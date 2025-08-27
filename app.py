@@ -13,6 +13,7 @@ st.markdown(f"""
             background-color: {COLOR_DEEP_BLUE};
         }}
         .stMainBlockContainer {{ padding-top: 0 }}
+        header.stAppHeader {{ background: none }}
     </style>
 """, unsafe_allow_html=True)
 
