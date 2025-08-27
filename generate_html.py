@@ -52,9 +52,23 @@ df["Spiller/Lag"] = df.apply(
 df["Runde"] = df["event_total"]
 df["Poeng"] = df["total"].apply(lambda x: f"<b>{x}</b>")
 df["Runderank"] = df["Runde"].rank(method="min", ascending=False).astype(int)
-df["Runderank"] = df["Runderank"].apply(add_medal)
-# Only keep the new combined column, remove separate Lag/Spiller
-df = df[["Rank", "Spiller/Lag", "Runde", "Runderank", "Poeng"]]
+
+# Prepend medal emoji to "Runde" if Runderank is 1, 2, or 3
+def medal_for_rank(rank):
+    if rank == 1:
+        return "🥇 "
+    elif rank == 2:
+        return "🥈 "
+    elif rank == 3:
+        return "🥉 "
+    else:
+        return ""
+df["Runde"] = df.apply(
+    lambda row: medal_for_rank(row["Runderank"]) + f"<b>{row['Runde']}</b>",
+    axis=1
+)
+# Only keep the new combined column, remove separate Lag/Spiller, and do not show Runderank in output table
+df = df[["Rank", "Spiller/Lag", "Runde", "Poeng"]]
 
 def df_to_html_table(df):
     headers = df.columns.tolist()
@@ -64,7 +78,7 @@ def df_to_html_table(df):
             html += '<th class="left"></th>'  # Blank header for Rank
         elif h in ["Spiller/Lag"]:
             html += f'<th class="left">{h}</th>'
-        elif h == "Poeng":
+        elif h in ["Runde", "Poeng"]:
             html += f'<th class="right">{h}</th>'
         else:
             html += f'<th>{h}</th>'
@@ -74,7 +88,7 @@ def df_to_html_table(df):
         for h, cell in zip(headers, row):
             if h in ["Rank", "Spiller/Lag"]:
                 html += f'<td class="left">{cell}</td>'
-            elif h == "Poeng":
+            elif h in ["Runde", "Poeng"]:
                 html += f'<td class="right">{cell}</td>'
             else:
                 html += f'<td>{cell}</td>'
