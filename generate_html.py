@@ -44,19 +44,25 @@ def add_medal(rank):
         return str(rank)
 
 df["Rank"] = df.apply(rank_with_change_html, axis=1)
-df["Lag"] = df["entry_name"]
-df["Spiller"] = df["player_name"].apply(smart_title)
+# Combine player and team name into one column
+df["Spiller/Lag"] = df.apply(
+    lambda row: f'<span class="player_name">{smart_title(row["player_name"])}</span><br>{row["entry_name"]}',
+    axis=1
+)
 df["Runde"] = df["event_total"]
 df["Poeng"] = df["total"].apply(lambda x: f"<b>{x}</b>")
 df["Runderank"] = df["Runde"].rank(method="min", ascending=False).astype(int)
 df["Runderank"] = df["Runderank"].apply(add_medal)
-df = df[["Rank", "Lag", "Spiller", "Runde", "Runderank", "Poeng"]]
+# Only keep the new combined column, remove separate Lag/Spiller
+df = df[["Rank", "Spiller/Lag", "Runde", "Runderank", "Poeng"]]
 
 def df_to_html_table(df):
     headers = df.columns.tolist()
     html = "<table>\n<tr>"
     for h in headers:
-        if h in ["Rank", "Lag", "Spiller"]:
+        if h == "Rank":
+            html += '<th class="left"></th>'  # Blank header for Rank
+        elif h in ["Spiller/Lag"]:
             html += f'<th class="left">{h}</th>'
         elif h == "Poeng":
             html += f'<th class="right">{h}</th>'
@@ -66,7 +72,7 @@ def df_to_html_table(df):
     for _, row in df.iterrows():
         html += "<tr>"
         for h, cell in zip(headers, row):
-            if h in ["Rank", "Lag", "Spiller"]:
+            if h in ["Rank", "Spiller/Lag"]:
                 html += f'<td class="left">{cell}</td>'
             elif h == "Poeng":
                 html += f'<td class="right">{cell}</td>'
@@ -128,13 +134,14 @@ html = f"""
             border-collapse: collapse;
             font-size: 1.2rem;
             background: #0A2540;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            min-width: 60vw;
+            max-width: 95vw;
         }}
         th, td {{
             padding: 0.7rem 1.2rem;
             text-align: center;
+            line-height: 1rem;
         }}
         th.left, td.left {{
             text-align: left;
@@ -153,6 +160,18 @@ html = f"""
         }}
         tr:nth-child(odd) {{
             background: #0A2540;
+        }}
+        .player_name {{
+            font-weight: bold;
+            display: block;
+        }}
+        @media (max-width: 768px) {{
+            table {{
+                font-size: 1rem;
+            }}
+            th, td {{
+                padding: 0.5rem 0.7rem;
+            }}
         }}
     </style>
 </head>

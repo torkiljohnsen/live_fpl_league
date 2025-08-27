@@ -37,13 +37,14 @@
             border-collapse: collapse;
             font-size: 1.2rem;
             background: #0A2540;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            min-width: 60vw;
+            max-width: 95vw;
         }
         th, td {
             padding: 0.7rem 1.2rem;
             text-align: center;
+            line-height: 1rem;
         }
         th.left, td.left {
             text-align: left;
@@ -63,6 +64,18 @@
         tr:nth-child(odd) {
             background: #0A2540;
         }
+        .player_name {
+            font-weight: bold;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            table {
+                font-size: 1rem;
+            }
+            th, td {
+                padding: 0.5rem 0.7rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -70,24 +83,24 @@
 </div></div>
     <h1>Sinkaberg Superliga</h1>
     <table>
-<tr><th class="left">Rank</th><th class="left">Lag</th><th class="left">Spiller</th><th>Runde</th><th>Runderank</th><th class="right">Poeng</th></tr>
-<tr><td class="left">1 <span style="color:green">(+1)</span></td><td class="left">FknfkUnited</td><td class="left">Espen Sørheim</td><td>65</td><td>1 🥇</td><td class="right"><b>139</b></td></tr>
-<tr><td class="left">2 <span style="color:red">(-1)</span></td><td class="left">SonPerignon</td><td class="left">Gustav Ulsund Sinkaberg</td><td>45</td><td>10</td><td class="right"><b>124</b></td></tr>
-<tr><td class="left">3 <span style="color:green">(+2)</span></td><td class="left">sinkaball</td><td class="left">Oskar Sinkaberg</td><td>54</td><td>7</td><td class="right"><b>116</b></td></tr>
-<tr><td class="left">4 <span style="color:red">(-1)</span></td><td class="left">Mulstad FC</td><td class="left">Sigurd Klingen</td><td>43</td><td>11</td><td class="right"><b>113</b></td></tr>
-<tr><td class="left">5 <span style="color:green">(+3)</span></td><td class="left">Flo Rida�</td><td class="left">Marius Henriksen</td><td>56</td><td>5</td><td class="right"><b>109</b></td></tr>
-<tr><td class="left">6</td><td class="left">Strøm Superteam</td><td class="left">Oliver Kibsgaard-Solås</td><td>54</td><td>7</td><td class="right"><b>109</b></td></tr>
-<tr><td class="left">7 <span style="color:green">(+2)</span></td><td class="left">Odas Disipler</td><td class="left">Oda Myhre</td><td>57</td><td>3 🥉</td><td class="right"><b>108</b></td></tr>
-<tr><td class="left">8 <span style="color:red">(-4)</span></td><td class="left">FK Haralds/By</td><td class="left">Torkil Johnsen</td><td>35</td><td>14</td><td class="right"><b>104</b></td></tr>
-<tr><td class="left">9</td><td class="left">Dragen BK</td><td class="left">Eirin Ottesen</td><td>53</td><td>9</td><td class="right"><b>104</b></td></tr>
-<tr><td class="left">10 <span style="color:green">(+3)</span></td><td class="left">Thisistheyear</td><td class="left">Anders Morken</td><td>57</td><td>3 🥉</td><td class="right"><b>99</b></td></tr>
-<tr><td class="left">11 <span style="color:red">(-5)</span></td><td class="left">YVIL</td><td class="left">Camilla Moen</td><td>38</td><td>13</td><td class="right"><b>93</b></td></tr>
-<tr><td class="left">12 <span style="color:green">(+4)</span></td><td class="left">Osan FC</td><td class="left">Rolf Johansen</td><td>56</td><td>5</td><td class="right"><b>90</b></td></tr>
-<tr><td class="left">13 <span style="color:red">(-1)</span></td><td class="left">shangala bangala</td><td class="left">Torbjørn Bergerud</td><td>42</td><td>12</td><td class="right"><b>86</b></td></tr>
-<tr><td class="left">14 <span style="color:red">(-5)</span></td><td class="left">Sisteplass læll</td><td class="left">Hauk Holten</td><td>35</td><td>14</td><td class="right"><b>86</b></td></tr>
-<tr><td class="left">15 <span style="color:red">(-1)</span></td><td class="left">Tafatt IL</td><td class="left">Hedda Wahl-Ovesen</td><td>33</td><td>16</td><td class="right"><b>74</b></td></tr>
-<tr><td class="left">16 <span style="color:red">(-1)</span></td><td class="left">Team Eiden med venna</td><td class="left">Peder Eiden</td><td>33</td><td>16</td><td class="right"><b>72</b></td></tr>
-<tr><td class="left">17</td><td class="left">Fjellvegen 8</td><td class="left">Ole Petter Åsaune</td><td>60</td><td>2 🥈</td><td class="right"><b>60</b></td></tr>
+<tr><th class="left"></th><th class="left">Spiller/Lag</th><th>Runde</th><th>Runderank</th><th class="right">Poeng</th></tr>
+<tr><td class="left">1 <span style="color:green">(+1)</span></td><td class="left"><span class="player_name">Espen Sørheim</span><br>FknfkUnited</td><td>65</td><td>1 🥇</td><td class="right"><b>139</b></td></tr>
+<tr><td class="left">2 <span style="color:red">(-1)</span></td><td class="left"><span class="player_name">Gustav Ulsund Sinkaberg</span><br>SonPerignon</td><td>45</td><td>10</td><td class="right"><b>124</b></td></tr>
+<tr><td class="left">3 <span style="color:green">(+2)</span></td><td class="left"><span class="player_name">Oskar Sinkaberg</span><br>sinkaball</td><td>54</td><td>7</td><td class="right"><b>116</b></td></tr>
+<tr><td class="left">4 <span style="color:red">(-1)</span></td><td class="left"><span class="player_name">Sigurd Klingen</span><br>Mulstad FC</td><td>43</td><td>11</td><td class="right"><b>113</b></td></tr>
+<tr><td class="left">5 <span style="color:green">(+3)</span></td><td class="left"><span class="player_name">Marius Henriksen</span><br>Flo Rida�</td><td>56</td><td>5</td><td class="right"><b>109</b></td></tr>
+<tr><td class="left">6</td><td class="left"><span class="player_name">Oliver Kibsgaard-Solås</span><br>Strøm Superteam</td><td>54</td><td>7</td><td class="right"><b>109</b></td></tr>
+<tr><td class="left">7 <span style="color:green">(+2)</span></td><td class="left"><span class="player_name">Oda Myhre</span><br>Odas Disipler</td><td>57</td><td>3 🥉</td><td class="right"><b>108</b></td></tr>
+<tr><td class="left">8 <span style="color:red">(-4)</span></td><td class="left"><span class="player_name">Torkil Johnsen</span><br>FK Haralds/By</td><td>35</td><td>14</td><td class="right"><b>104</b></td></tr>
+<tr><td class="left">9</td><td class="left"><span class="player_name">Eirin Ottesen</span><br>Dragen BK</td><td>53</td><td>9</td><td class="right"><b>104</b></td></tr>
+<tr><td class="left">10 <span style="color:green">(+3)</span></td><td class="left"><span class="player_name">Anders Morken</span><br>Thisistheyear</td><td>57</td><td>3 🥉</td><td class="right"><b>99</b></td></tr>
+<tr><td class="left">11 <span style="color:red">(-5)</span></td><td class="left"><span class="player_name">Camilla Moen</span><br>YVIL</td><td>38</td><td>13</td><td class="right"><b>93</b></td></tr>
+<tr><td class="left">12 <span style="color:green">(+4)</span></td><td class="left"><span class="player_name">Rolf Johansen</span><br>Osan FC</td><td>56</td><td>5</td><td class="right"><b>90</b></td></tr>
+<tr><td class="left">13 <span style="color:red">(-1)</span></td><td class="left"><span class="player_name">Torbjørn Bergerud</span><br>shangala bangala</td><td>42</td><td>12</td><td class="right"><b>86</b></td></tr>
+<tr><td class="left">14 <span style="color:red">(-5)</span></td><td class="left"><span class="player_name">Hauk Holten</span><br>Sisteplass læll</td><td>35</td><td>14</td><td class="right"><b>86</b></td></tr>
+<tr><td class="left">15 <span style="color:red">(-1)</span></td><td class="left"><span class="player_name">Hedda Wahl-Ovesen</span><br>Tafatt IL</td><td>33</td><td>16</td><td class="right"><b>74</b></td></tr>
+<tr><td class="left">16 <span style="color:red">(-1)</span></td><td class="left"><span class="player_name">Peder Eiden</span><br>Team Eiden med venna</td><td>33</td><td>16</td><td class="right"><b>72</b></td></tr>
+<tr><td class="left">17</td><td class="left"><span class="player_name">Ole Petter Åsaune</span><br>Fjellvegen 8</td><td>60</td><td>2 🥈</td><td class="right"><b>60</b></td></tr>
 </table>
 </body>
 </html>
