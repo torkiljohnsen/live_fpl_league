@@ -31,8 +31,8 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          git config user.name "Torkil Johnsen [bot]"
-          git config user.email "torkil.johnsen@sinkaberg.no"
+          git config user.name "torkiljohnsen"
+          git config user.email "torkil.johnsen@gmail.com"
           git add docs/index.html
           if ! git diff --cached --quiet; then
             git commit -m "[bot] Nightly dashboard update"
