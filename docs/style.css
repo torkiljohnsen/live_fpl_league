@@ -87,11 +87,11 @@ tr:nth-child(odd) {
 	}
 }
 
-/* Logo SVG styling */
-#logo * {
+/* Logo SVG styling (no id="logo" in SVG) */
+.logo-container > div > svg * {
 	fill: #fff !important;
 }
-#logo {
+.logo-container > div > svg {
 	width: 100% !important;
 	height: auto !important;
 	display: block;
