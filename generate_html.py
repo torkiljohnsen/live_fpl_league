@@ -1,11 +1,10 @@
 
-import requests
 import pandas as pd
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import sys
 import json
-
+from fpl import FPL
 
 FPL_LEAGUE_ID = "1639886"
 LOGO_PATH = "assets/fpl_logo.svg"
@@ -17,50 +16,14 @@ def get_output_path(dev_mode: bool):
     else:
         return Path("docs/index.html")
 
-class FPL:
-    BASE_URL = "https://fantasy.premierleague.com/api"
-
-    def __init__(self, league_id):
-        self.league_id = league_id
-
-    def get_league_standings(self):
-        url = f"{self.BASE_URL}/leagues-classic/{self.league_id}/standings/"
-        r = requests.get(url)
-        r.raise_for_status()
-        return r.json()
-
-    def get_entry(self, entry_id):
-        url = f"{self.BASE_URL}/entry/{entry_id}/"
-        r = requests.get(url)
-        r.raise_for_status()
-        return r.json()
-
-    def get_entry_history(self, entry_id):
-        url = f"{self.BASE_URL}/entry/{entry_id}/history/"
-        r = requests.get(url)
-        r.raise_for_status()
-        return r.json()
-
-    def get_entry_picks(self, entry_id, event_id):
-        url = f"{self.BASE_URL}/entry/{entry_id}/event/{event_id}/picks/"
-        r = requests.get(url)
-        r.raise_for_status()
-        return r.json()
-
-    def get_bootstrap_static(self):
-        url = f"{self.BASE_URL}/bootstrap-static/"
-        r = requests.get(url)
-        r.raise_for_status()
-        return r.json()
-
-def load_league_data(dev_mode: bool, fpl: FPL):
+def load_league_data(dev_mode: bool, fpl: FPL, league_id: str):
     if dev_mode:
         print("Loading sample data for development.")
         with open('sample_data.json', 'r', encoding='utf-8') as f:
             data = json.load(f)
     else:
         print("Loading live data from API.")
-        data = fpl.get_league_standings()
+        data = fpl.get_league_standings(league_id)
     return data
 
 def prepare_league_standings(data):
@@ -72,8 +35,8 @@ def prepare_league_standings(data):
 
 def render_html():
     dev_mode = '--dev' in sys.argv
-    fpl = FPL(FPL_LEAGUE_ID)
-    data = load_league_data(dev_mode, fpl)
+    fpl = FPL()
+    data = load_league_data(dev_mode, fpl, FPL_LEAGUE_ID)
     league_standings = prepare_league_standings(data)
 
     # Read SVG logo as string
