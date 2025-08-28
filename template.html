@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ league_name }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Sora:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+        </head>
+        <body>
+            <div class="logo-container"><div>{{ logo_svg | safe }}</div></div>
+            <h1>{{ league_name }}</h1>
+            <table>
+                <tr>
+                    <th class="rank_col"></th>
+                    <th class="player_col">Spiller/Lag</th>
+                    <th class="round_col">Runde</th>
+                    <th class="points_col">Poeng</th>
+                </tr>
+                {% for row in league_standings %}
+                    <tr>
+                        <td class="rank_col">{{ row.rank_html | safe }}</td>
+                        <td class="player_col"><span class="player_name">{{ row.player_name }}</span><br>{{ row.team_name }}</td>
+                        <td class="round_col">{{ row.round_score_html | safe }}</td>
+                        <td class="points_col">{{ row.total_points_html | safe }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </body>
+    </html>

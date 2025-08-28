@@ -1,0 +1,92 @@
+/* Rank change coloring */
+.positive_rank_change {
+	color: #1ec773;
+	font-weight: bold;
+}
+.negative_rank_change {
+	color: #ff4d4f;
+	font-weight: bold;
+}
+
+/* Table column alignment by semantic class */
+th.rank_col, td.rank_col {
+	text-align: left;
+}
+th.player_col, td.player_col {
+	text-align: left;
+}
+th.round_col, td.round_col {
+	text-align: right;
+}
+th.points_col, td.points_col {
+	text-align: right;
+}
+body {
+	background: #00143C;
+	color: #fff;
+	font-family: 'Inter', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+h1 {
+	font-family: 'Sora', sans-serif;
+	text-align: center;
+	font-size: 2.2rem;
+	margin-bottom: 1.5rem;
+}
+.logo-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 0.5rem;
+	margin-top: 2rem;
+}
+.logo-container > div {
+	width: 250px;
+	max-width: 100vw;
+}
+table {
+	margin: 2rem auto;
+	border-collapse: collapse;
+	font-size: 1.2rem;
+	background: #0A2540;
+	border-radius: 8px;
+	overflow: hidden;
+	max-width: 95vw;
+}
+th, td {
+	padding: 0.7rem 1.2rem;
+	text-align: center;
+	line-height: 1rem;
+}
+th.left, td.left {
+	/* Deprecated: use .rank_col or .player_col instead */
+}
+th.right, td.right {
+	/* Deprecated: use .round_col or .points_col instead */
+}
+th {
+	background: #1E90FF;
+	color: #fff;
+	font-family: 'Sora', sans-serif;
+	font-size: 1.1em;
+}
+tr:nth-child(even) {
+	background: #112a4d;
+}
+tr:nth-child(odd) {
+	background: #0A2540;
+}
+.player_name {
+	font-weight: bold;
+	display: block;
+}
+@media (max-width: 768px) {
+	table {
+		font-size: 1rem;
+	}
+	th, td {
+		padding: 0.5rem 0.7rem;
+	}
+}
