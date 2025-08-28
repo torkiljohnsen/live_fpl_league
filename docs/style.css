@@ -1,6 +1,8 @@
 /* Rank change coloring */
 .positive_rank_change {
 	color: #1ec773;
+}
+.points_value {
 	font-weight: bold;
 }
 .negative_rank_change {
@@ -60,12 +62,6 @@ th, td {
 	text-align: center;
 	line-height: 1rem;
 }
-th.left, td.left {
-	/* Deprecated: use .rank_col or .player_col instead */
-}
-th.right, td.right {
-	/* Deprecated: use .round_col or .points_col instead */
-}
 th {
 	background: #1E90FF;
 	color: #fff;
@@ -89,4 +85,14 @@ tr:nth-child(odd) {
 	th, td {
 		padding: 0.5rem 0.7rem;
 	}
+}
+
+/* Logo SVG styling */
+#logo * {
+	fill: #fff !important;
+}
+#logo {
+	width: 100% !important;
+	height: auto !important;
+	display: block;
 }

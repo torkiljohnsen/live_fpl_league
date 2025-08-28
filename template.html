@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="style.css">
         </head>
         <body>
-            <div class="logo-container"><div>{{ logo_svg | safe }}</div></div>
+            <div class="logo-container">
+                <div>
+                    {{ logo_svg | safe }}
+                </div>
+            </div>
             <h1>{{ league_name }}</h1>
             <table>
                 <tr>
@@ -19,10 +23,22 @@
                 </tr>
                 {% for row in league_standings %}
                     <tr>
-                        <td class="rank_col">{{ row.rank_html | safe }}</td>
-                        <td class="player_col"><span class="player_name">{{ row.player_name }}</span><br>{{ row.team_name }}</td>
-                        <td class="round_col">{{ row.round_score_html | safe }}</td>
-                        <td class="points_col">{{ row.total_points_html | safe }}</td>
+                        <td class="rank_col">
+                            <span class="rank">{{ row.rank_sort }}</span>
+                            {% if row.last_rank != 0 and row.rank_change != 0 %}
+                                {% if row.rank_change > 0 %}
+                                    <span class="positive_rank_change">(+{{ row.rank_change }})</span>
+                                {% else %}
+                                    <span class="negative_rank_change">({{ row.rank_change }})</span>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                        <td class="player_col"><span class="player_name">{{ row.player_name }}</span><br>{{ row.entry_name }}</td>
+                        <td class="round_col">
+                            {% if row.round_rank == 1 %}🥇 {% elif row.round_rank == 2 %}🥈 {% elif row.round_rank == 3 %}🥉 {% endif %}
+                            <span class="round_score_value">{{ row.event_total }}</span>
+                        </td>
+                        <td class="points_col"><span class="points_value">{{ row.total }}</span></td>
                     </tr>
                 {% endfor %}
             </table>
