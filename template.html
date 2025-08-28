@@ -17,7 +17,8 @@
             <table>
                 <tr>
                     <th class="rank_col"></th>
-                    <th class="player_col">Spiller/Lag</th>
+                    <th class="player_col">Spiller</th>
+                    <th class="entry_col">Lag</th>
                     <th class="round_col">Runde</th>
                     <th class="points_col">Poeng</th>
                 </tr>
@@ -33,7 +34,8 @@
                                 {% endif %}
                             {% endif %}
                         </td>
-                        <td class="player_col"><span class="player_name">{{ row.player_name }}</span><br>{{ row.entry_name }}</td>
+                        <td class="player_col">{{ row.player_name }}</td>
+                        <td class="entry_col">{{ row.entry_name }}</td>
                         <td class="round_col">
                             {% if row.round_rank == 1 %}🥇 {% elif row.round_rank == 2 %}🥈 {% elif row.round_rank == 3 %}🥉 {% endif %}
                             <span class="round_score_value">{{ row.event_total }}</span>

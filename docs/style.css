@@ -14,7 +14,7 @@
 th.rank_col, td.rank_col {
 	text-align: left;
 }
-th.player_col, td.player_col {
+th.player_col, td.player_col, th.entry_col, td.entry_col {
 	text-align: left;
 }
 th.round_col, td.round_col {
@@ -29,6 +29,7 @@ body {
 	font-family: 'Inter', sans-serif;
 	margin: 0;
 	padding: 0;
+  font-size: 15px;
 }
 h1 {
 	font-family: 'Sora', sans-serif;
@@ -51,8 +52,8 @@ h1 {
 table {
 	margin: 2rem auto;
 	border-collapse: collapse;
-	font-size: 1.2rem;
-	background: #0A2540;
+	font-size: 1rem;
+	background: #1f295C;
 	border-radius: 8px;
 	overflow: hidden;
 	max-width: 95vw;
@@ -63,21 +64,21 @@ th, td {
 	line-height: 1rem;
 }
 th {
-	background: #1E90FF;
+	background: #3E7DEE;
 	color: #fff;
 	font-family: 'Sora', sans-serif;
 	font-size: 1.1em;
 }
+
 tr:nth-child(even) {
-	background: #112a4d;
+	background: rgba(255, 255, 255, 0.05);
 }
+/*
 tr:nth-child(odd) {
-	background: #0A2540;
+	background: #023493;
 }
-.player_name {
-	font-weight: bold;
-	display: block;
-}
+  */
+
 @media (max-width: 768px) {
 	table {
 		font-size: 1rem;
