@@ -14,8 +14,9 @@ class FPL:
     def __init__(self, dev_mode: bool = False):
         self.dev_mode = dev_mode
 
-    def _get(self, endpoint: str, sample_name: str) -> Any:
+    def _get(self, endpoint: str) -> Any:
         if self.dev_mode:
+            sample_name = endpoint.replace('/', '_').strip('_')
             return self._read_sample_or_generate(endpoint, sample_name)
         return self._call_api(endpoint)
 
@@ -34,23 +35,23 @@ class FPL:
 
     def get_league_standings(self, league_id: str) -> Any:
         endpoint = f"/leagues-classic/{self.SAMPLE_LEAGUE_ID if self.dev_mode else league_id}/standings/"
-        return self._get(endpoint, "get_league_standings")
+        return self._get(endpoint)
 
     def get_team(self, team_id: str) -> Any:
         endpoint = f"/entry/{self.SAMPLE_TEAM_ID if self.dev_mode else team_id}/"
-        return self._get(endpoint, "get_team")
+        return self._get(endpoint)
 
     def get_team_history(self, team_id: str) -> Any:
         endpoint = f"/entry/{self.SAMPLE_TEAM_ID if self.dev_mode else team_id}/history/"
-        return self._get(endpoint, "get_team_history")
+        return self._get(endpoint)
 
     def get_team_picks(self, team_id: str, event_id: str) -> Any:
         endpoint = f"/entry/{self.SAMPLE_TEAM_ID if self.dev_mode else team_id}/event/{event_id}/picks/"
-        return self._get(endpoint, "get_team_picks")
+        return self._get(endpoint)
 
     def get_bootstrap_static(self) -> Any:
         endpoint = "/bootstrap-static/"
-        return self._get(endpoint, "get_bootstrap_static")
+        return self._get(endpoint)
 
 
 if __name__ == "__main__":
