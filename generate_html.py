@@ -3,7 +3,6 @@ import pandas as pd
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import sys
-import json
 from fpl import FPL
 
 FPL_LEAGUE_ID = "1639886"
@@ -16,15 +15,8 @@ def get_output_path(dev_mode: bool):
     else:
         return Path("docs/index.html")
 
-def load_league_data(dev_mode: bool, fpl: FPL, league_id: str):
-    if dev_mode:
-        print("Loading sample data for development.")
-        with open('sample_data.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-    else:
-        print("Loading live data from API.")
-        data = fpl.get_league_standings(league_id)
-    return data
+def load_league_data(fpl: FPL, league_id: str):
+    return fpl.get_league_standings(league_id)
 
 def prepare_league_standings(data):
     df = pd.DataFrame(data["standings"]["results"])
@@ -35,8 +27,8 @@ def prepare_league_standings(data):
 
 def render_html():
     dev_mode = '--dev' in sys.argv
-    fpl = FPL()
-    data = load_league_data(dev_mode, fpl, FPL_LEAGUE_ID)
+    fpl = FPL(dev_mode=dev_mode)
+    data = load_league_data(fpl, FPL_LEAGUE_ID)
     league_standings = prepare_league_standings(data)
 
     # Read SVG logo as string
