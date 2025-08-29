@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import sys
-from fpl import FPL
+from fpl import FPL_API
 
 FPL_LEAGUE_ID = "1639886"
 LOGO_PATH = "assets/fpl_logo.svg"
@@ -47,7 +47,7 @@ def generate_html(league_standings, league_name):
 
 if __name__ == "__main__":
     dev_mode = '--dev' in sys.argv
-    fpl = FPL(dev_mode=dev_mode)
+    fpl = FPL_API(dev_mode=dev_mode)
     data = fpl.get_league_standings(FPL_LEAGUE_ID)
     league_standings = prepare_league_standings(data)
     league_name = data.get("league", {}).get("name", "FPL Mini-League Dashboard")

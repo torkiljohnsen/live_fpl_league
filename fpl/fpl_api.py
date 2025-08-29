@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any
 
 
-class FPL:
+class FPL_API:
     BASE_URL = "https://fantasy.premierleague.com/api"
     SAMPLE_DATA_DIR = Path(__file__).parent / "sample_data"
     SAMPLE_LEAGUE_ID = "1639886"
@@ -56,16 +56,16 @@ class FPL:
 
 if __name__ == "__main__":
     # Regenerate all sample data files using sample IDs
-    fpl = FPL(dev_mode=True)
+    fpl = FPL_API(dev_mode=True)
     # Delete all sample files
     for sample_file in fpl.SAMPLE_DATA_DIR.glob("*_sample.json"):
         sample_file.unlink()
     # Call each get_* method to regenerate
     print("Regenerating sample data files...")
     fpl.get_bootstrap_static()
-    fpl.get_league_standings(FPL.SAMPLE_LEAGUE_ID)
-    fpl.get_team(FPL.SAMPLE_TEAM_ID)
-    fpl.get_team_history(FPL.SAMPLE_TEAM_ID)
+    fpl.get_league_standings(FPL_API.SAMPLE_LEAGUE_ID)
+    fpl.get_team(FPL_API.SAMPLE_TEAM_ID)
+    fpl.get_team_history(FPL_API.SAMPLE_TEAM_ID)
     # For team_picks, use event_id=1 as a sample (can be changed if needed)
-    fpl.get_team_picks(FPL.SAMPLE_TEAM_ID, "1")
+    fpl.get_team_picks(FPL_API.SAMPLE_TEAM_ID, "1")
     print("Sample data regeneration complete.")

@@ -1,0 +1,702 @@
+{
+  "id": 1639886,
+  "name": "Sinkaberg Superliga",
+  "created": "2025-08-14T12:47:08.115921Z",
+  "closed": false,
+  "max_entries": null,
+  "league_type": "x",
+  "scoring": "c",
+  "admin_entry": 7229447,
+  "start_event": 1,
+  "code_privacy": "p",
+  "has_cup": true,
+  "cup_league": null,
+  "rank": null,
+  "latest_finished_event_id": 2,
+  "next_event_deadline_time": "2025-08-30T10:00:00Z",
+  "generated_time": "2025-08-29T12:12:57Z",
+  "participants": [
+    {
+      "entry_id": 1460055,
+      "team_name": "FknfkUnited",
+      "manager_name": "Espen Sørheim",
+      "latest_gw": 2,
+      "latest_score": 65,
+      "latest_event_transfer_cost": 0,
+      "total_score": 139,
+      "history": [
+        {
+          "event": 1,
+          "points": 74,
+          "total_points": 74,
+          "rank": 544391,
+          "rank_sort": 558139,
+          "overall_rank": 544391,
+          "percentile_rank": 10,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 0,
+          "net_points": 74
+        },
+        {
+          "event": 2,
+          "points": 65,
+          "total_points": 139,
+          "rank": 1601384,
+          "rank_sort": 1611003,
+          "overall_rank": 239664,
+          "percentile_rank": 15,
+          "bank": 29,
+          "value": 1001,
+          "event_transfers": 1,
+          "event_transfers_cost": 0,
+          "points_on_bench": 3,
+          "net_points": 65
+        }
+      ]
+    },
+    {
+      "entry_id": 5534543,
+      "team_name": "SonPerignon",
+      "manager_name": "Gustav Ulsund Sinkaberg",
+      "latest_gw": 2,
+      "latest_score": 45,
+      "latest_event_transfer_cost": 0,
+      "total_score": 124,
+      "history": [
+        {
+          "event": 1,
+          "points": 79,
+          "total_points": 79,
+          "rank": 243514,
+          "rank_sort": 268690,
+          "overall_rank": 243514,
+          "percentile_rank": 5,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 8,
+          "net_points": 79
+        },
+        {
+          "event": 2,
+          "points": 45,
+          "total_points": 124,
+          "rank": 7253639,
+          "rank_sort": 7310203,
+          "overall_rank": 1242805,
+          "percentile_rank": 70,
+          "bank": 10,
+          "value": 1000,
+          "event_transfers": 1,
+          "event_transfers_cost": 0,
+          "points_on_bench": 6,
+          "net_points": 45
+        }
+      ]
+    },
+    {
+      "entry_id": 3791542,
+      "team_name": "sinkaball",
+      "manager_name": "oskar sinkaberg",
+      "latest_gw": 2,
+      "latest_score": 54,
+      "latest_event_transfer_cost": 0,
+      "total_score": 116,
+      "history": [
+        {
+          "event": 1,
+          "points": 62,
+          "total_points": 62,
+          "rank": 2372236,
+          "rank_sort": 2467906,
+          "overall_rank": 2372235,
+          "percentile_rank": 30,
+          "bank": 10,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 5,
+          "net_points": 62
+        },
+        {
+          "event": 2,
+          "points": 54,
+          "total_points": 116,
+          "rank": 4168589,
+          "rank_sort": 4218920,
+          "overall_rank": 2307349,
+          "percentile_rank": 40,
+          "bank": 9,
+          "value": 1001,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 1,
+          "net_points": 54
+        }
+      ]
+    },
+    {
+      "entry_id": 8432211,
+      "team_name": "Mulstad FC",
+      "manager_name": "Sigurd Klingen",
+      "latest_gw": 2,
+      "latest_score": 43,
+      "latest_event_transfer_cost": 0,
+      "total_score": 113,
+      "history": [
+        {
+          "event": 1,
+          "points": 70,
+          "total_points": 70,
+          "rank": 958151,
+          "rank_sort": 1075323,
+          "overall_rank": 958151,
+          "percentile_rank": 15,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 1,
+          "net_points": 70
+        },
+        {
+          "event": 2,
+          "points": 43,
+          "total_points": 113,
+          "rank": 7673712,
+          "rank_sort": 7777847,
+          "overall_rank": 2841827,
+          "percentile_rank": 75,
+          "bank": 0,
+          "value": 1001,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 0,
+          "net_points": 43
+        }
+      ]
+    },
+    {
+      "entry_id": 4522696,
+      "team_name": "Flo Rida�",
+      "manager_name": "Marius Henriksen",
+      "latest_gw": 2,
+      "latest_score": 56,
+      "latest_event_transfer_cost": 0,
+      "total_score": 109,
+      "history": [
+        {
+          "event": 1,
+          "points": 53,
+          "total_points": 53,
+          "rank": 4864965,
+          "rank_sort": 5016738,
+          "overall_rank": 4864958,
+          "percentile_rank": 55,
+          "bank": 10,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 6,
+          "net_points": 53
+        },
+        {
+          "event": 2,
+          "points": 56,
+          "total_points": 109,
+          "rank": 3570435,
+          "rank_sort": 3625648,
+          "overall_rank": 3634170,
+          "percentile_rank": 35,
+          "bank": 10,
+          "value": 1001,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 9,
+          "net_points": 56
+        }
+      ]
+    },
+    {
+      "entry_id": 8425126,
+      "team_name": "Strøm Superteam",
+      "manager_name": "Oliver Kibsgaard-Solås",
+      "latest_gw": 2,
+      "latest_score": 54,
+      "latest_event_transfer_cost": 0,
+      "total_score": 109,
+      "history": [
+        {
+          "event": 1,
+          "points": 55,
+          "total_points": 55,
+          "rank": 4223904,
+          "rank_sort": 4516213,
+          "overall_rank": 4223898,
+          "percentile_rank": 45,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 2,
+          "net_points": 55
+        },
+        {
+          "event": 2,
+          "points": 54,
+          "total_points": 109,
+          "rank": 4168589,
+          "rank_sort": 4282223,
+          "overall_rank": 3634170,
+          "percentile_rank": 40,
+          "bank": 0,
+          "value": 1001,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 1,
+          "net_points": 54
+        }
+      ]
+    },
+    {
+      "entry_id": 8811904,
+      "team_name": "Odas Disipler",
+      "manager_name": "Oda Myhre",
+      "latest_gw": 2,
+      "latest_score": 57,
+      "latest_event_transfer_cost": 0,
+      "total_score": 108,
+      "history": [
+        {
+          "event": 1,
+          "points": 51,
+          "total_points": 51,
+          "rank": 5471408,
+          "rank_sort": 5760028,
+          "overall_rank": 5471399,
+          "percentile_rank": 60,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 12,
+          "net_points": 51
+        },
+        {
+          "event": 2,
+          "points": 57,
+          "total_points": 108,
+          "rank": 3290679,
+          "rank_sort": 3393932,
+          "overall_rank": 3840714,
+          "percentile_rank": 35,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 2,
+          "net_points": 57
+        }
+      ]
+    },
+    {
+      "entry_id": 811114,
+      "team_name": "FK Haralds/By",
+      "manager_name": "Torkil Johnsen",
+      "latest_gw": 2,
+      "latest_score": 35,
+      "latest_event_transfer_cost": 0,
+      "total_score": 104,
+      "history": [
+        {
+          "event": 1,
+          "points": 69,
+          "total_points": 69,
+          "rank": 1090649,
+          "rank_sort": 1103966,
+          "overall_rank": 1090649,
+          "percentile_rank": 15,
+          "bank": 5,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 9,
+          "net_points": 69
+        },
+        {
+          "event": 2,
+          "points": 35,
+          "total_points": 104,
+          "rank": 9512674,
+          "rank_sort": 9518934,
+          "overall_rank": 4706099,
+          "percentile_rank": 90,
+          "bank": 5,
+          "value": 1002,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 13,
+          "net_points": 35
+        }
+      ]
+    },
+    {
+      "entry_id": 7345147,
+      "team_name": "Dragen BK",
+      "manager_name": "Eirin Ottesen",
+      "latest_gw": 2,
+      "latest_score": 53,
+      "latest_event_transfer_cost": 0,
+      "total_score": 104,
+      "history": [
+        {
+          "event": 1,
+          "points": 51,
+          "total_points": 51,
+          "rank": 5471408,
+          "rank_sort": 5711902,
+          "overall_rank": 5471399,
+          "percentile_rank": 60,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 0,
+          "net_points": 51
+        },
+        {
+          "event": 2,
+          "points": 53,
+          "total_points": 104,
+          "rank": 4666867,
+          "rank_sort": 4750908,
+          "overall_rank": 4810709,
+          "percentile_rank": 45,
+          "bank": 15,
+          "value": 1002,
+          "event_transfers": 1,
+          "event_transfers_cost": 0,
+          "points_on_bench": 0,
+          "net_points": 53
+        }
+      ]
+    },
+    {
+      "entry_id": 4738712,
+      "team_name": "Thisistheyear",
+      "manager_name": "Anders Morken",
+      "latest_gw": 2,
+      "latest_score": 57,
+      "latest_event_transfer_cost": 0,
+      "total_score": 99,
+      "history": [
+        {
+          "event": 1,
+          "points": 42,
+          "total_points": 42,
+          "rank": 7826128,
+          "rank_sort": 7922155,
+          "overall_rank": 7826116,
+          "percentile_rank": 85,
+          "bank": 5,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 6,
+          "net_points": 42
+        },
+        {
+          "event": 2,
+          "points": 57,
+          "total_points": 99,
+          "rank": 3290679,
+          "rank_sort": 3343782,
+          "overall_rank": 5742257,
+          "percentile_rank": 35,
+          "bank": 4,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 10,
+          "net_points": 57
+        }
+      ]
+    },
+    {
+      "entry_id": 8916452,
+      "team_name": "YVIL",
+      "manager_name": "Camilla Moen",
+      "latest_gw": 2,
+      "latest_score": 38,
+      "latest_event_transfer_cost": 0,
+      "total_score": 93,
+      "history": [
+        {
+          "event": 1,
+          "points": 55,
+          "total_points": 55,
+          "rank": 4223904,
+          "rank_sort": 4532149,
+          "overall_rank": 4223898,
+          "percentile_rank": 45,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 0,
+          "net_points": 55
+        },
+        {
+          "event": 2,
+          "points": 38,
+          "total_points": 93,
+          "rank": 8927235,
+          "rank_sort": 9014646,
+          "overall_rank": 6848626,
+          "percentile_rank": 85,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 0,
+          "net_points": 38
+        }
+      ]
+    },
+    {
+      "entry_id": 889674,
+      "team_name": "Osan FC",
+      "manager_name": "Rolf Johansen",
+      "latest_gw": 2,
+      "latest_score": 56,
+      "latest_event_transfer_cost": 4,
+      "total_score": 90,
+      "history": [
+        {
+          "event": 1,
+          "points": 38,
+          "total_points": 38,
+          "rank": 8516204,
+          "rank_sort": 8526182,
+          "overall_rank": 8516190,
+          "percentile_rank": 90,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 4,
+          "net_points": 38
+        },
+        {
+          "event": 2,
+          "points": 56,
+          "total_points": 90,
+          "rank": 3817795,
+          "rank_sort": 3820008,
+          "overall_rank": 7437429,
+          "percentile_rank": 40,
+          "bank": 35,
+          "value": 1001,
+          "event_transfers": 2,
+          "event_transfers_cost": 4,
+          "points_on_bench": 6,
+          "net_points": 52
+        }
+      ]
+    },
+    {
+      "entry_id": 4388275,
+      "team_name": "shangala bangala",
+      "manager_name": "Torbjørn Bergerud",
+      "latest_gw": 2,
+      "latest_score": 42,
+      "latest_event_transfer_cost": 0,
+      "total_score": 86,
+      "history": [
+        {
+          "event": 1,
+          "points": 44,
+          "total_points": 44,
+          "rank": 7400956,
+          "rank_sort": 7500748,
+          "overall_rank": 7400945,
+          "percentile_rank": 80,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 16,
+          "net_points": 44
+        },
+        {
+          "event": 2,
+          "points": 42,
+          "total_points": 86,
+          "rank": 7951736,
+          "rank_sort": 8002876,
+          "overall_rank": 7857430,
+          "percentile_rank": 75,
+          "bank": 0,
+          "value": 1001,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 9,
+          "net_points": 42
+        }
+      ]
+    },
+    {
+      "entry_id": 7229447,
+      "team_name": "Sisteplass læll",
+      "manager_name": "Hauk Holten",
+      "latest_gw": 2,
+      "latest_score": 35,
+      "latest_event_transfer_cost": 0,
+      "total_score": 86,
+      "history": [
+        {
+          "event": 1,
+          "points": 51,
+          "total_points": 51,
+          "rank": 5471408,
+          "rank_sort": 5708037,
+          "overall_rank": 5471399,
+          "percentile_rank": 60,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 9,
+          "net_points": 51
+        },
+        {
+          "event": 2,
+          "points": 35,
+          "total_points": 86,
+          "rank": 9610234,
+          "rank_sort": 9645473,
+          "overall_rank": 7917169,
+          "percentile_rank": 90,
+          "bank": 28,
+          "value": 999,
+          "event_transfers": 1,
+          "event_transfers_cost": 0,
+          "points_on_bench": 7,
+          "net_points": 35
+        }
+      ]
+    },
+    {
+      "entry_id": 9347056,
+      "team_name": "Tafatt IL",
+      "manager_name": "Hedda Wahl-Ovesen",
+      "latest_gw": 2,
+      "latest_score": 33,
+      "latest_event_transfer_cost": 0,
+      "total_score": 74,
+      "history": [
+        {
+          "event": 1,
+          "points": 41,
+          "total_points": 41,
+          "rank": 8019956,
+          "rank_sort": 8197402,
+          "overall_rank": 8019944,
+          "percentile_rank": 85,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 5,
+          "net_points": 41
+        },
+        {
+          "event": 2,
+          "points": 33,
+          "total_points": 74,
+          "rank": 9827140,
+          "rank_sort": 9887920,
+          "overall_rank": 8893267,
+          "percentile_rank": 95,
+          "bank": 0,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 6,
+          "net_points": 33
+        }
+      ]
+    },
+    {
+      "entry_id": 9258220,
+      "team_name": "Team Eiden med venna",
+      "manager_name": "Peder Eiden",
+      "latest_gw": 2,
+      "latest_score": 33,
+      "latest_event_transfer_cost": 0,
+      "total_score": 72,
+      "history": [
+        {
+          "event": 1,
+          "points": 39,
+          "total_points": 39,
+          "rank": 8366126,
+          "rank_sort": 8512299,
+          "overall_rank": 8366113,
+          "percentile_rank": 90,
+          "bank": 5,
+          "value": 1000,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 3,
+          "net_points": 39
+        },
+        {
+          "event": 2,
+          "points": 33,
+          "total_points": 72,
+          "rank": 9827140,
+          "rank_sort": 9887140,
+          "overall_rank": 9007393,
+          "percentile_rank": 95,
+          "bank": 5,
+          "value": 999,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 6,
+          "net_points": 33
+        }
+      ]
+    },
+    {
+      "entry_id": 9866143,
+      "team_name": "Fjellvegen 8",
+      "manager_name": "Ole Petter åsaune",
+      "latest_gw": 2,
+      "latest_score": 60,
+      "latest_event_transfer_cost": 0,
+      "total_score": 60,
+      "history": [
+        {
+          "event": 2,
+          "points": 60,
+          "total_points": 60,
+          "rank": 2518526,
+          "rank_sort": 2621171,
+          "overall_rank": 9552243,
+          "percentile_rank": 25,
+          "bank": 20,
+          "value": 1002,
+          "event_transfers": 0,
+          "event_transfers_cost": 0,
+          "points_on_bench": 9,
+          "net_points": 60
+        }
+      ]
+    }
+  ]
+}
