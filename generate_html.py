@@ -10,13 +10,8 @@ LOGO_PATH = "assets/fpl_logo.svg"
 TEMPLATE_PATH = Path("template.html")
 
 def get_output_path(dev_mode: bool):
-    if dev_mode:
-        return Path("docs/index-dev.html")
-    else:
-        return Path("docs/index.html")
+    return Path("docs/index-dev.html") if dev_mode else Path("docs/index.html")
 
-def load_league_data(fpl: FPL, league_id: str):
-    return fpl.get_league_standings(league_id)
 
 def prepare_league_standings(data):
     df = pd.DataFrame(data["standings"]["results"])
@@ -25,18 +20,18 @@ def prepare_league_standings(data):
     return df.to_dict(orient="records")
 
 
-def render_html():
-    dev_mode = '--dev' in sys.argv
-    fpl = FPL(dev_mode=dev_mode)
-    data = load_league_data(fpl, FPL_LEAGUE_ID)
-    league_standings = prepare_league_standings(data)
+def write_html_file(html: str, output_path: Path):
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"Static HTML generated at {output_path}")
 
+
+def generate_html(league_standings, league_name):
     # Read SVG logo as string
     with open(LOGO_PATH, "r", encoding="utf-8") as f:
         logo_svg = f.read()
 
-    # --- Jinja2 rendering ---
-    league_name = data.get("league", {}).get("name", "FPL Mini-League Dashboard")
     env = Environment(
         loader=FileSystemLoader("."),
         autoescape=select_autoescape(["html", "xml"])
@@ -48,12 +43,14 @@ def render_html():
         logo_svg=logo_svg,
         league_standings=league_standings
     )
-
-    output_path = get_output_path(dev_mode)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(html)
-    print(f"Static HTML generated at {output_path}")
+    return html
 
 if __name__ == "__main__":
-    render_html()
+    dev_mode = '--dev' in sys.argv
+    fpl = FPL(dev_mode=dev_mode)
+    data = fpl.get_league_standings(FPL_LEAGUE_ID)
+    league_standings = prepare_league_standings(data)
+    league_name = data.get("league", {}).get("name", "FPL Mini-League Dashboard")
+    output_path = get_output_path(dev_mode)
+    html = generate_html(league_standings, league_name)
+    write_html_file(html, output_path)
