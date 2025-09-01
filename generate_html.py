@@ -6,6 +6,7 @@ import sys
 from fpl import FPL_API
 
 FPL_LEAGUE_ID = "1639886"
+LEAGUE_JOIN_CODE = "anblvx"
 LOGO_PATH = "assets/fpl_logo.svg"
 TEMPLATE_PATH = Path("template.html")
 
@@ -40,6 +41,7 @@ def generate_html(league_standings, league_name):
 
     html = template.render(
         league_name=league_name,
+        league_join_code=LEAGUE_JOIN_CODE,
         logo_svg=logo_svg,
         league_standings=league_standings
     )
