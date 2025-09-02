@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}League Gameweek History{% endblock %}
+
+{% block body %}
+<h1>League Gameweek History</h1>
+<table>
+    <tr>
+        <th>Manager / Team</th>
+        {% for event in event_ids %}
+            <th>{{ event }}</th>
+        {% endfor %}
+        <th>SUM</th>
+    </tr>
+    {% for p in participants %}
+        <tr>
+            <th>{{ p.manager_name }} / {{ p.team_name }}</th>
+            {% set points_list = [] %}
+            {% for event in event_ids %}
+                {% set points = None %}
+                {% for h in p.history %}
+                    {% if h.event == event %}
+                        {% set points = h.points %}
+                    {% endif %}
+                {% endfor %}
+                {% if points is not none %}
+                    <td>{{ points }}</td>
+                    {% set _ = points_list.append(points) %}
+                {% else %}
+                    <td>-</td>
+                {% endif %}
+            {% endfor %}
+            <td><b>{{ points_list | sum }}</b></td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

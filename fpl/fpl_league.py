@@ -6,8 +6,12 @@ class FPLLeague:
         self.league_id = league_id
         self.fpl_api = fpl_api
         self.bootstrap = self.fpl_api.get_bootstrap_static()
+        self._set_events_list()
         self._set_finished_event_ids()
         self._init_league_data()
+
+    def _set_events_list(self):
+        self.event_ids = sorted(event['id'] for event in self.bootstrap['events'])
 
     def _set_finished_event_ids(self):
         self.finished_event_ids = [event["id"] for event in self.bootstrap["events"] if event["finished"]]
@@ -65,4 +69,5 @@ class FPLLeague:
         summary = dict(self.info)
         summary["generated_time"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
         summary["participants"] = self.get_participants()
+        summary["event_ids"] = self.event_ids
         return summary

@@ -2,7 +2,7 @@ import pandas as pd
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from fpl import FPL_API
+from fpl import FPL_API, FPLLeague
 
 FPL_LEAGUE_ID = "1639886"
 DEFAULT_LEAGUE_JOIN_CODE = "anblvx"  # Only used for default league if no join code is provided
@@ -27,7 +27,7 @@ def write_html_file(html: str, output_path: Path):
         f.write(html)
     print(f"Static HTML generated at {output_path}")
 
-def generate_html(league_standings, league_name, league_join_code):
+def write_league_standings(league_standings, league_name, league_join_code):
     with open(LOGO_PATH, "r", encoding="utf-8") as f:
         logo_svg = f.read()
 
@@ -44,6 +44,18 @@ def generate_html(league_standings, league_name, league_join_code):
         league_standings=league_standings
     )
     return html
+
+def write_league_gameweek_history(fpl, league_id, dev_mode):
+    league = FPLLeague(fpl, league_id)
+    summary = league.get_summary()
+    env = Environment(
+        loader=FileSystemLoader("templates"),
+        autoescape=select_autoescape(["html", "xml"])
+    )
+    template = env.get_template("league_gameweek_history.html")
+    html = template.render(**summary)
+    output_path = get_output_path(league_id, dev_mode, Path("league_gameweek_history.html"))
+    write_html_file(html, output_path)
 
 if __name__ == "__main__":
     import argparse
@@ -69,5 +81,5 @@ if __name__ == "__main__":
     league_name = data.get("league", {}).get("name", "FPL Mini-League Dashboard")
     output_path = get_output_path(league_id, dev_mode, TEMPLATE_PATH)  # Pass template path
 
-    html = generate_html(league_standings, league_name, league_join_code)
+    html = write_league_standings(league_standings, league_name, league_join_code)
     write_html_file(html, output_path)
