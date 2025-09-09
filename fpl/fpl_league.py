@@ -1,7 +1,14 @@
-from fpl.fpl_api import FPL_API
+from fpl import FPL_API
 from datetime import datetime, timezone
+import pandas as pd
 
 class FPLLeague:
+    CHIP_ABBREVIATIONS = {
+        "wildcard": "WC",
+        "freehit": "FH",
+        "bboost": "BB",
+        "3xc": "TC",
+    }
     def __init__(self, league_id: str, fpl_api: FPL_API):
         self.league_id = league_id
         self.fpl_api = fpl_api
@@ -37,24 +44,60 @@ class FPLLeague:
             results.append(participant)
         # Sort by total_score descending
         results.sort(key=lambda p: p["total_score"], reverse=True)
+        self._apply_history_ranks(results)
         return results
+
+    def _apply_history_ranks(self, participants):
+        # Flatten all histories into a DataFrame
+        rows = []
+        for p in participants:
+            for h in p["history"]:
+                row = dict(h)
+                row["entry_id"] = p["entry_id"]
+                rows.append(row)
+        df = pd.DataFrame(rows)
+
+        # Calculate round_rank (by net_points) and league_rank (by total_points) per event
+        df["round_rank"] = df.groupby("event")["net_points"].rank(method="min", ascending=False).astype(int)
+        df["league_rank"] = df.groupby("event")["total_points"].rank(method="min", ascending=False).astype(int)
+
+        # Calculate league_rank_change per participant
+        df = df.sort_values(["entry_id", "event"])
+        df["league_rank_change"] = df.groupby("entry_id")["league_rank"].diff().fillna(0).astype(int) * -1
+
+        # Write back to participants' history
+        for p in participants:
+            entry_id = p["entry_id"]
+            p_hist = df[df["entry_id"] == entry_id]
+            for h, row in zip(p["history"], p_hist.to_dict(orient="records")):
+                h["round_rank"] = row["round_rank"]
+                h["league_rank"] = row["league_rank"]
+                h["league_rank_change"] = row["league_rank_change"]
 
     def _build_participant(self, entry):
         history = self.fpl_api.get_team_history(str(entry["entry"]))
         finished_history = self._get_finished_history(history["current"])
-        latest_finished_event_id = self.info["latest_finished_event_id"]
-        last_event = next((e for e in finished_history if e["event"] == latest_finished_event_id), None)
+        chips = history.get("chips", [])
+        if chips:
+            finished_history = self._add_chips(chips, finished_history)
+
+        last_event = next((e for e in finished_history if e["event"] == self.info["latest_finished_event_id"]), None)
         return {
             "entry_id": entry["entry"],
             "team_name": entry["entry_name"],
             "manager_name": entry["player_name"],
-            "latest_gw": latest_finished_event_id,
-            "latest_score": last_event["points"] if last_event else 0,
-            "latest_net_score": last_event["net_points"] if last_event else 0,
-            "latest_event_transfer_cost": last_event.get("event_transfers_cost", 0) if last_event else 0,
             "total_score": last_event.get("total_points", 0) if last_event else 0,
             "history": finished_history,
+            "last_event": last_event,
         }
+
+    def _add_chips(self, chips, finished_history):
+        for chip in chips:
+            abbr = self.CHIP_ABBREVIATIONS.get(chip.get("name"))
+            for event in finished_history:
+                if event["event"] == chip.get("event") and abbr:
+                    event["chip"] = abbr
+        return finished_history
 
     def _get_finished_history(self, history_list):
         finished = []

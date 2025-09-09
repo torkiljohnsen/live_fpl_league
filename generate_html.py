@@ -76,10 +76,10 @@ if __name__ == "__main__":
         league_join_code = None
 
     fpl = FPL_API(dev_mode=dev_mode)
-    data = fpl.get_league_standings(league_id)
-    league_standings = prepare_league_standings(data)
-    league_name = data.get("league", {}).get("name", "FPL Mini-League Dashboard")
-    output_path = get_output_path(league_id, dev_mode, TEMPLATE_PATH)  # Pass template path
-
+    fpl_league = FPLLeague(league_id, fpl)
+    summary = fpl_league.get_summary()
+    league_standings = summary.get("participants", [])
+    league_name = summary.get("name", "FPL Mini-League Dashboard")
+    output_path = get_output_path(league_id, dev_mode, TEMPLATE_PATH)
     html = write_league_standings(league_standings, league_name, league_join_code)
     write_html_file(html, output_path)

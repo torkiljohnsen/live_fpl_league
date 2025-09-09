@@ -1,0 +1,104 @@
+{
+  "current": [
+    {
+      "event": 1,
+      "points": 53,
+      "total_points": 53,
+      "rank": 4864965,
+      "rank_sort": 5016738,
+      "overall_rank": 4864958,
+      "percentile_rank": 55,
+      "bank": 10,
+      "value": 1000,
+      "event_transfers": 0,
+      "event_transfers_cost": 0,
+      "points_on_bench": 6
+    },
+    {
+      "event": 2,
+      "points": 56,
+      "total_points": 109,
+      "rank": 3570435,
+      "rank_sort": 3625648,
+      "overall_rank": 3634170,
+      "percentile_rank": 35,
+      "bank": 10,
+      "value": 1001,
+      "event_transfers": 0,
+      "event_transfers_cost": 0,
+      "points_on_bench": 9
+    },
+    {
+      "event": 3,
+      "points": 43,
+      "total_points": 152,
+      "rank": 7431533,
+      "rank_sort": 7471886,
+      "overall_rank": 4530060,
+      "percentile_rank": 70,
+      "bank": 49,
+      "value": 1002,
+      "event_transfers": 1,
+      "event_transfers_cost": 0,
+      "points_on_bench": 14
+    }
+  ],
+  "past": [
+    {
+      "season_name": "2014/15",
+      "total_points": 1740,
+      "rank": 1424321
+    },
+    {
+      "season_name": "2015/16",
+      "total_points": 1973,
+      "rank": 797141
+    },
+    {
+      "season_name": "2016/17",
+      "total_points": 1576,
+      "rank": 3194851
+    },
+    {
+      "season_name": "2017/18",
+      "total_points": 2308,
+      "rank": 11833
+    },
+    {
+      "season_name": "2018/19",
+      "total_points": 2242,
+      "rank": 151024
+    },
+    {
+      "season_name": "2019/20",
+      "total_points": 2239,
+      "rank": 162416
+    },
+    {
+      "season_name": "2020/21",
+      "total_points": 2335,
+      "rank": 236894
+    },
+    {
+      "season_name": "2021/22",
+      "total_points": 2181,
+      "rank": 1320918
+    },
+    {
+      "season_name": "2022/23",
+      "total_points": 2436,
+      "rank": 435896
+    },
+    {
+      "season_name": "2023/24",
+      "total_points": 2315,
+      "rank": 903532
+    },
+    {
+      "season_name": "2024/25",
+      "total_points": 2302,
+      "rank": 1485005
+    }
+  ],
+  "chips": []
+}
