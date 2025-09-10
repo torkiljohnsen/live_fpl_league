@@ -1,12 +1,18 @@
-
-from typing import Optional
+from typing import Optional, Any, Dict
 from .fpl_league import FPLLeague
 from .fpl_api import FPL_API
 
 LOGO_PATH = "assets/fpl_logo.svg"
 
+
 class LeagueContext:
-    def __init__(self, league_data: dict, league_join_code: Optional[str], logo_svg: str, output_type: str, dev_mode: bool = False):
+    league_data: Dict[str, Any]
+    league_join_code: Optional[str]
+    logo_svg: str
+    output_type: str
+    dev_mode: bool
+
+    def __init__(self, league_data: Dict[str, Any], league_join_code: Optional[str], logo_svg: str, output_type: str, dev_mode: bool = False) -> None:
         self.league_data = league_data
         self.league_join_code = league_join_code
         self.logo_svg = logo_svg
@@ -20,7 +26,7 @@ class LeagueContext:
         dev_mode: bool,
         league_join_code: Optional[str],
         output_type: str,
-        fpl_api=None,
+        fpl_api: Any = None,
     ) -> "LeagueContext":
         if fpl_api is None:
             fpl_api = FPL_API(dev_mode=dev_mode)
@@ -41,11 +47,10 @@ class LeagueContext:
             return f.read()
 
     @property
-    def id(self):
+    def id(self) -> Any:
         return self.league_data.get("id") or self.league_data.get("league", {}).get("id")
 
-    def as_dict(self):
-        # Flatten for template rendering
+    def as_dict(self) -> Dict[str, Any]:
         d = dict(self.league_data)
         d["league_join_code"] = self.league_join_code
         d["logo_svg"] = self.logo_svg

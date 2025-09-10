@@ -3,13 +3,19 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from .league_context import LeagueContext
 
+from typing import Any
+
 class LeagueTemplateRenderer:
-    TEMPLATE_MAP = {
+    TEMPLATE_MAP: dict[str, str] = {
         "standings": "league_standings",
         "gw_history": "league_gameweek_history",
     }
 
-    def __init__(self, context: LeagueContext, output_type: str, template_dir="templates"):
+    context: LeagueContext
+    output_type: str
+    env: Any
+
+    def __init__(self, context: LeagueContext, output_type: str, template_dir: str = "templates") -> None:
         self.context = context
         self.output_type = output_type
         self.env = Environment(
@@ -17,12 +23,12 @@ class LeagueTemplateRenderer:
             autoescape=select_autoescape(["html", "xml"])
         )
 
-    def get_template_name(self):
+    def get_template_name(self) -> str:
         if self.output_type not in self.TEMPLATE_MAP:
             raise ValueError(f"Unknown output type: {self.output_type}")
         return f"{self.TEMPLATE_MAP[self.output_type]}.html"
 
-    def get_output_path(self):
+    def get_output_path(self) -> Path:
         league_id = self.context.id or "unknown"
         dev_mode = self.context.dev_mode
         template_name = self.TEMPLATE_MAP[self.output_type]
@@ -30,7 +36,7 @@ class LeagueTemplateRenderer:
         filename = f"{template_name}_{league_id}{suffix}.html"
         return Path("docs") / filename
 
-    def write_html_output(self):
+    def write_html_output(self) -> None:
         template = self.env.get_template(self.get_template_name())
         html = template.render(**self.context.as_dict())
         output_path = self.get_output_path()
