@@ -66,7 +66,7 @@ th, td {
 th {
 	background: #3E7DEE;
 	color: #fff;
-	font-family: 'Sora', sans-serif;
+	font-family: 'Sora Regular', sans-serif;
 	font-size: 1.1em;
 }
 
@@ -96,4 +96,58 @@ tr:nth-child(odd) {
 	width: 100% !important;
 	height: auto !important;
 	display: block;
+}
+
+/* league gameweek history styling */
+.gw_history th,
+.gw_history td {
+	border: 1px solid rgba(255, 255, 255, 0.1)
+}
+.gw_history th {
+	font-size: .9rem;
+}
+.gw_history th.participant {
+	font-weight: normal;
+	text-align: left;
+	min-width: 170px;
+}
+
+.gw_history .manager_name {
+	display: block;
+}
+
+.gw_history .team_name {
+	display: block;
+	font-size: .8rem;
+	color: rgba(255, 255, 255, 0.7)
+}
+
+.gw_history th.golden_gameweek {
+	background-color: #F06848;
+}
+
+.gw_history td {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.gw_history td.round_rank_1 {
+	font-weight: bold;
+	color: #fff;
+	text-decoration: underline;
+	background-color: rgba(0,0,0,0.2);
+}
+.gw_history td.golden_gameweek.round_rank_1 {
+	background-color: gold;
+	color: #000;
+}
+.gw_history .team_header {
+	float: left;
+}
+.gw_history .gw_header {
+	float: right;
+}
+.gw_history th > .team_header, 
+.gw_history th > .gw_header {
+	display: inline-block;
+	min-width: 3em;
 }

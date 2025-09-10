@@ -4,30 +4,45 @@
 
 {% block body %}
 <h1>League Gameweek History</h1>
-<table>
+<table class="gw_history">
     <tr>
-        <th>Manager / Team</th>
+        <th><span class="team_header">Team &#8595;</span><span class="gw_header">GW &#8594;</span></th>
         {% for event in event_ids %}
-            <th>{{ event }}</th>
+            {% if event % 4 == 0 %}
+                <th class="golden_gameweek">{{ event }}</th>
+            {% else %}
+                <th>{{ event }}</th>
+            {% endif %}
         {% endfor %}
         <th>SUM</th>
     </tr>
     {% for p in participants %}
         <tr>
-            <th>{{ p.manager_name }} / {{ p.team_name }}</th>
+            <th class="participant"><span class="manager_name">{{ p.manager_name }}</span><span class="team_name">{{ p.team_name }}</span></th>
+            {% set history_map = {} %}
+            {% for h in p.history %}
+                {% set _ = history_map.update({h['event']: h}) %}
+            {% endfor %}
             {% set points_list = [] %}
             {% for event in event_ids %}
-                {% set points = None %}
-                {% for h in p.history %}
-                    {% if h.event == event %}
-                        {% set points = h.points %}
-                    {% endif %}
-                {% endfor %}
-                {% if points is not none %}
-                    <td>{{ points }}</td>
-                    {% set _ = points_list.append(points) %}
+                {% set history = history_map.get(event) %}
+                {% if history is mapping %}
+                    {% set points = history['points'] if 'points' in history else history.get('total_points') %}
+                    {% set round_rank = history.get('round_rank') %}
                 {% else %}
-                    <td>-</td>
+                    {% set points = history %}
+                    {% set round_rank = None %}
+                {% endif %}
+                {% set cell_class = [] %}
+                {% if event % 4 == 0 %}
+                    {% do cell_class.append('golden_gameweek') %}
+                {% endif %}
+                {% if round_rank is not none %}
+                    {% do cell_class.append('round_rank_' ~ round_rank) %}
+                {% endif %}
+                <td{% if cell_class %} class="{{ cell_class | join(' ') }}"{% endif %}>{{ points if points is not none else '-' }}</td>
+                {% if points is not none %}
+                    {% set _ = points_list.append(points) %}
                 {% endif %}
             {% endfor %}
             <td><b>{{ points_list | sum }}</b></td>

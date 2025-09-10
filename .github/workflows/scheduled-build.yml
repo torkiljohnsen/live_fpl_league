@@ -28,18 +28,21 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run script
-        run: python generate_html.py
+      - name: Generate standings for Sinkaberg Superliga
+        run: python generate_html.py -o standings -l 1639886
+
+      - name: Generate GW history for Sinkaberg administrasjon
+        run: python generate_html.py -o gw_history -l 1638989
 
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          if [[ `git status --porcelain docs/index.html` ]]; then
-            git add docs/index.html
-            git commit -m "Nightly dashboard update"
-            git push origin dev
+          if [[ `git status --porcelain docs/` ]]; then
+            git add docs/
+            git commit -m "Update docs [skip ci]"
+            git push
           else
             echo "No changes to commit."
           fi
