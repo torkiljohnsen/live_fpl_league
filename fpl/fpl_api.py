@@ -27,8 +27,11 @@ class FPL_API:
         sample_name = endpoint.replace('/', '_').strip('_')
         sample_path = self.SAMPLE_DATA_DIR / f"{sample_name}_sample.json"
         if not sample_path.exists():
+            print(f"[dev_mode] API called and sample generated: {sample_path}")
             data = self._call_api(endpoint)
             sample_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        else:
+            print(f"[dev_mode] Sample read: {sample_path}")
         return json.loads(sample_path.read_text(encoding="utf-8"))
 
     def get_league_standings(self, league_id: str) -> Any:

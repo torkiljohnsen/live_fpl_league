@@ -1,3 +1,5 @@
+# Ignore sample data JSON files
+fpl/sample_data/*.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
