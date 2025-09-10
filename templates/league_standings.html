@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ league_name }}{% endblock %}
+{% block title %}{{ name }}{% endblock %}
 
 {% block body %}
     <div class="logo-container">
@@ -9,7 +9,7 @@
         </div>
     </div>
     <h1>
-        {{ league_name }}
+        {{ name }}
         {% if league_join_code %}
             ({{ league_join_code }})
         {% endif %}
@@ -23,7 +23,7 @@
             <th class="round_col">Runde</th>
             <th class="points_col">Poeng</th>
         </tr>
-        {% for team in league_standings %}
+        {% for team in participants %}
             {% set last = team.last_event %}
             <tr>
                 <td class="rank_col">

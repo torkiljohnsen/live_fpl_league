@@ -9,9 +9,9 @@ class FPLLeague:
         "bboost": "BB",
         "3xc": "TC",
     }
-    def __init__(self, league_id: str, fpl_api: FPL_API):
+    def __init__(self, league_id: str, dev_mode: bool = False):
         self.league_id = league_id
-        self.fpl_api = fpl_api
+        self.fpl_api = FPL_API(dev_mode=dev_mode)
         self.bootstrap = self.fpl_api.get_bootstrap_static()
         self._set_events_list()
         self._set_finished_event_ids()
