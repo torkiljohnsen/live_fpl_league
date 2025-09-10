@@ -1,7 +1,7 @@
-from typing import Optional
 
-from .fpl_league import FPLLeague
 from typing import Optional
+from .fpl_league import FPLLeague
+from .fpl_api import FPL_API
 
 LOGO_PATH = "assets/fpl_logo.svg"
 
@@ -14,8 +14,17 @@ class LeagueContext:
         self.dev_mode = dev_mode
 
     @classmethod
-    def build(cls, league_id: str, dev_mode: bool, league_join_code: Optional[str], output_type: str) -> "LeagueContext":
-        league = FPLLeague(league_id, dev_mode=dev_mode)
+    def build(
+        cls,
+        league_id: str,
+        dev_mode: bool,
+        league_join_code: Optional[str],
+        output_type: str,
+        fpl_api=None,
+    ) -> "LeagueContext":
+        if fpl_api is None:
+            fpl_api = FPL_API(dev_mode=dev_mode)
+        league = FPLLeague(league_id, fpl_api)
         league_data = league.get_summary()
         logo_svg = cls._get_logo_svg()
         return cls(
