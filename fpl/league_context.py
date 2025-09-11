@@ -9,14 +9,12 @@ class LeagueContext:
     league_data: Dict[str, Any]
     league_join_code: Optional[str]
     logo_svg: str
-    output_type: str
     dev_mode: bool
 
-    def __init__(self, league_data: Dict[str, Any], league_join_code: Optional[str], logo_svg: str, output_type: str, dev_mode: bool = False) -> None:
+    def __init__(self, league_data: Dict[str, Any], league_join_code: Optional[str], logo_svg: str, dev_mode: bool = False) -> None:
         self.league_data = league_data
         self.league_join_code = league_join_code
         self.logo_svg = logo_svg
-        self.output_type = output_type
         self.dev_mode = dev_mode
 
     @classmethod
@@ -25,7 +23,6 @@ class LeagueContext:
         league_id: str,
         dev_mode: bool,
         league_join_code: Optional[str],
-        output_type: str,
         fpl_api: Any = None,
     ) -> "LeagueContext":
         if fpl_api is None:
@@ -37,7 +34,6 @@ class LeagueContext:
             league_data=league_data,
             league_join_code=league_join_code,
             logo_svg=logo_svg,
-            output_type=output_type,
             dev_mode=dev_mode
         )
 
@@ -54,6 +50,5 @@ class LeagueContext:
         d = dict(self.league_data)
         d["league_join_code"] = self.league_join_code
         d["logo_svg"] = self.logo_svg
-        d["output_type"] = self.output_type
         d["dev_mode"] = self.dev_mode
         return d

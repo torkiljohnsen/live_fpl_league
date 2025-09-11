@@ -39,7 +39,7 @@ class LeagueTemplateRenderer:
 
     def write_html_output(self) -> None:
         template = self.env.get_template(self.get_template_name())
-        html = template.render(**self.context.as_dict())
+        html = template.render(**self.context.as_dict(), output_type=self.output_type)
         output_path = self.get_output_path()
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
