@@ -28,11 +28,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Generate standings for Sinkaberg Superliga
-        run: python generate_html.py -o standings -l 1639886
-
-      - name: Generate GW history for Sinkaberg administrasjon
-        run: python generate_html.py -o gw_history -l 1638989
+      - name: Generate standings and gw history for the Sinkaberg leagues
+        run: python generate_html.py -l 1639886,1638989
 
       - name: Generate Index
         run: python generate_index.py
