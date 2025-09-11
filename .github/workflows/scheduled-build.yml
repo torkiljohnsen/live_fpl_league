@@ -34,6 +34,9 @@ jobs:
       - name: Generate GW history for Sinkaberg administrasjon
         run: python generate_html.py -o gw_history -l 1638989
 
+      - name: Generate Index
+        run: python generate_index.py
+
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"

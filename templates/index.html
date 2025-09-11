@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FPL League Dashboard Index</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        ul { line-height: 2; }
+    </style>
+</head>
+<body>
+    <h1>FPL League Dashboard Index</h1>
+    <ul>
+        {% for file, title in league_files %}
+            <li><a href="{{ file }}">{{ title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
