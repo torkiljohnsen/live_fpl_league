@@ -3,16 +3,33 @@
 {% block title %}{{ name }} - Gameweek History{% endblock %}
 
 {% block body %}
-<h1>{{ name }}</h1>
+<div class="logo-container">
+    <div>
+        {{ logo_svg | safe }}
+    </div>
+</div>
+<h1>{{ name }} | 🏆 Golden Gameweeks 🏆</h1>
 <table class="gw_history">
     <tr>
         <th><span class="team_header">Team &#8595;</span><span class="gw_header">GW &#8594;</span></th>
         {% for event in event_ids %}
+            {% set th_class = [] %}
             {% if event % 4 == 0 %}
-                <th class="golden_gameweek">{{ event }}</th>
-            {% else %}
-                <th>{{ event }}</th>
+                {% do th_class.append('golden_gameweek') %}
             {% endif %}
+            {% if event in hidden_event_ids %}
+                {% do th_class.append('gw_hidden') %}
+            {% endif %}
+            {% if latest_finished_event <= 15 %}
+                {% if event > 15 %}
+                    {% do th_class.append('gw_is_in_future') %}
+                {% endif %}
+            {% else %}
+                {% if event > latest_finished_event %}
+                    {% do th_class.append('gw_is_in_future') %}
+                {% endif %}
+            {% endif %}
+            <th{% if th_class %} class="{{ th_class | join(' ') }}"{% endif %}>{{ event }}</th>
         {% endfor %}
         <th>SUM</th>
     </tr>
@@ -39,6 +56,18 @@
                 {% endif %}
                 {% if round_rank is not none %}
                     {% do cell_class.append('round_rank_' ~ round_rank) %}
+                {% endif %}
+                {% if event in hidden_event_ids %}
+                    {% do cell_class.append('gw_hidden') %}
+                {% endif %}
+                {% if latest_finished_event <= 15 %}
+                    {% if event > 15 %}
+                        {% do cell_class.append('gw_is_in_future') %}
+                    {% endif %}
+                {% else %}
+                    {% if event > latest_finished_event %}
+                        {% do cell_class.append('gw_is_in_future') %}
+                    {% endif %}
                 {% endif %}
                 <td{% if cell_class %} class="{{ cell_class | join(' ') }}"{% endif %}>{{ points if points is not none else '-' }}</td>
                 {% if points is not none %}

@@ -151,3 +151,8 @@ tr:nth-child(odd) {
 	display: inline-block;
 	min-width: 3em;
 }
+
+.gw_history .gw_is_in_future,
+.gw_history .gw_hidden {
+	display: none;
+}

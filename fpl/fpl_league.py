@@ -27,6 +27,7 @@ class FPLLeague:
         self.bootstrap = self.fpl_api.get_bootstrap_static()
         self._set_events_list()
         self._set_finished_event_ids()
+        self.latest_finished_event = max(self.finished_event_ids) if self.finished_event_ids else 0
         self._init_league_data()
 
     def _set_events_list(self) -> None:
@@ -83,9 +84,11 @@ class FPLLeague:
                 finished.append(event_copy)
         return finished
 
+
     def get_summary(self) -> Dict[str, Any]:
         summary: Dict[str, Any] = dict(self.info)
         summary["generated_time"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
         summary["participants"] = self.get_participants()
         summary["event_ids"] = self.event_ids
+        summary["latest_finished_event"] = self.latest_finished_event
         return summary
