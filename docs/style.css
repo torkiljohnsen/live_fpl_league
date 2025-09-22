@@ -5,9 +5,8 @@
 .points_value {
 	font-weight: bold;
 }
-.negative_rank_change {
+.negative_rank_change, .round_transfers_col {
 	color: #ff4d4f;
-	font-weight: bold;
 }
 
 /* Table column alignment by semantic class */
@@ -18,10 +17,16 @@ th.player_col, td.player_col, th.entry_col, td.entry_col {
 	text-align: left;
 }
 th.round_col, td.round_col {
-	text-align: right;
+	text-align: center;
 }
 th.points_col, td.points_col {
 	text-align: right;
+}
+
+/* Reduce padding for round subcolumns */
+td[class^="round_"] {
+	padding-left: 0.1rem;
+	padding-right: 0.1rem;
 }
 body {
 	background: #00143C;
