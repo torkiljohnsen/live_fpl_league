@@ -66,11 +66,25 @@ class FPLLeague:
         if chips:
             finished_history = ChipAnnotator.add_chips(chips, finished_history)
         last_event = next((e for e in finished_history if e["event"] == self.info["latest_finished_event_id"]), None)
+        
+        # Ensure last_event is never None by creating a default event
+        if last_event is None:
+            last_event = {
+                "event": self.info["latest_finished_event_id"],
+                "points": 0,
+                "total_points": 0,
+                "event_transfers_cost": 0,
+                "net_points": 0,
+                "chip": None,
+            }
+            # Add the default event to history so RankCalculator can process it
+            finished_history.append(last_event)
+        
         return Participant(
             entry_id=entry["entry"],
             team_name=entry["entry_name"],
             manager_name=entry["player_name"],
-            total_score=last_event.get("total_points", 0) if last_event else 0,
+            total_score=last_event.get("total_points", 0),
             history=finished_history,
             last_event=last_event,
         )

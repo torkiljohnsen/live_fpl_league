@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 @dataclass
 class Participant:
@@ -8,5 +8,4 @@ class Participant:
     manager_name: str
     total_score: int
     history: List[Dict[str, Any]]
-    last_event: Optional[Dict[str, Any]] = None
-    # You can add more fields as needed
+    last_event: Dict[str, Any]
