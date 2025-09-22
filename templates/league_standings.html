@@ -49,7 +49,9 @@
                 <td class="round_transfers_col">
                     {% if last.event_transfers_cost > 0 %}(-{{ last.event_transfers_cost }}){% endif %}
                 </td>
-                <td class="points_col"><span class="points_value">{{ last.total_points }}</span></td>
+                <td class="points_col">
+                    <span class="points_value">{{ last.total_points }}</span>
+                </td>
             </tr>
         {% endfor %}
     </table>
