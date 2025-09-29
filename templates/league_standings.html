@@ -19,7 +19,7 @@
             <th class="rank_col"></th>
             <th class="player_col">Spiller</th>
             <th class="entry_col">Lag</th>
-            <th class="round_col" colspan="4">Runde</th>
+            <th class="round_col" colspan="4">Runde{% if not is_current_finished %} *{% endif %}</th>
             <th class="points_col">Poeng</th>
         </tr>
         {% for team in participants %}
