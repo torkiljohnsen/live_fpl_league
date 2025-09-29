@@ -47,10 +47,10 @@ class LeagueContext:
         return self.league_data.get("id") or self.league_data.get("league", {}).get("id")
 
     @staticmethod
-    def get_gw_column_sets(event_ids, latest_finished_event=None, max_cols=15):
-        # Only consider events up to latest_finished_event for hiding
-        if latest_finished_event is not None:
-            visible_event_ids = [e for e in event_ids if e <= latest_finished_event]
+    def get_gw_column_sets(event_ids, last_event=None, max_cols=15):
+        # Only consider events up to last_event for hiding
+        if last_event is not None:
+            visible_event_ids = [e for e in event_ids if e <= last_event]
         else:
             visible_event_ids = list(event_ids)
 
@@ -67,14 +67,21 @@ class LeagueContext:
             hidden_event_ids = set(non_golden_sorted[:num_to_hide])
         return set(golden_event_ids), hidden_event_ids
 
+    def get_last_event(self) -> Optional[int]:
+        """Get the last active event (current event or latest finished event)."""
+        current_event_id = self.league_data.get("current_event_id")
+        finished_event_ids = self.league_data.get("finished_event_ids", [])
+        # Use current event if it exists, otherwise fall back to max finished event
+        return current_event_id if current_event_id else (max(finished_event_ids) if finished_event_ids else None)
+
     def as_dict(self) -> Dict[str, Any]:
         d = dict(self.league_data)
         d["league_join_code"] = self.league_join_code
         d["logo_svg"] = self.logo_svg
         d["dev_mode"] = self.dev_mode
         event_ids = d.get("event_ids", [])
-        latest_finished_event = d.get("latest_finished_event")
-        golden_event_ids, hidden_event_ids = self.get_gw_column_sets(event_ids, latest_finished_event=latest_finished_event)
+        last_event = self.get_last_event()
+        golden_event_ids, hidden_event_ids = self.get_gw_column_sets(event_ids, last_event=last_event)
         d["golden_event_ids"] = golden_event_ids
         d["hidden_event_ids"] = hidden_event_ids
         return d
