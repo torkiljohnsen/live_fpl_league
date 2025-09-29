@@ -8,7 +8,7 @@
         {{ logo_svg | safe }}
     </div>
 </div>
-<h1>{{ name }} | 🏆 Golden Gameweeks 🏆</h1>
+<h1>{{ name }} Live Rank | 🏆 Golden Gameweeks 🏆</h1>
 <table class="gw_history">
     <tr>
         <th><span class="team_header">Team &#8595;</span><span class="gw_header">GW &#8594;</span></th>
@@ -20,16 +20,22 @@
             {% if event in hidden_event_ids %}
                 {% do th_class.append('gw_hidden') %}
             {% endif %}
-            {% if latest_finished_event <= 15 %}
+            {% if current_event_id <= 15 %}
                 {% if event > 15 %}
                     {% do th_class.append('gw_is_in_future') %}
                 {% endif %}
             {% else %}
-                {% if event > latest_finished_event %}
+                {% if event > current_event_id %}
                     {% do th_class.append('gw_is_in_future') %}
                 {% endif %}
             {% endif %}
-            <th{% if th_class %} class="{{ th_class | join(' ') }}"{% endif %}>{{ event }}</th>
+            <th{% if th_class %} class="{{ th_class | join(' ') }}"{% endif %}>
+                {% if event == current_event_id and not is_current_finished %}
+                    {{ event }} *
+                {% else %}
+                    {{ event }}
+                {% endif %}
+            </th>
         {% endfor %}
         <th>SUM</th>
     </tr>
@@ -60,12 +66,12 @@
                 {% if event in hidden_event_ids %}
                     {% do cell_class.append('gw_hidden') %}
                 {% endif %}
-                {% if latest_finished_event <= 15 %}
+                {% if current_event_id <= 15 %}
                     {% if event > 15 %}
                         {% do cell_class.append('gw_is_in_future') %}
                     {% endif %}
                 {% else %}
-                    {% if event > latest_finished_event %}
+                    {% if event > current_event_id %}
                         {% do cell_class.append('gw_is_in_future') %}
                     {% endif %}
                 {% endif %}
