@@ -24,10 +24,11 @@ th.points_col, td.points_col {
 }
 
 /* Reduce padding for round subcolumns */
-td[class^="round_"] {
+table.league_standings td[class^="round_"] {
 	padding-left: 0.1rem;
 	padding-right: 0.1rem;
 }
+
 body {
 	background: #00143C;
 	color: #fff;
