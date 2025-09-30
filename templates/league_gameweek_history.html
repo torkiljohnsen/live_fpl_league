@@ -46,41 +46,29 @@
             {% for h in p.history %}
                 {% set _ = history_map.update({h['event']: h}) %}
             {% endfor %}
-            {% set points_list = [] %}
             {% for event in event_ids %}
                 {% set history = history_map.get(event) %}
-                {% if history is mapping %}
-                    {% set points = history['points'] if 'points' in history else history.get('total_points') %}
-                    {% set round_rank = history.get('round_rank') %}
-                {% else %}
-                    {% set points = history %}
-                    {% set round_rank = None %}
-                {% endif %}
                 {% set cell_class = [] %}
                 {% if event % 4 == 0 %}
                     {% do cell_class.append('golden_gameweek') %}
                 {% endif %}
-                {% if round_rank is not none %}
-                    {% do cell_class.append('round_rank_' ~ round_rank) %}
-                {% endif %}
                 {% if event in hidden_event_ids %}
                     {% do cell_class.append('gw_hidden') %}
                 {% endif %}
-                {% if current_event_id <= 15 %}
-                    {% if event > 15 %}
-                        {% do cell_class.append('gw_is_in_future') %}
-                    {% endif %}
+                {% set is_future = (event > 15 if current_event_id <= 15 else event > current_event_id) %}
+                {% if is_future %}
+                    {% do cell_class.append('gw_is_in_future') %}
                 {% else %}
-                    {% if event > current_event_id %}
-                        {% do cell_class.append('gw_is_in_future') %}
-                    {% endif %}
+                    {% do cell_class.append('round_rank_' ~ (history.get('round_rank') if history is mapping else 'None')) %}
+                {% endif %}
+                {% if history is mapping %}
+                    {% set points = history['points'] if 'points' in history else history.get('total_points') %}
+                {% else %}
+                    {% set points = history %}
                 {% endif %}
                 <td{% if cell_class %} class="{{ cell_class | join(' ') }}"{% endif %}>{{ points if points is not none else '-' }}</td>
-                {% if points is not none %}
-                    {% set _ = points_list.append(points) %}
-                {% endif %}
             {% endfor %}
-            <td><b>{{ points_list | sum }}</b></td>
+            <td><b>{{ p.total_score }}</b></td>
         </tr>
     {% endfor %}
 </table>

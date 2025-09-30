@@ -14,7 +14,7 @@
             ({{ league_join_code }})
         {% endif %}
     </h1>
-    <table>
+    <table class="league_standings">
         <tr>
             <th class="rank_col"></th>
             <th class="player_col">Spiller</th>
@@ -37,12 +37,8 @@
                 </td>
                 <td class="player_col">{{ team.manager_name }}</td>
                 <td class="entry_col">{{ team.team_name }}</td>
-                <td class="round_chip_col">
-                    {% if last.chip %}{{ last.chip }}{% endif %}
-                </td>
-                <td class="round_medal_col">
-                    {% if last.round_rank == 1 %}🥇{% elif last.round_rank == 2 %}🥈{% elif last.round_rank == 3 %}🥉{% elif last.round_rank == participants|length %}🚨{% endif %}
-                </td>
+                <td class="round_chip_col">{% if last.chip %}{{ last.chip }}{% endif %}</td>
+                <td class="round_medal_col">{% if last.round_rank == 1 %}🥇{% elif last.round_rank == 2 %}🥈{% elif last.round_rank == 3 %}🥉{% elif last.round_rank == participants|length %}🚨{% endif %}</td>
                 <td class="round_points_col">
                     <span class="round_points_value">{{ last.points }}</span>
                 </td>
