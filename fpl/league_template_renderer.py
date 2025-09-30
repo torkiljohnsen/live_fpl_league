@@ -21,7 +21,9 @@ class LeagueTemplateRenderer:
         self.env = Environment(
             loader=FileSystemLoader(template_dir),
             extensions=['jinja2.ext.do'],
-            autoescape=select_autoescape(["html", "xml"])
+            autoescape=select_autoescape(["html", "xml"]),
+            trim_blocks=True,
+            lstrip_blocks=True
         )
 
     def get_template_name(self) -> str:
