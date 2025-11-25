@@ -146,6 +146,12 @@ tr:nth-child(odd) {
 	background-color: gold;
 	color: #000;
 }
+.gw_history td.is_loser {
+	background-image: url('The Duck liten.png');
+	background-repeat: no-repeat;
+	background-position: top right;
+	background-size: 20px auto;
+}
 .gw_history .team_header {
 	float: left;
 }
