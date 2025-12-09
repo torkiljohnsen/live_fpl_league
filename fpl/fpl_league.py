@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from .participant import Participant
 from .rank_calculator import RankCalculator
 from .fpl_api_protocol import FPLAPIProtocol
@@ -77,6 +77,7 @@ class FPLLeague:
             results.append(participant)
         results.sort(key=lambda p: p.total_score, reverse=True)
         RankCalculator.apply_history_ranks(results)
+        RankCalculator.calculate_lowest_rank_counts(results)
         return results
 
     def _build_participant(self, entry: Dict[str, Any]) -> Participant:
