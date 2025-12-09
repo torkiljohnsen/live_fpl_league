@@ -129,13 +129,29 @@ class FPLLeague:
         This handles ties correctly - if multiple participants have the same lowest score,
         they all get a rubber duck for that event.
         """
-        total_participants = len(participants)
+        # Build a map of event -> min_net_points
+        from collections import defaultdict
+        event_min_points: Dict[int, float] = {}
+        
+        # First pass: find minimum net_points for each event
+        for participant in participants:
+            for history_entry in participant.history:
+                event_id = history_entry.get("event")
+                net_points = history_entry.get("net_points", 0)
+                if event_id is not None:
+                    if event_id not in event_min_points:
+                        event_min_points[event_id] = net_points
+                    else:
+                        event_min_points[event_id] = min(event_min_points[event_id], net_points)
+        
+        # Second pass: count rubber ducks for each participant
         for participant in participants:
             rubber_duck_count = 0
             for history_entry in participant.history:
-                # A participant is a loser if their round_rank equals the total number of participants
-                # This works for ties because all participants with the lowest score get the same rank
-                if history_entry.get("round_rank") == total_participants:
+                event_id = history_entry.get("event")
+                net_points = history_entry.get("net_points", 0)
+                # A participant gets a duck if they have the minimum score for that event
+                if event_id in event_min_points and net_points == event_min_points[event_id]:
                     rubber_duck_count += 1
             participant.rubber_duck_count = rubber_duck_count
 
