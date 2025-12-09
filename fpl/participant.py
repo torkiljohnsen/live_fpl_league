@@ -9,4 +9,4 @@ class Participant:
     total_score: int
     history: List[Dict[str, Any]]
     last_event: Dict[str, Any]
-    rubber_duck_count: int = field(default=0)
+    lowest_rank_count: int = field(default=0)

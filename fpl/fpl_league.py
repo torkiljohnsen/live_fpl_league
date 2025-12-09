@@ -77,7 +77,7 @@ class FPLLeague:
             results.append(participant)
         results.sort(key=lambda p: p.total_score, reverse=True)
         RankCalculator.apply_history_ranks(results)
-        self._event_min_points = self._calculate_rubber_duck_counts(results)
+        RankCalculator.calculate_lowest_rank_counts(results)
         return results
 
     def _build_participant(self, entry: Dict[str, Any]) -> Participant:
@@ -122,43 +122,6 @@ class FPLLeague:
             complete.append(event_copy)
         return complete
 
-    def _calculate_rubber_duck_counts(self, participants: List[Participant]) -> Dict[int, Union[int, float]]:
-        """Calculate rubber duck count for each participant.
-        
-        A participant gets a rubber duck for each event where they had the lowest score.
-        This handles ties correctly - if multiple participants have the same lowest score,
-        they all get a rubber duck for that event.
-        
-        Returns:
-            Dict mapping event_id to minimum net_points for that event
-        """
-        # Build a map of event -> min_net_points
-        event_min_points: Dict[int, Union[int, float]] = {}
-        
-        # First pass: find minimum net_points for each event
-        for participant in participants:
-            for history_entry in participant.history:
-                event_id = history_entry.get("event")
-                net_points = history_entry.get("net_points", 0)
-                if event_id is not None:
-                    if event_id not in event_min_points:
-                        event_min_points[event_id] = net_points
-                    else:
-                        event_min_points[event_id] = min(event_min_points[event_id], net_points)
-        
-        # Second pass: count rubber ducks for each participant
-        for participant in participants:
-            rubber_duck_count = 0
-            for history_entry in participant.history:
-                event_id = history_entry.get("event")
-                net_points = history_entry.get("net_points", 0)
-                # A participant gets a duck if they have the minimum score for that event
-                if event_id in event_min_points and net_points == event_min_points[event_id]:
-                    rubber_duck_count += 1
-            participant.rubber_duck_count = rubber_duck_count
-        
-        return event_min_points
-
 
     def get_summary(self) -> Dict[str, Any]:
         summary: Dict[str, Any] = dict(self.info)
@@ -168,5 +131,4 @@ class FPLLeague:
         summary["finished_event_ids"] = self.finished_event_ids  # Finished events marker
         summary["current_event_id"] = self.current_event_id  # Current event marker
         summary["is_current_finished"] = self.current_event_id in self.finished_event_ids if self.current_event_id else False
-        summary["event_min_points"] = getattr(self, '_event_min_points', {})  # Map of event_id -> min points
         return summary
