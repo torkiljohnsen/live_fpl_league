@@ -128,8 +128,9 @@ def test_rubber_duck_column_in_template():
     template = renderer.env.get_template(renderer.get_template_name())
     html = template.render(**context.as_dict(), output_type="gw_history")
     
-    # Check that the duck emoji appears as a column header
-    assert "🦆" in html, "Template should contain duck emoji in header"
+    # Check that the duck image appears as a column header
+    assert 'The Duck liten.png' in html, "Template should contain duck image in header"
+    assert 'alt="🦆"' in html, "Duck image should have duck emoji as alt text"
     
     # Check that each participant's rubber duck count appears in the table
     for p in league_data["participants"]:
