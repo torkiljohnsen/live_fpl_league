@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from .participant import Participant
 from .rank_calculator import RankCalculator
 from .fpl_api_protocol import FPLAPIProtocol
@@ -130,8 +130,7 @@ class FPLLeague:
         they all get a rubber duck for that event.
         """
         # Build a map of event -> min_net_points
-        from collections import defaultdict
-        event_min_points: Dict[int, float] = {}
+        event_min_points: Dict[int, Union[int, float]] = {}
         
         # First pass: find minimum net_points for each event
         for participant in participants:
