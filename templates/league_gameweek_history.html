@@ -65,7 +65,7 @@
                     {% endif %}
                 {% endif %}
                 {% if history is mapping %}
-                    {% set points = history['points'] if 'points' in history else history.get('total_points') %}
+                    {% set points = history['net_points'] if 'net_points' in history else history.get('total_points') %}
                 {% else %}
                     {% set points = history %}
                 {% endif %}
