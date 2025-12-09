@@ -77,6 +77,7 @@ class FPLLeague:
             results.append(participant)
         results.sort(key=lambda p: p.total_score, reverse=True)
         RankCalculator.apply_history_ranks(results)
+        self._calculate_rubber_duck_counts(results)
         return results
 
     def _build_participant(self, entry: Dict[str, Any]) -> Participant:
@@ -120,6 +121,23 @@ class FPLLeague:
             event_copy["net_points"] = e.get("points", 0) - e.get("event_transfers_cost", 0)
             complete.append(event_copy)
         return complete
+
+    def _calculate_rubber_duck_counts(self, participants: List[Participant]) -> None:
+        """Calculate rubber duck count for each participant.
+        
+        A participant gets a rubber duck for each event where they had the lowest score.
+        This handles ties correctly - if multiple participants have the same lowest score,
+        they all get a rubber duck for that event.
+        """
+        total_participants = len(participants)
+        for participant in participants:
+            rubber_duck_count = 0
+            for history_entry in participant.history:
+                # A participant is a loser if their round_rank equals the total number of participants
+                # This works for ties because all participants with the lowest score get the same rank
+                if history_entry.get("round_rank") == total_participants:
+                    rubber_duck_count += 1
+            participant.rubber_duck_count = rubber_duck_count
 
 
     def get_summary(self) -> Dict[str, Any]:

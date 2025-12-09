@@ -38,6 +38,7 @@
             </th>
         {% endfor %}
         <th>SUM</th>
+        <th>🦆</th>
     </tr>
     {% for p in participants %}
         <tr>
@@ -72,6 +73,7 @@
                 <td{% if cell_class %} class="{{ cell_class | join(' ') }}"{% endif %}>{{ points if points is not none else '-' }}</td>
             {% endfor %}
             <td><b>{{ p.total_score }}</b></td>
+            <td>{{ p.rubber_duck_count }}</td>
         </tr>
     {% endfor %}
 </table>
