@@ -1,9 +1,11 @@
 import json
 from pathlib import Path
+from typing import Dict, Union
 from fpl.fpl_league import FPLLeague
 from fpl.participant import Participant
 from fpl.league_context import LeagueContext
 from fpl.league_template_renderer import LeagueTemplateRenderer
+from fpl.rank_calculator import RankCalculator
 
 
 class DummyAPI:
@@ -136,4 +138,80 @@ def test_rubber_duck_column_in_template():
     for p in league_data["participants"]:
         # The rubber duck count should appear as text in the rendered HTML
         assert str(p.rubber_duck_count) in html, f"Template should display rubber_duck_count ({p.rubber_duck_count}) for participant {p.manager_name}"
+
+
+def test_duck_icons_appear_for_tied_losers():
+    """Test that duck icons appear in cells when multiple participants tie for last place."""
+    # Create test data with 2 participants tied for last in an event
+    participants = [
+        Participant(
+            entry_id=1, team_name="Team A", manager_name="Alice", total_score=50,
+            history=[{"event": 1, "net_points": 50, "total_points": 50}],
+            last_event={"event": 1, "net_points": 50, "total_points": 50}
+        ),
+        Participant(
+            entry_id=2, team_name="Team B", manager_name="Bob", total_score=50,
+            history=[{"event": 1, "net_points": 50, "total_points": 50}],
+            last_event={"event": 1, "net_points": 50, "total_points": 50}
+        ),
+        Participant(
+            entry_id=3, team_name="Team C", manager_name="Carol", total_score=70,
+            history=[{"event": 1, "net_points": 70, "total_points": 70}],
+            last_event={"event": 1, "net_points": 70, "total_points": 70}
+        ),
+    ]
+    
+    # Apply ranks and calculate rubber duck counts
+    RankCalculator.apply_history_ranks(participants)
+    
+    # Calculate rubber duck counts and event_min_points like FPLLeague does
+    event_min_points: Dict[int, Union[int, float]] = {}
+    for participant in participants:
+        for history_entry in participant.history:
+            event_id = history_entry.get("event")
+            net_points = history_entry.get("net_points", 0)
+            if event_id is not None:
+                if event_id not in event_min_points:
+                    event_min_points[event_id] = net_points
+                else:
+                    event_min_points[event_id] = min(event_min_points[event_id], net_points)
+    
+    for participant in participants:
+        rubber_duck_count = 0
+        for history_entry in participant.history:
+            event_id = history_entry.get("event")
+            net_points = history_entry.get("net_points", 0)
+            if event_id in event_min_points and net_points == event_min_points[event_id]:
+                rubber_duck_count += 1
+        participant.rubber_duck_count = rubber_duck_count
+    
+    # Build league data and context
+    league_data = {
+        "id": 12345,
+        "name": "Test League",
+        "participants": participants,
+        "event_ids": [1],
+        "finished_event_ids": [1],
+        "current_event_id": 1,
+        "is_current_finished": True,
+        "generated_time": "2024-01-01T12:00:00Z",
+        "event_min_points": event_min_points  # Add this for template
+    }
+    
+    logo_svg = "<svg></svg>"
+    context = LeagueContext(
+        league_data=league_data,
+        league_join_code=None,
+        logo_svg=logo_svg,
+        dev_mode=False
+    )
+    
+    # Render template
+    renderer = LeagueTemplateRenderer(context, "gw_history")
+    template = renderer.env.get_template(renderer.get_template_name())
+    html = template.render(**context.as_dict(), output_type="gw_history")
+    
+    # Count occurrences of "is_loser" class - should be 2 (one for each tied loser)
+    is_loser_count = html.count('is_loser')
+    assert is_loser_count == 2, f"Expected 2 cells with 'is_loser' class (tied losers), but found {is_loser_count}"
 

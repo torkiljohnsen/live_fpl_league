@@ -61,7 +61,7 @@
                     {% do cell_class.append('gw_is_in_future') %}
                 {% else %}
                     {% do cell_class.append('round_rank_' ~ (history.get('round_rank') if history is mapping else 'None')) %}
-                    {% if history is mapping and history.get('round_rank') == participants|length %}
+                    {% if history is mapping and event_min_points and history.get('net_points') == event_min_points.get(event) %}
                         {% do cell_class.append('is_loser') %}
                     {% endif %}
                 {% endif %}
