@@ -371,5 +371,5 @@ def test_win_display_format_with_golden_wins():
     assert participant1.win_count == 3
     assert participant1.golden_win_count == 1
     
-    # In the HTML, we should see "3 (1)"
-    assert "3 (1)" in html, "Template should display win count as '3 (1)' when there are golden wins"
+    # In the HTML, we should see "3 (1)" (rendered as 3&nbsp;(1) in HTML)
+    assert "3&nbsp;(1)" in html, "Template should display win count as '3 (1)' when there are golden wins"
