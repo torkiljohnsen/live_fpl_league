@@ -75,7 +75,7 @@
             {% endfor %}
             <td><b>{{ p.total_score }}</b></td>
             <td>{{ p.lowest_rank_count }}</td>
-            <td>{{ p.win_count }}{% if p.golden_win_count > 0 %} ({{ p.golden_win_count }}){% endif %}</td>
+            <td>{{ p.win_count }}{% if p.golden_win_count > 0 %}&nbsp;({{ p.golden_win_count }}){% endif %}</td>
         </tr>
     {% endfor %}
 </table>
