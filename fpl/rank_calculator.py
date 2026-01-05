@@ -26,7 +26,9 @@ class RankCalculator:
         for p in participants:
             entry_id = p.entry_id
             p_hist = df[df["entry_id"] == entry_id]
-            for h, row in zip(p.history, p_hist.to_dict(orient="records")):
+            for h, row_data in zip(p.history, p_hist.to_dict(orient="records")):
+                # Cast to the expected type to satisfy mypy
+                row: Dict[str, Any] = dict(row_data)  # type: ignore
                 h["round_rank"] = row["round_rank"]
                 h["league_rank"] = row["league_rank"]
                 h["league_rank_change"] = row["league_rank_change"]
