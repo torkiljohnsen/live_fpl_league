@@ -51,3 +51,25 @@ class RankCalculator:
                 if history_entry.get("is_lowest_rank", False):
                     lowest_rank_count += 1
             participant.lowest_rank_count = lowest_rank_count
+    
+    @staticmethod
+    def calculate_win_counts(participants: List[Participant]) -> None:
+        """Calculate the count of gameweek wins for each participant.
+        
+        This counts how many events each participant had round_rank == 1 (winner).
+        Also tracks golden gameweek wins (events where event % 4 == 0).
+        Handles ties correctly - if multiple participants tie for first place,
+        they all get counted as winners.
+        """
+        for participant in participants:
+            win_count = 0
+            golden_win_count = 0
+            for history_entry in participant.history:
+                if history_entry.get("round_rank") == 1:
+                    win_count += 1
+                    # Check if this is a golden gameweek (divisible by 4)
+                    event_id = history_entry.get("event")
+                    if event_id and event_id % 4 == 0:
+                        golden_win_count += 1
+            participant.win_count = win_count
+            participant.golden_win_count = golden_win_count

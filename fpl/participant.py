@@ -10,3 +10,5 @@ class Participant:
     history: List[Dict[str, Any]]
     last_event: Dict[str, Any]
     lowest_rank_count: int = field(default=0)
+    win_count: int = field(default=0)
+    golden_win_count: int = field(default=0)
