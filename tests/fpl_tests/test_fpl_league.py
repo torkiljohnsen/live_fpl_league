@@ -12,9 +12,10 @@ class DummyAPI:
     def get_bootstrap_static(self):
         data = json.loads((self.data_dir / "bootstrap-static_sample.json").read_text(encoding="utf-8"))
         if self._all_events_finished:
-            # Mark all events as finished
+            # Mark all events as finished and no event as next
             for event in data["events"]:
                 event["finished"] = True
+                event["is_next"] = False
         return data
 
     def get_league_standings(self, league_id):
@@ -43,16 +44,16 @@ def test_fpl_league_summary():
     assert "participants" in summary
     assert isinstance(summary["participants"], list)
     assert summary["event_ids"]
-    # Check participant fields
+    # Check participant fields - participants are now Participant objects, not dicts
     for p in summary["participants"]:
-        assert "entry_id" in p
-        assert "team_name" in p
-        assert "manager_name" in p
-        assert "total_score" in p
-        assert "history" in p
-        assert isinstance(p["history"], list)
-        if p["history"]:
-            h = p["history"][0]
+        assert hasattr(p, "entry_id")
+        assert hasattr(p, "team_name")
+        assert hasattr(p, "manager_name")
+        assert hasattr(p, "total_score")
+        assert hasattr(p, "history")
+        assert isinstance(p.history, list)
+        if p.history:
+            h = p.history[0]
             assert "event" in h
             assert "net_points" in h
             assert "round_rank" in h
@@ -63,7 +64,7 @@ def test_fpl_league_summary():
 def test_get_next_deadline_time_returns_none():
     api = DummyAPI(data_dir, all_events_finished=True)
     league = FPLLeague(LEAGUE_ID, api)
-    assert league.get_next_deadline_time() is None
+    assert league.info["next_event_deadline_time"] is None
 
 
 def test_participant_with_chip():
@@ -73,7 +74,7 @@ def test_participant_with_chip():
     participants = league.get_participants()
     found_chip = False
     for p in participants:
-        for h in p["history"]:
+        for h in p.history:
             if h.get("chip") == "WC":
                 found_chip = True
     assert found_chip, "Wildcard chip abbreviation should be present in participant history"
