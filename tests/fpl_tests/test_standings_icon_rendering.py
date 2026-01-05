@@ -58,11 +58,13 @@ def test_standings_uses_icon_files_instead_of_emojis():
     assert '🥉' not in html, "Template should not contain bronze medal emoji"
     assert '🚨' not in html, "Template should not contain alarm emoji"
     
-    # Verify that the icons have max-height styling
-    assert 'max-height: 18px' in html, "Icons should have max-height of 18px"
+    # Verify that the icons use the medal-icon CSS class
+    assert 'class="medal-icon"' in html, "Icons should use the medal-icon CSS class"
     
-    # Verify the template references all icon files by reading the template file
-    template_path = Path(__file__).parent.parent.parent / "templates" / "league_standings.html"
+    # Verify the template references all icon files by reading from the templates directory
+    # Use the renderer's template loader to get the correct template directory
+    templates_dir = Path(renderer.env.loader.searchpath[0])  # type: ignore
+    template_path = templates_dir / "league_standings.html"
     template_content = template_path.read_text(encoding="utf-8")
     assert 'second_place.png' in template_content, "Template should reference second_place.png"
     assert 'third_place.png' in template_content, "Template should reference third_place.png"

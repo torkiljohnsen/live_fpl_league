@@ -168,3 +168,8 @@ tr:nth-child(odd) {
 .gw_history .gw_hidden {
 	display: none;
 }
+
+/* Medal icons in standings */
+.medal-icon {
+	max-height: 18px;
+}
