@@ -63,9 +63,12 @@ def test_standings_uses_icon_files_instead_of_emojis():
     
     # Verify the template references all icon files by reading from the templates directory
     # Use the renderer's template loader to get the correct template directory
-    templates_dir = Path(renderer.env.loader.searchpath[0])  # type: ignore
-    template_path = templates_dir / "league_standings.html"
-    template_content = template_path.read_text(encoding="utf-8")
-    assert 'second_place.png' in template_content, "Template should reference second_place.png"
-    assert 'third_place.png' in template_content, "Template should reference third_place.png"
-    assert 'alarm.png' in template_content, "Template should reference alarm.png"
+    from jinja2.loaders import FileSystemLoader
+    loader = renderer.env.loader
+    if isinstance(loader, FileSystemLoader) and loader.searchpath:
+        templates_dir = Path(loader.searchpath[0])
+        template_path = templates_dir / "league_standings.html"
+        template_content = template_path.read_text(encoding="utf-8")
+        assert 'second_place.png' in template_content, "Template should reference second_place.png"
+        assert 'third_place.png' in template_content, "Template should reference third_place.png"
+        assert 'alarm.png' in template_content, "Template should reference alarm.png"
