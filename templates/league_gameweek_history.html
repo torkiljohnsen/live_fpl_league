@@ -39,6 +39,7 @@
         {% endfor %}
         <th>SUM</th>
         <th><img src="The Duck liten.png" alt="🦆" style="width: 20px; height: auto;"></th>
+        <th><img src="trophy.png" alt="🏆" style="height: 18px; width: auto;"></th>
     </tr>
     {% for p in participants %}
         <tr>
@@ -74,6 +75,7 @@
             {% endfor %}
             <td><b>{{ p.total_score }}</b></td>
             <td>{{ p.lowest_rank_count }}</td>
+            <td>{{ p.win_count }}{% if p.golden_win_count > 0 %} ({{ p.golden_win_count }}){% endif %}</td>
         </tr>
     {% endfor %}
 </table>

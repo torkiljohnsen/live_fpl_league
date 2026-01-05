@@ -78,6 +78,7 @@ class FPLLeague:
         results.sort(key=lambda p: p.total_score, reverse=True)
         RankCalculator.apply_history_ranks(results)
         RankCalculator.calculate_lowest_rank_counts(results)
+        RankCalculator.calculate_win_counts(results)
         return results
 
     def _build_participant(self, entry: Dict[str, Any]) -> Participant:
