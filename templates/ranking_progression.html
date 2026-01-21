@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ name }} - Ranking Progression{% endblock %}
+
+{% block body %}
+    <div class="logo-container">
+        <div>
+            {{ logo_svg | safe }}
+        </div>
+    </div>
+    <h1>
+        {{ name }} Ranking Progression
+        {% if league_join_code %}
+            ({{ league_join_code }})
+        {% endif %}
+    </h1>
+    
+    <div class="chart-container">
+        <canvas id="rankingChart"></canvas>
+    </div>
+    
+{% endblock %}
