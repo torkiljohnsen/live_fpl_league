@@ -2,6 +2,12 @@
 
 Generates static HTML dashboards for Fantasy Premier League mini-leagues showing live standings and gameweek history.
 
+## Knowledge collection
+
+When you learn something new about this repo that is of use to users or agents, add it to README.md or AGENTS.md, respectively. You can also place AGENTS.md-files in subfolders if you think there is a need for this.
+
+Add new knowledge sparingly, and do so in a consise way.
+
 ## Architecture Flow
 
 **Data Collection → Context Building → Template Rendering → Static HTML Output**
