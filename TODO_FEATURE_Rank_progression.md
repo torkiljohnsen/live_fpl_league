@@ -404,6 +404,69 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 - [ ] Links are correctly formatted and clickable
 - [ ] Test passes
 
+---
+
+### Job 25: Ensure X-axis shows only whole gameweek numbers
+**Status**: todo
+
+**Task**: Configure X-axis to display only integer gameweek numbers from 1 to latest event. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test creates chart with gameweeks 1-7
+- [ ] Test asserts X-axis tick values are integers [1, 2, 3, 4, 5, 6, 7]
+- [ ] Test asserts no decimal values appear on X-axis
+- [ ] X-axis displays only whole numbers (no decimals like 3.5)
+- [ ] X-axis range goes from 1 to latest gameweek number
+- [ ] Test passes
+
+---
+
+### Job 26: Set dark theme as default
+**Status**: todo
+
+**Task**: Change default theme from light to dark. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test calls chart generator without theme parameter
+- [ ] Test asserts background is dark colored (default dark theme applied)
+- [ ] Test asserts line colors are light/bright
+- [ ] Default theme parameter is `theme="dark"`
+- [ ] Charts generated without explicit theme use dark theme
+- [ ] Test passes
+
+---
+
+### Job 27: Set Y-axis range from 1 to total_players
+**Status**: todo
+
+**Task**: Configure Y-axis range based on total_players from bootstrap-static. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test provides total_players value (e.g., 10000000)
+- [ ] Test asserts Y-axis range is [1, total_players]
+- [ ] Test asserts Y-axis is reversed (1 at top, total_players at bottom)
+- [ ] Function accepts `total_players` parameter from bootstrap-static API
+- [ ] Y-axis range is explicitly set from 1 (top) to total_players (bottom)
+- [ ] Test passes
+
+---
+
+### Job 28: Add asterisk to unfinished gameweek on X-axis
+**Status**: todo
+
+**Task**: Mark unfinished gameweeks with asterisk based on bootstrap-static data. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test provides gameweek data with event 7 having `finished: false`
+- [ ] Test asserts X-axis label for event 7 displays "7*"
+- [ ] Test asserts finished events (1-6) display without asterisk
+- [ ] Function receives event finish status from bootstrap-static
+- [ ] Unfinished gameweeks display with asterisk (e.g., "7*")
+- [ ] Finished gameweeks display as plain numbers
+- [ ] Test passes
+
+---
+
 ## Design Decisions to Make
 
 1. **Chart file location**: Save to `docs/charts/` or embed inline in HTML?
