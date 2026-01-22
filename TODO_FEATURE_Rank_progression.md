@@ -319,17 +319,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 19: Handle incomplete participant history
-**Status**: todo
+**Status**: done
 
 **Task**: Support participants who joined mid-season. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test creates participant with history starting at GW5 (missing GW 1-4)
-- [ ] Test asserts chart renders without error
-- [ ] Test asserts line starts from GW5 with no gaps
-- [ ] Chart renders without error when participant history is incomplete
-- [ ] Line starts from first available gameweek for that participant
-- [ ] Test passes
+- [x] Test creates participant with history starting at GW5 (missing GW 1-4)
+- [x] Test asserts chart renders without error
+- [x] Test asserts line starts from GW5 with no gaps
+- [x] Chart renders without error when participant history is incomplete
+- [x] Line starts from first available gameweek for that participant
+- [x] Test passes
 
 ---
 

@@ -405,3 +405,45 @@ def test_png_export():
         # Cleanup: remove the temporary file
         if os.path.exists(output_path):
             os.remove(output_path)
+
+
+def test_incomplete_participant_history():
+    """Test that chart handles participants who joined mid-season."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'EarlyJoiner',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+                {'event': 4, 'overall_rank': 875000},
+                {'event': 5, 'overall_rank': 850000},
+            ]
+        },
+        {
+            'player_first_name': 'MidSeasonJoiner',
+            'history': [
+                # Missing GW 1-4, starts at GW5
+                {'event': 5, 'overall_rank': 2000000},
+                {'event': 6, 'overall_rank': 1950000},
+                {'event': 7, 'overall_rank': 1900000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    assert len(fig.data) == 2, "Figure should have two traces for two participants"
+
+    # Check first participant (full history from GW1)
+    trace_0 = fig.data[0]
+    assert list(trace_0.x) == [1, 2, 3, 4, 5], "First trace should have full history"
+    assert list(trace_0.y) == [1000000, 950000, 900000, 875000, 850000]
+
+    # Check second participant (history starts at GW5)
+    trace_1 = fig.data[1]
+    assert list(trace_1.x) == [5, 6, 7], "Second trace should start from GW5"
+    assert list(trace_1.y) == [2000000, 1950000, 1900000]
