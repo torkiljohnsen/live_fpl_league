@@ -180,3 +180,47 @@ def test_light_theme_colors():
         # Dark colors should not be white or very light
         assert line_color not in ['white', '#ffffff', '#fff'], \
             f"Trace {i} should not use white/light color on light background: {line_color}"
+
+
+def test_dark_theme_colors():
+    """Test that dark theme uses dark background and light/bright lines."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+            ]
+        }
+    ]
+    
+    # Act
+    fig = generate_rank_progression_chart(participants, theme="dark")
+    
+    # Assert
+    # Check background is dark colored
+    bg_color = fig.layout.plot_bgcolor
+    assert bg_color is not None, "Background color should be set"
+    # For dark theme, we expect dark colors (black, dark gray, etc.)
+    dark_colors = ['black', '#000000', '#000', '#1a1a1a', '#2b2b2b', '#333333', '#222222']
+    is_dark = bg_color in dark_colors
+    assert is_dark, f"Dark theme should use dark background, got: {bg_color}"
+    
+    # Check that line colors are light/bright for visibility on dark background
+    for i, trace in enumerate(fig.data):
+        line_color = trace.line.color
+        assert line_color is not None, f"Trace {i} should have a line color set"
+        # Light/bright colors should not be from the standard dark palette
+        # We expect colors that are bright and visible on dark backgrounds
+        dark_palette_colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
+                               '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
+        assert line_color not in dark_palette_colors, \
+            f"Trace {i} should not use dark palette color on dark background: {line_color}"

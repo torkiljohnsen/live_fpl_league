@@ -50,7 +50,10 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ## Implementation Steps
 
 **Agent instructions**: 
-- Keep output at a minimum, to conserve token usage. No need to consider personal feelings, this is strictly business.
+- Keep chat/text output (responses to me) at a minimum, to conserve token usage. No need to consider personal feelings, this is strictly business.
+- Write consise and succinct code. Respect Zen of Python.
+
+**Job iteration instructions**
 - Start at the first job with `status: todo`. 
 - Activate the virtual environment before you begin.
 - Complete ONLY that job, then stop. Stay within the job description. The next agent will handle the next job.
@@ -65,7 +68,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 **TDD Methodology**: For each job with code changes, follow Test-Driven Development:
 1. Write a failing test first
 2. Write minimal code to make the test pass
-4. Ensure test passes before marking job as done
+3. Ensure test passes before marking job as done, unless the job requires you to make a failing test.
 
 ---
 
@@ -192,15 +195,15 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 10: Write test for dark theme colors
-**Status**: todo
+**Status**: done
 
 **Task**: Write a failing test that expects dark theme color configuration.
 
 **Acceptance Criteria**:
-- [ ] Test calls function with `theme="dark"` parameter
-- [ ] Test asserts background is dark colored
-- [ ] Test asserts line colors are light/bright for visibility
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
+- [x] Test calls function with `theme="dark"` parameter
+- [x] Test asserts background is dark colored
+- [x] Test asserts line colors are light/bright for visibility
+- [x] Running test produces FAILURE (functionality doesn't exist yet)
 
 ---
 
