@@ -499,7 +499,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 - [x] Apply similar centering approach to ranking_progression.html
 - [x] Chart image is centered horizontally in the page
 - [x] Layout is consistent with other templates
-- [ ] Manual test: Verify chart is centered when viewed in browser
+- [x] Manual test: Verify chart is centered when viewed in browser
 
 ---
 

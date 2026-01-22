@@ -115,7 +115,7 @@ class LeagueContext:
 
             # Calculate and format statistics
             from .statistics import get_highest_team_value, get_in_form_players, should_show_in_form_stat
-            
+
             # Format highest team value
             highest_value = get_highest_team_value(participants_for_chart)
             if highest_value:
