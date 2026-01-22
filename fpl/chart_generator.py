@@ -14,7 +14,7 @@ DARK_THEME_COLORS = [
 ]
 
 
-def generate_rank_progression_chart(participants, theme="light", bg_color=None):
+def generate_rank_progression_chart(participants, theme="light", bg_color=None, width=1200, height=600):
     """Generate a rank progression chart for FPL participants.
 
     Args:
@@ -22,6 +22,8 @@ def generate_rank_progression_chart(participants, theme="light", bg_color=None):
                      with 'event' and 'overall_rank' fields.
         theme: Color theme for the chart. Options: "light" (default).
         bg_color: Optional custom background color (hex string). Overrides theme default.
+        width: Width of the chart in pixels (default: 1200).
+        height: Height of the chart in pixels (default: 600).
 
     Returns:
         A Plotly figure object with rank progression chart.
@@ -73,6 +75,10 @@ def generate_rank_progression_chart(participants, theme="light", bg_color=None):
     )
 
     # Set background color
-    fig.update_layout(plot_bgcolor=final_bg_color)
+    fig.update_layout(
+        plot_bgcolor=final_bg_color,
+        width=width,
+        height=height
+    )
 
     return fig

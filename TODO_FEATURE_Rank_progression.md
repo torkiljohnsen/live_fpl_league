@@ -259,17 +259,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 15: Implement configurable chart dimensions
-**Status**: todo
+**Status**: done
 
 **Task**: Add width and height parameters. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test calls function with `width=800, height=400`
-- [ ] Test asserts generated chart has those dimensions
-- [ ] Function accepts `width` parameter (default 1200)
-- [ ] Function accepts `height` parameter (default 600)
-- [ ] Generated chart uses specified dimensions
-- [ ] Test passes
+- [x] Test calls function with `width=800, height=400`
+- [x] Test asserts generated chart has those dimensions
+- [x] Function accepts `width` parameter (default 1200)
+- [x] Function accepts `height` parameter (default 600)
+- [x] Generated chart uses specified dimensions
+- [x] Test passes
 
 ---
 
