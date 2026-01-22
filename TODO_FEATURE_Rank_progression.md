@@ -489,15 +489,15 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 30: Center graph horizontally in template
-**Status**: todo
+**Status**: done
 
 **Task**: Update ranking_progression template to center the chart horizontally, matching layout in league_gameweek_history and league_standings templates. Write test first if applicable, then implement.
 
 **Acceptance Criteria**:
-- [ ] Review CSS/layout in league_gameweek_history.html and league_standings.html
-- [ ] Apply similar centering approach to ranking_progression.html
-- [ ] Chart image is centered horizontally in the page
-- [ ] Layout is consistent with other templates
+- [x] Review CSS/layout in league_gameweek_history.html and league_standings.html
+- [x] Apply similar centering approach to ranking_progression.html
+- [x] Chart image is centered horizontally in the page
+- [x] Layout is consistent with other templates
 - [ ] Manual test: Verify chart is centered when viewed in browser
 
 ---
