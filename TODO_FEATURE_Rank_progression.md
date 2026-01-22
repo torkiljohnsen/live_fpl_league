@@ -473,18 +473,18 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 29: Make graph background color configurable with RGBA
-**Status**: todo
+**Status**: done
 
 **Task**: Change background color configuration to support RGBA format with opacity. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test calls function with `bg_color="rgba(0, 0, 0, 0.1)"`
-- [ ] Test asserts background uses the specified RGBA color
-- [ ] Test verifies opacity is correctly applied
-- [ ] Function accepts `bg_color` parameter in RGBA format (e.g., "rgba(0, 0, 0, 0.1)")
-- [ ] Default background color is `rgba(0, 0, 0, 0.1)` (black with 10% opacity)
-- [ ] Background opacity is properly rendered in output
-- [ ] Test passes
+- [x] Test calls function with `bg_color="rgba(0, 0, 0, 0.1)"`
+- [x] Test asserts background uses the specified RGBA color
+- [x] Test verifies opacity is correctly applied
+- [x] Function accepts `bg_color` parameter in RGBA format (e.g., "rgba(0, 0, 0, 0.1)")
+- [x] Default background color is `rgba(0, 0, 0, 0.1)` (black with 10% opacity)
+- [x] Background opacity is properly rendered in output
+- [x] Test passes
 
 ---
 

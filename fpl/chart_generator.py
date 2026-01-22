@@ -55,10 +55,10 @@ def generate_rank_progression_chart(
         default_bg_color = "white"
     elif theme == "dark":
         colors = DARK_THEME_COLORS
-        default_bg_color = "#222222"
+        default_bg_color = "rgba(0, 0, 0, 0.1)"
     else:
         colors = DARK_THEME_COLORS  # Default to dark colors
-        default_bg_color = "#222222"
+        default_bg_color = "rgba(0, 0, 0, 0.1)"
 
     # Use custom bg_color if provided, otherwise use theme default
     final_bg_color = bg_color if bg_color is not None else default_bg_color

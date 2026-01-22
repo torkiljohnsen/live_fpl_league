@@ -208,9 +208,9 @@ def test_dark_theme_colors():
     # Check background is dark colored
     bg_color = fig.layout.plot_bgcolor
     assert bg_color is not None, "Background color should be set"
-    # For dark theme, we expect dark colors (black, dark gray, etc.)
+    # For dark theme, we expect dark colors (black, dark gray, etc.) or RGBA with black base
     dark_colors = ['black', '#000000', '#000', '#1a1a1a', '#2b2b2b', '#333333', '#222222']
-    is_dark = bg_color in dark_colors
+    is_dark = bg_color in dark_colors or (isinstance(bg_color, str) and bg_color.startswith('rgba(0, 0, 0,'))
     assert is_dark, f"Dark theme should use dark background, got: {bg_color}"
 
     # Check that line colors are light/bright for visibility on dark background
@@ -525,9 +525,9 @@ def test_default_theme_is_dark():
     bg_color = fig.layout.plot_bgcolor
     assert bg_color is not None, "Background color should be set"
 
-    # For dark theme, we expect dark colors
+    # For dark theme, we expect dark colors or RGBA with black base
     dark_colors = ['black', '#000000', '#000', '#1a1a1a', '#2b2b2b', '#333333', '#222222']
-    is_dark = bg_color in dark_colors
+    is_dark = bg_color in dark_colors or (isinstance(bg_color, str) and bg_color.startswith('rgba(0, 0, 0,'))
     assert is_dark, f"Default theme should be dark, got background color: {bg_color}"
 
     # Check that line colors are light/bright (suitable for dark background)
@@ -629,3 +629,54 @@ def test_unfinished_gameweek_displays_with_asterisk():
 
     # Verify unfinished event 7 displays with asterisk
     assert tick_text[6] == "7*", "Event 7 should display as '7*' (with asterisk)"
+
+
+def test_rgba_background_color_support():
+    """Test that chart generator accepts and applies RGBA background color format."""
+    # Arrange
+    rgba_color = "rgba(0, 0, 0, 0.1)"  # Black with 10% opacity
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants, bg_color=rgba_color)
+
+    # Assert
+    # Verify that the background color is set to the specified RGBA value
+    assert fig.layout.plot_bgcolor == rgba_color, \
+        f"Background color should be '{rgba_color}', got: {fig.layout.plot_bgcolor}"
+
+    # Verify the color format is correctly applied (contains "rgba(" and opacity value)
+    bg_color = fig.layout.plot_bgcolor
+    assert bg_color.startswith("rgba("), "Background color should start with 'rgba('"
+    assert "0.1" in bg_color, "Background color should contain opacity value 0.1"
+
+
+def test_default_rgba_background_color():
+    """Test that default background color is rgba(0, 0, 0, 0.1)."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    # Default background should be rgba(0, 0, 0, 0.1)
+    expected_default = "rgba(0, 0, 0, 0.1)"
+    assert fig.layout.plot_bgcolor == expected_default, \
+        f"Default background color should be '{expected_default}', got: {fig.layout.plot_bgcolor}"
