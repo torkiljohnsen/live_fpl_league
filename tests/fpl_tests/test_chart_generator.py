@@ -882,3 +882,47 @@ def test_large_font_sizes_for_tv_display():
         f"Y-axis title font size should be >= 18px for TV display, got: {fig.layout.yaxis.title.font.size}"
     assert fig.layout.yaxis.title.font.size <= 24, \
         f"Y-axis title font size should be <= 24px, got: {fig.layout.yaxis.title.font.size}"
+
+
+def test_reduced_top_padding_with_balanced_margins():
+    """Test that chart has reduced top padding and balanced margins on all sides."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Check that margin is configured
+    assert fig.layout.margin is not None, "Margin should be configured"
+
+    # Assert - Top margin should be reduced (targeting 40-60px)
+    assert fig.layout.margin.t <= 60, \
+        f"Top margin should be <= 60px to reduce whitespace, got: {fig.layout.margin.t}"
+    assert fig.layout.margin.t >= 40, \
+        f"Top margin should be >= 40px for minimal spacing, got: {fig.layout.margin.t}"
+
+    # Assert - All margins should be balanced (equal or close)
+    # Target all margins to be in the 40-60px range for consistency
+    assert fig.layout.margin.b >= 40, \
+        f"Bottom margin should be >= 40px, got: {fig.layout.margin.b}"
+    assert fig.layout.margin.b <= 60, \
+        f"Bottom margin should be <= 60px, got: {fig.layout.margin.b}"
+
+    assert fig.layout.margin.l >= 40, \
+        f"Left margin should be >= 40px, got: {fig.layout.margin.l}"
+    assert fig.layout.margin.l <= 100, \
+        f"Left margin should be <= 100px (may be slightly larger for Y-axis labels), got: {fig.layout.margin.l}"
+
+    assert fig.layout.margin.r >= 40, \
+        f"Right margin should be >= 40px, got: {fig.layout.margin.r}"
+    assert fig.layout.margin.r <= 60, \
+        f"Right margin should be <= 60px, got: {fig.layout.margin.r}"

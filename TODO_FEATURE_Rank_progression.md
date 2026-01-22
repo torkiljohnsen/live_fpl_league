@@ -65,11 +65,11 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
   - verify that all acceptance criteria have been met, and if so, change the status for the job to done and 
   - if all acceptance criteria haven't been met, continue working, revise your plan if needed
 - **Before committing**: ALWAYS run the FULL test suite and fix any failures:
-  1. If you changed or created any python files, run ruff linting on these files: `python -m ruff check --fix <changed_files>`
-  2. Run ALL tests: `python -m pytest` (not just tests for current job)
-  3. If any test fails, fix the issue before committing
+  1. FIRST: Run ruff linting on changed Python files: `python -m ruff check --fix <changed_files>` (or `python -m ruff check --fix .` for all files)
+  2. SECOND: Run ALL tests: `python -m pytest` (not just tests for current job)
+  3. If any test fails, fix the issue before proceeding. Repeat steps 1-2 until all tests pass
   4. Mark the job status as done in the TODO file
-  5. Only commit when all tests pass
+  5. Only commit when all tests pass and job is marked done
 - Make a git commit of your work.
 
 **TDD Methodology**: For each job with code changes, follow Test-Driven Development:
@@ -607,17 +607,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 37: Reduce top padding above chart
-**Status**: todo
+**Status**: done
 
 **Task**: Reduce top padding above the chart - currently has too much whitespace. Make padding consistent for all chart edges. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test asserts top margin/padding is reduced from current value
-- [ ] Test asserts all margins (top, bottom, left, right) are equal or balanced
-- [ ] Top padding is reduced to match other edges
-- [ ] Chart has consistent padding on all sides
-- [ ] Manual test: Verify improved layout in browser
-- [ ] Test passes
+- [x] Test asserts top margin/padding is reduced from current value
+- [x] Test asserts all margins (top, bottom, left, right) are equal or balanced
+- [x] Top padding is reduced to match other edges
+- [x] Chart has consistent padding on all sides
+- [x] Manual test: Verify improved layout in browser
+- [x] Test passes
 
 ---
 

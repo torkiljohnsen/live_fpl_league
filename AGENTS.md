@@ -92,28 +92,35 @@ python -m ruff check --fix tests/fpl_tests/test_chart_generator.py
 python -m ruff check --fix .
 ```
 
-### Before Committing
+### Before Marking Task as DONE and Committing
 
-**ALWAYS run the FULL test suite before making a git commit**:
+**ALWAYS follow this workflow before marking a task as DONE**:
 ```bash
-# 1. Run ruff on changed Python files only
+# 1. FIRST: Run ruff on changed Python files to ensure code quality
 # If you changed: fpl/statistics.py and tests/fpl_tests/test_statistics.py
 python -m ruff check --fix fpl/statistics.py tests/fpl_tests/test_statistics.py
 
 # OR run on all Python files (ruff will ignore non-Python files)
 python -m ruff check --fix .
 
-# 2. Run ALL tests to ensure nothing broke (not just tests for current feature)
+# 2. SECOND: Run ALL tests to ensure nothing broke (not just tests for current feature)
 python -m pytest
 
-# 3. If ANY test fails, fix it before committing
+# 3. If ANY test fails, fix it before proceeding
 # Your changes may have introduced regressions in other parts of the codebase
+# Repeat steps 1-2 until all tests pass
 
-# 4. Only commit when all tests pass
+# 4. Mark the task status as DONE in the TODO file
+
+# 5. Only commit when all tests pass and task is marked DONE
 git add -A && git commit -m "Your message"
 ```
 
-**Critical**: 
+**Critical Workflow Order**: 
+1. **Ruff BEFORE tests** - All code must be properly formatted before running tests
+2. **All tests MUST pass** - Fix any failures before proceeding
+3. **Mark task DONE** - Only after all tests pass
+4. **Git commit** - Final step after everything is verified
 - Even if you only modified one module, run the entire test suite. Changes can have unexpected side effects on other components.
 - Ruff automatically ignores non-Python files, but for clarity specify only .py files when listing individual files.
 
