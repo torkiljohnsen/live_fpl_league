@@ -534,7 +534,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 33: Add statistics section - Highest team value
-**Status**: todo
+**Status**: done
 
 **Task**: Below the graph, add a statistics section with "Highest team value" statistic. Write test first, then implement.
 
