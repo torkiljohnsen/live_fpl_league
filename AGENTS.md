@@ -89,7 +89,25 @@ python generate_html.py -l LEAGUE_ID [--dev] [-o standings|gw_history|ALL]
 - **CSS**: All styles in [`docs/style.css`](docs/style.css), no inline styles
 
 ## Testing
+
 Tests in [`tests/fpl_tests/`](tests/fpl_tests/) use `DummyAPI` with sample data from [`tests/fpl_tests/data_samples/`](tests/fpl_tests/data_samples/)
+
+### Test Organization Guidelines
+
+**Test file naming convention**: Each module in [`fpl/`](fpl/) should have a corresponding test file in [`tests/fpl_tests/`](tests/fpl_tests/) following the pattern `test_<module_name>.py`.
+
+Examples:
+- [`fpl/fpl_api.py`](fpl/fpl_api.py) → [`tests/fpl_tests/test_fpl_api.py`](tests/fpl_tests/test_fpl_api.py)
+- [`fpl/chart_generator.py`](fpl/chart_generator.py) → [`tests/fpl_tests/test_chart_generator.py`](tests/fpl_tests/test_chart_generator.py)
+- [`fpl/statistics.py`](fpl/statistics.py) → [`tests/fpl_tests/test_statistics.py`](tests/fpl_tests/test_statistics.py)
+- [`fpl/league_context.py`](fpl/league_context.py) → [`tests/fpl_tests/test_league_context.py`](tests/fpl_tests/test_league_context.py)
+
+**Critical**: Tests must be placed in the file corresponding to the module they test. Do NOT place tests for `statistics.py` in `test_chart_generator.py`, even if the chart generator uses statistics functions. Each module's tests should be isolated in its own test file.
+
+**When writing new tests**:
+1. Create a new test file if one doesn't exist for the module
+2. Place tests in the corresponding test file based on which module's code is being tested
+3. Integration tests that test multiple modules together should be clearly named (e.g., `test_integration_<feature>.py`)
 
 ## Code Quality & Linting
 
