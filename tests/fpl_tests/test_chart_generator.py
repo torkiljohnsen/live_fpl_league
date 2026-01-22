@@ -58,3 +58,82 @@ def test_single_participant_line():
     
     assert list(trace.x) == expected_events, f"X-axis data should match events: {expected_events}"
     assert list(trace.y) == expected_ranks, f"Y-axis data should match ranks: {expected_ranks}"
+
+
+def test_multiple_participants_3_traces():
+    """Test that chart plots three participants' rank progressions."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+                {'event': 3, 'overall_rank': 700000},
+            ]
+        },
+        {
+            'player_first_name': 'Bob',
+            'history': [
+                {'event': 1, 'overall_rank': 1200000},
+                {'event': 2, 'overall_rank': 1150000},
+                {'event': 3, 'overall_rank': 1100000},
+            ]
+        }
+    ]
+    
+    # Act
+    fig = generate_rank_progression_chart(participants)
+    
+    # Assert
+    assert len(fig.data) == 3, "Figure should have exactly three traces for three participants"
+    
+    # Check first participant's data
+    trace_0 = fig.data[0]
+    assert list(trace_0.x) == [1, 2, 3], "First trace X-axis should match events"
+    assert list(trace_0.y) == [1000000, 950000, 900000], "First trace Y-axis should match John's ranks"
+    
+    # Check second participant's data
+    trace_1 = fig.data[1]
+    assert list(trace_1.x) == [1, 2, 3], "Second trace X-axis should match events"
+    assert list(trace_1.y) == [800000, 750000, 700000], "Second trace Y-axis should match Jane's ranks"
+    
+    # Check third participant's data
+    trace_2 = fig.data[2]
+    assert list(trace_2.x) == [1, 2, 3], "Third trace X-axis should match events"
+    assert list(trace_2.y) == [1200000, 1150000, 1100000], "Third trace Y-axis should match Bob's ranks"
+
+
+def test_multiple_participants_10_traces():
+    """Test that chart plots ten participants' rank progressions."""
+    # Arrange
+    participants = []
+    for i in range(10):
+        participants.append({
+            'player_first_name': f'Player{i}',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000 + (i * 100000)},
+                {'event': 2, 'overall_rank': 950000 + (i * 100000)},
+            ]
+        })
+    
+    # Act
+    fig = generate_rank_progression_chart(participants)
+    
+    # Assert
+    assert len(fig.data) == 10, "Figure should have exactly ten traces for ten participants"
+    
+    # Verify each trace has correct data
+    for i, trace in enumerate(fig.data):
+        expected_x = [1, 2]
+        expected_y = [1000000 + (i * 100000), 950000 + (i * 100000)]
+        assert list(trace.x) == expected_x, f"Trace {i} X-axis should match events"
+        assert list(trace.y) == expected_y, f"Trace {i} Y-axis should match Player{i}'s ranks"

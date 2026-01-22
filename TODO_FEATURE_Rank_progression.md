@@ -140,15 +140,15 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 6: Write test for multiple participant lines
-**Status**: todo
+**Status**: done
 
 **Task**: Write failing tests for plotting multiple participants on same chart.
 
 **Acceptance Criteria**:
-- [ ] Test with 3 participants expects 3 traces in figure
-- [ ] Test with 10 participants expects 10 traces in figure
-- [ ] Tests assert each trace has correct participant data
-- [ ] Running tests produces FAILURES (functionality doesn't exist yet)
+- [x] Test with 3 participants expects 3 traces in figure
+- [x] Test with 10 participants expects 10 traces in figure
+- [x] Tests assert each trace has correct participant data
+- [x] Running tests produces FAILURES (functionality doesn't exist yet)
 
 ---
 
