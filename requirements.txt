@@ -6,3 +6,5 @@ requests
 jinja2
 pandas-stubs
 types-requests
+plotly>=6.5.2
+kaleido>=1.1.0

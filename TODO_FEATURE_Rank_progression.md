@@ -49,7 +49,11 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 
 ## Implementation Steps
 
-**Agent instructions**: Start at the first job with `status: todo`. Complete ONLY that job, then stop. The next agent will handle the next job. After you finish a job, change status for that job to "done".
+**Agent instructions**: 
+- Start at the first job with `status: todo`. 
+- Complete ONLY that job, then stop. The next agent will handle the next job.
+- After you finish a job, change status for that job to "done".
+- Make a git commit of your work.
 
 **TDD Methodology**: For each job with code changes, follow Test-Driven Development:
 1. Write a failing test first
@@ -59,7 +63,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 1: Add chart dependencies to requirements
-**Status**: todo
+**Status**: done
 
 **Task**: Add plotly and kaleido to requirements.txt
 
