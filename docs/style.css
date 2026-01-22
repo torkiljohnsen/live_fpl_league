@@ -73,6 +73,11 @@ table {
 	text-align: center;
 }
 
+.stats-container {
+	margin: 2rem auto;
+	max-width: 40vw;
+}
+
 th, td {
 	padding: 0.7rem 1.2rem;
 	text-align: center;
@@ -100,6 +105,9 @@ tr:nth-child(odd) {
 	}
 	th, td {
 		padding: 0.5rem 0.7rem;
+	}
+	.stats-container {
+		max-width: 95vw;
 	}
 }
 

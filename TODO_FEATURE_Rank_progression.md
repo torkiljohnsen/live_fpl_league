@@ -671,17 +671,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 41: Center stats section in container matching league_standings width
-**Status**: todo
+**Status**: done
 
 **Task**: The stats section at the bottom of ranking_progression template aligns to the left edge of the screen. It should be in a centered container with the same width as league_standings content for consistency. Write test first if applicable, then implement.
 
 **Acceptance Criteria**:
-- [ ] Review CSS for league_standings content container width
-- [ ] Apply similar container/centering approach to stats section
-- [ ] Stats section uses centered container (not full screen width)
-- [ ] Container width matches league_standings for consistency
-- [ ] Manual test: Verify stats section is properly centered in browser
-- [ ] Test passes (if applicable)
+- [x] Review CSS for league_standings content container width
+- [x] Apply similar container/centering approach to stats section
+- [x] Stats section uses centered container (not full screen width)
+- [x] Container width matches league_standings for consistency
+- [x] Manual test: Verify stats section is properly centered in browser
+- [x] Test passes (if applicable)
 
 ---
 
