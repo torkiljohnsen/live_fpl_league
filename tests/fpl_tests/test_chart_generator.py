@@ -916,11 +916,11 @@ def test_reduced_top_padding_with_balanced_margins():
     # Assert - Check that margin is configured
     assert fig.layout.margin is not None, "Margin should be configured"
 
-    # Assert - Top margin should be reduced (targeting 40-60px)
-    assert fig.layout.margin.t <= 60, \
-        f"Top margin should be <= 60px to reduce whitespace, got: {fig.layout.margin.t}"
-    assert fig.layout.margin.t >= 40, \
-        f"Top margin should be >= 40px for minimal spacing, got: {fig.layout.margin.t}"
+    # Assert - Top margin should be reduced (targeting 30-40px)
+    assert fig.layout.margin.t <= 40, \
+        f"Top margin should be <= 40px to reduce whitespace, got: {fig.layout.margin.t}"
+    assert fig.layout.margin.t >= 30, \
+        f"Top margin should be >= 30px for minimal spacing, got: {fig.layout.margin.t}"
 
     # Assert - All margins should be balanced (equal or close)
     # Target all margins to be in the 40-60px range for consistency
@@ -1056,3 +1056,26 @@ def test_transparent_plot_area_and_legend_with_increased_opacity():
     assert legend_bg in ['rgba(0, 0, 0, 0)', 'rgba(0,0,0,0)', '', None] or \
            (isinstance(legend_bg, str) and 'rgba' in legend_bg and ', 0)' in legend_bg), \
         f"Legend background should be transparent, got: {legend_bg}"
+
+
+def test_further_reduced_top_padding():
+    """Test that chart top padding is further reduced from 50px to 30px for better visual balance."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Top margin should be further reduced to 30px
+    assert fig.layout.margin is not None, "Margin should be configured"
+    assert fig.layout.margin.t == 30, \
+        f"Top margin should be 30px for improved visual balance, got: {fig.layout.margin.t}"

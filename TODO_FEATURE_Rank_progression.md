@@ -657,16 +657,16 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 40: Reduce chart top padding further
-**Status**: todo
+**Status**: done
 
 **Task**: The top padding above the chart is still too large. Reduce it further for better visual balance. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test asserts top margin is further reduced from current value
-- [ ] Top padding is reduced to improve visual balance
-- [ ] Chart appears better balanced with less whitespace above
-- [ ] Manual test: Verify improved layout in browser
-- [ ] Test passes
+- [x] Test asserts top margin is further reduced from current value
+- [x] Top padding is reduced to improve visual balance
+- [x] Chart appears better balanced with less whitespace above
+- [x] Manual test: Verify improved layout in browser
+- [x] Test passes
 
 ---
 

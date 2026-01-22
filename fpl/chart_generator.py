@@ -196,7 +196,7 @@ def generate_rank_progression_chart(
         height=height,
         showlegend=True,
         legend={'font': {'color': text_color, 'size': 18}, 'bgcolor': 'rgba(0, 0, 0, 0)'},  # Transparent legend
-        margin={'t': 50, 'b': 50, 'l': 80, 'r': 50}  # Balanced margins: reduced top, consistent edges
+        margin={'t': 30, 'b': 50, 'l': 80, 'r': 50}  # Further reduced top margin for better visual balance
     )
 
     # Return based on requested format
