@@ -115,7 +115,14 @@ class LeagueContext:
             d["rank_progression_chart"] = chart_svg
 
             # Calculate statistics
-            from .statistics import format_highest_team_value
+            from .statistics import format_highest_team_value, format_in_form_players, should_show_in_form_stat
             d["highest_team_value"] = format_highest_team_value(participants_for_chart)
+
+            # Add in_form statistic (only show from event 3 onwards)
+            current_event = d.get("current_event_id")
+            if current_event and should_show_in_form_stat(current_event):
+                d["in_form_players"] = format_in_form_players(participants_for_chart)
+            else:
+                d["in_form_players"] = None
 
         return d

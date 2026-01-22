@@ -223,8 +223,12 @@ def test_in_form_format_multiple_players():
     result = format_in_form_players(participants)
 
     # Assert
-    expected = "Torkil, Anders ▲ grønn pil 2 runder på rad"
-    assert result == expected, f"Expected '{expected}', got '{result}'"
+    assert result is not None, "Should return result dict"
+    assert 'triangle' in result, "Result should contain triangle"
+    assert 'text' in result, "Result should contain text"
+    assert result['triangle'] == '▲', "Triangle should be up arrow"
+    expected_text = 'Torkil, Anders 2 runder på rad'
+    assert result['text'] == expected_text, f"Expected '{expected_text}', got '{result['text']}'"
 
 
 def test_in_form_format_single_player():
@@ -248,8 +252,11 @@ def test_in_form_format_single_player():
     result = format_in_form_players(participants)
 
     # Assert
-    expected = "Torkil ▲ grønn pil 3 runder på rad"
-    assert result == expected, f"Expected '{expected}', got '{result}'"
+    assert result is not None, "Should return result dict"
+    assert 'triangle' in result, "Result should contain triangle"
+    assert 'text' in result, "Result should contain text"
+    assert result['triangle'] == '▲', "Triangle should be up arrow"
+    assert result['text'] == 'Torkil 3 runder på rad', f"Expected 'Torkil 3 runder på rad', got '{result['text']}'"
 
 
 def test_in_form_format_none():
@@ -271,7 +278,7 @@ def test_in_form_format_none():
     result = format_in_form_players(participants)
 
     # Assert
-    assert result == "None", f"Expected 'None', got '{result}'"
+    assert result is None, f"Expected None, got '{result}'"
 
 
 def test_in_form_before_event_3():

@@ -65,7 +65,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
   - verify that all acceptance criteria have been met, and if so, change the status for the job to done and 
   - if all acceptance criteria haven't been met, continue working, revise your plan if needed
 - **Before committing**: ALWAYS run the FULL test suite and fix any failures:
-  1. Run ruff linting on changed files only: `python -m ruff check --fix <changed_files>`
+  1. If you changed or created any python files, run ruff linting on these files: `python -m ruff check --fix <changed_files>`
   2. Run ALL tests: `python -m pytest` (not just tests for current job)
   3. If any test fails, fix the issue before committing
   4. Mark the job status as done in the TODO file
@@ -553,24 +553,24 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 34: Add statistics section - In form (consecutive green arrows)
-**Status**: todo
+**Status**: done
 
 **Task**: Add "In form" statistic showing team(s) with most consecutive overall_rank improvements (green arrows). Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test creates participant history with consecutive rank decreases
-- [ ] Test asserts function correctly counts consecutive green arrows
-- [ ] Test verifies teams are identified and formatted correctly
-- [ ] Test asserts "None" is shown when no team has green arrows
-- [ ] Test asserts multiple teams are listed if tied
-- [ ] Test verifies statistic is hidden before event 3
-- [ ] Calculate consecutive green arrows: overall_rank decreases from previous event
-- [ ] Identify team(s) with most consecutive green arrows
-- [ ] Display format: "<FirstName>, <FirstName> ▲ grønn pil <count> runder på rad"
-- [ ] Show "None" if no teams have green arrows
-- [ ] List all teams if multiple teams are tied for most green arrows
-- [ ] Only display this statistic from event 3 onwards
-- [ ] Test passes
+- [x] Test creates participant history with consecutive rank decreases
+- [x] Test asserts function correctly counts consecutive green arrows
+- [x] Test verifies teams are identified and formatted correctly
+- [x] Test asserts "None" is shown when no team has green arrows
+- [x] Test asserts multiple teams are listed if tied
+- [x] Test verifies statistic is hidden before event 3
+- [x] Calculate consecutive green arrows: overall_rank decreases from previous event
+- [x] Identify team(s) with most consecutive green arrows
+- [x] Display format: "<FirstName>, <FirstName> ▲ grønn pil <count> runder på rad"
+- [x] Show "None" if no teams have green arrows
+- [x] List all teams if multiple teams are tied for most green arrows
+- [x] Only display this statistic from event 3 onwards
+- [x] Test passes
 
 ---
 

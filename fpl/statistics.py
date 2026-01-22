@@ -116,24 +116,26 @@ def get_in_form_players(participants):
 
 
 def format_in_form_players(participants):
-    """Format the in-form players statistic as a string.
+    """Format the in-form players statistic as a dict with separate triangle and text.
 
     Args:
         participants: List of participant dictionaries.
 
     Returns:
-        Formatted string: "FirstName, FirstName ▲ grønn pil <count> runder på rad"
-        or "None" if no players have green arrows.
+        Dictionary with 'triangle' and 'text' keys, or None if no players have green arrows.
     """
     result = get_in_form_players(participants)
     if result is None:
-        return "None"
+        return None
 
     players_str = ", ".join(result['players'])
     count = result['count']
 
-    # Format: "FirstName, FirstName ▲ grønn pil <count> runder på rad"
-    return f"{players_str} ▲ grønn pil {count} runder på rad"
+    # Return dict for template: triangle separate from text
+    return {
+        'triangle': '▲',
+        'text': f"{players_str} {count} runder på rad"
+    }
 
 
 def should_show_in_form_stat(current_event):
