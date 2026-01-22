@@ -78,6 +78,24 @@ table {
 	max-width: 40vw;
 }
 
+.stats-list {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 0.5rem 1rem;
+	align-items: baseline;
+}
+
+.stats-list dt {
+	font-weight: bold;
+	text-align: right;
+	white-space: nowrap;
+}
+
+.stats-list dd {
+	margin: 0;
+	text-align: left;
+}
+
 th, td {
 	padding: 0.7rem 1.2rem;
 	text-align: center;

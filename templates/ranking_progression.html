@@ -26,12 +26,16 @@
     {% if highest_team_value or in_form_players %}
     <div class="stats-container">
         <h2>Stats:</h2>
-        {% if highest_team_value %}
-        <p><strong>Høyeste lagverdi:</strong> {{ highest_team_value }}</p>
-        {% endif %}
-        {% if in_form_players %}
-        <p><strong>I toppform:</strong> {{ in_form_players.text }}</p>
-        {% endif %}
+        <dl class="stats-list">
+            {% if highest_team_value %}
+            <dt>Høyeste lagverdi:</dt>
+            <dd>{{ highest_team_value }}</dd>
+            {% endif %}
+            {% if in_form_players %}
+            <dt>I toppform:</dt>
+            <dd>{{ in_form_players.text }}</dd>
+            {% endif %}
+        </dl>
     </div>
     {% endif %}
     

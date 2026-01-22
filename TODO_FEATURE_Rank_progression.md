@@ -686,17 +686,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 42: Improve stats section layout with consistent label alignment
-**Status**: todo
+**Status**: done
 
 **Task**: Use a definition list or ensure all labels have the same width so stat values align on the left edge. Improve readability and visual consistency. Write test first if applicable, then implement.
 
 **Acceptance Criteria**:
-- [ ] Consider using HTML `<dl>` definition list for stats
-- [ ] Ensure all stat labels have consistent width
-- [ ] Stat values align on the same left edge
-- [ ] Layout is visually cleaner and more readable
-- [ ] Manual test: Verify improved alignment in browser
-- [ ] Test passes (if applicable)
+- [x] Consider using HTML `<dl>` definition list for stats
+- [x] Ensure all stat labels have consistent width
+- [x] Stat values align on the same left edge
+- [x] Layout is visually cleaner and more readable
+- [x] Manual test: Verify improved alignment in browser
+- [x] Test passes (if applicable)
 
 ---
 
