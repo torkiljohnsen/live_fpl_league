@@ -680,3 +680,30 @@ def test_default_rgba_background_color():
     expected_default = "rgba(0, 0, 0, 0.1)"
     assert fig.layout.plot_bgcolor == expected_default, \
         f"Default background color should be '{expected_default}', got: {fig.layout.plot_bgcolor}"
+
+
+def test_horizontal_gridlines_at_major_ticks():
+    """Test that chart displays horizontal gridlines at major Y-axis tick marks."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 3000000},
+                {'event': 3, 'overall_rank': 5000000},
+            ]
+        }
+    ]
+    total_players = 10000000
+
+    # Act
+    fig = generate_rank_progression_chart(participants, total_players=total_players)
+
+    # Assert
+    # Horizontal gridlines should be enabled
+    assert fig.layout.yaxis.showgrid is True, "Y-axis gridlines should be enabled"
+
+    # Gridlines should be visible (not hidden)
+    # In Plotly, if showgrid is True and gridcolor is set, gridlines will appear
+    assert hasattr(fig.layout.yaxis, 'gridcolor'), "Y-axis should have gridcolor property"

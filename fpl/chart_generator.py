@@ -124,7 +124,9 @@ def generate_rank_progression_chart(
     # Configure Y-axis (inverted so lower rank appears at top)
     yaxis_config = {
         'title_text': "Overall Rank",
-        'autorange': "reversed"
+        'autorange': "reversed",
+        'showgrid': True,
+        'gridcolor': 'rgba(128, 128, 128, 0.3)'
     }
 
     # If total_players is provided, set explicit range from 1 to total_players

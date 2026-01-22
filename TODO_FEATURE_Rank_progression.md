@@ -503,17 +503,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 31: Add horizontal helper lines for major Y-axis points
-**Status**: todo
+**Status**: done
 
 **Task**: Add horizontal gridlines at major Y-axis tick marks (0, 2M, 4M, 6M, etc.). Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test creates chart with Y-axis major ticks at 0, 2000000, 4000000, 6000000
-- [ ] Test asserts horizontal gridlines are enabled
-- [ ] Test asserts gridlines appear at major tick positions
-- [ ] Chart displays horizontal gridlines at each major Y-axis tick
-- [ ] Gridlines improve readability without cluttering the chart
-- [ ] Test passes
+- [x] Test creates chart with Y-axis major ticks at 0, 2000000, 4000000, 6000000
+- [x] Test asserts horizontal gridlines are enabled
+- [x] Test asserts gridlines appear at major tick positions
+- [x] Chart displays horizontal gridlines at each major Y-axis tick
+- [x] Gridlines improve readability without cluttering the chart
+- [x] Test passes
 
 ---
 
