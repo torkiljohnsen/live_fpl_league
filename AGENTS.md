@@ -15,7 +15,11 @@ Add new knowledge sparingly, and do so in a consise way.
 ### 1. Data Collection
 [`fpl/fpl_api.py`](fpl/fpl_api.py) - API client with dev mode support
 - **Live mode**: Fetches from `fantasy.premierleague.com/api`
-- **Dev mode**: Uses/generates sample JSON files in [`fpl/sample_data/`](fpl/sample_data/)
+- **Dev mode**: Automatic sample data management via `_read_sample_or_generate()`
+  - If sample file exists: reads from [`fpl/sample_data/`](fpl/sample_data/)
+  - If sample file missing: fetches from live API and saves to [`fpl/sample_data/`](fpl/sample_data/)
+  - Sample files: `{endpoint}_sample.json` (e.g., `bootstrap-static_sample.json`, `entry_123_history_sample.json`)
+  - Console output: `[dev_mode] Sample read:` or `[dev_mode] API called and sample generated:`
 - Key methods: [`get_bootstrap_static()`](fpl/fpl_api.py), [`get_league_standings()`](fpl/fpl_api.py), [`get_team_history()`](fpl/fpl_api.py), [`get_team_picks()`](fpl/fpl_api.py)
 
 ### 2. Data Processing
