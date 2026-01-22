@@ -138,7 +138,8 @@ def generate_rank_progression_chart(
         'tickfont': {'color': tick_color, 'size': 16},
         'showgrid': True,
         'gridcolor': xaxis_grid_color,
-        'zerolinecolor': zeroline_color
+        'zerolinecolor': zeroline_color,
+        'side': 'top'  # Position X-axis ticks and title at the top
     }
 
     # If we have data, set the range from 1 to the latest gameweek
@@ -196,7 +197,7 @@ def generate_rank_progression_chart(
         height=height,
         showlegend=True,
         legend={'font': {'color': text_color, 'size': 18}, 'bgcolor': 'rgba(0, 0, 0, 0)'},  # Transparent legend
-        margin={'t': 30, 'b': 50, 'l': 80, 'r': 50}  # Further reduced top margin for better visual balance
+        margin={'t': 90, 'b': 30, 'l': 80, 'r': 50}  # Increased top margin for X-axis at top with more breathing room
     )
 
     # Return based on requested format

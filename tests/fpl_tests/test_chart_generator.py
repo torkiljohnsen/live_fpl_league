@@ -897,7 +897,7 @@ def test_large_font_sizes_for_tv_display():
 
 
 def test_reduced_top_padding_with_balanced_margins():
-    """Test that chart has reduced top padding and balanced margins on all sides."""
+    """Test that chart has appropriate margins with X-axis positioned at the top."""
     # Arrange
     participants = [
         {
@@ -916,18 +916,13 @@ def test_reduced_top_padding_with_balanced_margins():
     # Assert - Check that margin is configured
     assert fig.layout.margin is not None, "Margin should be configured"
 
-    # Assert - Top margin should be reduced (targeting 30-40px)
-    assert fig.layout.margin.t <= 40, \
-        f"Top margin should be <= 40px to reduce whitespace, got: {fig.layout.margin.t}"
-    assert fig.layout.margin.t >= 30, \
-        f"Top margin should be >= 30px for minimal spacing, got: {fig.layout.margin.t}"
+    # Assert - Top margin should accommodate X-axis at top (90px)
+    assert fig.layout.margin.t == 90, \
+        f"Top margin should be 90px to accommodate X-axis at top, got: {fig.layout.margin.t}"
 
-    # Assert - All margins should be balanced (equal or close)
-    # Target all margins to be in the 40-60px range for consistency
-    assert fig.layout.margin.b >= 40, \
-        f"Bottom margin should be >= 40px, got: {fig.layout.margin.b}"
-    assert fig.layout.margin.b <= 60, \
-        f"Bottom margin should be <= 60px, got: {fig.layout.margin.b}"
+    # Assert - Bottom margin should be reduced since X-axis is no longer there (30px)
+    assert fig.layout.margin.b == 30, \
+        f"Bottom margin should be 30px with X-axis at top, got: {fig.layout.margin.b}"
 
     assert fig.layout.margin.l >= 40, \
         f"Left margin should be >= 40px, got: {fig.layout.margin.l}"
@@ -1059,7 +1054,7 @@ def test_transparent_plot_area_and_legend_with_increased_opacity():
 
 
 def test_further_reduced_top_padding():
-    """Test that chart top padding is further reduced from 50px to 30px for better visual balance."""
+    """Test that chart has appropriate top padding with X-axis positioned at the top."""
     # Arrange
     participants = [
         {
@@ -1075,7 +1070,7 @@ def test_further_reduced_top_padding():
     # Act
     fig = generate_rank_progression_chart(participants)
 
-    # Assert - Top margin should be further reduced to 30px
+    # Assert - Top margin should be 90px to accommodate X-axis at top
     assert fig.layout.margin is not None, "Margin should be configured"
-    assert fig.layout.margin.t == 30, \
-        f"Top margin should be 30px for improved visual balance, got: {fig.layout.margin.t}"
+    assert fig.layout.margin.t == 90, \
+        f"Top margin should be 90px to accommodate X-axis at top, got: {fig.layout.margin.t}"

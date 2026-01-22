@@ -1,7 +1,64 @@
 # live_fpl_league
-A streamlit dashboard to show the live standings of your FPL mini league
+A static HTML dashboard generator for Fantasy Premier League mini-leagues, showing live standings, gameweek history, and rank progression.
 
 See [Live standings](https://torkiljohnsen.github.io/live_fpl_league/)
+
+## Usage
+
+### Quick Start
+
+Generate all dashboard views for the default league:
+```bash
+python generate_html.py
+```
+
+Generate for a specific league:
+```bash
+python generate_html.py -l 1638989
+```
+
+### Command-Line Options
+
+View all available options:
+```bash
+python generate_html.py --help
+```
+
+**Basic options:**
+- `-l, --league_id` - FPL league ID(s). Can be comma-separated or repeated. Default: 1639886
+- `-o, --output` - Which view to generate: `standings`, `gw_history`, `ranking_progression`, or `ALL` (default)
+- `-j, --join_code` - Optional league join code to display
+- `--dev` - Use sample data instead of live FPL API (outputs have `-dev.html` suffix)
+
+**Examples:**
+```bash
+# Generate all views for default league
+python generate_html.py
+
+# Generate all views for specific league
+python generate_html.py -l 1638989
+
+# Generate only ranking progression chart
+python generate_html.py -o ranking_progression
+
+# Multiple leagues (comma-separated)
+python generate_html.py -l 1638989,1639886
+
+# Multiple leagues (repeated flag)
+python generate_html.py -l 1638989 -l 1639886
+
+# Use sample data (dev mode)
+python generate_html.py --dev
+```
+
+### Output Files
+
+Generated HTML files are saved to the `docs/` directory:
+- `league_standings_{league_id}.html` - Current league standings table
+- `league_gameweek_history_{league_id}.html` - Historical performance grid
+- `ranking_progression_{league_id}.html` - Rank progression chart over time
+
+When using `--dev` mode, files are suffixed with `-dev.html` (e.g., `league_standings_1638989-dev.html`)
 
 ## Development Setup
 
