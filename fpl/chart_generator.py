@@ -17,6 +17,22 @@ def generate_rank_progression_chart(participants):
     # Create empty figure
     fig = go.Figure()
     
+    # Add a line trace for each participant
+    for participant in participants:
+        history = participant.get('history', [])
+        
+        # Extract event numbers and overall ranks
+        events = [entry['event'] for entry in history]
+        ranks = [entry['overall_rank'] for entry in history]
+        
+        # Add line trace for this participant
+        fig.add_trace(go.Scatter(
+            x=events,
+            y=ranks,
+            mode='lines+markers',
+            name=participant.get('player_first_name', 'Unknown')
+        ))
+    
     # Configure X-axis
     fig.update_xaxes(title_text="Gameweek")
     

@@ -51,6 +51,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 
 **Agent instructions**: 
 - Start at the first job with `status: todo`. 
+- Activate the virtual environment before you begin.
 - Complete ONLY that job, then stop. The next agent will handle the next job.
 - Look at commit history in the current branch if you are unsure of what has been done in previous jobs.
 - After you finish a job:
@@ -125,15 +126,15 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 5: Implement single participant line to pass test
-**Status**: todo
+**Status**: done
 
 **Task**: Extend chart generator to plot one participant's rank progression, making Job 4 test pass.
 
 **Acceptance Criteria**:
-- [ ] Function accepts list with one participant dict containing `history` array
-- [ ] Extracts `event` and `overall_rank` from history
-- [ ] Adds one line trace to the figure
-- [ ] Test from Job 4 now PASSES
+- [x] Function accepts list with one participant dict containing `history` array
+- [x] Extracts `event` and `overall_rank` from history
+- [x] Adds one line trace to the figure
+- [x] Test from Job 4 now PASSES
 
 ---
 
