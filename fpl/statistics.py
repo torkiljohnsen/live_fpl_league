@@ -41,24 +41,6 @@ def get_highest_team_value(participants):
     return highest
 
 
-def format_highest_team_value(participants):
-    """Format the highest team value as a string.
-
-    Args:
-        participants: List of participant dictionaries.
-
-    Returns:
-        Formatted string: "Team name (Player name) - £XXX.XM"
-        or None if no data is available.
-    """
-    result = get_highest_team_value(participants)
-    if result is None:
-        return None
-
-    # Format: "Team name (Player name) - £XXX.XM"
-    return f"{result['team_name']} ({result['player_name']}) - £{result['value']:.1f}M"
-
-
 def get_in_form_players(participants):
     """Calculate players with most consecutive overall_rank improvements (green arrows).
 
@@ -112,29 +94,6 @@ def get_in_form_players(participants):
     return {
         'count': max_consecutive,
         'players': players_with_max
-    }
-
-
-def format_in_form_players(participants):
-    """Format the in-form players statistic as a dict with separate triangle and text.
-
-    Args:
-        participants: List of participant dictionaries.
-
-    Returns:
-        Dictionary with 'triangle' and 'text' keys, or None if no players have green arrows.
-    """
-    result = get_in_form_players(participants)
-    if result is None:
-        return None
-
-    players_str = ", ".join(result['players'])
-    count = result['count']
-
-    # Return dict for template: triangle separate from text
-    return {
-        'triangle': '▲',
-        'text': f"{players_str} {count} runder på rad"
     }
 
 

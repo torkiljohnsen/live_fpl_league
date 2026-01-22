@@ -113,14 +113,29 @@ class LeagueContext:
             )
             d["rank_progression_chart"] = chart_svg
 
-            # Calculate statistics
-            from .statistics import format_highest_team_value, format_in_form_players, should_show_in_form_stat
-            d["highest_team_value"] = format_highest_team_value(participants_for_chart)
+            # Calculate and format statistics
+            from .statistics import get_highest_team_value, get_in_form_players, should_show_in_form_stat
+            
+            # Format highest team value
+            highest_value = get_highest_team_value(participants_for_chart)
+            if highest_value:
+                d["highest_team_value"] = f"{highest_value['team_name']} ({highest_value['player_name']}) - £{highest_value['value']:.1f}M"
+            else:
+                d["highest_team_value"] = None
 
-            # Add in_form statistic (only show from event 3 onwards)
+            # Format in-form statistic (only show from event 3 onwards)
             current_event = d.get("current_event_id")
             if current_event and should_show_in_form_stat(current_event):
-                d["in_form_players"] = format_in_form_players(participants_for_chart)
+                in_form_result = get_in_form_players(participants_for_chart)
+                if in_form_result:
+                    players_str = ", ".join(in_form_result['players'])
+                    count = in_form_result['count']
+                    d["in_form_players"] = {
+                        'triangle': '▲',
+                        'text': f"{players_str} ▲ {count} runder på rad"
+                    }
+                else:
+                    d["in_form_players"] = None
             else:
                 d["in_form_players"] = None
 

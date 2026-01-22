@@ -48,29 +48,6 @@ def test_highest_team_value_calculation():
     assert result['value'] == 100.5, f"Value should be 100.5M, got {result['value']}"
 
 
-def test_highest_team_value_format():
-    """Test that highest team value is formatted correctly."""
-    # Arrange
-    participants = [
-        {
-            'team_name': 'Test Team',
-            'player_first_name': 'John',
-            'history': [
-                {'event': 1, 'overall_rank': 500000, 'bank': 15, 'value': 1005},  # Team value: 100.5M
-            ]
-        },
-    ]
-
-    # Act
-    from fpl.statistics import format_highest_team_value
-    result = format_highest_team_value(participants)
-
-    # Assert
-    # Expected format: "Team name (Player name) - £XXX.XM"
-    expected = "Test Team (John) - £100.5M"
-    assert result == expected, f"Expected '{expected}', got '{result}'"
-
-
 def test_highest_team_value_with_no_history():
     """Test that function handles participants with no history gracefully."""
     # Arrange
@@ -192,93 +169,6 @@ def test_in_form_single_player():
     assert result['count'] == 2, f"Should have 2 consecutive green arrows, got {result['count']}"
     assert len(result['players']) == 1, "Should have one player"
     assert 'Torkil' in result['players'], "Torkil should be in the list"
-
-
-def test_in_form_format_multiple_players():
-    """Test that in-form statistic formats multiple players correctly."""
-    # Arrange
-    participants = [
-        {
-            'team_name': 'Team Alpha',
-            'player_first_name': 'Torkil',
-            'history': [
-                {'event': 1, 'overall_rank': 500000},
-                {'event': 2, 'overall_rank': 450000},  # ↓
-                {'event': 3, 'overall_rank': 400000},  # ↓ - 2 consecutive
-            ]
-        },
-        {
-            'team_name': 'Team Beta',
-            'player_first_name': 'Anders',
-            'history': [
-                {'event': 1, 'overall_rank': 600000},
-                {'event': 2, 'overall_rank': 550000},  # ↓
-                {'event': 3, 'overall_rank': 500000},  # ↓ - 2 consecutive
-            ]
-        },
-    ]
-
-    # Act
-    from fpl.statistics import format_in_form_players
-    result = format_in_form_players(participants)
-
-    # Assert
-    assert result is not None, "Should return result dict"
-    assert 'triangle' in result, "Result should contain triangle"
-    assert 'text' in result, "Result should contain text"
-    assert result['triangle'] == '▲', "Triangle should be up arrow"
-    expected_text = 'Torkil, Anders 2 runder på rad'
-    assert result['text'] == expected_text, f"Expected '{expected_text}', got '{result['text']}'"
-
-
-def test_in_form_format_single_player():
-    """Test that in-form statistic formats single player correctly."""
-    # Arrange
-    participants = [
-        {
-            'team_name': 'Team Alpha',
-            'player_first_name': 'Torkil',
-            'history': [
-                {'event': 1, 'overall_rank': 500000},
-                {'event': 2, 'overall_rank': 450000},  # ↓
-                {'event': 3, 'overall_rank': 400000},  # ↓
-                {'event': 4, 'overall_rank': 350000},  # ↓ - 3 consecutive
-            ]
-        },
-    ]
-
-    # Act
-    from fpl.statistics import format_in_form_players
-    result = format_in_form_players(participants)
-
-    # Assert
-    assert result is not None, "Should return result dict"
-    assert 'triangle' in result, "Result should contain triangle"
-    assert 'text' in result, "Result should contain text"
-    assert result['triangle'] == '▲', "Triangle should be up arrow"
-    assert result['text'] == 'Torkil 3 runder på rad', f"Expected 'Torkil 3 runder på rad', got '{result['text']}'"
-
-
-def test_in_form_format_none():
-    """Test that in-form statistic returns 'None' when no green arrows."""
-    # Arrange
-    participants = [
-        {
-            'team_name': 'Team Alpha',
-            'player_first_name': 'Torkil',
-            'history': [
-                {'event': 1, 'overall_rank': 500000},
-                {'event': 2, 'overall_rank': 510000},  # ↑ (worse)
-            ]
-        },
-    ]
-
-    # Act
-    from fpl.statistics import format_in_form_players
-    result = format_in_form_players(participants)
-
-    # Assert
-    assert result is None, f"Expected None, got '{result}'"
 
 
 def test_in_form_before_event_3():

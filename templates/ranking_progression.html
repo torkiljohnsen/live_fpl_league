@@ -27,10 +27,10 @@
     <div class="stats-container">
         <h2>Stats:</h2>
         {% if highest_team_value %}
-        <p><strong>Highest team value:</strong> {{ highest_team_value }}</p>
+        <p><strong>Høyeste lagverdi:</strong> {{ highest_team_value }}</p>
         {% endif %}
         {% if in_form_players %}
-        <p><strong>In form:</strong> {{ in_form_players.text }} <span class="green-arrow">{{ in_form_players.triangle }}</span></p>
+        <p><strong>I toppform:</strong> {{ in_form_players.text }}</p>
         {% endif %}
     </div>
     {% endif %}
