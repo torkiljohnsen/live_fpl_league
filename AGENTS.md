@@ -94,25 +94,26 @@ Tests in [`tests/fpl_tests/`](tests/fpl_tests/) use `DummyAPI` with sample data 
 ## Agent Operational Guidelines
 
 ### Running Tests
-The terminal needs the virtual environment activated to run tests easily. **Always activate the venv first**:
+The virtual environment **stays active** once activated in a terminal session. Check if it's active with `which python` (should show `venv/Scripts/python`).
 
+If not active, activate it once:
 ```bash
-source venv/Scripts/activate && python -m pytest [test_path]
+source venv/Scripts/activate
 ```
 
-Examples:
+Then run tests:
 ```bash
 # Run all tests
-source venv/Scripts/activate && python -m pytest
+python -m pytest
 
 # Run specific test file
-source venv/Scripts/activate && python -m pytest tests/fpl_tests/test_chart_generator.py
+python -m pytest tests/fpl_tests/test_chart_generator.py
 
 # Run specific test
-source venv/Scripts/activate && python -m pytest tests/fpl_tests/test_chart_generator.py::test_empty_chart_has_proper_axes -v
+python -m pytest tests/fpl_tests/test_chart_generator.py::test_empty_chart_has_proper_axes -v
 ```
 
-**Why not just `pytest`?** The Windows bash terminal doesn't have execute permissions on the pytest script directly, so use `python -m pytest` instead.
+**Why `python -m pytest` instead of `pytest`?** The Windows bash terminal doesn't have execute permissions on the pytest script directly.
 
 ### Git Commits
 Git commands work normally in the bash terminal. **Don't use `cd` with Windows-style paths** (backslashes).
