@@ -74,7 +74,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 2: Write test for empty chart generator
-**Status**: todo
+**Status**: done
 
 **Task**: Write a test that expects a chart generator function to create an empty Plotly figure with proper axis setup. The test should FAIL initially.
 
