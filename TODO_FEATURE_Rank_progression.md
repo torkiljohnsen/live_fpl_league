@@ -397,17 +397,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 24: Add rank progression to index page
-**Status**: todo
+**Status**: done
 
 **Task**: Update generate_index.py to link to rank progression pages. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test generates index with ranking_progression pages present
-- [ ] Test asserts index HTML includes ranking_progression links
-- [ ] Test asserts links are correctly formatted
-- [ ] Index page lists ranking_progression HTML files for each league
-- [ ] Links are correctly formatted and clickable
-- [ ] Test passes
+- [x] Test generates index with ranking_progression pages present
+- [x] Test asserts index HTML includes ranking_progression links
+- [x] Test asserts links are correctly formatted
+- [x] Index page lists ranking_progression HTML files for each league
+- [x] Links are correctly formatted and clickable
+- [x] Test passes
 
 ---
 
