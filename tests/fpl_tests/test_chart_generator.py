@@ -137,3 +137,46 @@ def test_multiple_participants_10_traces():
         expected_y = [1000000 + (i * 100000), 950000 + (i * 100000)]
         assert list(trace.x) == expected_x, f"Trace {i} X-axis should match events"
         assert list(trace.y) == expected_y, f"Trace {i} Y-axis should match Player{i}'s ranks"
+
+
+def test_light_theme_colors():
+    """Test that light theme uses light background and dark lines."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+            ]
+        }
+    ]
+    
+    # Act
+    fig = generate_rank_progression_chart(participants, theme="light")
+    
+    # Assert
+    # Check background is light colored (white or near-white)
+    bg_color = fig.layout.plot_bgcolor
+    assert bg_color is not None, "Background color should be set"
+    # Accept various light color formats: white, #ffffff, #fff, rgb(255,255,255), or None (default white)
+    # For light theme, we expect white or near-white
+    light_colors = ['white', '#ffffff', '#fff', 'rgb(255,255,255)', 'rgb(255, 255, 255)', None, '']
+    is_light = (bg_color in light_colors) or (isinstance(bg_color, str) and bg_color.startswith('#f'))
+    assert is_light, f"Light theme should use light background, got: {bg_color}"
+    
+    # Check that line colors are dark/visible
+    # Line colors should be distinguishable and dark for good visibility on light background
+    for i, trace in enumerate(fig.data):
+        line_color = trace.line.color
+        assert line_color is not None, f"Trace {i} should have a line color set"
+        # Dark colors should not be white or very light
+        assert line_color not in ['white', '#ffffff', '#fff'], \
+            f"Trace {i} should not use white/light color on light background: {line_color}"

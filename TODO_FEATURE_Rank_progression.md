@@ -165,15 +165,15 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 8: Write test for light theme colors
-**Status**: todo
+**Status**: done
 
 **Task**: Write a failing test that expects light theme color configuration.
 
 **Acceptance Criteria**:
-- [ ] Test calls function with `theme="light"` parameter
-- [ ] Test asserts background is light colored (white or near-white)
-- [ ] Test asserts line colors are dark/visible
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
+- [x] Test calls function with `theme="light"` parameter
+- [x] Test asserts background is light colored (white or near-white)
+- [x] Test asserts line colors are dark/visible
+- [x] Running test produces FAILURE (functionality doesn't exist yet)
 
 ---
 
