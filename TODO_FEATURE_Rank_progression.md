@@ -444,7 +444,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ### Job 27: Set Y-axis range from 1 to total_players
 **Status**: todo
 
-**Task**: Configure Y-axis range based on total_players from bootstrap-static. Write test first, then implement.
+**Task**: Configure Y-axis range based on total_players from bootstrap-static. Might need to fetch updated numbers here from the live API. Write test first, then implement.
 
 **Acceptance Criteria**:
 - [ ] Test provides total_players value (e.g., 10000000)
@@ -468,6 +468,107 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 - [ ] Function receives event finish status from bootstrap-static
 - [ ] Unfinished gameweeks display with asterisk (e.g., "7*")
 - [ ] Finished gameweeks display as plain numbers
+- [ ] Test passes
+
+---
+
+### Job 29: Make graph background color configurable with RGBA
+**Status**: todo
+
+**Task**: Change background color configuration to support RGBA format with opacity. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test calls function with `bg_color="rgba(0, 0, 0, 0.1)"`
+- [ ] Test asserts background uses the specified RGBA color
+- [ ] Test verifies opacity is correctly applied
+- [ ] Function accepts `bg_color` parameter in RGBA format (e.g., "rgba(0, 0, 0, 0.1)")
+- [ ] Default background color is `rgba(0, 0, 0, 0.1)` (black with 10% opacity)
+- [ ] Background opacity is properly rendered in output
+- [ ] Test passes
+
+---
+
+### Job 30: Center graph horizontally in template
+**Status**: todo
+
+**Task**: Update ranking_progression template to center the chart horizontally, matching layout in league_gameweek_history and league_standings templates. Write test first if applicable, then implement.
+
+**Acceptance Criteria**:
+- [ ] Review CSS/layout in league_gameweek_history.html and league_standings.html
+- [ ] Apply similar centering approach to ranking_progression.html
+- [ ] Chart image is centered horizontally in the page
+- [ ] Layout is consistent with other templates
+- [ ] Manual test: Verify chart is centered when viewed in browser
+
+---
+
+### Job 31: Add horizontal helper lines for major Y-axis points
+**Status**: todo
+
+**Task**: Add horizontal gridlines at major Y-axis tick marks (0, 2M, 4M, 6M, etc.). Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test creates chart with Y-axis major ticks at 0, 2000000, 4000000, 6000000
+- [ ] Test asserts horizontal gridlines are enabled
+- [ ] Test asserts gridlines appear at major tick positions
+- [ ] Chart displays horizontal gridlines at each major Y-axis tick
+- [ ] Gridlines improve readability without cluttering the chart
+- [ ] Test passes
+
+---
+
+### Job 32: Enhance legend format with rank and player details
+**Status**: todo
+
+**Task**: Change legend format to show: Line | League rank | Player name | Overall rank (rounded to thousands). Example: "--- 1. Torkil (345k)". Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test creates participants with league_rank, first_name, and latest overall_rank
+- [ ] Test asserts legend displays format: "1. Torkil (345k)"
+- [ ] Test verifies overall_rank is rounded to thousands (e.g., 345123 → 345k)
+- [ ] Legend format shows: `<league_rank>. <first_name> (<overall_rank_rounded>)`
+- [ ] Overall rank is rounded to nearest thousand with "k" suffix
+- [ ] Legend entries are numbered by league rank
+- [ ] Test passes
+
+---
+
+### Job 33: Add statistics section - Highest team value
+**Status**: todo
+
+**Task**: Below the graph, add a statistics section with "Highest team value" statistic. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test creates participants with history containing bank and value fields
+- [ ] Test calculates team_value = (bank + value) / 10
+- [ ] Test asserts highest team value is correctly identified
+- [ ] Test asserts format is "Team name (Player name) - £XXX.XM"
+- [ ] Template displays "Stats:" headline
+- [ ] First statistic shows: "Highest team value: <team_name> (<player_name>) - £<value>M"
+- [ ] Team value is calculated from latest event: (bank + value) / 10
+- [ ] Value is displayed in millions with one decimal (e.g., £100.5M)
+- [ ] Test passes
+
+---
+
+### Job 34: Add statistics section - In form (consecutive green arrows)
+**Status**: todo
+
+**Task**: Add "In form" statistic showing team(s) with most consecutive overall_rank improvements (green arrows). Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test creates participant history with consecutive rank decreases
+- [ ] Test asserts function correctly counts consecutive green arrows
+- [ ] Test verifies teams are identified and formatted correctly
+- [ ] Test asserts "None" is shown when no team has green arrows
+- [ ] Test asserts multiple teams are listed if tied
+- [ ] Test verifies statistic is hidden before event 3
+- [ ] Calculate consecutive green arrows: overall_rank decreases from previous event
+- [ ] Identify team(s) with most consecutive green arrows
+- [ ] Display format: "<FirstName>, <FirstName> ▲ grønn pil <count> runder på rad"
+- [ ] Show "None" if no teams have green arrows
+- [ ] List all teams if multiple teams are tied for most green arrows
+- [ ] Only display this statistic from event 3 onwards
 - [ ] Test passes
 
 ---
