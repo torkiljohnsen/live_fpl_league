@@ -639,20 +639,20 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 39: Fix overlapping semi-transparent backgrounds and increase default opacity
-**Status**: todo
+**Status**: done
 
 **Task**: The chart area and legend box inherit the same semi-transparent background as the main plot background, causing a darker appearance where they overlap. Make the plot area and legend box backgrounds fully transparent. Also change default background color from rgba(0,0,0,0.1) to rgba(0,0,0,0.3). Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test verifies default background color is "rgba(0, 0, 0, 0.3)"
-- [ ] Test verifies plot area background is fully transparent
-- [ ] Test verifies legend background is fully transparent
-- [ ] Default background color changed to rgba(0,0,0,0.3)
-- [ ] Plot area (graph area) has transparent background
-- [ ] Legend box has transparent background
-- [ ] No overlapping semi-transparent backgrounds
-- [ ] Manual test: Verify improved appearance in browser
-- [ ] Test passes
+- [x] Test verifies default background color is "rgba(0, 0, 0, 0.3)"
+- [x] Test verifies plot area background is fully transparent
+- [x] Test verifies legend background is fully transparent
+- [x] Default background color changed to rgba(0,0,0,0.3)
+- [x] Plot area (graph area) has transparent background
+- [x] Legend box has transparent background
+- [x] No overlapping semi-transparent backgrounds
+- [x] Manual test: Verify improved appearance in browser
+- [x] Test passes
 
 ---
 

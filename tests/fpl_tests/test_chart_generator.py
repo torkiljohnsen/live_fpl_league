@@ -163,13 +163,16 @@ def test_light_theme_colors():
 
     # Assert
     # Check background is light colored (white or near-white)
-    bg_color = fig.layout.plot_bgcolor
+    bg_color = fig.layout.paper_bgcolor
     assert bg_color is not None, "Background color should be set"
     # Accept various light color formats: white, #ffffff, #fff, rgb(255,255,255), or None (default white)
     # For light theme, we expect white or near-white
     light_colors = ['white', '#ffffff', '#fff', 'rgb(255,255,255)', 'rgb(255, 255, 255)', None, '']
     is_light = (bg_color in light_colors) or (isinstance(bg_color, str) and bg_color.startswith('#f'))
     assert is_light, f"Light theme should use light background, got: {bg_color}"
+
+    # Verify plot area is transparent
+    assert fig.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
 
     # Check that line colors are dark/visible
     # Line colors should be distinguishable and dark for good visibility on light background
@@ -244,13 +247,17 @@ def test_custom_background_color_override():
     fig_dark = generate_rank_progression_chart(participants, theme="dark", bg_color=custom_color)
 
     # Assert
-    # Custom color should override light theme default
-    assert fig_light.layout.plot_bgcolor == custom_color, \
-        f"Custom bg_color should override light theme default, got {fig_light.layout.plot_bgcolor}"
+    # Custom color should override light theme default (applied to paper_bgcolor)
+    assert fig_light.layout.paper_bgcolor == custom_color, \
+        f"Custom bg_color should override light theme default, got {fig_light.layout.paper_bgcolor}"
 
-    # Custom color should override dark theme default
-    assert fig_dark.layout.plot_bgcolor == custom_color, \
-        f"Custom bg_color should override dark theme default, got {fig_dark.layout.plot_bgcolor}"
+    # Custom color should override dark theme default (applied to paper_bgcolor)
+    assert fig_dark.layout.paper_bgcolor == custom_color, \
+        f"Custom bg_color should override dark theme default, got {fig_dark.layout.paper_bgcolor}"
+
+    # Plot area should always be transparent
+    assert fig_light.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
+    assert fig_dark.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
 
 
 def test_configurable_chart_dimensions():
@@ -649,18 +656,21 @@ def test_rgba_background_color_support():
     fig = generate_rank_progression_chart(participants, bg_color=rgba_color)
 
     # Assert
-    # Verify that the background color is set to the specified RGBA value
-    assert fig.layout.plot_bgcolor == rgba_color, \
-        f"Background color should be '{rgba_color}', got: {fig.layout.plot_bgcolor}"
+    # Verify that the background color is set to the specified RGBA value (on paper_bgcolor)
+    assert fig.layout.paper_bgcolor == rgba_color, \
+        f"Background color should be '{rgba_color}', got: {fig.layout.paper_bgcolor}"
 
     # Verify the color format is correctly applied (contains "rgba(" and opacity value)
-    bg_color = fig.layout.plot_bgcolor
+    bg_color = fig.layout.paper_bgcolor
     assert bg_color.startswith("rgba("), "Background color should start with 'rgba('"
     assert "0.1" in bg_color, "Background color should contain opacity value 0.1"
 
+    # Plot area should be transparent
+    assert fig.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
+
 
 def test_default_rgba_background_color():
-    """Test that default background color is rgba(0, 0, 0, 0.1)."""
+    """Test that default background color is rgba(0, 0, 0, 0.3)."""
     # Arrange
     participants = [
         {
@@ -676,10 +686,10 @@ def test_default_rgba_background_color():
     fig = generate_rank_progression_chart(participants)
 
     # Assert
-    # Default background should be rgba(0, 0, 0, 0.1)
-    expected_default = "rgba(0, 0, 0, 0.1)"
-    assert fig.layout.plot_bgcolor == expected_default, \
-        f"Default background color should be '{expected_default}', got: {fig.layout.plot_bgcolor}"
+    # Default background should be rgba(0, 0, 0, 0.3)
+    expected_default = "rgba(0, 0, 0, 0.3)"
+    assert fig.layout.paper_bgcolor == expected_default, \
+        f"Default background color should be '{expected_default}', got: {fig.layout.paper_bgcolor}"
 
 
 def test_horizontal_gridlines_at_major_ticks():
@@ -762,7 +772,7 @@ def test_enhanced_legend_format():
 
 
 def test_paper_bgcolor_matches_plot_bgcolor():
-    """Test that paper_bgcolor is set to the same value as plot_bgcolor for consistent background."""
+    """Test that paper_bgcolor controls background while plot_bgcolor is transparent."""
     # Arrange
     participants = [
         {
@@ -777,22 +787,24 @@ def test_paper_bgcolor_matches_plot_bgcolor():
     # Act - Test with default background
     fig_default = generate_rank_progression_chart(participants)
 
-    # Assert - Both should be set to default rgba(0, 0, 0, 0.1)
-    expected_default = "rgba(0, 0, 0, 0.1)"
-    assert fig_default.layout.plot_bgcolor == expected_default, \
-        f"plot_bgcolor should be '{expected_default}', got: {fig_default.layout.plot_bgcolor}"
+    # Assert - paper_bgcolor should be set to default rgba(0, 0, 0, 0.3)
+    expected_default = "rgba(0, 0, 0, 0.3)"
     assert fig_default.layout.paper_bgcolor == expected_default, \
         f"paper_bgcolor should be '{expected_default}', got: {fig_default.layout.paper_bgcolor}"
+
+    # plot_bgcolor should always be transparent
+    assert fig_default.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', \
+        f"plot_bgcolor should be transparent, got: {fig_default.layout.plot_bgcolor}"
 
     # Act - Test with custom background
     custom_color = "rgba(255, 0, 0, 0.5)"
     fig_custom = generate_rank_progression_chart(participants, bg_color=custom_color)
 
-    # Assert - Both should be set to custom color
-    assert fig_custom.layout.plot_bgcolor == custom_color, \
-        f"plot_bgcolor should be '{custom_color}', got: {fig_custom.layout.plot_bgcolor}"
+    # Assert - paper_bgcolor should use custom color, plot_bgcolor should be transparent
     assert fig_custom.layout.paper_bgcolor == custom_color, \
         f"paper_bgcolor should be '{custom_color}', got: {fig_custom.layout.paper_bgcolor}"
+    assert fig_custom.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', \
+        f"plot_bgcolor should be transparent, got: {fig_custom.layout.plot_bgcolor}"
 
 
 def test_dark_theme_has_light_text_colors():
@@ -999,3 +1011,48 @@ def test_gridline_brightness_for_dark_theme():
             r, g, b = int(match.group(1)), int(match.group(2)), int(match.group(3))
             assert r >= 120 and g >= 120 and b >= 120, \
                 f"Y-axis gridlines should be brighter for visibility (RGB >= 120), got: {yaxis_gridcolor}"
+
+
+def test_transparent_plot_area_and_legend_with_increased_opacity():
+    """Test that default background is rgba(0,0,0,0.3), plot area and legend are transparent."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'league_rank': 2,
+            'history': [
+                {'event': 1, 'overall_rank': 1100000},
+                {'event': 2, 'overall_rank': 1050000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    # 1. Default background color should be rgba(0, 0, 0, 0.3)
+    expected_bg = "rgba(0, 0, 0, 0.3)"
+    assert fig.layout.paper_bgcolor == expected_bg, \
+        f"Paper background should be '{expected_bg}', got: {fig.layout.paper_bgcolor}"
+
+    # 2. Plot area background should be fully transparent
+    # When plot_bgcolor is transparent, it can be represented as 'rgba(0,0,0,0)' or None or ''
+    plot_bg = fig.layout.plot_bgcolor
+    assert plot_bg in ['rgba(0, 0, 0, 0)', 'rgba(0,0,0,0)', '', None] or \
+           (isinstance(plot_bg, str) and 'rgba' in plot_bg and ', 0)' in plot_bg), \
+        f"Plot area background should be transparent, got: {plot_bg}"
+
+    # 3. Legend background should be fully transparent
+    legend_bg = fig.layout.legend.bgcolor
+    assert legend_bg in ['rgba(0, 0, 0, 0)', 'rgba(0,0,0,0)', '', None] or \
+           (isinstance(legend_bg, str) and 'rgba' in legend_bg and ', 0)' in legend_bg), \
+        f"Legend background should be transparent, got: {legend_bg}"

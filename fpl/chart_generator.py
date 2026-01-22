@@ -60,7 +60,7 @@ def generate_rank_progression_chart(
         zeroline_color = "rgba(128, 128, 128, 0.5)"  # Zero line
     elif theme == "dark":
         colors = DARK_THEME_COLORS
-        default_bg_color = "rgba(0, 0, 0, 0.1)"
+        default_bg_color = "rgba(0, 0, 0, 0.3)"
         text_color = "rgba(200, 200, 200, 1)"  # Light text for dark theme
         tick_color = "rgba(180, 180, 180, 1)"  # Slightly dimmer for axis numbers
         grid_color = "rgba(140, 140, 140, 0.4)"  # Brighter Y-axis gridlines for visibility
@@ -68,7 +68,7 @@ def generate_rank_progression_chart(
         zeroline_color = "rgba(80, 80, 80, 0.4)"  # Subtle zero line
     else:
         colors = DARK_THEME_COLORS  # Default to dark colors
-        default_bg_color = "rgba(0, 0, 0, 0.1)"
+        default_bg_color = "rgba(0, 0, 0, 0.3)"
         text_color = "rgba(200, 200, 200, 1)"
         tick_color = "rgba(180, 180, 180, 1)"
         grid_color = "rgba(140, 140, 140, 0.4)"
@@ -188,14 +188,14 @@ def generate_rank_progression_chart(
 
     fig.update_yaxes(**yaxis_config)
 
-    # Set background color (both plot and paper for consistent appearance)
+    # Set background color: paper uses final_bg_color, plot area and legend are transparent
     fig.update_layout(
-        plot_bgcolor=final_bg_color,
+        plot_bgcolor='rgba(0, 0, 0, 0)',  # Transparent plot area
         paper_bgcolor=final_bg_color,
         width=width,
         height=height,
         showlegend=True,
-        legend={'font': {'color': text_color, 'size': 18}},
+        legend={'font': {'color': text_color, 'size': 18}, 'bgcolor': 'rgba(0, 0, 0, 0)'},  # Transparent legend
         margin={'t': 50, 'b': 50, 'l': 80, 'r': 50}  # Balanced margins: reduced top, consistent edges
     )
 
