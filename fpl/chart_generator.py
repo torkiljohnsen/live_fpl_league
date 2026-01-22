@@ -53,12 +53,21 @@ def generate_rank_progression_chart(
     if theme == "light":
         colors = LIGHT_THEME_COLORS
         default_bg_color = "white"
+        text_color = "rgba(42, 63, 95, 1)"  # Dark text for light theme
+        tick_color = "rgba(42, 63, 95, 1)"  # Dark text for axis numbers
+        grid_color = "rgba(128, 128, 128, 0.3)"
     elif theme == "dark":
         colors = DARK_THEME_COLORS
         default_bg_color = "rgba(0, 0, 0, 0.1)"
+        text_color = "rgba(200, 200, 200, 1)"  # Light text for dark theme
+        tick_color = "rgba(180, 180, 180, 1)"  # Slightly dimmer for axis numbers
+        grid_color = "rgba(100, 100, 100, 0.3)"  # Lighter gridlines
     else:
         colors = DARK_THEME_COLORS  # Default to dark colors
         default_bg_color = "rgba(0, 0, 0, 0.1)"
+        text_color = "rgba(200, 200, 200, 1)"
+        tick_color = "rgba(180, 180, 180, 1)"
+        grid_color = "rgba(100, 100, 100, 0.3)"
 
     # Use custom bg_color if provided, otherwise use theme default
     final_bg_color = bg_color if bg_color is not None else default_bg_color
@@ -116,7 +125,12 @@ def generate_rank_progression_chart(
 
     # Configure X-axis to show only integer gameweek numbers
     # Set dtick=1 to ensure tick marks appear at every whole number
-    xaxis_config = {'title_text': "Gameweek", 'dtick': 1}
+    xaxis_config = {
+        'title_text': "Gameweek",
+        'dtick': 1,
+        'title_font': {'color': text_color},
+        'tickfont': {'color': tick_color}
+    }
 
     # If we have data, set the range from 1 to the latest gameweek
     if all_events:
@@ -153,7 +167,9 @@ def generate_rank_progression_chart(
         'title_text': "Overall Rank",
         'autorange': "reversed",
         'showgrid': True,
-        'gridcolor': 'rgba(128, 128, 128, 0.3)'
+        'gridcolor': grid_color,
+        'title_font': {'color': text_color},
+        'tickfont': {'color': tick_color}
     }
 
     # If total_players is provided, set explicit range from 1 to total_players
@@ -162,12 +178,14 @@ def generate_rank_progression_chart(
 
     fig.update_yaxes(**yaxis_config)
 
-    # Set background color
+    # Set background color (both plot and paper for consistent appearance)
     fig.update_layout(
         plot_bgcolor=final_bg_color,
+        paper_bgcolor=final_bg_color,
         width=width,
         height=height,
-        showlegend=True
+        showlegend=True,
+        legend={'font': {'color': text_color}}
     )
 
     # Return based on requested format

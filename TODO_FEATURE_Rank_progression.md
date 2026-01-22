@@ -575,17 +575,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 35: Fix chart background color
-**Status**: todo
+**Status**: done
 
 **Task**: Looking at /live_fpl_league/docs/ranking_progression_1639886-dev.html - Bug: Background shows as white. Should be RGBA(0,0,0,0.1) by default. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test verifies default background color is "rgba(0, 0, 0, 0.1)"
-- [ ] Test asserts background is not white/opaque by default
-- [ ] Identify and fix issue causing white background in rendered chart
-- [ ] Verify fix with generated HTML in browser
-- [ ] Background displays as intended RGBA(0,0,0,0.1) - black with 10% opacity
-- [ ] Test passes
+- [x] Test verifies default background color is "rgba(0, 0, 0, 0.1)"
+- [x] Test asserts background is not white/opaque by default
+- [x] Identify and fix issue causing white background in rendered chart
+- [x] Verify fix with generated HTML in browser
+- [x] Background displays as intended RGBA(0,0,0,0.1) - black with 10% opacity
+- [x] Test passes
 
 ---
 
@@ -617,6 +617,23 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 - [ ] Top padding is reduced to match other edges
 - [ ] Chart has consistent padding on all sides
 - [ ] Manual test: Verify improved layout in browser
+- [ ] Test passes
+
+---
+
+### Job 38: Adjust gridline brightness for dark theme
+**Status**: todo
+
+**Task**: Visual refactor of gridlines for better dark theme appearance. Vertical gridlines (on X-axis gameweeks) are too bright. The horizontal zero line (Y-axis 0 mark) is too bright. The horizontal gridlines (2M, 4M, 6M, etc.) are too dark and barely visible. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test verifies X-axis vertical gridlines have reduced brightness for dark theme
+- [ ] Test verifies Y-axis zero line has reduced brightness for dark theme
+- [ ] Test verifies Y-axis horizontal gridlines (major ticks) have increased brightness for dark theme
+- [ ] X-axis vertical gridlines are more subtle/less prominent
+- [ ] Y-axis zero line is more subtle/less prominent
+- [ ] Y-axis horizontal gridlines at 2M, 4M, 6M, etc. are brighter and more visible
+- [ ] Manual test: Verify improved visual balance in browser
 - [ ] Test passes
 
 ---

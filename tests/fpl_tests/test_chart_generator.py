@@ -759,3 +759,80 @@ def test_enhanced_legend_format():
 
     assert actual_labels == expected_labels, \
         f"Legend labels should be {expected_labels}, got: {actual_labels}"
+
+
+def test_paper_bgcolor_matches_plot_bgcolor():
+    """Test that paper_bgcolor is set to the same value as plot_bgcolor for consistent background."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act - Test with default background
+    fig_default = generate_rank_progression_chart(participants)
+
+    # Assert - Both should be set to default rgba(0, 0, 0, 0.1)
+    expected_default = "rgba(0, 0, 0, 0.1)"
+    assert fig_default.layout.plot_bgcolor == expected_default, \
+        f"plot_bgcolor should be '{expected_default}', got: {fig_default.layout.plot_bgcolor}"
+    assert fig_default.layout.paper_bgcolor == expected_default, \
+        f"paper_bgcolor should be '{expected_default}', got: {fig_default.layout.paper_bgcolor}"
+
+    # Act - Test with custom background
+    custom_color = "rgba(255, 0, 0, 0.5)"
+    fig_custom = generate_rank_progression_chart(participants, bg_color=custom_color)
+
+    # Assert - Both should be set to custom color
+    assert fig_custom.layout.plot_bgcolor == custom_color, \
+        f"plot_bgcolor should be '{custom_color}', got: {fig_custom.layout.plot_bgcolor}"
+    assert fig_custom.layout.paper_bgcolor == custom_color, \
+        f"paper_bgcolor should be '{custom_color}', got: {fig_custom.layout.paper_bgcolor}"
+
+
+def test_dark_theme_has_light_text_colors():
+    """Test that dark theme uses light text colors for readability."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act - Generate with dark theme (default)
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Font colors should be light (not dark default)
+    # Check X-axis title color
+    assert fig.layout.xaxis.title.font.color == 'rgba(200, 200, 200, 1)', \
+        f"X-axis title should be light colored, got: {fig.layout.xaxis.title.font.color}"
+
+    # Check Y-axis title color
+    assert fig.layout.yaxis.title.font.color == 'rgba(200, 200, 200, 1)', \
+        f"Y-axis title should be light colored, got: {fig.layout.yaxis.title.font.color}"
+
+    # Check X-axis tick (label) color
+    assert fig.layout.xaxis.tickfont.color == 'rgba(180, 180, 180, 1)', \
+        f"X-axis ticks should be light colored, got: {fig.layout.xaxis.tickfont.color}"
+
+    # Check Y-axis tick (label) color
+    assert fig.layout.yaxis.tickfont.color == 'rgba(180, 180, 180, 1)', \
+        f"Y-axis ticks should be light colored, got: {fig.layout.yaxis.tickfont.color}"
+
+    # Check legend font color
+    assert fig.layout.legend.font.color == 'rgba(200, 200, 200, 1)', \
+        f"Legend should be light colored, got: {fig.layout.legend.font.color}"
+
+    # Check gridline color is lighter for dark theme
+    assert fig.layout.yaxis.gridcolor == 'rgba(100, 100, 100, 0.3)', \
+        f"Gridlines should be lighter for dark theme, got: {fig.layout.yaxis.gridcolor}"

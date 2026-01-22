@@ -109,7 +109,6 @@ class LeagueContext:
 
             chart_svg = generate_rank_progression_chart(
                 participants=participants_for_chart,
-                theme="light",
                 output_format="svg"
             )
             d["rank_progression_chart"] = chart_svg
