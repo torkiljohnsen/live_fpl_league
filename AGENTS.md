@@ -115,24 +115,26 @@ This project uses **ruff** for fast Python linting and code formatting. Configur
 
 ### Running Ruff
 
+**Important**: Ruff should ONLY be run on Python (.py) files. Never run it on markdown, JSON, or other file types.
+
 **Before writing code**, check existing code style:
 ```bash
-# Check specific file
+# Check specific Python file
 python -m ruff check fpl/chart_generator.py
 
-# Check entire directory
+# Check all Python files in a directory
 python -m ruff check fpl/
 
-# Check all Python files
+# Check all Python files in project (safe - ruff ignores non-Python files)
 python -m ruff check .
 ```
 
 **Auto-fix issues** where possible:
 ```bash
-# Fix specific file
+# Fix specific Python file
 python -m ruff check --fix tests/fpl_tests/test_chart_generator.py
 
-# Fix all files
+# Fix all Python files in project
 python -m ruff check --fix .
 ```
 
@@ -140,7 +142,11 @@ python -m ruff check --fix .
 
 **ALWAYS run the FULL test suite before making a git commit**:
 ```bash
-# 1. Run ruff and auto-fix
+# 1. Run ruff on changed Python files only
+# If you changed: fpl/statistics.py and tests/fpl_tests/test_statistics.py
+python -m ruff check --fix fpl/statistics.py tests/fpl_tests/test_statistics.py
+
+# OR run on all Python files (ruff will ignore non-Python files)
 python -m ruff check --fix .
 
 # 2. Run ALL tests to ensure nothing broke (not just tests for current feature)
@@ -153,7 +159,9 @@ python -m pytest
 git add -A && git commit -m "Your message"
 ```
 
-**Critical**: Even if you only modified one module, run the entire test suite. Changes can have unexpected side effects on other components.
+**Critical**: 
+- Even if you only modified one module, run the entire test suite. Changes can have unexpected side effects on other components.
+- Ruff automatically ignores non-Python files, but for clarity specify only .py files when listing individual files.
 
 ### Common Ruff Rules
 - **Import sorting** (I): Imports must be sorted alphabetically and grouped
