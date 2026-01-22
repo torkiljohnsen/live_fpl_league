@@ -577,3 +577,55 @@ def test_y_axis_range_set_from_total_players():
 
     # Verify Y-axis is still reversed
     assert fig.layout.yaxis.autorange == "reversed", "Y-axis should still be reversed"
+
+
+def test_unfinished_gameweek_displays_with_asterisk():
+    """Test that unfinished gameweeks are marked with asterisk on X-axis."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+                {'event': 4, 'overall_rank': 875000},
+                {'event': 5, 'overall_rank': 850000},
+                {'event': 6, 'overall_rank': 825000},
+                {'event': 7, 'overall_rank': 800000},
+            ]
+        }
+    ]
+
+    # Event 7 is unfinished, events 1-6 are finished
+    events = [
+        {'id': 1, 'finished': True},
+        {'id': 2, 'finished': True},
+        {'id': 3, 'finished': True},
+        {'id': 4, 'finished': True},
+        {'id': 5, 'finished': True},
+        {'id': 6, 'finished': True},
+        {'id': 7, 'finished': False},
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants, events=events)
+
+    # Assert
+    # Check that X-axis has custom tick text configured
+    assert fig.layout.xaxis.ticktext is not None, "X-axis should have custom tick text"
+    assert fig.layout.xaxis.tickvals is not None, "X-axis should have custom tick values"
+
+    # Convert to lists for easier comparison
+    tick_vals = list(fig.layout.xaxis.tickvals)
+    tick_text = list(fig.layout.xaxis.ticktext)
+
+    # Verify we have tick values for all events 1-7
+    assert tick_vals == [1, 2, 3, 4, 5, 6, 7], "Tick values should be [1, 2, 3, 4, 5, 6, 7]"
+
+    # Verify finished events (1-6) display as plain numbers
+    for i in range(6):
+        assert tick_text[i] == str(i + 1), f"Event {i + 1} should display as '{i + 1}' (no asterisk)"
+
+    # Verify unfinished event 7 displays with asterisk
+    assert tick_text[6] == "7*", "Event 7 should display as '7*' (with asterisk)"

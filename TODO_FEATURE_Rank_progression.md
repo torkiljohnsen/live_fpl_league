@@ -457,18 +457,18 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 28: Add asterisk to unfinished gameweek on X-axis
-**Status**: todo
+**Status**: done
 
 **Task**: Mark unfinished gameweeks with asterisk based on bootstrap-static data. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test provides gameweek data with event 7 having `finished: false`
-- [ ] Test asserts X-axis label for event 7 displays "7*"
-- [ ] Test asserts finished events (1-6) display without asterisk
-- [ ] Function receives event finish status from bootstrap-static
-- [ ] Unfinished gameweeks display with asterisk (e.g., "7*")
-- [ ] Finished gameweeks display as plain numbers
-- [ ] Test passes
+- [x] Test provides gameweek data with event 7 having `finished: false`
+- [x] Test asserts X-axis label for event 7 displays "7*"
+- [x] Test asserts finished events (1-6) display without asterisk
+- [x] Function receives event finish status from bootstrap-static
+- [x] Unfinished gameweeks display with asterisk (e.g., "7*")
+- [x] Finished gameweeks display as plain numbers
+- [x] Test passes
 
 ---
 

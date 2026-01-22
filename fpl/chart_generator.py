@@ -22,7 +22,8 @@ def generate_rank_progression_chart(
     height=600,
     output_format="figure",
     output_path=None,
-    total_players=None
+    total_players=None,
+    events=None
 ):
     """Generate a rank progression chart for FPL participants.
 
@@ -37,6 +38,8 @@ def generate_rank_progression_chart(
         output_path: File path for PNG output (required when output_format="png").
         total_players: Total number of FPL players (from bootstrap-static). If provided,
                       sets Y-axis range from 1 to total_players.
+        events: List of event dictionaries from bootstrap-static, each containing 'id' and
+               'finished' fields. Used to mark unfinished gameweeks with asterisk.
 
     Returns:
         If output_format="figure": A Plotly figure object.
@@ -66,18 +69,18 @@ def generate_rank_progression_chart(
         history = participant.get('history', [])
 
         # Extract event numbers and overall ranks
-        events = [entry['event'] for entry in history]
+        event_numbers = [entry['event'] for entry in history]
         ranks = [entry['overall_rank'] for entry in history]
 
         # Track all event numbers to determine X-axis range
-        all_events.extend(events)
+        all_events.extend(event_numbers)
 
         # Select color from palette (cycle through if more participants than colors)
         color = colors[i % len(colors)]
 
         # Add line trace for this participant
         fig.add_trace(go.Scatter(
-            x=events,
+            x=event_numbers,
             y=ranks,
             mode='lines+markers',
             name=participant.get('player_first_name', 'Unknown'),
@@ -94,6 +97,27 @@ def generate_rank_progression_chart(
         max_event = max(all_events)
         # Add small padding to make sure all data points are visible
         xaxis_config['range'] = [min_event - 0.5, max_event + 0.5]
+
+    # If events data is provided, mark unfinished gameweeks with asterisk
+    if events is not None and all_events:
+        # Create a mapping of event_id -> finished status
+        event_status = {event['id']: event['finished'] for event in events}
+
+        # Generate tick values and text for all events in range
+        min_event = min(all_events)
+        max_event = max(all_events)
+        tick_vals = list(range(min_event, max_event + 1))
+        tick_text = []
+
+        for event_id in tick_vals:
+            # Add asterisk to unfinished events
+            if event_id in event_status and not event_status[event_id]:
+                tick_text.append(f"{event_id}*")
+            else:
+                tick_text.append(str(event_id))
+
+        xaxis_config['tickvals'] = tick_vals
+        xaxis_config['ticktext'] = tick_text
 
     fig.update_xaxes(**xaxis_config)
 
