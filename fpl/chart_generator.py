@@ -56,18 +56,24 @@ def generate_rank_progression_chart(
         text_color = "rgba(42, 63, 95, 1)"  # Dark text for light theme
         tick_color = "rgba(42, 63, 95, 1)"  # Dark text for axis numbers
         grid_color = "rgba(128, 128, 128, 0.3)"
+        xaxis_grid_color = "rgba(128, 128, 128, 0.3)"  # X-axis vertical gridlines
+        zeroline_color = "rgba(128, 128, 128, 0.5)"  # Zero line
     elif theme == "dark":
         colors = DARK_THEME_COLORS
         default_bg_color = "rgba(0, 0, 0, 0.1)"
         text_color = "rgba(200, 200, 200, 1)"  # Light text for dark theme
         tick_color = "rgba(180, 180, 180, 1)"  # Slightly dimmer for axis numbers
-        grid_color = "rgba(100, 100, 100, 0.3)"  # Lighter gridlines
+        grid_color = "rgba(140, 140, 140, 0.4)"  # Brighter Y-axis gridlines for visibility
+        xaxis_grid_color = "rgba(60, 60, 60, 0.3)"  # Subtle X-axis vertical gridlines
+        zeroline_color = "rgba(80, 80, 80, 0.4)"  # Subtle zero line
     else:
         colors = DARK_THEME_COLORS  # Default to dark colors
         default_bg_color = "rgba(0, 0, 0, 0.1)"
         text_color = "rgba(200, 200, 200, 1)"
         tick_color = "rgba(180, 180, 180, 1)"
-        grid_color = "rgba(100, 100, 100, 0.3)"
+        grid_color = "rgba(140, 140, 140, 0.4)"
+        xaxis_grid_color = "rgba(60, 60, 60, 0.3)"
+        zeroline_color = "rgba(80, 80, 80, 0.4)"
 
     # Use custom bg_color if provided, otherwise use theme default
     final_bg_color = bg_color if bg_color is not None else default_bg_color
@@ -129,7 +135,10 @@ def generate_rank_progression_chart(
         'title_text': "Gameweek",
         'dtick': 1,
         'title_font': {'color': text_color, 'size': 20},
-        'tickfont': {'color': tick_color, 'size': 16}
+        'tickfont': {'color': tick_color, 'size': 16},
+        'showgrid': True,
+        'gridcolor': xaxis_grid_color,
+        'zerolinecolor': zeroline_color
     }
 
     # If we have data, set the range from 1 to the latest gameweek
@@ -168,6 +177,7 @@ def generate_rank_progression_chart(
         'autorange': "reversed",
         'showgrid': True,
         'gridcolor': grid_color,
+        'zerolinecolor': zeroline_color,
         'title_font': {'color': text_color, 'size': 20},
         'tickfont': {'color': tick_color, 'size': 16}
     }

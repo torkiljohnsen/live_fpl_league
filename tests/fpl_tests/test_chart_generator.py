@@ -833,9 +833,9 @@ def test_dark_theme_has_light_text_colors():
     assert fig.layout.legend.font.color == 'rgba(200, 200, 200, 1)', \
         f"Legend should be light colored, got: {fig.layout.legend.font.color}"
 
-    # Check gridline color is lighter for dark theme
-    assert fig.layout.yaxis.gridcolor == 'rgba(100, 100, 100, 0.3)', \
-        f"Gridlines should be lighter for dark theme, got: {fig.layout.yaxis.gridcolor}"
+    # Check gridline color is brighter for dark theme (updated from rgba(100, 100, 100, 0.3))
+    assert fig.layout.yaxis.gridcolor == 'rgba(140, 140, 140, 0.4)', \
+        f"Gridlines should be brighter for dark theme visibility, got: {fig.layout.yaxis.gridcolor}"
 
 
 def test_large_font_sizes_for_tv_display():
@@ -926,3 +926,76 @@ def test_reduced_top_padding_with_balanced_margins():
         f"Right margin should be >= 40px, got: {fig.layout.margin.r}"
     assert fig.layout.margin.r <= 60, \
         f"Right margin should be <= 60px, got: {fig.layout.margin.r}"
+
+
+def test_gridline_brightness_for_dark_theme():
+    """Test that gridlines have appropriate brightness for dark theme visibility.
+
+    Dark theme requirements:
+    - X-axis vertical gridlines should be subtle (not too bright)
+    - Y-axis zero line should be subtle (not too bright)
+    - Y-axis horizontal gridlines (major ticks) should be visible (brighter than current)
+    """
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 3000000},
+                {'event': 3, 'overall_rank': 5000000},
+            ]
+        }
+    ]
+    total_players = 10000000
+
+    # Act
+    fig = generate_rank_progression_chart(
+        participants,
+        theme="dark",
+        total_players=total_players
+    )
+
+    # Assert - X-axis vertical gridlines should be subtle (reduced brightness)
+    # Check if X-axis has gridlines enabled and their color
+    if hasattr(fig.layout.xaxis, 'showgrid') and fig.layout.xaxis.showgrid:
+        xaxis_gridcolor = fig.layout.xaxis.gridcolor
+        # Should be more subtle than before, e.g., rgba(60, 60, 60, 0.3) or similar
+        assert xaxis_gridcolor is not None, "X-axis gridcolor should be set when gridlines are shown"
+        # Check that it's not too bright (e.g., not over rgba(80, 80, 80, ...))
+        if 'rgba' in xaxis_gridcolor.lower():
+            # Extract RGB values to check brightness
+            import re
+            match = re.match(r'rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)', xaxis_gridcolor)
+            if match:
+                r, g, b = int(match.group(1)), int(match.group(2)), int(match.group(3))
+                assert r <= 80 and g <= 80 and b <= 80, \
+                    f"X-axis gridlines should be subtle (RGB <= 80), got: {xaxis_gridcolor}"
+
+    # Assert - Y-axis zero line should be subtle
+    if hasattr(fig.layout.yaxis, 'zerolinecolor'):
+        yaxis_zerolinecolor = fig.layout.yaxis.zerolinecolor
+        if yaxis_zerolinecolor:
+            # Check that zero line is not too bright
+            if 'rgba' in yaxis_zerolinecolor.lower():
+                import re
+                match = re.match(r'rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)', yaxis_zerolinecolor)
+                if match:
+                    r, g, b = int(match.group(1)), int(match.group(2)), int(match.group(3))
+                    assert r <= 100 and g <= 100 and b <= 100, \
+                        f"Y-axis zero line should be subtle (RGB <= 100), got: {yaxis_zerolinecolor}"
+
+    # Assert - Y-axis horizontal gridlines should be visible (brighter than before)
+    yaxis_gridcolor = fig.layout.yaxis.gridcolor
+    assert yaxis_gridcolor is not None, "Y-axis gridcolor should be set"
+
+    # Y-axis gridlines should be brighter than the old rgba(100, 100, 100, 0.3)
+    # Target: at least rgba(120, 120, 120, ...) or higher
+    if 'rgba' in yaxis_gridcolor.lower():
+        import re
+        match = re.match(r'rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)', yaxis_gridcolor)
+        if match:
+            r, g, b = int(match.group(1)), int(match.group(2)), int(match.group(3))
+            assert r >= 120 and g >= 120 and b >= 120, \
+                f"Y-axis gridlines should be brighter for visibility (RGB >= 120), got: {yaxis_gridcolor}"

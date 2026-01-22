@@ -622,19 +622,19 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 38: Adjust gridline brightness for dark theme
-**Status**: todo
+**Status**: done
 
 **Task**: Visual refactor of gridlines for better dark theme appearance. Vertical gridlines (on X-axis gameweeks) are too bright. The horizontal zero line (Y-axis 0 mark) is too bright. The horizontal gridlines (2M, 4M, 6M, etc.) are too dark and barely visible. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test verifies X-axis vertical gridlines have reduced brightness for dark theme
-- [ ] Test verifies Y-axis zero line has reduced brightness for dark theme
-- [ ] Test verifies Y-axis horizontal gridlines (major ticks) have increased brightness for dark theme
-- [ ] X-axis vertical gridlines are more subtle/less prominent
-- [ ] Y-axis zero line is more subtle/less prominent
-- [ ] Y-axis horizontal gridlines at 2M, 4M, 6M, etc. are brighter and more visible
-- [ ] Manual test: Verify improved visual balance in browser
-- [ ] Test passes
+- [x] Test verifies X-axis vertical gridlines have reduced brightness for dark theme
+- [x] Test verifies Y-axis zero line has reduced brightness for dark theme
+- [x] Test verifies Y-axis horizontal gridlines (major ticks) have increased brightness for dark theme
+- [x] X-axis vertical gridlines are more subtle/less prominent
+- [x] Y-axis zero line is more subtle/less prominent
+- [x] Y-axis horizontal gridlines at 2M, 4M, 6M, etc. are brighter and more visible
+- [x] Manual test: Verify improved visual balance in browser
+- [x] Test passes
 
 ---
 
