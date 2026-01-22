@@ -53,7 +53,10 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 - Start at the first job with `status: todo`. 
 - Complete ONLY that job, then stop. The next agent will handle the next job.
 - Look at commit history in the current branch if you are unsure of what has been done in previous jobs.
-- After you finish a job, change status for that job to "done".
+- After you finish a job:
+  - verify that all acceptance criteria have been met
+  - check the checkbox for each acceptance criteria you deem to having been met
+  - change status for that job to "done"
 - Make a git commit of your work.
 
 **TDD Methodology**: For each job with code changes, follow Test-Driven Development:
@@ -69,8 +72,8 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 **Task**: Add plotly and kaleido to requirements.txt
 
 **Acceptance Criteria**:
-- [ ] `plotly>=5.0.0` added to requirements.txt
-- [ ] `kaleido>=0.2.0` added to requirements.txt
+- [x] `plotly>=5.0.0` added to requirements.txt
+- [x] `kaleido>=0.2.0` added to requirements.txt
 
 ---
 
@@ -80,14 +83,14 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 **Task**: Write a test that expects a chart generator function to create an empty Plotly figure with proper axis setup. The test should FAIL initially.
 
 **Acceptance Criteria**:
-- [ ] Test file created (e.g., `tests/fpl_tests/test_chart_generator.py`)
-- [ ] Test imports chart generator module (import will fail - that's expected)
-- [ ] Test calls function with empty participants list
-- [ ] Test asserts Y-axis is inverted (reversed=True)
-- [ ] Test asserts X-axis label is "Gameweek"
-- [ ] Test asserts Y-axis label is "Overall Rank"
-- [ ] Test asserts function returns a Plotly figure object
-- [ ] Running test produces FAILURE (function doesn't exist yet)
+- [x] Test file created (e.g., `tests/fpl_tests/test_chart_generator.py`)
+- [x] Test imports chart generator module (import will fail - that's expected)
+- [x] Test calls function with empty participants list
+- [x] Test asserts Y-axis is inverted (reversed=True)
+- [x] Test asserts X-axis label is "Gameweek"
+- [x] Test asserts Y-axis label is "Overall Rank"
+- [x] Test asserts function returns a Plotly figure object
+- [x] Running test produces FAILURE (function doesn't exist yet)
 
 ---
 
