@@ -707,3 +707,55 @@ def test_horizontal_gridlines_at_major_ticks():
     # Gridlines should be visible (not hidden)
     # In Plotly, if showgrid is True and gridcolor is set, gridlines will appear
     assert hasattr(fig.layout.yaxis, 'gridcolor'), "Y-axis should have gridcolor property"
+
+
+def test_enhanced_legend_format():
+    """Test that legend format shows: <league_rank>. <first_name> (<overall_rank_rounded>)."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'Torkil',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 345123, 'league_rank': 1},
+                {'event': 2, 'overall_rank': 340500, 'league_rank': 1},
+            ]
+        },
+        {
+            'player_first_name': 'Anders',
+            'league_rank': 2,
+            'history': [
+                {'event': 1, 'overall_rank': 450789, 'league_rank': 2},
+                {'event': 2, 'overall_rank': 442000, 'league_rank': 2},
+            ]
+        },
+        {
+            'player_first_name': 'Eirin',
+            'league_rank': 3,
+            'history': [
+                {'event': 1, 'overall_rank': 1234567, 'league_rank': 3},
+                {'event': 2, 'overall_rank': 1234000, 'league_rank': 3},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    # Check that we have 3 traces
+    assert len(fig.data) == 3, "Figure should have exactly three traces"
+
+    # Check that each trace has the correct legend label format
+    # Format: "<league_rank>. <first_name> (<overall_rank_rounded>)"
+    # Overall rank should be rounded: <1M use "k", >=1M use "M" with 2 decimals
+    expected_labels = [
+        "1. Torkil (341k)",   # Latest rank: 340500 → rounds to 341k
+        "2. Anders (442k)",   # Latest rank: 442000 → rounds to 442k
+        "3. Eirin (1.23M)"    # Latest rank: 1234000 → displays as 1.23M
+    ]
+
+    actual_labels = [trace.name for trace in fig.data]
+
+    assert actual_labels == expected_labels, \
+        f"Legend labels should be {expected_labels}, got: {actual_labels}"

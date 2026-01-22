@@ -78,12 +78,39 @@ def generate_rank_progression_chart(
         # Select color from palette (cycle through if more participants than colors)
         color = colors[i % len(colors)]
 
+        # Create legend label with enhanced format: "<league_rank>. <first_name> (<overall_rank_rounded>)"
+        first_name = participant.get('player_first_name', 'Unknown')
+        league_rank = participant.get('league_rank')
+
+        # Get the latest overall_rank from history and format appropriately
+        if history:
+            latest_overall_rank = history[-1].get('overall_rank', 0)
+            # Format based on magnitude: use "M" for millions, "k" for thousands
+            if latest_overall_rank >= 1000000:
+                # Display as millions with 2 decimal places
+                overall_rank_value = latest_overall_rank / 1000000
+                overall_rank_str = f"{overall_rank_value:.2f}M"
+            else:
+                # Display as thousands, rounded to nearest thousand
+                # Use int(x + 0.5) for consistent rounding (always up at .5)
+                overall_rank_rounded = int(latest_overall_rank / 1000 + 0.5)
+                overall_rank_str = f"{overall_rank_rounded}k"
+        else:
+            overall_rank_str = "0k"
+
+        # Format legend label
+        if league_rank is not None:
+            legend_label = f"{league_rank}. {first_name} ({overall_rank_str})"
+        else:
+            # Fallback if league_rank is not provided
+            legend_label = first_name
+
         # Add line trace for this participant
         fig.add_trace(go.Scatter(
             x=event_numbers,
             y=ranks,
             mode='lines+markers',
-            name=participant.get('player_first_name', 'Unknown'),
+            name=legend_label,
             line={'color': color}
         ))
 
