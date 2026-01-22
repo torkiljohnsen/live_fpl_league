@@ -111,16 +111,16 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 4: Write test for single participant line
-**Status**: todo
+**Status**: done
 
 **Task**: Write a failing test that expects chart to plot one participant's rank progression.
 
 **Acceptance Criteria**:
-- [ ] Test creates mock participant dict with `history` array containing `event` and `overall_rank` data
-- [ ] Test calls chart generator with one-participant list
-- [ ] Test asserts returned figure has exactly one trace (line)
-- [ ] Test asserts trace contains correct data points
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
+- [x] Test creates mock participant dict with `history` array containing `event` and `overall_rank` data
+- [x] Test calls chart generator with one-participant list
+- [x] Test asserts returned figure has exactly one trace (line)
+- [x] Test asserts trace contains correct data points
+- [x] Running test produces FAILURE (functionality doesn't exist yet)
 
 ---
 
