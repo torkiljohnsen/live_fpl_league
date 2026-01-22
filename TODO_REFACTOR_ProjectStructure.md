@@ -71,6 +71,27 @@ Target deliverable:
 2. Write minimal code to make the test pass
 3. Ensure test passes before marking job as done
 
+## Test Coverage Requirements Before Refactoring
+
+**Critical Principle**: Before refactoring any code, ensure comprehensive test coverage exists to validate that functionality remains unchanged.
+
+**Pre-Refactor Checklist**:
+- [ ] Identify all code paths in modules targeted for refactoring
+- [ ] Run `python -m pytest --cov=fpl --cov-report=term-missing` to check current coverage
+- [ ] Write tests for any uncovered code paths (aim for >90% coverage on refactored modules)
+- [ ] Verify all tests pass: `python -m pytest`
+- [ ] Document any areas that cannot be easily tested and why
+
+**During Refactor**:
+- [ ] Run tests frequently during refactoring
+- [ ] Commit working states incrementally
+- [ ] If tests fail, debug before continuing refactor
+
+**Post-Refactor Validation**:
+- [ ] All existing tests still pass
+- [ ] Code coverage percentage has not decreased
+- [ ] Linting passes: `python -m ruff check .`
+
 ---
 
 ### Job 1: Migrate dependencies to pyproject.toml

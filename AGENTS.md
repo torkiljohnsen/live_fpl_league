@@ -205,3 +205,25 @@ git add -A && git commit -m "Your message"
 # ✅ CORRECT - use forward slashes if you need cd
 cd /c/Dev/live_fpl_league && git add -A
 ```
+
+### Refactoring Best Practices
+
+**Test Coverage First**: Before refactoring any code, ensure comprehensive test coverage exists to validate that functionality remains unchanged after refactoring.
+
+**Pre-Refactor Steps**:
+1. Check current test coverage: `python -m pytest --cov=fpl --cov-report=term-missing`
+2. Write tests for uncovered code paths (aim for >90% coverage on modules being refactored)
+3. Verify all tests pass: `python -m pytest`
+4. Commit the improved test coverage before starting refactor
+
+**During Refactoring**:
+- Make small, incremental changes
+- Run tests after each logical change
+- Commit working states frequently
+- If tests fail, fix immediately before proceeding
+
+**Post-Refactor Validation**:
+- All existing tests still pass
+- Test coverage has not decreased
+- Linting passes: `python -m ruff check --fix .`
+- Code is more maintainable/readable than before
