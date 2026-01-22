@@ -573,6 +573,53 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 
 ---
 
+### Job 35: Fix chart background color
+**Status**: todo
+
+**Task**: Looking at /live_fpl_league/docs/ranking_progression_1639886-dev.html - Bug: Background shows as white. Should be RGBA(0,0,0,0.1) by default. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test verifies default background color is "rgba(0, 0, 0, 0.1)"
+- [ ] Test asserts background is not white/opaque by default
+- [ ] Identify and fix issue causing white background in rendered chart
+- [ ] Verify fix with generated HTML in browser
+- [ ] Background displays as intended RGBA(0,0,0,0.1) - black with 10% opacity
+- [ ] Test passes
+
+---
+
+### Job 36: Increase text size for TV display readability
+**Status**: todo
+
+**Task**: Chart will be shown on a big screen from a distance. Increase font sizes for legend, axis labels, and axis titles. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test asserts legend font size is increased (e.g., 16-20px)
+- [ ] Test asserts axis label font size is increased (e.g., 14-18px)
+- [ ] Test asserts axis title font size is increased (e.g., 18-24px)
+- [ ] Legend text is larger and readable from distance
+- [ ] Axis tick labels (numbers) are larger and readable from distance
+- [ ] Axis titles ("Gameweek", "Overall Rank") are larger and readable from distance
+- [ ] Manual test: Verify readability from 3+ meters on big screen
+- [ ] Test passes
+
+---
+
+### Job 37: Reduce top padding above chart
+**Status**: todo
+
+**Task**: Reduce top padding above the chart - currently has too much whitespace. Make padding consistent for all chart edges. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test asserts top margin/padding is reduced from current value
+- [ ] Test asserts all margins (top, bottom, left, right) are equal or balanced
+- [ ] Top padding is reduced to match other edges
+- [ ] Chart has consistent padding on all sides
+- [ ] Manual test: Verify improved layout in browser
+- [ ] Test passes
+
+---
+
 ## Design Decisions to Make
 
 1. **Chart file location**: Save to `docs/charts/` or embed inline in HTML?
