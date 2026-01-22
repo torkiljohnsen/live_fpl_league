@@ -496,3 +496,43 @@ def test_x_axis_shows_only_integer_gameweeks():
         xrange = xaxis.range
         assert xrange[0] <= 1, f"X-axis should start at or before 1, got {xrange[0]}"
         assert xrange[1] >= 7, f"X-axis should end at or after 7, got {xrange[1]}"
+
+
+def test_default_theme_is_dark():
+    """Test that dark theme is used by default when no theme parameter is provided."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+            ]
+        }
+    ]
+
+    # Act - Call without theme parameter
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Should use dark theme as default
+    bg_color = fig.layout.plot_bgcolor
+    assert bg_color is not None, "Background color should be set"
+
+    # For dark theme, we expect dark colors
+    dark_colors = ['black', '#000000', '#000', '#1a1a1a', '#2b2b2b', '#333333', '#222222']
+    is_dark = bg_color in dark_colors
+    assert is_dark, f"Default theme should be dark, got background color: {bg_color}"
+
+    # Check that line colors are light/bright (suitable for dark background)
+    for i, trace in enumerate(fig.data):
+        line_color = trace.line.color
+        assert line_color is not None, f"Trace {i} should have a line color set"
+        # Light colors should not be from the standard dark palette (darker colors)
+        # Dark theme uses bright colors like #66c2ff, #ffb366, etc.

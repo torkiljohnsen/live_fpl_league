@@ -16,7 +16,7 @@ DARK_THEME_COLORS = [
 
 def generate_rank_progression_chart(
     participants,
-    theme="light",
+    theme="dark",
     bg_color=None,
     width=1200,
     height=600,
@@ -28,7 +28,7 @@ def generate_rank_progression_chart(
     Args:
         participants: List of participant dictionaries, each containing 'history' array
                      with 'event' and 'overall_rank' fields.
-        theme: Color theme for the chart. Options: "light" (default), "dark".
+        theme: Color theme for the chart. Options: "light", "dark" (default).
         bg_color: Optional custom background color (hex string). Overrides theme default.
         width: Width of the chart in pixels (default: 1200).
         height: Height of the chart in pixels (default: 600).
@@ -51,8 +51,8 @@ def generate_rank_progression_chart(
         colors = DARK_THEME_COLORS
         default_bg_color = "#222222"
     else:
-        colors = LIGHT_THEME_COLORS  # Default to light colors
-        default_bg_color = "white"
+        colors = DARK_THEME_COLORS  # Default to dark colors
+        default_bg_color = "#222222"
 
     # Use custom bg_color if provided, otherwise use theme default
     final_bg_color = bg_color if bg_color is not None else default_bg_color

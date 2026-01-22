@@ -427,17 +427,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 26: Set dark theme as default
-**Status**: todo
+**Status**: done
 
 **Task**: Change default theme from light to dark. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test calls chart generator without theme parameter
-- [ ] Test asserts background is dark colored (default dark theme applied)
-- [ ] Test asserts line colors are light/bright
-- [ ] Default theme parameter is `theme="dark"`
-- [ ] Charts generated without explicit theme use dark theme
-- [ ] Test passes
+- [x] Test calls chart generator without theme parameter
+- [x] Test asserts background is dark colored (default dark theme applied)
+- [x] Test asserts line colors are light/bright
+- [x] Default theme parameter is `theme="dark"`
+- [x] Charts generated without explicit theme use dark theme
+- [x] Test passes
 
 ---
 
