@@ -14,19 +14,28 @@ DARK_THEME_COLORS = [
 ]
 
 
-def generate_rank_progression_chart(participants, theme="light", bg_color=None, width=1200, height=600):
+def generate_rank_progression_chart(
+    participants,
+    theme="light",
+    bg_color=None,
+    width=1200,
+    height=600,
+    output_format="figure"
+):
     """Generate a rank progression chart for FPL participants.
 
     Args:
         participants: List of participant dictionaries, each containing 'history' array
                      with 'event' and 'overall_rank' fields.
-        theme: Color theme for the chart. Options: "light" (default).
+        theme: Color theme for the chart. Options: "light" (default), "dark".
         bg_color: Optional custom background color (hex string). Overrides theme default.
         width: Width of the chart in pixels (default: 1200).
         height: Height of the chart in pixels (default: 600).
+        output_format: Output format. Options: "figure" (default), "svg".
 
     Returns:
-        A Plotly figure object with rank progression chart.
+        If output_format="figure": A Plotly figure object.
+        If output_format="svg": An SVG string representation of the chart.
     """
     # Create empty figure
     fig = go.Figure()
@@ -82,4 +91,8 @@ def generate_rank_progression_chart(participants, theme="light", bg_color=None, 
         showlegend=True
     )
 
-    return fig
+    # Return based on requested format
+    if output_format == "svg":
+        return fig.to_image(format="svg").decode('utf-8')
+    else:
+        return fig

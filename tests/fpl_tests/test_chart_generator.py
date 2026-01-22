@@ -318,3 +318,38 @@ def test_legend_with_participant_names():
     # We check that showlegend is not False
     legend_visible = fig.layout.showlegend
     assert legend_visible is not False, f"Legend should be visible, got showlegend={legend_visible}"
+
+
+def test_svg_export():
+    """Test that chart can be exported as SVG string."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'Alice',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+            ]
+        },
+        {
+            'player_first_name': 'Bob',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+                {'event': 3, 'overall_rank': 700000},
+            ]
+        }
+    ]
+
+    # Act
+    svg_string = generate_rank_progression_chart(participants, output_format="svg")
+
+    # Assert
+    assert isinstance(svg_string, str), "SVG export should return a string"
+    assert svg_string.startswith('<svg'), f"SVG string should start with '<svg' tag, got: {svg_string[:20]}"
+    assert '</svg>' in svg_string, "SVG string should contain closing '</svg>' tag"
+
+    # Verify it contains expected elements (basic sanity check)
+    assert 'Gameweek' in svg_string, "SVG should contain X-axis label 'Gameweek'"
+    assert 'Overall Rank' in svg_string, "SVG should contain Y-axis label 'Overall Rank'"

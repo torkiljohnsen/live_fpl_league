@@ -289,17 +289,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 17: Implement SVG export
-**Status**: todo
+**Status**: done
 
 **Task**: Add ability to export chart as SVG string. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test calls function with `format="svg"`
-- [ ] Test asserts returned value is a string starting with `<svg` tag
-- [ ] Function accepts `format="svg"` parameter
-- [ ] Function returns valid SVG string (not file path)
-- [ ] SVG can be embedded in HTML
-- [ ] Test passes
+- [x] Test calls function with `output_format="svg"`
+- [x] Test asserts returned value is a string starting with `<svg` tag
+- [x] Function accepts `output_format="svg"` parameter
+- [x] Function returns valid SVG string (not file path)
+- [x] SVG can be embedded in HTML
+- [x] Test passes
 
 ---
 
