@@ -33,7 +33,7 @@
             {% endif %}
             {% if in_form_players %}
             <dt>I toppform:</dt>
-            <dd>{{ in_form_players.text }}</dd>
+            <dd>{{ in_form_players.text | replace('▲', '<span class="green-arrow">▲</span>') | safe }}</dd>
             {% endif %}
         </dl>
     </div>

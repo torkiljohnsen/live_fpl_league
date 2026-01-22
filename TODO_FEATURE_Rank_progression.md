@@ -701,16 +701,16 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 43: Apply green style to arrow in "I toppform" stat
-**Status**: todo
+**Status**: done
 
 **Task**: The triangle/arrow (▲) in the "I toppform" stat text should have green styling applied. Find existing green CSS class and apply it. Write test first if applicable, then implement.
 
 **Acceptance Criteria**:
-- [ ] Locate existing green arrow CSS class in style.css
-- [ ] Apply green styling to arrow in "I toppform" stat
-- [ ] Arrow displays in green color
-- [ ] Manual test: Verify green arrow in browser
-- [ ] Test passes (if applicable)
+- [x] Locate existing green arrow CSS class in style.css
+- [x] Apply green styling to arrow in "I toppform" stat
+- [x] Arrow displays in green color
+- [x] Manual test: Verify green arrow in browser
+- [x] Test passes (if applicable)
 
 ---
 
