@@ -1,7 +1,8 @@
-import requests
 import json
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
+
+import requests
 
 
 class FPL_API:
@@ -23,7 +24,7 @@ class FPL_API:
         self.dev_mode = dev_mode
         self.sample_data_dir = sample_data_dir if sample_data_dir is not None else self.DEFAULT_SAMPLE_DATA_DIR
 
-    def _get(self, endpoint: str) -> Dict:
+    def _get(self, endpoint: str) -> dict:
         """
         Fetches data from the API or sample files, depending on dev_mode.
         :param endpoint: API endpoint string (e.g., '/entry/123/')
@@ -33,7 +34,7 @@ class FPL_API:
             return self._read_sample_or_generate(endpoint)
         return self._call_api(endpoint)
 
-    def _call_api(self, endpoint: str) -> Dict:
+    def _call_api(self, endpoint: str) -> dict:
         """
         Calls the FPL API and returns the JSON response.
         :param endpoint: API endpoint string
@@ -45,7 +46,7 @@ class FPL_API:
         r.raise_for_status()
         return r.json()
 
-    def _read_sample_or_generate(self, endpoint: str) -> Dict:
+    def _read_sample_or_generate(self, endpoint: str) -> dict:
         """
         Reads sample data from disk, or generates it by calling the API if not present.
         :param endpoint: API endpoint string
@@ -61,7 +62,7 @@ class FPL_API:
             print(f"[dev_mode] Sample read: {sample_path}")
         return json.loads(sample_path.read_text(encoding="utf-8"))
 
-    def get_league_standings(self, league_id: str) -> Dict:
+    def get_league_standings(self, league_id: str) -> dict:
         """
         Get league standings for a given league ID.
         :param league_id: The league ID
@@ -70,7 +71,7 @@ class FPL_API:
         endpoint = f"/leagues-classic/{league_id}/standings/"
         return self._get(endpoint)
 
-    def get_team(self, team_id: str) -> Dict:
+    def get_team(self, team_id: str) -> dict:
         """
         Get team data for a given team ID.
         :param team_id: The team ID
@@ -79,7 +80,7 @@ class FPL_API:
         endpoint = f"/entry/{team_id}/"
         return self._get(endpoint)
 
-    def get_team_history(self, team_id: str) -> Dict:
+    def get_team_history(self, team_id: str) -> dict:
         """
         Get team history for a given team ID.
         :param team_id: The team ID
@@ -88,7 +89,7 @@ class FPL_API:
         endpoint = f"/entry/{team_id}/history/"
         return self._get(endpoint)
 
-    def get_team_picks(self, team_id: str, event_id: str) -> Dict:
+    def get_team_picks(self, team_id: str, event_id: str) -> dict:
         """
         Get team picks for a given team ID and event ID.
         :param team_id: The team ID
@@ -98,7 +99,7 @@ class FPL_API:
         endpoint = f"/entry/{team_id}/event/{event_id}/picks/"
         return self._get(endpoint)
 
-    def get_bootstrap_static(self) -> Dict:
+    def get_bootstrap_static(self) -> dict:
         """
         Get the bootstrap static data (global FPL data).
         :return: Bootstrap static data as a dict

@@ -1,5 +1,6 @@
-from pathlib import Path
 import re
+from pathlib import Path
+
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 DOCS_DIR = Path("docs")

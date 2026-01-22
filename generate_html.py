@@ -1,24 +1,25 @@
 import argparse
 import sys
-from typing import List
-from fpl import LeagueTemplateRenderer, LeagueContext, FPL_API
+
+from fpl import FPL_API, LeagueContext, LeagueTemplateRenderer
 
 FPL_LEAGUE_ID = "1639886"
 ALL_OUTPUT = "ALL"
 TEMPLATE_MAP = {
     "standings": "league_standings",
     "gw_history": "league_gameweek_history",
+    "ranking_progression": "ranking_progression",
 }
 
-def parse_league_ids(raw_ids: List[str]) -> List[str]:
-    ids: List[str] = []
+def parse_league_ids(raw_ids: list[str]) -> list[str]:
+    ids: list[str] = []
     for item in raw_ids:
         # Support comma-separated lists as well as repeated flags
         parts = [p.strip() for p in item.split(',') if p.strip()]
         ids.extend(parts)
     # De-duplicate preserving order
     seen = set()
-    deduped: List[str] = []
+    deduped: list[str] = []
     for lid in ids:
         if lid not in seen:
             seen.add(lid)

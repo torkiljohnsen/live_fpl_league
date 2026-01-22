@@ -1,9 +1,11 @@
-import tempfile
-import shutil
 import json
+import shutil
+import tempfile
 from pathlib import Path
+from unittest.mock import MagicMock, patch
+
 import pytest
-from unittest.mock import patch, MagicMock
+
 from fpl import FPL_API
 
 

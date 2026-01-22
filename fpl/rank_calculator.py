@@ -1,11 +1,14 @@
+from typing import Any
+
 import pandas as pd
-from typing import Any, Dict, List, Union, cast
+
 from .participant import Participant
+
 
 class RankCalculator:
     @staticmethod
-    def apply_history_ranks(participants: List[Participant]) -> None:
-        rows: List[dict[str, Any]] = []
+    def apply_history_ranks(participants: list[Participant]) -> None:
+        rows: list[dict[str, Any]] = []
         for p in participants:
             for h in p.history:
                 row = dict(h)

@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+
 from fpl.fpl_league import FPLLeague
 
 

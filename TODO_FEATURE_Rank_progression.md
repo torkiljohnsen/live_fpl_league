@@ -368,31 +368,31 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 22: Wire up template rendering in generator script
-**Status**: todo
+**Status**: done
 
 **Task**: Update generate_html.py to support ranking_progression output. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test simulates CLI call with `-o ranking_progression`
-- [ ] Test asserts HTML file is generated in docs/ directory
-- [ ] Test asserts file contains expected chart content
-- [ ] CLI accepts `--output ranking_progression` option
-- [ ] Script renders ranking_progression template when requested
-- [ ] Generated HTML file saved to docs/ directory
-- [ ] Test passes
+- [x] Test simulates CLI call with `-o ranking_progression`
+- [x] Test asserts HTML file is generated in docs/ directory
+- [x] Test asserts file contains expected chart content
+- [x] CLI accepts `--output ranking_progression` option
+- [x] Script renders ranking_progression template when requested
+- [x] Generated HTML file saved to docs/ directory
+- [x] Test passes
 
 ---
 
 ### Job 23: Support ALL output option for rank progression
-**Status**: todo
+**Status**: done
 
 **Task**: Include ranking_progression in `-o ALL`. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test simulates CLI call with `-o ALL`
-- [ ] Test asserts ranking_progression HTML is created along with other views
-- [ ] `-o ALL` generates ranking_progression along with other views
-- [ ] Test passes
+- [x] Test simulates CLI call with `-o ALL`
+- [x] Test asserts ranking_progression HTML is created along with other views
+- [x] `-o ALL` generates ranking_progression along with other views
+- [x] Test passes
 
 ---
 

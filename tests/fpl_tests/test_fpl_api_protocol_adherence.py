@@ -1,5 +1,5 @@
-from fpl import FPLAPIProtocol
-from fpl import FPL_API
+from fpl import FPL_API, FPLAPIProtocol
+
 
 def test_fpl_api_protocol_adherence() -> None:
 	# This assignment will be checked by mypy for protocol adherence
