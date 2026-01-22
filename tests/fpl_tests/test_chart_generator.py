@@ -223,3 +223,31 @@ def test_dark_theme_colors():
                                '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
         assert line_color not in dark_palette_colors, \
             f"Trace {i} should not use dark palette color on dark background: {line_color}"
+
+
+def test_custom_background_color_override():
+    """Test that custom bg_color parameter overrides theme defaults."""
+    # Arrange
+    custom_color = "#ff0000"  # Red
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig_light = generate_rank_progression_chart(participants, theme="light", bg_color=custom_color)
+    fig_dark = generate_rank_progression_chart(participants, theme="dark", bg_color=custom_color)
+
+    # Assert
+    # Custom color should override light theme default
+    assert fig_light.layout.plot_bgcolor == custom_color, \
+        f"Custom bg_color should override light theme default, got {fig_light.layout.plot_bgcolor}"
+
+    # Custom color should override dark theme default
+    assert fig_dark.layout.plot_bgcolor == custom_color, \
+        f"Custom bg_color should override dark theme default, got {fig_dark.layout.plot_bgcolor}"

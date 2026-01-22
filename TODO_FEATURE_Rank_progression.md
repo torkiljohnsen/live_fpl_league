@@ -223,14 +223,14 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 12: Write test for custom background color override
-**Status**: todo
+**Status**: done
 
 **Task**: Write a failing test that expects custom background color to override theme defaults.
 
 **Acceptance Criteria**:
-- [ ] Test calls function with `bg_color` parameter (e.g., "#ff0000")
-- [ ] Test asserts background uses the custom color instead of theme default
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
+- [x] Test calls function with `bg_color` parameter (e.g., "#ff0000")
+- [x] Test asserts background uses the custom color instead of theme default
+- [x] Running test produces FAILURE (functionality doesn't exist yet)
 
 ---
 
