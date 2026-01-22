@@ -60,17 +60,22 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 - Complete ONLY that job, then stop. Stay within the job description. The next agent will handle the next job.
 - Look at commit history in the current branch if you are unsure of what has been done in previous jobs.
 - If making visual changes, verify them by looking at them in a browser.
-- If you wrote python code, veryfy that RUFF linting checks pass for the code you wrote. Do not test older parts of the codebase.
 - As you complete acceptance criterias, check their checkboxes
 - After you finish a job:
   - verify that all acceptance criteria have been met, and if so, change the status for the job to done and 
   - if all acceptance criteria haven't been met, continue working, revise your plan if needed
+- **Before committing**: ALWAYS run the FULL test suite and fix any failures:
+  1. Run ruff linting: `python -m ruff check --fix .`
+  2. Run ALL tests: `python -m pytest` (not just tests for current job)
+  3. If any test fails, fix the issue before committing
+  4. Only commit when all tests pass
 - Make a git commit of your work.
 
 **TDD Methodology**: For each job with code changes, follow Test-Driven Development:
 1. Write a failing test first
 2. Write minimal code to make the test pass
-3. Ensure test passes before marking job as done, unless the job requires you to make a failing test.
+3. Run the FULL test suite (`python -m pytest`) to ensure your changes don't break existing tests
+4. Ensure all tests pass before marking job as done, unless the job requires you to make a failing test.
 
 ---
 

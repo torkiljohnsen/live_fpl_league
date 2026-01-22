@@ -120,17 +120,22 @@ python -m ruff check --fix .
 
 ### Before Committing
 
-**ALWAYS run ruff before making a git commit**:
+**ALWAYS run the FULL test suite before making a git commit**:
 ```bash
 # 1. Run ruff and auto-fix
 python -m ruff check --fix .
 
-# 2. Run tests to ensure nothing broke
+# 2. Run ALL tests to ensure nothing broke (not just tests for current feature)
 python -m pytest
 
-# 3. Commit changes
+# 3. If ANY test fails, fix it before committing
+# Your changes may have introduced regressions in other parts of the codebase
+
+# 4. Only commit when all tests pass
 git add -A && git commit -m "Your message"
 ```
+
+**Critical**: Even if you only modified one module, run the entire test suite. Changes can have unexpected side effects on other components.
 
 ### Common Ruff Rules
 - **Import sorting** (I): Imports must be sorted alphabetically and grouped
