@@ -1,17 +1,21 @@
-from typing import Optional, Any, Dict
-from .fpl_league import FPLLeague
+from typing import Any
+
+from .chart_generator import generate_rank_progression_chart
 from .fpl_api import FPL_API
+from .fpl_league import FPLLeague
 
 LOGO_PATH = "assets/fpl_logo.svg"
 
 
 class LeagueContext:
-    league_data: Dict[str, Any]
-    league_join_code: Optional[str]
+    league_data: dict[str, Any]
+    league_join_code: str | None
     logo_svg: str
     dev_mode: bool
 
-    def __init__(self, league_data: Dict[str, Any], league_join_code: Optional[str], logo_svg: str, dev_mode: bool = False) -> None:
+    def __init__(
+        self, league_data: dict[str, Any], league_join_code: str | None, logo_svg: str, dev_mode: bool = False
+    ) -> None:
         self.league_data = league_data
         self.league_join_code = league_join_code
         self.logo_svg = logo_svg
@@ -22,7 +26,7 @@ class LeagueContext:
         cls,
         league_id: str,
         dev_mode: bool,
-        league_join_code: Optional[str],
+        league_join_code: str | None,
         fpl_api: Any = None,
     ) -> "LeagueContext":
         if fpl_api is None:
@@ -39,7 +43,7 @@ class LeagueContext:
 
     @staticmethod
     def _get_logo_svg() -> str:
-        with open(LOGO_PATH, "r", encoding="utf-8") as f:
+        with open(LOGO_PATH, encoding="utf-8") as f:
             return f.read()
 
     @property
@@ -67,14 +71,14 @@ class LeagueContext:
             hidden_event_ids = set(non_golden_sorted[:num_to_hide])
         return set(golden_event_ids), hidden_event_ids
 
-    def get_last_event(self) -> Optional[int]:
+    def get_last_event(self) -> int | None:
         """Get the last active event (current event or latest finished event)."""
         current_event_id = self.league_data.get("current_event_id")
         finished_event_ids = self.league_data.get("finished_event_ids", [])
         # Use current event if it exists, otherwise fall back to max finished event
         return current_event_id if current_event_id else (max(finished_event_ids) if finished_event_ids else None)
 
-    def as_dict(self) -> Dict[str, Any]:
+    def as_dict(self) -> dict[str, Any]:
         d = dict(self.league_data)
         d["league_join_code"] = self.league_join_code
         d["logo_svg"] = self.logo_svg
@@ -84,4 +88,25 @@ class LeagueContext:
         golden_event_ids, hidden_event_ids = self.get_gw_column_sets(event_ids, last_event=last_event)
         d["golden_event_ids"] = golden_event_ids
         d["hidden_event_ids"] = hidden_event_ids
+
+        # Generate rank progression chart
+        participants = d.get("participants", [])
+        if participants:
+            # Convert Participant objects to dictionaries for chart generator
+            participants_for_chart = []
+            for p in participants:
+                # Extract first name from manager_name
+                first_name = p.manager_name.split()[0] if p.manager_name else 'Unknown'
+                participants_for_chart.append({
+                    'player_first_name': first_name,
+                    'history': p.history
+                })
+
+            chart_svg = generate_rank_progression_chart(
+                participants=participants_for_chart,
+                theme="light",
+                output_format="svg"
+            )
+            d["rank_progression_chart"] = chart_svg
+
         return d

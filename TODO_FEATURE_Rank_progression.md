@@ -347,18 +347,18 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 21: Integrate chart into league context
-**Status**: todo
+**Status**: done
 
 **Task**: Add chart generation to league context. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test creates LeagueContext with sample data
-- [ ] Test asserts context dict includes chart data (SVG string or file path)
-- [ ] Test asserts chart is generated in dev mode
-- [ ] `LeagueContext.build()` calls chart generator
-- [ ] Generated chart is added to context dict
-- [ ] Works with sample data in dev mode
-- [ ] Test passes
+- [x] Test creates LeagueContext with sample data
+- [x] Test asserts context dict includes chart data (SVG string or file path)
+- [x] Test asserts chart is generated in dev mode
+- [x] `LeagueContext.build()` calls chart generator
+- [x] Generated chart is added to context dict
+- [x] Works with sample data in dev mode
+- [x] Test passes
 
 ---
 
