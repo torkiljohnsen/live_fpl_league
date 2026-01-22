@@ -175,15 +175,21 @@ DeprecationWarning: Support for the 'engine' argument is deprecated and will be 
 
 ## Agent Operational Guidelines
 
-### Running Tests
-The virtual environment **stays active** once activated in a terminal session. Check if it's active with `which python` (should show `venv/Scripts/python`).
+### Virtual Environment Activation
+**ALWAYS activate the virtual environment at the start of each new session** before running any Python commands:
 
-If not active, activate it once:
 ```bash
 source venv/Scripts/activate
 ```
 
-Then run tests:
+Verify activation with `which python` (should show `venv/Scripts/python`, not `/c/Python313/python`).
+
+The virtual environment **stays active** within a terminal session but must be re-activated when starting a new terminal or session.
+
+### Running Tests
+Once the virtual environment is active, check with `which python` (should show `venv/Scripts/python`).
+
+Run tests:
 ```bash
 # Run all tests
 python -m pytest
