@@ -95,18 +95,18 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 3: Implement basic chart generator to pass empty chart test
-**Status**: todo
+**Status**: done
 
 **Task**: Create `fpl/chart_generator.py` with minimal implementation to make Job 2 test pass.
 
 **Acceptance Criteria**:
-- [ ] File `fpl/chart_generator.py` exists
-- [ ] Function accepts empty participants list parameter
-- [ ] Returns valid Plotly figure object with configured axes
-- [ ] Y-axis is inverted (reversed=True)
-- [ ] X-axis labeled "Gameweek"
-- [ ] Y-axis labeled "Overall Rank"
-- [ ] Test from Job 2 now PASSES
+- [x] File `fpl/chart_generator.py` exists
+- [x] Function accepts empty participants list parameter
+- [x] Returns valid Plotly figure object with configured axes
+- [x] Y-axis is inverted (reversed=True)
+- [x] X-axis labeled "Gameweek"
+- [x] Y-axis labeled "Overall Rank"
+- [x] Test from Job 2 now PASSES
 
 ---
 
