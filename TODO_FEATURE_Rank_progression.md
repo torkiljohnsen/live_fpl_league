@@ -210,15 +210,15 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 11: Implement dark theme colors to pass test
-**Status**: todo
+**Status**: done
 
 **Task**: Add dark theme color configuration, making Job 10 test pass.
 
 **Acceptance Criteria**:
-- [ ] Function accepts `theme="dark"` parameter
-- [ ] Dark theme uses dark background color
-- [ ] Dark theme uses light/bright line colors for visibility
-- [ ] Test from Job 10 now PASSES
+- [x] Function accepts `theme="dark"` parameter
+- [x] Dark theme uses dark background color
+- [x] Dark theme uses light/bright line colors for visibility
+- [x] Test from Job 10 now PASSES
 
 ---
 

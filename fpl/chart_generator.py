@@ -8,6 +8,11 @@ LIGHT_THEME_COLORS = [
     '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'
 ]
 
+DARK_THEME_COLORS = [
+    '#66c2ff', '#ffb366', '#66ff8c', '#ff6b6b', '#d896ff',
+    '#c2a17a', '#ff99d8', '#b3b3b3', '#f2f266', '#66fff2'
+]
+
 
 def generate_rank_progression_chart(participants, theme="light"):
     """Generate a rank progression chart for FPL participants.
@@ -27,8 +32,11 @@ def generate_rank_progression_chart(participants, theme="light"):
     if theme == "light":
         colors = LIGHT_THEME_COLORS
         bg_color = "white"
+    elif theme == "dark":
+        colors = DARK_THEME_COLORS
+        bg_color = "#222222"
     else:
-        colors = LIGHT_THEME_COLORS  # Default to light colors for now
+        colors = LIGHT_THEME_COLORS  # Default to light colors
         bg_color = "white"
 
     # Add a line trace for each participant
