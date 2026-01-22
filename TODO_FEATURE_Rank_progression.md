@@ -52,6 +52,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 **Agent instructions**: 
 - Start at the first job with `status: todo`. 
 - Complete ONLY that job, then stop. The next agent will handle the next job.
+- Look at commit history in the current branch if you are unsure of what has been done in previous jobs.
 - After you finish a job, change status for that job to "done".
 - Make a git commit of your work.
 
