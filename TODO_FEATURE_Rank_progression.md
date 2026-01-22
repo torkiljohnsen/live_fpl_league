@@ -442,17 +442,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 27: Set Y-axis range from 1 to total_players
-**Status**: todo
+**Status**: done
 
 **Task**: Configure Y-axis range based on total_players from bootstrap-static. Might need to fetch updated numbers here from the live API. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test provides total_players value (e.g., 10000000)
-- [ ] Test asserts Y-axis range is [1, total_players]
-- [ ] Test asserts Y-axis is reversed (1 at top, total_players at bottom)
-- [ ] Function accepts `total_players` parameter from bootstrap-static API
-- [ ] Y-axis range is explicitly set from 1 (top) to total_players (bottom)
-- [ ] Test passes
+- [x] Test provides total_players value (e.g., 10000000)
+- [x] Test asserts Y-axis range is [1, total_players]
+- [x] Test asserts Y-axis is reversed (1 at top, total_players at bottom)
+- [x] Function accepts `total_players` parameter from bootstrap-static API
+- [x] Y-axis range is explicitly set from 1 (top) to total_players (bottom)
+- [x] Test passes
 
 ---
 

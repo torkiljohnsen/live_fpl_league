@@ -21,7 +21,8 @@ def generate_rank_progression_chart(
     width=1200,
     height=600,
     output_format="figure",
-    output_path=None
+    output_path=None,
+    total_players=None
 ):
     """Generate a rank progression chart for FPL participants.
 
@@ -34,6 +35,8 @@ def generate_rank_progression_chart(
         height: Height of the chart in pixels (default: 600).
         output_format: Output format. Options: "figure" (default), "svg", "png".
         output_path: File path for PNG output (required when output_format="png").
+        total_players: Total number of FPL players (from bootstrap-static). If provided,
+                      sets Y-axis range from 1 to total_players.
 
     Returns:
         If output_format="figure": A Plotly figure object.
@@ -95,10 +98,16 @@ def generate_rank_progression_chart(
     fig.update_xaxes(**xaxis_config)
 
     # Configure Y-axis (inverted so lower rank appears at top)
-    fig.update_yaxes(
-        title_text="Overall Rank",
-        autorange="reversed"
-    )
+    yaxis_config = {
+        'title_text': "Overall Rank",
+        'autorange': "reversed"
+    }
+
+    # If total_players is provided, set explicit range from 1 to total_players
+    if total_players is not None:
+        yaxis_config['range'] = [total_players, 1]
+
+    fig.update_yaxes(**yaxis_config)
 
     # Set background color
     fig.update_layout(

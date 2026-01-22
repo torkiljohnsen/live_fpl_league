@@ -536,3 +536,44 @@ def test_default_theme_is_dark():
         assert line_color is not None, f"Trace {i} should have a line color set"
         # Light colors should not be from the standard dark palette (darker colors)
         # Dark theme uses bright colors like #66c2ff, #ffb366, etc.
+
+
+def test_y_axis_range_set_from_total_players():
+    """Test that Y-axis range is set from 1 to total_players."""
+    # Arrange
+    total_players = 10000000
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+                {'event': 3, 'overall_rank': 700000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants, total_players=total_players)
+
+    # Assert
+    # Y-axis should be explicitly set from 1 (top) to total_players (bottom)
+    assert fig.layout.yaxis.range is not None, "Y-axis range should be explicitly set"
+
+    # The range is reversed (autorange='reversed'), so it should be [total_players, 1]
+    # which displays 1 at the top and total_players at the bottom
+    y_range = fig.layout.yaxis.range
+    assert len(y_range) == 2, "Y-axis range should have two values [start, end]"
+    assert y_range[0] == total_players, f"Y-axis should start at total_players ({total_players})"
+    assert y_range[1] == 1, "Y-axis should end at 1"
+
+    # Verify Y-axis is still reversed
+    assert fig.layout.yaxis.autorange == "reversed", "Y-axis should still be reversed"
