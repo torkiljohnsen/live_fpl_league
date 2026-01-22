@@ -23,4 +23,11 @@
         {% endif %}
     </div>
     
+    {% if highest_team_value %}
+    <div class="stats-container">
+        <h2>Stats:</h2>
+        <p><strong>Highest team value:</strong> {{ highest_team_value }}</p>
+    </div>
+    {% endif %}
+    
 {% endblock %}

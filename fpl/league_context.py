@@ -103,6 +103,7 @@ class LeagueContext:
                 participants_for_chart.append({
                     'player_first_name': first_name,
                     'league_rank': league_rank,
+                    'team_name': p.get("team_name", ""),
                     'history': p.get("history", [])
                 })
 
@@ -112,5 +113,9 @@ class LeagueContext:
                 output_format="svg"
             )
             d["rank_progression_chart"] = chart_svg
+
+            # Calculate statistics
+            from .statistics import format_highest_team_value
+            d["highest_team_value"] = format_highest_team_value(participants_for_chart)
 
         return d

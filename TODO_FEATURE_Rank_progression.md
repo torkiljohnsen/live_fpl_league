@@ -539,15 +539,15 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 **Task**: Below the graph, add a statistics section with "Highest team value" statistic. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test creates participants with history containing bank and value fields
-- [ ] Test calculates team_value = (bank + value) / 10
-- [ ] Test asserts highest team value is correctly identified
-- [ ] Test asserts format is "Team name (Player name) - £XXX.XM"
-- [ ] Template displays "Stats:" headline
-- [ ] First statistic shows: "Highest team value: <team_name> (<player_name>) - £<value>M"
-- [ ] Team value is calculated from latest event: (bank + value) / 10
-- [ ] Value is displayed in millions with one decimal (e.g., £100.5M)
-- [ ] Test passes
+- [x] Test creates participants with history containing bank and value fields
+- [x] Test calculates team_value = value / 10
+- [x] Test asserts highest team value is correctly identified
+- [x] Test asserts format is "Team name (Player name) - £XXX.XM"
+- [x] Template displays "Stats:" headline
+- [x] First statistic shows: "Highest team value: <team_name> (<player_name>) - £<value>M"
+- [x] Team value is calculated from latest event: value / 10
+- [x] Value is displayed in millions with one decimal (e.g., £100.5M)
+- [x] Test passes
 
 ---
 
