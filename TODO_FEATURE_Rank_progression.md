@@ -258,126 +258,82 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 
 ---
 
-### Job 15: Implement configurable chart dimensions to pass test
+### Job 15: Implement configurable chart dimensions
 **Status**: todo
 
-**Task**: Add width and height parameters, making Job 14 test pass.
+**Task**: Add width and height parameters. Write test first, then implement.
 
 **Acceptance Criteria**:
+- [ ] Test calls function with `width=800, height=400`
+- [ ] Test asserts generated chart has those dimensions
 - [ ] Function accepts `width` parameter (default 1200)
 - [ ] Function accepts `height` parameter (default 600)
 - [ ] Generated chart uses specified dimensions
-- [ ] Test from Job 14 now PASSES
+- [ ] Test passes
 
 ---
 
-### Job 16: Write test for legend with participant names
+### Job 16: Implement legend with participant names
 **Status**: todo
 
-**Task**: Write a failing test that expects legend to show participant first names.
+**Task**: Add legend showing participant first names. Write test first, then implement.
 
 **Acceptance Criteria**:
 - [ ] Test creates participants with known first names
 - [ ] Test asserts each trace has correct name label
 - [ ] Test asserts legend is visible
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
-
----
-
-### Job 17: Implement legend with participant names to pass test
-**Status**: todo
-
-**Task**: Add legend showing first name for each participant line, making Job 16 test pass.
-
-**Acceptance Criteria**:
 - [ ] Each line in chart has label with participant's first name
 - [ ] Legend is visible and readable
-- [ ] Test from Job 16 now PASSES
+- [ ] Test passes
 
 ---
 
-### Job 18: Write test for SVG export
+### Job 17: Implement SVG export
 **Status**: todo
 
-**Task**: Write a failing test that expects chart to export as SVG string.
+**Task**: Add ability to export chart as SVG string. Write test first, then implement.
 
 **Acceptance Criteria**:
 - [ ] Test calls function with `format="svg"`
-- [ ] Test asserts returned value is a string
-- [ ] Test asserts string starts with `<svg` tag
-- [ ] Test asserts SVG contains valid XML structure
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
-
----
-
-### Job 19: Implement SVG export to pass test
-**Status**: todo
-
-**Task**: Add ability to export chart as SVG string, making Job 18 test pass.
-
-**Acceptance Criteria**:
+- [ ] Test asserts returned value is a string starting with `<svg` tag
 - [ ] Function accepts `format="svg"` parameter
-- [ ] Function returns SVG string (not file path)
-- [ ] SVG is valid and can be embedded in HTML
-- [ ] Test from Job 18 now PASSES
+- [ ] Function returns valid SVG string (not file path)
+- [ ] SVG can be embedded in HTML
+- [ ] Test passes
 
 ---
 
-### Job 20: Write test for PNG export
+### Job 18: Implement PNG export
 **Status**: todo
 
-**Task**: Write a failing test that expects chart to export as PNG file.
+**Task**: Add ability to export chart as PNG file. Write test first, then implement.
 
 **Acceptance Criteria**:
 - [ ] Test calls function with `format="png"` and output path
-- [ ] Test asserts PNG file is created at expected location
-- [ ] Test asserts file is valid image (can check file header)
-- [ ] Test cleans up created file after assertion
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
-
----
-
-### Job 21: Implement PNG export to pass test
-**Status**: todo
-
-**Task**: Add ability to export chart as PNG file, making Job 20 test pass.
-
-**Acceptance Criteria**:
-- [ ] Function accepts `format="png"` parameter
-- [ ] Function accepts output path parameter
+- [ ] Test asserts PNG file is created and is valid image
+- [ ] Test cleans up created file
+- [ ] Function accepts `format="png"` parameter and output path
 - [ ] PNG file is created at specified location
-- [ ] Test from Job 20 now PASSES
+- [ ] Test passes
 
 ---
 
-### Job 22: Write test for incomplete participant history
+### Job 19: Handle incomplete participant history
 **Status**: todo
 
-**Task**: Write a failing test for participants who joined mid-season.
+**Task**: Support participants who joined mid-season. Write test first, then implement.
 
 **Acceptance Criteria**:
 - [ ] Test creates participant with history starting at GW5 (missing GW 1-4)
 - [ ] Test asserts chart renders without error
-- [ ] Test asserts line starts from GW5 (not GW1)
-- [ ] Test asserts no gaps or breaks in line
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
-
----
-
-### Job 23: Implement handling for incomplete history to pass test
-**Status**: todo
-
-**Task**: Handle participants with incomplete history, making Job 22 test pass.
-
-**Acceptance Criteria**:
+- [ ] Test asserts line starts from GW5 with no gaps
 - [ ] Chart renders without error when participant history is incomplete
 - [ ] Line starts from first available gameweek for that participant
-- [ ] No gaps or breaks in line rendering
-- [ ] Test from Job 22 now PASSES
+- [ ] Test passes
 
 ---
 
-### Job 24: Create ranking progression template
+### Job 20: Create ranking progression template
 **Status**: todo
 
 **Task**: Create `templates/ranking_progression.html` that displays the chart.
@@ -390,103 +346,63 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 
 ---
 
-### Job 25: Write test for chart integration in league context
+### Job 21: Integrate chart into league context
 **Status**: todo
 
-**Task**: Write a failing test that expects LeagueContext to include chart data.
+**Task**: Add chart generation to league context. Write test first, then implement.
 
 **Acceptance Criteria**:
 - [ ] Test creates LeagueContext with sample data
 - [ ] Test asserts context dict includes chart data (SVG string or file path)
 - [ ] Test asserts chart is generated in dev mode
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
-
----
-
-### Job 26: Integrate chart into league context to pass test
-**Status**: todo
-
-**Task**: Add chart generation to `fpl/league_context.py`, making Job 25 test pass.
-
-**Acceptance Criteria**:
 - [ ] `LeagueContext.build()` calls chart generator
 - [ ] Generated chart is added to context dict
 - [ ] Works with sample data in dev mode
-- [ ] Test from Job 25 now PASSES
+- [ ] Test passes
 
 ---
 
-### Job 27: Write test for generator script supporting ranking_progression
+### Job 22: Wire up template rendering in generator script
 **Status**: todo
 
-**Task**: Write a failing test that expects generate_html.py to support ranking_progression output.
+**Task**: Update generate_html.py to support ranking_progression output. Write test first, then implement.
 
 **Acceptance Criteria**:
 - [ ] Test simulates CLI call with `-o ranking_progression`
 - [ ] Test asserts HTML file is generated in docs/ directory
 - [ ] Test asserts file contains expected chart content
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
-
----
-
-### Job 28: Wire up template rendering in generator script to pass test
-**Status**: todo
-
-**Task**: Update `generate_html.py` to support ranking_progression output, making Job 27 test pass.
-
-**Acceptance Criteria**:
 - [ ] CLI accepts `--output ranking_progression` option
 - [ ] Script renders ranking_progression template when requested
 - [ ] Generated HTML file saved to docs/ directory
-- [ ] Test from Job 27 now PASSES
+- [ ] Test passes
 
 ---
 
-### Job 29: Write test for ALL output including rank progression
+### Job 23: Support ALL output option for rank progression
 **Status**: todo
 
-**Task**: Write a failing test that expects `-o ALL` to include ranking_progression.
+**Task**: Include ranking_progression in `-o ALL`. Write test first, then implement.
 
 **Acceptance Criteria**:
 - [ ] Test simulates CLI call with `-o ALL`
 - [ ] Test asserts ranking_progression HTML is created along with other views
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
-
----
-
-### Job 30: Support ALL output option for rank progression to pass test
-**Status**: todo
-
-**Task**: Include ranking_progression when `--output ALL` is specified, making Job 29 test pass.
-
-**Acceptance Criteria**:
 - [ ] `-o ALL` generates ranking_progression along with other views
-- [ ] Test from Job 29 now PASSES
+- [ ] Test passes
 
 ---
 
-### Job 31: Write test for index page with rank progression links
+### Job 24: Add rank progression to index page
 **Status**: todo
 
-**Task**: Write a failing test that expects index page to link to rank progression pages.
+**Task**: Update generate_index.py to link to rank progression pages. Write test first, then implement.
 
 **Acceptance Criteria**:
 - [ ] Test generates index with ranking_progression pages present
 - [ ] Test asserts index HTML includes ranking_progression links
 - [ ] Test asserts links are correctly formatted
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
-
----
-
-### Job 32: Add rank progression to index page to pass test
-**Status**: todo
-
-**Task**: Update `generate_index.py` to link to rank progression pages, making Job 31 test pass.
-
-**Acceptance Criteria**:
 - [ ] Index page lists ranking_progression HTML files for each league
 - [ ] Links are correctly formatted and clickable
-- [ ] Test from Job 31 now PASSES
+- [ ] Test passes
 
 ## Design Decisions to Make
 
