@@ -260,6 +260,54 @@ def test_custom_background_color_override():
     assert fig_dark.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
 
 
+def test_sinkaberg_theme_colors():
+    """Test that Sinkaberg theme uses corporate color palette."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'league_rank': 2,
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants, theme="sinkaberg")
+
+    # Assert
+    # Check that background is white (corporate clean look)
+    assert fig.layout.paper_bgcolor == '#FFFFFF', \
+        f"Sinkaberg theme should use white background, got: {fig.layout.paper_bgcolor}"
+
+    # Check that plot area is transparent
+    assert fig.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
+
+    # Check that line colors are from Sinkaberg palette
+    sinkaberg_colors = ['#3E7DEE', '#F06848', '#023493', '#1f295C', '#FAD2C8', '#00143C', '#E2ECFC']
+    for i, trace in enumerate(fig.data):
+        line_color = trace.line.color.upper()  # Normalize to uppercase for comparison
+        assert line_color in [c.upper() for c in sinkaberg_colors], \
+            f"Trace {i} should use Sinkaberg color palette, got: {line_color}"
+
+    # Verify that first two lines use the primary brand colors
+    assert fig.data[0].line.color.upper() == '#3E7DEE', \
+        "First line should use Lys blå (primary brand color)"
+    assert fig.data[1].line.color.upper() == '#F06848', \
+        "Second line should use Lakserød (accent color)"
+
+
+
 def test_configurable_chart_dimensions():
     """Test that width and height parameters control chart size."""
     # Arrange

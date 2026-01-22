@@ -12,6 +12,7 @@ Add new knowledge sparingly, and do so in a consise way.
 
 - **[`fpl/AGENTS.md`](fpl/AGENTS.md)** - Detailed documentation for the `fpl/` module (data collection, processing, context building)
 - **[`templates/AGENTS.md`](templates/AGENTS.md)** - Template variables and structure reference
+- **[`docs/CHART_THEMES.md`](docs/CHART_THEMES.md)** - Chart theme customization guide (dark, light, Sinkaberg corporate)
 
 ## Architecture Flow
 

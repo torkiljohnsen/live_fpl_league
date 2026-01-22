@@ -27,13 +27,13 @@
     <div class="stats-container">
         <h2>Stats:</h2>
         <dl class="stats-list">
+            {% if in_form_players %}
+            <dt>Klatreren:</dt>
+            <dd>{{ in_form_players.text | replace('▲', '<span class="green-arrow">▲</span>') | safe }}</dd>
+            {% endif %}
             {% if highest_team_value %}
             <dt>Høyeste lagverdi:</dt>
             <dd>{{ highest_team_value }}</dd>
-            {% endif %}
-            {% if in_form_players %}
-            <dt>I toppform:</dt>
-            <dd>{{ in_form_players.text | replace('▲', '<span class="green-arrow">▲</span>') | safe }}</dd>
             {% endif %}
         </dl>
     </div>

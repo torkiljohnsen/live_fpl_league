@@ -13,6 +13,48 @@ DARK_THEME_COLORS = [
     '#c2a17a', '#ff99d8', '#b3b3b3', '#f2f266', '#66fff2'
 ]
 
+# Sinkaberg corporate color palette
+SINKABERG_COLORS = [
+    '#3E7DEE',  # Lys blå (Light blue) - Primary brand color
+    '#F06848',  # Lakserød (Salmon red) - Accent/contrast
+    '#023493',  # Mellomblå (Medium blue)
+    '#1f295C',  # Mørk blå (Dark blue)
+    '#FAD2C8',  # Dus lakserosa (Muted salmon pink)
+    '#00143C',  # Dyp blå (Deep blue)
+    '#E2ECFC',  # Dus blå (Muted blue) - Light contrast
+]
+
+# Theme configurations: maps theme name to color settings
+THEME_CONFIGS = {
+    'light': {
+        'colors': LIGHT_THEME_COLORS,
+        'bg_color': 'white',
+        'text_color': 'rgba(42, 63, 95, 1)',
+        'tick_color': 'rgba(42, 63, 95, 1)',
+        'grid_color': 'rgba(128, 128, 128, 0.3)',
+        'xaxis_grid_color': 'rgba(128, 128, 128, 0.3)',
+        'zeroline_color': 'rgba(128, 128, 128, 0.5)',
+    },
+    'dark': {
+        'colors': DARK_THEME_COLORS,
+        'bg_color': 'rgba(0, 0, 0, 0.3)',
+        'text_color': 'rgba(200, 200, 200, 1)',
+        'tick_color': 'rgba(180, 180, 180, 1)',
+        'grid_color': 'rgba(140, 140, 140, 0.4)',
+        'xaxis_grid_color': 'rgba(60, 60, 60, 0.3)',
+        'zeroline_color': 'rgba(80, 80, 80, 0.4)',
+    },
+    'sinkaberg': {
+        'colors': SINKABERG_COLORS,
+        'bg_color': '#FFFFFF',  # White background for clean corporate look
+        'text_color': '#00143C',  # Dyp blå (Deep blue) for text
+        'tick_color': '#1f295C',  # Mørk blå (Dark blue) for axis numbers
+        'grid_color': 'rgba(226, 236, 252, 0.6)',  # Dus blå with transparency
+        'xaxis_grid_color': 'rgba(226, 236, 252, 0.4)',  # Lighter vertical gridlines
+        'zeroline_color': 'rgba(2, 52, 147, 0.3)',  # Mellomblå with transparency
+    }
+}
+
 
 def generate_rank_progression_chart(
     participants,
@@ -30,7 +72,7 @@ def generate_rank_progression_chart(
     Args:
         participants: List of participant dictionaries, each containing 'history' array
                      with 'event' and 'overall_rank' fields.
-        theme: Color theme for the chart. Options: "light", "dark" (default).
+        theme: Color theme for the chart. Options: "light", "dark" (default), "sinkaberg".
         bg_color: Optional custom background color (hex string). Overrides theme default.
         width: Width of the chart in pixels (default: 1200).
         height: Height of the chart in pixels (default: 600).
@@ -49,31 +91,17 @@ def generate_rank_progression_chart(
     # Create empty figure
     fig = go.Figure()
 
-    # Set color palette based on theme
-    if theme == "light":
-        colors = LIGHT_THEME_COLORS
-        default_bg_color = "white"
-        text_color = "rgba(42, 63, 95, 1)"  # Dark text for light theme
-        tick_color = "rgba(42, 63, 95, 1)"  # Dark text for axis numbers
-        grid_color = "rgba(128, 128, 128, 0.3)"
-        xaxis_grid_color = "rgba(128, 128, 128, 0.3)"  # X-axis vertical gridlines
-        zeroline_color = "rgba(128, 128, 128, 0.5)"  # Zero line
-    elif theme == "dark":
-        colors = DARK_THEME_COLORS
-        default_bg_color = "rgba(0, 0, 0, 0.3)"
-        text_color = "rgba(200, 200, 200, 1)"  # Light text for dark theme
-        tick_color = "rgba(180, 180, 180, 1)"  # Slightly dimmer for axis numbers
-        grid_color = "rgba(140, 140, 140, 0.4)"  # Brighter Y-axis gridlines for visibility
-        xaxis_grid_color = "rgba(60, 60, 60, 0.3)"  # Subtle X-axis vertical gridlines
-        zeroline_color = "rgba(80, 80, 80, 0.4)"  # Subtle zero line
-    else:
-        colors = DARK_THEME_COLORS  # Default to dark colors
-        default_bg_color = "rgba(0, 0, 0, 0.3)"
-        text_color = "rgba(200, 200, 200, 1)"
-        tick_color = "rgba(180, 180, 180, 1)"
-        grid_color = "rgba(140, 140, 140, 0.4)"
-        xaxis_grid_color = "rgba(60, 60, 60, 0.3)"
-        zeroline_color = "rgba(80, 80, 80, 0.4)"
+    # Get theme configuration or default to dark theme
+    theme_config = THEME_CONFIGS.get(theme, THEME_CONFIGS['dark'])
+
+    # Extract theme settings
+    colors = theme_config['colors']
+    default_bg_color = theme_config['bg_color']
+    text_color = theme_config['text_color']
+    tick_color = theme_config['tick_color']
+    grid_color = theme_config['grid_color']
+    xaxis_grid_color = theme_config['xaxis_grid_color']
+    zeroline_color = theme_config['zeroline_color']
 
     # Use custom bg_color if provided, otherwise use theme default
     final_bg_color = bg_color if bg_color is not None else default_bg_color
