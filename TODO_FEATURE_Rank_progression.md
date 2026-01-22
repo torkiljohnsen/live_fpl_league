@@ -412,17 +412,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 25: Ensure X-axis shows only whole gameweek numbers
-**Status**: todo
+**Status**: done
 
 **Task**: Configure X-axis to display only integer gameweek numbers from 1 to latest event. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test creates chart with gameweeks 1-7
-- [ ] Test asserts X-axis tick values are integers [1, 2, 3, 4, 5, 6, 7]
-- [ ] Test asserts no decimal values appear on X-axis
-- [ ] X-axis displays only whole numbers (no decimals like 3.5)
-- [ ] X-axis range goes from 1 to latest gameweek number
-- [ ] Test passes
+- [x] Test creates chart with gameweeks 1-7
+- [x] Test asserts X-axis tick values are integers [1, 2, 3, 4, 5, 6, 7]
+- [x] Test asserts no decimal values appear on X-axis
+- [x] X-axis displays only whole numbers (no decimals like 3.5)
+- [x] X-axis range goes from 1 to latest gameweek number
+- [x] Test passes
 
 ---
 

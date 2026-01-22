@@ -58,12 +58,16 @@ def generate_rank_progression_chart(
     final_bg_color = bg_color if bg_color is not None else default_bg_color
 
     # Add a line trace for each participant
+    all_events = []
     for i, participant in enumerate(participants):
         history = participant.get('history', [])
 
         # Extract event numbers and overall ranks
         events = [entry['event'] for entry in history]
         ranks = [entry['overall_rank'] for entry in history]
+
+        # Track all event numbers to determine X-axis range
+        all_events.extend(events)
 
         # Select color from palette (cycle through if more participants than colors)
         color = colors[i % len(colors)]
@@ -77,8 +81,18 @@ def generate_rank_progression_chart(
             line={'color': color}
         ))
 
-    # Configure X-axis
-    fig.update_xaxes(title_text="Gameweek")
+    # Configure X-axis to show only integer gameweek numbers
+    # Set dtick=1 to ensure tick marks appear at every whole number
+    xaxis_config = {'title_text': "Gameweek", 'dtick': 1}
+
+    # If we have data, set the range from 1 to the latest gameweek
+    if all_events:
+        min_event = min(all_events)
+        max_event = max(all_events)
+        # Add small padding to make sure all data points are visible
+        xaxis_config['range'] = [min_event - 0.5, max_event + 0.5]
+
+    fig.update_xaxes(**xaxis_config)
 
     # Configure Y-axis (inverted so lower rank appears at top)
     fig.update_yaxes(

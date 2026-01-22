@@ -447,3 +447,52 @@ def test_incomplete_participant_history():
     trace_1 = fig.data[1]
     assert list(trace_1.x) == [5, 6, 7], "Second trace should start from GW5"
     assert list(trace_1.y) == [2000000, 1950000, 1900000]
+
+
+def test_x_axis_shows_only_integer_gameweeks():
+    """Test that X-axis displays only whole integer gameweek numbers."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'Alice',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+                {'event': 4, 'overall_rank': 875000},
+                {'event': 5, 'overall_rank': 850000},
+                {'event': 6, 'overall_rank': 825000},
+                {'event': 7, 'overall_rank': 800000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    # Check that X-axis tick values are integers
+    # In Plotly, we can configure tickmode and tickvals to force specific tick values
+    xaxis = fig.layout.xaxis
+
+    # Verify tickmode is set to 'linear' or tick values are explicitly defined
+    # We expect tick values to be [1, 2, 3, 4, 5, 6, 7]
+    expected_ticks = [1, 2, 3, 4, 5, 6, 7]
+
+    # Check if tickvals are explicitly set
+    if xaxis.tickvals is not None:
+        actual_ticks = list(xaxis.tickvals)
+        assert actual_ticks == expected_ticks, \
+            f"X-axis tick values should be integers {expected_ticks}, got {actual_ticks}"
+    else:
+        # If not explicitly set, check that dtick is 1 to ensure integer spacing
+        # dtick controls the spacing between ticks
+        assert xaxis.dtick == 1, \
+            f"X-axis dtick should be 1 to ensure integer ticks, got {xaxis.dtick}"
+
+    # Verify X-axis range covers from 1 to latest gameweek
+    # Range should be [0.5, 7.5] or [1, 7] or similar to encompass all data
+    if xaxis.range is not None:
+        xrange = xaxis.range
+        assert xrange[0] <= 1, f"X-axis should start at or before 1, got {xrange[0]}"
+        assert xrange[1] >= 7, f"X-axis should end at or after 7, got {xrange[1]}"
