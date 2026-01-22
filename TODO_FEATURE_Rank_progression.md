@@ -65,10 +65,11 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
   - verify that all acceptance criteria have been met, and if so, change the status for the job to done and 
   - if all acceptance criteria haven't been met, continue working, revise your plan if needed
 - **Before committing**: ALWAYS run the FULL test suite and fix any failures:
-  1. Run ruff linting: `python -m ruff check --fix .`
+  1. Run ruff linting on changed files only: `python -m ruff check --fix <changed_files>`
   2. Run ALL tests: `python -m pytest` (not just tests for current job)
   3. If any test fails, fix the issue before committing
-  4. Only commit when all tests pass
+  4. Mark the job status as done in the TODO file
+  5. Only commit when all tests pass
 - Make a git commit of your work.
 
 **TDD Methodology**: For each job with code changes, follow Test-Driven Development:
