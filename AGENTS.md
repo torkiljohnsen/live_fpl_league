@@ -91,6 +91,60 @@ python generate_html.py -l LEAGUE_ID [--dev] [-o standings|gw_history|ALL]
 ## Testing
 Tests in [`tests/fpl_tests/`](tests/fpl_tests/) use `DummyAPI` with sample data from [`tests/fpl_tests/data_samples/`](tests/fpl_tests/data_samples/)
 
+## Code Quality & Linting
+
+This project uses **ruff** for fast Python linting and code formatting. Configuration is in [`pyproject.toml`](pyproject.toml).
+
+### Running Ruff
+
+**Before writing code**, check existing code style:
+```bash
+# Check specific file
+python -m ruff check fpl/chart_generator.py
+
+# Check entire directory
+python -m ruff check fpl/
+
+# Check all Python files
+python -m ruff check .
+```
+
+**Auto-fix issues** where possible:
+```bash
+# Fix specific file
+python -m ruff check --fix tests/fpl_tests/test_chart_generator.py
+
+# Fix all files
+python -m ruff check --fix .
+```
+
+### Before Committing
+
+**ALWAYS run ruff before making a git commit**:
+```bash
+# 1. Run ruff and auto-fix
+python -m ruff check --fix .
+
+# 2. Run tests to ensure nothing broke
+python -m pytest
+
+# 3. Commit changes
+git add -A && git commit -m "Your message"
+```
+
+### Common Ruff Rules
+- **Import sorting** (I): Imports must be sorted alphabetically and grouped
+- **Unused imports** (F401): Remove imports that aren't used
+- **Whitespace** (W293): No trailing whitespace on blank lines
+- **Dict literals** (C408): Use `{'key': value}` instead of `dict(key=value)`
+- **Naming** (N): Follow PEP 8 naming conventions
+- **Pyflakes** (F): Detect common Python errors
+
+### Type Hints
+- Add type hints to all function signatures in production code
+- Plotly types can be complex - use `# type: ignore` when necessary for dynamic attributes
+- Test files: type hints recommended but optional
+
 ## Agent Operational Guidelines
 
 ### Running Tests

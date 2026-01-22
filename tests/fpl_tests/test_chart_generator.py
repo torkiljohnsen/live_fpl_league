@@ -1,6 +1,5 @@
 """Tests for chart generator functionality."""
 
-import pytest
 from fpl.chart_generator import generate_rank_progression_chart
 
 
@@ -8,23 +7,23 @@ def test_empty_chart_has_proper_axes():
     """Test that chart generator creates empty figure with proper axis setup."""
     # Arrange
     participants = []
-    
+
     # Act
     fig = generate_rank_progression_chart(participants)
-    
+
     # Assert
     assert fig is not None, "Function should return a figure object"
-    
+
     # Check that it's a Plotly figure
     assert hasattr(fig, 'data'), "Should be a Plotly figure with data attribute"
     assert hasattr(fig, 'layout'), "Should be a Plotly figure with layout attribute"
-    
+
     # Check X-axis label
     assert fig.layout.xaxis.title.text == "Gameweek", "X-axis should be labeled 'Gameweek'"
-    
+
     # Check Y-axis label
     assert fig.layout.yaxis.title.text == "Overall Rank", "Y-axis should be labeled 'Overall Rank'"
-    
+
     # Check Y-axis is inverted (reversed=True means lower rank at top)
     assert fig.layout.yaxis.autorange == "reversed", "Y-axis should be inverted (reversed=True)"
 
@@ -43,19 +42,19 @@ def test_single_participant_line():
             ]
         }
     ]
-    
+
     # Act
     fig = generate_rank_progression_chart(participants)
-    
+
     # Assert
     assert len(fig.data) == 1, "Figure should have exactly one trace for one participant"
-    
+
     trace = fig.data[0]
-    
+
     # Check that trace contains correct data points
     expected_events = [1, 2, 3, 4]
     expected_ranks = [1000000, 950000, 900000, 875000]
-    
+
     assert list(trace.x) == expected_events, f"X-axis data should match events: {expected_events}"
     assert list(trace.y) == expected_ranks, f"Y-axis data should match ranks: {expected_ranks}"
 
@@ -89,23 +88,23 @@ def test_multiple_participants_3_traces():
             ]
         }
     ]
-    
+
     # Act
     fig = generate_rank_progression_chart(participants)
-    
+
     # Assert
     assert len(fig.data) == 3, "Figure should have exactly three traces for three participants"
-    
+
     # Check first participant's data
     trace_0 = fig.data[0]
     assert list(trace_0.x) == [1, 2, 3], "First trace X-axis should match events"
     assert list(trace_0.y) == [1000000, 950000, 900000], "First trace Y-axis should match John's ranks"
-    
+
     # Check second participant's data
     trace_1 = fig.data[1]
     assert list(trace_1.x) == [1, 2, 3], "Second trace X-axis should match events"
     assert list(trace_1.y) == [800000, 750000, 700000], "Second trace Y-axis should match Jane's ranks"
-    
+
     # Check third participant's data
     trace_2 = fig.data[2]
     assert list(trace_2.x) == [1, 2, 3], "Third trace X-axis should match events"
@@ -124,13 +123,13 @@ def test_multiple_participants_10_traces():
                 {'event': 2, 'overall_rank': 950000 + (i * 100000)},
             ]
         })
-    
+
     # Act
     fig = generate_rank_progression_chart(participants)
-    
+
     # Assert
     assert len(fig.data) == 10, "Figure should have exactly ten traces for ten participants"
-    
+
     # Verify each trace has correct data
     for i, trace in enumerate(fig.data):
         expected_x = [1, 2]
@@ -158,10 +157,10 @@ def test_light_theme_colors():
             ]
         }
     ]
-    
+
     # Act
     fig = generate_rank_progression_chart(participants, theme="light")
-    
+
     # Assert
     # Check background is light colored (white or near-white)
     bg_color = fig.layout.plot_bgcolor
@@ -171,7 +170,7 @@ def test_light_theme_colors():
     light_colors = ['white', '#ffffff', '#fff', 'rgb(255,255,255)', 'rgb(255, 255, 255)', None, '']
     is_light = (bg_color in light_colors) or (isinstance(bg_color, str) and bg_color.startswith('#f'))
     assert is_light, f"Light theme should use light background, got: {bg_color}"
-    
+
     # Check that line colors are dark/visible
     # Line colors should be distinguishable and dark for good visibility on light background
     for i, trace in enumerate(fig.data):
@@ -201,10 +200,10 @@ def test_dark_theme_colors():
             ]
         }
     ]
-    
+
     # Act
     fig = generate_rank_progression_chart(participants, theme="dark")
-    
+
     # Assert
     # Check background is dark colored
     bg_color = fig.layout.plot_bgcolor
@@ -213,7 +212,7 @@ def test_dark_theme_colors():
     dark_colors = ['black', '#000000', '#000', '#1a1a1a', '#2b2b2b', '#333333', '#222222']
     is_dark = bg_color in dark_colors
     assert is_dark, f"Dark theme should use dark background, got: {bg_color}"
-    
+
     # Check that line colors are light/bright for visibility on dark background
     for i, trace in enumerate(fig.data):
         line_color = trace.line.color
