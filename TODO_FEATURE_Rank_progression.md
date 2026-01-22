@@ -50,6 +50,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ## Implementation Steps
 
 **Agent instructions**: 
+- Keep output at a minimum, to conserve token usage. No need to consider personal feelings, this is strictly business.
 - Start at the first job with `status: todo`. 
 - Activate the virtual environment before you begin.
 - Complete ONLY that job, then stop. Stay within the job description. The next agent will handle the next job.
@@ -178,15 +179,15 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 9: Implement light theme colors to pass test
-**Status**: todo
+**Status**: done
 
 **Task**: Add color configuration for light theme, making Job 8 test pass.
 
 **Acceptance Criteria**:
-- [ ] Function accepts `theme="light"` parameter (can be default)
-- [ ] Light theme uses light background color
-- [ ] Light theme uses dark/visible line colors
-- [ ] Test from Job 8 now PASSES
+- [x] Function accepts `theme="light"` parameter (can be default)
+- [x] Light theme uses light background color
+- [x] Light theme uses dark/visible line colors
+- [x] Test from Job 8 now PASSES
 
 ---
 
