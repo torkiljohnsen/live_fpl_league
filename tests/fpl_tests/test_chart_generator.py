@@ -353,3 +353,55 @@ def test_svg_export():
     # Verify it contains expected elements (basic sanity check)
     assert 'Gameweek' in svg_string, "SVG should contain X-axis label 'Gameweek'"
     assert 'Overall Rank' in svg_string, "SVG should contain Y-axis label 'Overall Rank'"
+
+
+def test_png_export():
+    """Test that chart can be exported as PNG file."""
+    import os
+    import tempfile
+
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'Alice',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+            ]
+        },
+        {
+            'player_first_name': 'Bob',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+                {'event': 3, 'overall_rank': 700000},
+            ]
+        }
+    ]
+
+    # Create a temporary file for PNG output
+    with tempfile.NamedTemporaryFile(mode='wb', suffix='.png', delete=False) as tmp_file:
+        output_path = tmp_file.name
+
+    try:
+        # Act
+        generate_rank_progression_chart(participants, output_format="png", output_path=output_path)
+
+        # Assert
+        assert os.path.exists(output_path), f"PNG file should be created at {output_path}"
+
+        # Verify it's a valid PNG file (check PNG magic bytes)
+        with open(output_path, 'rb') as f:
+            header = f.read(8)
+            # PNG files start with: 89 50 4E 47 0D 0A 1A 0A
+            assert header[:4] == b'\x89PNG', "File should have valid PNG header"
+
+        # Verify file has content
+        file_size = os.path.getsize(output_path)
+        assert file_size > 1000, f"PNG file should have substantial content, got {file_size} bytes"
+
+    finally:
+        # Cleanup: remove the temporary file
+        if os.path.exists(output_path):
+            os.remove(output_path)

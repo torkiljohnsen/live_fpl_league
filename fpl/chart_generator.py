@@ -20,7 +20,8 @@ def generate_rank_progression_chart(
     bg_color=None,
     width=1200,
     height=600,
-    output_format="figure"
+    output_format="figure",
+    output_path=None
 ):
     """Generate a rank progression chart for FPL participants.
 
@@ -31,11 +32,13 @@ def generate_rank_progression_chart(
         bg_color: Optional custom background color (hex string). Overrides theme default.
         width: Width of the chart in pixels (default: 1200).
         height: Height of the chart in pixels (default: 600).
-        output_format: Output format. Options: "figure" (default), "svg".
+        output_format: Output format. Options: "figure" (default), "svg", "png".
+        output_path: File path for PNG output (required when output_format="png").
 
     Returns:
         If output_format="figure": A Plotly figure object.
         If output_format="svg": An SVG string representation of the chart.
+        If output_format="png": None (writes PNG file to output_path).
     """
     # Create empty figure
     fig = go.Figure()
@@ -94,5 +97,10 @@ def generate_rank_progression_chart(
     # Return based on requested format
     if output_format == "svg":
         return fig.to_image(format="svg").decode('utf-8')
+    elif output_format == "png":
+        if output_path is None:
+            raise ValueError("output_path is required when output_format='png'")
+        fig.write_image(output_path, format="png")
+        return None
     else:
         return fig

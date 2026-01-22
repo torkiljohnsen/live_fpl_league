@@ -304,17 +304,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 18: Implement PNG export
-**Status**: todo
+**Status**: done
 
 **Task**: Add ability to export chart as PNG file. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test calls function with `format="png"` and output path
-- [ ] Test asserts PNG file is created and is valid image
-- [ ] Test cleans up created file
-- [ ] Function accepts `format="png"` parameter and output path
-- [ ] PNG file is created at specified location
-- [ ] Test passes
+- [x] Test calls function with `format="png"` and output path
+- [x] Test asserts PNG file is created and is valid image
+- [x] Test cleans up created file
+- [x] Function accepts `format="png"` parameter and output path
+- [x] PNG file is created at specified location
+- [x] Test passes
 
 ---
 
