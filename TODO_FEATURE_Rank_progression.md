@@ -638,6 +638,82 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 
 ---
 
+### Job 39: Fix overlapping semi-transparent backgrounds and increase default opacity
+**Status**: todo
+
+**Task**: The chart area and legend box inherit the same semi-transparent background as the main plot background, causing a darker appearance where they overlap. Make the plot area and legend box backgrounds fully transparent. Also change default background color from rgba(0,0,0,0.1) to rgba(0,0,0,0.3). Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test verifies default background color is "rgba(0, 0, 0, 0.3)"
+- [ ] Test verifies plot area background is fully transparent
+- [ ] Test verifies legend background is fully transparent
+- [ ] Default background color changed to rgba(0,0,0,0.3)
+- [ ] Plot area (graph area) has transparent background
+- [ ] Legend box has transparent background
+- [ ] No overlapping semi-transparent backgrounds
+- [ ] Manual test: Verify improved appearance in browser
+- [ ] Test passes
+
+---
+
+### Job 40: Reduce chart top padding further
+**Status**: todo
+
+**Task**: The top padding above the chart is still too large. Reduce it further for better visual balance. Write test first, then implement.
+
+**Acceptance Criteria**:
+- [ ] Test asserts top margin is further reduced from current value
+- [ ] Top padding is reduced to improve visual balance
+- [ ] Chart appears better balanced with less whitespace above
+- [ ] Manual test: Verify improved layout in browser
+- [ ] Test passes
+
+---
+
+### Job 41: Center stats section in container matching league_standings width
+**Status**: todo
+
+**Task**: The stats section at the bottom of ranking_progression template aligns to the left edge of the screen. It should be in a centered container with the same width as league_standings content for consistency. Write test first if applicable, then implement.
+
+**Acceptance Criteria**:
+- [ ] Review CSS for league_standings content container width
+- [ ] Apply similar container/centering approach to stats section
+- [ ] Stats section uses centered container (not full screen width)
+- [ ] Container width matches league_standings for consistency
+- [ ] Manual test: Verify stats section is properly centered in browser
+- [ ] Test passes (if applicable)
+
+---
+
+### Job 42: Improve stats section layout with consistent label alignment
+**Status**: todo
+
+**Task**: Use a definition list or ensure all labels have the same width so stat values align on the left edge. Improve readability and visual consistency. Write test first if applicable, then implement.
+
+**Acceptance Criteria**:
+- [ ] Consider using HTML `<dl>` definition list for stats
+- [ ] Ensure all stat labels have consistent width
+- [ ] Stat values align on the same left edge
+- [ ] Layout is visually cleaner and more readable
+- [ ] Manual test: Verify improved alignment in browser
+- [ ] Test passes (if applicable)
+
+---
+
+### Job 43: Apply green style to arrow in "I toppform" stat
+**Status**: todo
+
+**Task**: The triangle/arrow (▲) in the "I toppform" stat text should have green styling applied. Find existing green CSS class and apply it. Write test first if applicable, then implement.
+
+**Acceptance Criteria**:
+- [ ] Locate existing green arrow CSS class in style.css
+- [ ] Apply green styling to arrow in "I toppform" stat
+- [ ] Arrow displays in green color
+- [ ] Manual test: Verify green arrow in browser
+- [ ] Test passes (if applicable)
+
+---
+
 ## Design Decisions to Make
 
 1. **Chart file location**: Save to `docs/charts/` or embed inline in HTML?
