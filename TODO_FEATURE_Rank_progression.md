@@ -518,18 +518,18 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 32: Enhance legend format with rank and player details
-**Status**: todo
+**Status**: done
 
 **Task**: Change legend format to show: Line | League rank | Player name | Overall rank (rounded to thousands). Example: "--- 1. Torkil (345k)". Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test creates participants with league_rank, first_name, and latest overall_rank
-- [ ] Test asserts legend displays format: "1. Torkil (345k)"
-- [ ] Test verifies overall_rank is rounded to thousands (e.g., 345123 → 345k)
-- [ ] Legend format shows: `<league_rank>. <first_name> (<overall_rank_rounded>)`
-- [ ] Overall rank is rounded to nearest thousand with "k" suffix
-- [ ] Legend entries are numbered by league rank
-- [ ] Test passes
+- [x] Test creates participants with league_rank, first_name, and latest overall_rank
+- [x] Test asserts legend displays format: "1. Torkil (345k)"
+- [x] Test verifies overall_rank is rounded to thousands (e.g., 345123 → 345k)
+- [x] Legend format shows: `<league_rank>. <first_name> (<overall_rank_rounded>)`
+- [x] Overall rank is rounded to nearest thousand with "k" suffix
+- [x] Legend entries are numbered by league rank
+- [x] Test passes
 
 ---
 
