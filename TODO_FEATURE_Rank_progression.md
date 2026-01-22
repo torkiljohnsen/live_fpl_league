@@ -52,7 +52,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 **Agent instructions**: 
 - Start at the first job with `status: todo`. 
 - Activate the virtual environment before you begin.
-- Complete ONLY that job, then stop. The next agent will handle the next job.
+- Complete ONLY that job, then stop. Stay within the job description. The next agent will handle the next job.
 - Look at commit history in the current branch if you are unsure of what has been done in previous jobs.
 - If making visual changes, verify them by looking at them in a browser.
 - As you complete acceptance criterias, check their checkboxes
@@ -153,14 +153,14 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 7: Implement multiple participant lines to pass test
-**Status**: todo
+**Status**: done
 
 **Task**: Extend chart generator to plot multiple participants, making Job 6 tests pass.
 
 **Acceptance Criteria**:
-- [ ] Function accepts list with multiple participants
-- [ ] Each participant gets their own line trace on the chart
-- [ ] Tests from Job 6 now PASS
+- [x] Function accepts list with multiple participants
+- [x] Each participant gets their own line trace on the chart
+- [x] Tests from Job 6 now PASS
 
 ---
 
