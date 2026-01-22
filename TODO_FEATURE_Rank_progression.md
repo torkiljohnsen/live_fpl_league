@@ -54,10 +54,11 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 - Activate the virtual environment before you begin.
 - Complete ONLY that job, then stop. The next agent will handle the next job.
 - Look at commit history in the current branch if you are unsure of what has been done in previous jobs.
+- If making visual changes, verify them by looking at them in a browser.
+- As you complete acceptance criterias, check their checkboxes
 - After you finish a job:
-  - verify that all acceptance criteria have been met
-  - check the checkbox for each acceptance criteria you deem to having been met
-  - change status for that job to "done"
+  - verify that all acceptance criteria have been met, and if so, change the status for the job to done and 
+  - if all acceptance criteria haven't been met, continue working, revise your plan if needed
 - Make a git commit of your work.
 
 **TDD Methodology**: For each job with code changes, follow Test-Driven Development:
