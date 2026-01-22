@@ -29,9 +29,7 @@ class RankCalculator:
         for p in participants:
             entry_id = p.entry_id
             p_hist = df[df["entry_id"] == entry_id]
-            for h, row_data in zip(p.history, p_hist.to_dict(orient="records")):
-                # pandas to_dict returns Dict[Hashable, Any], but we know all keys are strings
-                row = cast(Dict[str, Any], row_data)
+            for h, row in zip(p.history, p_hist.to_dict(orient="records")):
                 h["round_rank"] = row["round_rank"]
                 h["league_rank"] = row["league_rank"]
                 h["league_rank_change"] = row["league_rank_change"]
@@ -43,7 +41,7 @@ class RankCalculator:
                 h["is_highest_rank"] = (event_id in event_max_points and net_points == event_max_points[event_id])
     
     @staticmethod
-    def calculate_lowest_rank_counts(participants: List[Participant]) -> None:
+    def calculate_lowest_rank_counts(participants: list[Participant]) -> None:
         """Calculate the count of times each participant achieved the lowest rank.
         
         This counts how many events each participant had the minimum net_points.
@@ -58,7 +56,7 @@ class RankCalculator:
             participant.lowest_rank_count = lowest_rank_count
     
     @staticmethod
-    def calculate_win_counts(participants: List[Participant]) -> None:
+    def calculate_win_counts(participants: list[Participant]) -> None:
         """Calculate the count of gameweek wins for each participant.
         
         This counts how many events each participant had round_rank == 1 (winner).

@@ -17,12 +17,3 @@ class Participant:
     def to_dict(self) -> dict[str, Any]:
         """Convert Participant to dictionary for backward compatibility."""
         return asdict(self)
-    golden_win_count: int = field(default=0)
-=======
-    history: list[dict[str, Any]]
-    last_event: dict[str, Any]
->>>>>>> abd78cb (Job 22-23: Wire up ranking_progression to CLI)
-
-    def to_dict(self) -> dict[str, Any]:
-        """Convert Participant to dictionary for backward compatibility."""
-        return asdict(self)

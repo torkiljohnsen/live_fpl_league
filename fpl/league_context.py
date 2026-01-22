@@ -92,19 +92,25 @@ class LeagueContext:
         # Generate rank progression chart
         participants = d.get("participants", [])
         if participants:
-            # Participants are already dictionaries from get_summary()
+            # Convert Participant objects to dicts if needed
             participants_for_chart = []
             for idx, p in enumerate(participants):
+                # Handle both dict and Participant object
+                if hasattr(p, 'to_dict'):
+                    p_dict = p.to_dict()
+                else:
+                    p_dict = p
+                
                 # Extract first name from manager_name
-                manager_name = p.get("manager_name", "")
+                manager_name = p_dict.get("manager_name", "")
                 first_name = manager_name.split()[0] if manager_name else 'Unknown'
                 # League rank is the position in the sorted list (1-indexed)
                 league_rank = idx + 1
                 participants_for_chart.append({
                     'player_first_name': first_name,
                     'league_rank': league_rank,
-                    'team_name': p.get("team_name", ""),
-                    'history': p.get("history", [])
+                    'team_name': p_dict.get("team_name", ""),
+                    'history': p_dict.get("history", [])
                 })
 
             chart_svg = generate_rank_progression_chart(
