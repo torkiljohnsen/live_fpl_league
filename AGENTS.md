@@ -176,6 +176,28 @@ git add -A && git commit -m "Your message"
 cd /c/Dev/live_fpl_league && git add -A
 ```
 
+### Test-Driven Development (TDD) Workflow
+
+**CRITICAL**: For bugs and features, write the failing test FIRST, then fix/implement:
+
+#### Bug Fixes
+1. Write a failing test that reproduces the bug
+2. Run test to confirm it fails: `python -m pytest tests/fpl_tests/test_<module>.py::test_<name> -v`
+3. Fix the bug with minimal code changes
+4. Run test to confirm it passes
+5. Run all tests: `python -m pytest`
+6. Commit both test and fix together
+
+**Example**: For "CLI processes both default and specified league" bug:
+- First: Write `test_specified_league_overrides_default()` that verifies only specified league is processed (fails)
+- Then: Fix argparse handling in `generate_html.py` (test passes)
+- Finally: Commit test + fix together
+
+#### New Features
+Same workflow: failing test → minimal code → test passes → refactor if needed → commit
+
+**Why TDD?** Ensures test coverage, catches regressions, makes refactoring safe.
+
 ### Refactoring Best Practices
 
 **Test Coverage First**: Before refactoring any code, ensure comprehensive test coverage exists to validate that functionality remains unchanged after refactoring.
