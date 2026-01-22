@@ -247,14 +247,14 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 14: Write test for configurable chart dimensions
-**Status**: todo
+**Status**: done
 
 **Task**: Write a failing test that expects width and height parameters to control chart size.
 
 **Acceptance Criteria**:
-- [ ] Test calls function with `width=800, height=400`
-- [ ] Test asserts generated chart has those dimensions
-- [ ] Running test produces FAILURE (functionality doesn't exist yet)
+- [x] Test calls function with `width=800, height=400`
+- [x] Test asserts generated chart has those dimensions
+- [x] Running test produces FAILURE (functionality doesn't exist yet)
 
 ---
 

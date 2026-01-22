@@ -251,3 +251,26 @@ def test_custom_background_color_override():
     # Custom color should override dark theme default
     assert fig_dark.layout.plot_bgcolor == custom_color, \
         f"Custom bg_color should override dark theme default, got {fig_dark.layout.plot_bgcolor}"
+
+
+def test_configurable_chart_dimensions():
+    """Test that width and height parameters control chart size."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+    custom_width = 800
+    custom_height = 400
+
+    # Act
+    fig = generate_rank_progression_chart(participants, width=custom_width, height=custom_height)
+
+    # Assert
+    assert fig.layout.width == custom_width, f"Chart width should be {custom_width}, got {fig.layout.width}"
+    assert fig.layout.height == custom_height, f"Chart height should be {custom_height}, got {fig.layout.height}"
