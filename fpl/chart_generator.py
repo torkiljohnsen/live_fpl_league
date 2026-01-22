@@ -14,13 +14,14 @@ DARK_THEME_COLORS = [
 ]
 
 
-def generate_rank_progression_chart(participants, theme="light"):
+def generate_rank_progression_chart(participants, theme="light", bg_color=None):
     """Generate a rank progression chart for FPL participants.
 
     Args:
         participants: List of participant dictionaries, each containing 'history' array
                      with 'event' and 'overall_rank' fields.
         theme: Color theme for the chart. Options: "light" (default).
+        bg_color: Optional custom background color (hex string). Overrides theme default.
 
     Returns:
         A Plotly figure object with rank progression chart.
@@ -31,13 +32,16 @@ def generate_rank_progression_chart(participants, theme="light"):
     # Set color palette based on theme
     if theme == "light":
         colors = LIGHT_THEME_COLORS
-        bg_color = "white"
+        default_bg_color = "white"
     elif theme == "dark":
         colors = DARK_THEME_COLORS
-        bg_color = "#222222"
+        default_bg_color = "#222222"
     else:
         colors = LIGHT_THEME_COLORS  # Default to light colors
-        bg_color = "white"
+        default_bg_color = "white"
+
+    # Use custom bg_color if provided, otherwise use theme default
+    final_bg_color = bg_color if bg_color is not None else default_bg_color
 
     # Add a line trace for each participant
     for i, participant in enumerate(participants):
@@ -69,6 +73,6 @@ def generate_rank_progression_chart(participants, theme="light"):
     )
 
     # Set background color
-    fig.update_layout(plot_bgcolor=bg_color)
+    fig.update_layout(plot_bgcolor=final_bg_color)
 
     return fig

@@ -235,14 +235,14 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 13: Implement custom background color override to pass test
-**Status**: todo
+**Status**: done
 
 **Task**: Allow custom background color parameter, making Job 12 test pass.
 
 **Acceptance Criteria**:
-- [ ] Function accepts `bg_color` parameter (optional)
-- [ ] When provided, `bg_color` overrides theme default background
-- [ ] Test from Job 12 now PASSES
+- [x] Function accepts `bg_color` parameter (optional)
+- [x] When provided, `bg_color` overrides theme default background
+- [x] Test from Job 12 now PASSES
 
 ---
 
