@@ -334,15 +334,15 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 20: Create ranking progression template
-**Status**: todo
+**Status**: done
 
 **Task**: Create `templates/ranking_progression.html` that displays the chart.
 
 **Acceptance Criteria**:
-- [ ] Template file extends `base.html`
-- [ ] Template has placeholder for chart embedding (SVG or img)
-- [ ] Template includes page title "Rank Progression"
-- [ ] Manual test: Template renders without errors when chart variable is provided
+- [x] Template file extends `base.html`
+- [x] Template has placeholder for chart embedding (SVG or img)
+- [x] Template includes page title "Rank Progression"
+- [x] Manual test: Template renders without errors when chart variable is provided
 
 ---
 

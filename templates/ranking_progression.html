@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ name }} - Ranking Progression{% endblock %}
+{% block title %}{{ name }} - Rank Progression{% endblock %}
 
 {% block body %}
     <div class="logo-container">
@@ -9,14 +9,18 @@
         </div>
     </div>
     <h1>
-        {{ name }} Ranking Progression
+        {{ name }} Rank Progression
         {% if league_join_code %}
             ({{ league_join_code }})
         {% endif %}
     </h1>
     
     <div class="chart-container">
-        <canvas id="rankingChart"></canvas>
+        {% if rank_progression_chart %}
+            {{ rank_progression_chart | safe }}
+        {% else %}
+            <p>No chart data available.</p>
+        {% endif %}
     </div>
     
 {% endblock %}
