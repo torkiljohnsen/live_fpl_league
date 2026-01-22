@@ -90,3 +90,40 @@ python generate_html.py -l LEAGUE_ID [--dev] [-o standings|gw_history|ALL]
 
 ## Testing
 Tests in [`tests/fpl_tests/`](tests/fpl_tests/) use `DummyAPI` with sample data from [`tests/fpl_tests/data_samples/`](tests/fpl_tests/data_samples/)
+
+## Agent Operational Guidelines
+
+### Running Tests
+The terminal needs the virtual environment activated to run tests easily. **Always activate the venv first**:
+
+```bash
+source venv/Scripts/activate && python -m pytest [test_path]
+```
+
+Examples:
+```bash
+# Run all tests
+source venv/Scripts/activate && python -m pytest
+
+# Run specific test file
+source venv/Scripts/activate && python -m pytest tests/fpl_tests/test_chart_generator.py
+
+# Run specific test
+source venv/Scripts/activate && python -m pytest tests/fpl_tests/test_chart_generator.py::test_empty_chart_has_proper_axes -v
+```
+
+**Why not just `pytest`?** The Windows bash terminal doesn't have execute permissions on the pytest script directly, so use `python -m pytest` instead.
+
+### Git Commits
+Git commands work normally in the bash terminal. **Don't use `cd` with Windows-style paths** (backslashes).
+
+```bash
+# ❌ WRONG - bash doesn't understand backslashes
+cd c:\Dev\live_fpl_league && git add -A
+
+# ✅ CORRECT - git commands work from current directory
+git add -A && git commit -m "Your message"
+
+# ✅ CORRECT - use forward slashes if you need cd
+cd /c/Dev/live_fpl_league && git add -A
+```
