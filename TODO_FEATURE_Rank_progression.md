@@ -590,19 +590,19 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 36: Increase text size for TV display readability
-**Status**: todo
+**Status**: done
 
 **Task**: Chart will be shown on a big screen from a distance. Increase font sizes for legend, axis labels, and axis titles. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test asserts legend font size is increased (e.g., 16-20px)
-- [ ] Test asserts axis label font size is increased (e.g., 14-18px)
-- [ ] Test asserts axis title font size is increased (e.g., 18-24px)
-- [ ] Legend text is larger and readable from distance
-- [ ] Axis tick labels (numbers) are larger and readable from distance
-- [ ] Axis titles ("Gameweek", "Overall Rank") are larger and readable from distance
-- [ ] Manual test: Verify readability from 3+ meters on big screen
-- [ ] Test passes
+- [x] Test asserts legend font size is increased (e.g., 16-20px)
+- [x] Test asserts axis label font size is increased (e.g., 14-18px)
+- [x] Test asserts axis title font size is increased (e.g., 18-24px)
+- [x] Legend text is larger and readable from distance
+- [x] Axis tick labels (numbers) are larger and readable from distance
+- [x] Axis titles ("Gameweek", "Overall Rank") are larger and readable from distance
+- [x] Manual test: Verify readability from 3+ meters on big screen
+- [x] Test passes
 
 ---
 

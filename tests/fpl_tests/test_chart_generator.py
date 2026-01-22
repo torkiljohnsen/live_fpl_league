@@ -836,3 +836,49 @@ def test_dark_theme_has_light_text_colors():
     # Check gridline color is lighter for dark theme
     assert fig.layout.yaxis.gridcolor == 'rgba(100, 100, 100, 0.3)', \
         f"Gridlines should be lighter for dark theme, got: {fig.layout.yaxis.gridcolor}"
+
+
+def test_large_font_sizes_for_tv_display():
+    """Test that chart uses large font sizes for readability from distance on TV."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Legend font size should be large (16-20px)
+    assert fig.layout.legend.font.size >= 16, \
+        f"Legend font size should be >= 16px for TV display, got: {fig.layout.legend.font.size}"
+    assert fig.layout.legend.font.size <= 20, \
+        f"Legend font size should be <= 20px, got: {fig.layout.legend.font.size}"
+
+    # Assert - Axis tick labels should be large (14-18px)
+    assert fig.layout.xaxis.tickfont.size >= 14, \
+        f"X-axis tick font size should be >= 14px for TV display, got: {fig.layout.xaxis.tickfont.size}"
+    assert fig.layout.xaxis.tickfont.size <= 18, \
+        f"X-axis tick font size should be <= 18px, got: {fig.layout.xaxis.tickfont.size}"
+
+    assert fig.layout.yaxis.tickfont.size >= 14, \
+        f"Y-axis tick font size should be >= 14px for TV display, got: {fig.layout.yaxis.tickfont.size}"
+    assert fig.layout.yaxis.tickfont.size <= 18, \
+        f"Y-axis tick font size should be <= 18px, got: {fig.layout.yaxis.tickfont.size}"
+
+    # Assert - Axis titles should be large (18-24px)
+    assert fig.layout.xaxis.title.font.size >= 18, \
+        f"X-axis title font size should be >= 18px for TV display, got: {fig.layout.xaxis.title.font.size}"
+    assert fig.layout.xaxis.title.font.size <= 24, \
+        f"X-axis title font size should be <= 24px, got: {fig.layout.xaxis.title.font.size}"
+
+    assert fig.layout.yaxis.title.font.size >= 18, \
+        f"Y-axis title font size should be >= 18px for TV display, got: {fig.layout.yaxis.title.font.size}"
+    assert fig.layout.yaxis.title.font.size <= 24, \
+        f"Y-axis title font size should be <= 24px, got: {fig.layout.yaxis.title.font.size}"

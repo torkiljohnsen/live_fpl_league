@@ -128,8 +128,8 @@ def generate_rank_progression_chart(
     xaxis_config = {
         'title_text': "Gameweek",
         'dtick': 1,
-        'title_font': {'color': text_color},
-        'tickfont': {'color': tick_color}
+        'title_font': {'color': text_color, 'size': 20},
+        'tickfont': {'color': tick_color, 'size': 16}
     }
 
     # If we have data, set the range from 1 to the latest gameweek
@@ -168,8 +168,8 @@ def generate_rank_progression_chart(
         'autorange': "reversed",
         'showgrid': True,
         'gridcolor': grid_color,
-        'title_font': {'color': text_color},
-        'tickfont': {'color': tick_color}
+        'title_font': {'color': text_color, 'size': 20},
+        'tickfont': {'color': tick_color, 'size': 16}
     }
 
     # If total_players is provided, set explicit range from 1 to total_players
@@ -185,7 +185,7 @@ def generate_rank_progression_chart(
         width=width,
         height=height,
         showlegend=True,
-        legend={'font': {'color': text_color}}
+        legend={'font': {'color': text_color, 'size': 18}}
     )
 
     # Return based on requested format
