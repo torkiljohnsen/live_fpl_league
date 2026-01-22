@@ -78,7 +78,8 @@ def generate_rank_progression_chart(participants, theme="light", bg_color=None, 
     fig.update_layout(
         plot_bgcolor=final_bg_color,
         width=width,
-        height=height
+        height=height,
+        showlegend=True
     )
 
     return fig

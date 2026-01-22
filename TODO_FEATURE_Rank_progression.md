@@ -274,17 +274,17 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 16: Implement legend with participant names
-**Status**: todo
+**Status**: done
 
 **Task**: Add legend showing participant first names. Write test first, then implement.
 
 **Acceptance Criteria**:
-- [ ] Test creates participants with known first names
-- [ ] Test asserts each trace has correct name label
-- [ ] Test asserts legend is visible
-- [ ] Each line in chart has label with participant's first name
-- [ ] Legend is visible and readable
-- [ ] Test passes
+- [x] Test creates participants with known first names
+- [x] Test asserts each trace has correct name label
+- [x] Test asserts legend is visible
+- [x] Each line in chart has label with participant's first name
+- [x] Legend is visible and readable
+- [x] Test passes
 
 ---
 

@@ -274,3 +274,47 @@ def test_configurable_chart_dimensions():
     # Assert
     assert fig.layout.width == custom_width, f"Chart width should be {custom_width}, got {fig.layout.width}"
     assert fig.layout.height == custom_height, f"Chart height should be {custom_height}, got {fig.layout.height}"
+
+
+def test_legend_with_participant_names():
+    """Test that legend shows participant first names and is visible."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'Alice',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Bob',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+            ]
+        },
+        {
+            'player_first_name': 'Charlie',
+            'history': [
+                {'event': 1, 'overall_rank': 1200000},
+                {'event': 2, 'overall_rank': 1100000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    # Check that each trace has the correct name label
+    assert len(fig.data) == 3, "Should have 3 traces"
+    assert fig.data[0].name == 'Alice', f"First trace should be named 'Alice', got {fig.data[0].name}"
+    assert fig.data[1].name == 'Bob', f"Second trace should be named 'Bob', got {fig.data[1].name}"
+    assert fig.data[2].name == 'Charlie', f"Third trace should be named 'Charlie', got {fig.data[2].name}"
+
+    # Check that legend is visible
+    # By default, Plotly shows legend unless explicitly hidden
+    # We check that showlegend is not False
+    legend_visible = fig.layout.showlegend
+    assert legend_visible is not False, f"Legend should be visible, got showlegend={legend_visible}"
