@@ -83,6 +83,7 @@ table {
 	grid-template-columns: auto 1fr;
 	gap: 0.5rem 1rem;
 	align-items: baseline;
+	font-size: 1.1rem;
 }
 
 .stats-list dt {
