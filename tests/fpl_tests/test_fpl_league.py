@@ -12,7 +12,7 @@ class DummyAPI:
     def get_bootstrap_static(self):
         data = json.loads((self.data_dir / "bootstrap-static_sample.json").read_text(encoding="utf-8"))
         if self._all_events_finished:
-            # Mark all events as finished and no event as next
+            # Mark all events as finished and no next event
             for event in data["events"]:
                 event["finished"] = True
                 event["is_next"] = False

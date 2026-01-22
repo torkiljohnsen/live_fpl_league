@@ -127,9 +127,14 @@ class FPLLeague:
     def get_summary(self) -> Dict[str, Any]:
         summary: Dict[str, Any] = dict(self.info)
         summary["generated_time"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-        summary["participants"] = self.get_participants()
+        # Convert Participant objects to dicts for backward compatibility
+        summary["participants"] = [p.to_dict() for p in self.get_participants()]
         summary["event_ids"] = self.event_ids  # All events
         summary["finished_event_ids"] = self.finished_event_ids  # Finished events marker
         summary["current_event_id"] = self.current_event_id  # Current event marker
         summary["is_current_finished"] = self.current_event_id in self.finished_event_ids if self.current_event_id else False
         return summary
+
+    def get_next_deadline_time(self) -> Optional[str]:
+        """Get the deadline time for the next event, or None if no next event."""
+        return self.info.get("next_event_deadline_time")
