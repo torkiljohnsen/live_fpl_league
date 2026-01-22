@@ -145,6 +145,29 @@ git add -A && git commit -m "Your message"
 - Plotly types can be complex - use `# type: ignore` when necessary for dynamic attributes
 - Test files: type hints recommended but optional
 
+## Known Issues
+
+### Plotly Deprecation Warning (Informational Only)
+
+When running tests that use chart generation (SVG/PNG export), you may see this deprecation warning:
+
+```
+DeprecationWarning: Support for the 'engine' argument is deprecated and will be removed after September 2025.
+```
+
+**Root Cause**: This warning originates from plotly's internal code (v6.5.2+), not our code.
+- `plotly.io.write_image()` has `engine="auto"` as a default parameter
+- When it calls `to_image()`, it triggers the deprecation warning
+- This is a bug in plotly - they deprecated the parameter but still use a non-None default
+
+**Our Code Status**: ✅ Already compliant with plotly's migration guide
+- We don't pass the `engine` parameter anywhere in [`fpl/chart_generator.py`](fpl/chart_generator.py)
+- Calls are: `fig.to_image(format="svg")` and `fig.write_image(output_path, format="png")`
+
+**Impact**: Informational only - doesn't affect functionality. Will be resolved when plotly removes the parameter after September 2025.
+
+**Action**: Do not suppress this warning. It's harmless and will disappear in a future plotly release.
+
 ## Agent Operational Guidelines
 
 ### Running Tests
