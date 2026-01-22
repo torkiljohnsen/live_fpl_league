@@ -52,6 +52,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 **Agent instructions**: 
 - Keep chat/text output (responses to me) at a minimum, to conserve token usage. No need to consider personal feelings, this is strictly business.
 - Write consise and succinct code. Respect Zen of Python.
+- All new code written should pass RUFF tests.
 
 **Job iteration instructions**
 - Start at the first job with `status: todo`. 
@@ -59,6 +60,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 - Complete ONLY that job, then stop. Stay within the job description. The next agent will handle the next job.
 - Look at commit history in the current branch if you are unsure of what has been done in previous jobs.
 - If making visual changes, verify them by looking at them in a browser.
+- If you wrote python code, veryfy that RUFF linting checks pass for the code you wrote. Do not test older parts of the codebase.
 - As you complete acceptance criterias, check their checkboxes
 - After you finish a job:
   - verify that all acceptance criteria have been met, and if so, change the status for the job to done and 
