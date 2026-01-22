@@ -714,6 +714,36 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 
 ---
 
+### Job 44: Improve rank number formatting in chart legend
+**Status**: todo
+
+**Task**: Format rank numbers in chart legend labels (in parenthesis) with smart precision to maintain 3-digit display. Create a helper function for number formatting. Write test first, then implement.
+
+**Formatting Rules**:
+- If rank < 1000: Show actual rank (e.g., "123")
+- If rank < 1000000: Show in thousands with 3 total digits (e.g., "1.32k", "34.5k", "234k")
+- If rank >= 1000000: Show in millions with 3 total digits (e.g., "9.82M", "12.2M", "123M")
+
+Note: Number of decimals varies to maintain exactly 3 digits total before the suffix.
+
+**Acceptance Criteria**:
+- [ ] Test creates helper function for rank formatting
+- [ ] Test verifies rank 123 formats as "123"
+- [ ] Test verifies rank 999 formats as "999"
+- [ ] Test verifies rank 1320 formats as "1.32k"
+- [ ] Test verifies rank 34500 formats as "34.5k"
+- [ ] Test verifies rank 234000 formats as "234k"
+- [ ] Test verifies rank 999999 formats as "1000k" or "1.00M"
+- [ ] Test verifies rank 9820000 formats as "9.82M"
+- [ ] Test verifies rank 12200000 formats as "12.2M"
+- [ ] Test verifies rank 123000000 formats as "123M"
+- [ ] Helper function created (suggest: in chart_generator.py or new utility module)
+- [ ] Chart legend uses formatted rank numbers
+- [ ] Manual test: Verify improved rank display in browser
+- [ ] Test passes
+
+---
+
 ## Design Decisions to Make
 
 1. **Chart file location**: Save to `docs/charts/` or embed inline in HTML?
