@@ -1,6 +1,7 @@
 from typing import Any
 
 from .chart_generator import generate_rank_progression_chart
+from .formatters import format_rank_compact
 from .fpl_api import FPL_API
 from .fpl_league import FPLLeague
 
@@ -99,7 +100,12 @@ class LeagueContext:
             d["rank_progression_chart"] = chart_svg
 
             # Calculate and format statistics
-            from .statistics import get_highest_team_value, get_in_form_players, should_show_in_form_stat
+            from .statistics import (
+                get_highest_team_value,
+                get_in_form_players,
+                get_player_with_highest_rank_loss,
+                should_show_in_form_stat,
+            )
 
             # Format highest team value
             highest_value = get_highest_team_value(participants)
@@ -126,5 +132,26 @@ class LeagueContext:
                     d["in_form_players"] = None
             else:
                 d["in_form_players"] = None
+
+            # Format rank loss statistic (only show from event 2 onwards)
+            if current_event and current_event > 1:
+                rank_loss_result = get_player_with_highest_rank_loss(participants, current_event)
+                if rank_loss_result:
+                    player = rank_loss_result['player_name']
+                    percent = rank_loss_result['rank_loss_percent']
+                    rounds = rank_loss_result['num_rounds']
+                    old_rank = rank_loss_result['old_rank']
+                    new_rank = rank_loss_result['new_rank']
+                    # Format ranks with 3 significant digits (e.g., 534000 -> 534k, 1234 -> 1.23k)
+                    old_rank_str = format_rank_compact(old_rank)
+                    new_rank_str = format_rank_compact(new_rank)
+                    d["free_falling"] = {
+                        'arrow': '▼',
+                        'text': f"{player} ▼ ned {percent:.1f}% plasseringer siste {rounds} runder ({old_rank_str}→{new_rank_str})"
+                    }
+                else:
+                    d["free_falling"] = None
+            else:
+                d["free_falling"] = None
 
         return d
