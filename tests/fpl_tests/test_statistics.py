@@ -1,35 +1,34 @@
 """Tests for FPL statistics calculation module."""
 
+from .test_utils import make_test_participant
+
 
 def test_highest_team_value_calculation():
     """Test that highest team value statistic is correctly calculated."""
     # Arrange
     participants = [
-        {
-            'team_name': 'Team Alpha',
-            'player_first_name': 'Torkil',
-            'history': [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
                 {'event': 1, 'overall_rank': 500000, 'bank': 5, 'value': 995},
                 {'event': 2, 'overall_rank': 450000, 'bank': 10, 'value': 1000},  # Team value: 1000/10 = 100.0M
             ]
-        },
-        {
-            'team_name': 'Team Beta',
-            'player_first_name': 'Anders',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Anders',
+            history=[
                 {'event': 1, 'overall_rank': 600000, 'bank': 15, 'value': 990},
                 # Team value: 1005/10 = 100.5M (highest)
                 {'event': 2, 'overall_rank': 550000, 'bank': 20, 'value': 1005},
             ]
-        },
-        {
-            'team_name': 'Team Gamma',
-            'player_first_name': 'Eirin',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            history=[
                 {'event': 1, 'overall_rank': 700000, 'bank': 0, 'value': 1000},
                 {'event': 2, 'overall_rank': 650000, 'bank': 5, 'value': 995},  # Team value: 995/10 = 99.5M
             ]
-        },
+        ),
     ]
 
     # Act
@@ -43,7 +42,7 @@ def test_highest_team_value_calculation():
     assert 'value' in result, "Result should contain value"
 
     # Verify highest team value is correctly identified
-    assert result['team_name'] == 'Team Beta', "Should identify Team Beta as having highest value"
+    assert result['team_name'] == "Anders's Team", "Should identify Anders's Team as having highest value"
     assert result['player_name'] == 'Anders', "Should identify Anders as the player"
     assert result['value'] == 100.5, f"Value should be 100.5M, got {result['value']}"
 
@@ -52,11 +51,10 @@ def test_highest_team_value_with_no_history():
     """Test that function handles participants with no history gracefully."""
     # Arrange
     participants = [
-        {
-            'team_name': 'Empty Team',
-            'player_first_name': 'Nobody',
-            'history': []
-        },
+        make_test_participant(
+            first_name='Nobody',
+            history=[]
+        ),
     ]
 
     # Act
@@ -71,39 +69,36 @@ def test_in_form_consecutive_green_arrows():
     """Test that in-form statistic correctly counts consecutive rank decreases."""
     # Arrange
     participants = [
-        {
-            'team_name': 'Team Alpha',
-            'player_first_name': 'Torkil',
-            'history': [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
                 {'event': 1, 'overall_rank': 500000},
                 {'event': 2, 'overall_rank': 450000},  # ↓ (improvement)
                 {'event': 3, 'overall_rank': 400000},  # ↓ (improvement) - 2 consecutive
                 {'event': 4, 'overall_rank': 350000},  # ↓ (improvement) - 3 consecutive
                 {'event': 5, 'overall_rank': 340000},  # ↓ (improvement) - 4 consecutive
             ]
-        },
-        {
-            'team_name': 'Team Beta',
-            'player_first_name': 'Anders',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Anders',
+            history=[
                 {'event': 1, 'overall_rank': 600000},
                 {'event': 2, 'overall_rank': 550000},  # ↓ (improvement)
                 {'event': 3, 'overall_rank': 500000},  # ↓ (improvement) - 2 consecutive
                 {'event': 4, 'overall_rank': 510000},  # ↑ (worse) - streak ends
                 {'event': 5, 'overall_rank': 500000},  # ↓ (improvement) - new streak of 1
             ]
-        },
-        {
-            'team_name': 'Team Gamma',
-            'player_first_name': 'Eirin',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            history=[
                 {'event': 1, 'overall_rank': 700000},
                 {'event': 2, 'overall_rank': 690000},  # ↓ (improvement)
                 {'event': 3, 'overall_rank': 680000},  # ↓ (improvement) - 2 consecutive
                 {'event': 4, 'overall_rank': 670000},  # ↓ (improvement) - 3 consecutive
                 {'event': 5, 'overall_rank': 660000},  # ↓ (improvement) - 4 consecutive
             ]
-        },
+        ),
     ]
 
     # Act
@@ -126,15 +121,14 @@ def test_in_form_no_green_arrows():
     """Test that in-form statistic returns None when no team has green arrows."""
     # Arrange
     participants = [
-        {
-            'team_name': 'Team Alpha',
-            'player_first_name': 'Torkil',
-            'history': [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
                 {'event': 1, 'overall_rank': 500000},
                 {'event': 2, 'overall_rank': 510000},  # ↑ (worse)
                 {'event': 3, 'overall_rank': 520000},  # ↑ (worse)
             ]
-        },
+        ),
     ]
 
     # Act
@@ -149,15 +143,14 @@ def test_in_form_single_player():
     """Test that in-form statistic works with single player having green arrows."""
     # Arrange
     participants = [
-        {
-            'team_name': 'Team Alpha',
-            'player_first_name': 'Torkil',
-            'history': [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
                 {'event': 1, 'overall_rank': 500000},
                 {'event': 2, 'overall_rank': 450000},  # ↓ (improvement)
                 {'event': 3, 'overall_rank': 400000},  # ↓ (improvement) - 2 consecutive
             ]
-        },
+        ),
     ]
 
     # Act

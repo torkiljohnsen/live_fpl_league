@@ -2,6 +2,8 @@
 
 from fpl.chart_generator import generate_rank_progression_chart
 
+from .test_utils import make_test_participant
+
 
 def test_empty_chart_has_proper_axes():
     """Test that chart generator creates empty figure with proper axis setup."""
@@ -32,15 +34,15 @@ def test_single_participant_line():
     """Test that chart plots one participant's rank progression."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
                 {'event': 3, 'overall_rank': 900000},
                 {'event': 4, 'overall_rank': 875000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -63,30 +65,32 @@ def test_multiple_participants_3_traces():
     """Test that chart plots three participants' rank progressions."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
                 {'event': 3, 'overall_rank': 900000},
             ]
-        },
-        {
-            'player_first_name': 'Jane',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Jane',
+            entry_id=2,
+            history=[
                 {'event': 1, 'overall_rank': 800000},
                 {'event': 2, 'overall_rank': 750000},
                 {'event': 3, 'overall_rank': 700000},
             ]
-        },
-        {
-            'player_first_name': 'Bob',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Bob',
+            entry_id=3,
+            history=[
                 {'event': 1, 'overall_rank': 1200000},
                 {'event': 2, 'overall_rank': 1150000},
                 {'event': 3, 'overall_rank': 1100000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -116,13 +120,14 @@ def test_multiple_participants_10_traces():
     # Arrange
     participants = []
     for i in range(10):
-        participants.append({
-            'player_first_name': f'Player{i}',
-            'history': [
+        participants.append(make_test_participant(
+            first_name=f'Player{i}',
+            entry_id=i+1,
+            history=[
                 {'event': 1, 'overall_rank': 1000000 + (i * 100000)},
                 {'event': 2, 'overall_rank': 950000 + (i * 100000)},
             ]
-        })
+        ))
 
     # Act
     fig = generate_rank_progression_chart(participants)
@@ -142,20 +147,21 @@ def test_light_theme_colors():
     """Test that light theme uses light background and dark lines."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
             ]
-        },
-        {
-            'player_first_name': 'Jane',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Jane',
+            entry_id=2,
+            history=[
                 {'event': 1, 'overall_rank': 800000},
                 {'event': 2, 'overall_rank': 750000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -188,20 +194,21 @@ def test_dark_theme_colors():
     """Test that dark theme uses dark background and light/bright lines."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
             ]
-        },
-        {
-            'player_first_name': 'Jane',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Jane',
+            entry_id=2,
+            history=[
                 {'event': 1, 'overall_rank': 800000},
                 {'event': 2, 'overall_rank': 750000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -233,13 +240,13 @@ def test_custom_background_color_override():
     # Arrange
     custom_color = "#ff0000"  # Red
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -264,22 +271,23 @@ def test_sinkaberg_theme_colors():
     """Test that Sinkaberg theme uses corporate color palette."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'league_rank': 1,
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
-            ]
-        },
-        {
-            'player_first_name': 'Jane',
-            'league_rank': 2,
-            'history': [
+            ],
+            league_rank=1
+        ),
+        make_test_participant(
+            first_name='Jane',
+            entry_id=2,
+            history=[
                 {'event': 1, 'overall_rank': 800000},
                 {'event': 2, 'overall_rank': 750000},
-            ]
-        }
+            ],
+            league_rank=2
+        )
     ]
 
     # Act
@@ -312,13 +320,13 @@ def test_configurable_chart_dimensions():
     """Test that width and height parameters control chart size."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
             ]
-        }
+        )
     ]
     custom_width = 800
     custom_height = 400
@@ -335,27 +343,27 @@ def test_legend_with_participant_names():
     """Test that legend shows participant first names and is visible."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'Alice',
-            'history': [
+        make_test_participant(
+            first_name='Alice',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
             ]
-        },
-        {
-            'player_first_name': 'Bob',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Bob',
+            history=[
                 {'event': 1, 'overall_rank': 800000},
                 {'event': 2, 'overall_rank': 750000},
             ]
-        },
-        {
-            'player_first_name': 'Charlie',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Charlie',
+            history=[
                 {'event': 1, 'overall_rank': 1200000},
                 {'event': 2, 'overall_rank': 1100000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -364,9 +372,10 @@ def test_legend_with_participant_names():
     # Assert
     # Check that each trace has the correct name label
     assert len(fig.data) == 3, "Should have 3 traces"
-    assert fig.data[0].name == 'Alice', f"First trace should be named 'Alice', got {fig.data[0].name}"
-    assert fig.data[1].name == 'Bob', f"Second trace should be named 'Bob', got {fig.data[1].name}"
-    assert fig.data[2].name == 'Charlie', f"Third trace should be named 'Charlie', got {fig.data[2].name}"
+    # Enhanced legend format: "1. Alice (950k)"
+    assert 'Alice' in fig.data[0].name, f"First trace should contain 'Alice', got {fig.data[0].name}"
+    assert 'Bob' in fig.data[1].name, f"Second trace should contain 'Bob', got {fig.data[1].name}"
+    assert 'Charlie' in fig.data[2].name, f"Third trace should contain 'Charlie', got {fig.data[2].name}"
 
     # Check that legend is visible
     # By default, Plotly shows legend unless explicitly hidden
@@ -379,22 +388,22 @@ def test_svg_export():
     """Test that chart can be exported as SVG string."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'Alice',
-            'history': [
+        make_test_participant(
+            first_name='Alice',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
                 {'event': 3, 'overall_rank': 900000},
             ]
-        },
-        {
-            'player_first_name': 'Bob',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Bob',
+            history=[
                 {'event': 1, 'overall_rank': 800000},
                 {'event': 2, 'overall_rank': 750000},
                 {'event': 3, 'overall_rank': 700000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -417,22 +426,22 @@ def test_png_export():
 
     # Arrange
     participants = [
-        {
-            'player_first_name': 'Alice',
-            'history': [
+        make_test_participant(
+            first_name='Alice',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
                 {'event': 3, 'overall_rank': 900000},
             ]
-        },
-        {
-            'player_first_name': 'Bob',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Bob',
+            history=[
                 {'event': 1, 'overall_rank': 800000},
                 {'event': 2, 'overall_rank': 750000},
                 {'event': 3, 'overall_rank': 700000},
             ]
-        }
+        )
     ]
 
     # Create a temporary file for PNG output
@@ -466,25 +475,25 @@ def test_incomplete_participant_history():
     """Test that chart handles participants who joined mid-season."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'EarlyJoiner',
-            'history': [
+        make_test_participant(
+            first_name='EarlyJoiner',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
                 {'event': 3, 'overall_rank': 900000},
                 {'event': 4, 'overall_rank': 875000},
                 {'event': 5, 'overall_rank': 850000},
             ]
-        },
-        {
-            'player_first_name': 'MidSeasonJoiner',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='MidSeasonJoiner',
+            history=[
                 # Missing GW 1-4, starts at GW5
                 {'event': 5, 'overall_rank': 2000000},
                 {'event': 6, 'overall_rank': 1950000},
                 {'event': 7, 'overall_rank': 1900000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -508,9 +517,9 @@ def test_x_axis_shows_only_integer_gameweeks():
     """Test that X-axis displays only whole integer gameweek numbers."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'Alice',
-            'history': [
+        make_test_participant(
+            first_name='Alice',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
                 {'event': 3, 'overall_rank': 900000},
@@ -519,7 +528,7 @@ def test_x_axis_shows_only_integer_gameweeks():
                 {'event': 6, 'overall_rank': 825000},
                 {'event': 7, 'overall_rank': 800000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -557,20 +566,20 @@ def test_default_theme_is_dark():
     """Test that dark theme is used by default when no theme parameter is provided."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
             ]
-        },
-        {
-            'player_first_name': 'Jane',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Jane',
+            history=[
                 {'event': 1, 'overall_rank': 800000},
                 {'event': 2, 'overall_rank': 750000},
             ]
-        }
+        )
     ]
 
     # Act - Call without theme parameter
@@ -598,22 +607,22 @@ def test_y_axis_range_set_from_total_players():
     # Arrange
     total_players = 10000000
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
                 {'event': 3, 'overall_rank': 900000},
             ]
-        },
-        {
-            'player_first_name': 'Jane',
-            'history': [
+        ),
+        make_test_participant(
+            first_name='Jane',
+            history=[
                 {'event': 1, 'overall_rank': 800000},
                 {'event': 2, 'overall_rank': 750000},
                 {'event': 3, 'overall_rank': 700000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -638,9 +647,9 @@ def test_unfinished_gameweek_displays_with_asterisk():
     """Test that unfinished gameweeks are marked with asterisk on X-axis."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
                 {'event': 3, 'overall_rank': 900000},
@@ -649,7 +658,7 @@ def test_unfinished_gameweek_displays_with_asterisk():
                 {'event': 6, 'overall_rank': 825000},
                 {'event': 7, 'overall_rank': 800000},
             ]
-        }
+        )
     ]
 
     # Event 7 is unfinished, events 1-6 are finished
@@ -691,13 +700,13 @@ def test_rgba_background_color_support():
     # Arrange
     rgba_color = "rgba(0, 0, 0, 0.1)"  # Black with 10% opacity
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -721,13 +730,13 @@ def test_default_rgba_background_color():
     """Test that default background color is rgba(0, 0, 0, 0.3)."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
             ]
-        }
+        )
     ]
 
     # Act
@@ -744,14 +753,14 @@ def test_horizontal_gridlines_at_major_ticks():
     """Test that chart displays horizontal gridlines at major Y-axis tick marks."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 3000000},
                 {'event': 3, 'overall_rank': 5000000},
             ]
-        }
+        )
     ]
     total_players = 10000000
 
@@ -771,30 +780,32 @@ def test_enhanced_legend_format():
     """Test that legend format shows: <league_rank>. <first_name> (<overall_rank_rounded>)."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'Torkil',
-            'league_rank': 1,
-            'history': [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
                 {'event': 1, 'overall_rank': 345123, 'league_rank': 1},
                 {'event': 2, 'overall_rank': 340500, 'league_rank': 1},
-            ]
-        },
-        {
-            'player_first_name': 'Anders',
-            'league_rank': 2,
-            'history': [
+            ],
+            league_rank=1
+        ),
+        make_test_participant(
+            first_name='Anders',
+            entry_id=2,
+            history=[
                 {'event': 1, 'overall_rank': 450789, 'league_rank': 2},
                 {'event': 2, 'overall_rank': 442000, 'league_rank': 2},
-            ]
-        },
-        {
-            'player_first_name': 'Eirin',
-            'league_rank': 3,
-            'history': [
+            ],
+            league_rank=2
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            entry_id=3,
+            history=[
                 {'event': 1, 'overall_rank': 1234567, 'league_rank': 3},
                 {'event': 2, 'overall_rank': 1234000, 'league_rank': 3},
-            ]
-        }
+            ],
+            league_rank=3
+        )
     ]
 
     # Act
@@ -823,13 +834,13 @@ def test_paper_bgcolor_matches_plot_bgcolor():
     """Test that paper_bgcolor controls background while plot_bgcolor is transparent."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
             ]
-        }
+        )
     ]
 
     # Act - Test with default background
@@ -859,14 +870,14 @@ def test_dark_theme_has_light_text_colors():
     """Test that dark theme uses light text colors for readability."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'league_rank': 1,
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
-            ]
-        }
+            ],
+            league_rank=1
+        )
     ]
 
     # Act - Generate with dark theme (default)
@@ -902,14 +913,14 @@ def test_large_font_sizes_for_tv_display():
     """Test that chart uses large font sizes for readability from distance on TV."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'league_rank': 1,
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
-            ]
-        }
+            ],
+            league_rank=1
+        )
     ]
 
     # Act
@@ -948,14 +959,14 @@ def test_reduced_top_padding_with_balanced_margins():
     """Test that chart has appropriate margins with X-axis positioned at the top."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'league_rank': 1,
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
-            ]
-        }
+            ],
+            league_rank=1
+        )
     ]
 
     # Act
@@ -993,15 +1004,15 @@ def test_gridline_brightness_for_dark_theme():
     """
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'league_rank': 1,
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 3000000},
                 {'event': 3, 'overall_rank': 5000000},
-            ]
-        }
+            ],
+            league_rank=1
+        )
     ]
     total_players = 10000000
 
@@ -1060,22 +1071,23 @@ def test_transparent_plot_area_and_legend_with_increased_opacity():
     """Test that default background is rgba(0,0,0,0.3), plot area and legend are transparent."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'league_rank': 1,
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
-            ]
-        },
-        {
-            'player_first_name': 'Jane',
-            'league_rank': 2,
-            'history': [
+            ],
+            league_rank=1
+        ),
+        make_test_participant(
+            first_name='Jane',
+            entry_id=2,
+            history=[
                 {'event': 1, 'overall_rank': 1100000},
                 {'event': 2, 'overall_rank': 1050000},
-            ]
-        }
+            ],
+            league_rank=2
+        )
     ]
 
     # Act
@@ -1105,14 +1117,14 @@ def test_further_reduced_top_padding():
     """Test that chart has appropriate top padding with X-axis positioned at the top."""
     # Arrange
     participants = [
-        {
-            'player_first_name': 'John',
-            'league_rank': 1,
-            'history': [
+        make_test_participant(
+            first_name='John',
+            history=[
                 {'event': 1, 'overall_rank': 1000000},
                 {'event': 2, 'overall_rank': 950000},
-            ]
-        }
+            ],
+            league_rank=1
+        )
     ]
 
     # Act

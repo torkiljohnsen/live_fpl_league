@@ -20,7 +20,8 @@ class DummyAPI:
         return data
 
     def get_league_standings(self, league_id):
-        return json.loads((self.data_dir / f"leagues-classic_{league_id}_standings_sample.json").read_text(encoding="utf-8"))
+        path = self.data_dir / f"leagues-classic_{league_id}_standings_sample.json"
+        return json.loads(path.read_text(encoding="utf-8"))
 
     def get_team_history(self, team_id):
         data = json.loads((self.data_dir / "entry_811114_history_sample.json").read_text(encoding="utf-8"))
@@ -40,12 +41,12 @@ LEAGUE_ID = "1639886"
 def test_fpl_league_summary():
     api = DummyAPI(data_dir)
     league = FPLLeague(LEAGUE_ID, api)
-    summary = league.get_summary()
+    summary = league.get_summary_as_dicts()
     assert summary["id"] == int(LEAGUE_ID)
     assert "participants" in summary
     assert isinstance(summary["participants"], list)
     assert summary["event_ids"]
-    # Check participant fields - participants are dicts from get_summary()
+    # Check participant fields - participants are dicts from get_summary_as_dicts()
     for p in summary["participants"]:
         assert "entry_id" in p
         assert "team_name" in p

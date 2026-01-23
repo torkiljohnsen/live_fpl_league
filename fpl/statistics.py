@@ -1,11 +1,15 @@
 """Statistics calculation module for FPL league data."""
 
+from typing import Any
 
-def get_highest_team_value(participants):
+from .participant import Participant
+
+
+def get_highest_team_value(participants: list[Participant]) -> dict[str, Any] | None:
     """Calculate the highest team value among participants.
 
     Args:
-        participants: List of participant dictionaries with 'team_name', 'player_first_name',
+        participants: List of Participant objects with 'team_name', 'player_first_name',
                      and 'history' containing 'bank' and 'value' fields.
 
     Returns:
@@ -19,7 +23,7 @@ def get_highest_team_value(participants):
     highest_value = 0
 
     for participant in participants:
-        history = participant.get('history', [])
+        history = participant.history
         if not history:
             continue
 
@@ -33,21 +37,21 @@ def get_highest_team_value(participants):
         if team_value > highest_value:
             highest_value = team_value
             highest = {
-                'team_name': participant.get('team_name', ''),
-                'player_name': participant.get('player_first_name', ''),
+                'team_name': participant.team_name,
+                'player_name': participant.player_first_name,
                 'value': team_value
             }
 
     return highest
 
 
-def get_in_form_players(participants):
+def get_in_form_players(participants: list[Participant]) -> dict[str, Any] | None:
     """Calculate players with most consecutive overall_rank improvements (green arrows).
 
     A green arrow means the overall_rank decreased (improved) from the previous event.
 
     Args:
-        participants: List of participant dictionaries with 'player_first_name'
+        participants: List of Participant objects with 'player_first_name'
                      and 'history' containing 'event' and 'overall_rank' fields.
 
     Returns:
@@ -61,7 +65,7 @@ def get_in_form_players(participants):
     players_with_max = []
 
     for participant in participants:
-        history = participant.get('history', [])
+        history = participant.history
         if len(history) < 2:
             continue
 
@@ -81,7 +85,7 @@ def get_in_form_players(participants):
                 break
 
         if current_consecutive > 0:
-            player_name = participant.get('player_first_name', '')
+            player_name = participant.player_first_name
             if current_consecutive > max_consecutive:
                 max_consecutive = current_consecutive
                 players_with_max = [player_name]
@@ -97,7 +101,7 @@ def get_in_form_players(participants):
     }
 
 
-def should_show_in_form_stat(current_event):
+def should_show_in_form_stat(current_event: int) -> bool:
     """Determine if the in-form statistic should be displayed.
 
     Args:

@@ -1,6 +1,10 @@
 """Chart generation module for FPL rank progression visualization."""
 
+from typing import Any
+
 import plotly.graph_objects as go
+
+from .participant import Participant
 
 # Color palettes for different themes
 LIGHT_THEME_COLORS = [
@@ -57,20 +61,20 @@ THEME_CONFIGS = {
 
 
 def generate_rank_progression_chart(
-    participants,
-    theme="dark",
-    bg_color=None,
-    width=1200,
-    height=600,
-    output_format="figure",
-    output_path=None,
-    total_players=None,
-    events=None
-):
+    participants: list[Participant],
+    theme: str = "dark",
+    bg_color: str | None = None,
+    width: int = 1200,
+    height: int = 600,
+    output_format: str = "figure",
+    output_path: str | None = None,
+    total_players: int | None = None,
+    events: list[dict[str, Any]] | None = None
+) -> go.Figure | str | None:
     """Generate a rank progression chart for FPL participants.
 
     Args:
-        participants: List of participant dictionaries, each containing 'history' array
+        participants: List of Participant objects, each containing 'history' array
                      with 'event' and 'overall_rank' fields.
         theme: Color theme for the chart. Options: "light", "dark" (default), "sinkaberg".
         bg_color: Optional custom background color (hex string). Overrides theme default.
@@ -109,7 +113,7 @@ def generate_rank_progression_chart(
     # Add a line trace for each participant
     all_events = []
     for i, participant in enumerate(participants):
-        history = participant.get('history', [])
+        history = participant.history
 
         # Extract event numbers and overall ranks
         event_numbers = [entry['event'] for entry in history]
@@ -122,8 +126,8 @@ def generate_rank_progression_chart(
         color = colors[i % len(colors)]
 
         # Create legend label with enhanced format: "<league_rank>. <first_name> (<overall_rank_rounded>)"
-        first_name = participant.get('player_first_name', 'Unknown')
-        league_rank = participant.get('league_rank')
+        first_name = participant.player_first_name
+        league_rank = participant.league_rank
 
         # Get the latest overall_rank from history and format appropriately
         if history:

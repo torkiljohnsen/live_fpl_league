@@ -79,7 +79,8 @@ def test_formats_highest_team_value():
         # Should be formatted as: "Team name (Player name) - £XXX.XM"
         assert " - £" in highest_value, "Should contain currency format"
         assert "M" in highest_value, "Should end with M for millions"
-        assert "(" in highest_value and ")" in highest_value, "Should contain player name in parentheses"
+        assert "(" in highest_value, "Should contain opening parenthesis"
+        assert ")" in highest_value, "Should contain closing parenthesis"
 
 
 def test_formats_in_form_players():

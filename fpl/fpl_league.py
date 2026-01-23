@@ -91,8 +91,15 @@ class FPLLeague:
             complete_history = ChipAnnotator.add_chips(chips, complete_history)
 
         # Find the latest event with activity (current or finished)
-        latest_active_event_id = self.current_event_id if self.current_event_id else (max(self.finished_event_ids) if self.finished_event_ids else 0)
-        last_event = next((e for e in complete_history if e["event"] == latest_active_event_id), None)
+        if self.current_event_id:
+            latest_active_event_id = self.current_event_id
+        elif self.finished_event_ids:
+            latest_active_event_id = max(self.finished_event_ids)
+        else:
+            latest_active_event_id = 0
+        last_event = next(
+            (e for e in complete_history if e["event"] == latest_active_event_id), None
+        )
 
         # Ensure last_event is never None by creating a default event
         if last_event is None:
@@ -129,12 +136,27 @@ class FPLLeague:
     def get_summary(self) -> dict[str, Any]:
         summary: dict[str, Any] = dict(self.info)
         summary["generated_time"] = datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-        # Convert Participant objects to dicts for backward compatibility
-        summary["participants"] = [p.to_dict() for p in self.get_participants()]
+        # Get Participant objects with league_rank assigned
+        participants = self.get_participants()
+        for idx, p in enumerate(participants):
+            p.league_rank = idx + 1
+        # Store Participant objects for internal use (statistics, charts)
+        # Templates can access both object attributes and dict keys via Jinja2
+        summary["participants"] = participants
         summary["event_ids"] = self.event_ids  # All events
         summary["finished_event_ids"] = self.finished_event_ids  # Finished events marker
         summary["current_event_id"] = self.current_event_id  # Current event marker
-        summary["is_current_finished"] = self.current_event_id in self.finished_event_ids if self.current_event_id else False
+        summary["is_current_finished"] = (
+            self.current_event_id in self.finished_event_ids
+            if self.current_event_id
+            else False
+        )
+        return summary
+
+    def get_summary_as_dicts(self) -> dict[str, Any]:
+        """Get summary with participants converted to dicts for JSON serialization."""
+        summary = self.get_summary()
+        summary["participants"] = [p.to_dict() for p in summary["participants"]]
         return summary
 
     def get_next_deadline_time(self) -> str | None:

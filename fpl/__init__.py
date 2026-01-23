@@ -6,4 +6,12 @@ from .league_template_renderer import LeagueTemplateRenderer
 from .participant import Participant
 from .rank_calculator import RankCalculator
 
-__all__ = ['FPL_API', 'FPLLeague', 'LeagueTemplateRenderer', 'LeagueContext', 'FPLAPIProtocol', 'Participant', 'RankCalculator']
+__all__ = [
+    'FPL_API',
+    'FPLLeague',
+    'LeagueTemplateRenderer',
+    'LeagueContext',
+    'FPLAPIProtocol',
+    'Participant',
+    'RankCalculator',
+]
