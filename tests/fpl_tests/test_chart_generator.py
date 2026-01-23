@@ -816,11 +816,11 @@ def test_enhanced_legend_format():
     assert len(fig.data) == 3, "Figure should have exactly three traces"
 
     # Check that each trace has the correct legend label format
-    # Format: "<league_rank>. <first_name> (<overall_rank_rounded>)"
-    # Overall rank should be rounded: <1M use "k", >=1M use "M" with 2 decimals
+    # Format: "<league_rank>. <first_name> (<overall_rank_formatted>)"
+    # Overall rank uses 3-digit precision: 1.23k, 23.4k, 345k, 4.56M, etc.
     expected_labels = [
-        "1. Torkil (341k)",   # Latest rank: 340500 → rounds to 341k
-        "2. Anders (442k)",   # Latest rank: 442000 → rounds to 442k
+        "1. Torkil (340k)",   # Latest rank: 340500 → displays as 340k (3 sig figs)
+        "2. Anders (442k)",   # Latest rank: 442000 → displays as 442k
         "3. Eirin (1.23M)"    # Latest rank: 1234000 → displays as 1.23M
     ]
 
