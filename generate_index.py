@@ -1,5 +1,6 @@
-from pathlib import Path
 import re
+from pathlib import Path
+
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 DOCS_DIR = Path("docs")
@@ -7,11 +8,19 @@ TEMPLATES_DIR = Path("templates")
 OUTPUT_FILE = DOCS_DIR / "index.html"
 
 def get_league_html_files():
-    """Return a list of league_*.html files in docs/, excluding -dev.html and index.html."""
-    return sorted(
+    """
+    Return league_*.html and ranking_progression_*.html files in docs/,
+    excluding -dev.html, test files, and index.html.
+    """
+    league_files = [
         f for f in DOCS_DIR.glob("league_*.html")
         if not f.name.endswith("-dev.html") and f.name != "index.html"
-    )
+    ]
+    ranking_files = [
+        f for f in DOCS_DIR.glob("ranking_progression_*.html")
+        if not f.name.endswith("-dev.html") and not f.name.startswith("test_")
+    ]
+    return sorted(league_files + ranking_files)
 
 def extract_title(filepath: Path) -> str:
     """Extract the <title> from an HTML file, or fallback to a cleaned filename."""

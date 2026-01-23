@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+
 from fpl.fpl_league import FPLLeague
 
 
@@ -12,7 +13,7 @@ class DummyAPI:
     def get_bootstrap_static(self):
         data = json.loads((self.data_dir / "bootstrap-static_sample.json").read_text(encoding="utf-8"))
         if self._all_events_finished:
-            # Mark all events as finished and no event as next
+            # Mark all events as finished and no next event
             for event in data["events"]:
                 event["finished"] = True
                 event["is_next"] = False
@@ -44,16 +45,16 @@ def test_fpl_league_summary():
     assert "participants" in summary
     assert isinstance(summary["participants"], list)
     assert summary["event_ids"]
-    # Check participant fields - participants are now Participant objects, not dicts
+    # Check participant fields - participants are dicts from get_summary()
     for p in summary["participants"]:
-        assert hasattr(p, "entry_id")
-        assert hasattr(p, "team_name")
-        assert hasattr(p, "manager_name")
-        assert hasattr(p, "total_score")
-        assert hasattr(p, "history")
-        assert isinstance(p.history, list)
-        if p.history:
-            h = p.history[0]
+        assert "entry_id" in p
+        assert "team_name" in p
+        assert "manager_name" in p
+        assert "total_score" in p
+        assert "history" in p
+        assert isinstance(p["history"], list)
+        if p["history"]:
+            h = p["history"][0]
             assert "event" in h
             assert "net_points" in h
             assert "round_rank" in h

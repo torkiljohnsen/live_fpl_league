@@ -128,7 +128,7 @@ def test_lowest_rank_column_in_template():
     # Check that each participant's lowest rank count appears in the table
     for p in league_data["participants"]:
         # The lowest rank count should appear as text in the rendered HTML
-        assert str(p.lowest_rank_count) in html, f"Template should display lowest_rank_count ({p.lowest_rank_count}) for participant {p.manager_name}"
+        assert str(p["lowest_rank_count"]) in html, f"Template should display lowest_rank_count ({p['lowest_rank_count']}) for participant {p['manager_name']}"
 
 
 def test_duck_icons_appear_for_tied_losers():
@@ -137,17 +137,17 @@ def test_duck_icons_appear_for_tied_losers():
     participants = [
         Participant(
             entry_id=1, team_name="Team A", manager_name="Alice", total_score=50,
-            history=[{"event": 1, "net_points": 50, "total_points": 50}],
+            history=[{"event": 1, "net_points": 50, "total_points": 50, "overall_rank": 100}],
             last_event={"event": 1, "net_points": 50, "total_points": 50}
         ),
         Participant(
             entry_id=2, team_name="Team B", manager_name="Bob", total_score=50,
-            history=[{"event": 1, "net_points": 50, "total_points": 50}],
+            history=[{"event": 1, "net_points": 50, "total_points": 50, "overall_rank": 100}],
             last_event={"event": 1, "net_points": 50, "total_points": 50}
         ),
         Participant(
             entry_id=3, team_name="Team C", manager_name="Carol", total_score=70,
-            history=[{"event": 1, "net_points": 70, "total_points": 70}],
+            history=[{"event": 1, "net_points": 70, "total_points": 70, "overall_rank": 50}],
             last_event={"event": 1, "net_points": 70, "total_points": 70}
         ),
     ]

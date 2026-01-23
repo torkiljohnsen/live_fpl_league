@@ -1,7 +1,8 @@
-from typing import Any, Dict, List
+from typing import Any
+
 
 class ChipAnnotator:
-    CHIP_ABBREVIATIONS: Dict[str, str] = {
+    CHIP_ABBREVIATIONS: dict[str, str] = {
         "wildcard": "WC",
         "freehit": "FH",
         "bboost": "BB",
@@ -9,7 +10,7 @@ class ChipAnnotator:
     }
 
     @classmethod
-    def add_chips(cls, chips: List[Dict[str, Any]], finished_history: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def add_chips(cls, chips: list[dict[str, Any]], finished_history: list[dict[str, Any]]) -> list[dict[str, Any]]:
         for chip in chips:
             name = chip.get("name")
             if not isinstance(name, str):

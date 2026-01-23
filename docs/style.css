@@ -2,6 +2,9 @@
 .positive_rank_change {
 	color: #1ec773;
 }
+.green-arrow {
+	color: #1ec773;
+}
 .points_value {
 	font-weight: bold;
 }
@@ -64,6 +67,36 @@ table {
 	overflow: hidden;
 	max-width: 95vw;
 }
+
+.chart-container {
+	margin: 2rem auto;
+	text-align: center;
+}
+
+.stats-container {
+	margin: 2rem auto;
+	max-width: 40vw;
+}
+
+.stats-list {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 0.5rem 1rem;
+	align-items: baseline;
+	font-size: 1.1rem;
+}
+
+.stats-list dt {
+	font-weight: bold;
+	text-align: right;
+	white-space: nowrap;
+}
+
+.stats-list dd {
+	margin: 0;
+	text-align: left;
+}
+
 th, td {
 	padding: 0.7rem 1.2rem;
 	text-align: center;
@@ -91,6 +124,9 @@ tr:nth-child(odd) {
 	}
 	th, td {
 		padding: 0.5rem 0.7rem;
+	}
+	.stats-container {
+		max-width: 95vw;
 	}
 }
 

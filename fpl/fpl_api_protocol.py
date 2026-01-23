@@ -1,13 +1,14 @@
-from typing import Protocol, Dict, Any
+from typing import Any, Protocol
+
 
 class FPLAPIProtocol(Protocol):
-    def get_league_standings(self, league_id: str) -> Dict[str, Any]:
+    def get_league_standings(self, league_id: str) -> dict[str, Any]:
         ...
-    def get_team(self, team_id: str) -> Dict[str, Any]:
+    def get_team(self, team_id: str) -> dict[str, Any]:
         ...
-    def get_team_history(self, team_id: str) -> Dict[str, Any]:
+    def get_team_history(self, team_id: str) -> dict[str, Any]:
         ...
-    def get_team_picks(self, team_id: str, event_id: str) -> Dict[str, Any]:
+    def get_team_picks(self, team_id: str, event_id: str) -> dict[str, Any]:
         ...
-    def get_bootstrap_static(self) -> Dict[str, Any]:
+    def get_bootstrap_static(self) -> dict[str, Any]:
         ...

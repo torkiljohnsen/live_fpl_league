@@ -1,0 +1,1124 @@
+"""Tests for chart generator functionality."""
+
+from fpl.chart_generator import generate_rank_progression_chart
+
+
+def test_empty_chart_has_proper_axes():
+    """Test that chart generator creates empty figure with proper axis setup."""
+    # Arrange
+    participants = []
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    assert fig is not None, "Function should return a figure object"
+
+    # Check that it's a Plotly figure
+    assert hasattr(fig, 'data'), "Should be a Plotly figure with data attribute"
+    assert hasattr(fig, 'layout'), "Should be a Plotly figure with layout attribute"
+
+    # Check X-axis label
+    assert fig.layout.xaxis.title.text == "Gameweek", "X-axis should be labeled 'Gameweek'"
+
+    # Check Y-axis label
+    assert fig.layout.yaxis.title.text == "Overall Rank", "Y-axis should be labeled 'Overall Rank'"
+
+    # Check Y-axis is inverted (reversed=True means lower rank at top)
+    assert fig.layout.yaxis.autorange == "reversed", "Y-axis should be inverted (reversed=True)"
+
+
+def test_single_participant_line():
+    """Test that chart plots one participant's rank progression."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+                {'event': 4, 'overall_rank': 875000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    assert len(fig.data) == 1, "Figure should have exactly one trace for one participant"
+
+    trace = fig.data[0]
+
+    # Check that trace contains correct data points
+    expected_events = [1, 2, 3, 4]
+    expected_ranks = [1000000, 950000, 900000, 875000]
+
+    assert list(trace.x) == expected_events, f"X-axis data should match events: {expected_events}"
+    assert list(trace.y) == expected_ranks, f"Y-axis data should match ranks: {expected_ranks}"
+
+
+def test_multiple_participants_3_traces():
+    """Test that chart plots three participants' rank progressions."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+                {'event': 3, 'overall_rank': 700000},
+            ]
+        },
+        {
+            'player_first_name': 'Bob',
+            'history': [
+                {'event': 1, 'overall_rank': 1200000},
+                {'event': 2, 'overall_rank': 1150000},
+                {'event': 3, 'overall_rank': 1100000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    assert len(fig.data) == 3, "Figure should have exactly three traces for three participants"
+
+    # Check first participant's data
+    trace_0 = fig.data[0]
+    assert list(trace_0.x) == [1, 2, 3], "First trace X-axis should match events"
+    assert list(trace_0.y) == [1000000, 950000, 900000], "First trace Y-axis should match John's ranks"
+
+    # Check second participant's data
+    trace_1 = fig.data[1]
+    assert list(trace_1.x) == [1, 2, 3], "Second trace X-axis should match events"
+    assert list(trace_1.y) == [800000, 750000, 700000], "Second trace Y-axis should match Jane's ranks"
+
+    # Check third participant's data
+    trace_2 = fig.data[2]
+    assert list(trace_2.x) == [1, 2, 3], "Third trace X-axis should match events"
+    assert list(trace_2.y) == [1200000, 1150000, 1100000], "Third trace Y-axis should match Bob's ranks"
+
+
+def test_multiple_participants_10_traces():
+    """Test that chart plots ten participants' rank progressions."""
+    # Arrange
+    participants = []
+    for i in range(10):
+        participants.append({
+            'player_first_name': f'Player{i}',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000 + (i * 100000)},
+                {'event': 2, 'overall_rank': 950000 + (i * 100000)},
+            ]
+        })
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    assert len(fig.data) == 10, "Figure should have exactly ten traces for ten participants"
+
+    # Verify each trace has correct data
+    for i, trace in enumerate(fig.data):
+        expected_x = [1, 2]
+        expected_y = [1000000 + (i * 100000), 950000 + (i * 100000)]
+        assert list(trace.x) == expected_x, f"Trace {i} X-axis should match events"
+        assert list(trace.y) == expected_y, f"Trace {i} Y-axis should match Player{i}'s ranks"
+
+
+def test_light_theme_colors():
+    """Test that light theme uses light background and dark lines."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants, theme="light")
+
+    # Assert
+    # Check background is light colored (white or near-white)
+    bg_color = fig.layout.paper_bgcolor
+    assert bg_color is not None, "Background color should be set"
+    # Accept various light color formats: white, #ffffff, #fff, rgb(255,255,255), or None (default white)
+    # For light theme, we expect white or near-white
+    light_colors = ['white', '#ffffff', '#fff', 'rgb(255,255,255)', 'rgb(255, 255, 255)', None, '']
+    is_light = (bg_color in light_colors) or (isinstance(bg_color, str) and bg_color.startswith('#f'))
+    assert is_light, f"Light theme should use light background, got: {bg_color}"
+
+    # Verify plot area is transparent
+    assert fig.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
+
+    # Check that line colors are dark/visible
+    # Line colors should be distinguishable and dark for good visibility on light background
+    for i, trace in enumerate(fig.data):
+        line_color = trace.line.color
+        assert line_color is not None, f"Trace {i} should have a line color set"
+        # Dark colors should not be white or very light
+        assert line_color not in ['white', '#ffffff', '#fff'], \
+            f"Trace {i} should not use white/light color on light background: {line_color}"
+
+
+def test_dark_theme_colors():
+    """Test that dark theme uses dark background and light/bright lines."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants, theme="dark")
+
+    # Assert
+    # Check background is dark colored
+    bg_color = fig.layout.plot_bgcolor
+    assert bg_color is not None, "Background color should be set"
+    # For dark theme, we expect dark colors (black, dark gray, etc.) or RGBA with black base
+    dark_colors = ['black', '#000000', '#000', '#1a1a1a', '#2b2b2b', '#333333', '#222222']
+    is_dark = bg_color in dark_colors or (isinstance(bg_color, str) and bg_color.startswith('rgba(0, 0, 0,'))
+    assert is_dark, f"Dark theme should use dark background, got: {bg_color}"
+
+    # Check that line colors are light/bright for visibility on dark background
+    for i, trace in enumerate(fig.data):
+        line_color = trace.line.color
+        assert line_color is not None, f"Trace {i} should have a line color set"
+        # Light/bright colors should not be from the standard dark palette
+        # We expect colors that are bright and visible on dark backgrounds
+        dark_palette_colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
+                               '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
+        assert line_color not in dark_palette_colors, \
+            f"Trace {i} should not use dark palette color on dark background: {line_color}"
+
+
+def test_custom_background_color_override():
+    """Test that custom bg_color parameter overrides theme defaults."""
+    # Arrange
+    custom_color = "#ff0000"  # Red
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig_light = generate_rank_progression_chart(participants, theme="light", bg_color=custom_color)
+    fig_dark = generate_rank_progression_chart(participants, theme="dark", bg_color=custom_color)
+
+    # Assert
+    # Custom color should override light theme default (applied to paper_bgcolor)
+    assert fig_light.layout.paper_bgcolor == custom_color, \
+        f"Custom bg_color should override light theme default, got {fig_light.layout.paper_bgcolor}"
+
+    # Custom color should override dark theme default (applied to paper_bgcolor)
+    assert fig_dark.layout.paper_bgcolor == custom_color, \
+        f"Custom bg_color should override dark theme default, got {fig_dark.layout.paper_bgcolor}"
+
+    # Plot area should always be transparent
+    assert fig_light.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
+    assert fig_dark.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
+
+
+def test_sinkaberg_theme_colors():
+    """Test that Sinkaberg theme uses corporate color palette."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'league_rank': 2,
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants, theme="sinkaberg")
+
+    # Assert
+    # Check that background is white (corporate clean look)
+    assert fig.layout.paper_bgcolor == '#FFFFFF', \
+        f"Sinkaberg theme should use white background, got: {fig.layout.paper_bgcolor}"
+
+    # Check that plot area is transparent
+    assert fig.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
+
+    # Check that line colors are from Sinkaberg palette
+    sinkaberg_colors = ['#3E7DEE', '#F06848', '#023493', '#1f295C', '#FAD2C8', '#00143C', '#E2ECFC']
+    for i, trace in enumerate(fig.data):
+        line_color = trace.line.color.upper()  # Normalize to uppercase for comparison
+        assert line_color in [c.upper() for c in sinkaberg_colors], \
+            f"Trace {i} should use Sinkaberg color palette, got: {line_color}"
+
+    # Verify that first two lines use the primary brand colors
+    assert fig.data[0].line.color.upper() == '#3E7DEE', \
+        "First line should use Lys blå (primary brand color)"
+    assert fig.data[1].line.color.upper() == '#F06848', \
+        "Second line should use Lakserød (accent color)"
+
+
+
+def test_configurable_chart_dimensions():
+    """Test that width and height parameters control chart size."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+    custom_width = 800
+    custom_height = 400
+
+    # Act
+    fig = generate_rank_progression_chart(participants, width=custom_width, height=custom_height)
+
+    # Assert
+    assert fig.layout.width == custom_width, f"Chart width should be {custom_width}, got {fig.layout.width}"
+    assert fig.layout.height == custom_height, f"Chart height should be {custom_height}, got {fig.layout.height}"
+
+
+def test_legend_with_participant_names():
+    """Test that legend shows participant first names and is visible."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'Alice',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Bob',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+            ]
+        },
+        {
+            'player_first_name': 'Charlie',
+            'history': [
+                {'event': 1, 'overall_rank': 1200000},
+                {'event': 2, 'overall_rank': 1100000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    # Check that each trace has the correct name label
+    assert len(fig.data) == 3, "Should have 3 traces"
+    assert fig.data[0].name == 'Alice', f"First trace should be named 'Alice', got {fig.data[0].name}"
+    assert fig.data[1].name == 'Bob', f"Second trace should be named 'Bob', got {fig.data[1].name}"
+    assert fig.data[2].name == 'Charlie', f"Third trace should be named 'Charlie', got {fig.data[2].name}"
+
+    # Check that legend is visible
+    # By default, Plotly shows legend unless explicitly hidden
+    # We check that showlegend is not False
+    legend_visible = fig.layout.showlegend
+    assert legend_visible is not False, f"Legend should be visible, got showlegend={legend_visible}"
+
+
+def test_svg_export():
+    """Test that chart can be exported as SVG string."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'Alice',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+            ]
+        },
+        {
+            'player_first_name': 'Bob',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+                {'event': 3, 'overall_rank': 700000},
+            ]
+        }
+    ]
+
+    # Act
+    svg_string = generate_rank_progression_chart(participants, output_format="svg")
+
+    # Assert
+    assert isinstance(svg_string, str), "SVG export should return a string"
+    assert svg_string.startswith('<svg'), f"SVG string should start with '<svg' tag, got: {svg_string[:20]}"
+    assert '</svg>' in svg_string, "SVG string should contain closing '</svg>' tag"
+
+    # Verify it contains expected elements (basic sanity check)
+    assert 'Gameweek' in svg_string, "SVG should contain X-axis label 'Gameweek'"
+    assert 'Overall Rank' in svg_string, "SVG should contain Y-axis label 'Overall Rank'"
+
+
+def test_png_export():
+    """Test that chart can be exported as PNG file."""
+    import os
+    import tempfile
+
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'Alice',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+            ]
+        },
+        {
+            'player_first_name': 'Bob',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+                {'event': 3, 'overall_rank': 700000},
+            ]
+        }
+    ]
+
+    # Create a temporary file for PNG output
+    with tempfile.NamedTemporaryFile(mode='wb', suffix='.png', delete=False) as tmp_file:
+        output_path = tmp_file.name
+
+    try:
+        # Act
+        generate_rank_progression_chart(participants, output_format="png", output_path=output_path)
+
+        # Assert
+        assert os.path.exists(output_path), f"PNG file should be created at {output_path}"
+
+        # Verify it's a valid PNG file (check PNG magic bytes)
+        with open(output_path, 'rb') as f:
+            header = f.read(8)
+            # PNG files start with: 89 50 4E 47 0D 0A 1A 0A
+            assert header[:4] == b'\x89PNG', "File should have valid PNG header"
+
+        # Verify file has content
+        file_size = os.path.getsize(output_path)
+        assert file_size > 1000, f"PNG file should have substantial content, got {file_size} bytes"
+
+    finally:
+        # Cleanup: remove the temporary file
+        if os.path.exists(output_path):
+            os.remove(output_path)
+
+
+def test_incomplete_participant_history():
+    """Test that chart handles participants who joined mid-season."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'EarlyJoiner',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+                {'event': 4, 'overall_rank': 875000},
+                {'event': 5, 'overall_rank': 850000},
+            ]
+        },
+        {
+            'player_first_name': 'MidSeasonJoiner',
+            'history': [
+                # Missing GW 1-4, starts at GW5
+                {'event': 5, 'overall_rank': 2000000},
+                {'event': 6, 'overall_rank': 1950000},
+                {'event': 7, 'overall_rank': 1900000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    assert len(fig.data) == 2, "Figure should have two traces for two participants"
+
+    # Check first participant (full history from GW1)
+    trace_0 = fig.data[0]
+    assert list(trace_0.x) == [1, 2, 3, 4, 5], "First trace should have full history"
+    assert list(trace_0.y) == [1000000, 950000, 900000, 875000, 850000]
+
+    # Check second participant (history starts at GW5)
+    trace_1 = fig.data[1]
+    assert list(trace_1.x) == [5, 6, 7], "Second trace should start from GW5"
+    assert list(trace_1.y) == [2000000, 1950000, 1900000]
+
+
+def test_x_axis_shows_only_integer_gameweeks():
+    """Test that X-axis displays only whole integer gameweek numbers."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'Alice',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+                {'event': 4, 'overall_rank': 875000},
+                {'event': 5, 'overall_rank': 850000},
+                {'event': 6, 'overall_rank': 825000},
+                {'event': 7, 'overall_rank': 800000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    # Check that X-axis tick values are integers
+    # In Plotly, we can configure tickmode and tickvals to force specific tick values
+    xaxis = fig.layout.xaxis
+
+    # Verify tickmode is set to 'linear' or tick values are explicitly defined
+    # We expect tick values to be [1, 2, 3, 4, 5, 6, 7]
+    expected_ticks = [1, 2, 3, 4, 5, 6, 7]
+
+    # Check if tickvals are explicitly set
+    if xaxis.tickvals is not None:
+        actual_ticks = list(xaxis.tickvals)
+        assert actual_ticks == expected_ticks, \
+            f"X-axis tick values should be integers {expected_ticks}, got {actual_ticks}"
+    else:
+        # If not explicitly set, check that dtick is 1 to ensure integer spacing
+        # dtick controls the spacing between ticks
+        assert xaxis.dtick == 1, \
+            f"X-axis dtick should be 1 to ensure integer ticks, got {xaxis.dtick}"
+
+    # Verify X-axis range covers from 1 to latest gameweek
+    # Range should be [0.5, 7.5] or [1, 7] or similar to encompass all data
+    if xaxis.range is not None:
+        xrange = xaxis.range
+        assert xrange[0] <= 1, f"X-axis should start at or before 1, got {xrange[0]}"
+        assert xrange[1] >= 7, f"X-axis should end at or after 7, got {xrange[1]}"
+
+
+def test_default_theme_is_dark():
+    """Test that dark theme is used by default when no theme parameter is provided."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+            ]
+        }
+    ]
+
+    # Act - Call without theme parameter
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Should use dark theme as default
+    bg_color = fig.layout.plot_bgcolor
+    assert bg_color is not None, "Background color should be set"
+
+    # For dark theme, we expect dark colors or RGBA with black base
+    dark_colors = ['black', '#000000', '#000', '#1a1a1a', '#2b2b2b', '#333333', '#222222']
+    is_dark = bg_color in dark_colors or (isinstance(bg_color, str) and bg_color.startswith('rgba(0, 0, 0,'))
+    assert is_dark, f"Default theme should be dark, got background color: {bg_color}"
+
+    # Check that line colors are light/bright (suitable for dark background)
+    for i, trace in enumerate(fig.data):
+        line_color = trace.line.color
+        assert line_color is not None, f"Trace {i} should have a line color set"
+        # Light colors should not be from the standard dark palette (darker colors)
+        # Dark theme uses bright colors like #66c2ff, #ffb366, etc.
+
+
+def test_y_axis_range_set_from_total_players():
+    """Test that Y-axis range is set from 1 to total_players."""
+    # Arrange
+    total_players = 10000000
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'history': [
+                {'event': 1, 'overall_rank': 800000},
+                {'event': 2, 'overall_rank': 750000},
+                {'event': 3, 'overall_rank': 700000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants, total_players=total_players)
+
+    # Assert
+    # Y-axis should be explicitly set from 1 (top) to total_players (bottom)
+    assert fig.layout.yaxis.range is not None, "Y-axis range should be explicitly set"
+
+    # The range is reversed (autorange='reversed'), so it should be [total_players, 1]
+    # which displays 1 at the top and total_players at the bottom
+    y_range = fig.layout.yaxis.range
+    assert len(y_range) == 2, "Y-axis range should have two values [start, end]"
+    assert y_range[0] == total_players, f"Y-axis should start at total_players ({total_players})"
+    assert y_range[1] == 1, "Y-axis should end at 1"
+
+    # Verify Y-axis is still reversed
+    assert fig.layout.yaxis.autorange == "reversed", "Y-axis should still be reversed"
+
+
+def test_unfinished_gameweek_displays_with_asterisk():
+    """Test that unfinished gameweeks are marked with asterisk on X-axis."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+                {'event': 3, 'overall_rank': 900000},
+                {'event': 4, 'overall_rank': 875000},
+                {'event': 5, 'overall_rank': 850000},
+                {'event': 6, 'overall_rank': 825000},
+                {'event': 7, 'overall_rank': 800000},
+            ]
+        }
+    ]
+
+    # Event 7 is unfinished, events 1-6 are finished
+    events = [
+        {'id': 1, 'finished': True},
+        {'id': 2, 'finished': True},
+        {'id': 3, 'finished': True},
+        {'id': 4, 'finished': True},
+        {'id': 5, 'finished': True},
+        {'id': 6, 'finished': True},
+        {'id': 7, 'finished': False},
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants, events=events)
+
+    # Assert
+    # Check that X-axis has custom tick text configured
+    assert fig.layout.xaxis.ticktext is not None, "X-axis should have custom tick text"
+    assert fig.layout.xaxis.tickvals is not None, "X-axis should have custom tick values"
+
+    # Convert to lists for easier comparison
+    tick_vals = list(fig.layout.xaxis.tickvals)
+    tick_text = list(fig.layout.xaxis.ticktext)
+
+    # Verify we have tick values for all events 1-7
+    assert tick_vals == [1, 2, 3, 4, 5, 6, 7], "Tick values should be [1, 2, 3, 4, 5, 6, 7]"
+
+    # Verify finished events (1-6) display as plain numbers
+    for i in range(6):
+        assert tick_text[i] == str(i + 1), f"Event {i + 1} should display as '{i + 1}' (no asterisk)"
+
+    # Verify unfinished event 7 displays with asterisk
+    assert tick_text[6] == "7*", "Event 7 should display as '7*' (with asterisk)"
+
+
+def test_rgba_background_color_support():
+    """Test that chart generator accepts and applies RGBA background color format."""
+    # Arrange
+    rgba_color = "rgba(0, 0, 0, 0.1)"  # Black with 10% opacity
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants, bg_color=rgba_color)
+
+    # Assert
+    # Verify that the background color is set to the specified RGBA value (on paper_bgcolor)
+    assert fig.layout.paper_bgcolor == rgba_color, \
+        f"Background color should be '{rgba_color}', got: {fig.layout.paper_bgcolor}"
+
+    # Verify the color format is correctly applied (contains "rgba(" and opacity value)
+    bg_color = fig.layout.paper_bgcolor
+    assert bg_color.startswith("rgba("), "Background color should start with 'rgba('"
+    assert "0.1" in bg_color, "Background color should contain opacity value 0.1"
+
+    # Plot area should be transparent
+    assert fig.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', "Plot area should be transparent"
+
+
+def test_default_rgba_background_color():
+    """Test that default background color is rgba(0, 0, 0, 0.3)."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    # Default background should be rgba(0, 0, 0, 0.3)
+    expected_default = "rgba(0, 0, 0, 0.3)"
+    assert fig.layout.paper_bgcolor == expected_default, \
+        f"Default background color should be '{expected_default}', got: {fig.layout.paper_bgcolor}"
+
+
+def test_horizontal_gridlines_at_major_ticks():
+    """Test that chart displays horizontal gridlines at major Y-axis tick marks."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 3000000},
+                {'event': 3, 'overall_rank': 5000000},
+            ]
+        }
+    ]
+    total_players = 10000000
+
+    # Act
+    fig = generate_rank_progression_chart(participants, total_players=total_players)
+
+    # Assert
+    # Horizontal gridlines should be enabled
+    assert fig.layout.yaxis.showgrid is True, "Y-axis gridlines should be enabled"
+
+    # Gridlines should be visible (not hidden)
+    # In Plotly, if showgrid is True and gridcolor is set, gridlines will appear
+    assert hasattr(fig.layout.yaxis, 'gridcolor'), "Y-axis should have gridcolor property"
+
+
+def test_enhanced_legend_format():
+    """Test that legend format shows: <league_rank>. <first_name> (<overall_rank_rounded>)."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'Torkil',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 345123, 'league_rank': 1},
+                {'event': 2, 'overall_rank': 340500, 'league_rank': 1},
+            ]
+        },
+        {
+            'player_first_name': 'Anders',
+            'league_rank': 2,
+            'history': [
+                {'event': 1, 'overall_rank': 450789, 'league_rank': 2},
+                {'event': 2, 'overall_rank': 442000, 'league_rank': 2},
+            ]
+        },
+        {
+            'player_first_name': 'Eirin',
+            'league_rank': 3,
+            'history': [
+                {'event': 1, 'overall_rank': 1234567, 'league_rank': 3},
+                {'event': 2, 'overall_rank': 1234000, 'league_rank': 3},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    # Check that we have 3 traces
+    assert len(fig.data) == 3, "Figure should have exactly three traces"
+
+    # Check that each trace has the correct legend label format
+    # Format: "<league_rank>. <first_name> (<overall_rank_rounded>)"
+    # Overall rank should be rounded: <1M use "k", >=1M use "M" with 2 decimals
+    expected_labels = [
+        "1. Torkil (341k)",   # Latest rank: 340500 → rounds to 341k
+        "2. Anders (442k)",   # Latest rank: 442000 → rounds to 442k
+        "3. Eirin (1.23M)"    # Latest rank: 1234000 → displays as 1.23M
+    ]
+
+    actual_labels = [trace.name for trace in fig.data]
+
+    assert actual_labels == expected_labels, \
+        f"Legend labels should be {expected_labels}, got: {actual_labels}"
+
+
+def test_paper_bgcolor_matches_plot_bgcolor():
+    """Test that paper_bgcolor controls background while plot_bgcolor is transparent."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act - Test with default background
+    fig_default = generate_rank_progression_chart(participants)
+
+    # Assert - paper_bgcolor should be set to default rgba(0, 0, 0, 0.3)
+    expected_default = "rgba(0, 0, 0, 0.3)"
+    assert fig_default.layout.paper_bgcolor == expected_default, \
+        f"paper_bgcolor should be '{expected_default}', got: {fig_default.layout.paper_bgcolor}"
+
+    # plot_bgcolor should always be transparent
+    assert fig_default.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', \
+        f"plot_bgcolor should be transparent, got: {fig_default.layout.plot_bgcolor}"
+
+    # Act - Test with custom background
+    custom_color = "rgba(255, 0, 0, 0.5)"
+    fig_custom = generate_rank_progression_chart(participants, bg_color=custom_color)
+
+    # Assert - paper_bgcolor should use custom color, plot_bgcolor should be transparent
+    assert fig_custom.layout.paper_bgcolor == custom_color, \
+        f"paper_bgcolor should be '{custom_color}', got: {fig_custom.layout.paper_bgcolor}"
+    assert fig_custom.layout.plot_bgcolor == 'rgba(0, 0, 0, 0)', \
+        f"plot_bgcolor should be transparent, got: {fig_custom.layout.plot_bgcolor}"
+
+
+def test_dark_theme_has_light_text_colors():
+    """Test that dark theme uses light text colors for readability."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act - Generate with dark theme (default)
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Font colors should be light (not dark default)
+    # Check X-axis title color
+    assert fig.layout.xaxis.title.font.color == 'rgba(200, 200, 200, 1)', \
+        f"X-axis title should be light colored, got: {fig.layout.xaxis.title.font.color}"
+
+    # Check Y-axis title color
+    assert fig.layout.yaxis.title.font.color == 'rgba(200, 200, 200, 1)', \
+        f"Y-axis title should be light colored, got: {fig.layout.yaxis.title.font.color}"
+
+    # Check X-axis tick (label) color
+    assert fig.layout.xaxis.tickfont.color == 'rgba(180, 180, 180, 1)', \
+        f"X-axis ticks should be light colored, got: {fig.layout.xaxis.tickfont.color}"
+
+    # Check Y-axis tick (label) color
+    assert fig.layout.yaxis.tickfont.color == 'rgba(180, 180, 180, 1)', \
+        f"Y-axis ticks should be light colored, got: {fig.layout.yaxis.tickfont.color}"
+
+    # Check legend font color
+    assert fig.layout.legend.font.color == 'rgba(200, 200, 200, 1)', \
+        f"Legend should be light colored, got: {fig.layout.legend.font.color}"
+
+    # Check gridline color is brighter for dark theme (updated from rgba(100, 100, 100, 0.3))
+    assert fig.layout.yaxis.gridcolor == 'rgba(140, 140, 140, 0.4)', \
+        f"Gridlines should be brighter for dark theme visibility, got: {fig.layout.yaxis.gridcolor}"
+
+
+def test_large_font_sizes_for_tv_display():
+    """Test that chart uses large font sizes for readability from distance on TV."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Legend font size should be large (16-20px)
+    assert fig.layout.legend.font.size >= 16, \
+        f"Legend font size should be >= 16px for TV display, got: {fig.layout.legend.font.size}"
+    assert fig.layout.legend.font.size <= 20, \
+        f"Legend font size should be <= 20px, got: {fig.layout.legend.font.size}"
+
+    # Assert - Axis tick labels should be large (14-18px)
+    assert fig.layout.xaxis.tickfont.size >= 14, \
+        f"X-axis tick font size should be >= 14px for TV display, got: {fig.layout.xaxis.tickfont.size}"
+    assert fig.layout.xaxis.tickfont.size <= 18, \
+        f"X-axis tick font size should be <= 18px, got: {fig.layout.xaxis.tickfont.size}"
+
+    assert fig.layout.yaxis.tickfont.size >= 14, \
+        f"Y-axis tick font size should be >= 14px for TV display, got: {fig.layout.yaxis.tickfont.size}"
+    assert fig.layout.yaxis.tickfont.size <= 18, \
+        f"Y-axis tick font size should be <= 18px, got: {fig.layout.yaxis.tickfont.size}"
+
+    # Assert - Axis titles should be large (18-24px)
+    assert fig.layout.xaxis.title.font.size >= 18, \
+        f"X-axis title font size should be >= 18px for TV display, got: {fig.layout.xaxis.title.font.size}"
+    assert fig.layout.xaxis.title.font.size <= 24, \
+        f"X-axis title font size should be <= 24px, got: {fig.layout.xaxis.title.font.size}"
+
+    assert fig.layout.yaxis.title.font.size >= 18, \
+        f"Y-axis title font size should be >= 18px for TV display, got: {fig.layout.yaxis.title.font.size}"
+    assert fig.layout.yaxis.title.font.size <= 24, \
+        f"Y-axis title font size should be <= 24px, got: {fig.layout.yaxis.title.font.size}"
+
+
+def test_reduced_top_padding_with_balanced_margins():
+    """Test that chart has appropriate margins with X-axis positioned at the top."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Check that margin is configured
+    assert fig.layout.margin is not None, "Margin should be configured"
+
+    # Assert - Top margin should accommodate X-axis at top (90px)
+    assert fig.layout.margin.t == 90, \
+        f"Top margin should be 90px to accommodate X-axis at top, got: {fig.layout.margin.t}"
+
+    # Assert - Bottom margin should be reduced since X-axis is no longer there (30px)
+    assert fig.layout.margin.b == 30, \
+        f"Bottom margin should be 30px with X-axis at top, got: {fig.layout.margin.b}"
+
+    assert fig.layout.margin.l >= 40, \
+        f"Left margin should be >= 40px, got: {fig.layout.margin.l}"
+    assert fig.layout.margin.l <= 100, \
+        f"Left margin should be <= 100px (may be slightly larger for Y-axis labels), got: {fig.layout.margin.l}"
+
+    assert fig.layout.margin.r >= 40, \
+        f"Right margin should be >= 40px, got: {fig.layout.margin.r}"
+    assert fig.layout.margin.r <= 60, \
+        f"Right margin should be <= 60px, got: {fig.layout.margin.r}"
+
+
+def test_gridline_brightness_for_dark_theme():
+    """Test that gridlines have appropriate brightness for dark theme visibility.
+
+    Dark theme requirements:
+    - X-axis vertical gridlines should be subtle (not too bright)
+    - Y-axis zero line should be subtle (not too bright)
+    - Y-axis horizontal gridlines (major ticks) should be visible (brighter than current)
+    """
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 3000000},
+                {'event': 3, 'overall_rank': 5000000},
+            ]
+        }
+    ]
+    total_players = 10000000
+
+    # Act
+    fig = generate_rank_progression_chart(
+        participants,
+        theme="dark",
+        total_players=total_players
+    )
+
+    # Assert - X-axis vertical gridlines should be subtle (reduced brightness)
+    # Check if X-axis has gridlines enabled and their color
+    if hasattr(fig.layout.xaxis, 'showgrid') and fig.layout.xaxis.showgrid:
+        xaxis_gridcolor = fig.layout.xaxis.gridcolor
+        # Should be more subtle than before, e.g., rgba(60, 60, 60, 0.3) or similar
+        assert xaxis_gridcolor is not None, "X-axis gridcolor should be set when gridlines are shown"
+        # Check that it's not too bright (e.g., not over rgba(80, 80, 80, ...))
+        if 'rgba' in xaxis_gridcolor.lower():
+            # Extract RGB values to check brightness
+            import re
+            match = re.match(r'rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)', xaxis_gridcolor)
+            if match:
+                r, g, b = int(match.group(1)), int(match.group(2)), int(match.group(3))
+                assert r <= 80 and g <= 80 and b <= 80, \
+                    f"X-axis gridlines should be subtle (RGB <= 80), got: {xaxis_gridcolor}"
+
+    # Assert - Y-axis zero line should be subtle
+    if hasattr(fig.layout.yaxis, 'zerolinecolor'):
+        yaxis_zerolinecolor = fig.layout.yaxis.zerolinecolor
+        if yaxis_zerolinecolor:
+            # Check that zero line is not too bright
+            if 'rgba' in yaxis_zerolinecolor.lower():
+                import re
+                match = re.match(r'rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)', yaxis_zerolinecolor)
+                if match:
+                    r, g, b = int(match.group(1)), int(match.group(2)), int(match.group(3))
+                    assert r <= 100 and g <= 100 and b <= 100, \
+                        f"Y-axis zero line should be subtle (RGB <= 100), got: {yaxis_zerolinecolor}"
+
+    # Assert - Y-axis horizontal gridlines should be visible (brighter than before)
+    yaxis_gridcolor = fig.layout.yaxis.gridcolor
+    assert yaxis_gridcolor is not None, "Y-axis gridcolor should be set"
+
+    # Y-axis gridlines should be brighter than the old rgba(100, 100, 100, 0.3)
+    # Target: at least rgba(120, 120, 120, ...) or higher
+    if 'rgba' in yaxis_gridcolor.lower():
+        import re
+        match = re.match(r'rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)', yaxis_gridcolor)
+        if match:
+            r, g, b = int(match.group(1)), int(match.group(2)), int(match.group(3))
+            assert r >= 120 and g >= 120 and b >= 120, \
+                f"Y-axis gridlines should be brighter for visibility (RGB >= 120), got: {yaxis_gridcolor}"
+
+
+def test_transparent_plot_area_and_legend_with_increased_opacity():
+    """Test that default background is rgba(0,0,0,0.3), plot area and legend are transparent."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        },
+        {
+            'player_first_name': 'Jane',
+            'league_rank': 2,
+            'history': [
+                {'event': 1, 'overall_rank': 1100000},
+                {'event': 2, 'overall_rank': 1050000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    # 1. Default background color should be rgba(0, 0, 0, 0.3)
+    expected_bg = "rgba(0, 0, 0, 0.3)"
+    assert fig.layout.paper_bgcolor == expected_bg, \
+        f"Paper background should be '{expected_bg}', got: {fig.layout.paper_bgcolor}"
+
+    # 2. Plot area background should be fully transparent
+    # When plot_bgcolor is transparent, it can be represented as 'rgba(0,0,0,0)' or None or ''
+    plot_bg = fig.layout.plot_bgcolor
+    assert plot_bg in ['rgba(0, 0, 0, 0)', 'rgba(0,0,0,0)', '', None] or \
+           (isinstance(plot_bg, str) and 'rgba' in plot_bg and ', 0)' in plot_bg), \
+        f"Plot area background should be transparent, got: {plot_bg}"
+
+    # 3. Legend background should be fully transparent
+    legend_bg = fig.layout.legend.bgcolor
+    assert legend_bg in ['rgba(0, 0, 0, 0)', 'rgba(0,0,0,0)', '', None] or \
+           (isinstance(legend_bg, str) and 'rgba' in legend_bg and ', 0)' in legend_bg), \
+        f"Legend background should be transparent, got: {legend_bg}"
+
+
+def test_further_reduced_top_padding():
+    """Test that chart has appropriate top padding with X-axis positioned at the top."""
+    # Arrange
+    participants = [
+        {
+            'player_first_name': 'John',
+            'league_rank': 1,
+            'history': [
+                {'event': 1, 'overall_rank': 1000000},
+                {'event': 2, 'overall_rank': 950000},
+            ]
+        }
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Top margin should be 90px to accommodate X-axis at top
+    assert fig.layout.margin is not None, "Margin should be configured"
+    assert fig.layout.margin.t == 90, \
+        f"Top margin should be 90px to accommodate X-axis at top, got: {fig.layout.margin.t}"

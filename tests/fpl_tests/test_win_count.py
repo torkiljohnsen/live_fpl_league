@@ -252,7 +252,7 @@ def test_win_column_in_template():
     # Check that each participant's win count appears in the table
     for p in league_data["participants"]:
         # The win count should appear as text in the rendered HTML
-        assert str(p.win_count) in html, f"Template should display win_count ({p.win_count}) for participant {p.manager_name}"
+        assert str(p["win_count"]) in html, f"Template should display win_count ({p['win_count']}) for participant {p['manager_name']}"
 
 
 def test_win_display_format_without_golden_wins():
@@ -260,21 +260,21 @@ def test_win_display_format_without_golden_wins():
     participant1 = Participant(
         entry_id=1, team_name="Team 1", manager_name="Player 1", total_score=200,
         history=[
-            {"event": 1, "net_points": 70, "total_points": 70},  # Win
-            {"event": 2, "net_points": 60, "total_points": 130},
+            {"event": 1, "net_points": 70, "total_points": 70, "overall_rank": 100},  # Win
+            {"event": 2, "net_points": 60, "total_points": 130, "overall_rank": 150},
         ],
         last_event={"event": 2, "net_points": 60, "total_points": 130}
     )
-    
+
     participant2 = Participant(
         entry_id=2, team_name="Team 2", manager_name="Player 2", total_score=180,
         history=[
-            {"event": 1, "net_points": 50, "total_points": 50},
-            {"event": 2, "net_points": 70, "total_points": 120},  # Win
+            {"event": 1, "net_points": 50, "total_points": 50, "overall_rank": 200},
+            {"event": 2, "net_points": 70, "total_points": 120, "overall_rank": 120},  # Win
         ],
         last_event={"event": 2, "net_points": 70, "total_points": 120}
     )
-    
+
     participants = [participant1, participant2]
     RankCalculator.apply_history_ranks(participants)
     RankCalculator.calculate_win_counts(participants)
@@ -319,25 +319,25 @@ def test_win_display_format_with_golden_wins():
     participant1 = Participant(
         entry_id=1, team_name="Team 1", manager_name="Player 1", total_score=350,
         history=[
-            {"event": 1, "net_points": 70, "total_points": 70},  # Win
-            {"event": 2, "net_points": 65, "total_points": 135},
-            {"event": 3, "net_points": 70, "total_points": 205},  # Win
-            {"event": 4, "net_points": 75, "total_points": 280},  # Golden gameweek win
+            {"event": 1, "net_points": 70, "total_points": 70, "overall_rank": 100},  # Win
+            {"event": 2, "net_points": 65, "total_points": 135, "overall_rank": 120},
+            {"event": 3, "net_points": 70, "total_points": 205, "overall_rank": 90},  # Win
+            {"event": 4, "net_points": 75, "total_points": 280, "overall_rank": 80},  # Golden gameweek win
         ],
         last_event={"event": 4, "net_points": 75, "total_points": 280}
     )
-    
+
     participant2 = Participant(
         entry_id=2, team_name="Team 2", manager_name="Player 2", total_score=300,
         history=[
-            {"event": 1, "net_points": 60, "total_points": 60},
-            {"event": 2, "net_points": 70, "total_points": 130},  # Win
-            {"event": 3, "net_points": 60, "total_points": 190},
-            {"event": 4, "net_points": 65, "total_points": 255},
+            {"event": 1, "net_points": 60, "total_points": 60, "overall_rank": 200},
+            {"event": 2, "net_points": 70, "total_points": 130, "overall_rank": 110},  # Win
+            {"event": 3, "net_points": 60, "total_points": 190, "overall_rank": 150},
+            {"event": 4, "net_points": 65, "total_points": 255, "overall_rank": 140},
         ],
         last_event={"event": 4, "net_points": 65, "total_points": 255}
     )
-    
+
     participants = [participant1, participant2]
     RankCalculator.apply_history_ranks(participants)
     RankCalculator.calculate_win_counts(participants)

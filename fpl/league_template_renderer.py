@@ -1,14 +1,16 @@
 from pathlib import Path
+from typing import Any
+
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from .league_context import LeagueContext
 
-from typing import Any
 
 class LeagueTemplateRenderer:
     TEMPLATE_MAP: dict[str, str] = {
         "standings": "league_standings",
         "gw_history": "league_gameweek_history",
+        "ranking_progression": "ranking_progression",
     }
 
     context: LeagueContext

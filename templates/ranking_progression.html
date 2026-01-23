@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{ name }} - Rank Progression{% endblock %}
+
+{% block body %}
+    <div class="logo-container">
+        <div>
+            {{ logo_svg | safe }}
+        </div>
+    </div>
+    <h1>
+        {{ name }} Rank Progression
+        {% if league_join_code %}
+            ({{ league_join_code }})
+        {% endif %}
+    </h1>
+    
+    <div class="chart-container">
+        {% if rank_progression_chart %}
+            {{ rank_progression_chart | safe }}
+        {% else %}
+            <p>No chart data available.</p>
+        {% endif %}
+    </div>
+    
+    {% if highest_team_value or in_form_players %}
+    <div class="stats-container">
+        <h2>Stats:</h2>
+        <dl class="stats-list">
+            {% if in_form_players %}
+            <dt>Klatreren:</dt>
+            <dd>{{ in_form_players.text | replace('▲', '<span class="green-arrow">▲</span>') | safe }}</dd>
+            {% endif %}
+            {% if highest_team_value %}
+            <dt>Høyeste lagverdi:</dt>
+            <dd>{{ highest_team_value }}</dd>
+            {% endif %}
+        </dl>
+    </div>
+    {% endif %}
+    
+{% endblock %}

@@ -46,7 +46,7 @@ def test_gameweek_history_shows_net_points():
     
     # Find an event with transfer costs
     event_with_cost = None
-    for h in participant.history:
+    for h in participant["history"]:
         if h.get("event_transfers_cost", 0) > 0:
             event_with_cost = h
             break
