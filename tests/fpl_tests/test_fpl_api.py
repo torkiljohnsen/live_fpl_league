@@ -46,10 +46,11 @@ class TestFPLAPIDevMode:
 		sample_content = {"baz": 123}
 		sample_file.write_text(json.dumps(sample_content), encoding="utf-8")
 		# _call_api should not be called
-		monkeypatch.setattr(self.api, "_call_api", lambda endpoint: (_ for _ in ()).throw(Exception("Should not call API")))
+		def raise_error(endpoint):
+			raise Exception("Should not call API")
+		monkeypatch.setattr(self.api, "_call_api", raise_error)
 		data = self.api.get_bootstrap_static()
 		assert data == sample_content
-
 
 class TestFPLAPI:
 	def setup_method(self):

@@ -5,18 +5,11 @@ from typing import Any
 from .participant import Participant
 
 
-def _get_attr(obj: Participant | dict[str, Any], attr: str, default: Any = None) -> Any:
-    """Get attribute from either Participant object or dict."""
-    if isinstance(obj, dict):
-        return obj.get(attr, default)
-    return getattr(obj, attr, default)
-
-
-def get_highest_team_value(participants: list[Participant | dict[str, Any]]) -> dict[str, Any] | None:
+def get_highest_team_value(participants: list[Participant]) -> dict[str, Any] | None:
     """Calculate the highest team value among participants.
 
     Args:
-        participants: List of Participant objects or dictionaries with 'team_name', 'player_first_name',
+        participants: List of Participant objects with 'team_name', 'player_first_name',
                      and 'history' containing 'bank' and 'value' fields.
 
     Returns:
@@ -30,7 +23,7 @@ def get_highest_team_value(participants: list[Participant | dict[str, Any]]) -> 
     highest_value = 0
 
     for participant in participants:
-        history = _get_attr(participant, 'history', [])
+        history = participant.history
         if not history:
             continue
 
@@ -44,21 +37,21 @@ def get_highest_team_value(participants: list[Participant | dict[str, Any]]) -> 
         if team_value > highest_value:
             highest_value = team_value
             highest = {
-                'team_name': _get_attr(participant, 'team_name', ''),
-                'player_name': _get_attr(participant, 'player_first_name', ''),
+                'team_name': participant.team_name,
+                'player_name': participant.player_first_name,
                 'value': team_value
             }
 
     return highest
 
 
-def get_in_form_players(participants: list[Participant | dict[str, Any]]) -> dict[str, Any] | None:
+def get_in_form_players(participants: list[Participant]) -> dict[str, Any] | None:
     """Calculate players with most consecutive overall_rank improvements (green arrows).
 
     A green arrow means the overall_rank decreased (improved) from the previous event.
 
     Args:
-        participants: List of Participant objects or dictionaries with 'player_first_name'
+        participants: List of Participant objects with 'player_first_name'
                      and 'history' containing 'event' and 'overall_rank' fields.
 
     Returns:
@@ -72,7 +65,7 @@ def get_in_form_players(participants: list[Participant | dict[str, Any]]) -> dic
     players_with_max = []
 
     for participant in participants:
-        history = _get_attr(participant, 'history', [])
+        history = participant.history
         if len(history) < 2:
             continue
 
@@ -92,7 +85,7 @@ def get_in_form_players(participants: list[Participant | dict[str, Any]]) -> dic
                 break
 
         if current_consecutive > 0:
-            player_name = _get_attr(participant, 'player_first_name', '')
+            player_name = participant.player_first_name
             if current_consecutive > max_consecutive:
                 max_consecutive = current_consecutive
                 players_with_max = [player_name]

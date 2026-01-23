@@ -20,7 +20,8 @@ class DummyAPI:
         return data
 
     def get_league_standings(self, league_id):
-        return json.loads((self.data_dir / f"leagues-classic_{league_id}_standings_sample.json").read_text(encoding="utf-8"))
+        path = self.data_dir / f"leagues-classic_{league_id}_standings_sample.json"
+        return json.loads(path.read_text(encoding="utf-8"))
 
     def get_team_history(self, team_id):
         data = json.loads((self.data_dir / "entry_811114_history_sample.json").read_text(encoding="utf-8"))
