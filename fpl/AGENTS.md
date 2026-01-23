@@ -9,6 +9,42 @@
 
 This separation makes code more testable and easier to internationalize.
 
+## Data Model Conventions
+
+### Participant Objects vs Dicts
+
+The [`Participant`](participant.py) dataclass represents a league participant with their history and statistics.
+
+**When to use Participant objects:**
+- Internal business logic (rank calculation, statistics, chart generation)
+- Passing data between `fpl/` modules
+- Template rendering (Jinja2 works seamlessly with both objects and dicts)
+
+**When to use dicts:**
+- JSON serialization / API responses (use `FPLLeague.get_summary_as_dicts()`)
+- Test fixtures that need dict-serializable format
+- External integrations expecting plain dict data
+
+**Key properties:**
+- `player_first_name` - Auto-extracted property from `manager_name` (returns first word)
+- `league_rank` - Assigned by `FPLLeague.get_summary()` (1-indexed position in sorted standings)
+- `to_dict()` - Converts to dict for backward compatibility
+
+**Type-aware modules:**
+- [`statistics.py`](statistics.py) - Accepts `Union[Participant, dict]` via `_get_attr()` helper
+- [`chart_generator.py`](chart_generator.py) - Accepts `Union[Participant, dict]` via `_get_attr()` helper
+- Templates access attributes via Jinja2 dot notation (works for both)
+
+**Pattern:**
+```python
+# Internal flow uses objects
+participants = league.get_summary()["participants"]  # list[Participant]
+highest_value = get_highest_team_value(participants)  # Accepts both types
+
+# External API uses dicts (for JSON serialization)
+summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
+```
+
 ## Module Overview
 
 ### Data Collection
@@ -24,13 +60,20 @@ This separation makes code more testable and easier to internationalize.
 ### Data Processing
 **[`fpl_league.py`](fpl_league.py)** - Aggregates API data into league summary
 - Fetches bootstrap data (events, chips), league standings, team histories
-- `FPLLeague.get_summary()` returns dict with participants, events, current gameweek
+- `FPLLeague.get_summary()` returns dict with `list[Participant]` objects (for internal use)
+- `FPLLeague.get_summary_as_dicts()` returns dict with `list[dict]` (for JSON serialization)
 
-**[`participant.py`](participant.py)** - Processes individual team data (win counts, lowest rank counts)
+**[`participant.py`](participant.py)** - Dataclass representing a participant
+- Properties: `player_first_name` (extracted from `manager_name`), `league_rank`
+- Fields: `entry_id`, `team_name`, `manager_name`, `total_score`, `history`, `last_event`, `lowest_rank_count`, `win_count`, `golden_win_count`
 
-**[`rank_calculator.py`](rank_calculator.py)** - Calculates round ranks for gameweek history
+**[`rank_calculator.py`](rank_calculator.py)** - Calculates round ranks and win/loss statistics
+- `apply_history_ranks()` - Calculates `round_rank`, `league_rank`, and `league_rank_change`
+- `calculate_lowest_rank_counts()` - Counts gameweeks with minimum points
+- `calculate_win_counts()` - Counts gameweek wins and golden gameweek wins
 
 **[`statistics.py`](statistics.py)** - Statistical calculations
+- Type-aware: accepts `Union[Participant, dict]` via `_get_attr()` helper
 - `get_highest_team_value()` - Returns team with highest value
 - `get_in_form_players()` - Returns players with most consecutive rank improvements
 - `should_show_in_form_stat()` - Business logic for stat visibility
@@ -46,6 +89,8 @@ This separation makes code more testable and easier to internationalize.
 - `write_html_output()` generates HTML to `docs/` folder
 
 **[`chart_generator.py`](chart_generator.py)** - Plotly chart generation for static SVG/PNG images
+- Type-aware: accepts `Union[Participant, dict]` via `_get_attr()` helper
+- `generate_rank_progression_chart()` - Creates rank progression visualization
 
 **[`chip_annotator.py`](chip_annotator.py)** - Chip usage annotations
 

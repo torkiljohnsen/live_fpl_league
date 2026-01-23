@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+
 from fpl.fpl_league import FPLLeague
 from fpl.league_context import LeagueContext
 from fpl.league_template_renderer import LeagueTemplateRenderer
@@ -34,7 +35,7 @@ def test_standings_uses_icon_files_instead_of_emojis():
     api = DummyAPI(data_dir)
     league = FPLLeague(LEAGUE_ID, api)
     league_data = league.get_summary()
-    
+
     # Build the context
     logo_svg = "<svg></svg>"
     context = LeagueContext(
@@ -43,24 +44,24 @@ def test_standings_uses_icon_files_instead_of_emojis():
         logo_svg=logo_svg,
         dev_mode=True
     )
-    
+
     # Render the template
     renderer = LeagueTemplateRenderer(context, "standings")
     template = renderer.env.get_template(renderer.get_template_name())
     html = template.render(**context.as_dict(), output_type="standings")
-    
+
     # Verify that icon image files are used (at least first_place exists in sample data)
     assert '<img src="first_place.png"' in html, "Template should use first_place.png icon"
-    
+
     # Verify that emojis are NOT used in the rendered HTML
     assert '🥇' not in html, "Template should not contain gold medal emoji"
     assert '🥈' not in html, "Template should not contain silver medal emoji"
     assert '🥉' not in html, "Template should not contain bronze medal emoji"
     assert '🚨' not in html, "Template should not contain alarm emoji"
-    
+
     # Verify that the icons use the medal-icon CSS class
     assert 'class="medal-icon"' in html, "Icons should use the medal-icon CSS class"
-    
+
     # Verify the template references all icon files by reading from the templates directory
     # Use the renderer's template loader to get the correct template directory
     from jinja2.loaders import FileSystemLoader

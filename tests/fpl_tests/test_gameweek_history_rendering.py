@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+
 from fpl.fpl_league import FPLLeague
 from fpl.league_context import LeagueContext
 from fpl.league_template_renderer import LeagueTemplateRenderer
@@ -40,20 +41,20 @@ def test_gameweek_history_shows_net_points():
     api = DummyAPI(data_dir)
     league = FPLLeague(LEAGUE_ID, api)
     league_data = league.get_summary()
-    
+
     # Get a participant with transfer costs
     participant = league_data["participants"][0]
-    
+
     # Find an event with transfer costs
     event_with_cost = None
-    for h in participant["history"]:
+    for h in participant.history:
         if h.get("event_transfers_cost", 0) > 0:
             event_with_cost = h
             break
-    
+
     # Verify we have data with transfer costs to test
     assert event_with_cost is not None, "Test data should have at least one event with transfer costs"
-    
+
     # Build the context
     logo_svg = "<svg></svg>"
     context = LeagueContext(
@@ -62,26 +63,28 @@ def test_gameweek_history_shows_net_points():
         logo_svg=logo_svg,
         dev_mode=True
     )
-    
+
     # Render the template
     renderer = LeagueTemplateRenderer(context, "gw_history")
     template = renderer.env.get_template(renderer.get_template_name())
     html = template.render(**context.as_dict(), output_type="gw_history")
-    
+
     # The HTML should contain net_points values, not gross points for events with transfer costs
     # For the event with transfer cost, verify net_points is shown
-    event_id = event_with_cost["event"]
     gross_points = event_with_cost["points"]
     net_points = event_with_cost["net_points"]
     transfer_cost = event_with_cost["event_transfers_cost"]
-    
+
     # Verify net_points calculation is correct
-    assert net_points == gross_points - transfer_cost, f"net_points should be {gross_points} - {transfer_cost} = {gross_points - transfer_cost}"
-    
+    expected_net = gross_points - transfer_cost
+    msg = f"net_points should be {gross_points} - {transfer_cost} = {expected_net}"
+    assert net_points == expected_net, msg
+
     # The rendered HTML should show net_points, not gross points
     # We need to find the cell value for this participant and event
     # This is a basic check - in the real HTML, the net_points value should appear in the table cell
-    assert str(net_points) in html, f"Template should display net_points ({net_points}) for events with transfer costs"
-    
+    msg2 = f"Template should display net_points ({net_points}) for events with transfer costs"
+    assert str(net_points) in html, msg2
+
     # Additionally verify that gross_points and net_points are different for this event
     assert gross_points != net_points, "Test data should have gross_points different from net_points to verify the fix"

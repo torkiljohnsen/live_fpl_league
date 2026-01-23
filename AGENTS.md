@@ -57,6 +57,42 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 - **Golden gameweeks**: Every 4th gameweek (4, 8, 12...) marked with `golden_gameweek` CSS class
 - **Template variables**: See [`templates/AGENTS.md`](templates/AGENTS.md) for full variable reference
 - **CSS**: All styles in [`docs/style.css`](docs/style.css), no inline styles
+- **Participant objects vs dicts**: See "Data Model Conventions" below for when to use objects vs dicts
+
+## Data Model Conventions
+
+### Participant Class
+The [`Participant`](fpl/participant.py) class is a dataclass representing a league participant with their history and statistics.
+
+**When to use Participant objects:**
+- Internal business logic (rank calculation, statistics, chart generation)
+- Passing data between `fpl/` modules
+- Template rendering (Jinja2 works seamlessly with both objects and dicts)
+
+**When to use dicts:**
+- JSON serialization / API responses (`FPLLeague.get_summary_as_dicts()`)
+- External integrations expecting plain dict data
+- Test fixtures that need dict-serializable format
+
+**Key properties:**
+- `player_first_name` - Auto-extracts first name from `manager_name`
+- `league_rank` - Assigned by `FPLLeague.get_summary()` (1-indexed position)
+- `to_dict()` - Converts to dict for backward compatibility
+
+**Type-aware modules:**
+- [`statistics.py`](fpl/statistics.py) - Accepts `Union[Participant, dict]` via `_get_attr()` helper
+- [`chart_generator.py`](fpl/chart_generator.py) - Accepts `Union[Participant, dict]` via `_get_attr()` helper
+- Templates access attributes via Jinja2 dot notation (works for both)
+
+**Pattern:**
+```python
+# Internal flow uses objects
+participants = league.get_summary()["participants"]  # list[Participant]
+highest_value = get_highest_team_value(participants)  # Accepts both types
+
+# External API uses dicts
+summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
+```
 
 ## Testing
 

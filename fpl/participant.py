@@ -13,6 +13,12 @@ class Participant:
     lowest_rank_count: int = field(default=0)
     win_count: int = field(default=0)
     golden_win_count: int = field(default=0)
+    league_rank: int = field(default=0)
+
+    @property
+    def player_first_name(self) -> str:
+        """Extract first name from manager_name for display purposes."""
+        return self.manager_name.split()[0] if self.manager_name else 'Unknown'
 
     def to_dict(self) -> dict[str, Any]:
         """Convert Participant to dictionary for backward compatibility."""

@@ -89,32 +89,11 @@ class LeagueContext:
         d["golden_event_ids"] = golden_event_ids
         d["hidden_event_ids"] = hidden_event_ids
 
-        # Generate rank progression chart
+        # Generate rank progression chart and statistics with Participant objects
         participants = d.get("participants", [])
         if participants:
-            # Convert Participant objects to dicts if needed
-            participants_for_chart = []
-            for idx, p in enumerate(participants):
-                # Handle both dict and Participant object
-                if hasattr(p, 'to_dict'):
-                    p_dict = p.to_dict()
-                else:
-                    p_dict = p
-                
-                # Extract first name from manager_name
-                manager_name = p_dict.get("manager_name", "")
-                first_name = manager_name.split()[0] if manager_name else 'Unknown'
-                # League rank is the position in the sorted list (1-indexed)
-                league_rank = idx + 1
-                participants_for_chart.append({
-                    'player_first_name': first_name,
-                    'league_rank': league_rank,
-                    'team_name': p_dict.get("team_name", ""),
-                    'history': p_dict.get("history", [])
-                })
-
             chart_svg = generate_rank_progression_chart(
-                participants=participants_for_chart,
+                participants=participants,
                 output_format="svg"
             )
             d["rank_progression_chart"] = chart_svg
@@ -123,16 +102,19 @@ class LeagueContext:
             from .statistics import get_highest_team_value, get_in_form_players, should_show_in_form_stat
 
             # Format highest team value
-            highest_value = get_highest_team_value(participants_for_chart)
+            highest_value = get_highest_team_value(participants)
             if highest_value:
-                d["highest_team_value"] = f"{highest_value['team_name']} ({highest_value['player_name']}) - £{highest_value['value']:.1f}M"
+                team = highest_value['team_name']
+                player = highest_value['player_name']
+                value = highest_value['value']
+                d["highest_team_value"] = f"{team} ({player}) - £{value:.1f}M"
             else:
                 d["highest_team_value"] = None
 
             # Format in-form statistic (only show from event 3 onwards)
             current_event = d.get("current_event_id")
             if current_event and should_show_in_form_stat(current_event):
-                in_form_result = get_in_form_players(participants_for_chart)
+                in_form_result = get_in_form_players(participants)
                 if in_form_result:
                     players_str = ", ".join(in_form_result['players'])
                     count = in_form_result['count']

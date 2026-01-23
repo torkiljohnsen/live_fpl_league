@@ -1,10 +1,10 @@
 import json
 from pathlib import Path
-from typing import Dict, Union
+
 from fpl.fpl_league import FPLLeague
-from fpl.participant import Participant
 from fpl.league_context import LeagueContext
 from fpl.league_template_renderer import LeagueTemplateRenderer
+from fpl.participant import Participant
 from fpl.rank_calculator import RankCalculator
 
 
@@ -37,7 +37,7 @@ def test_lowest_rank_count_is_calculated():
     api = DummyAPI(data_dir)
     league = FPLLeague(LEAGUE_ID, api)
     participants = league.get_participants()
-    
+
     # Verify that each participant has a lowest_rank_count field
     for p in participants:
         assert hasattr(p, "lowest_rank_count"), "Participant should have lowest_rank_count attribute"
@@ -52,14 +52,14 @@ def test_lowest_rank_count_counts_last_place_finishes():
     api = DummyAPI(data_dir)
     league = FPLLeague(LEAGUE_ID, api)
     participants = league.get_participants()
-    
+
     # In the sample data, all participants have identical scores, so they all tie for last
     # Each event should contribute to all participants' lowest_rank_count
     if participants:
         # All participants should have the same lowest_rank_count since they have identical scores
         first_count = participants[0].lowest_rank_count
         for p in participants:
-            assert p.lowest_rank_count == first_count, f"All participants should have same count in this test data"
+            assert p.lowest_rank_count == first_count, "All participants should have same count in this test data"
 
 
 def test_lowest_rank_count_handles_ties():
@@ -72,7 +72,7 @@ def test_lowest_rank_count_handles_ties():
         ],
         last_event={"event": 1, "net_points": 50, "total_points": 50}
     )
-    
+
     participant2 = Participant(
         entry_id=2, team_name="Team 2", manager_name="Player 2", total_score=100,
         history=[
@@ -80,7 +80,7 @@ def test_lowest_rank_count_handles_ties():
         ],
         last_event={"event": 1, "net_points": 50, "total_points": 50}
     )
-    
+
     participant3 = Participant(
         entry_id=3, team_name="Team 3", manager_name="Player 3", total_score=120,
         history=[
@@ -88,13 +88,13 @@ def test_lowest_rank_count_handles_ties():
         ],
         last_event={"event": 1, "net_points": 70, "total_points": 70}
     )
-    
+
     participants = [participant1, participant2, participant3]
-    
+
     # Apply ranks and calculate lowest rank counts
     RankCalculator.apply_history_ranks(participants)
     RankCalculator.calculate_lowest_rank_counts(participants)
-    
+
     # In this case, both participant1 and participant2 should have lowest_rank_count = 1
     assert participant1.lowest_rank_count == 1, "Participant1 should have lowest_rank_count = 1"
     assert participant2.lowest_rank_count == 1, "Participant2 should have lowest_rank_count = 1"
@@ -106,7 +106,7 @@ def test_lowest_rank_column_in_template():
     api = DummyAPI(data_dir)
     league = FPLLeague(LEAGUE_ID, api)
     league_data = league.get_summary()
-    
+
     # Build the context
     logo_svg = "<svg></svg>"
     context = LeagueContext(
@@ -115,20 +115,23 @@ def test_lowest_rank_column_in_template():
         logo_svg=logo_svg,
         dev_mode=True
     )
-    
+
     # Render the template
     renderer = LeagueTemplateRenderer(context, "gw_history")
     template = renderer.env.get_template(renderer.get_template_name())
     html = template.render(**context.as_dict(), output_type="gw_history")
-    
+
     # Check that the duck image appears as a column header
     assert 'The Duck liten.png' in html, "Template should contain duck image in header"
     assert 'alt="🦆"' in html, "Duck image should have duck emoji as alt text"
-    
+
     # Check that each participant's lowest rank count appears in the table
     for p in league_data["participants"]:
         # The lowest rank count should appear as text in the rendered HTML
-        assert str(p["lowest_rank_count"]) in html, f"Template should display lowest_rank_count ({p['lowest_rank_count']}) for participant {p['manager_name']}"
+        count_text = str(p.lowest_rank_count)
+        name_text = p.manager_name
+        msg = f"Template should display lowest_rank_count ({count_text}) for {name_text}"
+        assert count_text in html, msg
 
 
 def test_duck_icons_appear_for_tied_losers():
@@ -151,11 +154,11 @@ def test_duck_icons_appear_for_tied_losers():
             last_event={"event": 1, "net_points": 70, "total_points": 70}
         ),
     ]
-    
+
     # Apply ranks and calculate lowest rank counts
     RankCalculator.apply_history_ranks(participants)
     RankCalculator.calculate_lowest_rank_counts(participants)
-    
+
     # Build league data and context
     league_data = {
         "id": 12345,
@@ -167,7 +170,7 @@ def test_duck_icons_appear_for_tied_losers():
         "is_current_finished": True,
         "generated_time": "2024-01-01T12:00:00Z"
     }
-    
+
     logo_svg = "<svg></svg>"
     context = LeagueContext(
         league_data=league_data,
@@ -175,12 +178,12 @@ def test_duck_icons_appear_for_tied_losers():
         logo_svg=logo_svg,
         dev_mode=False
     )
-    
+
     # Render template
     renderer = LeagueTemplateRenderer(context, "gw_history")
     template = renderer.env.get_template(renderer.get_template_name())
     html = template.render(**context.as_dict(), output_type="gw_history")
-    
+
     # Count occurrences of "is_loser" class - should be 2 (one for each tied loser)
     is_loser_count = html.count('is_loser')
     assert is_loser_count == 2, f"Expected 2 cells with 'is_loser' class (tied losers), but found {is_loser_count}"
