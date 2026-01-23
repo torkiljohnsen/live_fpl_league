@@ -132,18 +132,10 @@ def generate_rank_progression_chart(
         # Get the latest overall_rank from history and format appropriately
         if history:
             latest_overall_rank = history[-1].get('overall_rank', 0)
-            # Format based on magnitude: use "M" for millions, "k" for thousands
-            if latest_overall_rank >= 1000000:
-                # Display as millions with 2 decimal places
-                overall_rank_value = latest_overall_rank / 1000000
-                overall_rank_str = f"{overall_rank_value:.2f}M"
-            else:
-                # Display as thousands, rounded to nearest thousand
-                # Use int(x + 0.5) for consistent rounding (always up at .5)
-                overall_rank_rounded = int(latest_overall_rank / 1000 + 0.5)
-                overall_rank_str = f"{overall_rank_rounded}k"
+            from .formatters import format_rank_compact
+            overall_rank_str = format_rank_compact(latest_overall_rank)
         else:
-            overall_rank_str = "0k"
+            overall_rank_str = "0"
 
         # Format legend label
         if league_rank is not None:
