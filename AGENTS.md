@@ -66,7 +66,7 @@ Test organization guidelines in [`fpl/AGENTS.md`](fpl/AGENTS.md)
 
 ## Code Quality & Linting
 
-This project uses **ruff** for fast Python linting and code formatting. Configuration is in [`pyproject.toml`](pyproject.toml).
+This project uses **ruff** for fast Python linting and code formatting, and **mypy** for static type checking. Configuration is in [`pyproject.toml`](pyproject.toml).
 
 ### Running Ruff
 
@@ -93,6 +93,20 @@ python -m ruff check --fix tests/fpl_tests/test_chart_generator.py
 python -m ruff check --fix .
 ```
 
+### Running Mypy
+
+Mypy performs static type checking to catch type-related errors before runtime:
+
+```bash
+# Check the fpl/ package (main codebase)
+python -m mypy fpl/ --ignore-missing-imports
+
+# Check specific file
+python -m mypy fpl/chart_generator.py --ignore-missing-imports
+```
+
+Mypy analyzes type hints in the code and reports type mismatches, missing return types, and other type-related issues.
+
 ### Before Marking Task as DONE and Committing
 
 **ALWAYS follow this workflow before marking a task as DONE**:
@@ -104,24 +118,28 @@ python -m ruff check --fix fpl/statistics.py tests/fpl_tests/test_statistics.py
 # OR run on all Python files (ruff will ignore non-Python files)
 python -m ruff check --fix .
 
-# 2. SECOND: Run ALL tests to ensure nothing broke (not just tests for current feature)
+# 2. SECOND: Run mypy type checking on the fpl/ package
+python -m mypy fpl/ --ignore-missing-imports
+
+# 3. THIRD: Run ALL tests to ensure nothing broke (not just tests for current feature)
 python -m pytest
 
-# 3. If ANY test fails, fix it before proceeding
+# 4. If ANY test fails, fix it before proceeding
 # Your changes may have introduced regressions in other parts of the codebase
-# Repeat steps 1-2 until all tests pass
+# Repeat steps 1-3 until all tests pass
 
-# 4. Mark the task status as DONE in the TODO file
+# 5. Mark the task status as DONE in the TODO file
 
-# 5. Only commit when all tests pass and task is marked DONE
+# 6. Only commit when all checks pass and task is marked DONE
 git add -A && git commit -m "Your message"
 ```
 
 **Critical Workflow Order**: 
 1. **Ruff BEFORE tests** - All code must be properly formatted before running tests
-2. **All tests MUST pass** - Fix any failures before proceeding
-3. **Mark task DONE** - Only after all tests pass
-4. **Git commit** - Final step after everything is verified
+2. **Mypy type checking** - Catch type errors before running tests
+3. **All tests MUST pass** - Fix any failures before proceeding
+4. **Mark task DONE** - Only after all checks pass
+5. **Git commit** - Final step after everything is verified
 - Even if you only modified one module, run the entire test suite. Changes can have unexpected side effects on other components.
 - Ruff automatically ignores non-Python files, but for clarity specify only .py files when listing individual files.
 
