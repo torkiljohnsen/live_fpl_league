@@ -5,6 +5,10 @@
 .green-arrow {
 	color: #1ec773;
 }
+.rank-down {
+	color: #dc3545;
+	font-weight: bold;
+}
 .points_value {
 	font-weight: bold;
 }

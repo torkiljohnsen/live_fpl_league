@@ -188,3 +188,151 @@ def test_in_form_at_event_3():
 
     # Assert
     assert result is True, "Should show in-form stat from event 3 onwards"
+
+
+def test_get_player_with_highest_rank_loss():
+    """Test rank loss calculation over last 5 gameweeks (or fewer if fewer events have passed)."""
+    # Test Case 1: Normal case with 20% rank loss over 5 gameweeks
+    # Arrange
+    participants = [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
+                {'event': 1, 'overall_rank': 500000},
+                {'event': 2, 'overall_rank': 480000},
+                {'event': 3, 'overall_rank': 460000},
+                {'event': 4, 'overall_rank': 450000},
+                {'event': 5, 'overall_rank': 500000},  # Rank 500k -> 500k, no change
+                {'event': 6, 'overall_rank': 520000},  # Rank 450k -> 520k = 15.6% loss over 5 GWs
+            ]
+        ),
+        make_test_participant(
+            first_name='Anders',
+            history=[
+                {'event': 1, 'overall_rank': 500000},
+                {'event': 2, 'overall_rank': 500000},
+                {'event': 3, 'overall_rank': 500000},
+                {'event': 4, 'overall_rank': 500000},
+                {'event': 5, 'overall_rank': 500000},
+                {'event': 6, 'overall_rank': 600000},  # Rank 500k -> 600k = 20% loss over 5 GWs (highest)
+            ]
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 1, 'overall_rank': 700000},
+                {'event': 2, 'overall_rank': 680000},
+                {'event': 3, 'overall_rank': 660000},
+                {'event': 4, 'overall_rank': 640000},
+                {'event': 5, 'overall_rank': 620000},
+                {'event': 6, 'overall_rank': 610000},  # Rank 620k -> 610k, improvement
+            ]
+        ),
+    ]
+
+    # Act
+    from fpl.statistics import get_player_with_highest_rank_loss
+    result = get_player_with_highest_rank_loss(participants, current_event=6)
+
+    # Assert
+    assert result is not None, "Should return a result when there is rank loss"
+    assert 'player_name' in result, "Result should contain player_name"
+    assert 'rank_loss_percent' in result, "Result should contain rank_loss_percent"
+    assert 'num_rounds' in result, "Result should contain num_rounds"
+    assert 'old_rank' in result, "Result should contain old_rank"
+    assert 'new_rank' in result, "Result should contain new_rank"
+
+    assert result['player_name'] == 'Anders', "Should identify Anders as having highest rank loss"
+    assert result['rank_loss_percent'] == 20.0, f"Should be 20% loss, got {result['rank_loss_percent']}"
+    assert result['num_rounds'] == 5, f"Should compare 5 rounds, got {result['num_rounds']}"
+    assert result['old_rank'] == 500000, f"Old rank should be 500000, got {result['old_rank']}"
+    assert result['new_rank'] == 600000, f"New rank should be 600000, got {result['new_rank']}"
+
+
+def test_get_player_with_highest_rank_loss_no_losses():
+    """Test that function returns None when no players have rank loss."""
+    # Arrange - all players improved
+    participants = [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
+                {'event': 1, 'overall_rank': 500000},
+                {'event': 2, 'overall_rank': 480000},
+                {'event': 3, 'overall_rank': 460000},
+                {'event': 4, 'overall_rank': 450000},
+                {'event': 5, 'overall_rank': 440000},
+                {'event': 6, 'overall_rank': 430000},  # Improved
+            ]
+        ),
+        make_test_participant(
+            first_name='Anders',
+            history=[
+                {'event': 1, 'overall_rank': 600000},
+                {'event': 2, 'overall_rank': 590000},
+                {'event': 3, 'overall_rank': 580000},
+                {'event': 4, 'overall_rank': 570000},
+                {'event': 5, 'overall_rank': 560000},
+                {'event': 6, 'overall_rank': 550000},  # Improved
+            ]
+        ),
+    ]
+
+    # Act
+    from fpl.statistics import get_player_with_highest_rank_loss
+    result = get_player_with_highest_rank_loss(participants, current_event=6)
+
+    # Assert
+    assert result is None, "Should return None when no rank losses"
+
+
+def test_get_player_with_highest_rank_loss_fewer_than_5_gameweeks():
+    """Test that function works with fewer than 5 gameweeks (e.g., event 3)."""
+    # Arrange - only 3 events available
+    participants = [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
+                {'event': 1, 'overall_rank': 500000},
+                {'event': 2, 'overall_rank': 510000},  # Small loss
+                {'event': 3, 'overall_rank': 520000},  # Total: 500k -> 520k = 4% loss
+            ]
+        ),
+        make_test_participant(
+            first_name='Anders',
+            history=[
+                {'event': 1, 'overall_rank': 500000},
+                {'event': 2, 'overall_rank': 550000},
+                {'event': 3, 'overall_rank': 600000},  # Total: 500k -> 600k = 20% loss (highest)
+            ]
+        ),
+    ]
+
+    # Act
+    from fpl.statistics import get_player_with_highest_rank_loss
+    result = get_player_with_highest_rank_loss(participants, current_event=3)
+
+    # Assert
+    assert result is not None, "Should work with fewer than 5 gameweeks"
+    assert result['player_name'] == 'Anders', "Should identify Anders as having highest rank loss"
+    assert result['rank_loss_percent'] == 20.0, f"Should be 20% loss, got {result['rank_loss_percent']}"
+    assert result['num_rounds'] == 2, f"Should compare 2 rounds (event 1 to 3), got {result['num_rounds']}"
+
+
+def test_get_player_with_highest_rank_loss_event_1():
+    """Test that function returns None for event 1 (no comparison possible)."""
+    # Arrange
+    participants = [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
+                {'event': 1, 'overall_rank': 500000},
+            ]
+        ),
+    ]
+
+    # Act
+    from fpl.statistics import get_player_with_highest_rank_loss
+    result = get_player_with_highest_rank_loss(participants, current_event=1)
+
+    # Assert
+    assert result is None, "Should return None for event 1 (no comparison possible)"
