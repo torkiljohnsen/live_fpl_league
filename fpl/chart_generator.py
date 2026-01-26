@@ -220,8 +220,15 @@ def generate_rank_progression_chart(
         width=width,
         height=height,
         showlegend=True,
-        legend={'font': {'color': text_color, 'size': 18}, 'bgcolor': 'rgba(0, 0, 0, 0)'},  # Transparent legend
-        margin={'t': 90, 'b': 30, 'l': 80, 'r': 50}  # Increased top margin for X-axis at top with more breathing room
+        legend={
+            'font': {'color': text_color, 'size': 17},  # Reduced from 18 to 17
+            'bgcolor': 'rgba(0, 0, 0, 0)',  # Transparent legend
+            'x': 1.02,  # Position legend outside plot area
+            'xanchor': 'left',  # Anchor to left edge of legend box
+            'y': 1,  # Align with top of plot
+            'yanchor': 'top'
+        },
+        margin={'t': 90, 'b': 30, 'l': 80, 'r': 200}  # Increased right margin from 50 to 200 for legend space
     )
 
     # Return based on requested format

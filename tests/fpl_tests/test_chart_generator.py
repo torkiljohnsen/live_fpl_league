@@ -988,10 +988,10 @@ def test_reduced_top_padding_with_balanced_margins():
     assert fig.layout.margin.l <= 100, \
         f"Left margin should be <= 100px (may be slightly larger for Y-axis labels), got: {fig.layout.margin.l}"
 
-    assert fig.layout.margin.r >= 40, \
-        f"Right margin should be >= 40px, got: {fig.layout.margin.r}"
-    assert fig.layout.margin.r <= 60, \
-        f"Right margin should be <= 60px, got: {fig.layout.margin.r}"
+    assert fig.layout.margin.r >= 200, \
+        f"Right margin should be >= 200px for legend space, got: {fig.layout.margin.r}"
+    assert fig.layout.margin.r <= 250, \
+        f"Right margin should be <= 250px, got: {fig.layout.margin.r}"
 
 
 def test_gridline_brightness_for_dark_theme():
@@ -1134,3 +1134,48 @@ def test_further_reduced_top_padding():
     assert fig.layout.margin is not None, "Margin should be configured"
     assert fig.layout.margin.t == 90, \
         f"Top margin should be 90px to accommodate X-axis at top, got: {fig.layout.margin.t}"
+
+
+def test_legend_positioned_outside_plot_area():
+    """Test that legend is positioned outside the plot area to prevent text truncation."""
+    # Arrange
+    participants = [
+        make_test_participant(
+            first_name='JohnWithVeryLongName',
+            history=[
+                {'event': 1, 'overall_rank': 4710000},
+                {'event': 2, 'overall_rank': 4600000},
+            ],
+            league_rank=1
+        ),
+        make_test_participant(
+            first_name='AnotherLongPlayerName',
+            history=[
+                {'event': 1, 'overall_rank': 3570000},
+                {'event': 2, 'overall_rank': 3500000},
+            ],
+            league_rank=2
+        )
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert - Legend should be positioned outside plot area
+    assert fig.layout.legend is not None, "Legend should be configured"
+    assert fig.layout.legend.x == 1.02, \
+        f"Legend x position should be 1.02 (outside plot area), got: {fig.layout.legend.x}"
+    assert fig.layout.legend.xanchor == 'left', \
+        f"Legend xanchor should be 'left', got: {fig.layout.legend.xanchor}"
+    assert fig.layout.legend.y == 1, \
+        f"Legend y position should be 1 (top), got: {fig.layout.legend.y}"
+    assert fig.layout.legend.yanchor == 'top', \
+        f"Legend yanchor should be 'top', got: {fig.layout.legend.yanchor}"
+
+    # Assert - Legend font size should be 17px (reduced from 18px for better fit)
+    assert fig.layout.legend.font.size == 17, \
+        f"Legend font size should be 17px for better text fit, got: {fig.layout.legend.font.size}"
+
+    # Assert - Right margin should be 200px to accommodate legend
+    assert fig.layout.margin.r == 200, \
+        f"Right margin should be 200px to provide space for legend, got: {fig.layout.margin.r}"
