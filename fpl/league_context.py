@@ -101,6 +101,7 @@ class LeagueContext:
 
             # Calculate and format statistics
             from .statistics import (
+                get_closest_overall_rank_gap,
                 get_highest_team_value,
                 get_in_form_players,
                 get_player_with_highest_rank_loss,
@@ -153,5 +154,15 @@ class LeagueContext:
                     d["free_falling"] = None
             else:
                 d["free_falling"] = None
+
+            # Format "Haien kommer" statistic (closest overall rank gap)
+            closest_gap_result = get_closest_overall_rank_gap(participants)
+            if closest_gap_result:
+                leader = closest_gap_result['leader_name']
+                chaser = closest_gap_result['chaser_name']
+                gap = closest_gap_result['points_gap']
+                d["haien_kommer"] = f"{chaser} er bare {gap} poeng bak {leader}."
+            else:
+                d["haien_kommer"] = None
 
         return d
