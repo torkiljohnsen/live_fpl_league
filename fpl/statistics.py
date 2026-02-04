@@ -229,6 +229,10 @@ def get_closest_overall_rank_gap(participants: list[Participant]) -> dict[str, A
         chaser = participants_with_points[i + 1]
         gap = leader['points'] - chaser['points']
 
+        # Skip if gap is 0 or negative (shouldn't happen with proper sorting, but safeguard)
+        if gap <= 0:
+            continue
+
         if smallest_gap is None or gap < smallest_gap:
             smallest_gap = gap
             smallest_gap_pair = (leader, chaser)

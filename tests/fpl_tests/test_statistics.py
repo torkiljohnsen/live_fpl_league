@@ -461,3 +461,37 @@ def test_get_closest_overall_rank_gap_tie():
     # Should return the first pair found (Torkil and Anders)
     assert result['leader_name'] == 'Torkil', f"Leader should be Torkil, got {result['leader_name']}"
     assert result['chaser_name'] == 'Anders', f"Chaser should be Anders, got {result['chaser_name']}"
+
+
+def test_get_closest_overall_rank_gap_equal_points():
+    """Test behavior when participants have equal points (gap should be skipped)."""
+    # Arrange
+    participants = [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
+                {'event': 1, 'overall_rank': 500000, 'total_points': 100},
+            ]
+        ),
+        make_test_participant(
+            first_name='Anders',
+            history=[
+                {'event': 1, 'overall_rank': 600000, 'total_points': 100},  # Same points as Torkil
+            ]
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 1, 'overall_rank': 700000, 'total_points': 80},  # 20 points behind both
+            ]
+        ),
+    ]
+
+    # Act
+    from fpl.statistics import get_closest_overall_rank_gap
+    result = get_closest_overall_rank_gap(participants)
+
+    # Assert
+    # Should skip the 0-gap pair and return the next smallest gap
+    assert result is not None, "Should return a result"
+    assert result['points_gap'] == 20, f"Points gap should be 20 (skipping 0-gap pairs), got {result['points_gap']}"
