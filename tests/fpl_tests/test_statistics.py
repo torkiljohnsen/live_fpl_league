@@ -336,3 +336,128 @@ def test_get_player_with_highest_rank_loss_event_1():
 
     # Assert
     assert result is None, "Should return None for event 1 (no comparison possible)"
+
+
+def test_get_closest_overall_rank_gap():
+    """Test finding the two players with the smallest overall points difference."""
+    # Arrange
+    participants = [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
+                {'event': 1, 'overall_rank': 500000, 'total_points': 50},
+                {'event': 2, 'overall_rank': 450000, 'total_points': 150},
+                {'event': 3, 'overall_rank': 400000, 'total_points': 250},
+            ]
+        ),
+        make_test_participant(
+            first_name='Anders',
+            history=[
+                {'event': 1, 'overall_rank': 600000, 'total_points': 45},
+                {'event': 2, 'overall_rank': 550000, 'total_points': 140},
+                {'event': 3, 'overall_rank': 500000, 'total_points': 234},  # 250 - 234 = 16 points gap
+            ]
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 1, 'overall_rank': 700000, 'total_points': 40},
+                {'event': 2, 'overall_rank': 650000, 'total_points': 130},
+                {'event': 3, 'overall_rank': 600000, 'total_points': 200},  # 250 - 200 = 50 points gap
+            ]
+        ),
+    ]
+
+    # Act
+    from fpl.statistics import get_closest_overall_rank_gap
+    result = get_closest_overall_rank_gap(participants)
+
+    # Assert
+    assert result is not None, "Should return a result when there are multiple participants"
+    assert 'leader_name' in result, "Result should contain leader_name"
+    assert 'chaser_name' in result, "Result should contain chaser_name"
+    assert 'points_gap' in result, "Result should contain points_gap"
+
+    # Anders is 16 points behind Torkil (smallest gap)
+    assert result['leader_name'] == 'Torkil', f"Leader should be Torkil, got {result['leader_name']}"
+    assert result['chaser_name'] == 'Anders', f"Chaser should be Anders, got {result['chaser_name']}"
+    assert result['points_gap'] == 16, f"Points gap should be 16, got {result['points_gap']}"
+
+
+def test_get_closest_overall_rank_gap_no_history():
+    """Test that function returns None when participants have no history."""
+    # Arrange
+    participants = [
+        make_test_participant(
+            first_name='Torkil',
+            history=[]
+        ),
+        make_test_participant(
+            first_name='Anders',
+            history=[]
+        ),
+    ]
+
+    # Act
+    from fpl.statistics import get_closest_overall_rank_gap
+    result = get_closest_overall_rank_gap(participants)
+
+    # Assert
+    assert result is None, "Should return None when participants have no history"
+
+
+def test_get_closest_overall_rank_gap_single_participant():
+    """Test that function returns None with only one participant."""
+    # Arrange
+    participants = [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
+                {'event': 1, 'overall_rank': 500000, 'total_points': 50},
+                {'event': 2, 'overall_rank': 450000, 'total_points': 150},
+            ]
+        ),
+    ]
+
+    # Act
+    from fpl.statistics import get_closest_overall_rank_gap
+    result = get_closest_overall_rank_gap(participants)
+
+    # Assert
+    assert result is None, "Should return None with only one participant"
+
+
+def test_get_closest_overall_rank_gap_tie():
+    """Test behavior when multiple pairs have the same smallest gap."""
+    # Arrange
+    participants = [
+        make_test_participant(
+            first_name='Torkil',
+            history=[
+                {'event': 1, 'overall_rank': 500000, 'total_points': 100},
+            ]
+        ),
+        make_test_participant(
+            first_name='Anders',
+            history=[
+                {'event': 1, 'overall_rank': 600000, 'total_points': 90},  # 10 points behind Torkil
+            ]
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 1, 'overall_rank': 700000, 'total_points': 80},  # 10 points behind Anders
+            ]
+        ),
+    ]
+
+    # Act
+    from fpl.statistics import get_closest_overall_rank_gap
+    result = get_closest_overall_rank_gap(participants)
+
+    # Assert
+    assert result is not None, "Should return a result"
+    assert result['points_gap'] == 10, f"Points gap should be 10, got {result['points_gap']}"
+    # Should return the first pair found (Torkil and Anders)
+    assert result['leader_name'] == 'Torkil', f"Leader should be Torkil, got {result['leader_name']}"
+    assert result['chaser_name'] == 'Anders', f"Chaser should be Anders, got {result['chaser_name']}"

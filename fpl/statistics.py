@@ -180,3 +180,65 @@ def get_player_with_highest_rank_loss(
                 }
 
     return highest_loss
+
+
+def get_closest_overall_rank_gap(participants: list[Participant]) -> dict[str, Any] | None:
+    """Find the two players with the smallest overall points difference.
+
+    Args:
+        participants: List of Participant objects with 'player_first_name'
+                     and 'history' containing 'total_points' field.
+
+    Returns:
+        Dictionary with 'leader_name', 'chaser_name', and 'points_gap',
+        or None if not enough participants or no valid data.
+    """
+    if len(participants) < 2:
+        return None
+
+    # Get latest total points for each participant
+    participants_with_points = []
+    for participant in participants:
+        history = participant.history
+        if not history:
+            continue
+
+        # Get latest event data (last item in history)
+        latest_event = history[-1]
+        total_points = latest_event.get('total_points')
+
+        if total_points is not None:
+            participants_with_points.append({
+                'name': participant.player_first_name,
+                'points': total_points
+            })
+
+    # Need at least 2 participants with valid points
+    if len(participants_with_points) < 2:
+        return None
+
+    # Sort by points descending (highest first)
+    participants_with_points.sort(key=lambda x: x['points'], reverse=True)
+
+    # Find the smallest gap between consecutive participants
+    smallest_gap = None
+    smallest_gap_pair = None
+
+    for i in range(len(participants_with_points) - 1):
+        leader = participants_with_points[i]
+        chaser = participants_with_points[i + 1]
+        gap = leader['points'] - chaser['points']
+
+        if smallest_gap is None or gap < smallest_gap:
+            smallest_gap = gap
+            smallest_gap_pair = (leader, chaser)
+
+    if smallest_gap_pair is None:
+        return None
+
+    leader, chaser = smallest_gap_pair
+    return {
+        'leader_name': leader['name'],
+        'chaser_name': chaser['name'],
+        'points_gap': smallest_gap
+    }

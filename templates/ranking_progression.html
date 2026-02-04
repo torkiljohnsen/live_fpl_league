@@ -23,7 +23,7 @@
         {% endif %}
     </div>
     
-    {% if highest_team_value or in_form_players or free_falling %}
+    {% if highest_team_value or in_form_players or free_falling or haien_kommer %}
     <div class="stats-container">
         <h2>Stats:</h2>
         <dl class="stats-list">
@@ -37,6 +37,10 @@
             {% elif current_event_id > 1 %}
             <dt>I fritt fall:</dt>
             <dd>Ingen!</dd>
+            {% endif %}
+            {% if haien_kommer %}
+            <dt>Haien kommer:</dt>
+            <dd>{{ haien_kommer }}</dd>
             {% endif %}
             {% if highest_team_value %}
             <dt>Høyeste lagverdi:</dt>
