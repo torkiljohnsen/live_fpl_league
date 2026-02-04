@@ -185,6 +185,9 @@ def get_player_with_highest_rank_loss(
 def get_closest_overall_rank_gap(participants: list[Participant]) -> dict[str, Any] | None:
     """Find the two players with the smallest overall points difference.
 
+    This function identifies players who are closest in the overall standings by
+    comparing their total points accumulated across all gameweeks.
+
     Args:
         participants: List of Participant objects with 'player_first_name'
                      and 'history' containing 'total_points' field.
@@ -229,7 +232,9 @@ def get_closest_overall_rank_gap(participants: list[Participant]) -> dict[str, A
         chaser = participants_with_points[i + 1]
         gap = leader['points'] - chaser['points']
 
-        # Skip if gap is 0 or negative (shouldn't happen with proper sorting, but safeguard)
+        # Skip zero or negative gaps:
+        # - Zero gap means players are tied, so "Haien kommer" doesn't apply
+        # - Negative gap should never occur with proper sorting (highest points first)
         if gap <= 0:
             continue
 
