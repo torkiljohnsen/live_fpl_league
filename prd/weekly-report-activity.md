@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 12 / 19
-**Current Task:** Task 12 completed
+**Tasks Completed:** 13 / 19
+**Current Task:** Task 13 completed
 
 ---
 
@@ -68,4 +68,9 @@
 **Task:** Task 12 — Create example Reidar narratives from sample reports
 **Status:** completed
 **Notes:** Created `docs/REIDAR_EXAMPLES.md` with 3 example narratives in Norwegian, each 400-500 words, written from Reidar's outside-observer columnist perspective. Covers three scenarios: (1) dominant round winner (triple captain for 104 points, chip plays from multiple managers), (2) close contest (67-67 tie in a golden gameweek, tiebreaker on captain points), (3) disaster week (only 20 points separating top and bottom, universal low scores). Demonstrates Reidar's personality traits: sharp wit, dry humor, genuine praise for bold moves, mockery for poor timing. Includes recurring devices: callbacks, catchphrases ("Nedover i feltet..."), stat nuggets, running commentary on form and manager archetypes. Suitable as few-shot examples in the Claude API prompt. Mypy clean, all 168 tests pass.
+
+### Session 13 — 2026-02-24
+**Task:** Task 13 — Scaffold Reidar memory system
+**Status:** completed
+**Notes:** Created `fpl/reidar_memory.py` with `ReidarMemory` class. Constructor takes `output_dir`, `league_id`, `season` and computes base path as `reidar_memory/{league_id}/{season}/`. Methods: `scaffold_directories()` creates managers/ and gameweeks/ subdirs, `load_manager_profiles()` reads all .md files from managers/ (returns `dict[str, str]` keyed by file stem), `load_season_arc()` reads season_arc.md (empty string if missing), `load_recent_gameweeks(current_event, window=5)` reads last N GW summaries before current event, `get_prompt_context(current_event)` assembles all memory into a formatted prompt string with Norwegian section headers. All load methods handle missing files/directories gracefully (no errors on first run). Module docstring documents expected directory structure and file templates. Ruff clean, mypy clean, all 168 tests pass.
 

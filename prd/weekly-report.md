@@ -340,7 +340,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Module docstring or constants document the expected file structure/templates",
       "Ruff clean, mypy clean, all existing tests pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 14,
