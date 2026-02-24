@@ -185,7 +185,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "All functions handle empty input lists gracefully",
       "Ruff clean, mypy clean"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 5,

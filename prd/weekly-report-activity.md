@@ -24,3 +24,8 @@
 **Status:** completed
 **Notes:** Created sample data files for transfers (`entry_811114_transfers_sample.json`, JSON array) and event live (`event_1_live_sample.json`, dict with elements) in `tests/fpl_tests/data_samples/`. Added `get_transfers()` and `get_event_live()` to DummyAPI in `test_fpl_league.py`. Added URL tests and dev mode tests for both new API methods in `test_fpl_api.py`. Updated protocol adherence test. Created `test_player_registry.py` with tests for `get_player_name`, `get_player_info`, `get_team_name` including missing ID edge cases, empty bootstrap, and a real sample data integration test. All 94 tests pass, mypy clean.
 
+### Session 4 — 2026-02-24
+**Task:** Task 4 — Implement all weekly report stat functions
+**Status:** completed
+**Notes:** Created `fpl/weekly_report_stats.py` with all 9 pure award calculation functions: `get_highest_gameweek_scorer`, `get_lowest_gameweek_scorer`, `get_biggest_rank_rise`, `get_biggest_rank_fall`, `get_bench_disasters`, `get_transfer_impact`, `get_captain_summary`, `get_chip_usage`, `get_hit_takers`. Plus private helper `_calculate_transfer_net`. All functions accept `list[dict]` and return appropriate types. Rank rise/fall filter by threshold >= 2. Bench disasters exclude bench_boost chip users. Transfer impact includes hit cost. Captain summary returns most_popular, best_pick, worst_pick. Ruff clean, mypy clean, all 94 tests pass.
+
