@@ -255,7 +255,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Edge cases: no transfers, chip played, tied scores",
       "All tests pass: python -m pytest tests/fpl_tests/test_weekly_report.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 9,

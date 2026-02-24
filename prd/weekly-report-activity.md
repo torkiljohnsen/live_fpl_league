@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 7 / 19
-**Current Task:** Task 7 completed
+**Tasks Completed:** 8 / 19
+**Current Task:** Task 8 completed
 
 ---
 
@@ -43,4 +43,9 @@
 **Task:** Task 7 — Implement WeeklyReport assembly and JSON output
 **Status:** completed
 **Notes:** Extended `WeeklyReport.build()` to assemble the complete report dict with `meta`, `standings`, `awards`, and `league_summary` sections. Standings sorted by `league_rank`. Awards populated by calling all 9 `weekly_report_stats` functions, with `get_transfer_impact` unpacked into `best_transfer`/`worst_transfer`. Meta section includes league_id, league_name, season (derived from bootstrap events first deadline year, e.g. '2025-26'), event_id, generated_at ISO timestamp, and previous_report/previous_narrative paths (None for GW1). League summary includes average_score (rounded to 1 decimal), leader (first in sorted standings), and total_participants. Added `save_report(output_dir)` method writing JSON to `{output_dir}/reports/{league_id}/{season}/gw{N}.json` with auto-created directories. Ruff clean, mypy clean, all 136 tests pass.
+
+### Session 8 — 2026-02-24
+**Task:** Task 8 — WeeklyReport integration tests
+**Status:** completed
+**Notes:** Created `tests/fpl_tests/test_weekly_report.py` with 32 tests across 5 test classes. Built a self-contained `WeeklyReportDummyAPI` with inline fixtures for 3 participants with varied scenarios: normal captain (2x), triple captain (3xc), wildcard chip, hit costs, bench players, transfers filtered by event, and no-transfer participants. Tests verify: full `build()` report structure (meta/standings/awards/league_summary keys), all participant data fields populated correctly, captain points multiplied (2x and 3x), bench points from multiplier-0 picks, transfers filtered to correct GW, player names resolved via PlayerRegistry, awards populated from stats functions, `save_report()` creates correct file path with valid JSON, and edge cases (GW1 no previous paths, different event ID). Ruff clean, mypy clean, all 168 tests pass.
 
