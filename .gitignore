@@ -1,9 +1,6 @@
 # Ignore sample data JSON files
 fpl/sample_data/*.json
 
-# Generated weekly reports (local dev output)
-weekly_report/reports/
-
 # FPL API response cache
 .fpl_cache/
 # Byte-compiled / optimized / DLL files
