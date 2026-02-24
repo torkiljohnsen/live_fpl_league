@@ -436,7 +436,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Workflow exits cleanly (exit 0) when no new GW detected",
       "YAML is valid GitHub Actions syntax"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 19,

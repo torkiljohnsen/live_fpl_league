@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 17 / 19
-**Current Task:** Task 17 completed
+**Tasks Completed:** 18 / 19
+**Current Task:** Task 18 completed
 
 ---
 
@@ -93,4 +93,9 @@
 **Task:** Task 17 — Integrate narrative and memory into CLI
 **Status:** completed
 **Notes:** Updated `generate_weekly_report.py` to support the full narrative pipeline via `--narrative` flag. When set, the CLI reads all three Reidar reference docs from `weekly_report/` (persona, guide, examples), creates `ReidarMemory` to load memory context, checks for previous gameweek narrative for continuity, calls `NarrativeGenerator.generate()` with all context, saves the narrative, and calls `ReidarMemory.update_memory()` to update memory files. Missing `ANTHROPIC_API_KEY` is caught as a `RuntimeError` and printed cleanly (no traceback). Narrative output path printed to stdout. Works with `--dev` flag end-to-end (report generation; narrative requires API key). Ruff clean, mypy clean, all 207 tests pass.
+
+### Session 18 — 2026-02-24
+**Task:** Task 18 — Create GitHub Actions weekly report workflow
+**Status:** completed
+**Notes:** Created `.github/workflows/weekly_report.yml` with nightly cron schedule (06:00 UTC) and workflow_dispatch trigger. Detection step uses inline Python to fetch bootstrap-static from FPL API, find the latest finished GW, derive the season string, and check if a report already exists. If the report exists or no finished GW is found, the workflow exits cleanly (exit 0) with `skip=true` output. When a new GW is detected, runs `generate_weekly_report.py -l 1639886 -e {gw} --narrative` with `ANTHROPIC_API_KEY` from GitHub secrets, then commits and pushes reports/, narratives/, and reidar_memory/ files with a bot commit message. All 207 tests pass.
 
