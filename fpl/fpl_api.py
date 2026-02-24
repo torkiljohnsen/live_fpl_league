@@ -1,4 +1,5 @@
 import json
+import time
 from pathlib import Path
 from typing import Any
 
@@ -16,13 +17,23 @@ class FPL_API:
     dev_mode: bool
     sample_data_dir: Path
 
-    def __init__(self, dev_mode: bool = False, sample_data_dir: Any = None) -> None:
+    def __init__(
+        self,
+        dev_mode: bool = False,
+        sample_data_dir: Any = None,
+        cache_dir: Path | None = None,
+        cache_ttl: int = 300,
+    ) -> None:
         """
         :param dev_mode: If True, use sample data files instead of live API.
         :param sample_data_dir: Optional override for sample data directory (for testing).
+        :param cache_dir: Optional directory for file-based response caching.
+        :param cache_ttl: Cache time-to-live in seconds (default 300).
         """
         self.dev_mode = dev_mode
         self.sample_data_dir = sample_data_dir if sample_data_dir is not None else self.DEFAULT_SAMPLE_DATA_DIR
+        self.cache_dir = cache_dir
+        self.cache_ttl = cache_ttl
 
     def _get(self, endpoint: str) -> dict | list:
         """
@@ -32,7 +43,29 @@ class FPL_API:
         """
         if self.dev_mode:
             return self._read_sample_or_generate(endpoint)
+        if self.cache_dir is not None:
+            return self._get_with_cache(endpoint)
         return self._call_api(endpoint)
+
+    def _get_with_cache(self, endpoint: str) -> dict | list:
+        """
+        Returns cached response if fresh, otherwise fetches from API and caches.
+        :param endpoint: API endpoint string
+        :return: Parsed JSON response as a dict or list
+        """
+        assert self.cache_dir is not None
+        cache_name = endpoint.replace("/", "_").strip("_") + ".json"
+        cache_path = self.cache_dir / cache_name
+
+        if cache_path.exists():
+            age = time.time() - cache_path.stat().st_mtime
+            if age < self.cache_ttl:
+                return json.loads(cache_path.read_text(encoding="utf-8"))
+
+        data = self._call_api(endpoint)
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+        cache_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        return data
 
     def _call_api(self, endpoint: str) -> dict | list:
         """

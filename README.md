@@ -86,6 +86,9 @@ python generate_weekly_report.py -l 1639886 -e 10 --narrative
 # Generate report only (no narrative, no API key needed)
 python generate_weekly_report.py -l 1639886 -e 10
 
+# Skip if report already exists (used in CI to avoid duplicates)
+python generate_weekly_report.py -l 1639886 --narrative --skip-existing
+
 # Dev mode with sample data
 python generate_weekly_report.py --dev
 ```

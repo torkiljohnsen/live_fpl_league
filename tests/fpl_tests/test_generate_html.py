@@ -27,7 +27,7 @@ def test_ranking_progression_output_option():
         main()
 
         # Assert API was created with dev_mode=True
-        mock_api_class.assert_called_once_with(dev_mode=True)
+        mock_api_class.assert_called_once_with(dev_mode=True, cache_dir=None)
 
         # Assert context was built exactly once for the specified league
         mock_context_class.build.assert_called_once_with(

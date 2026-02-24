@@ -13,7 +13,7 @@ from pathlib import Path
 from fpl import FPL_API
 from fpl.narrative_generator import NarrativeGenerator
 from fpl.reidar_memory import ReidarMemory
-from fpl.weekly_report import WeeklyReport
+from fpl.weekly_report import WeeklyReport, get_season_from_bootstrap
 
 FPL_LEAGUE_ID = "1639886"
 
@@ -138,16 +138,40 @@ def main() -> None:
         "--output-dir", type=str, default=".",
         help="Output directory for report files. Default: current directory.",
     )
+    parser.add_argument(
+        "--skip-existing", action="store_true",
+        help="Skip generation if the report JSON already exists on disk.",
+    )
+    parser.add_argument(
+        "--cache-dir", type=str, default=None,
+        help="Directory for file-based API response caching.",
+    )
     args = parser.parse_args()
 
     try:
-        api = FPL_API(dev_mode=args.dev)
+        cache_dir = Path(args.cache_dir) if args.cache_dir else None
+        api = FPL_API(dev_mode=args.dev, cache_dir=cache_dir)
 
         event_id: int
         if args.event is not None:
             event_id = args.event
         else:
             event_id = detect_current_gameweek(api)
+
+        if args.skip_existing:
+            bootstrap = api.get_bootstrap_static()
+            season = get_season_from_bootstrap(bootstrap)
+            report_path = (
+                Path(args.output_dir)
+                / "weekly_report"
+                / "reports"
+                / args.league_id
+                / season
+                / f"gw{event_id}.json"
+            )
+            if report_path.is_file():
+                print(f"Report already exists: {report_path} — skipping.")
+                return
 
         report = WeeklyReport(api=api, league_id=args.league_id, event_id=event_id)
         result = report.build()

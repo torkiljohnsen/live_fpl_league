@@ -9,10 +9,11 @@ from __future__ import annotations
 import json
 import os
 from typing import Any
+from unittest.mock import patch
 
 import pytest
 
-from fpl.weekly_report import WeeklyReport
+from fpl.weekly_report import WeeklyReport, get_season_from_bootstrap
 
 # ---------------------------------------------------------------------------
 # Minimal bootstrap data with 4 elements, 2 teams, 4 element_types
@@ -700,3 +701,93 @@ class TestWeeklyReportEdgeCases:
             p for p in report["standings"] if p["entry_id"] == 1002
         )
         assert len(bob["transfers"]) == 1
+
+
+class TestGetSeasonFromBootstrap:
+    """Test the standalone get_season_from_bootstrap() helper."""
+
+    def test_normal_season(self) -> None:
+        assert get_season_from_bootstrap(BOOTSTRAP_DATA) == "2025-26"
+
+    def test_empty_events(self) -> None:
+        assert get_season_from_bootstrap({"events": []}) == "unknown"
+
+    def test_no_events_key(self) -> None:
+        assert get_season_from_bootstrap({}) == "unknown"
+
+    def test_empty_deadline(self) -> None:
+        data: dict[str, Any] = {"events": [{"deadline_time": ""}]}
+        assert get_season_from_bootstrap(data) == "unknown"
+
+
+class TestSkipExisting:
+    """Test the --skip-existing CLI behavior."""
+
+    def test_skip_existing_when_report_exists(self, tmp_path: Any) -> None:
+        """When report file exists and --skip-existing is set, main() returns early."""
+        # Create the report file that would be found
+        report_dir = (
+            tmp_path / "weekly_report" / "reports" / LEAGUE_ID / "2025-26"
+        )
+        report_dir.mkdir(parents=True)
+        (report_dir / "gw2.json").write_text("{}", encoding="utf-8")
+
+        with patch("generate_weekly_report.FPL_API") as mock_api_cls:
+            mock_api = mock_api_cls.return_value
+            mock_api.get_bootstrap_static.return_value = BOOTSTRAP_DATA
+
+            from generate_weekly_report import main
+
+            with patch(
+                "sys.argv",
+                [
+                    "generate_weekly_report.py",
+                    "-l", LEAGUE_ID,
+                    "-e", "2",
+                    "--skip-existing",
+                    "--output-dir", str(tmp_path),
+                ],
+            ):
+                main()
+
+            # WeeklyReport.build() should NOT have been called
+            mock_api.get_league_standings.assert_not_called()
+
+    def test_no_skip_when_report_missing(self, tmp_path: Any) -> None:
+        """When report file doesn't exist, --skip-existing still builds."""
+        with patch("generate_weekly_report.FPL_API") as mock_api_cls:
+            mock_api = mock_api_cls.return_value
+            mock_api.get_bootstrap_static.return_value = BOOTSTRAP_DATA
+            mock_api.get_league_standings.return_value = LEAGUE_STANDINGS
+            mock_api.get_event_live.return_value = EVENT_LIVE_DATA
+            mock_api.get_team_picks.side_effect = (
+                lambda tid, eid: {
+                    "1001": ALICE_PICKS,
+                    "1002": BOB_PICKS,
+                    "1003": CHARLIE_PICKS,
+                }.get(tid, {"picks": [], "entry_history": {}})
+            )
+            mock_api.get_transfers.side_effect = (
+                lambda tid: {
+                    "1001": ALICE_TRANSFERS,
+                    "1002": BOB_TRANSFERS,
+                    "1003": CHARLIE_TRANSFERS,
+                }.get(tid, [])
+            )
+
+            from generate_weekly_report import main
+
+            with patch(
+                "sys.argv",
+                [
+                    "generate_weekly_report.py",
+                    "-l", LEAGUE_ID,
+                    "-e", "2",
+                    "--skip-existing",
+                    "--output-dir", str(tmp_path),
+                ],
+            ):
+                main()
+
+            # Report should have been built
+            mock_api.get_league_standings.assert_called_once()

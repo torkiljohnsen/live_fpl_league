@@ -44,7 +44,7 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 
 **Reidar Memory System**: Persistent context across gameweeks stored in `weekly_report/reidar_memory/{league_id}/{season}/`. Includes per-manager profiles (~200 words), season arc, and rolling GW summaries. Assembled into prompt context via `ReidarMemory.get_prompt_context()` (~4k words at any point in the season).
 
-**GitHub Actions**: `.github/workflows/weekly_report.yml` runs nightly, detects finished gameweeks, generates report + narrative, and auto-commits.
+**GitHub Actions**: `.github/workflows/scheduled-build.yml` runs nightly, generates HTML dashboards and weekly report + narrative (with `--skip-existing` to avoid duplicates), and auto-commits.
 
 ## Directory Structure
 

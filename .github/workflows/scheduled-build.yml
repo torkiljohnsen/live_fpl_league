@@ -1,4 +1,4 @@
-name: Nightly Dashboard Update
+name: Nightly Dashboard & Weekly Report
 
 on:
   schedule:
@@ -23,26 +23,30 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.13'
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
       - name: Generate standings and gw history for the Sinkaberg leagues
-        run: python generate_html.py -l 1639886,1638989
+        run: python generate_html.py -l 1639886,1638989 --cache-dir .fpl_cache
 
       - name: Generate Index
         run: python generate_index.py
+
+      - name: Generate weekly report and narrative
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python generate_weekly_report.py -l 1638989 --narrative --skip-existing --cache-dir .fpl_cache
 
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
-          if [[ `git status --porcelain docs/` ]]; then
-            git add docs/
-            git commit -m "Update docs [skip ci]"
+
+          git add docs/ weekly_report/reports/ weekly_report/narratives/ weekly_report/reidar_memory/
+          git diff --cached --quiet || (
+            git commit -m "chore: nightly dashboard and report update [skip ci]"
             git push
-          else
-            echo "No changes to commit."
-          fi
+          )

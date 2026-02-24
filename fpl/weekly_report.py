@@ -17,6 +17,22 @@ from .fpl_api_protocol import FPLAPIProtocol
 from .player_registry import PlayerRegistry
 
 
+def get_season_from_bootstrap(bootstrap: dict[str, Any]) -> str:
+    """Derive season string (e.g. '2025-26') from bootstrap data.
+
+    Shared by WeeklyReport and CLI skip-existing logic.
+    """
+    events = bootstrap.get("events", [])
+    if not events:
+        return "unknown"
+    first_deadline = events[0].get("deadline_time", "")
+    if not first_deadline:
+        return "unknown"
+    year = int(first_deadline[:4])
+    next_year_short = str(year + 1)[-2:]
+    return f"{year}-{next_year_short}"
+
+
 class WeeklyReport:
     """Collects gameweek data and builds participant data dicts.
 
@@ -110,15 +126,7 @@ class WeeklyReport:
 
     def _get_season(self) -> str:
         """Derive season string (e.g. '2025-26') from bootstrap events."""
-        events = self._bootstrap.get("events", [])
-        if not events:
-            return "unknown"
-        first_deadline = events[0].get("deadline_time", "")
-        if not first_deadline:
-            return "unknown"
-        year = int(first_deadline[:4])
-        next_year_short = str(year + 1)[-2:]
-        return f"{year}-{next_year_short}"
+        return get_season_from_bootstrap(self._bootstrap)
 
     def _build_meta(self) -> dict[str, Any]:
         """Build the meta section of the report."""
