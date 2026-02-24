@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 10 / 19
-**Current Task:** Task 10 completed
+**Tasks Completed:** 11 / 19
+**Current Task:** Task 11 completed
 
 ---
 
@@ -58,4 +58,9 @@
 **Task:** Task 10 — Define Reidar persona document
 **Status:** completed
 **Notes:** Created `docs/REIDAR_PERSONA.md` defining the "Reidar" columnist character for weekly narratives. Sections: Background & Identity (seasoned columnist, outside observer, retired FPL manager), Voice Rules (Norwegian informal tone, sports commentary cadence, sarcasm guidelines, when to be genuine), Personality Traits (what triggers praise, mockery, grudging respect), Manager Archetypes (frontrunner, comeback kid, perennial underperformer, lucky one, tactician, ghost), Recurring Narrative Devices (running jokes, callbacks, stat nuggets, catchphrases), and Anti-Patterns (things Reidar never does). References the sample reports for tone baseline. Mypy clean, all 168 tests pass.
+
+### Session 11 — 2026-02-24
+**Task:** Task 11 — Create narrative structure guide
+**Status:** completed
+**Notes:** Created `docs/NARRATIVE_GUIDE.md` as the structural reference for the LLM narrative writer. Sections: Narrative Structure (opening hook, round winner spotlight, award-by-award coverage, rest of the field, standings & implications, look-ahead), Award Name Mapping table (all 10 JSON keys mapped to Norwegian names with narrative angles, plus handling of conditional/missing awards), Week-over-Week Continuity (previous narrative reference, memory context from ReidarMemory, continuity patterns table with examples, first gameweek handling), Norwegian FPL Terminology glossary (chips, game terms, scoring terms with Norwegian usage notes), and Length & Format Guidelines (500-800 words, markdown output, no emojis, columnist tone calibration). References REIDAR_PERSONA.md and REIDAR_EXAMPLES.md. Mypy clean, all 168 tests pass.
 

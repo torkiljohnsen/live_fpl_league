@@ -305,7 +305,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Length/format guidelines (~500-800 words, markdown output)",
       "References docs/REIDAR_PERSONA.md for voice/personality"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 12,
