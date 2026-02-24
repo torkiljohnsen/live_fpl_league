@@ -1,13 +1,18 @@
-"""Weekly report data collection and participant building.
+"""Weekly report data collection, assembly, and JSON output.
 
-Orchestrates data collection from the FPL API and builds
-GameweekParticipantData dicts for each league participant.
+Orchestrates data collection from the FPL API, builds
+GameweekParticipantData dicts for each league participant,
+calculates awards, and assembles the final report dict.
 """
 
 from __future__ import annotations
 
+import json
+from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any
 
+from . import weekly_report_stats as stats
 from .fpl_api_protocol import FPLAPIProtocol
 from .player_registry import PlayerRegistry
 
@@ -29,15 +34,15 @@ class WeeklyReport:
         self._participants_data: list[dict[str, Any]] = []
         self._bootstrap: dict[str, Any] = {}
         self._league_name: str = ""
+        self._report: dict[str, Any] = {}
 
     def build(self) -> dict[str, Any]:
-        """Fetch all data and build participant data dicts.
+        """Fetch all data, build participant data, and assemble the report.
 
         Fetches bootstrap, league standings, event live data, and
-        per-participant picks and transfers. Builds a
-        GameweekParticipantData dict for each participant.
-
-        Returns a dict with standings (list of participant data dicts).
+        per-participant picks and transfers. Builds GameweekParticipantData
+        dicts, calculates awards, and returns the complete report dict
+        with meta, standings, awards, and league_summary sections.
         """
         self._bootstrap = self._api.get_bootstrap_static()
         registry = PlayerRegistry(self._bootstrap)
@@ -66,7 +71,119 @@ class WeeklyReport:
             )
             self._participants_data.append(participant)
 
-        return {"standings": self._participants_data}
+        # Sort standings by league rank
+        self._participants_data.sort(key=lambda p: p.get("league_rank", 0))
+
+        # Assemble the full report
+        self._report = {
+            "meta": self._build_meta(),
+            "standings": self._participants_data,
+            "awards": self._build_awards(),
+            "league_summary": self._build_league_summary(),
+        }
+
+        return self._report
+
+    def save_report(self, output_dir: str) -> str:
+        """Write the report JSON to disk.
+
+        Saves to {output_dir}/reports/{league_id}/{season}/gw{N}.json,
+        creating directories as needed.
+
+        Returns the path to the written file.
+        """
+        season = self._get_season()
+        path = (
+            Path(output_dir)
+            / "reports"
+            / self._league_id
+            / season
+            / f"gw{self._event_id}.json"
+        )
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(self._report, indent=2, ensure_ascii=False))
+        return str(path)
+
+    def _get_season(self) -> str:
+        """Derive season string (e.g. '2025-26') from bootstrap events."""
+        events = self._bootstrap.get("events", [])
+        if not events:
+            return "unknown"
+        first_deadline = events[0].get("deadline_time", "")
+        if not first_deadline:
+            return "unknown"
+        year = int(first_deadline[:4])
+        next_year_short = str(year + 1)[-2:]
+        return f"{year}-{next_year_short}"
+
+    def _build_meta(self) -> dict[str, Any]:
+        """Build the meta section of the report."""
+        season = self._get_season()
+        prev_event = self._event_id - 1
+
+        previous_report: str | None = None
+        previous_narrative: str | None = None
+        if prev_event >= 1:
+            previous_report = (
+                f"reports/{self._league_id}/{season}/gw{prev_event}.json"
+            )
+            previous_narrative = (
+                f"narratives/{self._league_id}/{season}/gw{prev_event}.md"
+            )
+
+        return {
+            "league_id": self._league_id,
+            "league_name": self._league_name,
+            "season": season,
+            "event_id": self._event_id,
+            "generated_at": datetime.now(UTC).isoformat(),
+            "previous_report": previous_report,
+            "previous_narrative": previous_narrative,
+        }
+
+    def _build_awards(self) -> dict[str, Any]:
+        """Calculate all awards from participant data."""
+        p = self._participants_data
+        transfer_impact = stats.get_transfer_impact(p)
+        best_transfer = transfer_impact["best"] if transfer_impact else None
+        worst_transfer = transfer_impact["worst"] if transfer_impact else None
+
+        return {
+            "highest_scorer": stats.get_highest_gameweek_scorer(p),
+            "lowest_scorer": stats.get_lowest_gameweek_scorer(p),
+            "biggest_rise": stats.get_biggest_rank_rise(p),
+            "biggest_fall": stats.get_biggest_rank_fall(p),
+            "bench_disasters": stats.get_bench_disasters(p),
+            "best_transfer": best_transfer,
+            "worst_transfer": worst_transfer,
+            "captain_summary": stats.get_captain_summary(p),
+            "chip_usage": stats.get_chip_usage(p),
+            "hit_takers": stats.get_hit_takers(p),
+        }
+
+    def _build_league_summary(self) -> dict[str, Any]:
+        """Build the league summary section."""
+        total = len(self._participants_data)
+        if total == 0:
+            return {
+                "average_score": 0,
+                "leader": None,
+                "total_participants": 0,
+            }
+
+        net_scores = [p.get("net_points", 0) for p in self._participants_data]
+        avg = sum(net_scores) / total
+
+        leader = self._participants_data[0]
+
+        return {
+            "average_score": round(avg, 1),
+            "leader": {
+                "player_name": leader["player_first_name"],
+                "total_points": leader["total_points"],
+            },
+            "total_participants": total,
+        }
 
     def _build_live_points_map(
         self, live_data: dict[str, Any]

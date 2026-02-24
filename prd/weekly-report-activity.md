@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 6 / 19
-**Current Task:** Task 6 completed
+**Tasks Completed:** 7 / 19
+**Current Task:** Task 7 completed
 
 ---
 
@@ -38,4 +38,9 @@
 **Task:** Task 6 — Implement WeeklyReport data collection and participant building
 **Status:** completed
 **Notes:** Created `fpl/weekly_report.py` with `WeeklyReport` class. Constructor takes `api` (FPLAPIProtocol), `league_id` (str), `event_id` (int). `build()` fetches bootstrap, league standings, event live data (one shared call), and per-participant picks and transfers. Builds `GameweekParticipantData` dict for each participant with all schema fields: points (event_total, net_points, total_points), rank (league_rank, league_rank_previous, league_rank_change via last_rank - rank), value (team_value, bank divided by 10), bench (players with multiplier=0), captain (points multiplied by multiplier: 2x captain, 3x TC), transfers (filtered by event, with player names via PlayerRegistry and live point impact), chip_played from active_chip. Ruff clean, mypy clean, all 136 tests pass.
+
+### Session 7 — 2026-02-24
+**Task:** Task 7 — Implement WeeklyReport assembly and JSON output
+**Status:** completed
+**Notes:** Extended `WeeklyReport.build()` to assemble the complete report dict with `meta`, `standings`, `awards`, and `league_summary` sections. Standings sorted by `league_rank`. Awards populated by calling all 9 `weekly_report_stats` functions, with `get_transfer_impact` unpacked into `best_transfer`/`worst_transfer`. Meta section includes league_id, league_name, season (derived from bootstrap events first deadline year, e.g. '2025-26'), event_id, generated_at ISO timestamp, and previous_report/previous_narrative paths (None for GW1). League summary includes average_score (rounded to 1 decimal), leader (first in sorted standings), and total_participants. Added `save_report(output_dir)` method writing JSON to `{output_dir}/reports/{league_id}/{season}/gw{N}.json` with auto-created directories. Ruff clean, mypy clean, all 136 tests pass.
 

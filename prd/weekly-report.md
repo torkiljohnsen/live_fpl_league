@@ -238,7 +238,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "JSON output is valid and matches schema from docs/WEEKLY_REPORT_PLAN.md",
       "Ruff clean, mypy clean"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 8,
