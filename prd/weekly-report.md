@@ -200,7 +200,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Threshold boundaries tested: bench disasters at 19 (excluded) and 20 (included)",
       "All tests pass: python -m pytest tests/fpl_tests/test_weekly_report_stats.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 6,

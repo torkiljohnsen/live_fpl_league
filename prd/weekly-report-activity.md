@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 3 / 19
-**Current Task:** Task 3 completed
+**Tasks Completed:** 5 / 19
+**Current Task:** Task 5 completed
 
 ---
 
@@ -28,4 +28,9 @@
 **Task:** Task 4 — Implement all weekly report stat functions
 **Status:** completed
 **Notes:** Created `fpl/weekly_report_stats.py` with all 9 pure award calculation functions: `get_highest_gameweek_scorer`, `get_lowest_gameweek_scorer`, `get_biggest_rank_rise`, `get_biggest_rank_fall`, `get_bench_disasters`, `get_transfer_impact`, `get_captain_summary`, `get_chip_usage`, `get_hit_takers`. Plus private helper `_calculate_transfer_net`. All functions accept `list[dict]` and return appropriate types. Rank rise/fall filter by threshold >= 2. Bench disasters exclude bench_boost chip users. Transfer impact includes hit cost. Captain summary returns most_popular, best_pick, worst_pick. Ruff clean, mypy clean, all 94 tests pass.
+
+### Session 5 — 2026-02-24
+**Task:** Task 5 — Tests for weekly report stat functions
+**Status:** completed
+**Notes:** Created `tests/fpl_tests/test_weekly_report_stats.py` with 42 tests across 9 test classes (one per function). Used a `_make_participant()` helper for building realistic participant data dicts. Each function has 3-7 test cases covering: normal operation, empty list input, single participant, ties, threshold boundaries (bench disasters at 19 excluded / 20 included, rank changes at exactly +/-2), negative net points, hit cost inclusion in transfer impact, multiple transfers, bench_boost chip exclusion, custom thresholds. All 136 tests pass, mypy clean.
 
