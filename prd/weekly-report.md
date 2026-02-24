@@ -132,7 +132,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Dev mode works: calling get_transfers and get_event_live with dev_mode=True reads/generates sample files",
       "Ruff clean, mypy clean, all existing tests still pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 2,
