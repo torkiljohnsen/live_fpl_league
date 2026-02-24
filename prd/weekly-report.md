@@ -165,7 +165,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Tests verify PlayerRegistry handles missing element IDs gracefully",
       "All tests pass: python -m pytest"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 4,

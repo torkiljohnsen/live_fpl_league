@@ -52,6 +52,25 @@ class TestFPLAPIDevMode:
 		data = self.api.get_bootstrap_static()
 		assert data == sample_content
 
+	def test_get_transfers_dev_mode(self, monkeypatch):
+		transfers_data = [{"element_in": 1, "element_out": 2, "event": 1}]
+		sample_file = Path(self.temp_dir) / "entry_811114_transfers_sample.json"
+		sample_file.write_text(json.dumps(transfers_data), encoding="utf-8")
+		monkeypatch.setattr(self.api, "_call_api", lambda e: (_ for _ in ()).throw(Exception("Should not call API")))
+		data = self.api.get_transfers("811114")
+		assert isinstance(data, list)
+		assert data == transfers_data
+
+	def test_get_event_live_dev_mode(self, monkeypatch):
+		live_data = {"elements": [{"id": 1, "stats": {"total_points": 6}}]}
+		sample_file = Path(self.temp_dir) / "event_1_live_sample.json"
+		sample_file.write_text(json.dumps(live_data), encoding="utf-8")
+		monkeypatch.setattr(self.api, "_call_api", lambda e: (_ for _ in ()).throw(Exception("Should not call API")))
+		data = self.api.get_event_live("1")
+		assert isinstance(data, dict)
+		assert "elements" in data
+		assert data == live_data
+
 class TestFPLAPI:
 	def setup_method(self):
 		self.api = FPL_API(dev_mode=False)
@@ -80,3 +99,17 @@ class TestFPLAPI:
 		event_id = "1"
 		self.api.get_team_picks(team_id, event_id)
 		patch_requests_get.assert_called_once_with(f"https://fantasy.premierleague.com/api/entry/{team_id}/event/{event_id}/picks/")
+
+	def test_get_transfers_calls_correct_url(self, patch_requests_get):
+		team_id = "654321"
+		mock_response = MagicMock()
+		mock_response.json.return_value = []
+		mock_response.raise_for_status.return_value = None
+		patch_requests_get.return_value = mock_response
+		self.api.get_transfers(team_id)
+		patch_requests_get.assert_called_once_with(f"https://fantasy.premierleague.com/api/entry/{team_id}/transfers/")
+
+	def test_get_event_live_calls_correct_url(self, patch_requests_get):
+		event_id = "1"
+		self.api.get_event_live(event_id)
+		patch_requests_get.assert_called_once_with(f"https://fantasy.premierleague.com/api/event/{event_id}/live/")
