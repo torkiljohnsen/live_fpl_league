@@ -94,6 +94,40 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 
 **[`chip_annotator.py`](chip_annotator.py)** - Chip usage annotations
 
+### Weekly Report Pipeline
+**[`player_registry.py`](player_registry.py)** - Maps FPL element IDs to human-readable names
+- `PlayerRegistry(bootstrap_data)` builds lookup dicts from bootstrap `elements[]`, `teams[]`, `element_types[]`
+- `get_player_name(element_id)` returns "FirstName LastName" (or "Unknown Player")
+- `get_player_info(element_id)` returns dict with name, team, position
+- `get_team_name(team_code)` returns team name (or "Unknown Team")
+- Pure data transformation — no API calls
+
+**[`weekly_report.py`](weekly_report.py)** - Assembles gameweek data into a structured report
+- `WeeklyReport(api, league_id, event_id)` — constructor takes API client, league ID, and gameweek number
+- `build()` fetches all data, assembles participant dicts, calculates awards, returns complete report dict with `meta`, `standings`, `awards`, `league_summary`
+- `save_report(output_dir)` writes JSON to `reports/{league_id}/{season}/gw{N}.json`
+- Uses PlayerRegistry for name resolution, weekly_report_stats for awards
+
+**[`weekly_report_stats.py`](weekly_report_stats.py)** - Pure award calculation functions
+- All functions: `list[dict]` in, `dict`/`list`/`None` out — no side effects
+- Functions: `get_highest_gameweek_scorer`, `get_lowest_gameweek_scorer`, `get_biggest_rank_rise`, `get_biggest_rank_fall`, `get_bench_disasters`, `get_transfer_impact`, `get_captain_summary`, `get_chip_usage`, `get_hit_takers`
+- Follows same pure-function pattern as [`statistics.py`](statistics.py)
+
+**[`narrative_generator.py`](narrative_generator.py)** - Claude API narrative generation
+- `NarrativeGenerator(client=None)` — accepts optional anthropic client; creates from `ANTHROPIC_API_KEY` env var if not provided
+- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None)` — builds system prompt from reference docs + memory, sends report as user message, returns Norwegian narrative markdown
+- `save_narrative(content, output_dir, league_id, season, event_id)` writes to `narratives/{league_id}/{season}/gw{N}.md`
+- Uses `claude-sonnet-4-6` model
+
+**[`reidar_memory.py`](reidar_memory.py)** - Persistent memory system for Reidar persona
+- `ReidarMemory(output_dir, league_id, season)` — manages files under `reidar_memory/{league_id}/{season}/`
+- `scaffold_directories()` creates `managers/` and `gameweeks/` subdirs
+- `load_manager_profiles()` returns `dict[str, str]` keyed by manager name
+- `load_season_arc()` returns season arc markdown (empty string if missing)
+- `load_recent_gameweeks(current_event, window=5)` returns last N GW summaries
+- `get_prompt_context(current_event)` assembles all memory into formatted prompt string (~4k words)
+- `update_memory(report_json, narrative, client)` makes a Claude API call to update all memory files after each narrative
+
 ### Sample Data
 **[`sample_data/`](sample_data/)** - Sample API JSON responses for dev mode
 - `bootstrap_static_sample.json` - Global FPL data (events, chips, teams)

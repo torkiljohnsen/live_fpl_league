@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 18 / 19
-**Current Task:** Task 18 completed
+**Tasks Completed:** 19 / 19
+**Current Task:** Task 19 completed — all tasks done
 
 ---
 
@@ -99,3 +99,7 @@
 **Status:** completed
 **Notes:** Created `.github/workflows/weekly_report.yml` with nightly cron schedule (06:00 UTC) and workflow_dispatch trigger. Detection step uses inline Python to fetch bootstrap-static from FPL API, find the latest finished GW, derive the season string, and check if a report already exists. If the report exists or no finished GW is found, the workflow exits cleanly (exit 0) with `skip=true` output. When a new GW is detected, runs `generate_weekly_report.py -l 1639886 -e {gw} --narrative` with `ANTHROPIC_API_KEY` from GitHub secrets, then commits and pushes reports/, narratives/, and reidar_memory/ files with a bot commit message. All 207 tests pass.
 
+### Session 19 — 2026-02-24
+**Task:** Task 19 — Update documentation and module exports
+**Status:** completed
+**Notes:** Updated `fpl/__init__.py` to export `PlayerRegistry`, `WeeklyReport`, `NarrativeGenerator`, and `ReidarMemory`. Updated root `AGENTS.md` with the weekly report architecture flow (data collection, player resolution, participant building, awards, report assembly, narrative generation, memory update) and Reidar memory system description. Updated `fpl/AGENTS.md` with documentation for all 5 new modules (`player_registry.py`, `weekly_report.py`, `weekly_report_stats.py`, `narrative_generator.py`, `reidar_memory.py`). Added `reports/` to `.gitignore`. Added `reports/`, `narratives/`, and `reidar_memory/` output directories to the directory structure section. Verified end-to-end dev mode works. All 207 tests pass, mypy clean.

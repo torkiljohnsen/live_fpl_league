@@ -21,13 +21,30 @@ Add new knowledge sparingly, and do so in a consise way.
 
 See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 
-### Overview
+### HTML Dashboard Flow
 
 1. **Data Collection** - [`fpl/fpl_api.py`](fpl/fpl_api.py) fetches from FPL API (or dev mode samples)
 2. **Data Processing** - [`fpl/fpl_league.py`](fpl/fpl_league.py) aggregates data; [`fpl/statistics.py`](fpl/statistics.py) calculates stats
 3. **Context Building** - [`fpl/league_context.py`](fpl/league_context.py) formats data for templates
 4. **Template Rendering** - [`fpl/league_template_renderer.py`](fpl/league_template_renderer.py) generates HTML
 5. **Entry Points** - [`generate_html.py`](generate_html.py) and [`generate_index.py`](generate_index.py)
+
+### Weekly Report & Narrative Flow (Reidar's Rapport)
+
+**Data Collection → Report Assembly → Narrative Generation → Memory Update**
+
+1. **Data Collection** - [`fpl/fpl_api.py`](fpl/fpl_api.py) fetches standings, picks, transfers, and live event data
+2. **Player Resolution** - [`fpl/player_registry.py`](fpl/player_registry.py) maps element IDs to player/team names
+3. **Participant Building** - [`fpl/weekly_report.py`](fpl/weekly_report.py) assembles per-participant gameweek data (points, captain, bench, transfers, rank changes)
+4. **Awards Calculation** - [`fpl/weekly_report_stats.py`](fpl/weekly_report_stats.py) computes awards (top scorer, bench disasters, captain picks, etc.)
+5. **Report Assembly** - `WeeklyReport.build()` produces a self-contained JSON report with meta, standings, awards, league_summary
+6. **Narrative Generation** - [`fpl/narrative_generator.py`](fpl/narrative_generator.py) sends report + Reidar persona + memory context to Claude API, returns Norwegian-language narrative
+7. **Memory Update** - [`fpl/reidar_memory.py`](fpl/reidar_memory.py) updates per-manager profiles, season arc, and GW summaries after each narrative
+8. **Entry Point** - [`generate_weekly_report.py`](generate_weekly_report.py) (`--dev` for sample data, `--narrative` for Claude API narrative)
+
+**Reidar Memory System**: Persistent context across gameweeks stored in `reidar_memory/{league_id}/{season}/`. Includes per-manager profiles (~200 words), season arc, and rolling GW summaries. Assembled into prompt context via `ReidarMemory.get_prompt_context()` (~4k words at any point in the season).
+
+**GitHub Actions**: `.github/workflows/weekly_report.yml` runs nightly, detects finished gameweeks, generates report + narrative, and auto-commits.
 
 ## Directory Structure
 
@@ -49,6 +66,12 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
   - [`REIDAR_PERSONA.md`](weekly_report/REIDAR_PERSONA.md) - Reidar character definition (voice, personality)
   - [`NARRATIVE_GUIDE.md`](weekly_report/NARRATIVE_GUIDE.md) - Narrative structure and content rules
   - [`REIDAR_EXAMPLES.md`](weekly_report/REIDAR_EXAMPLES.md) - Few-shot example narratives for LLM prompting
+
+- **`reports/`** - Generated JSON weekly reports (`reports/{league_id}/{season}/gw{N}.json`). Gitignored for local dev; committed by GitHub Actions.
+
+- **`narratives/`** - Generated Norwegian narratives (`narratives/{league_id}/{season}/gw{N}.md`). Committed by GitHub Actions.
+
+- **`reidar_memory/`** - Reidar's persistent memory files (`reidar_memory/{league_id}/{season}/`). Manager profiles, season arc, GW summaries. Committed by GitHub Actions.
 
 - **[`prd/`](prd/)** - Product requirement documents (Ralph agent loop task definitions)
 
