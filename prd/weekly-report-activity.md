@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 11 / 19
-**Current Task:** Task 11 completed
+**Tasks Completed:** 12 / 19
+**Current Task:** Task 12 completed
 
 ---
 
@@ -63,4 +63,9 @@
 **Task:** Task 11 — Create narrative structure guide
 **Status:** completed
 **Notes:** Created `docs/NARRATIVE_GUIDE.md` as the structural reference for the LLM narrative writer. Sections: Narrative Structure (opening hook, round winner spotlight, award-by-award coverage, rest of the field, standings & implications, look-ahead), Award Name Mapping table (all 10 JSON keys mapped to Norwegian names with narrative angles, plus handling of conditional/missing awards), Week-over-Week Continuity (previous narrative reference, memory context from ReidarMemory, continuity patterns table with examples, first gameweek handling), Norwegian FPL Terminology glossary (chips, game terms, scoring terms with Norwegian usage notes), and Length & Format Guidelines (500-800 words, markdown output, no emojis, columnist tone calibration). References REIDAR_PERSONA.md and REIDAR_EXAMPLES.md. Mypy clean, all 168 tests pass.
+
+### Session 12 — 2026-02-24
+**Task:** Task 12 — Create example Reidar narratives from sample reports
+**Status:** completed
+**Notes:** Created `docs/REIDAR_EXAMPLES.md` with 3 example narratives in Norwegian, each 400-500 words, written from Reidar's outside-observer columnist perspective. Covers three scenarios: (1) dominant round winner (triple captain for 104 points, chip plays from multiple managers), (2) close contest (67-67 tie in a golden gameweek, tiebreaker on captain points), (3) disaster week (only 20 points separating top and bottom, universal low scores). Demonstrates Reidar's personality traits: sharp wit, dry humor, genuine praise for bold moves, mockery for poor timing. Includes recurring devices: callbacks, catchphrases ("Nedover i feltet..."), stat nuggets, running commentary on form and manager archetypes. Suitable as few-shot examples in the Claude API prompt. Mypy clean, all 168 tests pass.
 
