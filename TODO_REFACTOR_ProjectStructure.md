@@ -33,7 +33,9 @@ Target state:
 
 ### 3. CI/CD Integration
 Current state:
-- No automated checks
+- [`pr-tests.yml`](.github/workflows/pr-tests.yml) exists and runs pytest + mypy on PRs
+- [`scheduled-build.yml`](.github/workflows/scheduled-build.yml) runs nightly dashboard updates
+- Ruff linting is **not** included in CI yet
 
 Target state:
 - GitHub Actions workflow that:
