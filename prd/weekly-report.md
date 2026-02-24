@@ -398,7 +398,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Missing ANTHROPIC_API_KEY raises clear error",
       "All tests pass: python -m pytest"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 17,

@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 15 / 19
-**Current Task:** Task 15 completed
+**Tasks Completed:** 16 / 19
+**Current Task:** Task 16 completed
 
 ---
 
@@ -83,4 +83,9 @@
 **Task:** Task 15 — Implement Reidar memory update after narrative generation
 **Status:** completed
 **Notes:** Added `update_memory(report_json, narrative, client)` method to `ReidarMemory`. Makes a Claude API call (claude-sonnet-4-6) with current memory state (manager profiles + season arc), the new report JSON, and the narrative just written. LLM response uses structured delimiters (`===MANAGER: name===`, `===GW_SUMMARY===`, `===SEASON_ARC===`) for reliable parsing. Updates all manager profile .md files, creates gw{N}.md summary in gameweeks/, and updates season_arc.md. Handles first-run gracefully with bootstrap instructions when no profiles exist. Added helper methods `_build_memory_update_prompt()`, `_build_memory_update_user_message()`, and `_parse_and_write_memory()`. Ruff clean, mypy clean, all 168 tests pass.
+
+### Session 16 — 2026-02-24
+**Task:** Task 16 — Tests for narrative generator and memory system
+**Status:** completed
+**Notes:** Created `tests/fpl_tests/test_reidar_memory.py` (24 tests across 6 classes) and `tests/fpl_tests/test_narrative_generator.py` (15 tests across 4 classes). ReidarMemory tests cover: scaffold_directories (creation + idempotency), load_manager_profiles (missing dir, empty dir, reads files, ignores non-.md), load_season_arc (missing file, existing file), load_recent_gameweeks (missing dir, no prior GWs, reads summaries, window limit, excludes current event, GW1 edge case), get_prompt_context (first run empty, full assembly, partial content), and update_memory with mocked LLM (writes manager profiles, GW summary, season arc, correct model, first-run bootstrap note, existing profiles skip bootstrap, user message content). NarrativeGenerator tests cover: constructor (accepts client, missing API key raises RuntimeError with helpful message), generate() (system prompt includes all sections, divider separation, empty memory excluded, user message includes JSON, previous narrative inclusion/exclusion, correct model, returns text), save_narrative (correct path, file content, directory creation, overwrites). All 207 tests pass, ruff clean, mypy clean.
 
