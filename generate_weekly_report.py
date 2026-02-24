@@ -7,6 +7,7 @@ and persistent memory system.
 """
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -158,6 +159,12 @@ def main() -> None:
         else:
             event_id = detect_current_gameweek(api)
 
+        # Resolve paths for skip-existing checks
+        report_exists = False
+        narrative_exists = False
+        report_path: Path | None = None
+        narrative_path_expected: Path | None = None
+
         if args.skip_existing:
             bootstrap = api.get_bootstrap_static()
             season = get_season_from_bootstrap(bootstrap)
@@ -169,33 +176,51 @@ def main() -> None:
                 / season
                 / f"gw{event_id}.json"
             )
-            if report_path.is_file():
+            narrative_path_expected = (
+                Path(args.output_dir)
+                / "weekly_report"
+                / "narratives"
+                / args.league_id
+                / season
+                / f"gw{event_id}.md"
+            )
+            report_exists = report_path.is_file()
+            narrative_exists = narrative_path_expected.is_file()
+
+            if report_exists and (not args.narrative or narrative_exists):
                 print(f"Report already exists: {report_path} — skipping.")
                 return
 
-        report = WeeklyReport(api=api, league_id=args.league_id, event_id=event_id)
-        result = report.build()
-
-        league_name = result["meta"]["league_name"]
-        output_path = report.save_report(args.output_dir)
+        # Build or load report
+        if report_exists and report_path is not None:
+            print(f"Report already exists: {report_path} — loading for narrative retry.")
+            result = json.loads(report_path.read_text(encoding="utf-8"))
+            league_name = result["meta"]["league_name"]
+        else:
+            report = WeeklyReport(api=api, league_id=args.league_id, event_id=event_id)
+            result = report.build()
+            league_name = result["meta"]["league_name"]
+            output_path = report.save_report(args.output_dir)
+            print(f"Report saved: {output_path}")
 
         print(f"League: {league_name}")
         print(f"Gameweek: {event_id}")
-        print(f"Report saved: {output_path}")
 
-        if args.narrative:
-            narrative_path = _generate_narrative(
-                result=result,
-                league_id=args.league_id,
-                event_id=event_id,
-                output_dir=args.output_dir,
-            )
-            print(f"Narrative saved: {narrative_path}")
+        if args.narrative and not narrative_exists:
+            try:
+                narrative_path = _generate_narrative(
+                    result=result,
+                    league_id=args.league_id,
+                    event_id=event_id,
+                    output_dir=args.output_dir,
+                )
+                print(f"Narrative saved: {narrative_path}")
+            except Exception as e:
+                print(f"WARNING: Narrative generation failed: {e}", file=sys.stderr)
+                print("Report was saved successfully. Narrative skipped.", file=sys.stderr)
+        elif args.narrative and narrative_exists:
+            print(f"Narrative already exists: {narrative_path_expected} — skipping.")
 
-    except RuntimeError as e:
-        # Catch RuntimeError from NarrativeGenerator (missing API key)
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)

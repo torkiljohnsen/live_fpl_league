@@ -723,12 +723,41 @@ class TestGetSeasonFromBootstrap:
 class TestSkipExisting:
     """Test the --skip-existing CLI behavior."""
 
-    def test_skip_existing_when_report_exists(self, tmp_path: Any) -> None:
-        """When report file exists and --skip-existing is set, main() returns early."""
-        # Create the report file that would be found
-        report_dir = (
-            tmp_path / "weekly_report" / "reports" / LEAGUE_ID / "2025-26"
-        )
+    def test_skip_existing_when_report_and_narrative_exist(self, tmp_path: Any) -> None:
+        """When both report and narrative exist, skip everything."""
+        report_dir = tmp_path / "weekly_report" / "reports" / LEAGUE_ID / "2025-26"
+        report_dir.mkdir(parents=True)
+        (report_dir / "gw2.json").write_text("{}", encoding="utf-8")
+
+        narrative_dir = tmp_path / "weekly_report" / "narratives" / LEAGUE_ID / "2025-26"
+        narrative_dir.mkdir(parents=True)
+        (narrative_dir / "gw2.md").write_text("Reidar says hi", encoding="utf-8")
+
+        with patch("generate_weekly_report.FPL_API") as mock_api_cls:
+            mock_api = mock_api_cls.return_value
+            mock_api.get_bootstrap_static.return_value = BOOTSTRAP_DATA
+
+            from generate_weekly_report import main
+
+            with patch(
+                "sys.argv",
+                [
+                    "generate_weekly_report.py",
+                    "-l", LEAGUE_ID,
+                    "-e", "2",
+                    "--narrative",
+                    "--skip-existing",
+                    "--output-dir", str(tmp_path),
+                ],
+            ):
+                main()
+
+            # Nothing should have been built
+            mock_api.get_league_standings.assert_not_called()
+
+    def test_skip_existing_without_narrative_flag(self, tmp_path: Any) -> None:
+        """When report exists and --narrative is not set, skip everything."""
+        report_dir = tmp_path / "weekly_report" / "reports" / LEAGUE_ID / "2025-26"
         report_dir.mkdir(parents=True)
         (report_dir / "gw2.json").write_text("{}", encoding="utf-8")
 
@@ -750,8 +779,44 @@ class TestSkipExisting:
             ):
                 main()
 
-            # WeeklyReport.build() should NOT have been called
             mock_api.get_league_standings.assert_not_called()
+
+    def test_retry_narrative_when_report_exists_but_narrative_missing(
+        self, tmp_path: Any
+    ) -> None:
+        """When report exists but narrative doesn't, load report and retry narrative."""
+        # Create a valid report JSON
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
+        wr.build()
+        wr.save_report(str(tmp_path))
+
+        with patch("generate_weekly_report.FPL_API") as mock_api_cls:
+            mock_api = mock_api_cls.return_value
+            mock_api.get_bootstrap_static.return_value = BOOTSTRAP_DATA
+
+            with patch("generate_weekly_report._generate_narrative") as mock_narr:
+                mock_narr.return_value = "some/path.md"
+
+                from generate_weekly_report import main
+
+                with patch(
+                    "sys.argv",
+                    [
+                        "generate_weekly_report.py",
+                        "-l", LEAGUE_ID,
+                        "-e", "2",
+                        "--narrative",
+                        "--skip-existing",
+                        "--output-dir", str(tmp_path),
+                    ],
+                ):
+                    main()
+
+                # Report should NOT have been rebuilt
+                mock_api.get_league_standings.assert_not_called()
+                # Narrative SHOULD have been attempted
+                mock_narr.assert_called_once()
 
     def test_no_skip_when_report_missing(self, tmp_path: Any) -> None:
         """When report file doesn't exist, --skip-existing still builds."""
