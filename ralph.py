@@ -5,9 +5,7 @@ Runs Claude Code in a loop, completing one PRD task per iteration.
 
 import argparse
 import json
-import os
 import re
-import shutil
 import subprocess
 import sys
 import time
@@ -458,24 +456,6 @@ def show_prd_list() -> None:
     console.print(table)
 
 
-# ── PATH fix ────────────────────────────────────────────────
-
-
-def ensure_uv_in_path() -> None:
-    """Ensure uv is discoverable by child processes (claude).
-
-    On some environments (e.g. Windows Git Bash), uv may be in PATH for the
-    current shell but not inherited by subprocesses. Explicitly add its
-    directory to PATH so `claude` and its internal Bash tool can find it.
-    """
-    uv_path = shutil.which("uv")
-    if uv_path:
-        uv_dir = str(Path(uv_path).resolve().parent)
-        current_path = os.environ.get("PATH", "")
-        if uv_dir not in current_path:
-            os.environ["PATH"] = uv_dir + os.pathsep + current_path
-
-
 # ── CLI ──────────────────────────────────────────────────────
 
 
@@ -520,11 +500,6 @@ def main() -> None:
         return
 
     # Preflight checks
-    if not shutil.which("uv"):
-        console.print("[red][ERROR][/] uv not found in PATH.")
-        sys.exit(1)
-    ensure_uv_in_path()
-
     if not prd.exists():
         console.print(f"[red][ERROR][/] PRD not found: {prd}")
         sys.exit(1)
