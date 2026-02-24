@@ -22,9 +22,9 @@ from rich.table import Table
 console = Console()
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-PRD_DIR = SCRIPT_DIR / ".claude/prds"
+PRD_DIR = SCRIPT_DIR / "prd"
 DEFAULT_PRD = PRD_DIR / "prd.md"
-PROMPT_FILE = SCRIPT_DIR / ".claude/prds/CLAUDE.md"
+PROMPT_FILE = SCRIPT_DIR / "prd/CLAUDE.md"
 LOG_DIR = SCRIPT_DIR / ".claude/logs"
 
 DEFAULT_ITERATIONS = 14
@@ -72,11 +72,11 @@ def _read_prd_texts(prd: Path) -> list[str]:
     2. Feature branch — local then origin (agent committed but may not have pushed)
     3. Local file on current branch (fallback)
     """
-    prd_dir = ".claude/prds"
+    prd_dir = "prd"
     stem = prd.stem
 
     # 1. Try worktree
-    wt_dir = WORKTREE_DIR / stem / ".claude" / "prds"
+    wt_dir = WORKTREE_DIR / stem / "prd"
     if wt_dir.exists():
         phase_files = sorted(wt_dir.glob(f"{stem}-phase-*.md"))
         if phase_files:
@@ -421,7 +421,7 @@ def list_prds() -> list[Path]:
         return []
     results: list[Path] = []
     for p in PRD_DIR.glob("*.md"):
-        if p.name in ("CLAUDE.md", "lessons.md") or p.name.endswith("-activity.md"):
+        if p.name in ("CLAUDE.md", "lessons.md", "PROMPT.md", "PROMPT-INSPIRATION.md") or p.name.endswith("-activity.md"):
             continue
         # Exclude phase files: {stem}-phase-{label}.md where {stem}.md exists
         m = re.match(r"^(.+)-phase-.+\.md$", p.name)
@@ -483,12 +483,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Autonomous development loop using Claude Code. Completes one PRD task per iteration.",
         epilog="""examples:
-  python ralph.py                                        Run default PRD (.claude/prds/prd.md)
-  python ralph.py --prd .claude/prds/prd-refactor.md    Run a specific PRD
-  python ralph.py --prd .claude/prds/prd-refactor.md 5  Run 5 iterations on a specific PRD
-  python ralph.py --list                                 List all PRDs with progress
-  python ralph.py --status                               Show progress for default PRD
-  python ralph.py --prd .claude/prds/prd-refactor.md --status
+  python ralph.py                                    Run default PRD (prd/prd.md)
+  python ralph.py --prd prd/weekly-report.md         Run a specific PRD
+  python ralph.py --prd prd/weekly-report.md 5       Run 5 iterations on a specific PRD
+  python ralph.py --list                             List all PRDs with progress
+  python ralph.py --status                           Show progress for default PRD
+  python ralph.py --prd prd/weekly-report.md --status
 """,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -505,7 +505,7 @@ def main() -> None:
         default=DEFAULT_PRD,
         help=f"path to PRD file (default: {DEFAULT_PRD.relative_to(SCRIPT_DIR)})",
     )
-    parser.add_argument("--list", action="store_true", help="list all PRDs in .claude/prds/ with progress")
+    parser.add_argument("--list", action="store_true", help="list all PRDs in prd/ with progress")
     parser.add_argument("-n", "--dry-run", action="store_true", help="show config without executing")
     parser.add_argument("--status", action="store_true", help="show current task progress")
     args = parser.parse_args()
