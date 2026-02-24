@@ -1,0 +1,50 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(uv run python server.py)",
+      "Bash(uv sync)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git rm *)",
+      "Bash(git push *)",
+      "Bash(git checkout *)",
+      "Bash(git branch *)",
+      "Bash(git switch *)",
+      "Bash(git fetch *)",
+      "Bash(git worktree *)",
+      "Bash(git ls-remote *)",
+      "Bash(gh pr *)",
+      "Bash(echo *)",
+      "Bash(npm ci *)",
+      "Bash(npm install*)",
+      "Bash(npm run *)",
+      "Bash(npm create *)",
+      "Bash(npx *)",
+      "Bash(node *)",
+      "Bash(ls *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(cd /c/Dev/WAVdeck)",
+      "Bash(mv *)",
+      "Bash(rustup *)",
+      "Bash(cargo *)",
+      "Bash(rustc *)"
+    ],
+    "deny": [
+      "Bash(rm *)",
+      "Bash(sudo *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(pip *)",
+      "Bash(git reset --hard *)"
+    ]
+  }
+}
