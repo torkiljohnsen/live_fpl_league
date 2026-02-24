@@ -219,7 +219,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "League rank change calculated by comparing current vs previous GW rank",
       "Ruff clean, mypy clean"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 7,

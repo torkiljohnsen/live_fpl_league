@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 5 / 19
-**Current Task:** Task 5 completed
+**Tasks Completed:** 6 / 19
+**Current Task:** Task 6 completed
 
 ---
 
@@ -33,4 +33,9 @@
 **Task:** Task 5 — Tests for weekly report stat functions
 **Status:** completed
 **Notes:** Created `tests/fpl_tests/test_weekly_report_stats.py` with 42 tests across 9 test classes (one per function). Used a `_make_participant()` helper for building realistic participant data dicts. Each function has 3-7 test cases covering: normal operation, empty list input, single participant, ties, threshold boundaries (bench disasters at 19 excluded / 20 included, rank changes at exactly +/-2), negative net points, hit cost inclusion in transfer impact, multiple transfers, bench_boost chip exclusion, custom thresholds. All 136 tests pass, mypy clean.
+
+### Session 6 — 2026-02-24
+**Task:** Task 6 — Implement WeeklyReport data collection and participant building
+**Status:** completed
+**Notes:** Created `fpl/weekly_report.py` with `WeeklyReport` class. Constructor takes `api` (FPLAPIProtocol), `league_id` (str), `event_id` (int). `build()` fetches bootstrap, league standings, event live data (one shared call), and per-participant picks and transfers. Builds `GameweekParticipantData` dict for each participant with all schema fields: points (event_total, net_points, total_points), rank (league_rank, league_rank_previous, league_rank_change via last_rank - rank), value (team_value, bank divided by 10), bench (players with multiplier=0), captain (points multiplied by multiplier: 2x captain, 3x TC), transfers (filtered by event, with player names via PlayerRegistry and live point impact), chip_played from active_chip. Ruff clean, mypy clean, all 136 tests pass.
 
