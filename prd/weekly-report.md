@@ -378,7 +378,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Manager profiles stay concise (~200 words each)",
       "Ruff clean, mypy clean"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 16,

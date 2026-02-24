@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 14 / 19
-**Current Task:** Task 14 completed
+**Tasks Completed:** 15 / 19
+**Current Task:** Task 15 completed
 
 ---
 
@@ -78,4 +78,9 @@
 **Task:** Task 14 — Implement narrative generator with memory support
 **Status:** completed
 **Notes:** Created `fpl/narrative_generator.py` with `NarrativeGenerator` class. Constructor accepts optional client or creates one from `ANTHROPIC_API_KEY` env var (raises `RuntimeError` with clear message if missing). `generate()` method builds system prompt from persona + narrative guide + examples + memory context (joined with `---` separators), user message includes report JSON and optional previous narrative for continuity. Calls Claude API with `claude-sonnet-4-6` model, returns markdown string. `save_narrative()` writes to `{output_dir}/narratives/{league_id}/{season}/gw{N}.md` with auto-created directories. Lazy `import anthropic` ensures module is importable even when package isn't installed (for testing with mocked clients). Added `anthropic` to `requirements.txt`. Ruff clean, mypy clean, all 168 tests pass.
+
+### Session 15 — 2026-02-24
+**Task:** Task 15 — Implement Reidar memory update after narrative generation
+**Status:** completed
+**Notes:** Added `update_memory(report_json, narrative, client)` method to `ReidarMemory`. Makes a Claude API call (claude-sonnet-4-6) with current memory state (manager profiles + season arc), the new report JSON, and the narrative just written. LLM response uses structured delimiters (`===MANAGER: name===`, `===GW_SUMMARY===`, `===SEASON_ARC===`) for reliable parsing. Updates all manager profile .md files, creates gw{N}.md summary in gameweeks/, and updates season_arc.md. Handles first-run gracefully with bootstrap instructions when no profiles exist. Added helper methods `_build_memory_update_prompt()`, `_build_memory_update_user_message()`, and `_parse_and_write_memory()`. Ruff clean, mypy clean, all 168 tests pass.
 

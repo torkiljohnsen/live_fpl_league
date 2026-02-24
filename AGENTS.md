@@ -13,6 +13,7 @@ Add new knowledge sparingly, and do so in a consise way.
 - **[`fpl/AGENTS.md`](fpl/AGENTS.md)** - Detailed documentation for the `fpl/` module (data collection, processing, context building)
 - **[`templates/AGENTS.md`](templates/AGENTS.md)** - Template variables and structure reference
 - **[`docs/CHART_THEMES.md`](docs/CHART_THEMES.md)** - Chart theme customization guide (dark, light, Sinkaberg corporate)
+- **[`weekly_report/`](weekly_report/)** - Reidar persona, narrative guide, and example narratives for weekly report generation
 
 ## Architecture Flow
 
@@ -39,9 +40,19 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
   - [`index.html`](templates/index.html) - Index page template
   - [`AGENTS.md`](templates/AGENTS.md) - Template variables reference
 
-- **[`docs/`](docs/)** - Generated static HTML output (GitHub Pages ready)
+- **[`docs/`](docs/)** - GitHub Pages publishing directory (static HTML output only)
   - Generated HTML files for each league/view
   - [`style.css`](docs/style.css) - Shared stylesheet
+  - **Do not place non-publishing files here** — this folder is deployed to GitHub Pages
+
+- **[`weekly_report/`](weekly_report/)** - Reference documents for weekly narrative generation (Reidar's Rapport)
+  - [`REIDAR_PERSONA.md`](weekly_report/REIDAR_PERSONA.md) - Reidar character definition (voice, personality)
+  - [`NARRATIVE_GUIDE.md`](weekly_report/NARRATIVE_GUIDE.md) - Narrative structure and content rules
+  - [`REIDAR_EXAMPLES.md`](weekly_report/REIDAR_EXAMPLES.md) - Few-shot example narratives for LLM prompting
+
+- **[`prd/`](prd/)** - Product requirement documents (Ralph agent loop task definitions)
+
+- **[`assets/`](assets/)** - Source images and SVGs (logos, icons) used by templates
 
 - **[`tests/`](tests/)** - Test suite
   - [`fpl_tests/`](tests/fpl_tests/) - Tests for `fpl/` modules
@@ -50,6 +61,7 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 - **Root files**
   - [`generate_html.py`](generate_html.py) - Main HTML generation script
   - [`generate_index.py`](generate_index.py) - Index page generator
+  - [`generate_weekly_report.py`](generate_weekly_report.py) - Weekly report generation (JSON + narrative)
   - [`requirements.txt`](requirements.txt) - Python dependencies
 
 ## Key Conventions
