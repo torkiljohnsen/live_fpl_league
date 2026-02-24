@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 13 / 19
-**Current Task:** Task 13 completed
+**Tasks Completed:** 14 / 19
+**Current Task:** Task 14 completed
 
 ---
 
@@ -73,4 +73,9 @@
 **Task:** Task 13 — Scaffold Reidar memory system
 **Status:** completed
 **Notes:** Created `fpl/reidar_memory.py` with `ReidarMemory` class. Constructor takes `output_dir`, `league_id`, `season` and computes base path as `reidar_memory/{league_id}/{season}/`. Methods: `scaffold_directories()` creates managers/ and gameweeks/ subdirs, `load_manager_profiles()` reads all .md files from managers/ (returns `dict[str, str]` keyed by file stem), `load_season_arc()` reads season_arc.md (empty string if missing), `load_recent_gameweeks(current_event, window=5)` reads last N GW summaries before current event, `get_prompt_context(current_event)` assembles all memory into a formatted prompt string with Norwegian section headers. All load methods handle missing files/directories gracefully (no errors on first run). Module docstring documents expected directory structure and file templates. Ruff clean, mypy clean, all 168 tests pass.
+
+### Session 14 — 2026-02-24
+**Task:** Task 14 — Implement narrative generator with memory support
+**Status:** completed
+**Notes:** Created `fpl/narrative_generator.py` with `NarrativeGenerator` class. Constructor accepts optional client or creates one from `ANTHROPIC_API_KEY` env var (raises `RuntimeError` with clear message if missing). `generate()` method builds system prompt from persona + narrative guide + examples + memory context (joined with `---` separators), user message includes report JSON and optional previous narrative for continuity. Calls Claude API with `claude-sonnet-4-6` model, returns markdown string. `save_narrative()` writes to `{output_dir}/narratives/{league_id}/{season}/gw{N}.md` with auto-created directories. Lazy `import anthropic` ensures module is importable even when package isn't installed (for testing with mocked clients). Added `anthropic` to `requirements.txt`. Ruff clean, mypy clean, all 168 tests pass.
 

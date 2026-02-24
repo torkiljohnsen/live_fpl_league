@@ -359,7 +359,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "anthropic package added to requirements.txt",
       "Ruff clean, mypy clean"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 15,
