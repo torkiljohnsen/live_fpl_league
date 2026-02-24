@@ -78,6 +78,12 @@ All three files are 100% complete:
 - [ ] `.github/workflows/scheduled-build.yml` updated to use `python-version: '3.13'` (instead of `'3.x'`)
 - [ ] Both workflows are valid YAML (no syntax errors)
 
+**Task 2**
+Ruff complaint: N801 Class name `FPL_API` should use CapWords convention. Refactor the class name to the CapWords convention.
+
+**Acceptance Criteria**:
+- [ ] Ruff warning about class name `FPL_API` disappears.
+
 ---
 
 ### Job 4: Fix nightly build to generate all output types

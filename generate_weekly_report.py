@@ -184,6 +184,8 @@ def main() -> None:
                 / season
                 / f"gw{event_id}.md"
             )
+            assert report_path is not None
+            assert narrative_path_expected is not None
             report_exists = report_path.is_file()
             narrative_exists = narrative_path_expected.is_file()
 

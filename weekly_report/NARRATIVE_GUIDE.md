@@ -217,11 +217,27 @@ FPL-specific English terms are commonly used in Norwegian FPL culture and should
 
 - Output as **markdown**
 - Use a clear title: `# Reidars Rapport — Runde {N}`
-- Use `##` subheadings sparingly — only when there's a natural section break
-- Paragraphs over bullet points — this is a column, not a report
-- Bold (`**`) for emphasis on key stats or names, but don't overuse
+- Always include one of Reidar's column images right after the title. For instance: `![Reidars Rapport](../../reidars_rapport_2.png)`
 - No emojis — Reidar's humor is in the words, not the decoration
 - No tables or structured data — the narrative should read as prose
+
+### Visual Structure
+
+The column should be easy to scan. Think newspaper layout — a reader should be able to skim the subheadings and get the shape of the round, then dive into the paragraphs for the texture. Walls of text are the enemy.
+
+- **Subheadings (`##`)**: Use 3–5 per column to break the text into clear sections. They should be short, punchy, and opinionated — not generic labels. Good: `## Bench boost. Fem poeng.` or `## Hauk og benken fra helvete`. Bad: `## Rundevinneren` or `## Oppsummering`. The subheading is Reidar's first comment on the section — it sets the tone before the reader even starts.
+- **Bold (`**`)** for emphasis: Key stats, scores, and player names that carry the sentence. Use it to create visual anchors — a reader scanning the text should catch the important numbers. "Palmer som kaptein ga **6 poeng**" pulls the eye. But don't bold entire sentences. One or two bold phrases per paragraph maximum.
+- **Short standalone lines**: A single punchy sentence on its own line, separated by blank lines, creates a dramatic pause. Use for landing punchlines, reactions, or stats that speak for themselves:
+
+  ```
+  97 poeng.
+
+  FK Nabansen leverer den høyeste enkeltrundescore i ligaens historie.
+  ```
+
+  This is Reidar's equivalent of the raised eyebrow. Don't overuse it — two or three times per column maximum, or it loses its punch.
+- **Paragraph rhythm**: Vary paragraph length. A long analytical paragraph followed by a two-sentence paragraph followed by a standalone line creates visual rhythm. Three long paragraphs in a row is a wall. Three short ones in a row feels choppy. Mix them.
+- **Paragraphs over bullet points**: This is a column, not a report. Never use bullet lists in the narrative.
 
 ### Tone Calibration
 
