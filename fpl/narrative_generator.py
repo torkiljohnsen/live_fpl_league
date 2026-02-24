@@ -102,7 +102,7 @@ class NarrativeGenerator:
     ) -> Path:
         """Save narrative markdown to the standard path.
 
-        Writes to {output_dir}/narratives/{league_id}/{season}/gw{N}.md,
+        Writes to {output_dir}/weekly_report/narratives/{league_id}/{season}/gw{N}.md,
         creating directories as needed.
 
         Args:
@@ -117,6 +117,7 @@ class NarrativeGenerator:
         """
         output_path = (
             Path(output_dir)
+            / "weekly_report"
             / "narratives"
             / league_id
             / season

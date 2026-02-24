@@ -42,7 +42,7 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 7. **Memory Update** - [`fpl/reidar_memory.py`](fpl/reidar_memory.py) updates per-manager profiles, season arc, and GW summaries after each narrative
 8. **Entry Point** - [`generate_weekly_report.py`](generate_weekly_report.py) (`--dev` for sample data, `--narrative` for Claude API narrative)
 
-**Reidar Memory System**: Persistent context across gameweeks stored in `reidar_memory/{league_id}/{season}/`. Includes per-manager profiles (~200 words), season arc, and rolling GW summaries. Assembled into prompt context via `ReidarMemory.get_prompt_context()` (~4k words at any point in the season).
+**Reidar Memory System**: Persistent context across gameweeks stored in `weekly_report/reidar_memory/{league_id}/{season}/`. Includes per-manager profiles (~200 words), season arc, and rolling GW summaries. Assembled into prompt context via `ReidarMemory.get_prompt_context()` (~4k words at any point in the season).
 
 **GitHub Actions**: `.github/workflows/weekly_report.yml` runs nightly, detects finished gameweeks, generates report + narrative, and auto-commits.
 
@@ -62,16 +62,13 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
   - [`style.css`](docs/style.css) - Shared stylesheet
   - **Do not place non-publishing files here** — this folder is deployed to GitHub Pages
 
-- **[`weekly_report/`](weekly_report/)** - Reference documents for weekly narrative generation (Reidar's Rapport)
+- **[`weekly_report/`](weekly_report/)** - Everything related to weekly narrative generation (Reidar's Rapport)
   - [`REIDAR_PERSONA.md`](weekly_report/REIDAR_PERSONA.md) - Reidar character definition (voice, personality)
   - [`NARRATIVE_GUIDE.md`](weekly_report/NARRATIVE_GUIDE.md) - Narrative structure and content rules
   - [`REIDAR_EXAMPLES.md`](weekly_report/REIDAR_EXAMPLES.md) - Few-shot example narratives for LLM prompting
-
-- **`reports/`** - Generated JSON weekly reports (`reports/{league_id}/{season}/gw{N}.json`). Gitignored for local dev; committed by GitHub Actions.
-
-- **`narratives/`** - Generated Norwegian narratives (`narratives/{league_id}/{season}/gw{N}.md`). Committed by GitHub Actions.
-
-- **`reidar_memory/`** - Reidar's persistent memory files (`reidar_memory/{league_id}/{season}/`). Manager profiles, season arc, GW summaries. Committed by GitHub Actions.
+  - `reports/{league_id}/{season}/gw{N}.json` - Generated JSON weekly reports. Gitignored for local dev; committed by GitHub Actions.
+  - `narratives/{league_id}/{season}/gw{N}.md` - Generated Norwegian narratives. Committed by GitHub Actions.
+  - `reidar_memory/{league_id}/{season}/` - Reidar's persistent memory files (manager profiles, season arc, GW summaries). Committed by GitHub Actions.
 
 - **[`prd/`](prd/)** - Product requirement documents (Ralph agent loop task definitions)
 

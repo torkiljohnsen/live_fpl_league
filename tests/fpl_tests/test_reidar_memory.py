@@ -14,7 +14,7 @@ def _make_memory(tmp_path: Path) -> ReidarMemory:
 
 
 def _base_path(tmp_path: Path) -> Path:
-    return tmp_path / "reidar_memory" / "123456" / "2025-26"
+    return tmp_path / "weekly_report" / "reidar_memory" / "123456" / "2025-26"
 
 
 def _sample_report() -> dict:

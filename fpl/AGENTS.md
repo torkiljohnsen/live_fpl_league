@@ -105,7 +105,7 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 **[`weekly_report.py`](weekly_report.py)** - Assembles gameweek data into a structured report
 - `WeeklyReport(api, league_id, event_id)` — constructor takes API client, league ID, and gameweek number
 - `build()` fetches all data, assembles participant dicts, calculates awards, returns complete report dict with `meta`, `standings`, `awards`, `league_summary`
-- `save_report(output_dir)` writes JSON to `reports/{league_id}/{season}/gw{N}.json`
+- `save_report(output_dir)` writes JSON to `weekly_report/reports/{league_id}/{season}/gw{N}.json`
 - Uses PlayerRegistry for name resolution, weekly_report_stats for awards
 
 **[`weekly_report_stats.py`](weekly_report_stats.py)** - Pure award calculation functions
@@ -116,11 +116,11 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 **[`narrative_generator.py`](narrative_generator.py)** - Claude API narrative generation
 - `NarrativeGenerator(client=None)` — accepts optional anthropic client; creates from `ANTHROPIC_API_KEY` env var if not provided
 - `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None)` — builds system prompt from reference docs + memory, sends report as user message, returns Norwegian narrative markdown
-- `save_narrative(content, output_dir, league_id, season, event_id)` writes to `narratives/{league_id}/{season}/gw{N}.md`
+- `save_narrative(content, output_dir, league_id, season, event_id)` writes to `weekly_report/narratives/{league_id}/{season}/gw{N}.md`
 - Uses `claude-sonnet-4-6` model
 
 **[`reidar_memory.py`](reidar_memory.py)** - Persistent memory system for Reidar persona
-- `ReidarMemory(output_dir, league_id, season)` — manages files under `reidar_memory/{league_id}/{season}/`
+- `ReidarMemory(output_dir, league_id, season)` — manages files under `weekly_report/reidar_memory/{league_id}/{season}/`
 - `scaffold_directories()` creates `managers/` and `gameweeks/` subdirs
 - `load_manager_profiles()` returns `dict[str, str]` keyed by manager name
 - `load_season_arc()` returns season arc markdown (empty string if missing)

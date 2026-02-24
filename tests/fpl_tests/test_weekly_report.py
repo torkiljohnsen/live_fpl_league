@@ -377,8 +377,8 @@ class TestWeeklyReportBuild:
         assert meta["event_id"] == EVENT_ID
         assert "generated_at" in meta
         # GW2 should have previous report/narrative paths for GW1
-        assert meta["previous_report"] == f"reports/{LEAGUE_ID}/2025-26/gw1.json"
-        assert meta["previous_narrative"] == f"narratives/{LEAGUE_ID}/2025-26/gw1.md"
+        assert meta["previous_report"] == f"weekly_report/reports/{LEAGUE_ID}/2025-26/gw1.json"
+        assert meta["previous_narrative"] == f"weekly_report/narratives/{LEAGUE_ID}/2025-26/gw1.md"
 
     def test_meta_gw1_has_no_previous(self) -> None:
         api = WeeklyReportDummyAPI()
@@ -645,7 +645,7 @@ class TestWeeklyReportSaveReport:
         result_path = wr.save_report(str(tmp_path))
 
         expected_path = os.path.join(
-            str(tmp_path), "reports", LEAGUE_ID, "2025-26", "gw2.json"
+            str(tmp_path), "weekly_report", "reports", LEAGUE_ID, "2025-26", "gw2.json"
         )
         assert os.path.normpath(result_path) == os.path.normpath(expected_path)
         assert os.path.exists(result_path)

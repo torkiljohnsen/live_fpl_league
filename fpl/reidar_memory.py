@@ -6,7 +6,7 @@ from earlier in the season.
 
 Directory structure::
 
-    reidar_memory/{league_id}/{season}/
+    weekly_report/reidar_memory/{league_id}/{season}/
         season_arc.md               # Rolling season summary, records, threads
         managers/
             {first_name}.md         # Per-manager profile (~200 words)
@@ -60,7 +60,7 @@ class ReidarMemory:
 
     def __init__(self, output_dir: str, league_id: str, season: str) -> None:
         self._base_path = (
-            Path(output_dir) / "reidar_memory" / league_id / season
+            Path(output_dir) / "weekly_report" / "reidar_memory" / league_id / season
         )
         self._managers_path = self._base_path / "managers"
         self._gameweeks_path = self._base_path / "gameweeks"
@@ -68,7 +68,7 @@ class ReidarMemory:
     def scaffold_directories(self) -> None:
         """Create the memory directory structure.
 
-        Creates reidar_memory/{league_id}/{season}/ with managers/
+        Creates weekly_report/reidar_memory/{league_id}/{season}/ with managers/
         and gameweeks/ subdirectories.
         """
         self._managers_path.mkdir(parents=True, exist_ok=True)

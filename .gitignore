@@ -2,7 +2,7 @@
 fpl/sample_data/*.json
 
 # Generated weekly reports (local dev output)
-reports/
+weekly_report/reports/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

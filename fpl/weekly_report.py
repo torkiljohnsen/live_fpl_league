@@ -87,7 +87,7 @@ class WeeklyReport:
     def save_report(self, output_dir: str) -> str:
         """Write the report JSON to disk.
 
-        Saves to {output_dir}/reports/{league_id}/{season}/gw{N}.json,
+        Saves to {output_dir}/weekly_report/reports/{league_id}/{season}/gw{N}.json,
         creating directories as needed.
 
         Returns the path to the written file.
@@ -95,6 +95,7 @@ class WeeklyReport:
         season = self._get_season()
         path = (
             Path(output_dir)
+            / "weekly_report"
             / "reports"
             / self._league_id
             / season
@@ -128,10 +129,10 @@ class WeeklyReport:
         previous_narrative: str | None = None
         if prev_event >= 1:
             previous_report = (
-                f"reports/{self._league_id}/{season}/gw{prev_event}.json"
+                f"weekly_report/reports/{self._league_id}/{season}/gw{prev_event}.json"
             )
             previous_narrative = (
-                f"narratives/{self._league_id}/{season}/gw{prev_event}.md"
+                f"weekly_report/narratives/{self._league_id}/{season}/gw{prev_event}.md"
             )
 
         return {

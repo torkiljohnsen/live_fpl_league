@@ -60,6 +60,44 @@ Generated HTML files are saved to the `docs/` directory:
 
 When using `--dev` mode, files are suffixed with `-dev.html` (e.g., `league_standings_1638989-dev.html`)
 
+## Weekly Report (Reidar's Rapport)
+
+The weekly report system generates entertaining Norwegian-language narratives for each FPL gameweek, written in the voice of "Reidar" — a fictional commentator with strong opinions.
+
+### Setup
+
+The narrative generator requires an Anthropic API key:
+
+```bash
+export ANTHROPIC_API_KEY="sk-ant-..."
+```
+
+On Windows (PowerShell):
+```powershell
+$env:ANTHROPIC_API_KEY = "sk-ant-..."
+```
+
+### Usage
+
+```bash
+# Generate report + narrative for a specific gameweek
+python generate_weekly_report.py -l 1639886 -e 10 --narrative
+
+# Generate report only (no narrative, no API key needed)
+python generate_weekly_report.py -l 1639886 -e 10
+
+# Dev mode with sample data
+python generate_weekly_report.py --dev
+```
+
+### Output
+
+All weekly report artifacts are stored under `weekly_report/`:
+
+- `weekly_report/reports/{league_id}/{season}/gw{N}.json` — Structured gameweek data
+- `weekly_report/narratives/{league_id}/{season}/gw{N}.md` — Generated narratives
+- `weekly_report/reidar_memory/{league_id}/{season}/` — Persistent memory (manager profiles, season arc, GW summaries)
+
 ## Development Setup
 
 ### Environment Setup
