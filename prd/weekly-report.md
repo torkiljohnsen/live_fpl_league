@@ -148,7 +148,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Handles missing IDs gracefully (returns 'Unknown Player' / 'Unknown Team')",
       "Ruff clean, mypy clean"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 3,
