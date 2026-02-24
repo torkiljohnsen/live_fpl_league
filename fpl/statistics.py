@@ -251,3 +251,143 @@ def get_closest_overall_rank_gap(participants: list[Participant]) -> dict[str, A
         'chaser_name': chaser['name'],
         'points_gap': smallest_gap
     }
+
+
+def get_best_gameweek_score(participants: list[Participant]) -> dict[str, Any] | None:
+    """Find the highest single-gameweek points score among all participants.
+
+    Handles ties — multiple players can share the record if they scored the
+    same max points (possibly in different gameweeks).
+
+    Returns:
+        Dictionary with 'points' and 'players' list of {'name', 'event'},
+        or None if no valid data.
+    """
+    if not participants:
+        return None
+
+    max_points = -1
+    best_players: list[dict[str, Any]] = []
+
+    for participant in participants:
+        for event_data in participant.history:
+            points = event_data.get('points')
+            if points is None:
+                continue
+            if points > max_points:
+                max_points = points
+                best_players = [{'name': participant.player_first_name, 'event': event_data['event']}]
+            elif points == max_points:
+                best_players.append({'name': participant.player_first_name, 'event': event_data['event']})
+
+    if max_points < 0:
+        return None
+
+    return {'points': max_points, 'players': best_players}
+
+
+def get_best_gameweek_rank(
+    participants: list[Participant], total_players: int
+) -> dict[str, Any] | None:
+    """Find the best (lowest) global gameweek rank among all participants.
+
+    Handles ties — multiple players can share the record if they achieved the
+    same best rank (possibly in different gameweeks).
+
+    Returns:
+        Dictionary with 'rank', 'percentile', and 'players' list of {'name', 'event'},
+        or None if no valid data.
+    """
+    if not participants:
+        return None
+
+    best_rank = float('inf')
+    best_players: list[dict[str, Any]] = []
+
+    for participant in participants:
+        for event_data in participant.history:
+            rank = event_data.get('rank')
+            if rank is None:
+                continue
+            if rank < best_rank:
+                best_rank = rank
+                best_players = [{'name': participant.player_first_name, 'event': event_data['event']}]
+            elif rank == best_rank:
+                best_players.append({'name': participant.player_first_name, 'event': event_data['event']})
+
+    if best_rank == float('inf'):
+        return None
+
+    percentile = (best_rank / total_players) * 100
+
+    return {'rank': best_rank, 'percentile': percentile, 'players': best_players}
+
+
+def get_worst_gameweek_score(participants: list[Participant]) -> dict[str, Any] | None:
+    """Find the lowest single-gameweek points score among all participants.
+
+    Handles ties — multiple players can share the record if they scored the
+    same min points (possibly in different gameweeks).
+
+    Returns:
+        Dictionary with 'points' and 'players' list of {'name', 'event'},
+        or None if no valid data.
+    """
+    if not participants:
+        return None
+
+    min_points = float('inf')
+    worst_players: list[dict[str, Any]] = []
+
+    for participant in participants:
+        for event_data in participant.history:
+            points = event_data.get('points')
+            if points is None:
+                continue
+            if points < min_points:
+                min_points = points
+                worst_players = [{'name': participant.player_first_name, 'event': event_data['event']}]
+            elif points == min_points:
+                worst_players.append({'name': participant.player_first_name, 'event': event_data['event']})
+
+    if min_points == float('inf'):
+        return None
+
+    return {'points': int(min_points), 'players': worst_players}
+
+
+def get_worst_gameweek_rank(
+    participants: list[Participant], total_players: int
+) -> dict[str, Any] | None:
+    """Find the worst (highest) global gameweek rank among all participants.
+
+    Handles ties — multiple players can share the record if they achieved the
+    same worst rank (possibly in different gameweeks).
+
+    Returns:
+        Dictionary with 'rank', 'percentile', and 'players' list of {'name', 'event'},
+        or None if no valid data.
+    """
+    if not participants:
+        return None
+
+    worst_rank = -1
+    worst_players: list[dict[str, Any]] = []
+
+    for participant in participants:
+        for event_data in participant.history:
+            rank = event_data.get('rank')
+            if rank is None:
+                continue
+            if rank > worst_rank:
+                worst_rank = rank
+                worst_players = [{'name': participant.player_first_name, 'event': event_data['event']}]
+            elif rank == worst_rank:
+                worst_players.append({'name': participant.player_first_name, 'event': event_data['event']})
+
+    if worst_rank == -1:
+        return None
+
+    percentile = ((total_players - worst_rank) / total_players) * 100
+
+    return {'rank': worst_rank, 'percentile': percentile, 'players': worst_players}

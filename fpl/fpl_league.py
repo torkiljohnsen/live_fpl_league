@@ -151,6 +151,7 @@ class FPLLeague:
             if self.current_event_id
             else False
         )
+        summary["total_players"] = self.bootstrap.get("total_players")
         return summary
 
     def get_summary_as_dicts(self) -> dict[str, Any]:

@@ -23,30 +23,61 @@
         {% endif %}
     </div>
     
-    {% if highest_team_value or in_form_players or free_falling or haien_kommer %}
-    <div class="stats-container">
-        <h2>Stats:</h2>
-        <dl class="stats-list">
-            {% if in_form_players %}
-            <dt>Klatreren:</dt>
-            <dd>{{ in_form_players.text | replace('▲', '<span class="green-arrow">▲</span>') | safe }}</dd>
-            {% endif %}
-            {% if current_event_id > 1 and free_falling %}
-            <dt>I fritt fall:</dt>
-            <dd>{{ free_falling.text | replace('▼', '<span class="rank-down">▼</span>') | safe }}</dd>
-            {% elif current_event_id > 1 %}
-            <dt>I fritt fall:</dt>
-            <dd>Ingen!</dd>
-            {% endif %}
-            {% if haien_kommer %}
-            <dt>Haien kommer:</dt>
-            <dd>{{ haien_kommer }}</dd>
-            {% endif %}
-            {% if highest_team_value %}
-            <dt>Høyeste lagverdi:</dt>
-            <dd>{{ highest_team_value }}</dd>
-            {% endif %}
-        </dl>
+    {% set has_stats = highest_team_value or in_form_players or free_falling or haien_kommer %}
+    {% set has_records = best_gameweek_score or best_gameweek_rank or worst_gameweek_score or worst_gameweek_rank %}
+
+    {% if has_stats or has_records %}
+    <div class="stats-records-wrapper">
+        {% if has_stats %}
+        <div class="stats-container">
+            <h2>Stats:</h2>
+            <dl class="stats-list">
+                {% if in_form_players %}
+                <dt>Klatreren:</dt>
+                <dd>{{ in_form_players.text | replace('▲', '<span class="green-arrow">▲</span>') | safe }}</dd>
+                {% endif %}
+                {% if current_event_id > 1 and free_falling %}
+                <dt>I fritt fall:</dt>
+                <dd>{{ free_falling.text | replace('▼', '<span class="rank-down">▼</span>') | safe }}</dd>
+                {% elif current_event_id > 1 %}
+                <dt>I fritt fall:</dt>
+                <dd>Ingen!</dd>
+                {% endif %}
+                {% if haien_kommer %}
+                <dt>Haien kommer:</dt>
+                <dd>{{ haien_kommer }}</dd>
+                {% endif %}
+                {% if highest_team_value %}
+                <dt>Høyeste lagverdi:</dt>
+                <dd>{{ highest_team_value }}</dd>
+                {% endif %}
+            </dl>
+        </div>
+        {% endif %}
+
+        {% if has_records %}
+        <div class="stats-container">
+            <h2>Rekorder:</h2>
+            <dl class="stats-list">
+                {% if best_gameweek_score %}
+                <dt>Flest poeng i en GW:</dt>
+                <dd>{{ best_gameweek_score }}</dd>
+                {% endif %}
+                {% if best_gameweek_rank %}
+                <dt>Høyeste GW-plassering:</dt>
+                <dd>{{ best_gameweek_rank }}</dd>
+                {% endif %}
+                {% if worst_gameweek_score %}
+                <dt>Færrest poeng i en GW:</dt>
+                <dd>{{ worst_gameweek_score }}</dd>
+                {% endif %}
+                {% if worst_gameweek_rank %}
+                <dt>Laveste GW-plassering:</dt>
+                <dd>{{ worst_gameweek_rank }}</dd>
+                {% endif %}
+            </dl>
+        </div>
+        {% endif %}
     </div>
     {% endif %}
     
