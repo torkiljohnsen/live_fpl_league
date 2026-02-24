@@ -109,3 +109,39 @@ def test_formats_in_form_players():
         assert in_form["triangle"] == "▲", "Triangle should be up arrow"
         assert "▲" in in_form["text"], "Text should contain arrow symbol"
         assert "runder på rad" in in_form["text"], "Text should be in Norwegian"
+
+
+def test_formats_gameweek_record_stats():
+    """Test that LeagueContext populates all four gameweek record stats.
+
+    This is an integration test ensuring total_players flows from
+    FPLLeague.get_summary() through to the rank percentile formatting.
+    If total_players is missing from the summary, rank stats silently
+    become None — this test catches that regression.
+    """
+    api = DummyAPI(data_dir)
+
+    context = LeagueContext.build(
+        league_id=LEAGUE_ID,
+        dev_mode=True,
+        league_join_code=None,
+        fpl_api=api
+    )
+
+    context_dict = context.as_dict()
+
+    # Score stats should always be present when participants have history
+    assert context_dict.get("best_gameweek_score") is not None, (
+        "best_gameweek_score should be populated"
+    )
+    assert context_dict.get("worst_gameweek_score") is not None, (
+        "worst_gameweek_score should be populated"
+    )
+
+    # Rank stats require total_players to flow through the pipeline
+    assert context_dict.get("best_gameweek_rank") is not None, (
+        "best_gameweek_rank should be populated (requires total_players in summary)"
+    )
+    assert context_dict.get("worst_gameweek_rank") is not None, (
+        "worst_gameweek_rank should be populated (requires total_players in summary)"
+    )
