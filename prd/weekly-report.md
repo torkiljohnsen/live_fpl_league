@@ -289,7 +289,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Anti-patterns: things Reidar never does",
       "References the sample reports for tone baseline"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 11,

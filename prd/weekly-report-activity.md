@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 9 / 19
-**Current Task:** Task 9 completed
+**Tasks Completed:** 10 / 19
+**Current Task:** Task 10 completed
 
 ---
 
@@ -53,4 +53,9 @@
 **Task:** Task 9 — Implement CLI entry point for weekly report
 **Status:** completed
 **Notes:** Created `generate_weekly_report.py` following `generate_html.py` patterns. Argparse with `-l/--league_id` (default: 1639886), `-e/--event` (optional gameweek number), `--dev` (sample data), `--output-dir` (default: current directory). Auto-detects current gameweek when `-e` is omitted by scanning bootstrap-static events in reverse for latest `finished=True`. Creates shared `FPL_API` instance, builds `WeeklyReport`, calls `build()` and `save_report()`. Prints league name, gameweek, and output file path to stdout. Also fixed a UTF-8 encoding bug in `WeeklyReport.save_report()` where `write_text()` defaulted to cp1252 on Windows. Dev mode works end-to-end. Ruff clean, mypy clean, all 168 tests pass.
+
+### Session 10 — 2026-02-24
+**Task:** Task 10 — Define Reidar persona document
+**Status:** completed
+**Notes:** Created `docs/REIDAR_PERSONA.md` defining the "Reidar" columnist character for weekly narratives. Sections: Background & Identity (seasoned columnist, outside observer, retired FPL manager), Voice Rules (Norwegian informal tone, sports commentary cadence, sarcasm guidelines, when to be genuine), Personality Traits (what triggers praise, mockery, grudging respect), Manager Archetypes (frontrunner, comeback kid, perennial underperformer, lucky one, tactician, ghost), Recurring Narrative Devices (running jokes, callbacks, stat nuggets, catchphrases), and Anti-Patterns (things Reidar never does). References the sample reports for tone baseline. Mypy clean, all 168 tests pass.
 
