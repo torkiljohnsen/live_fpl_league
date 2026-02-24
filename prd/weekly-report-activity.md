@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 16 / 19
-**Current Task:** Task 16 completed
+**Tasks Completed:** 17 / 19
+**Current Task:** Task 17 completed
 
 ---
 
@@ -88,4 +88,9 @@
 **Task:** Task 16 — Tests for narrative generator and memory system
 **Status:** completed
 **Notes:** Created `tests/fpl_tests/test_reidar_memory.py` (24 tests across 6 classes) and `tests/fpl_tests/test_narrative_generator.py` (15 tests across 4 classes). ReidarMemory tests cover: scaffold_directories (creation + idempotency), load_manager_profiles (missing dir, empty dir, reads files, ignores non-.md), load_season_arc (missing file, existing file), load_recent_gameweeks (missing dir, no prior GWs, reads summaries, window limit, excludes current event, GW1 edge case), get_prompt_context (first run empty, full assembly, partial content), and update_memory with mocked LLM (writes manager profiles, GW summary, season arc, correct model, first-run bootstrap note, existing profiles skip bootstrap, user message content). NarrativeGenerator tests cover: constructor (accepts client, missing API key raises RuntimeError with helpful message), generate() (system prompt includes all sections, divider separation, empty memory excluded, user message includes JSON, previous narrative inclusion/exclusion, correct model, returns text), save_narrative (correct path, file content, directory creation, overwrites). All 207 tests pass, ruff clean, mypy clean.
+
+### Session 17 — 2026-02-24
+**Task:** Task 17 — Integrate narrative and memory into CLI
+**Status:** completed
+**Notes:** Updated `generate_weekly_report.py` to support the full narrative pipeline via `--narrative` flag. When set, the CLI reads all three Reidar reference docs from `weekly_report/` (persona, guide, examples), creates `ReidarMemory` to load memory context, checks for previous gameweek narrative for continuity, calls `NarrativeGenerator.generate()` with all context, saves the narrative, and calls `ReidarMemory.update_memory()` to update memory files. Missing `ANTHROPIC_API_KEY` is caught as a `RuntimeError` and printed cleanly (no traceback). Narrative output path printed to stdout. Works with `--dev` flag end-to-end (report generation; narrative requires API key). Ruff clean, mypy clean, all 207 tests pass.
 

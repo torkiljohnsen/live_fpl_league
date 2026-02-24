@@ -417,7 +417,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Works with --dev flag end-to-end",
       "Ruff clean, mypy clean, all tests pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 18,
