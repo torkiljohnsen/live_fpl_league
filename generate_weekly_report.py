@@ -184,18 +184,18 @@ def main() -> None:
         print(f"Report saved: {output_path}")
 
         if args.narrative:
-            narrative_path = _generate_narrative(
-                result=result,
-                league_id=args.league_id,
-                event_id=event_id,
-                output_dir=args.output_dir,
-            )
-            print(f"Narrative saved: {narrative_path}")
+            try:
+                narrative_path = _generate_narrative(
+                    result=result,
+                    league_id=args.league_id,
+                    event_id=event_id,
+                    output_dir=args.output_dir,
+                )
+                print(f"Narrative saved: {narrative_path}")
+            except Exception as e:
+                print(f"WARNING: Narrative generation failed: {e}", file=sys.stderr)
+                print("Report was saved successfully. Narrative skipped.", file=sys.stderr)
 
-    except RuntimeError as e:
-        # Catch RuntimeError from NarrativeGenerator (missing API key)
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
