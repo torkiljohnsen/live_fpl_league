@@ -101,10 +101,14 @@ class LeagueContext:
 
             # Calculate and format statistics
             from .statistics import (
+                get_best_gameweek_rank,
+                get_best_gameweek_score,
                 get_closest_overall_rank_gap,
                 get_highest_team_value,
                 get_in_form_players,
                 get_player_with_highest_rank_loss,
+                get_worst_gameweek_rank,
+                get_worst_gameweek_score,
                 should_show_in_form_stat,
             )
 
@@ -164,5 +168,78 @@ class LeagueContext:
                 d["haien_kommer"] = f"{chaser} er bare {gap} poeng bak {leader}."
             else:
                 d["haien_kommer"] = None
+
+            # Format best gameweek score ("Flest poeng i en GW")
+            best_score = get_best_gameweek_score(participants)
+            if best_score:
+                players = best_score['players']
+                pts = best_score['points']
+                if len(players) == 1:
+                    p = players[0]
+                    d["best_gameweek_score"] = f"{p['name']}, {pts}p GW{p['event']}"
+                else:
+                    parts = [f"{p['name']} (GW{p['event']})" for p in players]
+                    d["best_gameweek_score"] = f"{' og '.join(parts)}, {pts}p"
+            else:
+                d["best_gameweek_score"] = None
+
+            # Format best gameweek rank ("Høyeste GW-plassering")
+            total_players = d.get("total_players")
+            if total_players:
+                best_rank = get_best_gameweek_rank(participants, total_players)
+                if best_rank:
+                    players = best_rank['players']
+                    rank = best_rank['rank']
+                    pct = best_rank['percentile']
+                    if len(players) == 1:
+                        p = players[0]
+                        d["best_gameweek_rank"] = (
+                            f"{p['name']}, {rank}.-plass GW{p['event']} (topp {pct:.3f}%)"
+                        )
+                    else:
+                        parts = [f"{p['name']} (GW{p['event']})" for p in players]
+                        d["best_gameweek_rank"] = (
+                            f"{' og '.join(parts)}, {rank}.-plass (topp {pct:.3f}%)"
+                        )
+                else:
+                    d["best_gameweek_rank"] = None
+            else:
+                d["best_gameweek_rank"] = None
+
+            # Format worst gameweek score ("Færrest poeng i en GW")
+            worst_score = get_worst_gameweek_score(participants)
+            if worst_score:
+                players = worst_score['players']
+                pts = worst_score['points']
+                if len(players) == 1:
+                    p = players[0]
+                    d["worst_gameweek_score"] = f"{p['name']}, {pts}p GW{p['event']}"
+                else:
+                    parts = [f"{p['name']} (GW{p['event']})" for p in players]
+                    d["worst_gameweek_score"] = f"{' og '.join(parts)}, {pts}p"
+            else:
+                d["worst_gameweek_score"] = None
+
+            # Format worst gameweek rank ("Laveste GW-plassering")
+            if total_players:
+                worst_rank = get_worst_gameweek_rank(participants, total_players)
+                if worst_rank:
+                    players = worst_rank['players']
+                    rank = worst_rank['rank']
+                    pct = worst_rank['percentile']
+                    if len(players) == 1:
+                        p = players[0]
+                        d["worst_gameweek_rank"] = (
+                            f"{p['name']}, {rank}.-plass GW{p['event']} (bunn {pct:.3f}%)"
+                        )
+                    else:
+                        parts = [f"{p['name']} (GW{p['event']})" for p in players]
+                        d["worst_gameweek_rank"] = (
+                            f"{' og '.join(parts)}, {rank}.-plass (bunn {pct:.3f}%)"
+                        )
+                else:
+                    d["worst_gameweek_rank"] = None
+            else:
+                d["worst_gameweek_rank"] = None
 
         return d

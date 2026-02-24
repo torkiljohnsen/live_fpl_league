@@ -495,3 +495,319 @@ def test_get_closest_overall_rank_gap_equal_points():
     # Should skip the 0-gap pair and return the next smallest gap
     assert result is not None, "Should return a result"
     assert result['points_gap'] == 20, f"Points gap should be 20 (skipping 0-gap pairs), got {result['points_gap']}"
+
+
+def test_best_gameweek_score_single_winner():
+    """Test that best gameweek score identifies a single winner."""
+    participants = [
+        make_test_participant(
+            first_name='Peder',
+            history=[
+                {'event': 1, 'points': 60},
+                {'event': 2, 'points': 110},
+            ]
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 1, 'points': 70},
+                {'event': 2, 'points': 80},
+            ]
+        ),
+    ]
+
+    from fpl.statistics import get_best_gameweek_score
+    result = get_best_gameweek_score(participants)
+
+    assert result is not None
+    assert result['points'] == 110
+    assert len(result['players']) == 1
+    assert result['players'][0]['name'] == 'Peder'
+    assert result['players'][0]['event'] == 2
+
+
+def test_best_gameweek_score_tied():
+    """Test that best gameweek score handles ties across different GWs."""
+    participants = [
+        make_test_participant(
+            first_name='Peder',
+            history=[
+                {'event': 1, 'points': 60},
+                {'event': 14, 'points': 110},
+            ]
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 1, 'points': 70},
+                {'event': 18, 'points': 110},
+            ]
+        ),
+    ]
+
+    from fpl.statistics import get_best_gameweek_score
+    result = get_best_gameweek_score(participants)
+
+    assert result is not None
+    assert result['points'] == 110
+    assert len(result['players']) == 2
+    names = {p['name'] for p in result['players']}
+    assert names == {'Peder', 'Eirin'}
+
+
+def test_best_gameweek_score_empty_history():
+    """Test that best gameweek score returns None for empty history."""
+    participants = [
+        make_test_participant(first_name='Nobody', history=[]),
+    ]
+
+    from fpl.statistics import get_best_gameweek_score
+    result = get_best_gameweek_score(participants)
+
+    assert result is None
+
+
+def test_best_gameweek_rank_single_winner():
+    """Test that best gameweek rank identifies a single winner."""
+    participants = [
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 1, 'points': 60, 'rank': 100000},
+                {'event': 18, 'points': 80, 'rank': 4321},
+            ]
+        ),
+        make_test_participant(
+            first_name='Peder',
+            history=[
+                {'event': 1, 'points': 70, 'rank': 50000},
+                {'event': 2, 'points': 75, 'rank': 80000},
+            ]
+        ),
+    ]
+
+    from fpl.statistics import get_best_gameweek_rank
+    result = get_best_gameweek_rank(participants, total_players=11600000)
+
+    assert result is not None
+    assert result['rank'] == 4321
+    assert len(result['players']) == 1
+    assert result['players'][0]['name'] == 'Eirin'
+    assert result['players'][0]['event'] == 18
+
+
+def test_best_gameweek_rank_tied():
+    """Test that best gameweek rank handles ties."""
+    participants = [
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 18, 'points': 80, 'rank': 5000},
+            ]
+        ),
+        make_test_participant(
+            first_name='Peder',
+            history=[
+                {'event': 14, 'points': 75, 'rank': 5000},
+            ]
+        ),
+    ]
+
+    from fpl.statistics import get_best_gameweek_rank
+    result = get_best_gameweek_rank(participants, total_players=11600000)
+
+    assert result is not None
+    assert result['rank'] == 5000
+    assert len(result['players']) == 2
+    names = {p['name'] for p in result['players']}
+    assert names == {'Eirin', 'Peder'}
+
+
+def test_best_gameweek_rank_empty_history():
+    """Test that best gameweek rank returns None for empty history."""
+    participants = [
+        make_test_participant(first_name='Nobody', history=[]),
+    ]
+
+    from fpl.statistics import get_best_gameweek_rank
+    result = get_best_gameweek_rank(participants, total_players=11600000)
+
+    assert result is None
+
+
+def test_best_gameweek_rank_percentile_calculation():
+    """Test that percentile is correctly calculated."""
+    participants = [
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 18, 'points': 80, 'rank': 348},
+            ]
+        ),
+    ]
+
+    from fpl.statistics import get_best_gameweek_rank
+    result = get_best_gameweek_rank(participants, total_players=11600000)
+
+    assert result is not None
+    assert result['rank'] == 348
+    expected_percentile = (348 / 11600000) * 100
+    assert abs(result['percentile'] - expected_percentile) < 1e-10
+
+
+def test_worst_gameweek_score_single_loser():
+    """Test that worst gameweek score identifies a single loser."""
+    participants = [
+        make_test_participant(
+            first_name='Peder',
+            history=[
+                {'event': 1, 'points': 60},
+                {'event': 14, 'points': 25},
+            ]
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 1, 'points': 70},
+                {'event': 18, 'points': 40},
+            ]
+        ),
+    ]
+
+    from fpl.statistics import get_worst_gameweek_score
+    result = get_worst_gameweek_score(participants)
+
+    assert result is not None
+    assert result['points'] == 25
+    assert len(result['players']) == 1
+    assert result['players'][0]['name'] == 'Peder'
+    assert result['players'][0]['event'] == 14
+
+
+def test_worst_gameweek_score_tied():
+    """Test that worst gameweek score handles ties across different GWs."""
+    participants = [
+        make_test_participant(
+            first_name='Peder',
+            history=[
+                {'event': 1, 'points': 60},
+                {'event': 14, 'points': 25},
+            ]
+        ),
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 1, 'points': 70},
+                {'event': 18, 'points': 25},
+            ]
+        ),
+    ]
+
+    from fpl.statistics import get_worst_gameweek_score
+    result = get_worst_gameweek_score(participants)
+
+    assert result is not None
+    assert result['points'] == 25
+    assert len(result['players']) == 2
+    names = {p['name'] for p in result['players']}
+    assert names == {'Peder', 'Eirin'}
+
+
+def test_worst_gameweek_score_empty_history():
+    """Test that worst gameweek score returns None for empty history."""
+    participants = [
+        make_test_participant(first_name='Nobody', history=[]),
+    ]
+
+    from fpl.statistics import get_worst_gameweek_score
+    result = get_worst_gameweek_score(participants)
+
+    assert result is None
+
+
+def test_worst_gameweek_rank_single_loser():
+    """Test that worst gameweek rank identifies a single loser (highest rank number)."""
+    participants = [
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 1, 'points': 60, 'rank': 100000},
+                {'event': 18, 'points': 30, 'rank': 9500000},
+            ]
+        ),
+        make_test_participant(
+            first_name='Peder',
+            history=[
+                {'event': 1, 'points': 70, 'rank': 50000},
+                {'event': 2, 'points': 40, 'rank': 3000000},
+            ]
+        ),
+    ]
+
+    from fpl.statistics import get_worst_gameweek_rank
+    result = get_worst_gameweek_rank(participants, total_players=11600000)
+
+    assert result is not None
+    assert result['rank'] == 9500000
+    assert len(result['players']) == 1
+    assert result['players'][0]['name'] == 'Eirin'
+    assert result['players'][0]['event'] == 18
+
+
+def test_worst_gameweek_rank_tied():
+    """Test that worst gameweek rank handles ties."""
+    participants = [
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 18, 'points': 30, 'rank': 9500000},
+            ]
+        ),
+        make_test_participant(
+            first_name='Peder',
+            history=[
+                {'event': 14, 'points': 35, 'rank': 9500000},
+            ]
+        ),
+    ]
+
+    from fpl.statistics import get_worst_gameweek_rank
+    result = get_worst_gameweek_rank(participants, total_players=11600000)
+
+    assert result is not None
+    assert result['rank'] == 9500000
+    assert len(result['players']) == 2
+    names = {p['name'] for p in result['players']}
+    assert names == {'Eirin', 'Peder'}
+
+
+def test_worst_gameweek_rank_empty_history():
+    """Test that worst gameweek rank returns None for empty history."""
+    participants = [
+        make_test_participant(first_name='Nobody', history=[]),
+    ]
+
+    from fpl.statistics import get_worst_gameweek_rank
+    result = get_worst_gameweek_rank(participants, total_players=11600000)
+
+    assert result is None
+
+
+def test_worst_gameweek_rank_percentile_calculation():
+    """Test that worst rank percentile is correctly calculated as ((total - rank) / total) * 100."""
+    participants = [
+        make_test_participant(
+            first_name='Eirin',
+            history=[
+                {'event': 18, 'points': 30, 'rank': 9500000},
+            ]
+        ),
+    ]
+
+    from fpl.statistics import get_worst_gameweek_rank
+    result = get_worst_gameweek_rank(participants, total_players=11600000)
+
+    assert result is not None
+    assert result['rank'] == 9500000
+    expected_percentile = ((11600000 - 9500000) / 11600000) * 100
+    assert abs(result['percentile'] - expected_percentile) < 1e-10

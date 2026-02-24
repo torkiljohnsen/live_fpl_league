@@ -77,6 +77,20 @@ table {
 	text-align: center;
 }
 
+.stats-records-wrapper {
+	display: flex;
+	gap: 2rem;
+	justify-content: center;
+	margin: 2rem auto;
+	max-width: 80vw;
+}
+
+.stats-records-wrapper .stats-container {
+	flex: 1;
+	margin: 0;
+	max-width: none;
+}
+
 .stats-container {
 	margin: 2rem auto;
 	max-width: 60vw;
@@ -128,6 +142,10 @@ tr:nth-child(odd) {
 	}
 	th, td {
 		padding: 0.5rem 0.7rem;
+	}
+	.stats-records-wrapper {
+		flex-direction: column;
+		max-width: 95vw;
 	}
 	.stats-container {
 		max-width: 95vw;
