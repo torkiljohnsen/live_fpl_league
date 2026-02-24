@@ -272,7 +272,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Dev mode works end-to-end: python generate_weekly_report.py -l 1639886 --dev",
       "Ruff clean, mypy clean"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 10,

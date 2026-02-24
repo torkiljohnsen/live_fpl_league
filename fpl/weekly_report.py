@@ -101,7 +101,10 @@ class WeeklyReport:
             / f"gw{self._event_id}.json"
         )
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(self._report, indent=2, ensure_ascii=False))
+        path.write_text(
+            json.dumps(self._report, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
         return str(path)
 
     def _get_season(self) -> str:

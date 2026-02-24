@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-24
-**Tasks Completed:** 8 / 19
-**Current Task:** Task 8 completed
+**Tasks Completed:** 9 / 19
+**Current Task:** Task 9 completed
 
 ---
 
@@ -48,4 +48,9 @@
 **Task:** Task 8 — WeeklyReport integration tests
 **Status:** completed
 **Notes:** Created `tests/fpl_tests/test_weekly_report.py` with 32 tests across 5 test classes. Built a self-contained `WeeklyReportDummyAPI` with inline fixtures for 3 participants with varied scenarios: normal captain (2x), triple captain (3xc), wildcard chip, hit costs, bench players, transfers filtered by event, and no-transfer participants. Tests verify: full `build()` report structure (meta/standings/awards/league_summary keys), all participant data fields populated correctly, captain points multiplied (2x and 3x), bench points from multiplier-0 picks, transfers filtered to correct GW, player names resolved via PlayerRegistry, awards populated from stats functions, `save_report()` creates correct file path with valid JSON, and edge cases (GW1 no previous paths, different event ID). Ruff clean, mypy clean, all 168 tests pass.
+
+### Session 9 — 2026-02-24
+**Task:** Task 9 — Implement CLI entry point for weekly report
+**Status:** completed
+**Notes:** Created `generate_weekly_report.py` following `generate_html.py` patterns. Argparse with `-l/--league_id` (default: 1639886), `-e/--event` (optional gameweek number), `--dev` (sample data), `--output-dir` (default: current directory). Auto-detects current gameweek when `-e` is omitted by scanning bootstrap-static events in reverse for latest `finished=True`. Creates shared `FPL_API` instance, builds `WeeklyReport`, calls `build()` and `save_report()`. Prints league name, gameweek, and output file path to stdout. Also fixed a UTF-8 encoding bug in `WeeklyReport.save_report()` where `write_text()` defaulted to cp1252 on Windows. Dev mode works end-to-end. Ruff clean, mypy clean, all 168 tests pass.
 
