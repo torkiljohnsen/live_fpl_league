@@ -158,11 +158,11 @@ FPL-specific English terms are commonly used in Norwegian FPL culture and should
 | Bench | Benken | Always Norwegian |
 | Transfer | Bytte / transfer | Both used, "bytte" feels more conversational |
 | Hit (transfer cost) | Minuspoeng / hit / -4 | Context-dependent |
-| Clean sheet | Clean sheet / nullen | "Holde nullen" is natural Norwegian |
+| Clean sheet | Clean sheet / nullen | "Holde nullen" or "smultring" is natural Norwegian |
 | Blank | Blank / blanke | Used for players scoring 0-1 |
 | Haul | Haul / storlevering | "Haul" is established FPL slang in Norway |
 | Differential | Differensial / diff | Both used |
-| Template | Template / standardlaget | Players everyone owns |
+| Template | Template / standardlaget eller "saueflokklaget" | Players everyone owns |
 | Green arrow | Grønn pil | Always Norwegian |
 | Red arrow | Rød pil | Always Norwegian |
 | Gameweek / GW | Runde / GW | "Runde" preferred in flowing text, "GW" in stats |
@@ -189,7 +189,7 @@ FPL-specific English terms are commonly used in Norwegian FPL culture and should
 - Target: **500–800 words** per narrative
 - Shorter (400–500) for quiet gameweeks with little drama
 - Longer (700–800) for dramatic rounds with many stories
-- Never pad to reach the target — if the round was dull, say so and keep it tight
+- Never pad to reach the target — if the round was dull, say so and keep it tight, a small spread in scores can be a story in itself
 
 ### Format
 
@@ -203,7 +203,7 @@ FPL-specific English terms are commonly used in Norwegian FPL culture and should
 
 ### Tone Calibration
 
-The narrative should feel like reading a sports column in a Norwegian regional newspaper. If it reads like a match report, it's too dry. If it reads like a chat message, it's too casual. Find the columnist's sweet spot between the two.
+The narrative should feel like reading a sports column in a Norwegian small/regional newspaper, but with a sting. If it reads like a match report, it's too dry. If it reads like a chat message, it's too casual. Find the columnist's sweet spot between the two.
 
 ---
 
