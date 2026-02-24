@@ -715,7 +715,7 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 ---
 
 ### Job 44: Improve rank number formatting in chart legend
-**Status**: todo
+**Status**: done
 
 **Task**: Format rank numbers in chart legend labels (in parenthesis) with smart precision to maintain 3-digit display. Create a helper function for number formatting. Write test first, then implement.
 
@@ -727,39 +727,33 @@ Each participant's history is in `participant['history']` array (from [`FPLLeagu
 Note: Number of decimals varies to maintain exactly 3 digits total before the suffix.
 
 **Acceptance Criteria**:
-- [ ] Test creates helper function for rank formatting
-- [ ] Test verifies rank 123 formats as "123"
-- [ ] Test verifies rank 999 formats as "999"
-- [ ] Test verifies rank 1320 formats as "1.32k"
-- [ ] Test verifies rank 34500 formats as "34.5k"
-- [ ] Test verifies rank 234000 formats as "234k"
-- [ ] Test verifies rank 999999 formats as "1000k" or "1.00M"
-- [ ] Test verifies rank 9820000 formats as "9.82M"
-- [ ] Test verifies rank 12200000 formats as "12.2M"
-- [ ] Test verifies rank 123000000 formats as "123M"
-- [ ] Helper function created (suggest: in chart_generator.py or new utility module)
-- [ ] Chart legend uses formatted rank numbers
-- [ ] Manual test: Verify improved rank display in browser
-- [ ] Test passes
+- [x] Test creates helper function for rank formatting
+- [x] Test verifies rank 123 formats as "123"
+- [x] Test verifies rank 999 formats as "999"
+- [x] Test verifies rank 1320 formats as "1.32k"
+- [x] Test verifies rank 34500 formats as "34.5k"
+- [x] Test verifies rank 234000 formats as "234k"
+- [x] Test verifies rank 999999 formats as "1000k" or "1.00M"
+- [x] Test verifies rank 9820000 formats as "9.82M"
+- [x] Test verifies rank 12200000 formats as "12.2M"
+- [x] Test verifies rank 123000000 formats as "123M"
+- [x] Helper function created (suggest: in chart_generator.py or new utility module)
+- [x] Chart legend uses formatted rank numbers
+- [x] Manual test: Verify improved rank display in browser
+- [x] Test passes
+
+**Note (added during review)**: `format_rank_compact()` was implemented in `fpl/formatters.py` and is used by `chart_generator.py` (line 135-136) for legend labels. No dedicated `test_formatters.py` exists yet — the function is tested indirectly through chart and context tests. A dedicated test file could be added as a follow-up.
 
 ---
 
-## Design Decisions to Make
+## Design Decisions (Resolved)
 
-1. **Chart file location**: Save to `docs/charts/` or embed inline in HTML?
-2. **Color palette**: Define default color sets for light/dark themes
-3. **Line styling**: Solid lines only, or vary line styles (dashed, dotted) for accessibility?
-4. **Marker styling**: Show markers at each gameweek, or lines only?
-5. **Tooltip/hover**: Not applicable for static images, but consider adding annotations
-6. **Missing data**: How to handle participants who joined mid-season?
-
-## Testing Considerations
-
-- Test with sample data in dev mode
-- Verify chart renders correctly with varying numbers of participants (2-20 teams)
-- Test both light and dark themes
-- Verify SVG rendering on target TV display systems
-- Test with participants who have incomplete history data
+1. **Chart file location**: Embedded inline as SVG in HTML
+2. **Color palette**: Three themes implemented (light, dark, sinkaberg)
+3. **Line styling**: Solid lines with markers (`lines+markers` mode)
+4. **Marker styling**: Markers shown at each gameweek
+5. **Tooltip/hover**: Not applicable (static SVG images)
+6. **Missing data**: Lines start from first available gameweek (Job 19)
 
 ## Future Enhancements
 

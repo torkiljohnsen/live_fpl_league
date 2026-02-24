@@ -13,6 +13,7 @@ Add new knowledge sparingly, and do so in a consise way.
 - **[`fpl/AGENTS.md`](fpl/AGENTS.md)** - Detailed documentation for the `fpl/` module (data collection, processing, context building)
 - **[`templates/AGENTS.md`](templates/AGENTS.md)** - Template variables and structure reference
 - **[`docs/CHART_THEMES.md`](docs/CHART_THEMES.md)** - Chart theme customization guide (dark, light, Sinkaberg corporate)
+- **[`weekly_report/`](weekly_report/)** - Reidar persona, narrative guide, and example narratives for weekly report generation
 
 ## Architecture Flow
 
@@ -20,13 +21,30 @@ Add new knowledge sparingly, and do so in a consise way.
 
 See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 
-### Overview
+### HTML Dashboard Flow
 
 1. **Data Collection** - [`fpl/fpl_api.py`](fpl/fpl_api.py) fetches from FPL API (or dev mode samples)
 2. **Data Processing** - [`fpl/fpl_league.py`](fpl/fpl_league.py) aggregates data; [`fpl/statistics.py`](fpl/statistics.py) calculates stats
 3. **Context Building** - [`fpl/league_context.py`](fpl/league_context.py) formats data for templates
 4. **Template Rendering** - [`fpl/league_template_renderer.py`](fpl/league_template_renderer.py) generates HTML
 5. **Entry Points** - [`generate_html.py`](generate_html.py) and [`generate_index.py`](generate_index.py)
+
+### Weekly Report & Narrative Flow (Reidar's Rapport)
+
+**Data Collection → Report Assembly → Narrative Generation → Memory Update**
+
+1. **Data Collection** - [`fpl/fpl_api.py`](fpl/fpl_api.py) fetches standings, picks, transfers, and live event data
+2. **Player Resolution** - [`fpl/player_registry.py`](fpl/player_registry.py) maps element IDs to player/team names
+3. **Participant Building** - [`fpl/weekly_report.py`](fpl/weekly_report.py) assembles per-participant gameweek data (points, captain, bench, transfers, rank changes)
+4. **Awards Calculation** - [`fpl/weekly_report_stats.py`](fpl/weekly_report_stats.py) computes awards (top scorer, bench disasters, captain picks, etc.)
+5. **Report Assembly** - `WeeklyReport.build()` produces a self-contained JSON report with meta, standings, awards, league_summary
+6. **Narrative Generation** - [`fpl/narrative_generator.py`](fpl/narrative_generator.py) sends report + Reidar persona + memory context to Claude API, returns Norwegian-language narrative
+7. **Memory Update** - [`fpl/reidar_memory.py`](fpl/reidar_memory.py) updates per-manager profiles, season arc, and GW summaries after each narrative
+8. **Entry Point** - [`generate_weekly_report.py`](generate_weekly_report.py) (`--dev` for sample data, `--narrative` for Claude API narrative)
+
+**Reidar Memory System**: Persistent context across gameweeks stored in `weekly_report/reidar_memory/{league_id}/{season}/`. Includes per-manager profiles (~200 words), season arc, and rolling GW summaries. Assembled into prompt context via `ReidarMemory.get_prompt_context()` (~4k words at any point in the season).
+
+**GitHub Actions**: `.github/workflows/scheduled-build.yml` runs nightly, generates HTML dashboards and weekly report + narrative (with `--skip-existing` to avoid duplicates), and auto-commits.
 
 ## Directory Structure
 
@@ -39,9 +57,22 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
   - [`index.html`](templates/index.html) - Index page template
   - [`AGENTS.md`](templates/AGENTS.md) - Template variables reference
 
-- **[`docs/`](docs/)** - Generated static HTML output (GitHub Pages ready)
+- **[`docs/`](docs/)** - GitHub Pages publishing directory (static HTML output only)
   - Generated HTML files for each league/view
   - [`style.css`](docs/style.css) - Shared stylesheet
+  - **Do not place non-publishing files here** — this folder is deployed to GitHub Pages
+
+- **[`weekly_report/`](weekly_report/)** - Everything related to weekly narrative generation (Reidar's Rapport)
+  - [`REIDAR_PERSONA.md`](weekly_report/REIDAR_PERSONA.md) - Reidar character definition (voice, personality)
+  - [`NARRATIVE_GUIDE.md`](weekly_report/NARRATIVE_GUIDE.md) - Narrative structure and content rules
+  - [`REIDAR_EXAMPLES.md`](weekly_report/REIDAR_EXAMPLES.md) - Few-shot example narratives for LLM prompting
+  - `reports/{league_id}/{season}/gw{N}.json` - Generated JSON weekly reports. Gitignored for local dev; committed by GitHub Actions.
+  - `narratives/{league_id}/{season}/gw{N}.md` - Generated Norwegian narratives. Committed by GitHub Actions.
+  - `reidar_memory/{league_id}/{season}/` - Reidar's persistent memory files (manager profiles, season arc, GW summaries). Committed by GitHub Actions.
+
+- **[`prd/`](prd/)** - Product requirement documents (Ralph agent loop task definitions)
+
+- **[`assets/`](assets/)** - Source images and SVGs (logos, icons) used by templates
 
 - **[`tests/`](tests/)** - Test suite
   - [`fpl_tests/`](tests/fpl_tests/) - Tests for `fpl/` modules
@@ -50,6 +81,7 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 - **Root files**
   - [`generate_html.py`](generate_html.py) - Main HTML generation script
   - [`generate_index.py`](generate_index.py) - Index page generator
+  - [`generate_weekly_report.py`](generate_weekly_report.py) - Weekly report generation (JSON + narrative)
   - [`requirements.txt`](requirements.txt) - Python dependencies
 
 ## Key Conventions

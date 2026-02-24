@@ -1,3 +1,4 @@
+# pyright: reportAttributeAccessIssue=false
 """Tests for chart generator functionality."""
 
 from fpl.chart_generator import generate_rank_progression_chart

@@ -1,5 +1,11 @@
 # Ignore sample data JSON files
 fpl/sample_data/*.json
+
+# Generated weekly reports (local dev output)
+weekly_report/reports/
+
+# FPL API response cache
+.fpl_cache/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -189,6 +195,10 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file. However, if you prefer, 
 #  you could uncomment the following to ignore the entire vscode folder
 # .vscode/
+
+# Claude Code
+.claude/settings.local.json
+.claude/logs/
 
 # Ruff stuff:
 .ruff_cache/

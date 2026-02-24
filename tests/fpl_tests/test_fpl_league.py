@@ -35,6 +35,18 @@ class DummyAPI:
     def get_team_picks(self, team_id, event_id):
         return {}
 
+    def get_transfers(self, team_id):
+        path = self.data_dir / f"entry_{team_id}_transfers_sample.json"
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+        return []
+
+    def get_event_live(self, event_id):
+        path = self.data_dir / f"event_{event_id}_live_sample.json"
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+        return {"elements": []}
+
 data_dir = Path(__file__).parent / "data_samples"
 LEAGUE_ID = "1639886"
 

@@ -1,5 +1,6 @@
 import argparse
 import sys
+from pathlib import Path
 
 from fpl import FPL_API, LeagueContext, LeagueTemplateRenderer
 
@@ -66,6 +67,10 @@ def main() -> None:
         choices=list(TEMPLATE_MAP.keys()) + [ALL_OUTPUT],
         help=f"Output view to generate. Options: {', '.join(TEMPLATE_MAP.keys())}, {ALL_OUTPUT}. Default: {ALL_OUTPUT}"
     )
+    parser.add_argument(
+        "--cache-dir", type=str, default=None,
+        help="Directory for file-based API response caching.",
+    )
     args = parser.parse_args()
 
     # Use default league ID only if user didn't provide any
@@ -74,7 +79,8 @@ def main() -> None:
     requested_outputs = list(TEMPLATE_MAP.keys()) if args.output == ALL_OUTPUT else [args.output]
 
     try:
-        shared_api = FPL_API(dev_mode=args.dev)
+        cache_dir = Path(args.cache_dir) if args.cache_dir else None
+        shared_api = FPL_API(dev_mode=args.dev, cache_dir=cache_dir)
         for league_id in league_ids:
             render_league_outputs(
                 league_id=league_id,

@@ -1,6 +1,6 @@
 """Chart generation module for FPL rank progression visualization."""
 
-from typing import Any
+from typing import Any, Literal, overload
 
 import plotly.graph_objects as go
 
@@ -58,6 +58,50 @@ THEME_CONFIGS = {
         'zeroline_color': 'rgba(2, 52, 147, 0.3)',  # Mellomblå with transparency
     }
 }
+
+
+@overload
+def generate_rank_progression_chart(
+    participants: list[Participant],
+    theme: str = ...,
+    bg_color: str | None = ...,
+    width: int = ...,
+    height: int = ...,
+    output_format: Literal["figure"] = ...,
+    output_path: str | None = ...,
+    total_players: int | None = ...,
+    events: list[dict[str, Any]] | None = ...,
+) -> go.Figure: ...
+
+
+@overload
+def generate_rank_progression_chart(
+    participants: list[Participant],
+    theme: str = ...,
+    bg_color: str | None = ...,
+    width: int = ...,
+    height: int = ...,
+    *,
+    output_format: Literal["svg"],
+    output_path: str | None = ...,
+    total_players: int | None = ...,
+    events: list[dict[str, Any]] | None = ...,
+) -> str: ...
+
+
+@overload
+def generate_rank_progression_chart(
+    participants: list[Participant],
+    theme: str = ...,
+    bg_color: str | None = ...,
+    width: int = ...,
+    height: int = ...,
+    *,
+    output_format: Literal["png"],
+    output_path: str | None = ...,
+    total_players: int | None = ...,
+    events: list[dict[str, Any]] | None = ...,
+) -> None: ...
 
 
 def generate_rank_progression_chart(

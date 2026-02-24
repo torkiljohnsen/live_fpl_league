@@ -14,10 +14,7 @@ The example demonstrates:
 - Noah: Started poorly but climbing steadily
 - Liam: Struggling and falling behind
 """
-import sys
-
-sys.path.insert(0, 'tests/fpl_tests')
-from test_utils import make_test_participant
+from tests.fpl_tests.test_utils import make_test_participant
 
 from fpl.league_context import LeagueContext
 from fpl.league_template_renderer import LeagueTemplateRenderer

@@ -30,3 +30,6 @@ jobs:
 
       - name: Run mypy type checking
         run: python -m mypy fpl/ --ignore-missing-imports
+
+      - name: Run pyright type checking
+        run: npx pyright
