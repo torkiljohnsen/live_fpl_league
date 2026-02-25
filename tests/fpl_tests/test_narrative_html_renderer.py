@@ -40,7 +40,7 @@ class TestRender:
         renderer = NarrativeHTMLRenderer(template_dir=TEMPLATES_DIR, output_dir=str(tmp_path))
         path = renderer.render(SAMPLE_NARRATIVE, "123", "Test League", "2025-26", 27)
 
-        assert path == tmp_path / "reidars_rapport_123_gw27.html"
+        assert path == tmp_path / "narratives" / "2025-26" / "123" / "reidars_rapport_gw27.html"
 
     def test_extracts_title_from_heading(self, tmp_path: Path) -> None:
         renderer = NarrativeHTMLRenderer(template_dir=TEMPLATES_DIR, output_dir=str(tmp_path))
@@ -97,9 +97,9 @@ class TestRender:
         path = renderer.render(SAMPLE_NARRATIVE, "456", "Test League", "2025-26", 27)
         html = path.read_text(encoding="utf-8")
 
-        assert "league_standings_456.html" in html
-        assert "league_gameweek_history_456.html" in html
-        assert "ranking_progression_456.html" in html
+        assert "../../../league_standings_456.html" in html
+        assert "../../../league_gameweek_history_456.html" in html
+        assert "../../../ranking_progression_456.html" in html
 
     def test_output_contains_article_body(self, tmp_path: Path) -> None:
         renderer = NarrativeHTMLRenderer(template_dir=TEMPLATES_DIR, output_dir=str(tmp_path))
@@ -113,7 +113,7 @@ class TestRender:
         path = renderer.render(SAMPLE_NARRATIVE, "123", "Test League", "2025-26", 27)
         html = path.read_text(encoding="utf-8")
 
-        assert "reidars_rapport_2.png" in html
+        assert "../../../reidars_rapport_2.png" in html
 
     def test_output_contains_footer(self, tmp_path: Path) -> None:
         renderer = NarrativeHTMLRenderer(template_dir=TEMPLATES_DIR, output_dir=str(tmp_path))
@@ -136,16 +136,24 @@ class TestGetGithubPagesUrl:
     """Tests for NarrativeHTMLRenderer.get_github_pages_url()."""
 
     def test_returns_correct_url(self) -> None:
-        url = NarrativeHTMLRenderer.get_github_pages_url("123456", 27)
+        url = NarrativeHTMLRenderer.get_github_pages_url("123456", 27, "2025-26")
 
-        assert url == "https://torkiljohnsen.github.io/live_fpl_league/reidars_rapport_123456_gw27.html"
+        assert url == (
+            "https://torkiljohnsen.github.io/live_fpl_league/"
+            "narratives/2025-26/123456/reidars_rapport_gw27.html"
+        )
 
     def test_url_includes_league_id(self) -> None:
-        url = NarrativeHTMLRenderer.get_github_pages_url("999", 1)
+        url = NarrativeHTMLRenderer.get_github_pages_url("999", 1, "2025-26")
 
         assert "999" in url
 
     def test_url_includes_event_id(self) -> None:
-        url = NarrativeHTMLRenderer.get_github_pages_url("123", 15)
+        url = NarrativeHTMLRenderer.get_github_pages_url("123", 15, "2025-26")
 
         assert "gw15" in url
+
+    def test_url_includes_season(self) -> None:
+        url = NarrativeHTMLRenderer.get_github_pages_url("123", 15, "2025-26")
+
+        assert "2025-26" in url

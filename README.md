@@ -3,6 +3,25 @@ A static HTML dashboard generator for Fantasy Premier League mini-leagues, showi
 
 See [Live standings](https://torkiljohnsen.github.io/live_fpl_league/)
 
+## Table of Contents
+
+- [Usage](#usage)
+  - [Quick Start](#quick-start)
+  - [Command-Line Options](#command-line-options)
+  - [Output Files](#output-files)
+- [Weekly Report (Reidar's Rapport)](#weekly-report-reidars-rapport)
+  - [Setup](#setup)
+  - [Usage](#usage-1)
+  - [Output](#output)
+- [GitHub Actions (Nightly Workflow)](#github-actions-nightly-workflow)
+  - [What happens each night](#what-happens-each-night)
+  - [Required secrets](#required-secrets)
+  - [How it ties together after a gameweek finishes](#how-it-ties-together-after-a-gameweek-finishes)
+- [Development Setup](#development-setup)
+  - [Environment Setup](#environment-setup)
+  - [Running Tests](#running-tests)
+  - [Development Mode and Sample Data](#development-mode-and-sample-data)
+
 ## Usage
 
 ### Quick Start
@@ -89,9 +108,16 @@ python generate_weekly_report.py -l 1639886 -e 10
 # Skip if report already exists (used in CI to avoid duplicates)
 python generate_weekly_report.py -l 1639886 --narrative --skip-existing
 
+# Generate narrative with Teams notification
+python generate_weekly_report.py -l 1639886 -e 10 --narrative --notify-teams
+
 # Dev mode with sample data
 python generate_weekly_report.py --dev
 ```
+
+The `--narrative` flag generates an HTML article page alongside the markdown narrative, published to GitHub Pages at `docs/narratives/{season}/{league_id}/reidars_rapport_gw{N}.html`.
+
+The `--notify-teams` flag posts a Teams Adaptive Card with a teaser and link to the article. Requires the `TEAMS_WEBHOOK_URL` environment variable.
 
 ### Output
 
@@ -100,6 +126,41 @@ All weekly report artifacts are stored under `weekly_report/`:
 - `weekly_report/reports/{league_id}/{season}/gw{N}.json` — Structured gameweek data
 - `weekly_report/narratives/{league_id}/{season}/gw{N}.md` — Generated narratives
 - `weekly_report/reidar_memory/{league_id}/{season}/` — Persistent memory (manager profiles, season arc, GW summaries)
+
+Narrative HTML pages are published to `docs/narratives/{season}/{league_id}/reidars_rapport_gw{N}.html`.
+
+## GitHub Actions (Nightly Workflow)
+
+A nightly GitHub Actions workflow (`.github/workflows/scheduled-build.yml`) runs at 05:00 UTC and ties everything together automatically. It can also be triggered manually via `workflow_dispatch`.
+
+### What happens each night
+
+1. **HTML dashboards** — Generates standings, gameweek history, and ranking progression charts for all configured leagues (currently `1639886` and `1638989`). API responses are cached with `--cache-dir` to avoid redundant calls.
+2. **Index page** — Regenerates `docs/index.html` with links to all dashboard pages.
+3. **Weekly report & narrative** — Runs `generate_weekly_report.py` with `--narrative --skip-existing` for league `1638989`. This:
+   - Builds the JSON report (if it doesn't already exist for this gameweek)
+   - Generates a Norwegian narrative via Claude API
+   - Renders the narrative as a styled HTML article page
+   - `--skip-existing` ensures no duplicate work — once a gameweek's report and narrative exist, it's skipped
+4. **Hero image** — Copies `reidars_rapport_2.png` to `docs/` if not already present
+5. **Auto-commit** — Commits all changes to `docs/`, `weekly_report/reports/`, `weekly_report/narratives/`, and `weekly_report/reidar_memory/` to the `dev` branch
+
+### Required secrets
+
+- `GH_PAT` — GitHub personal access token (for pushing to the repo)
+- `ANTHROPIC_API_KEY` — Claude API key (for narrative generation)
+- `TEAMS_WEBHOOK_URL` — Power Automate Workflows webhook URL (configured but not active until `--notify-teams` is added to the workflow)
+
+### How it ties together after a gameweek finishes
+
+When the FPL API marks a gameweek as finished, the next nightly run will:
+1. Detect the newly finished gameweek automatically
+2. Generate fresh dashboard HTML reflecting the latest results
+3. Create a new narrative report (Reidar's take on the gameweek)
+4. Render the narrative as an HTML article page on GitHub Pages
+5. Commit everything — the site updates automatically
+
+Dashboard pages are always regenerated (reflecting live data), while reports and narratives are only generated once per gameweek (`--skip-existing`).
 
 ## Development Setup
 

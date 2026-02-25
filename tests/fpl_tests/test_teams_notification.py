@@ -4,7 +4,12 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from fpl.teams_notification import build_adaptive_card, extract_teaser, post_to_teams
+from fpl.teams_notification import (
+    build_adaptive_card,
+    extract_teaser,
+    extract_title,
+    post_to_teams,
+)
 
 # --- Sample narratives for testing ---
 
@@ -79,6 +84,22 @@ class TestExtractTeaser:
         assert teaser == "First real paragraph."
 
 
+class TestExtractTitle:
+    def test_extracts_title_from_heading(self) -> None:
+        assert extract_title(SAMPLE_NARRATIVE) == "Reidars Rapport — Runde 27"
+
+    def test_returns_fallback_when_no_heading(self) -> None:
+        assert extract_title("No heading here.\n\nJust text.") == "Reidars Rapport"
+
+    def test_extracts_custom_headline(self) -> None:
+        narrative = "# Bench boost. Fem poeng. Null verdighet.\n\nBody text."
+        assert extract_title(narrative) == "Bench boost. Fem poeng. Null verdighet."
+
+    def test_uses_first_heading_only(self) -> None:
+        narrative = "# First Heading\n\n## Second\n\nBody."
+        assert extract_title(narrative) == "First Heading"
+
+
 class TestBuildAdaptiveCard:
     @pytest.fixture
     def card(self) -> dict:
@@ -136,6 +157,28 @@ class TestBuildAdaptiveCard:
         assert action["type"] == "Action.OpenUrl"
         assert action["title"] == "Les hele Reidars Rapport"
         assert action["url"] == "https://example.com/narrative.html"
+
+    def test_custom_title_overrides_default(self) -> None:
+        card = build_adaptive_card(
+            gameweek=27,
+            teaser="A teaser.",
+            narrative_url="https://example.com",
+            image_url="https://example.com/img.png",
+            title="Bench boost. Fem poeng. Null verdighet.",
+        )
+        title_block = card["attachments"][0]["content"]["body"][1]
+        assert title_block["text"] == "Bench boost. Fem poeng. Null verdighet."
+
+    def test_empty_title_uses_fallback(self) -> None:
+        card = build_adaptive_card(
+            gameweek=10,
+            teaser="A teaser.",
+            narrative_url="https://example.com",
+            image_url="https://example.com/img.png",
+            title="",
+        )
+        title_block = card["attachments"][0]["content"]["body"][1]
+        assert title_block["text"] == "Reidars Rapport — Runde 10"
 
 
 class TestPostToTeams:

@@ -48,18 +48,28 @@ class NarrativeHTMLRenderer:
         body_md = "\n".join(body_lines).strip()
         body_html = markdown.markdown(body_md, extensions=["extra"])
 
+        # Relative path from narratives/<season>/<league_id>/ back to docs root
+        base_path = "../../../"
+
         template = self.env.get_template("narrative.html")
         html = template.render(
             title=title,
             subtitle=f"Runde {event_id}",
             body_html=body_html,
-            hero_image="reidars_rapport_2.png",
+            hero_image=f"{base_path}reidars_rapport_2.png",
+            base_path=base_path,
             league_id=league_id,
             league_name=league_name,
             season=season,
         )
 
-        output_path = self.output_dir / f"reidars_rapport_{league_id}_gw{event_id}.html"
+        output_path = (
+            self.output_dir
+            / "narratives"
+            / season
+            / league_id
+            / f"reidars_rapport_gw{event_id}.html"
+        )
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(html)
@@ -67,5 +77,9 @@ class NarrativeHTMLRenderer:
         return output_path
 
     @staticmethod
-    def get_github_pages_url(league_id: str, event_id: int) -> str:
-        return f"{GITHUB_PAGES_BASE}reidars_rapport_{league_id}_gw{event_id}.html"
+    def get_github_pages_url(league_id: str, event_id: int, season: str) -> str:
+        return (
+            f"{GITHUB_PAGES_BASE}"
+            f"narratives/{season}/{league_id}/"
+            f"reidars_rapport_gw{event_id}.html"
+        )

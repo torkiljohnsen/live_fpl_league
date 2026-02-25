@@ -37,10 +37,10 @@ Each narrative markdown file gets converted to a styled HTML page:
 narrative markdown (gw27.md)
   → markdown library → HTML body
   → Jinja2 template (narrative.html extends base.html)
-  → styled article page (docs/reidars_rapport_{league_id}_gw{N}.html)
+  → styled article page (docs/narratives/{season}/{league_id}/reidars_rapport_gw{N}.html)
 ```
 
-Published at: `https://torkiljohnsen.github.io/live_fpl_league/reidars_rapport_{league_id}_gw{N}.html`
+Published at: `https://torkiljohnsen.github.io/live_fpl_league/narratives/{season}/{league_id}/reidars_rapport_gw{N}.html`
 
 **Template structure:**
 - Hero image (`reidars_rapport_2.png`, copied to `docs/`)

@@ -6,6 +6,14 @@ from typing import Any
 import requests
 
 
+def extract_title(narrative: str) -> str:
+    """Extract the headline from the first # heading in the narrative."""
+    for line in narrative.split("\n"):
+        if line.startswith("# "):
+            return line[2:].strip()
+    return "Reidars Rapport"
+
+
 def extract_teaser(narrative: str, max_length: int = 300) -> str:
     """Extract a teaser paragraph from a narrative markdown string."""
     paragraphs = narrative.split("\n\n")
@@ -32,9 +40,14 @@ def extract_teaser(narrative: str, max_length: int = 300) -> str:
 
 
 def build_adaptive_card(
-    gameweek: int, teaser: str, narrative_url: str, image_url: str
+    gameweek: int,
+    teaser: str,
+    narrative_url: str,
+    image_url: str,
+    title: str = "",
 ) -> dict[str, Any]:
     """Build an Adaptive Card payload for Teams webhook."""
+    card_title = title if title else f"Reidars Rapport — Runde {gameweek}"
     return {
         "type": "message",
         "attachments": [
@@ -53,7 +66,7 @@ def build_adaptive_card(
                         },
                         {
                             "type": "TextBlock",
-                            "text": f"Reidars Rapport — Runde {gameweek}",
+                            "text": card_title,
                             "weight": "bolder",
                             "size": "large",
                             "wrap": True,
@@ -87,8 +100,11 @@ def post_to_teams(
 ) -> bool:
     """Post an Adaptive Card to Teams via webhook. Returns True on success, False on failure."""
     try:
+        title = extract_title(narrative)
         teaser = extract_teaser(narrative)
-        card = build_adaptive_card(gameweek, teaser, narrative_url, image_url)
+        card = build_adaptive_card(
+            gameweek, teaser, narrative_url, image_url, title=title,
+        )
         response = requests.post(
             webhook_url,
             json=card,
