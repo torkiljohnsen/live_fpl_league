@@ -236,7 +236,7 @@ def main() -> None:
                             )
                             image_url = (
                                 "https://torkiljohnsen.github.io/live_fpl_league/"
-                                "assets/reidars_rapport_2.png"
+                                "assets/reidars_rapport_5.png"
                             )
                             success = post_to_teams(
                                 webhook_url=webhook_url,

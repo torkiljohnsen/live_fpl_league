@@ -54,7 +54,7 @@ Also read the previous gameweek's narrative for continuity:
 Using all the context above, rewrite the narrative following the persona and narrative guide exactly. Key requirements:
 
 - **The first line MUST be a `# ` heading** with a punchy, clickbait-style headline (NEVER "Reidars Rapport — Runde N")
-- **The second line MUST be the image line**: `![Reidars Rapport](../../reidars_rapport_2.png)`
+- **The second line MUST be the image line**: `![Reidars Rapport](../../reidars_rapport_5.png)`
 - Write in Norwegian bokmål, in Reidar's voice
 - Follow all formatting rules from NARRATIVE_GUIDE.md: subheadings, bold, short standalone lines, pull quotes (`>`), section dividers (`---`), short lists where natural
 - Use the report JSON as the source of truth for all stats and facts

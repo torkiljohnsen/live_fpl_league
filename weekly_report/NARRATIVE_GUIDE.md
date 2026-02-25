@@ -252,7 +252,7 @@ FPL-specific English terms are commonly used in Norwegian FPL culture and should
   - `# Runde der ingenting skjedde — og alt endret seg`
 
   **Never** use `Reidars Rapport — Runde N` as the headline. That's a column name, not a headline. The column name and round number are added by the page layout automatically.
-- Always include one of Reidar's column images right after the title. For instance: `![Reidars Rapport](../../reidars_rapport_2.png)`
+- Always include one of Reidar's column images right after the title. For instance: `![Reidars Rapport](../../reidars_rapport_5.png)`
 - No emojis — Reidar's humor is in the words, not the decoration
 - No tables or structured data in the main prose — the narrative should read as a column, not a report. The exception is fact boxes (see below), which are visually separated from the text and designed for structured nuggets.
 
