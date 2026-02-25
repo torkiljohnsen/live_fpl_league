@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - {{ subtitle }}{% endblock %}
+
+{% block body %}
+    <div class="narrative-hero">
+        <img src="{{ hero_image }}" alt="Reidars Rapport">
+    </div>
+
+    <div class="narrative-header">
+        <h1 class="narrative-title">{{ title }}</h1>
+        <p class="narrative-subtitle">{{ subtitle }}</p>
+    </div>
+
+    <nav class="narrative-nav">
+        <a href="league_standings_{{ league_id }}.html">Tabell</a>
+        <a href="league_gameweek_history_{{ league_id }}.html">Rundehistorikk</a>
+        <a href="ranking_progression_{{ league_id }}.html">Poengutvikling</a>
+    </nav>
+
+    <article class="narrative-article">
+        {{ body_html | safe }}
+    </article>
+
+    <footer class="narrative-footer">
+        <p>{{ league_name }} &mdash; {{ season }}</p>
+    </footer>
+{% endblock %}

@@ -194,7 +194,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Narrative styles include hero image, nav bar, article typography, and responsive rules",
       "Ruff clean, mypy clean, all existing tests pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 3,
