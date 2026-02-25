@@ -123,7 +123,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Hero image, navigation links, and footer are all present and use existing CSS classes",
       "Page uses the existing narrative CSS variables (--nr-red, --nr-gold, --nr-text, --nr-muted)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 3,
