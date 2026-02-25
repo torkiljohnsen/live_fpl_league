@@ -234,10 +234,9 @@ def main() -> None:
                                 "https://torkiljohnsen.github.io/live_fpl_league/"
                                 f"reidars_rapport.html?gw={event_id}"
                             )
-                            image_number = ((event_id - 1) % 4) + 1
                             image_url = (
                                 "https://torkiljohnsen.github.io/live_fpl_league/"
-                                f"assets/reidars_rapport_{image_number}.png"
+                                "assets/reidars_rapport_2.png"
                             )
                             success = post_to_teams(
                                 webhook_url=webhook_url,

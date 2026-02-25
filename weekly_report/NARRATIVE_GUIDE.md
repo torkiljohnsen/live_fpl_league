@@ -23,6 +23,8 @@ A punchy opening that sets the tone for the round. Reidar never eases the reader
 
 **Never** start with a generic greeting or "another exciting round" filler. Jump straight into the story. If there's no story, jump into the absence of one.
 
+**Teaser paragraph for notifications**: The first paragraph after the headline and image line is extracted automatically as a teaser for the Microsoft Teams adaptive card notification. Write it so it works as a standalone hook — 1–3 sentences that make the reader want to click through. It should capture the round's defining moment or mood without requiring context. Avoid single throwaway words or sentence fragments that don't convey enough on their own.
+
 ### 2. Round Winner Spotlight
 
 The gameweek's highest scorer gets a dedicated section. But the *amount* of spotlight depends on whether the performance actually impresses Reidar.
