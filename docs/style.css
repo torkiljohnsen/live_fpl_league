@@ -338,7 +338,7 @@ body:has(.narrative-page) {
 	justify-content: center;
 	align-items: center;
 	gap: 0.6rem;
-	padding: 1.5rem 1rem 0.5rem;
+	padding: 0.3rem 0;
 	flex-wrap: wrap;
 }
 .narrative-nav a {
@@ -518,24 +518,20 @@ body:has(.narrative-page) {
 	font-size: 0.9rem;
 }
 
-/* Footer — newspaper colophon */
+/* Footer — compact colophon with nav */
 .narrative-footer {
-	text-align: center;
-	padding: 1rem 1rem 3rem;
-}
-.narrative-footer-rule {
-	width: 100%;
 	max-width: 660px;
-	height: 1px;
-	background: var(--nr-rule);
-	margin: 0 auto 1.2rem;
+	margin: 0 auto;
+	text-align: center;
+	padding: 1.2rem 1.5rem 3rem;
+	border-top: 1px solid var(--nr-rule);
 }
 .narrative-footer p {
 	color: var(--nr-muted);
 	font-size: 0.75rem;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	margin: 0;
+	margin: 0.5rem 0 0;
 }
 
 /* Responsive */

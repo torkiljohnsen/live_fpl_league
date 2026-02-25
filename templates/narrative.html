@@ -21,20 +21,11 @@
             <p class="narrative-byline">Av <strong>Reidar Fjellheim</strong> <span class="narrative-byline-title">Journalist og FPL-ekspert</span></p>
         </div>
 
-        <nav class="narrative-nav">
-            <a href="{{ base_path }}league_standings_{{ league_id }}.html">Tabell</a>
-            <span class="narrative-nav-dot">&middot;</span>
-            <a href="{{ base_path }}league_gameweek_history_{{ league_id }}.html">Rundehistorikk</a>
-            <span class="narrative-nav-dot">&middot;</span>
-            <a href="{{ base_path }}ranking_progression_{{ league_id }}.html">Poengutvikling</a>
-        </nav>
-
         <article class="narrative-article">
             {{ body_html | safe }}
         </article>
 
         <footer class="narrative-footer">
-            <div class="narrative-footer-rule"></div>
             <nav class="narrative-nav">
                 <a href="{{ base_path }}league_standings_{{ league_id }}.html">Tabell</a>
                 <span class="narrative-nav-dot">&middot;</span>

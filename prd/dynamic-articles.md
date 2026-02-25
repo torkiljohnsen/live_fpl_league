@@ -49,7 +49,7 @@ User visits: reidars_rapport.html?gw=25
 docs/
 ├── assets/                          ← NEW: all images moved here
 │   ├── reidars_rapport_2.png
-│   ├── reidar_404.png               ← User will add later
+│   ├── reidar_404.png               ← Exists in docs/ root, move here in task 1
 │   ├── trophy.png
 │   ├── first_place.png
 │   ├── second_place.png
@@ -92,7 +92,7 @@ The task list below drives autonomous agent execution. Each task must be:
     "id": 1,
     "category": "setup",
     "title": "Move images to docs/assets/",
-    "description": "Create docs/assets/ directory. Move all image files from docs/ root into docs/assets/: reidars_rapport_2.png, trophy.png, first_place.png, second_place.png, third_place.png, alarm.png, 'The Duck liten.png'. Update all references to these images in: docs/style.css, docs/index.html, docs/*.html (standings, history, progression pages), templates/*.html (Jinja2 templates that reference image paths), generate_weekly_report.py (the image_url for Teams notification). Use grep to find all references before updating. Do NOT move or modify files in docs/narratives/.",
+    "description": "Create docs/assets/ directory. Move all image files from docs/ root into docs/assets/: reidars_rapport_2.png, reidar_404.png, trophy.png, first_place.png, second_place.png, third_place.png, alarm.png, 'The Duck liten.png'. Update all references to these images in: docs/style.css, docs/index.html, docs/*.html (standings, history, progression pages), templates/*.html (Jinja2 templates that reference image paths), generate_weekly_report.py (the image_url for Teams notification). Use grep to find all references before updating. Do NOT move or modify files in docs/narratives/.",
     "acceptance_criteria": [
       "docs/assets/ directory exists with all image files moved from docs/ root",
       "No image files remain in docs/ root (only .html, .css, narratives/, assets/)",
@@ -143,7 +143,7 @@ The task list below drives autonomous agent execution. Each task must be:
     "id": 4,
     "category": "feature",
     "title": "Add friendly 404 state for missing narratives",
-    "description": "When fetching a gameweek's .md file returns a non-OK response (404), display a friendly 'not found' state instead of a blank page. Show the Reidar image (assets/reidar_404.png with fallback to assets/reidars_rapport_2.png), a humorous Norwegian heading (e.g., 'Denne runden er ikke spilt ennå'), and a short witty body text in Reidar's voice (e.g., 'Reidar ser på deg som om du har brukt triple captain på en keeper. Kom tilbake når runden er ferdig.'). The navigation arrows should still work so users can navigate to other gameweeks. Style the 404 state to be centered and visually appealing using the existing narrative design system. Add a CSS class .narrative-not-found for the 404 state with appropriate styling in docs/style.css. The 404 image should handle the fallback gracefully with an onerror handler.",
+    "description": "When fetching a gameweek's .md file returns a non-OK response (404), display a friendly 'not found' state instead of a blank page. The dedicated 404 image exists at assets/reidar_404.png (moved there by task 1). Show the Reidar image (assets/reidar_404.png with fallback to assets/reidars_rapport_2.png), a humorous Norwegian heading (e.g., 'Denne runden er ikke spilt ennå'), and a short witty body text in Reidar's voice (e.g., 'Reidar ser på deg som om du har brukt triple captain på en keeper. Kom tilbake når runden er ferdig.'). The navigation arrows should still work so users can navigate to other gameweeks. Style the 404 state to be centered and visually appealing using the existing narrative design system. Add a CSS class .narrative-not-found for the 404 state with appropriate styling in docs/style.css. The 404 image should handle the fallback gracefully with an onerror handler.",
     "acceptance_criteria": [
       "Visiting ?gw=99 (non-existent) shows the friendly 404 state instead of a blank page",
       "404 state displays an image (reidar_404.png with fallback to reidars_rapport_2.png)",
