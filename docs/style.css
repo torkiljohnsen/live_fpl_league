@@ -232,108 +232,350 @@ tr:nth-child(odd) {
 	max-height: 18px;
 }
 
-/* Narrative article page */
+/* ===== Narrative Article Page — Newspaper Edition ===== */
+
+.narrative-page {
+	--nr-paper: #F5F0E8;
+	--nr-ink: #1C1917;
+	--nr-accent: #8B1A1A;
+	--nr-muted: #78716C;
+	--nr-rule: #C4BAA8;
+	--nr-highlight: #EDE8DD;
+	background: var(--nr-paper);
+	animation: narrativeFadeIn 0.6s ease-out;
+}
+
+body:has(.narrative-page) {
+	background: #F5F0E8;
+}
+
+@keyframes narrativeFadeIn {
+	from { opacity: 0; transform: translateY(8px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero — full-bleed image fading into paper */
 .narrative-hero {
+	position: relative;
 	width: 100%;
-	max-height: 400px;
+	max-height: 520px;
 	overflow: hidden;
 }
 .narrative-hero img {
 	width: 100%;
-	max-height: 400px;
+	max-height: 520px;
 	object-fit: cover;
+	object-position: center 20%;
 	display: block;
 }
+.narrative-hero-fade {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 70%;
+	background: linear-gradient(to top, #F5F0E8 0%, rgba(245, 240, 232, 0.8) 35%, transparent 100%);
+	pointer-events: none;
+}
 
+/* Header — newspaper masthead */
 .narrative-header {
 	text-align: center;
-	padding: 2rem 1rem 0.5rem;
+	padding: 0 1.5rem 0.5rem;
+	margin-top: -3rem;
+	position: relative;
+	z-index: 1;
+}
+.narrative-header-rule {
+	width: 64px;
+	height: 2px;
+	background: var(--nr-accent);
+	margin: 0 auto 1rem;
+}
+.narrative-kicker {
+	font-family: 'Sora', sans-serif;
+	font-size: 0.72rem;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	color: var(--nr-muted);
+	margin: 0 0 0.8rem;
 }
 .narrative-title {
-	font-family: 'Sora', sans-serif;
-	font-size: 2.4rem;
-	margin: 0 0 0.3rem;
+	font-family: 'DM Serif Display', Georgia, serif;
+	font-size: 2.8rem;
+	color: var(--nr-ink);
+	margin: 0 0 0.6rem;
+	line-height: 1.12;
+	letter-spacing: -0.015em;
 }
 .narrative-subtitle {
 	font-family: 'Sora', sans-serif;
-	font-size: 1.3rem;
-	color: rgba(255, 255, 255, 0.7);
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	letter-spacing: 0.22em;
+	color: var(--nr-accent);
 	margin: 0;
+	font-weight: 700;
 }
 
+/* Nav — editorial links */
 .narrative-nav {
 	display: flex;
 	justify-content: center;
-	gap: 0.75rem;
-	padding: 1.5rem 1rem;
+	align-items: center;
+	gap: 0.6rem;
+	padding: 1.5rem 1rem 0.5rem;
 	flex-wrap: wrap;
 }
 .narrative-nav a {
-	display: inline-block;
-	padding: 0.5rem 1.2rem;
-	background: #3E7DEE;
-	color: #fff;
+	color: var(--nr-muted);
 	text-decoration: none;
-	border-radius: 20px;
-	font-size: 0.95rem;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
 	font-weight: 700;
-	transition: background 0.2s;
+	padding: 0.25rem 0;
+	border-bottom: 1.5px solid transparent;
+	transition: color 0.2s, border-color 0.2s;
 }
 .narrative-nav a:hover {
-	background: #5a94f5;
+	color: var(--nr-ink);
+	border-bottom-color: var(--nr-accent);
+}
+.narrative-nav-dot {
+	color: var(--nr-rule);
+	font-size: 1.1rem;
+	line-height: 1;
 }
 
+/* Article body — newspaper serif typography */
 .narrative-article {
-	max-width: 720px;
+	max-width: 660px;
 	margin: 0 auto;
-	padding: 1rem 1.5rem 3rem;
-	line-height: 1.7;
-	font-size: 1.05rem;
+	padding: 1.5rem 1.5rem 3rem;
+	font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+	font-size: 1.1rem;
+	line-height: 1.78;
+	color: var(--nr-ink);
 }
+
+/* Drop cap on the opening paragraph */
+.narrative-article > p:first-child::first-letter {
+	font-family: 'DM Serif Display', serif;
+	float: left;
+	font-size: 4.2rem;
+	line-height: 0.78;
+	padding-right: 0.12em;
+	padding-top: 0.06em;
+	color: var(--nr-accent);
+}
+
 .narrative-article h2 {
-	font-family: 'Sora', sans-serif;
-	font-size: 1.5rem;
+	font-family: 'DM Serif Display', serif;
+	font-size: 1.45rem;
+	color: var(--nr-ink);
 	margin-top: 2.5rem;
-	margin-bottom: 0.75rem;
+	margin-bottom: 0.5rem;
+	padding-left: 0;
+	line-height: 1.3;
 }
+
 .narrative-article p {
 	margin: 0 0 1.2rem;
 }
-.narrative-article blockquote {
-	border-left: 3px solid #3E7DEE;
-	margin: 1.5rem 0;
-	padding: 0.75rem 1.2rem;
-	font-style: italic;
-	color: rgba(255, 255, 255, 0.85);
-	background: rgba(255, 255, 255, 0.03);
+
+.narrative-article strong {
+	color: var(--nr-ink);
+	font-weight: 700;
 }
 
-.narrative-footer {
+.narrative-article em {
+	color: inherit;
+}
+
+/* Pull quotes — large newspaper style with quotation marks */
+.narrative-article blockquote {
+	position: relative;
+	margin: 2.5rem -4rem 2.5rem -4rem;
+	padding: 1.8rem 3rem 1.5rem 3.5rem;
+	border-left: none;
+	border-top: 2px solid var(--nr-ink);
+	border-bottom: 1px solid var(--nr-rule);
+	font-family: 'DM Serif Display', serif;
+	font-size: 1.55rem;
+	font-style: italic;
+	color: var(--nr-ink);
+	background: none;
+	line-height: 1.45;
 	text-align: center;
-	padding: 2rem 1rem 3rem;
-	color: rgba(255, 255, 255, 0.5);
+}
+.narrative-article blockquote::before {
+	content: '\201C';
+	position: absolute;
+	top: 0.55rem;
+	left: 0.5rem;
+	font-family: 'DM Serif Display', Georgia, serif;
+	font-size: 4rem;
+	line-height: 1;
+	color: var(--nr-rule);
+	font-style: normal;
+}
+.narrative-article blockquote::after {
+	content: '\201D';
+	position: absolute;
+	bottom: 0.3rem;
+	right: 0.5rem;
+	font-family: 'DM Serif Display', Georgia, serif;
+	font-size: 4rem;
+	line-height: 1;
+	color: var(--nr-rule);
+	font-style: normal;
+}
+.narrative-article blockquote p {
+	margin: 0;
+}
+
+/* Section dividers */
+.narrative-article hr {
+	border: none;
+	height: 1px;
+	background: var(--nr-rule);
+	margin: 2.5rem 0;
+}
+
+/* Lists — compact with editorial dashes */
+.narrative-article ul {
+	margin: 1rem 0;
+	padding-left: 0;
+	list-style: none;
+}
+.narrative-article li {
+	padding-left: 1.4rem;
+	margin-bottom: 0.25rem;
+	position: relative;
+}
+.narrative-article li::before {
+	content: '\2014';
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: var(--nr-muted);
+}
+
+/* Fact boxes — newspaper sidebar */
+.narrative-article .fact-box {
+	background: var(--nr-highlight);
+	border: 1px solid var(--nr-rule);
+	border-radius: 0;
+	padding: 1.2rem 1.4rem;
+	margin: 2rem 0;
+	font-size: 0.92rem;
+	line-height: 1.65;
+}
+.narrative-article .fact-box > p:first-child {
+	font-family: 'Sora', sans-serif;
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.18em;
+	color: var(--nr-accent);
+	margin: 0 0 0.8rem;
+	padding-bottom: 0.6rem;
+	border-bottom: 1px solid var(--nr-rule);
+	line-height: 1.3;
+}
+.narrative-article .fact-box > p:first-child strong {
+	color: var(--nr-accent);
+	font-weight: 700;
+}
+/* Override drop cap inside fact boxes */
+.narrative-article .fact-box > p:first-child::first-letter {
+	float: none;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	padding: 0;
+	color: inherit;
+}
+.narrative-article .fact-box ul {
+	margin: 0.4rem 0 0;
+}
+.narrative-article .fact-box li {
+	margin-bottom: 0.2rem;
 	font-size: 0.9rem;
 }
 
+/* Footer — newspaper colophon */
+.narrative-footer {
+	text-align: center;
+	padding: 1rem 1rem 3rem;
+}
+.narrative-footer-rule {
+	width: 100%;
+	max-width: 660px;
+	height: 1px;
+	background: var(--nr-rule);
+	margin: 0 auto 1.2rem;
+}
+.narrative-footer p {
+	color: var(--nr-muted);
+	font-size: 0.75rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	margin: 0;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
+	.narrative-hero {
+		max-height: 380px;
+	}
+	.narrative-hero img {
+		max-height: 380px;
+	}
+	.narrative-header {
+		margin-top: -2rem;
+	}
 	.narrative-title {
-		font-size: 1.8rem;
+		font-size: 2rem;
 	}
 	.narrative-subtitle {
-		font-size: 1.1rem;
+		font-size: 0.7rem;
 	}
 	.narrative-nav {
-		gap: 0.5rem;
+		gap: 0.35rem;
 	}
 	.narrative-nav a {
-		padding: 0.4rem 0.9rem;
-		font-size: 0.85rem;
+		font-size: 0.65rem;
+		letter-spacing: 0.08em;
 	}
 	.narrative-article {
-		padding: 1rem 1rem 2rem;
-		font-size: 1rem;
+		padding: 1rem 1.2rem 2rem;
+		font-size: 1.02rem;
 	}
 	.narrative-article h2 {
-		font-size: 1.3rem;
+		font-size: 1.25rem;
+	}
+	.narrative-article > p:first-child::first-letter {
+		font-size: 3.2rem;
+	}
+	.narrative-article blockquote {
+		margin-left: 0;
+		margin-right: 0;
+		padding: 1.2rem 1rem 1rem 2.5rem;
+		font-size: 1.2rem;
+	}
+	.narrative-article blockquote::before {
+		font-size: 3rem;
+		left: 0.2rem;
+		top: 0.4rem;
+	}
+	.narrative-article blockquote::after {
+		font-size: 3rem;
+		right: 0.2rem;
+		bottom: 0.1rem;
+	}
+	.narrative-article .fact-box {
+		padding: 1rem 1.1rem;
+		font-size: 0.88rem;
 	}
 }
