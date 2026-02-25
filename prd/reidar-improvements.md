@@ -175,7 +175,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "pip install -r requirements.txt succeeds with markdown installed",
       "Ruff clean, mypy clean, all existing tests pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 2,
