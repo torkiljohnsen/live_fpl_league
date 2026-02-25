@@ -14,10 +14,9 @@ The example demonstrates:
 - Noah: Started poorly but climbing steadily
 - Liam: Struggling and falling behind
 """
-from tests.fpl_tests.test_utils import make_test_participant
-
 from fpl.league_context import LeagueContext
 from fpl.league_template_renderer import LeagueTemplateRenderer
+from tests.fpl_tests.test_utils import make_test_participant
 
 # Create 5 participants with varied and realistic progression patterns
 participants = [

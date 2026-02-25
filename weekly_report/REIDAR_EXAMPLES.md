@@ -52,7 +52,7 @@ Kapteinskampen avslører noe denne uken: Haaland-troen vakler. De som valgte ham
 
 Team Eiden, Dansen på Roser og FK Haralds/By lander midt på treet. Camilla belønnes for å holde troen på Reijnders, som scorer mot Chelsea — lojalitet til en uortodoks pick som endelig gir avkastning. Torkils FK Haralds/By klatrer på verdensrankingen til tross for en rundescore under ligasnittet, noe som sier mer om resten av verden enn om FK Haralds/By. Oda har en anonym runde. Det hender.
 
-Sjansen FK trekker det korteste strået. 35 poeng etter -4 i transfers er en brutal kombinasjon. Byttene var fornuftige nok i seg selv — Van de Ven og Palmer inn er ingen skandale — men når Tottenham ikke holder nullen og Palmer har en av sine roligere dager, er marginene ubarmhjertige. Badeanda finner veien dit den skal. Den gjør alltid det.
+Sjansen FK trekker det korteste strået. 35 poeng etter -4 i transfers er en brutal kombinasjon. Byttene var fornuftige nok i seg selv — Van de Ven og Palmer inn er ingen skandale — men når Tottenham ikke holder nullen og Palmer har en av sine roligere dager, er marginene ubarmhjertige. Sisteplassen finner veien dit den skal. Den gjør alltid det.
 
 I sammendraget er det status quo i toppen, men gapet er tynt. Neste deadline tirsdag 19:30, og med flere managere som sitter på ubrukte chips, kan det fort smelle. Eller så smeller det ikke, og Reidar skriver en ny kolonne om marginer og tålmodighet. Vi får se.
 
@@ -78,7 +78,7 @@ Eirin er ei uke for seint ute med trippelkaptein. Sjansen FK traff ikke denne ga
 
 Nedover i feltet er det egentlig ingen som fortjener verken skryt eller kjeft. Det var en av de rundene der man setter seg ned søndag kveld, ser på poengsummen, og sier «ja vel.» Hauken FK, Dansen på Roser — alle lander i det grå mellomsjiktet der man verken vinner eller taper, bare eksisterer. Reidar kjenner følelsen.
 
-Delt badeand mellom Camilla og Torkil. Dansen på Roser og FK Haralds/By deler skammen. Noen uker er det slik — man taper ikke fordi man gjør noe galt, men fordi alle andre treffer marginalt bedre. Det er en mager trøst. Den smaker ingenting.
+Delt sisteplass mellom Camilla og Torkil. Dansen på Roser og FK Haralds/By deler skammen. Noen uker er det slik — man taper ikke fordi man gjør noe galt, men fordi alle andre treffer marginalt bedre. Det er en mager trøst. Den smaker ingenting.
 
 Neste deadline tirsdag klokken 19. Camilla rigger wildcard som siste ligamedlem, og Eirin, Peder, Hauk og Oda har free hit på blokka. Runde 19 kan bli en helt annen affære. Reidar har sagt det før. Noen ganger stemmer det til og med.
 
@@ -102,7 +102,7 @@ FK Nabansen og Hauken FK deler andreplassen med 56. Peder har gjort noe riktig m
 
 Team Eiden og Viansen FC lander begge på 53. Oda og Hedda leverer nesten identiske lag med nesten identiske resultater. Reidar mistenker at de begge sjekket poengsummen, trakk på skuldrene, og gikk videre med kvelden sin. Det er det eneste fornuftige å gjøre med 53 poeng.
 
-FK Haralds/By og Sjansen FK bunnstrider med 50 og 48. Torkil og Eirin gjør opp om badeanda med tre poengs margin. Sjansen FKs Eirin trekker det korteste strået, men forskjellen mellom 48 og 50 er akademisk. Det er som å diskutere hvem som kom sist i et løp der ingen løp.
+FK Haralds/By og Sjansen FK bunnstrider med 50 og 48. Torkil og Eirin gjør opp om sisteplassen med tre poengs margin. Sjansen FKs Eirin trekker det korteste strået, men forskjellen mellom 48 og 50 er akademisk. Det er som å diskutere hvem som kom sist i et løp der ingen løp.
 
 Dansen på Roser lander på 52. Camilla eksisterer i denne runden. Det er det snilleste Reidar kan si, og det er snillere enn hun fortjener etter å ha valgt Haaland som kaptein i en bortekamp mot Arsenal. Noen valg er modige. Andre er bare valg.
 

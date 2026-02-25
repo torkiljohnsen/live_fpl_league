@@ -1,6 +1,9 @@
 # AGENTS.md - Live FPL League Dashboard
 
-Generates static HTML dashboards for Fantasy Premier League mini-leagues showing live standings and gameweek history.
+Two main systems for a Fantasy Premier League mini-league:
+
+1. **HTML Dashboards** — Static HTML pages (GitHub Pages) showing live standings and gameweek history.
+2. **Reidar's Rapport** — AI-generated weekly narrative reports written in Norwegian by "Reidar", a fictional grizzled FPL columnist. Uses Claude API with persistent memory across gameweeks. See [`weekly_report/`](weekly_report/) for persona, narrative guide, and examples.
 
 ## Knowledge collection
 
@@ -31,7 +34,7 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 
 ### Weekly Report & Narrative Flow (Reidar's Rapport)
 
-**Data Collection → Report Assembly → Narrative Generation → Memory Update**
+**Data Collection → Report Assembly → Narrative Generation → Memory Update → HTML Rendering → Teams Notification**
 
 1. **Data Collection** - [`fpl/fpl_api.py`](fpl/fpl_api.py) fetches standings, picks, transfers, and live event data
 2. **Player Resolution** - [`fpl/player_registry.py`](fpl/player_registry.py) maps element IDs to player/team names
@@ -40,7 +43,9 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 5. **Report Assembly** - `WeeklyReport.build()` produces a self-contained JSON report with meta, standings, awards, league_summary
 6. **Narrative Generation** - [`fpl/narrative_generator.py`](fpl/narrative_generator.py) sends report + Reidar persona + memory context to Claude API, returns Norwegian-language narrative
 7. **Memory Update** - [`fpl/reidar_memory.py`](fpl/reidar_memory.py) updates per-manager profiles, season arc, and GW summaries after each narrative
-8. **Entry Point** - [`generate_weekly_report.py`](generate_weekly_report.py) (`--dev` for sample data, `--narrative` for Claude API narrative)
+8. **HTML Rendering** - [`fpl/narrative_html_renderer.py`](fpl/narrative_html_renderer.py) converts narrative markdown to a styled article page in `docs/narratives/{season}/{league_id}/`
+9. **Teams Notification** - [`fpl/teams_notification.py`](fpl/teams_notification.py) posts an Adaptive Card with teaser and link (opt-in via `--notify-teams`)
+10. **Entry Point** - [`generate_weekly_report.py`](generate_weekly_report.py) (`--dev` for sample data, `--narrative` for Claude API narrative, `--notify-teams` for Teams posting)
 
 **Reidar Memory System**: Persistent context across gameweeks stored in `weekly_report/reidar_memory/{league_id}/{season}/`. Includes per-manager profiles (~200 words), season arc, and rolling GW summaries. Assembled into prompt context via `ReidarMemory.get_prompt_context()` (~4k words at any point in the season).
 
@@ -53,12 +58,14 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 - **[`templates/`](templates/)** - Jinja2 HTML templates
   - [`league_standings.html`](templates/league_standings.html) - Current standings table
   - [`league_gameweek_history.html`](templates/league_gameweek_history.html) - Historical performance grid
+  - [`narrative.html`](templates/narrative.html) - Narrative article page (Reidar's Rapport)
   - [`base.html`](templates/base.html) - Base template with shared structure
   - [`index.html`](templates/index.html) - Index page template
   - [`AGENTS.md`](templates/AGENTS.md) - Template variables reference
 
 - **[`docs/`](docs/)** - GitHub Pages publishing directory (static HTML output only)
   - Generated HTML files for each league/view
+  - `narratives/{season}/{league_id}/` - Narrative article pages (e.g. `reidars_rapport_gw25.html`)
   - [`style.css`](docs/style.css) - Shared stylesheet
   - **Do not place non-publishing files here** — this folder is deployed to GitHub Pages
 

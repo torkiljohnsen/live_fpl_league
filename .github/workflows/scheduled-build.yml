@@ -37,8 +37,12 @@ jobs:
       - name: Generate weekly report and narrative
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
           python generate_weekly_report.py -l 1638989 --narrative --skip-existing --cache-dir .fpl_cache
+
+      - name: Copy hero image to docs
+        run: cp -n weekly_report/reidars_rapport_2.png docs/ 2>/dev/null || true
 
       - name: Commit and push changes
         run: |

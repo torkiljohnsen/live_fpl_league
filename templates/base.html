@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}FPL League{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Sora:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ base_path | default('') }}style.css">
     {% block extra_head %}{% endblock %}
 </head>
 <body>

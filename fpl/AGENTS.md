@@ -119,6 +119,17 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 - `save_narrative(content, output_dir, league_id, season, event_id)` writes to `weekly_report/narratives/{league_id}/{season}/gw{N}.md`
 - Uses `claude-sonnet-4-6` model
 
+**[`narrative_html_renderer.py`](narrative_html_renderer.py)** - Renders narrative markdown as styled HTML article pages
+- `NarrativeHTMLRenderer(template_dir, output_dir)` — Jinja2-based renderer
+- `render(narrative_md, league_id, league_name, season, event_id)` — extracts title from `# ` heading, strips image lines, converts markdown to HTML, renders `narrative.html` template, writes to `docs/narratives/{season}/{league_id}/reidars_rapport_gw{N}.html`
+- `get_github_pages_url(league_id, event_id, season)` — static method returning the public URL
+- Passes `base_path` (`../../../`) to template for correct relative links back to docs root
+
+**[`teams_notification.py`](teams_notification.py)** - Microsoft Teams Adaptive Card notifications
+- `extract_teaser(narrative, max_length=300)` — extracts first real paragraph, strips markdown formatting, truncates on word boundary
+- `build_adaptive_card(gameweek, teaser, narrative_url, image_url)` — builds Adaptive Card v1.4 payload dict
+- `post_to_teams(webhook_url, gameweek, narrative, narrative_url, image_url)` — posts card to Power Automate Workflows webhook; returns `True`/`False`, never raises
+
 **[`reidar_memory.py`](reidar_memory.py)** - Persistent memory system for Reidar persona
 - `ReidarMemory(output_dir, league_id, season)` — manages files under `weekly_report/reidar_memory/{league_id}/{season}/`
 - `scaffold_directories()` creates `managers/` and `gameweeks/` subdirs

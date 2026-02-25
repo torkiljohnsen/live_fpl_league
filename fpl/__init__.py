@@ -4,6 +4,7 @@ from .fpl_league import FPLLeague
 from .league_context import LeagueContext
 from .league_template_renderer import LeagueTemplateRenderer
 from .narrative_generator import NarrativeGenerator
+from .narrative_html_renderer import NarrativeHTMLRenderer
 from .participant import Participant
 from .player_registry import PlayerRegistry
 from .rank_calculator import RankCalculator
@@ -17,6 +18,7 @@ __all__ = [
     'LeagueContext',
     'FPLAPIProtocol',
     'NarrativeGenerator',
+    'NarrativeHTMLRenderer',
     'Participant',
     'PlayerRegistry',
     'RankCalculator',
