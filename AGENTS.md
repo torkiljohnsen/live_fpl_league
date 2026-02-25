@@ -1,6 +1,9 @@
 # AGENTS.md - Live FPL League Dashboard
 
-Generates static HTML dashboards for Fantasy Premier League mini-leagues showing live standings and gameweek history.
+Two main systems for a Fantasy Premier League mini-league:
+
+1. **HTML Dashboards** — Static HTML pages (GitHub Pages) showing live standings and gameweek history.
+2. **Reidar's Rapport** — AI-generated weekly narrative reports written in Norwegian by "Reidar", a fictional grizzled FPL columnist. Uses Claude API with persistent memory across gameweeks. See [`weekly_report/`](weekly_report/) for persona, narrative guide, and examples.
 
 ## Knowledge collection
 
