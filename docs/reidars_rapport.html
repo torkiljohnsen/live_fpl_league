@@ -20,7 +20,11 @@
             <div class="narrative-header-rule"></div>
             <p class="narrative-kicker">Sinkaberg administrasjon &bull; 2025-26</p>
             <h1 class="narrative-title" id="narrative-title"></h1>
-            <p class="narrative-subtitle" id="narrative-subtitle"></p>
+            <div class="narrative-gw-nav" id="header-gw-nav">
+                <a id="header-prev" href="" class="gw-nav-arrow" aria-label="Forrige runde">&laquo;</a>
+                <p class="narrative-subtitle" id="narrative-subtitle"></p>
+                <a id="header-next" href="" class="gw-nav-arrow" aria-label="Neste runde">&raquo;</a>
+            </div>
             <p class="narrative-byline">Av <strong>Reidar Fjellheim</strong> <span class="narrative-byline-title">Journalist og FPL-ekspert</span></p>
         </div>
 
@@ -28,6 +32,10 @@
         </article>
 
         <footer class="narrative-footer">
+            <div class="narrative-gw-nav narrative-gw-nav-footer" id="footer-gw-nav">
+                <a id="footer-prev" href="" class="gw-nav-link"></a>
+                <a id="footer-next" href="" class="gw-nav-link"></a>
+            </div>
             <nav class="narrative-nav">
                 <a href="league_standings_1638989.html">Tabell</a>
                 <span class="narrative-nav-dot">&middot;</span>
@@ -55,6 +63,9 @@
                 return;
             }
 
+            // Set up gameweek navigation arrows
+            setupNavigation(gw);
+
             // Hero image rotation: ((gw - 1) % 4) + 1
             var imageNumber = ((gw - 1) % 4) + 1;
             document.getElementById('hero-img').src = 'assets/reidars_rapport_' + imageNumber + '.png';
@@ -76,6 +87,31 @@
                 .catch(function () {
                     showNotFound(gw);
                 });
+
+            function setupNavigation(gwNum) {
+                var headerPrev = document.getElementById('header-prev');
+                var headerNext = document.getElementById('header-next');
+                var footerPrev = document.getElementById('footer-prev');
+                var footerNext = document.getElementById('footer-next');
+
+                if (gwNum <= MIN_GW) {
+                    headerPrev.hidden = true;
+                    footerPrev.hidden = true;
+                } else {
+                    headerPrev.href = '?gw=' + (gwNum - 1);
+                    footerPrev.href = '?gw=' + (gwNum - 1);
+                    footerPrev.textContent = '\u00AB Runde ' + (gwNum - 1);
+                }
+
+                if (gwNum >= MAX_GW) {
+                    headerNext.hidden = true;
+                    footerNext.hidden = true;
+                } else {
+                    headerNext.href = '?gw=' + (gwNum + 1);
+                    footerNext.href = '?gw=' + (gwNum + 1);
+                    footerNext.textContent = 'Runde ' + (gwNum + 1) + ' \u00BB';
+                }
+            }
 
             function renderArticle(md) {
                 var lines = md.split('\n');
@@ -107,6 +143,9 @@
                 document.getElementById('hero-img').src = 'assets/reidars_rapport_1.png';
                 document.getElementById('narrative-title').textContent = 'Reidars Rapport';
                 document.getElementById('narrative-subtitle').textContent = 'Velg en runde';
+                document.getElementById('header-gw-nav').querySelector('#header-prev').hidden = true;
+                document.getElementById('header-gw-nav').querySelector('#header-next').hidden = true;
+                document.getElementById('footer-gw-nav').hidden = true;
                 document.getElementById('narrative-article').innerHTML =
                     '<p>Bruk lenker med <code>?gw=N</code> for å lese en rapport, for eksempel <a href="?gw=27">Runde 27</a>.</p>';
             }

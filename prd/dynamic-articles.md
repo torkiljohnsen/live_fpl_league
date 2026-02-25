@@ -142,7 +142,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Arrows are large enough for mobile tap targets (min 44px)",
       "Navigation works correctly at boundary gameweeks (1 and 38)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 4,

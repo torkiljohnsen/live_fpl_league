@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-25
-**Tasks Completed:** 2 / 7
-**Current Task:** Task 2 completed
+**Tasks Completed:** 3 / 7
+**Current Task:** Task 3 completed
 
 ---
 
@@ -18,3 +18,8 @@
 **Task:** Task 2 — Create dynamic article page with marked.js
 **Status:** completed
 **Notes:** Created docs/reidars_rapport.html — a self-contained HTML page that uses marked.js via CDN to render Markdown narratives client-side. Replicates the exact HTML structure from templates/narrative.html and templates/base.html: .narrative-page wrapper, .narrative-hero with dynamic hero image, .narrative-header with kicker/title/subtitle/byline, .narrative-article for rendered body, .narrative-nav with dashboard links, and .narrative-footer. Reads ?gw=N from query string, fetches narratives/2025-26/1638989/gw{N}.md, extracts title from first # heading, strips image lines, renders body with marked.parse(). Hero image rotates via ((gw-1)%4)+1 formula. Includes landing state for missing ?gw param and basic 404 handling. All 275 tests pass.
+
+### Session 3 — 2026-02-25
+**Task:** Task 3 — Add gameweek navigation arrows in header and footer
+**Status:** completed
+**Notes:** Added prev/next gameweek navigation to both header and footer of docs/reidars_rapport.html. Header uses « » guillemets flanking the subtitle in a flex container (.narrative-gw-nav). Footer uses labeled links ("« Runde 24" / "Runde 26 »") in a dedicated nav row above the existing dashboard links. JS setupNavigation() sets hrefs to ?gw={N±1} and hides arrows at boundaries (gw=1 hides prev, gw=38 hides next). Landing page hides all navigation. Added CSS for .gw-nav-arrow (header) and .gw-nav-link (footer) with 44px min tap targets, hover states using --nr-accent/--nr-highlight, and responsive adjustments. All 275 tests pass.
