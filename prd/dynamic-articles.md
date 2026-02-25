@@ -48,7 +48,10 @@ User visits: reidars_rapport.html?gw=25
 ```
 docs/
 ├── assets/                          ← NEW: all images moved here
+│   ├── reidars_rapport_1.png        ← Four report images, rotated by GW number
 │   ├── reidars_rapport_2.png
+│   ├── reidars_rapport_3.png
+│   ├── reidars_rapport_4.png
 │   ├── reidar_404.png               ← Exists in docs/ root, move here in task 1
 │   ├── trophy.png
 │   ├── first_place.png
@@ -92,9 +95,10 @@ The task list below drives autonomous agent execution. Each task must be:
     "id": 1,
     "category": "setup",
     "title": "Move images to docs/assets/",
-    "description": "Create docs/assets/ directory. Move all image files from docs/ root into docs/assets/: reidars_rapport_2.png, reidar_404.png, trophy.png, first_place.png, second_place.png, third_place.png, alarm.png, 'The Duck liten.png'. Update all references to these images in: docs/style.css, docs/index.html, docs/*.html (standings, history, progression pages), templates/*.html (Jinja2 templates that reference image paths), generate_weekly_report.py (the image_url for Teams notification). Use grep to find all references before updating. Do NOT move or modify files in docs/narratives/.",
+    "description": "Create docs/assets/ directory. Move all image files from docs/ root into docs/assets/: reidars_rapport_1.png, reidars_rapport_2.png, reidars_rapport_3.png, reidars_rapport_4.png, reidar_404.png, trophy.png, first_place.png, second_place.png, third_place.png, alarm.png, 'The Duck liten.png'. The four reidars_rapport_N.png images currently exist in weekly_report/ — copy them to docs/assets/. Update all references to these images in: docs/style.css, docs/index.html, docs/*.html (standings, history, progression pages), templates/*.html (Jinja2 templates that reference image paths), generate_weekly_report.py (the image_url for Teams notification). Use grep to find all references before updating. Do NOT move or modify files in docs/narratives/.",
     "acceptance_criteria": [
       "docs/assets/ directory exists with all image files moved from docs/ root",
+      "All four reidars_rapport_{1-4}.png images are present in docs/assets/",
       "No image files remain in docs/ root (only .html, .css, narratives/, assets/)",
       "All HTML files in docs/ render correctly with updated image paths",
       "Templates reference updated paths (e.g., assets/trophy.png instead of trophy.png)",
@@ -107,7 +111,7 @@ The task list below drives autonomous agent execution. Each task must be:
     "id": 2,
     "category": "feature",
     "title": "Create dynamic article page with marked.js",
-    "description": "Create docs/reidars_rapport.html — a self-contained HTML page that uses marked.js (via CDN: https://cdn.jsdelivr.net/npm/marked/marked.min.js) to render Markdown narratives client-side. IMPORTANT: The page must replicate the exact HTML structure from templates/narrative.html so the existing CSS renders identically. Read templates/narrative.html and templates/base.html first as your blueprint. The page reads ?gw=N from the query string, fetches narratives/2025-26/1638989/gw{N}.md, extracts the title from the first '# ' heading line, strips the title line and any '![...]()' image lines from the body, renders the remaining Markdown to HTML with marked.parse(), and inserts the result into the page. The page structure must match the existing template: .narrative-page wrapper, .narrative-hero with the hero image (assets/reidars_rapport_2.png), .narrative-header with kicker (league name), title, subtitle ('Runde N'), .narrative-nav with links to Tabell/Rundehistorikk/Poengutvikling, .narrative-article for the rendered body, and .narrative-footer. Link style.css and Google Fonts (Inter, Sora, DM Serif Display, Source Serif 4) in the head. If no ?gw param is provided, default to a landing state or the latest available gameweek. Hardcode league_id=1638989, season=2025-26.",
+    "description": "Create docs/reidars_rapport.html — a self-contained HTML page that uses marked.js (via CDN: https://cdn.jsdelivr.net/npm/marked/marked.min.js) to render Markdown narratives client-side. IMPORTANT: The page must replicate the exact HTML structure from templates/narrative.html so the existing CSS renders identically. Read templates/narrative.html and templates/base.html first as your blueprint. The page reads ?gw=N from the query string, fetches narratives/2025-26/1638989/gw{N}.md, extracts the title from the first '# ' heading line, strips the title line and any '![...]()' image lines from the body, renders the remaining Markdown to HTML with marked.parse(), and inserts the result into the page. The page structure must match the existing template: .narrative-page wrapper, .narrative-hero with a dynamically selected hero image, .narrative-header with kicker (league name), title, subtitle ('Runde N'), .narrative-nav with links to Tabell/Rundehistorikk/Poengutvikling, .narrative-article for the rendered body, and .narrative-footer. **Hero image rotation**: The hero image must rotate through four images based on the gameweek number: GW1 → reidars_rapport_1.png, GW2 → reidars_rapport_2.png, GW3 → reidars_rapport_3.png, GW4 → reidars_rapport_4.png, GW5 → reidars_rapport_1.png (cycling with modulo). Formula: image_number = ((gw - 1) % 4) + 1, then use assets/reidars_rapport_{image_number}.png. Link style.css and Google Fonts (Inter, Sora, DM Serif Display, Source Serif 4) in the head. If no ?gw param is provided, default to a landing state or the latest available gameweek. Hardcode league_id=1638989, season=2025-26.",
     "acceptance_criteria": [
       "docs/reidars_rapport.html exists and loads marked.js from CDN",
       "Visiting ?gw=27 fetches narratives/2025-26/1638989/gw27.md and renders the article",
@@ -115,6 +119,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Subtitle shows 'Runde N' matching the gameweek number",
       "Image lines (![...]()) are stripped from the rendered body",
       "Article body renders inside .narrative-article with correct Markdown-to-HTML conversion",
+      "Hero image rotates based on gameweek: GW1 uses reidars_rapport_1.png, GW2 uses _2, GW3 uses _3, GW4 uses _4, GW5 uses _1 again",
       "Hero image, navigation links, and footer are all present and use existing CSS classes",
       "Page uses the existing narrative CSS variables (--nr-red, --nr-gold, --nr-text, --nr-muted)"
     ],
@@ -175,7 +180,7 @@ The task list below drives autonomous agent execution. Each task must be:
     "id": 6,
     "category": "refactor",
     "title": "Remove NarrativeHTMLRenderer and update pipeline",
-    "description": "Remove the NarrativeHTMLRenderer class and all associated code. NOTE: By this point, the dynamic JS page (task 2) already replicates the exact HTML structure and design from the template, so the template is safe to remove. Steps: (1) Delete fpl/narrative_html_renderer.py, (2) Delete tests/fpl_tests/test_narrative_html_renderer.py, (3) Delete templates/narrative.html (the Jinja2 template — its design is preserved in docs/reidars_rapport.html), (4) Remove the 'markdown' dependency from requirements.txt (no longer needed server-side), (5) Remove the HTML rendering block from generate_weekly_report.py (the try/except block that calls renderer.render()), (6) Remove the import of NarrativeHTMLRenderer from generate_weekly_report.py, (7) Update the Teams notification URL construction — instead of using NarrativeHTMLRenderer.get_github_pages_url(), construct the URL directly as 'https://torkiljohnsen.github.io/live_fpl_league/reidars_rapport.html?gw={event_id}', (8) Update the Teams notification image_url to use the new assets/ path. Delete the pre-rendered HTML file docs/narratives/2025-26/1638989/reidars_rapport_gw27.html as it's no longer needed. Run ruff, mypy, and pytest to verify nothing is broken.",
+    "description": "Remove the NarrativeHTMLRenderer class and all associated code. NOTE: By this point, the dynamic JS page (task 2) already replicates the exact HTML structure and design from the template, so the template is safe to remove. Steps: (1) Delete fpl/narrative_html_renderer.py, (2) Delete tests/fpl_tests/test_narrative_html_renderer.py, (3) Delete templates/narrative.html (the Jinja2 template — its design is preserved in docs/reidars_rapport.html), (4) Remove the 'markdown' dependency from requirements.txt (no longer needed server-side), (5) Remove the HTML rendering block from generate_weekly_report.py (the try/except block that calls renderer.render()), (6) Remove the import of NarrativeHTMLRenderer from generate_weekly_report.py, (7) Update the Teams notification URL construction — instead of using NarrativeHTMLRenderer.get_github_pages_url(), construct the URL directly as 'https://torkiljohnsen.github.io/live_fpl_league/reidars_rapport.html?gw={event_id}', (8) Update the Teams notification image_url to use the new assets/ path with image rotation: image_number = ((event_id - 1) % 4) + 1, then use assets/reidars_rapport_{image_number}.png. Delete the pre-rendered HTML file docs/narratives/2025-26/1638989/reidars_rapport_gw27.html as it's no longer needed. Run ruff, mypy, and pytest to verify nothing is broken.",
     "acceptance_criteria": [
       "fpl/narrative_html_renderer.py is deleted",
       "tests/fpl_tests/test_narrative_html_renderer.py is deleted",
@@ -184,7 +189,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "generate_weekly_report.py no longer imports or uses NarrativeHTMLRenderer",
       "HTML rendering try/except block is removed from the pipeline",
       "Teams notification URL uses new format: reidars_rapport.html?gw={N}",
-      "Teams notification image URL uses assets/ path",
+      "Teams notification image URL uses assets/ path with gameweek-based rotation (reidars_rapport_{1-4}.png)",
       "docs/narratives/2025-26/1638989/reidars_rapport_gw27.html is deleted",
       "ruff, mypy, and pytest all pass cleanly"
     ],
