@@ -232,7 +232,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Test for directory creation",
       "All tests pass: python -m pytest tests/fpl_tests/test_narrative_html_renderer.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 5,

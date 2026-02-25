@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-25
-**Tasks Completed:** 3 / 7
-**Current Task:** Task 3 completed
+**Tasks Completed:** 4 / 7
+**Current Task:** Task 4 completed
 
 ---
 
@@ -23,3 +23,8 @@
 **Task:** Task 3 — Create NarrativeHTMLRenderer class
 **Status:** completed
 **Notes:** Created `fpl/narrative_html_renderer.py` with `NarrativeHTMLRenderer` class. Constructor sets up Jinja2 Environment with FileSystemLoader (matching LeagueTemplateRenderer pattern). `render()` extracts title from first `# ` heading (with fallback), strips title and image lines, converts remaining markdown to HTML using `markdown` library with 'extra' extension, renders via narrative.html template, and writes output to `docs/reidars_rapport_{league_id}_gw{event_id}.html`. Static method `get_github_pages_url()` returns the full GitHub Pages URL. Added to `fpl/__init__.py` exports and `__all__`. All 230 tests pass, mypy clean.
+
+### Session 4 — 2026-02-25
+**Task:** Task 4 — Tests for NarrativeHTMLRenderer
+**Status:** completed
+**Notes:** Created `tests/fpl_tests/test_narrative_html_renderer.py` with 17 tests covering all acceptance criteria. Tests use `tmp_path` for output and the real `templates/` directory for template rendering. Covers: output file creation and path, title extraction from `# ` heading, fallback title, image line stripping, markdown-to-HTML conversion (bold, subheadings, paragraphs), output HTML content verification (subtitle, nav links, article body, hero image, footer), parent directory creation, and `get_github_pages_url()` format. All 247 tests pass, ruff clean, mypy clean.
