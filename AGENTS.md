@@ -34,7 +34,7 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 
 ### Weekly Report & Narrative Flow (Reidar's Rapport)
 
-**Data Collection → Report Assembly → Narrative Generation → Memory Update → HTML Rendering → Teams Notification**
+**Data Collection → Report Assembly → Narrative Generation → Memory Update → Teams Notification**
 
 1. **Data Collection** - [`fpl/fpl_api.py`](fpl/fpl_api.py) fetches standings, picks, transfers, and live event data
 2. **Player Resolution** - [`fpl/player_registry.py`](fpl/player_registry.py) maps element IDs to player/team names
@@ -43,9 +43,8 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 5. **Report Assembly** - `WeeklyReport.build()` produces a self-contained JSON report with meta, standings, awards, league_summary
 6. **Narrative Generation** - [`fpl/narrative_generator.py`](fpl/narrative_generator.py) sends report + Reidar persona + memory context to Claude API, returns Norwegian-language narrative
 7. **Memory Update** - [`fpl/reidar_memory.py`](fpl/reidar_memory.py) updates per-manager profiles, season arc, and GW summaries after each narrative
-8. **HTML Rendering** - [`fpl/narrative_html_renderer.py`](fpl/narrative_html_renderer.py) converts narrative markdown to a styled article page in `docs/narratives/{season}/{league_id}/`
-9. **Teams Notification** - [`fpl/teams_notification.py`](fpl/teams_notification.py) posts an Adaptive Card with teaser and link (opt-in via `--notify-teams`)
-10. **Entry Point** - [`generate_weekly_report.py`](generate_weekly_report.py) (`--dev` for sample data, `--narrative` for Claude API narrative, `--notify-teams` for Teams posting)
+8. **Teams Notification** - [`fpl/teams_notification.py`](fpl/teams_notification.py) posts an Adaptive Card with teaser and link (opt-in via `--notify-teams`)
+9. **Entry Point** - [`generate_weekly_report.py`](generate_weekly_report.py) (`--dev` for sample data, `--narrative` for Claude API narrative, `--notify-teams` for Teams posting)
 
 **Reidar Memory System**: Persistent context across gameweeks stored in `weekly_report/reidar_memory/{league_id}/{season}/`. Includes per-manager profiles (~200 words), season arc, and rolling GW summaries. Assembled into prompt context via `ReidarMemory.get_prompt_context()` (~4k words at any point in the season).
 
@@ -58,15 +57,16 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 - **[`templates/`](templates/)** - Jinja2 HTML templates
   - [`league_standings.html`](templates/league_standings.html) - Current standings table
   - [`league_gameweek_history.html`](templates/league_gameweek_history.html) - Historical performance grid
-  - [`narrative.html`](templates/narrative.html) - Narrative article page (Reidar's Rapport)
   - [`base.html`](templates/base.html) - Base template with shared structure
   - [`index.html`](templates/index.html) - Index page template
   - [`AGENTS.md`](templates/AGENTS.md) - Template variables reference
 
 - **[`docs/`](docs/)** - GitHub Pages publishing directory (static HTML output only)
   - Generated HTML files for each league/view
-  - `narratives/{season}/{league_id}/` - Narrative article pages (e.g. `reidars_rapport_gw25.html`)
-  - [`style.css`](docs/style.css) - Shared stylesheet
+  - `assets/` — Images (hero images, trophy, rank badges, 404 image)
+  - `narratives/{season}/{league_id}/` — Narrative markdown files (e.g. `gw25.md`), rendered client-side by `reidars_rapport.html`
+  - [`reidars_rapport.html`](docs/reidars_rapport.html) — Dynamic article page (client-side Markdown rendering via marked.js)
+  - [`style.css`](docs/style.css) — Shared stylesheet
   - **Do not place non-publishing files here** — this folder is deployed to GitHub Pages
 
 - **[`weekly_report/`](weekly_report/)** - Everything related to weekly narrative generation (Reidar's Rapport)
@@ -74,7 +74,7 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
   - [`NARRATIVE_GUIDE.md`](weekly_report/NARRATIVE_GUIDE.md) - Narrative structure and content rules
   - [`REIDAR_EXAMPLES.md`](weekly_report/REIDAR_EXAMPLES.md) - Few-shot example narratives for LLM prompting
   - `reports/{league_id}/{season}/gw{N}.json` - Generated JSON weekly reports. Gitignored for local dev; committed by GitHub Actions.
-  - `narratives/{league_id}/{season}/gw{N}.md` - Generated Norwegian narratives. Committed by GitHub Actions.
+  - `narratives/{league_id}/{season}/gw{N}.md` - Legacy location. Narratives are now written to `docs/narratives/{season}/{league_id}/gw{N}.md`.
   - `reidar_memory/{league_id}/{season}/` - Reidar's persistent memory files (manager profiles, season arc, GW summaries). Committed by GitHub Actions.
 
 - **[`prd/`](prd/)** - Product requirement documents (Ralph agent loop task definitions)

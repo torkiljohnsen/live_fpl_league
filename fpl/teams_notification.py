@@ -48,6 +48,7 @@ def build_adaptive_card(
 ) -> dict[str, Any]:
     """Build an Adaptive Card payload for Teams webhook."""
     card_title = title if title else f"Reidars Rapport — Runde {gameweek}"
+    link_label = f"Les Reidars rapport uke {gameweek}"
     return {
         "type": "message",
         "attachments": [
@@ -60,30 +61,47 @@ def build_adaptive_card(
                     "version": "1.4",
                     "body": [
                         {
-                            "type": "Image",
-                            "url": image_url,
-                            "size": "stretch",
+                            "type": "ColumnSet",
+                            "columns": [
+                                {
+                                    "type": "Column",
+                                    "width": "stretch",
+                                    "items": [
+                                        {
+                                            "type": "TextBlock",
+                                            "text": card_title,
+                                            "weight": "bolder",
+                                            "size": "large",
+                                            "wrap": True,
+                                        },
+                                        {
+                                            "type": "TextBlock",
+                                            "text": teaser,
+                                            "wrap": True,
+                                            "size": "medium",
+                                            "spacing": "small",
+                                        },
+                                        {
+                                            "type": "TextBlock",
+                                            "text": f"[{link_label}]({narrative_url})",
+                                            "wrap": True,
+                                            "spacing": "medium",
+                                        },
+                                    ],
+                                },
+                                {
+                                    "type": "Column",
+                                    "width": "stretch",
+                                    "items": [
+                                        {
+                                            "type": "Image",
+                                            "url": image_url,
+                                            "size": "stretch",
+                                        },
+                                    ],
+                                },
+                            ],
                         },
-                        {
-                            "type": "TextBlock",
-                            "text": card_title,
-                            "weight": "bolder",
-                            "size": "large",
-                            "wrap": True,
-                        },
-                        {
-                            "type": "TextBlock",
-                            "text": teaser,
-                            "wrap": True,
-                            "size": "medium",
-                        },
-                    ],
-                    "actions": [
-                        {
-                            "type": "Action.OpenUrl",
-                            "title": "Les hele Reidars Rapport",
-                            "url": narrative_url,
-                        }
                     ],
                 },
             }

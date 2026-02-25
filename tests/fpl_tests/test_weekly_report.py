@@ -379,7 +379,7 @@ class TestWeeklyReportBuild:
         assert "generated_at" in meta
         # GW2 should have previous report/narrative paths for GW1
         assert meta["previous_report"] == f"weekly_report/reports/{LEAGUE_ID}/2025-26/gw1.json"
-        assert meta["previous_narrative"] == f"weekly_report/narratives/{LEAGUE_ID}/2025-26/gw1.md"
+        assert meta["previous_narrative"] == f"docs/narratives/2025-26/{LEAGUE_ID}/gw1.md"
 
     def test_meta_gw1_has_no_previous(self) -> None:
         api = WeeklyReportDummyAPI()
@@ -729,7 +729,7 @@ class TestSkipExisting:
         report_dir.mkdir(parents=True)
         (report_dir / "gw2.json").write_text("{}", encoding="utf-8")
 
-        narrative_dir = tmp_path / "weekly_report" / "narratives" / LEAGUE_ID / "2025-26"
+        narrative_dir = tmp_path / "docs" / "narratives" / "2025-26" / LEAGUE_ID
         narrative_dir.mkdir(parents=True)
         (narrative_dir / "gw2.md").write_text("Reidar says hi", encoding="utf-8")
 

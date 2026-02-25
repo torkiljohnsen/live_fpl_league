@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reidars Rapport</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Sora:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="narrative-page">
+        <div class="narrative-hero">
+            <img id="hero-img" src="" alt="Reidars Rapport">
+            <div class="narrative-hero-fade"></div>
+        </div>
+
+        <div class="narrative-header">
+            <div class="narrative-header-rule"></div>
+            <p class="narrative-kicker">Sinkaberg administrasjon &bull; 2025-26</p>
+            <h1 class="narrative-title" id="narrative-title"></h1>
+            <div class="narrative-gw-nav" id="header-gw-nav">
+                <a id="header-prev" href="" class="gw-nav-arrow" aria-label="Forrige runde">&laquo;</a>
+                <p class="narrative-subtitle" id="narrative-subtitle"></p>
+                <a id="header-next" href="" class="gw-nav-arrow" aria-label="Neste runde">&raquo;</a>
+            </div>
+            <p class="narrative-byline">Av <strong>Reidar Fjellheim</strong> <span class="narrative-byline-title">Journalist og FPL-ekspert</span></p>
+        </div>
+
+        <article class="narrative-article" id="narrative-article">
+        </article>
+
+        <footer class="narrative-footer">
+            <div class="narrative-gw-nav narrative-gw-nav-footer" id="footer-gw-nav">
+                <a id="footer-prev" href="" class="gw-nav-link"></a>
+                <a id="footer-next" href="" class="gw-nav-link"></a>
+            </div>
+            <nav class="narrative-nav">
+                <a href="league_standings_1638989.html">Tabell</a>
+                <span class="narrative-nav-dot">&middot;</span>
+                <a href="league_gameweek_history_1638989.html">Rundehistorikk</a>
+                <span class="narrative-nav-dot">&middot;</span>
+                <a href="ranking_progression_1638989.html">Poengutvikling</a>
+            </nav>
+            <p>Sinkaberg administrasjon &mdash; 2025-26</p>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            var LEAGUE_ID = '1638989';
+            var SEASON = '2025-26';
+            var MIN_GW = 1;
+            var MAX_GW = 38;
+
+            var params = new URLSearchParams(window.location.search);
+            var gwParam = params.get('gw');
+            var gw = gwParam ? parseInt(gwParam, 10) : null;
+
+            if (!gw || isNaN(gw) || gw < MIN_GW || gw > MAX_GW) {
+                showLanding();
+                return;
+            }
+
+            // Set up gameweek navigation arrows
+            setupNavigation(gw);
+
+            document.getElementById('hero-img').src = 'assets/reidars_rapport_2.png';
+
+            // Subtitle
+            document.getElementById('narrative-subtitle').textContent = 'Runde ' + gw;
+            document.title = 'Reidars Rapport — Runde ' + gw;
+
+            // Fetch narrative markdown
+            var mdPath = 'narratives/' + SEASON + '/' + LEAGUE_ID + '/gw' + gw + '.md';
+            fetch(mdPath)
+                .then(function (response) {
+                    if (!response.ok) throw new Error('Not found');
+                    return response.text();
+                })
+                .then(function (md) {
+                    renderArticle(md);
+                })
+                .catch(function () {
+                    showNotFound(gw);
+                });
+
+            function setupNavigation(gwNum) {
+                var headerPrev = document.getElementById('header-prev');
+                var headerNext = document.getElementById('header-next');
+                var footerPrev = document.getElementById('footer-prev');
+                var footerNext = document.getElementById('footer-next');
+
+                if (gwNum <= MIN_GW) {
+                    headerPrev.hidden = true;
+                    footerPrev.hidden = true;
+                } else {
+                    headerPrev.href = '?gw=' + (gwNum - 1);
+                    footerPrev.href = '?gw=' + (gwNum - 1);
+                    footerPrev.textContent = '\u00AB Runde ' + (gwNum - 1);
+                }
+
+                if (gwNum >= MAX_GW) {
+                    headerNext.hidden = true;
+                    footerNext.hidden = true;
+                } else {
+                    headerNext.href = '?gw=' + (gwNum + 1);
+                    footerNext.href = '?gw=' + (gwNum + 1);
+                    footerNext.textContent = 'Runde ' + (gwNum + 1) + ' \u00BB';
+                }
+            }
+
+            function renderArticle(md) {
+                var lines = md.split('\n');
+                var title = '';
+                var bodyLines = [];
+
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i];
+                    // Extract title from first # heading
+                    if (!title && line.match(/^# /)) {
+                        title = line.replace(/^# /, '');
+                        continue;
+                    }
+                    // Strip image lines ![...]()
+                    if (line.match(/^!\[.*\]\(.*\)/)) {
+                        continue;
+                    }
+                    bodyLines.push(line);
+                }
+
+                document.getElementById('narrative-title').textContent = title || 'Reidars Rapport';
+                document.title = title + ' — Runde ' + gw;
+
+                var bodyMd = bodyLines.join('\n').replace(/^\n+/, '');
+                document.getElementById('narrative-article').innerHTML = marked.parse(bodyMd);
+            }
+
+            function showLanding() {
+                document.getElementById('hero-img').src = 'assets/reidars_rapport_1.png';
+                document.getElementById('narrative-title').textContent = 'Reidars Rapport';
+                document.getElementById('narrative-subtitle').textContent = 'Velg en runde';
+                document.getElementById('header-gw-nav').querySelector('#header-prev').hidden = true;
+                document.getElementById('header-gw-nav').querySelector('#header-next').hidden = true;
+                document.getElementById('footer-gw-nav').hidden = true;
+                document.getElementById('narrative-article').innerHTML =
+                    '<p>Bruk lenker med <code>?gw=N</code> for å lese en rapport, for eksempel <a href="?gw=27">Runde 27</a>.</p>';
+            }
+
+            function showNotFound(gwNum) {
+                document.getElementById('hero-img').src = 'assets/reidar_404.png';
+                document.getElementById('narrative-title').textContent = 'Reidars Rapport';
+                var article = document.getElementById('narrative-article');
+                article.innerHTML = '';
+                var notFound = document.createElement('div');
+                notFound.className = 'narrative-not-found';
+                var heading = document.createElement('h2');
+                heading.textContent = 'Denne runden er ikke spilt ennå';
+                var text = document.createElement('p');
+                text.textContent = 'Reidar ser på deg som om du har brukt triple captain på en keeper. Kom tilbake når runden er ferdig.';
+                notFound.appendChild(heading);
+                notFound.appendChild(text);
+                article.appendChild(notFound);
+            }
+        })();
+    </script>
+</body>
+</html>

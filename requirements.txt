@@ -11,4 +11,3 @@ kaleido>=1.1.0
 ruff>=0.14.13
 anthropic
 rich
-markdown

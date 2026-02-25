@@ -102,8 +102,9 @@ class NarrativeGenerator:
     ) -> Path:
         """Save narrative markdown to the standard path.
 
-        Writes to {output_dir}/weekly_report/narratives/{league_id}/{season}/gw{N}.md,
-        creating directories as needed.
+        Writes to {output_dir}/docs/narratives/{season}/{league_id}/gw{N}.md,
+        creating directories as needed. This path matches the fetch URL used
+        by the client-side reidars_rapport.html page.
 
         Args:
             content: The narrative markdown content.
@@ -117,10 +118,10 @@ class NarrativeGenerator:
         """
         output_path = (
             Path(output_dir)
-            / "weekly_report"
+            / "docs"
             / "narratives"
-            / league_id
             / season
+            / league_id
             / f"gw{event_id}.md"
         )
         output_path.parent.mkdir(parents=True, exist_ok=True)

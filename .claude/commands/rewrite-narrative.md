@@ -4,22 +4,19 @@ Rewrite an existing Reidar's Rapport narrative using the current narrative guide
 
 ## Arguments
 
-$ARGUMENTS — A gameweek identifier, plus optional flags. Parse the arguments string for:
+$ARGUMENTS — A gameweek identifier. Parse the arguments string for:
 
 **Gameweek** (required): one of:
 - A number: `27`
 - A prefixed number: `gw27`
-- A full path: `weekly_report/narratives/1638989/2025-26/gw27.md`
-
-**Flags** (optional):
-- `--render-html` — Also render the HTML article page after saving
+- A full path: `docs/narratives/2025-26/1638989/gw27.md`
 
 Default league: `1638989`. Default season: `2025-26`. Override by passing a full path.
 
 Examples:
-- `/rewrite-narrative 27` — rewrite GW27, save markdown only
-- `/rewrite-narrative gw27 --render-html` — rewrite GW27 and render HTML
-- `/rewrite-narrative weekly_report/narratives/1638989/2025-26/gw27.md --render-html`
+- `/rewrite-narrative 27` — rewrite GW27
+- `/rewrite-narrative gw27`
+- `/rewrite-narrative docs/narratives/2025-26/1638989/gw27.md`
 
 ## Instructions
 
@@ -28,7 +25,7 @@ You are rewriting an existing narrative markdown file. You are NOT calling the A
 ### Step 1: Resolve the narrative file
 
 Parse $ARGUMENTS to find the narrative markdown file:
-- If it's a number or `gwN`, resolve to `weekly_report/narratives/1638989/2025-26/gw{N}.md`
+- If it's a number or `gwN`, resolve to `docs/narratives/2025-26/1638989/gw{N}.md`
 - If it's a full path, use it directly
 - Confirm the file exists before proceeding. If not found, tell the user and stop.
 
@@ -69,24 +66,7 @@ Using all the context above, rewrite the narrative following the persona and nar
 1. Show the user the rewritten narrative and ask for approval before saving
 2. Once approved, save the narrative to the original file path (overwriting the old version)
 
-### Step 5: Render HTML (only if `--render-html` flag is present)
+### Step 5: Inform the user
 
-If `--render-html` was passed in the arguments:
-
-1. Activate the venv and run:
-
-```python
-from fpl.narrative_html_renderer import NarrativeHTMLRenderer
-from pathlib import Path
-
-md = Path('{narrative_path}').read_text(encoding='utf-8')
-renderer = NarrativeHTMLRenderer()
-path = renderer.render(md, '{league_id}', '{league_name}', '{season}', {event_id})
-print(f'Rendered: {path}')
-```
-
-Get the league name from the report JSON (`result["meta"]["league_name"]`), or fall back to "Sinkaberg administrasjon" for league 1638989.
-
-2. Tell the user the HTML file path so they can preview it in a browser.
-
-If `--render-html` was NOT passed, skip this step entirely.
+Tell the user they can preview the narrative at:
+`docs/reidars_rapport.html?gw={N}` (the dynamic article page renders markdown client-side).

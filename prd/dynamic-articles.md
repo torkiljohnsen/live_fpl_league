@@ -105,7 +105,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "grep -r 'reidars_rapport_2.png' shows only docs/assets/ references (no broken paths)",
       "Teams notification image URL updated to include /assets/ in the path"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 2,
@@ -123,7 +123,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Hero image, navigation links, and footer are all present and use existing CSS classes",
       "Page uses the existing narrative CSS variables (--nr-red, --nr-gold, --nr-text, --nr-muted)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 3,
@@ -142,7 +142,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Arrows are large enough for mobile tap targets (min 44px)",
       "Navigation works correctly at boundary gameweeks (1 and 38)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 4,
@@ -159,7 +159,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Image fallback works: if reidar_404.png doesn't exist, reidars_rapport_2.png is shown",
       "The 404 state looks good on both desktop and mobile"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 5,
@@ -174,7 +174,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "No existing files are deleted from weekly_report/narratives/",
       "Pipeline runs successfully with the new paths (no import or path errors)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 6,
@@ -193,7 +193,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "docs/narratives/2025-26/1638989/reidars_rapport_gw27.html is deleted",
       "ruff, mypy, and pytest all pass cleanly"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 7,
@@ -206,7 +206,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "No references to narrative HTML rendering remain in the workflow",
       "Workflow file is valid YAML (no syntax errors)"
     ],
-    "passes": false
+    "passes": true
   }
 ]
 ```

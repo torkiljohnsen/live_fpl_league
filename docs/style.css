@@ -205,7 +205,7 @@ tr:nth-child(odd) {
 	color: #000;
 }
 .gw_history td.is_loser {
-	background-image: url('The Duck liten.png');
+	background-image: url('assets/The Duck liten.png');
 	background-repeat: no-repeat;
 	background-position: top right;
 	background-size: 20px auto;
@@ -317,6 +317,64 @@ body:has(.narrative-page) {
 	margin: 0;
 	font-weight: 700;
 }
+/* Gameweek navigation — arrows flanking subtitle */
+.narrative-gw-nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+}
+.gw-nav-arrow {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	min-height: 44px;
+	font-size: 1.6rem;
+	line-height: 1;
+	color: var(--nr-muted);
+	text-decoration: none;
+	border-radius: 50%;
+	transition: color 0.2s, background 0.2s;
+	user-select: none;
+}
+.gw-nav-arrow:hover {
+	color: var(--nr-accent);
+	background: var(--nr-highlight);
+}
+.gw-nav-arrow[hidden] {
+	visibility: hidden;
+}
+
+/* Footer gameweek navigation */
+.narrative-gw-nav-footer {
+	padding: 1rem 0;
+	margin-bottom: 0.8rem;
+	border-bottom: 1px solid var(--nr-rule);
+}
+.gw-nav-link {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 0.4rem 1rem;
+	font-family: 'Sora', sans-serif;
+	font-size: 0.8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	color: var(--nr-muted);
+	text-decoration: none;
+	border-radius: 4px;
+	transition: color 0.2s, background 0.2s;
+}
+.gw-nav-link:hover {
+	color: var(--nr-accent);
+	background: var(--nr-highlight);
+}
+.gw-nav-link[hidden] {
+	display: none;
+}
+
 .narrative-byline {
 	font-family: 'Source Serif 4', Georgia, serif;
 	font-size: 0.85rem;
@@ -534,6 +592,36 @@ body:has(.narrative-page) {
 	margin: 0.5rem 0 0;
 }
 
+/* 404 — not-found state */
+.narrative-not-found {
+	max-width: 660px;
+	margin: 0 auto;
+	padding: 2rem 1.5rem 3rem;
+	text-align: center;
+}
+.narrative-not-found img {
+	width: 220px;
+	max-width: 60%;
+	height: auto;
+	border-radius: 8px;
+	margin-bottom: 1.8rem;
+	border: 1px solid var(--nr-rule);
+}
+.narrative-not-found h2 {
+	font-family: 'DM Serif Display', Georgia, serif;
+	font-size: 1.6rem;
+	color: var(--nr-ink);
+	margin: 0 0 1rem;
+	line-height: 1.25;
+}
+.narrative-not-found p {
+	font-family: 'Source Serif 4', Georgia, serif;
+	font-size: 1.05rem;
+	line-height: 1.7;
+	color: var(--nr-muted);
+	margin: 0;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
 	.narrative-hero {
@@ -587,5 +675,24 @@ body:has(.narrative-page) {
 	.narrative-article .fact-box {
 		padding: 1rem 1.1rem;
 		font-size: 0.88rem;
+	}
+	.gw-nav-arrow {
+		font-size: 1.4rem;
+	}
+	.gw-nav-link {
+		font-size: 0.72rem;
+		padding: 0.4rem 0.6rem;
+	}
+	.narrative-not-found {
+		padding: 1.5rem 1.2rem 2rem;
+	}
+	.narrative-not-found img {
+		width: 180px;
+	}
+	.narrative-not-found h2 {
+		font-size: 1.3rem;
+	}
+	.narrative-not-found p {
+		font-size: 0.95rem;
 	}
 }

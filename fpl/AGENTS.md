@@ -116,14 +116,8 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 **[`narrative_generator.py`](narrative_generator.py)** - Claude API narrative generation
 - `NarrativeGenerator(client=None)` — accepts optional anthropic client; creates from `ANTHROPIC_API_KEY` env var if not provided
 - `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None)` — builds system prompt from reference docs + memory, sends report as user message, returns Norwegian narrative markdown
-- `save_narrative(content, output_dir, league_id, season, event_id)` writes to `weekly_report/narratives/{league_id}/{season}/gw{N}.md`
+- `save_narrative(content, output_dir, league_id, season, event_id)` writes to `docs/narratives/{season}/{league_id}/gw{N}.md`
 - Uses `claude-sonnet-4-6` model
-
-**[`narrative_html_renderer.py`](narrative_html_renderer.py)** - Renders narrative markdown as styled HTML article pages
-- `NarrativeHTMLRenderer(template_dir, output_dir)` — Jinja2-based renderer
-- `render(narrative_md, league_id, league_name, season, event_id)` — extracts title from `# ` heading, strips image lines, converts markdown to HTML, renders `narrative.html` template, writes to `docs/narratives/{season}/{league_id}/reidars_rapport_gw{N}.html`
-- `get_github_pages_url(league_id, event_id, season)` — static method returning the public URL
-- Passes `base_path` (`../../../`) to template for correct relative links back to docs root
 
 **[`teams_notification.py`](teams_notification.py)** - Microsoft Teams Adaptive Card notifications
 - `extract_teaser(narrative, max_length=300)` — extracts first real paragraph, strips markdown formatting, truncates on word boundary

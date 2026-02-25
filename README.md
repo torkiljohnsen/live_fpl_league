@@ -115,7 +115,7 @@ python generate_weekly_report.py -l 1639886 -e 10 --narrative --notify-teams
 python generate_weekly_report.py --dev
 ```
 
-The `--narrative` flag generates an HTML article page alongside the markdown narrative, published to GitHub Pages at `docs/narratives/{season}/{league_id}/reidars_rapport_gw{N}.html`.
+The `--narrative` flag writes a Markdown narrative to `docs/narratives/{season}/{league_id}/gw{N}.md`, viewable at `reidars_rapport.html?gw={N}` on GitHub Pages.
 
 The `--notify-teams` flag posts a Teams Adaptive Card with a teaser and link to the article. Requires the `TEAMS_WEBHOOK_URL` environment variable.
 
@@ -127,7 +127,7 @@ All weekly report artifacts are stored under `weekly_report/`:
 - `weekly_report/narratives/{league_id}/{season}/gw{N}.md` — Generated narratives
 - `weekly_report/reidar_memory/{league_id}/{season}/` — Persistent memory (manager profiles, season arc, GW summaries)
 
-Narrative HTML pages are published to `docs/narratives/{season}/{league_id}/reidars_rapport_gw{N}.html`.
+Narrative Markdown files are written to `docs/narratives/{season}/{league_id}/gw{N}.md`, rendered client-side at `reidars_rapport.html?gw={N}`.
 
 ## GitHub Actions (Nightly Workflow)
 
@@ -140,10 +140,9 @@ A nightly GitHub Actions workflow (`.github/workflows/scheduled-build.yml`) runs
 3. **Weekly report & narrative** — Runs `generate_weekly_report.py` with `--narrative --skip-existing` for league `1638989`. This:
    - Builds the JSON report (if it doesn't already exist for this gameweek)
    - Generates a Norwegian narrative via Claude API
-   - Renders the narrative as a styled HTML article page
    - `--skip-existing` ensures no duplicate work — once a gameweek's report and narrative exist, it's skipped
-4. **Hero image** — Copies `reidars_rapport_2.png` to `docs/` if not already present
-5. **Auto-commit** — Commits all changes to `docs/`, `weekly_report/reports/`, `weekly_report/narratives/`, and `weekly_report/reidar_memory/` to the `dev` branch
+4. **Hero images** — Copies `reidars_rapport_{1-4}.png` to `docs/assets/` if not already present
+5. **Auto-commit** — Commits all changes to `docs/`, `weekly_report/reports/`, and `weekly_report/reidar_memory/` to the `dev` branch
 
 ### Required secrets
 
@@ -157,7 +156,7 @@ When the FPL API marks a gameweek as finished, the next nightly run will:
 1. Detect the newly finished gameweek automatically
 2. Generate fresh dashboard HTML reflecting the latest results
 3. Create a new narrative report (Reidar's take on the gameweek)
-4. Render the narrative as an HTML article page on GitHub Pages
+4. Commit the narrative Markdown file (viewable via the dynamic article page on GitHub Pages)
 5. Commit everything — the site updates automatically
 
 Dashboard pages are always regenerated (reflecting live data), while reports and narratives are only generated once per gameweek (`--skip-existing`).

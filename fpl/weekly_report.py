@@ -140,7 +140,7 @@ class WeeklyReport:
                 f"weekly_report/reports/{self._league_id}/{season}/gw{prev_event}.json"
             )
             previous_narrative = (
-                f"weekly_report/narratives/{self._league_id}/{season}/gw{prev_event}.md"
+                f"docs/narratives/{season}/{self._league_id}/gw{prev_event}.md"
             )
 
         return {
