@@ -193,7 +193,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "docs/narratives/2025-26/1638989/reidars_rapport_gw27.html is deleted",
       "ruff, mypy, and pytest all pass cleanly"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 7,

@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-25
-**Tasks Completed:** 5 / 7
-**Current Task:** Task 5 completed
+**Tasks Completed:** 6 / 7
+**Current Task:** Task 6 completed
 
 ---
 
@@ -33,3 +33,8 @@
 **Task:** Task 5 — Update narrative generator to write .md to docs/
 **Status:** completed
 **Notes:** Changed narrative output path from `{output_dir}/weekly_report/narratives/{league_id}/{season}/gw{N}.md` to `{output_dir}/docs/narratives/{season}/{league_id}/gw{N}.md`, matching the fetch URL used by the client-side reidars_rapport.html page. Updated save_narrative() in fpl/narrative_generator.py, --skip-existing check in generate_weekly_report.py, and previous_narrative path in fpl/weekly_report.py. Also flipped path order from `{league_id}/{season}` to `{season}/{league_id}` to match deployed structure. Updated all corresponding test assertions. Existing files in weekly_report/narratives/ left untouched. All 275 tests pass.
+
+### Session 6 — 2026-02-25
+**Task:** Task 6 — Remove NarrativeHTMLRenderer and update pipeline
+**Status:** completed
+**Notes:** Deleted fpl/narrative_html_renderer.py, tests/fpl_tests/test_narrative_html_renderer.py, templates/narrative.html, and pre-rendered docs/narratives/2025-26/1638989/reidars_rapport_gw27.html. Removed 'markdown' dependency from requirements.txt. Removed NarrativeHTMLRenderer import and HTML rendering try/except block from generate_weekly_report.py. Updated Teams notification URL to use new dynamic page format (reidars_rapport.html?gw={N}) and image URL to use gameweek-based rotation (assets/reidars_rapport_{1-4}.png). Removed NarrativeHTMLRenderer from fpl/__init__.py exports. Updated AGENTS.md, fpl/AGENTS.md, and .claude/commands/rewrite-narrative.md to reflect removal. All 257 tests pass (18 fewer due to deleted renderer tests), mypy clean.

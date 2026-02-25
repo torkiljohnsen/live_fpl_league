@@ -14,7 +14,6 @@ from pathlib import Path
 
 from fpl import FPL_API
 from fpl.narrative_generator import NarrativeGenerator
-from fpl.narrative_html_renderer import NarrativeHTMLRenderer
 from fpl.reidar_memory import ReidarMemory
 from fpl.teams_notification import post_to_teams
 from fpl.weekly_report import WeeklyReport, get_season_from_bootstrap
@@ -225,31 +224,21 @@ def main() -> None:
                 )
                 print(f"Narrative saved: {narrative_path}")
 
-                # --- HTML rendering (non-fatal) ---
-                try:
-                    renderer = NarrativeHTMLRenderer()
-                    narrative_content = Path(narrative_path).read_text(encoding="utf-8")
-                    html_path = renderer.render(
-                        narrative_md=narrative_content,
-                        league_id=args.league_id,
-                        league_name=league_name,
-                        season=result["meta"]["season"],
-                        event_id=event_id,
-                    )
-                    print(f"Narrative HTML rendered: {html_path}")
-                except Exception as e:
-                    print(f"WARNING: HTML rendering failed: {e}", file=sys.stderr)
-
                 # --- Teams notification (non-fatal) ---
                 try:
                     if args.notify_teams:
                         webhook_url = os.environ.get("TEAMS_WEBHOOK_URL")
                         if webhook_url:
                             narrative_content = Path(narrative_path).read_text(encoding="utf-8")
-                            narrative_url = NarrativeHTMLRenderer.get_github_pages_url(
-                                args.league_id, event_id, season=result["meta"]["season"],
+                            narrative_url = (
+                                "https://torkiljohnsen.github.io/live_fpl_league/"
+                                f"reidars_rapport.html?gw={event_id}"
                             )
-                            image_url = "https://torkiljohnsen.github.io/live_fpl_league/assets/reidars_rapport_2.png"
+                            image_number = ((event_id - 1) % 4) + 1
+                            image_url = (
+                                "https://torkiljohnsen.github.io/live_fpl_league/"
+                                f"assets/reidars_rapport_{image_number}.png"
+                            )
                             success = post_to_teams(
                                 webhook_url=webhook_url,
                                 gameweek=event_id,
