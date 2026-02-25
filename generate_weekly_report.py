@@ -249,7 +249,7 @@ def main() -> None:
                             narrative_url = NarrativeHTMLRenderer.get_github_pages_url(
                                 args.league_id, event_id, season=result["meta"]["season"],
                             )
-                            image_url = "https://torkiljohnsen.github.io/live_fpl_league/reidars_rapport_2.png"
+                            image_url = "https://torkiljohnsen.github.io/live_fpl_league/assets/reidars_rapport_2.png"
                             success = post_to_teams(
                                 webhook_url=webhook_url,
                                 gameweek=event_id,

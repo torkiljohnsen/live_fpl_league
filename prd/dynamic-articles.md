@@ -105,7 +105,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "grep -r 'reidars_rapport_2.png' shows only docs/assets/ references (no broken paths)",
       "Teams notification image URL updated to include /assets/ in the path"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 2,

@@ -41,8 +41,12 @@ jobs:
         run: |
           python generate_weekly_report.py -l 1638989 --narrative --skip-existing --cache-dir .fpl_cache
 
-      - name: Copy hero image to docs
-        run: cp -n weekly_report/reidars_rapport_2.png docs/ 2>/dev/null || true
+      - name: Copy hero images to docs/assets
+        run: |
+          mkdir -p docs/assets
+          for img in weekly_report/reidars_rapport_*.png; do
+            cp -n "$img" docs/assets/ 2>/dev/null || true
+          done
 
       - name: Commit and push changes
         run: |

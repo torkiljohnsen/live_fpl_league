@@ -56,7 +56,7 @@ class NarrativeHTMLRenderer:
             title=title,
             subtitle=f"Runde {event_id}",
             body_html=body_html,
-            hero_image=f"{base_path}reidars_rapport_2.png",
+            hero_image=f"{base_path}assets/reidars_rapport_2.png",
             base_path=base_path,
             league_id=league_id,
             league_name=league_name,

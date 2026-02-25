@@ -40,13 +40,13 @@
                 <td class="round_chip_col">{% if last.chip %}{{ last.chip }}{% endif %}</td>
                 <td class="round_medal_col">
                     {% if last.round_rank == 1 %}
-                        <img src="first_place.png" alt="1st place" class="medal-icon">
+                        <img src="assets/first_place.png" alt="1st place" class="medal-icon">
                     {% elif last.round_rank == 2 %}
-                        <img src="second_place.png" alt="2nd place" class="medal-icon">
+                        <img src="assets/second_place.png" alt="2nd place" class="medal-icon">
                     {% elif last.round_rank == 3 %}
-                        <img src="third_place.png" alt="3rd place" class="medal-icon">
+                        <img src="assets/third_place.png" alt="3rd place" class="medal-icon">
                     {% elif last.round_rank == participants|length %}
-                        <img src="alarm.png" alt="Last place" class="medal-icon">
+                        <img src="assets/alarm.png" alt="Last place" class="medal-icon">
                     {% endif %}
                 </td>
                 <td class="round_points_col">

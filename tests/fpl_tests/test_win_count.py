@@ -259,7 +259,7 @@ def test_win_column_in_template():
     html = template.render(**context.as_dict(), output_type="gw_history")
 
     # Check that the trophy image appears as a column header
-    assert 'trophy.png' in html, "Template should contain trophy image in header"
+    assert 'assets/trophy.png' in html, "Template should contain trophy image in header"
     assert 'alt="🏆"' in html, "Trophy image should have trophy emoji as alt text"
     assert 'height: 18px' in html, "Trophy image should have 18px height"
 

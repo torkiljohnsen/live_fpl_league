@@ -129,7 +129,7 @@ def test_lowest_rank_column_in_template():
     html = template.render(**context.as_dict(), output_type="gw_history")
 
     # Check that the duck image appears as a column header
-    assert 'The Duck liten.png' in html, "Template should contain duck image in header"
+    assert 'assets/The Duck liten.png' in html, "Template should contain duck image in header"
     assert 'alt="🦆"' in html, "Duck image should have duck emoji as alt text"
 
     # Check that each participant's lowest rank count appears in the table

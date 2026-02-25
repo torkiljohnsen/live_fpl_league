@@ -205,7 +205,7 @@ tr:nth-child(odd) {
 	color: #000;
 }
 .gw_history td.is_loser {
-	background-image: url('The Duck liten.png');
+	background-image: url('assets/The Duck liten.png');
 	background-repeat: no-repeat;
 	background-position: top right;
 	background-size: 20px auto;

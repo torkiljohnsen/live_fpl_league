@@ -58,7 +58,7 @@ def test_standings_uses_icon_files_instead_of_emojis():
     html = template.render(**context.as_dict(), output_type="standings")
 
     # Verify that icon image files are used (at least first_place exists in sample data)
-    assert '<img src="first_place.png"' in html, "Template should use first_place.png icon"
+    assert '<img src="assets/first_place.png"' in html, "Template should use assets/first_place.png icon"
 
     # Verify that emojis are NOT used in the rendered HTML
     assert '🥇' not in html, "Template should not contain gold medal emoji"

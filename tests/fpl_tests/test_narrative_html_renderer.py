@@ -113,7 +113,7 @@ class TestRender:
         path = renderer.render(SAMPLE_NARRATIVE, "123", "Test League", "2025-26", 27)
         html = path.read_text(encoding="utf-8")
 
-        assert "../../../reidars_rapport_2.png" in html
+        assert "../../../assets/reidars_rapport_2.png" in html
 
     def test_output_contains_footer(self, tmp_path: Path) -> None:
         renderer = NarrativeHTMLRenderer(template_dir=TEMPLATES_DIR, output_dir=str(tmp_path))
