@@ -159,7 +159,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "Image fallback works: if reidar_404.png doesn't exist, reidars_rapport_2.png is shown",
       "The 404 state looks good on both desktop and mobile"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 5,

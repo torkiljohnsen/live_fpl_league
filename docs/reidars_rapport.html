@@ -151,9 +151,23 @@
             }
 
             function showNotFound(gwNum) {
-                document.getElementById('narrative-title').textContent = 'Denne runden er ikke spilt ennå';
-                document.getElementById('narrative-article').innerHTML =
-                    '<p>Reidar ser på deg som om du har brukt triple captain på en keeper. Kom tilbake når runden er ferdig.</p>';
+                document.getElementById('narrative-title').textContent = 'Reidars Rapport';
+                var article = document.getElementById('narrative-article');
+                article.innerHTML = '';
+                var notFound = document.createElement('div');
+                notFound.className = 'narrative-not-found';
+                var img = document.createElement('img');
+                img.src = 'assets/reidar_404.png';
+                img.alt = 'Reidar er ikke imponert';
+                img.onerror = function () { this.onerror = null; this.src = 'assets/reidars_rapport_2.png'; };
+                var heading = document.createElement('h2');
+                heading.textContent = 'Denne runden er ikke spilt ennå';
+                var text = document.createElement('p');
+                text.textContent = 'Reidar ser på deg som om du har brukt triple captain på en keeper. Kom tilbake når runden er ferdig.';
+                notFound.appendChild(img);
+                notFound.appendChild(heading);
+                notFound.appendChild(text);
+                article.appendChild(notFound);
             }
         })();
     </script>

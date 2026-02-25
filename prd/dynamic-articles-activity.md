@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-25
-**Tasks Completed:** 3 / 7
-**Current Task:** Task 3 completed
+**Tasks Completed:** 4 / 7
+**Current Task:** Task 4 completed
 
 ---
 
@@ -23,3 +23,8 @@
 **Task:** Task 3 — Add gameweek navigation arrows in header and footer
 **Status:** completed
 **Notes:** Added prev/next gameweek navigation to both header and footer of docs/reidars_rapport.html. Header uses « » guillemets flanking the subtitle in a flex container (.narrative-gw-nav). Footer uses labeled links ("« Runde 24" / "Runde 26 »") in a dedicated nav row above the existing dashboard links. JS setupNavigation() sets hrefs to ?gw={N±1} and hides arrows at boundaries (gw=1 hides prev, gw=38 hides next). Landing page hides all navigation. Added CSS for .gw-nav-arrow (header) and .gw-nav-link (footer) with 44px min tap targets, hover states using --nr-accent/--nr-highlight, and responsive adjustments. All 275 tests pass.
+
+### Session 4 — 2026-02-25
+**Task:** Task 4 — Add friendly 404 state for missing narratives
+**Status:** completed
+**Notes:** Enhanced the showNotFound() function in docs/reidars_rapport.html to render a full 404 state with .narrative-not-found container: displays reidar_404.png image (with onerror fallback to reidars_rapport_2.png), humorous Norwegian heading ("Denne runden er ikke spilt ennå"), and witty body text in Reidar's voice. Navigation arrows remain functional since setupNavigation() runs before the fetch. Added .narrative-not-found CSS class to docs/style.css with centered layout, image styling, typography, and responsive mobile adjustments. All 275 tests pass.
