@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-25
-**Tasks Completed:** 5 / 7
-**Current Task:** Task 5 completed
+**Tasks Completed:** 6 / 7
+**Current Task:** Task 6 completed
 
 ---
 
@@ -33,3 +33,8 @@
 **Task:** Task 5 — Create Teams notification module
 **Status:** completed
 **Notes:** Created `fpl/teams_notification.py` with three functions: `extract_teaser()` splits narrative on paragraphs, skips title/image lines, strips bold markers, truncates on word boundary at max_length with `...`; `build_adaptive_card()` builds the full Adaptive Card payload matching PRD schema (version 1.4, Image + two TextBlocks + Action.OpenUrl); `post_to_teams()` composes teaser and card, POSTs to webhook via requests, returns True on 2xx, catches all exceptions and logs warnings to stderr. All 247 tests pass, ruff clean, mypy clean.
+
+### Session 6 — 2026-02-25
+**Task:** Task 6 — Tests for Teams notification module
+**Status:** completed
+**Notes:** Created `tests/fpl_tests/test_teams_notification.py` with 21 tests across 3 test classes. TestExtractTeaser (8 tests): basic extraction, title/image line skipping, bold marker stripping, word boundary truncation, no-truncation for short text, empty result for title+image only, first real paragraph selection. TestBuildAdaptiveCard (7 tests): top-level structure, attachment content type, schema/version 1.4, Image element, title TextBlock, teaser TextBlock, Action.OpenUrl. TestPostToTeams (6 tests): HTTP 200 success, HTTP 202 success, HTTP 400 failure, exception handling, never-raises guarantee, JSON payload verification. All requests.post calls are mocked. All 268 tests pass, ruff clean, mypy clean.

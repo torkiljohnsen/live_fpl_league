@@ -273,7 +273,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "No real HTTP calls — all requests.post calls are mocked",
       "All tests pass: python -m pytest tests/fpl_tests/test_teams_notification.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 7,
