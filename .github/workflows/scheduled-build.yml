@@ -45,7 +45,10 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add docs/ weekly_report/reports/ weekly_report/narratives/ weekly_report/reidar_memory/
+          git add docs/
+          for dir in weekly_report/reports weekly_report/narratives weekly_report/reidar_memory; do
+            [ -d "$dir" ] && git add "$dir"
+          done
           git diff --cached --quiet || (
             git commit -m "chore: nightly dashboard and report update [skip ci]"
             git push
