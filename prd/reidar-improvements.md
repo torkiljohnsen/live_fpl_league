@@ -213,7 +213,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "NarrativeHTMLRenderer exported in fpl/__init__.py and __all__",
       "Ruff clean, mypy clean, all existing tests pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 4,

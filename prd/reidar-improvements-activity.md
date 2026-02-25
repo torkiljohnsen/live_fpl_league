@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-25
-**Tasks Completed:** 2 / 7
-**Current Task:** Task 2 completed
+**Tasks Completed:** 3 / 7
+**Current Task:** Task 3 completed
 
 ---
 
@@ -18,3 +18,8 @@
 **Task:** Task 2 — Create narrative article template and styles
 **Status:** completed
 **Notes:** Created `templates/narrative.html` extending `base.html` with hero image, title/subtitle (Sora font), 3-link navigation bar (Tabell, Rundehistorikk, Poengutvikling), centered article body (~720px), and footer with league name and season. Added narrative-specific CSS to `docs/style.css` with hero image styling, pill-style nav links, article typography (line-height 1.7, blockquote pull quotes, h2 subheadings), and responsive mobile styles. All 230 tests pass, mypy clean.
+
+### Session 3 — 2026-02-25
+**Task:** Task 3 — Create NarrativeHTMLRenderer class
+**Status:** completed
+**Notes:** Created `fpl/narrative_html_renderer.py` with `NarrativeHTMLRenderer` class. Constructor sets up Jinja2 Environment with FileSystemLoader (matching LeagueTemplateRenderer pattern). `render()` extracts title from first `# ` heading (with fallback), strips title and image lines, converts remaining markdown to HTML using `markdown` library with 'extra' extension, renders via narrative.html template, and writes output to `docs/reidars_rapport_{league_id}_gw{event_id}.html`. Static method `get_github_pages_url()` returns the full GitHub Pages URL. Added to `fpl/__init__.py` exports and `__all__`. All 230 tests pass, mypy clean.
