@@ -126,37 +126,44 @@ class TestBuildAdaptiveCard:
         assert content["type"] == "AdaptiveCard"
         assert content["version"] == "1.4"
 
-    def test_body_has_image(self, card: dict) -> None:
-        body = card["attachments"][0]["content"]["body"]
-        image = body[0]
-        assert image["type"] == "Image"
-        assert image["url"] == "https://example.com/image.png"
-        assert image["size"] == "stretch"
+    def _get_columns(self, card: dict) -> list:
+        column_set = card["attachments"][0]["content"]["body"][0]
+        assert column_set["type"] == "ColumnSet"
+        return column_set["columns"]
 
-    def test_body_has_title_textblock(self, card: dict) -> None:
+    def test_body_has_column_set(self, card: dict) -> None:
         body = card["attachments"][0]["content"]["body"]
-        title_block = body[1]
+        assert len(body) == 1
+        assert body[0]["type"] == "ColumnSet"
+
+    def test_left_column_has_title(self, card: dict) -> None:
+        left = self._get_columns(card)[0]
+        title_block = left["items"][0]
         assert title_block["type"] == "TextBlock"
         assert title_block["text"] == "Reidars Rapport — Runde 27"
         assert title_block["weight"] == "bolder"
         assert title_block["size"] == "large"
-        assert title_block["wrap"] is True
 
-    def test_body_has_teaser_textblock(self, card: dict) -> None:
-        body = card["attachments"][0]["content"]["body"]
-        teaser_block = body[2]
+    def test_left_column_has_teaser(self, card: dict) -> None:
+        left = self._get_columns(card)[0]
+        teaser_block = left["items"][1]
         assert teaser_block["type"] == "TextBlock"
         assert teaser_block["text"] == "A teaser text."
         assert teaser_block["wrap"] is True
-        assert teaser_block["size"] == "medium"
 
-    def test_actions_has_open_url(self, card: dict) -> None:
-        actions = card["attachments"][0]["content"]["actions"]
-        assert len(actions) == 1
-        action = actions[0]
-        assert action["type"] == "Action.OpenUrl"
-        assert action["title"] == "Les hele Reidars Rapport"
-        assert action["url"] == "https://example.com/narrative.html"
+    def test_left_column_has_link(self, card: dict) -> None:
+        left = self._get_columns(card)[0]
+        link_block = left["items"][2]
+        assert link_block["type"] == "TextBlock"
+        assert "https://example.com/narrative.html" in link_block["text"]
+        assert "Les Reidars rapport uke 27" in link_block["text"]
+
+    def test_right_column_has_image(self, card: dict) -> None:
+        right = self._get_columns(card)[1]
+        image = right["items"][0]
+        assert image["type"] == "Image"
+        assert image["url"] == "https://example.com/image.png"
+        assert image["size"] == "stretch"
 
     def test_custom_title_overrides_default(self) -> None:
         card = build_adaptive_card(
@@ -166,8 +173,8 @@ class TestBuildAdaptiveCard:
             image_url="https://example.com/img.png",
             title="Bench boost. Fem poeng. Null verdighet.",
         )
-        title_block = card["attachments"][0]["content"]["body"][1]
-        assert title_block["text"] == "Bench boost. Fem poeng. Null verdighet."
+        left = card["attachments"][0]["content"]["body"][0]["columns"][0]
+        assert left["items"][0]["text"] == "Bench boost. Fem poeng. Null verdighet."
 
     def test_empty_title_uses_fallback(self) -> None:
         card = build_adaptive_card(
@@ -177,8 +184,8 @@ class TestBuildAdaptiveCard:
             image_url="https://example.com/img.png",
             title="",
         )
-        title_block = card["attachments"][0]["content"]["body"][1]
-        assert title_block["text"] == "Reidars Rapport — Runde 10"
+        left = card["attachments"][0]["content"]["body"][0]["columns"][0]
+        assert left["items"][0]["text"] == "Reidars Rapport — Runde 10"
 
 
 class TestPostToTeams:
