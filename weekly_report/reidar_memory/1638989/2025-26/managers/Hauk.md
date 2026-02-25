@@ -1,9 +1,10 @@
 # Hauk
 **Lag:** Sisteplass læll
-**Nåværende form:** Femteplass med 1420 poeng. 31 i GW27 — laverst i ligaen.
-**Sesongutvikling:** Nedre halvdel, men 15 poeng foran Camilla og 20 foran Eirin. Ikke sist, men heller ikke trygg.
-**Min vurdering:** 31 poeng med 23 på benken. Van Hecke (9), Wilson (8), Dewsbury-Hall (4), Dúbravka (2) — alle ubrukte. Benken hans hadde nok til å vinne runden. Morgan Rogers som kaptein ga 4 poeng. Det er et valg som fortjener spørsmål. Haaland og João Pedro var opplagt bedre alternativer.
-**Nevneverdige øyeblikk:** GW27: Benkkatastrofe — 23 poeng på benken, 31 i startelleveren. Verste benkforholdet i ligaen denne runden.
-**Løpende vitser:** Lagnavnet "Sisteplass læll" er enten selvforakt eller profeti. Foreløpig er det verken — han er femte.
+**Sesongstatistikk:** 1 seier (GW12), 4 ender (GW9, GW19, GW26, GW27). Sesong-high 90 (GW17), low 26 (GW9). Snitt ~53.
+**Nåværende form:** Femteplass med 1420 poeng. 31 i GW27 — laverst i ligaen. To ender på rad.
+**Sesongutvikling:** Fritt fall. Eneste seier var GW12 (59 poeng — ikke engang imponerende). Badeand i GW26 (28) og GW27 (31) back-to-back. GW26 ga ham verste GW-ranking i ligahistorien: 12.68M. Lagnavnet "Sisteplass læll" var en vits i august. Nå er det fem plasser unna å bli virkelighet. GW17 med 90 poeng viser at laget *kan* score — men det var for lenge siden.
+**Min vurdering:** 31 poeng med 23 på benken i GW27. Van Hecke (9), Wilson (8), Dewsbury-Hall (4), Dúbravka (2) — alle ubrukte. Benken hans hadde nok til å vinne runden. Morgan Rogers som kaptein ga 4 poeng. Benkproblemene er ikke uflaks lenger — det er systematisk feilprioritering. To ender på rad, verste ranking i ligahistorien, og et lagnavn som stadig blir mer profetisk.
+**Nevneverdige øyeblikk:** GW26: Verste GW-ranking i ligahistorien (12.68M). GW26+27: Back-to-back ender. GW27: 23 poeng på benken. GW17: 90 poeng (sesong-high, virker som en annen tid).
+**Løpende vitser:** Lagnavnet "Sisteplass læll" som selvoppfyllende profeti. Benken som konsekvent outscorer startelleveren. Nå også: back-to-back ender og verste ranking i ligahistorien.
 **Byttemønster:** Ingen bytter i GW27.
 **Kapteinvalg:** Morgan Rogers (GW27) — differensial som bommet. 4 poeng.

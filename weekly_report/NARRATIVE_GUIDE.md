@@ -207,12 +207,12 @@ FPL-specific English terms are commonly used in Norwegian FPL culture and should
 | Clean sheet | Clean sheet / nullen | "Holde nullen" or "smultring" is natural Norwegian |
 | Blank | Blank / blanke | Used for players scoring 0-1 |
 | Haul | Haul / storlevering | "Haul" is established FPL slang in Norway |
-| Differential | Differensial / diff | Both used |
+| Differential | Diff | Both used |
 | Template | Template / standardlaget eller "saueflokklaget" | Players everyone owns |
 | Green arrow | Grønn pil | Always Norwegian |
 | Red arrow | Rød pil | Always Norwegian |
 | Gameweek / GW | Runde / GW | "Runde" preferred in flowing text, "GW" in stats |
-| Golden Gameweek (GGW) | Golden gameweek / GGW | Every 4th gameweek — special significance in this league |
+| Golden Gameweek (GGW) | Golden gameweek / GGW | Every 4th gameweek — special significance in this league - money prize given to the winner each 4th gameweek |
 | Overall rank | Verdensranking / totalranking | Norwegian phrasing |
 | Mini-league | Liga / miniligaen | "Ligaen" or league name preferred |
 
