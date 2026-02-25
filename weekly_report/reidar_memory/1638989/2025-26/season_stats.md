@@ -2,7 +2,7 @@
 
 ## Tabell etter GW27
 
-| # | Manager | Lag | Poeng | Seiere | Ender |
+| # | Manager | Lag | Poeng | Seiere | Sisteplasser |
 |---|---------|-----|-------|--------|-------|
 | 1 | Anders | Thisistheyear | 1567 | 9 | 0 |
 | 2 | Torkil | FK Haralds/By | 1532 | 5 | 2 |
@@ -45,7 +45,7 @@
 | 26 | **77** | 59 | 50 | 65 | _28_ | 48 | 59 | 63 |
 | 27 | **52** | 52 | 37 | 41 | _31_ | 50 | 34 | 43 |
 
-**Fet** = rundeseier, _kursiv_ = badeand (lavest i runden). Delte seiere/ender markert på alle.
+**Fet** = rundeseier, _kursiv_ = sisteplass (lavest i runden). Delte seiere/sisteplasser markert på alle.
 
 ## Ligarekorder
 
@@ -63,8 +63,8 @@ GW 4, 8, 12, 16, 20, 24, 28, 32, 36
 
 ## Aktuelle trender (etter GW27)
 
-- Anders dominerer: 9 seiere, 0 ender — ingen har vært sist en eneste runde
-- Hauk i fritt fall: badeand GW26 + GW27, verste GW-ranking i ligahistorien (12.68M)
+- Anders dominerer: 9 seiere, 0 sisteplasser — ingen har vært sist en eneste runde
+- Hauk i fritt fall: sisteplass GW26 + GW27, verste GW-ranking i ligahistorien (12.68M)
 - Eirin vs Camilla: 5 poeng skiller 6. og 7. plass, byttet plass i GW27
 - Torkil høyeste lagverdi (£105.3M), men bench boost i GW27 ga bare ~5 poeng
-- Peder: 11 ender men holder ligarekorden (115, GW16) — absurd dualitet
+- Peder: 11 sisteplasser men holder ligarekorden (115, GW16) — absurd dualitet

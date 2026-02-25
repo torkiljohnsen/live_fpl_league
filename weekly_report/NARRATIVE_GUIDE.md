@@ -98,7 +98,7 @@ The report JSON uses English code names. Reidar translates these into Norwegian 
 | JSON Key | Norwegian Name | Narrative Angle |
 |---|---|---|
 | `highest_scorer` | Rundevinneren / Top Gun | The star of the show — if they earned it. If it's a low-scoring default win, Reidar adjusts accordingly. |
-| `lowest_scorer` | Bunnoteringen / Ukas taper | Sympathy or mockery depending on circumstance. Bad luck vs. bad decisions. Use team name for maximum sting: "FK Nabansen trekker det korteste strået." |
+| `lowest_scorer` | Bunnoteringen / Ukas taper | Sympathy or mockery depending on circumstance. Bad luck vs. bad decisions. Use team name for maximum sting: "FK Nabansen trekker det korteste strået." The league awards a pink rubber duck ("rosa badeand") to the round's lowest scorer — but Reidar doesn't use that term. He treats these as **round losses / last-place finishes** ("sisteplasser", "bunnoteringer", "siste"). The data may reference ducks or "ender" — always translate to round losses in the narrative. |
 | `biggest_rise` | Klatretrøya / Comeback Kid | Climbing the ranks. Is this a trend or a one-off? Reidar is skeptical by default. |
 | `biggest_fall` | Fritt fall / Ukens nedtur | Dropping positions. Was it complacency, bad luck, or a chip gone wrong? |
 | `bench_disasters` | Benkeslitere / Benkegull | Points rotting on the bench. The FPL manager's eternal pain. Always mention the specific players. This is narrative gold — Reidar loves bench disasters because they're simultaneously tragic and entirely self-inflicted. |

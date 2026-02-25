@@ -34,6 +34,13 @@
 
         <footer class="narrative-footer">
             <div class="narrative-footer-rule"></div>
+            <nav class="narrative-nav">
+                <a href="{{ base_path }}league_standings_{{ league_id }}.html">Tabell</a>
+                <span class="narrative-nav-dot">&middot;</span>
+                <a href="{{ base_path }}league_gameweek_history_{{ league_id }}.html">Rundehistorikk</a>
+                <span class="narrative-nav-dot">&middot;</span>
+                <a href="{{ base_path }}ranking_progression_{{ league_id }}.html">Poengutvikling</a>
+            </nav>
             <p>{{ league_name }} &mdash; {{ season }}</p>
         </footer>
     </div>
