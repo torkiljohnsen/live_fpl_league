@@ -293,7 +293,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "scheduled-build.yml does NOT pass --notify-teams flag (feature flag is OFF)",
       "Ruff clean, mypy clean, all tests pass"
     ],
-    "passes": false
+    "passes": true
   }
 ]
 ```

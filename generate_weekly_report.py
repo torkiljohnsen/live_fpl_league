@@ -8,12 +8,15 @@ and persistent memory system.
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
 from fpl import FPL_API
 from fpl.narrative_generator import NarrativeGenerator
+from fpl.narrative_html_renderer import NarrativeHTMLRenderer
 from fpl.reidar_memory import ReidarMemory
+from fpl.teams_notification import post_to_teams
 from fpl.weekly_report import WeeklyReport, get_season_from_bootstrap
 
 FPL_LEAGUE_ID = "1639886"
@@ -147,6 +150,10 @@ def main() -> None:
         "--cache-dir", type=str, default=None,
         help="Directory for file-based API response caching.",
     )
+    parser.add_argument(
+        "--notify-teams", action="store_true",
+        help="Post Teams notification after narrative generation. Requires TEAMS_WEBHOOK_URL env var.",
+    )
     args = parser.parse_args()
 
     try:
@@ -217,6 +224,48 @@ def main() -> None:
                     output_dir=args.output_dir,
                 )
                 print(f"Narrative saved: {narrative_path}")
+
+                # --- HTML rendering (non-fatal) ---
+                try:
+                    renderer = NarrativeHTMLRenderer()
+                    narrative_content = Path(narrative_path).read_text(encoding="utf-8")
+                    html_path = renderer.render(
+                        narrative_md=narrative_content,
+                        league_id=args.league_id,
+                        league_name=league_name,
+                        season=result["meta"]["season"],
+                        event_id=event_id,
+                    )
+                    print(f"Narrative HTML rendered: {html_path}")
+                except Exception as e:
+                    print(f"WARNING: HTML rendering failed: {e}", file=sys.stderr)
+
+                # --- Teams notification (non-fatal) ---
+                try:
+                    if args.notify_teams:
+                        webhook_url = os.environ.get("TEAMS_WEBHOOK_URL")
+                        if webhook_url:
+                            narrative_content = Path(narrative_path).read_text(encoding="utf-8")
+                            narrative_url = NarrativeHTMLRenderer.get_github_pages_url(
+                                args.league_id, event_id,
+                            )
+                            image_url = "https://torkiljohnsen.github.io/live_fpl_league/reidars_rapport_2.png"
+                            success = post_to_teams(
+                                webhook_url=webhook_url,
+                                gameweek=event_id,
+                                narrative=narrative_content,
+                                narrative_url=narrative_url,
+                                image_url=image_url,
+                            )
+                            if success:
+                                print("Teams notification sent successfully.")
+                            else:
+                                print("WARNING: Teams notification failed.", file=sys.stderr)
+                        else:
+                            print("WARNING: TEAMS_WEBHOOK_URL not set — skipping Teams notification.", file=sys.stderr)
+                except Exception as e:
+                    print(f"WARNING: Teams notification failed: {e}", file=sys.stderr)
+
             except Exception as e:
                 print(f"WARNING: Narrative generation failed: {e}", file=sys.stderr)
                 print("Report was saved successfully. Narrative skipped.", file=sys.stderr)

@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-25
-**Tasks Completed:** 6 / 7
-**Current Task:** Task 6 completed
+**Tasks Completed:** 7 / 7
+**Current Task:** Task 7 completed
 
 ---
 
@@ -38,3 +38,8 @@
 **Task:** Task 6 — Tests for Teams notification module
 **Status:** completed
 **Notes:** Created `tests/fpl_tests/test_teams_notification.py` with 21 tests across 3 test classes. TestExtractTeaser (8 tests): basic extraction, title/image line skipping, bold marker stripping, word boundary truncation, no-truncation for short text, empty result for title+image only, first real paragraph selection. TestBuildAdaptiveCard (7 tests): top-level structure, attachment content type, schema/version 1.4, Image element, title TextBlock, teaser TextBlock, Action.OpenUrl. TestPostToTeams (6 tests): HTTP 200 success, HTTP 202 success, HTTP 400 failure, exception handling, never-raises guarantee, JSON payload verification. All requests.post calls are mocked. All 268 tests pass, ruff clean, mypy clean.
+
+### Session 7 — 2026-02-25
+**Task:** Task 7 — Pipeline integration and GitHub Actions update
+**Status:** completed
+**Notes:** Added `--notify-teams` CLI flag (store_true, default False) to `generate_weekly_report.py`. Added imports for `NarrativeHTMLRenderer` and `post_to_teams`. After narrative save, added two non-fatal steps in separate try/except blocks: (1) HTML rendering via `NarrativeHTMLRenderer.render()`, (2) Teams notification via `post_to_teams()` — only fires when both `--notify-teams` flag is passed and `TEAMS_WEBHOOK_URL` env var is set. Updated `scheduled-build.yml`: added `TEAMS_WEBHOOK_URL` secret to report step's env block, added idempotent hero image copy step (`cp -n`). The `--notify-teams` flag is NOT passed in the workflow (feature flag OFF by default). All 268 tests pass, ruff clean, mypy clean.
