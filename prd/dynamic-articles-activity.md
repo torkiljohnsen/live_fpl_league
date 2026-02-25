@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-25
-**Tasks Completed:** 6 / 7
-**Current Task:** Task 6 completed
+**Tasks Completed:** 7 / 7
+**Current Task:** All tasks completed
 
 ---
 
@@ -38,3 +38,8 @@
 **Task:** Task 6 — Remove NarrativeHTMLRenderer and update pipeline
 **Status:** completed
 **Notes:** Deleted fpl/narrative_html_renderer.py, tests/fpl_tests/test_narrative_html_renderer.py, templates/narrative.html, and pre-rendered docs/narratives/2025-26/1638989/reidars_rapport_gw27.html. Removed 'markdown' dependency from requirements.txt. Removed NarrativeHTMLRenderer import and HTML rendering try/except block from generate_weekly_report.py. Updated Teams notification URL to use new dynamic page format (reidars_rapport.html?gw={N}) and image URL to use gameweek-based rotation (assets/reidars_rapport_{1-4}.png). Removed NarrativeHTMLRenderer from fpl/__init__.py exports. Updated AGENTS.md, fpl/AGENTS.md, and .claude/commands/rewrite-narrative.md to reflect removal. All 257 tests pass (18 fewer due to deleted renderer tests), mypy clean.
+
+### Session 7 — 2026-02-25
+**Task:** Task 7 — Update GitHub Actions workflow
+**Status:** completed
+**Notes:** Reviewed .github/workflows/scheduled-build.yml against the new file structure. Hero image copy step already targets docs/assets/ (from Task 1). git add docs/ already covers docs/narratives/*.md and docs/assets/. No narrative HTML rendering references present. Removed stale weekly_report/narratives from the git add loop since narratives are now written to docs/narratives/ (Task 5). YAML validated, all 257 tests pass, mypy clean.

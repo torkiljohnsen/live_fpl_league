@@ -54,7 +54,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add docs/
-          for dir in weekly_report/reports weekly_report/narratives weekly_report/reidar_memory; do
+          for dir in weekly_report/reports weekly_report/reidar_memory; do
             [ -d "$dir" ] && git add "$dir"
           done
           git diff --cached --quiet || (

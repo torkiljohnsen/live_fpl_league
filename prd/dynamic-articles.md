@@ -206,7 +206,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "No references to narrative HTML rendering remain in the workflow",
       "Workflow file is valid YAML (no syntax errors)"
     ],
-    "passes": false
+    "passes": true
   }
 ]
 ```
