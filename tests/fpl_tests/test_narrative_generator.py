@@ -213,7 +213,7 @@ class TestSaveNarrative:
             event_id=5,
         )
 
-        expected = tmp_path / "weekly_report" / "narratives" / "123456" / "2025-26" / "gw5.md"
+        expected = tmp_path / "docs" / "narratives" / "2025-26" / "123456" / "gw5.md"
         assert path == expected
         assert path.is_file()
 
@@ -244,7 +244,7 @@ class TestSaveNarrative:
             event_id=1,
         )
 
-        assert (tmp_path / "weekly_report" / "narratives" / "999" / "2024-25").is_dir()
+        assert (tmp_path / "docs" / "narratives" / "2024-25" / "999").is_dir()
 
     def test_overwrites_existing_file(self, tmp_path: Path):
         client = _mock_client()

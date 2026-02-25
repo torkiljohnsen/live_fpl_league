@@ -174,7 +174,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "No existing files are deleted from weekly_report/narratives/",
       "Pipeline runs successfully with the new paths (no import or path errors)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 6,

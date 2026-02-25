@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-25
-**Tasks Completed:** 4 / 7
-**Current Task:** Task 4 completed
+**Tasks Completed:** 5 / 7
+**Current Task:** Task 5 completed
 
 ---
 
@@ -28,3 +28,8 @@
 **Task:** Task 4 — Add friendly 404 state for missing narratives
 **Status:** completed
 **Notes:** Enhanced the showNotFound() function in docs/reidars_rapport.html to render a full 404 state with .narrative-not-found container: displays reidar_404.png image (with onerror fallback to reidars_rapport_2.png), humorous Norwegian heading ("Denne runden er ikke spilt ennå"), and witty body text in Reidar's voice. Navigation arrows remain functional since setupNavigation() runs before the fetch. Added .narrative-not-found CSS class to docs/style.css with centered layout, image styling, typography, and responsive mobile adjustments. All 275 tests pass.
+
+### Session 5 — 2026-02-25
+**Task:** Task 5 — Update narrative generator to write .md to docs/
+**Status:** completed
+**Notes:** Changed narrative output path from `{output_dir}/weekly_report/narratives/{league_id}/{season}/gw{N}.md` to `{output_dir}/docs/narratives/{season}/{league_id}/gw{N}.md`, matching the fetch URL used by the client-side reidars_rapport.html page. Updated save_narrative() in fpl/narrative_generator.py, --skip-existing check in generate_weekly_report.py, and previous_narrative path in fpl/weekly_report.py. Also flipped path order from `{league_id}/{season}` to `{season}/{league_id}` to match deployed structure. Updated all corresponding test assertions. Existing files in weekly_report/narratives/ left untouched. All 275 tests pass.

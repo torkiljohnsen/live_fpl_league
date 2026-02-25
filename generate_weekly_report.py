@@ -185,10 +185,10 @@ def main() -> None:
             )
             narrative_path_expected = (
                 Path(args.output_dir)
-                / "weekly_report"
+                / "docs"
                 / "narratives"
-                / args.league_id
                 / season
+                / args.league_id
                 / f"gw{event_id}.md"
             )
             assert report_path is not None
