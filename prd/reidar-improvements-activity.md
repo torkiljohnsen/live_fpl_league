@@ -2,8 +2,8 @@
 
 ## Current Status
 **Last Updated:** 2026-02-25
-**Tasks Completed:** 4 / 7
-**Current Task:** Task 4 completed
+**Tasks Completed:** 5 / 7
+**Current Task:** Task 5 completed
 
 ---
 
@@ -28,3 +28,8 @@
 **Task:** Task 4 — Tests for NarrativeHTMLRenderer
 **Status:** completed
 **Notes:** Created `tests/fpl_tests/test_narrative_html_renderer.py` with 17 tests covering all acceptance criteria. Tests use `tmp_path` for output and the real `templates/` directory for template rendering. Covers: output file creation and path, title extraction from `# ` heading, fallback title, image line stripping, markdown-to-HTML conversion (bold, subheadings, paragraphs), output HTML content verification (subtitle, nav links, article body, hero image, footer), parent directory creation, and `get_github_pages_url()` format. All 247 tests pass, ruff clean, mypy clean.
+
+### Session 5 — 2026-02-25
+**Task:** Task 5 — Create Teams notification module
+**Status:** completed
+**Notes:** Created `fpl/teams_notification.py` with three functions: `extract_teaser()` splits narrative on paragraphs, skips title/image lines, strips bold markers, truncates on word boundary at max_length with `...`; `build_adaptive_card()` builds the full Adaptive Card payload matching PRD schema (version 1.4, Image + two TextBlocks + Action.OpenUrl); `post_to_teams()` composes teaser and card, POSTs to webhook via requests, returns True on 2xx, catches all exceptions and logs warnings to stderr. All 247 tests pass, ruff clean, mypy clean.

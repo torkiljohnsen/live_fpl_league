@@ -252,7 +252,7 @@ The task list below drives autonomous agent execution. Each task must be:
       "post_to_teams() returns False and logs warning on any exception (never raises)",
       "Ruff clean, mypy clean, all existing tests pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": 6,
