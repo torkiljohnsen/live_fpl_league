@@ -273,8 +273,8 @@ body:has(.narrative-page) {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	height: 70%;
-	background: linear-gradient(to top, #F5F0E8 0%, rgba(245, 240, 232, 0.8) 35%, transparent 100%);
+	height: 45%;
+	background: linear-gradient(to top, #F5F0E8 0%, rgba(245, 240, 232, 0.8) 40%, transparent 100%);
 	pointer-events: none;
 }
 
@@ -282,7 +282,7 @@ body:has(.narrative-page) {
 .narrative-header {
 	text-align: center;
 	padding: 0 1.5rem 0.5rem;
-	margin-top: -3rem;
+	margin-top: 3rem;
 	position: relative;
 	z-index: 1;
 }
