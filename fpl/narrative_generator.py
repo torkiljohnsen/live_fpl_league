@@ -12,6 +12,89 @@ import os
 from pathlib import Path
 from typing import Any
 
+from .reidar_memory import ReidarMemory
+
+# Reidar reference docs live in weekly_report/ relative to the repo root
+_REIDAR_DOCS_DIR = Path(__file__).resolve().parent.parent / "weekly_report"
+
+
+def read_reidar_doc(filename: str) -> str:
+    """Read a Reidar reference document from the weekly_report/ directory."""
+    path = _REIDAR_DOCS_DIR / filename
+    return path.read_text(encoding="utf-8")
+
+
+def run_narrative_pipeline(
+    result: dict[str, Any],
+    league_id: str,
+    event_id: int,
+    output_dir: str,
+) -> str:
+    """Run the full narrative pipeline: generate, save, update memory.
+
+    Returns the path to the saved narrative file.
+    """
+    season = result["meta"]["season"]
+
+    # Read Reidar reference docs
+    persona = read_reidar_doc("REIDAR_PERSONA.md")
+    narrative_guide = read_reidar_doc("NARRATIVE_GUIDE.md")
+    examples = read_reidar_doc("REIDAR_EXAMPLES.md")
+
+    # Load memory context
+    memory = ReidarMemory(
+        output_dir=output_dir, league_id=league_id, season=season
+    )
+    memory.scaffold_directories()
+    memory_context = memory.get_prompt_context(event_id)
+
+    # Check for previous narrative
+    previous_narrative: str | None = None
+    prev_narrative_path = result["meta"].get("previous_narrative")
+    if prev_narrative_path:
+        full_prev_path = Path(output_dir) / prev_narrative_path
+        if full_prev_path.is_file():
+            previous_narrative = full_prev_path.read_text(encoding="utf-8")
+
+    # Generate narrative
+    generator = NarrativeGenerator()
+    narrative = generator.generate(
+        report_json=result,
+        persona=persona,
+        narrative_guide=narrative_guide,
+        examples=examples,
+        memory_context=memory_context,
+        previous_narrative=previous_narrative,
+    )
+
+    # Save narrative
+    narrative_path = generator.save_narrative(
+        content=narrative,
+        output_dir=output_dir,
+        league_id=league_id,
+        season=season,
+        event_id=event_id,
+    )
+
+    # Update Reidar's memory (best-effort — don't lose the narrative over a parse failure)
+    try:
+        memory.update_memory(
+            report_json=result,
+            narrative=narrative,
+            client=generator._client,
+        )
+    except Exception:
+        import sys
+        import traceback
+
+        print(
+            "WARNING: Memory update failed. Narrative was saved successfully.\n"
+            f"{traceback.format_exc()}",
+            file=sys.stderr,
+        )
+
+    return str(narrative_path)
+
 
 class NarrativeGenerator:
     """Generates weekly narratives via Claude API.

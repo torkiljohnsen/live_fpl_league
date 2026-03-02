@@ -34,12 +34,20 @@ jobs:
       - name: Generate Index
         run: python generate_index.py
 
-      - name: Generate weekly report and narrative
+      - name: Generate weekly report (JSON)
+        run: python generate_weekly_report.py -l 1638989 --skip-existing --cache-dir .fpl_cache
+
+      - name: Generate narrative
+        id: narrative
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python generate_narrative.py -l 1638989 --skip-existing --cache-dir .fpl_cache
+
+      - name: Send Teams notification
+        if: steps.narrative.outputs.generated == 'true'
+        env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-        run: |
-          python generate_weekly_report.py -l 1638989 --narrative --notify-teams --skip-existing --cache-dir .fpl_cache
+        run: python notify_teams.py -l 1638989 --cache-dir .fpl_cache
 
       - name: Copy hero images to docs/assets
         run: |

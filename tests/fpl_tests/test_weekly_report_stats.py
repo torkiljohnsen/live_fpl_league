@@ -368,6 +368,71 @@ class TestCaptainSummary:
         assert result["worst_pick"]["manager"] == "Bob"
         assert result["worst_pick"]["points"] == 8
 
+    def test_captain_substitution_uses_effective_points(self):
+        """When a captain didn't play, effective_points should be used for best/worst."""
+        participants = [
+            _make_participant(
+                name="Alice",
+                captain={
+                    "name": "Haaland",
+                    "points": 0,
+                    "did_not_play": True,
+                    "effective_captain": "Salah",
+                    "effective_points": 24,
+                },
+            ),
+            _make_participant(
+                name="Bob",
+                captain={"name": "Palmer", "points": 16},
+            ),
+            _make_participant(
+                name="Charlie",
+                captain={"name": "Saka", "points": 4},
+            ),
+        ]
+        result = get_captain_summary(participants)
+        # Alice's effective_points (24) should make her the best pick
+        assert result["best_pick"]["manager"] == "Alice"
+        assert result["best_pick"]["points"] == 24
+        # Charlie's 4 is worst
+        assert result["worst_pick"]["manager"] == "Charlie"
+        assert result["worst_pick"]["points"] == 4
+
+    def test_vice_captain_substitutions_listed(self):
+        """Managers whose captain was subbed should appear in vice_captain_substitutions."""
+        participants = [
+            _make_participant(
+                name="Alice",
+                captain={
+                    "name": "Haaland",
+                    "points": 0,
+                    "did_not_play": True,
+                    "effective_captain": "Salah",
+                    "effective_points": 24,
+                },
+            ),
+            _make_participant(
+                name="Bob",
+                captain={"name": "Palmer", "points": 16},
+            ),
+        ]
+        result = get_captain_summary(participants)
+        subs = result["vice_captain_substitutions"]
+        assert len(subs) == 1
+        assert subs[0]["manager"] == "Alice"
+        assert subs[0]["original_captain"] == "Haaland"
+        assert subs[0]["effective_captain"] == "Salah"
+        assert subs[0]["effective_points"] == 24
+
+    def test_no_substitutions_when_captains_played(self):
+        """No vice_captain_substitutions when all captains played."""
+        participants = [
+            _make_participant(name="Alice", captain={"name": "Salah", "points": 20}),
+            _make_participant(name="Bob", captain={"name": "Haaland", "points": 16}),
+        ]
+        result = get_captain_summary(participants)
+        assert result["vice_captain_substitutions"] == []
+
 
 # --- get_chip_usage ---
 
