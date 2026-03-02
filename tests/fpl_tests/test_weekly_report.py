@@ -13,7 +13,13 @@ from unittest.mock import patch
 
 import pytest
 
-from fpl.weekly_report import WeeklyReport, get_season_from_bootstrap
+from fpl.weekly_report import (
+    WeeklyReport,
+    detect_current_gameweek,
+    get_narrative_path,
+    get_report_path,
+    get_season_from_bootstrap,
+)
 
 # ---------------------------------------------------------------------------
 # Minimal bootstrap data with 4 elements, 2 teams, 4 element_types
@@ -703,6 +709,79 @@ class TestWeeklyReportEdgeCases:
         assert len(bob["transfers"]) == 1
 
 
+class TestCaptainSubstitution:
+    """Test captain substitution detection in _build_squad_data."""
+
+    @pytest.fixture
+    def report_with_captain_sub(self) -> dict[str, Any]:
+        """Build a report where Alice's captain (Haaland) didn't play,
+        so VC (Salah) gets the armband with 2x multiplier."""
+        # Override Alice's picks: captain Haaland has multiplier 0,
+        # VC Salah has multiplier 2 (subbed in as captain)
+        alice_picks_vc_sub: dict[str, Any] = {
+            "active_chip": None,
+            "entry_history": ALICE_PICKS["entry_history"],
+            "picks": [
+                {"element": 200, "position": 1, "multiplier": 0, "is_captain": True, "is_vice_captain": False},
+                {"element": 100, "position": 2, "multiplier": 2, "is_captain": False, "is_vice_captain": True},
+                {"element": 400, "position": 3, "multiplier": 1, "is_captain": False, "is_vice_captain": False},
+                {"element": 300, "position": 12, "multiplier": 0, "is_captain": False, "is_vice_captain": False},
+            ],
+        }
+
+        class VCSubDummyAPI(WeeklyReportDummyAPI):
+            def get_team_picks(self, team_id: str, event_id: str) -> dict[str, Any]:
+                if team_id == "1001":
+                    return alice_picks_vc_sub
+                return super().get_team_picks(team_id, event_id)
+
+        api = VCSubDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
+        return wr.build()
+
+    def test_captain_did_not_play_flag(self, report_with_captain_sub: dict[str, Any]) -> None:
+        alice = report_with_captain_sub["standings"][0]
+        assert alice["captain"]["did_not_play"] is True
+
+    def test_effective_captain_name(self, report_with_captain_sub: dict[str, Any]) -> None:
+        alice = report_with_captain_sub["standings"][0]
+        assert alice["captain"]["effective_captain"] == "Mohamed Salah"
+
+    def test_effective_points(self, report_with_captain_sub: dict[str, Any]) -> None:
+        alice = report_with_captain_sub["standings"][0]
+        # Salah has 12 raw points * 2x multiplier = 24
+        assert alice["captain"]["effective_points"] == 24
+
+    def test_original_captain_points_zero(self, report_with_captain_sub: dict[str, Any]) -> None:
+        alice = report_with_captain_sub["standings"][0]
+        # Haaland (captain, didn't play): 8 raw * 0 multiplier = 0
+        assert alice["captain"]["points"] == 0
+
+    def test_vc_substituted_in_flag(self, report_with_captain_sub: dict[str, Any]) -> None:
+        alice = report_with_captain_sub["standings"][0]
+        assert alice["vice_captain"].get("substituted_in") is True
+
+    def test_normal_captain_not_flagged(self) -> None:
+        """When captain plays normally, did_not_play should be False."""
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
+        report = wr.build()
+        alice = report["standings"][0]
+        assert alice["captain"]["did_not_play"] is False
+        assert "effective_points" not in alice["captain"]
+        assert "effective_captain" not in alice["captain"]
+
+    def test_captain_sub_in_awards(self, report_with_captain_sub: dict[str, Any]) -> None:
+        """Captain summary awards should use effective points."""
+        cs = report_with_captain_sub["awards"]["captain_summary"]
+        subs = cs["vice_captain_substitutions"]
+        assert len(subs) == 1
+        assert subs[0]["manager"] == "Alice"
+        assert subs[0]["original_captain"] == "Erling Haaland"
+        assert subs[0]["effective_captain"] == "Mohamed Salah"
+        assert subs[0]["effective_points"] == 24
+
+
 class TestGetSeasonFromBootstrap:
     """Test the standalone get_season_from_bootstrap() helper."""
 
@@ -720,18 +799,52 @@ class TestGetSeasonFromBootstrap:
         assert get_season_from_bootstrap(data) == "unknown"
 
 
+class TestDetectCurrentGameweek:
+    """Test the detect_current_gameweek() helper."""
+
+    def test_returns_latest_finished_gameweek(self) -> None:
+        api = WeeklyReportDummyAPI()
+        assert detect_current_gameweek(api) == 2
+
+    def test_exits_when_no_finished_gameweek(self) -> None:
+        class NoFinishedAPI(WeeklyReportDummyAPI):
+            def get_bootstrap_static(self) -> dict[str, Any]:
+                return {"events": [{"id": 1, "finished": False}]}
+
+        with pytest.raises(SystemExit):
+            detect_current_gameweek(NoFinishedAPI())
+
+
+class TestPathHelpers:
+    """Test get_report_path() and get_narrative_path()."""
+
+    def test_report_path(self) -> None:
+        path = get_report_path(".", "12345", "2025-26", 5)
+        assert str(path).replace("\\", "/") == "weekly_report/reports/12345/2025-26/gw5.json"
+
+    def test_narrative_path(self) -> None:
+        path = get_narrative_path(".", "12345", "2025-26", 5)
+        assert str(path).replace("\\", "/") == "docs/narratives/2025-26/12345/gw5.md"
+
+    def test_report_path_with_output_dir(self) -> None:
+        path = get_report_path("/tmp/out", "999", "2024-25", 10)
+        assert path.name == "gw10.json"
+        assert "999" in str(path)
+
+    def test_narrative_path_with_output_dir(self) -> None:
+        path = get_narrative_path("/tmp/out", "999", "2024-25", 10)
+        assert path.name == "gw10.md"
+        assert "999" in str(path)
+
+
 class TestSkipExisting:
     """Test the --skip-existing CLI behavior."""
 
-    def test_skip_existing_when_report_and_narrative_exist(self, tmp_path: Any) -> None:
-        """When both report and narrative exist, skip everything."""
+    def test_skip_existing_when_report_exists(self, tmp_path: Any) -> None:
+        """When report exists, skip generation."""
         report_dir = tmp_path / "weekly_report" / "reports" / LEAGUE_ID / "2025-26"
         report_dir.mkdir(parents=True)
         (report_dir / "gw2.json").write_text("{}", encoding="utf-8")
-
-        narrative_dir = tmp_path / "docs" / "narratives" / "2025-26" / LEAGUE_ID
-        narrative_dir.mkdir(parents=True)
-        (narrative_dir / "gw2.md").write_text("Reidar says hi", encoding="utf-8")
 
         with patch("generate_weekly_report.FPL_API") as mock_api_cls:
             mock_api = mock_api_cls.return_value
@@ -745,7 +858,6 @@ class TestSkipExisting:
                     "generate_weekly_report.py",
                     "-l", LEAGUE_ID,
                     "-e", "2",
-                    "--narrative",
                     "--skip-existing",
                     "--output-dir", str(tmp_path),
                 ],
@@ -754,69 +866,6 @@ class TestSkipExisting:
 
             # Nothing should have been built
             mock_api.get_league_standings.assert_not_called()
-
-    def test_skip_existing_without_narrative_flag(self, tmp_path: Any) -> None:
-        """When report exists and --narrative is not set, skip everything."""
-        report_dir = tmp_path / "weekly_report" / "reports" / LEAGUE_ID / "2025-26"
-        report_dir.mkdir(parents=True)
-        (report_dir / "gw2.json").write_text("{}", encoding="utf-8")
-
-        with patch("generate_weekly_report.FPL_API") as mock_api_cls:
-            mock_api = mock_api_cls.return_value
-            mock_api.get_bootstrap_static.return_value = BOOTSTRAP_DATA
-
-            from generate_weekly_report import main
-
-            with patch(
-                "sys.argv",
-                [
-                    "generate_weekly_report.py",
-                    "-l", LEAGUE_ID,
-                    "-e", "2",
-                    "--skip-existing",
-                    "--output-dir", str(tmp_path),
-                ],
-            ):
-                main()
-
-            mock_api.get_league_standings.assert_not_called()
-
-    def test_retry_narrative_when_report_exists_but_narrative_missing(
-        self, tmp_path: Any
-    ) -> None:
-        """When report exists but narrative doesn't, load report and retry narrative."""
-        # Create a valid report JSON
-        api = WeeklyReportDummyAPI()
-        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
-        wr.build()
-        wr.save_report(str(tmp_path))
-
-        with patch("generate_weekly_report.FPL_API") as mock_api_cls:
-            mock_api = mock_api_cls.return_value
-            mock_api.get_bootstrap_static.return_value = BOOTSTRAP_DATA
-
-            with patch("generate_weekly_report._generate_narrative") as mock_narr:
-                mock_narr.return_value = "some/path.md"
-
-                from generate_weekly_report import main
-
-                with patch(
-                    "sys.argv",
-                    [
-                        "generate_weekly_report.py",
-                        "-l", LEAGUE_ID,
-                        "-e", "2",
-                        "--narrative",
-                        "--skip-existing",
-                        "--output-dir", str(tmp_path),
-                    ],
-                ):
-                    main()
-
-                # Report should NOT have been rebuilt
-                mock_api.get_league_standings.assert_not_called()
-                # Narrative SHOULD have been attempted
-                mock_narr.assert_called_once()
 
     def test_no_skip_when_report_missing(self, tmp_path: Any) -> None:
         """When report file doesn't exist, --skip-existing still builds."""

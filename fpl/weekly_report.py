@@ -8,6 +8,7 @@ calculates awards, and assembles the final report dict.
 from __future__ import annotations
 
 import json
+import sys
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -31,6 +32,51 @@ def get_season_from_bootstrap(bootstrap: dict[str, Any]) -> str:
     year = int(first_deadline[:4])
     next_year_short = str(year + 1)[-2:]
     return f"{year}-{next_year_short}"
+
+
+def detect_current_gameweek(api: FPLAPIProtocol) -> int:
+    """Find the latest finished gameweek from bootstrap-static data.
+
+    Scans events in reverse to find the most recent event with
+    finished=True. Raises SystemExit if no finished gameweek is found.
+    """
+    bootstrap = api.get_bootstrap_static()
+    events = bootstrap.get("events", [])
+
+    for event in reversed(events):
+        if event.get("finished", False):
+            return int(event["id"])
+
+    print("Error: No finished gameweek found.", file=sys.stderr)
+    sys.exit(1)
+
+
+def get_report_path(
+    output_dir: str, league_id: str, season: str, event_id: int
+) -> Path:
+    """Return the canonical path for a gameweek report JSON."""
+    return (
+        Path(output_dir)
+        / "weekly_report"
+        / "reports"
+        / league_id
+        / season
+        / f"gw{event_id}.json"
+    )
+
+
+def get_narrative_path(
+    output_dir: str, league_id: str, season: str, event_id: int
+) -> Path:
+    """Return the canonical path for a gameweek narrative markdown."""
+    return (
+        Path(output_dir)
+        / "docs"
+        / "narratives"
+        / season
+        / league_id
+        / f"gw{event_id}.md"
+    )
 
 
 class WeeklyReport:
@@ -313,9 +359,11 @@ class WeeklyReport:
             is_vice_captain = pick.get("is_vice_captain", False)
             raw_points = live_points.get(element_id, 0)
 
+            player_info = registry.get_player_info(element_id)
             squad.append({
                 "element_id": element_id,
-                "name": registry.get_player_name(element_id),
+                "name": player_info["name"],
+                "club": player_info["team"],
                 "position": pick["position"],
                 "points": raw_points,
                 "is_captain": is_captain,
@@ -324,14 +372,16 @@ class WeeklyReport:
 
             if is_captain:
                 captain_data = {
-                    "name": registry.get_player_name(element_id),
+                    "name": player_info["name"],
+                    "club": player_info["team"],
                     "points": raw_points * multiplier,
                     "element_id": element_id,
                 }
 
             if is_vice_captain:
                 vice_captain_data = {
-                    "name": registry.get_player_name(element_id),
+                    "name": player_info["name"],
+                    "club": player_info["team"],
                     "points": raw_points,
                     "element_id": element_id,
                 }
@@ -340,10 +390,31 @@ class WeeklyReport:
             if multiplier == 0:
                 bench_points += raw_points
                 bench_players.append({
-                    "name": registry.get_player_name(element_id),
+                    "name": player_info["name"],
+                    "club": player_info["team"],
                     "points": raw_points,
                     "element_id": element_id,
                 })
+
+        # Detect captain substitution: captain didn't play (multiplier 0)
+        # and vice-captain received the armband (multiplier > 1)
+        captain_multiplier = 0
+        vc_multiplier = 0
+        for p in squad:
+            if p["is_captain"]:
+                captain_multiplier = p["multiplier"]
+            if p["element_id"] == vice_captain_data["element_id"]:
+                vc_multiplier = p["multiplier"]
+
+        if captain_multiplier == 0 and vc_multiplier > 1:
+            captain_data["did_not_play"] = True
+            vice_captain_data["substituted_in"] = True
+            captain_data["effective_captain"] = vice_captain_data["name"]
+            captain_data["effective_points"] = (
+                vice_captain_data["points"] * vc_multiplier
+            )
+        else:
+            captain_data["did_not_play"] = False
 
         return squad, captain_data, vice_captain_data, bench_points, bench_players
 
@@ -356,9 +427,13 @@ class WeeklyReport:
         """Build transfer list with player names and point impact."""
         transfer_list: list[dict[str, Any]] = []
         for t in gw_transfers:
+            in_info = registry.get_player_info(t["element_in"])
+            out_info = registry.get_player_info(t["element_out"])
             transfer_list.append({
-                "player_in": registry.get_player_name(t["element_in"]),
-                "player_out": registry.get_player_name(t["element_out"]),
+                "player_in": in_info["name"],
+                "player_in_club": in_info["team"],
+                "player_out": out_info["name"],
+                "player_out_club": out_info["team"],
                 "player_in_points": live_points.get(t["element_in"], 0),
                 "player_out_points": live_points.get(t["element_out"], 0),
             })

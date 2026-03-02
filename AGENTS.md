@@ -34,21 +34,29 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 
 ### Weekly Report & Narrative Flow (Reidar's Rapport)
 
-**Data Collection → Report Assembly → Narrative Generation → Memory Update → Teams Notification**
+Three independent pipeline stages, each with its own CLI script:
+
+**Stage 1: Report JSON** → **Stage 2: Narrative** → **Stage 3: Teams Notification**
 
 1. **Data Collection** - [`fpl/fpl_api.py`](fpl/fpl_api.py) fetches standings, picks, transfers, and live event data
 2. **Player Resolution** - [`fpl/player_registry.py`](fpl/player_registry.py) maps element IDs to player/team names
 3. **Participant Building** - [`fpl/weekly_report.py`](fpl/weekly_report.py) assembles per-participant gameweek data (points, captain, bench, transfers, rank changes)
 4. **Awards Calculation** - [`fpl/weekly_report_stats.py`](fpl/weekly_report_stats.py) computes awards (top scorer, bench disasters, captain picks, etc.)
 5. **Report Assembly** - `WeeklyReport.build()` produces a self-contained JSON report with meta, standings, awards, league_summary
-6. **Narrative Generation** - [`fpl/narrative_generator.py`](fpl/narrative_generator.py) sends report + Reidar persona + memory context to Claude API, returns Norwegian-language narrative
+6. **Narrative Generation** - [`fpl/narrative_generator.py`](fpl/narrative_generator.py) sends report + Reidar persona + memory context to Claude API, returns Norwegian-language narrative. `run_narrative_pipeline()` orchestrates the full flow.
 7. **Memory Update** - [`fpl/reidar_memory.py`](fpl/reidar_memory.py) updates per-manager profiles, season arc, and GW summaries after each narrative
-8. **Teams Notification** - [`fpl/teams_notification.py`](fpl/teams_notification.py) posts an Adaptive Card with teaser and link (opt-in via `--notify-teams`)
-9. **Entry Point** - [`generate_weekly_report.py`](generate_weekly_report.py) (`--dev` for sample data, `--narrative` for Claude API narrative, `--notify-teams` for Teams posting)
+8. **Teams Notification** - [`fpl/teams_notification.py`](fpl/teams_notification.py) posts an Adaptive Card with teaser and link
+
+**Entry Points** (3 separate scripts, each does one thing and fails loudly):
+- [`generate_weekly_report.py`](generate_weekly_report.py) — Builds report JSON (`--dev`, `--skip-existing`, `--cache-dir`)
+- [`generate_narrative.py`](generate_narrative.py) — Generates narrative from existing JSON (requires `ANTHROPIC_API_KEY`, `--skip-existing`)
+- [`notify_teams.py`](notify_teams.py) — Sends Teams notification from existing narrative (requires `TEAMS_WEBHOOK_URL`)
+
+**Shared helpers** in `fpl/weekly_report.py`: `detect_current_gameweek()`, `get_report_path()`, `get_narrative_path()`, `get_season_from_bootstrap()`
 
 **Reidar Memory System**: Persistent context across gameweeks stored in `weekly_report/reidar_memory/{league_id}/{season}/`. Includes per-manager profiles (~200 words), season arc, and rolling GW summaries. Assembled into prompt context via `ReidarMemory.get_prompt_context()` (~4k words at any point in the season).
 
-**GitHub Actions**: `.github/workflows/scheduled-build.yml` runs nightly, generates HTML dashboards and weekly report + narrative (with `--skip-existing` to avoid duplicates), and auto-commits.
+**GitHub Actions**: `.github/workflows/scheduled-build.yml` runs nightly with 3 separate steps: generate report JSON, generate narrative, send Teams notification. Each step shows green/red independently. Secrets scoped to only the steps that need them.
 
 ## Directory Structure
 
@@ -88,7 +96,9 @@ See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
 - **Root files**
   - [`generate_html.py`](generate_html.py) - Main HTML generation script
   - [`generate_index.py`](generate_index.py) - Index page generator
-  - [`generate_weekly_report.py`](generate_weekly_report.py) - Weekly report generation (JSON + narrative)
+  - [`generate_weekly_report.py`](generate_weekly_report.py) - Weekly report JSON generation
+  - [`generate_narrative.py`](generate_narrative.py) - Narrative generation via Claude API
+  - [`notify_teams.py`](notify_teams.py) - Teams webhook notification
   - [`requirements.txt`](requirements.txt) - Python dependencies
 
 ## Key Conventions

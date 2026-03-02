@@ -168,10 +168,22 @@ def get_transfer_impact(participants_data: list[dict]) -> dict | None:
     }
 
 
+def _captain_effective_points(captain: dict) -> int:
+    """Return effective points for a captain pick.
+
+    Uses effective_points (from VC substitution) when present,
+    otherwise falls back to the captain's own points.
+    """
+    if "effective_points" in captain:
+        return captain["effective_points"]
+    return captain.get("points", 0)
+
+
 def get_captain_summary(participants_data: list[dict]) -> dict:
     """Summarize captain picks across all participants.
 
-    Returns dict with most_popular, best_pick, worst_pick.
+    Returns dict with most_popular, best_pick, worst_pick,
+    and vice_captain_substitutions.
     Returns empty dict if no participants.
     """
     if not participants_data:
@@ -187,12 +199,27 @@ def get_captain_summary(participants_data: list[dict]) -> dict:
 
     best = max(
         participants_data,
-        key=lambda p: p.get("captain", {}).get("points", 0),
+        key=lambda p: _captain_effective_points(p.get("captain", {})),
     )
     worst = min(
         participants_data,
-        key=lambda p: p.get("captain", {}).get("points", 0),
+        key=lambda p: _captain_effective_points(p.get("captain", {})),
     )
+
+    best_captain = best.get("captain", {})
+    worst_captain = worst.get("captain", {})
+
+    # Build list of VC substitutions
+    vice_captain_substitutions: list[dict] = []
+    for p in participants_data:
+        captain = p.get("captain", {})
+        if captain.get("did_not_play"):
+            vice_captain_substitutions.append({
+                "manager": p["player_first_name"],
+                "original_captain": captain.get("name", "Unknown"),
+                "effective_captain": captain.get("effective_captain", "Unknown"),
+                "effective_points": captain.get("effective_points", 0),
+            })
 
     return {
         "most_popular": {
@@ -201,14 +228,15 @@ def get_captain_summary(participants_data: list[dict]) -> dict:
         },
         "best_pick": {
             "manager": best["player_first_name"],
-            "captain": best.get("captain", {}).get("name", "Unknown"),
-            "points": best.get("captain", {}).get("points", 0),
+            "captain": best_captain.get("name", "Unknown"),
+            "points": _captain_effective_points(best_captain),
         },
         "worst_pick": {
             "manager": worst["player_first_name"],
-            "captain": worst.get("captain", {}).get("name", "Unknown"),
-            "points": worst.get("captain", {}).get("points", 0),
+            "captain": worst_captain.get("name", "Unknown"),
+            "points": _captain_effective_points(worst_captain),
         },
+        "vice_captain_substitutions": vice_captain_substitutions,
     }
 
 

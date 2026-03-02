@@ -107,6 +107,7 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 - `build()` fetches all data, assembles participant dicts, calculates awards, returns complete report dict with `meta`, `standings`, `awards`, `league_summary`
 - `save_report(output_dir)` writes JSON to `weekly_report/reports/{league_id}/{season}/gw{N}.json`
 - Uses PlayerRegistry for name resolution, weekly_report_stats for awards
+- Shared helpers: `detect_current_gameweek(api)`, `get_report_path()`, `get_narrative_path()`, `get_season_from_bootstrap()`
 
 **[`weekly_report_stats.py`](weekly_report_stats.py)** - Pure award calculation functions
 - All functions: `list[dict]` in, `dict`/`list`/`None` out — no side effects
@@ -117,6 +118,8 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 - `NarrativeGenerator(client=None)` — accepts optional anthropic client; creates from `ANTHROPIC_API_KEY` env var if not provided
 - `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None)` — builds system prompt from reference docs + memory, sends report as user message, returns Norwegian narrative markdown
 - `save_narrative(content, output_dir, league_id, season, event_id)` writes to `docs/narratives/{season}/{league_id}/gw{N}.md`
+- `run_narrative_pipeline(result, league_id, event_id, output_dir)` — orchestrates full flow: read Reidar docs, load memory, generate narrative, save, update memory
+- `read_reidar_doc(filename)` — reads reference docs from `weekly_report/` directory
 - Uses `claude-sonnet-4-6` model
 
 **[`teams_notification.py`](teams_notification.py)** - Microsoft Teams Adaptive Card notifications

@@ -292,23 +292,40 @@ class ReidarMemory:
 
         Expected sections delimited by ===MANAGER: name===...===END===,
         ===GW_SUMMARY===...===END===, ===SEASON_ARC===...===END===.
+
+        Saves each section independently — a malformed section is skipped
+        with a warning so that other sections are still written.
         """
+        warnings: list[str] = []
+
         # Parse manager profiles
         remaining = response_text
         while "===MANAGER:" in remaining:
-            start_marker = remaining.index("===MANAGER:")
-            # Extract name from marker line
-            marker_end = remaining.index("===", start_marker + 3)
+            try:
+                start_marker = remaining.index("===MANAGER:")
+                marker_end = remaining.index("===", start_marker + 3)
+            except ValueError:
+                warnings.append(
+                    "MANAGER section: could not find closing '===' "
+                    "for manager name marker. Skipping remaining managers."
+                )
+                break
             name_part = remaining[start_marker + len("===MANAGER:"):marker_end].strip()
-            # Find content between marker end and ===END===
             content_start = marker_end + 3
-            # Skip newline after marker
             if content_start < len(remaining) and remaining[content_start] == "\n":
                 content_start += 1
-            end_marker = remaining.index("===END===", content_start)
+            try:
+                end_marker = remaining.index("===END===", content_start)
+            except ValueError:
+                warnings.append(
+                    f"MANAGER section for '{name_part}': could not find "
+                    "'===END===' delimiter. Skipping this manager."
+                )
+                # Advance past the broken marker to continue parsing
+                remaining = remaining[content_start:]
+                continue
             content = remaining[content_start:end_marker].strip()
 
-            # Write manager profile
             profile_path = self._managers_path / f"{name_part}.md"
             profile_path.write_text(content, encoding="utf-8")
 
@@ -319,18 +336,40 @@ class ReidarMemory:
             start = remaining.index("===GW_SUMMARY===") + len("===GW_SUMMARY===")
             if start < len(remaining) and remaining[start] == "\n":
                 start += 1
-            end = remaining.index("===END===", start)
-            gw_content = remaining[start:end].strip()
-            gw_path = self._gameweeks_path / f"gw{event_id}.md"
-            gw_path.write_text(gw_content, encoding="utf-8")
-            remaining = remaining[end + len("===END==="):]
+            try:
+                end = remaining.index("===END===", start)
+                gw_content = remaining[start:end].strip()
+                gw_path = self._gameweeks_path / f"gw{event_id}.md"
+                gw_path.write_text(gw_content, encoding="utf-8")
+                remaining = remaining[end + len("===END==="):]
+            except ValueError:
+                warnings.append(
+                    "GW_SUMMARY section: could not find '===END===' delimiter. "
+                    "Skipping GW summary."
+                )
 
         # Parse season arc
         if "===SEASON_ARC===" in remaining:
             start = remaining.index("===SEASON_ARC===") + len("===SEASON_ARC===")
             if start < len(remaining) and remaining[start] == "\n":
                 start += 1
-            end = remaining.index("===END===", start)
-            arc_content = remaining[start:end].strip()
-            arc_path = self._base_path / "season_arc.md"
-            arc_path.write_text(arc_content, encoding="utf-8")
+            try:
+                end = remaining.index("===END===", start)
+                arc_content = remaining[start:end].strip()
+                arc_path = self._base_path / "season_arc.md"
+                arc_path.write_text(arc_content, encoding="utf-8")
+            except ValueError:
+                warnings.append(
+                    "SEASON_ARC section: could not find '===END===' delimiter. "
+                    "Skipping season arc."
+                )
+
+        if warnings:
+            import sys
+
+            print(
+                "WARNING: Memory update partially failed — "
+                "some sections could not be parsed:\n"
+                + "\n".join(f"  - {w}" for w in warnings),
+                file=sys.stderr,
+            )
