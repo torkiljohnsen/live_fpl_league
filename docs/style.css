@@ -79,10 +79,14 @@ table {
 
 .stats-records-wrapper {
 	display: flex;
-	gap: 2rem;
+	gap: 1.5rem;
 	justify-content: center;
 	margin: 2rem auto;
 	max-width: 80vw;
+}
+
+.stats-records-wrapper .stats-container h2 {
+	margin-top: 0;
 }
 
 .stats-records-wrapper .stats-container {
