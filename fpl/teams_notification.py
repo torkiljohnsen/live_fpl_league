@@ -46,65 +46,56 @@ def build_adaptive_card(
     image_url: str,
     title: str = "",
 ) -> dict[str, Any]:
-    """Build an Adaptive Card payload for Teams webhook."""
+    """Build an Adaptive Card payload for Power Automate webhook."""
     card_title = title if title else f"Reidars Rapport — Runde {gameweek}"
     link_label = f"Les Reidars rapport uke {gameweek}"
     return {
-        "type": "message",
-        "attachments": [
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "type": "AdaptiveCard",
+        "version": "1.4",
+        "body": [
             {
-                "contentType": "application/vnd.microsoft.card.adaptive",
-                "contentUrl": None,
-                "content": {
-                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                    "type": "AdaptiveCard",
-                    "version": "1.4",
-                    "body": [
-                        {
-                            "type": "ColumnSet",
-                            "columns": [
-                                {
-                                    "type": "Column",
-                                    "width": "stretch",
-                                    "items": [
-                                        {
-                                            "type": "TextBlock",
-                                            "text": card_title,
-                                            "weight": "bolder",
-                                            "size": "large",
-                                            "wrap": True,
-                                        },
-                                        {
-                                            "type": "TextBlock",
-                                            "text": teaser,
-                                            "wrap": True,
-                                            "size": "medium",
-                                            "spacing": "small",
-                                        },
-                                        {
-                                            "type": "TextBlock",
-                                            "text": f"[{link_label}]({narrative_url})",
-                                            "wrap": True,
-                                            "spacing": "medium",
-                                        },
-                                    ],
-                                },
-                                {
-                                    "type": "Column",
-                                    "width": "stretch",
-                                    "items": [
-                                        {
-                                            "type": "Image",
-                                            "url": image_url,
-                                            "size": "stretch",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
-                },
-            }
+                "type": "ColumnSet",
+                "columns": [
+                    {
+                        "type": "Column",
+                        "width": "stretch",
+                        "items": [
+                            {
+                                "type": "TextBlock",
+                                "text": card_title,
+                                "weight": "bolder",
+                                "size": "large",
+                                "wrap": True,
+                            },
+                            {
+                                "type": "TextBlock",
+                                "text": teaser,
+                                "wrap": True,
+                                "size": "medium",
+                                "spacing": "small",
+                            },
+                            {
+                                "type": "TextBlock",
+                                "text": f"[{link_label}]({narrative_url})",
+                                "wrap": True,
+                                "spacing": "medium",
+                            },
+                        ],
+                    },
+                    {
+                        "type": "Column",
+                        "width": "stretch",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "url": image_url,
+                                "size": "stretch",
+                            },
+                        ],
+                    },
+                ],
+            },
         ],
     }
 
@@ -116,16 +107,28 @@ def post_to_teams(
     narrative_url: str,
     image_url: str,
 ) -> bool:
-    """Post an Adaptive Card to Teams via webhook. Returns True on success, False on failure."""
+    """Post an Adaptive Card to Teams via Power Automate webhook.
+
+    Returns True on success, False on failure.
+    """
     try:
         title = extract_title(narrative)
         teaser = extract_teaser(narrative)
         card = build_adaptive_card(
             gameweek, teaser, narrative_url, image_url, title=title,
         )
+        payload = {
+            "type": "message",
+            "attachments": [
+                {
+                    "contentType": "application/vnd.microsoft.card.adaptive",
+                    "content": card,
+                }
+            ],
+        }
         response = requests.post(
             webhook_url,
-            json=card,
+            json=payload,
             headers={"Content-Type": "application/json"},
             timeout=30,
         )

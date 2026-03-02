@@ -199,7 +199,19 @@ class ReidarMemory:
 
         response_text: str = response.content[0].text  # type: ignore[union-attr]
 
+        self._save_debug_response(response_text, event_id)
         self._parse_and_write_memory(response_text, event_id)
+
+    def _save_debug_response(self, response_text: str, event_id: int) -> None:
+        """Save the raw LLM response for debugging memory update parsing.
+
+        Writes to {base_path}/debug/gw{N}_memory_response.txt so that
+        parse failures can be investigated after the fact.
+        """
+        debug_dir = self._base_path / "debug"
+        debug_dir.mkdir(parents=True, exist_ok=True)
+        debug_path = debug_dir / f"gw{event_id}_memory_response.txt"
+        debug_path.write_text(response_text, encoding="utf-8")
 
     def _build_memory_update_prompt(
         self,

@@ -111,28 +111,17 @@ class TestBuildAdaptiveCard:
         )
 
     def test_top_level_structure(self, card: dict) -> None:
-        assert card["type"] == "message"
-        assert isinstance(card["attachments"], list)
-        assert len(card["attachments"]) == 1
-
-    def test_attachment_content_type(self, card: dict) -> None:
-        attachment = card["attachments"][0]
-        assert attachment["contentType"] == "application/vnd.microsoft.card.adaptive"
-        assert attachment["contentUrl"] is None
-
-    def test_card_schema_and_version(self, card: dict) -> None:
-        content = card["attachments"][0]["content"]
-        assert content["$schema"] == "http://adaptivecards.io/schemas/adaptive-card.json"
-        assert content["type"] == "AdaptiveCard"
-        assert content["version"] == "1.4"
+        assert card["type"] == "AdaptiveCard"
+        assert card["$schema"] == "http://adaptivecards.io/schemas/adaptive-card.json"
+        assert card["version"] == "1.4"
 
     def _get_columns(self, card: dict) -> list:
-        column_set = card["attachments"][0]["content"]["body"][0]
+        column_set = card["body"][0]
         assert column_set["type"] == "ColumnSet"
         return column_set["columns"]
 
     def test_body_has_column_set(self, card: dict) -> None:
-        body = card["attachments"][0]["content"]["body"]
+        body = card["body"]
         assert len(body) == 1
         assert body[0]["type"] == "ColumnSet"
 
@@ -173,7 +162,7 @@ class TestBuildAdaptiveCard:
             image_url="https://example.com/img.png",
             title="Bench boost. Fem poeng. Null verdighet.",
         )
-        left = card["attachments"][0]["content"]["body"][0]["columns"][0]
+        left = card["body"][0]["columns"][0]
         assert left["items"][0]["text"] == "Bench boost. Fem poeng. Null verdighet."
 
     def test_empty_title_uses_fallback(self) -> None:
@@ -184,7 +173,7 @@ class TestBuildAdaptiveCard:
             image_url="https://example.com/img.png",
             title="",
         )
-        left = card["attachments"][0]["content"]["body"][0]["columns"][0]
+        left = card["body"][0]["columns"][0]
         assert left["items"][0]["text"] == "Reidars Rapport — Runde 10"
 
 
