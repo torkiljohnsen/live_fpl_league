@@ -230,6 +230,8 @@ class ReidarMemory:
             "===MANAGER: {navn}===\n"
             "(profiltekst, ~200 ord)\n"
             "===END===\n\n"
+            "Husk også å ha med ===END=== på siste managerprofil"
+            " — det er viktig for parsing.\n\n"
             "Deretter:\n"
             "===GW_SUMMARY===\n"
             "(rundesammendrag, ~100 ord)\n"
