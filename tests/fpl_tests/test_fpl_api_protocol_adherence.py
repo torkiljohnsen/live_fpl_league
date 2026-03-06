@@ -9,7 +9,6 @@ def test_fpl_api_protocol_adherence() -> None:
 	assert hasattr(api, 'get_team')
 	assert hasattr(api, 'get_team_history')
 	assert hasattr(api, 'get_team_picks')
-	assert hasattr(api, 'get_fixtures')
 	assert hasattr(api, 'get_bootstrap_static')
 	assert hasattr(api, 'get_transfers')
 	assert hasattr(api, 'get_event_live')

@@ -162,17 +162,6 @@ class FPL_API:
         assert isinstance(result, dict)
         return result
 
-    def get_fixtures(self, event_id: int | None = None) -> list:
-        """
-        Get fixtures, optionally filtered by event (gameweek).
-        :param event_id: Optional event (gameweek) ID. If None, returns all fixtures.
-        :return: List of fixture dicts
-        """
-        endpoint = f"/fixtures/?event={event_id}" if event_id else "/fixtures/"
-        result = self._get(endpoint)
-        assert isinstance(result, list)
-        return result
-
     def get_bootstrap_static(self) -> dict:
         """
         Get the bootstrap static data (global FPL data).

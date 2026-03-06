@@ -56,11 +56,7 @@ Three independent pipeline stages, each with its own CLI script:
 
 **Reidar Memory System**: Persistent context across gameweeks stored in `weekly_report/reidar_memory/{league_id}/{season}/`. Includes per-manager profiles (~200 words), season arc, and rolling GW summaries. Assembled into prompt context via `ReidarMemory.get_prompt_context()` (~4k words at any point in the season).
 
-**GitHub Actions**: `.github/workflows/scheduled-build.yml` runs hourly. `check_gw_status.py` compares live FPL API data against `.gw_state.json` to detect changes:
-- **Tier 1** (new fixtures finished) → refreshes dashboards (`generate_html`, `generate_index`)
-- **Tier 2** (whole gameweek finished) → generates report JSON, narrative, sends Teams notification
-
-State is only saved after successful generation. If a step fails, the next hourly run retries automatically. Manual dispatch runs everything unconditionally.
+**GitHub Actions**: `.github/workflows/scheduled-build.yml` runs nightly with 3 separate steps: generate report JSON, generate narrative, send Teams notification. Each step shows green/red independently. Secrets scoped to only the steps that need them.
 
 ## Directory Structure
 
@@ -98,13 +94,11 @@ State is only saved after successful generation. If a step fails, the next hourl
   - [`fpl_tests/data_samples/`](tests/fpl_tests/data_samples/) - Test fixtures
 
 - **Root files**
-  - [`check_gw_status.py`](check_gw_status.py) - Hourly CI check: compares FPL API against `.gw_state.json` to detect new fixtures/gameweek completion
   - [`generate_html.py`](generate_html.py) - Main HTML generation script
   - [`generate_index.py`](generate_index.py) - Index page generator
   - [`generate_weekly_report.py`](generate_weekly_report.py) - Weekly report JSON generation
   - [`generate_narrative.py`](generate_narrative.py) - Narrative generation via Claude API
   - [`notify_teams.py`](notify_teams.py) - Teams webhook notification
-  - [`.gw_state.json`](.gw_state.json) - Persisted gameweek state (committed by CI, tracks finished fixtures)
   - [`requirements.txt`](requirements.txt) - Python dependencies
 
 ## Key Conventions

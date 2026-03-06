@@ -13,10 +13,10 @@ See [Live standings](https://torkiljohnsen.github.io/live_fpl_league/)
   - [Setup](#setup)
   - [Usage](#usage-1)
   - [Output](#output)
-- [GitHub Actions (Hourly Workflow)](#github-actions-hourly-workflow)
-  - [How it works](#how-it-works)
+- [GitHub Actions (Nightly Workflow)](#github-actions-nightly-workflow)
+  - [What happens each night](#what-happens-each-night)
   - [Required secrets](#required-secrets)
-  - [Failure recovery](#failure-recovery)
+  - [How it ties together after a gameweek finishes](#how-it-ties-together-after-a-gameweek-finishes)
 - [Development Setup](#development-setup)
   - [Environment Setup](#environment-setup)
   - [Running Tests](#running-tests)
@@ -129,40 +129,37 @@ All weekly report artifacts are stored under `weekly_report/`:
 
 Narrative Markdown files are written to `docs/narratives/{season}/{league_id}/gw{N}.md`, rendered client-side at `reidars_rapport.html?gw={N}`.
 
-## GitHub Actions (Hourly Workflow)
+## GitHub Actions (Nightly Workflow)
 
-An hourly GitHub Actions workflow (`.github/workflows/scheduled-build.yml`) checks for FPL changes and runs the appropriate steps. It can also be triggered manually via `workflow_dispatch`.
+A nightly GitHub Actions workflow (`.github/workflows/scheduled-build.yml`) runs at 05:00 UTC and ties everything together automatically. It can also be triggered manually via `workflow_dispatch`.
 
-### How it works
+### What happens each night
 
-Each hour, `check_gw_status.py` queries the FPL API and compares against a persisted state file (`.gw_state.json`) to detect what has changed since the last successful run. It produces two signals:
-
-**Tier 1 — New fixtures finished** (e.g. a match ended): Refreshes dashboards.
-1. **HTML dashboards** — Regenerates standings, gameweek history, and ranking progression for all configured leagues (`1639886`, `1638989`).
-2. **Index page** — Regenerates `docs/index.html`.
-
-**Tier 2 — Whole gameweek finished** (FPL marks the event as finished): Generates reports.
-1. **Weekly report** — Builds the JSON report for the finished gameweek (`--skip-existing` prevents duplicates).
-2. **Narrative** — Generates a Norwegian-language narrative via Claude API.
-3. **Teams notification** — Posts an Adaptive Card to the configured Teams webhook.
-
-If nothing has changed, the workflow skips all generation steps to minimize CI usage.
-
-After successful generation, the state file is updated and committed alongside the generated files so the next run can diff against it.
-
-Manual dispatch (`workflow_dispatch`) skips the check and runs everything unconditionally.
+1. **HTML dashboards** — Generates standings, gameweek history, and ranking progression charts for all configured leagues (currently `1639886` and `1638989`). API responses are cached with `--cache-dir` to avoid redundant calls.
+2. **Index page** — Regenerates `docs/index.html` with links to all dashboard pages.
+3. **Weekly report & narrative** — Runs `generate_weekly_report.py` with `--narrative --skip-existing` for league `1638989`. This:
+   - Builds the JSON report (if it doesn't already exist for this gameweek)
+   - Generates a Norwegian narrative via Claude API
+   - `--skip-existing` ensures no duplicate work — once a gameweek's report and narrative exist, it's skipped
+4. **Hero images** — Copies `reidars_rapport_{1-4}.png` to `docs/assets/` if not already present
+5. **Auto-commit** — Commits all changes to `docs/`, `weekly_report/reports/`, and `weekly_report/reidar_memory/` to the `dev` branch
 
 ### Required secrets
 
 - `GH_PAT` — GitHub personal access token (for pushing to the repo)
 - `ANTHROPIC_API_KEY` — Claude API key (for narrative generation)
-- `TEAMS_WEBHOOK_URL` — Power Automate Workflows webhook URL (for Teams notifications)
+- `TEAMS_WEBHOOK_URL` — Power Automate Workflows webhook URL (configured but not active until `--notify-teams` is added to the workflow)
 
-### Failure recovery
+### How it ties together after a gameweek finishes
 
-The state file (`.gw_state.json`) is only saved after all generation steps succeed. If any step fails mid-pipeline, the state is not updated, and the next hourly run will detect the same changes and retry automatically.
+When the FPL API marks a gameweek as finished, the next nightly run will:
+1. Detect the newly finished gameweek automatically
+2. Generate fresh dashboard HTML reflecting the latest results
+3. Create a new narrative report (Reidar's take on the gameweek)
+4. Commit the narrative Markdown file (viewable via the dynamic article page on GitHub Pages)
+5. Commit everything — the site updates automatically
 
-For a full manual re-run, use the **Run workflow** button on GitHub (workflow_dispatch) — this bypasses the check entirely and runs all steps.
+Dashboard pages are always regenerated (reflecting live data), while reports and narratives are only generated once per gameweek (`--skip-existing`).
 
 ## Development Setup
 
