@@ -103,6 +103,27 @@ jobs:
             git push
           )
 
+      - name: Wait for GitHub Pages deployment
+        if: steps.narrative.outputs.generated == 'true'
+        run: |
+          URL="https://torkiljohnsen.github.io/live_fpl_league/narratives/${SEASON}/${LEAGUE_ID}/gw${GW}.md"
+          echo "Waiting for GitHub Pages to deploy: $URL"
+          for i in $(seq 1 30); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+            if [ "$STATUS" = "200" ]; then
+              echo "Live after ~$((i * 10))s"
+              break
+            fi
+            if [ "$i" = "30" ]; then
+              echo "Warning: timed out after 5min, sending notification anyway"
+            fi
+            sleep 10
+          done
+        env:
+          SEASON: ${{ steps.narrative.outputs.season }}
+          GW: ${{ steps.narrative.outputs.event_id }}
+          LEAGUE_ID: "1638989"
+
       - name: Send Teams notification
         if: steps.narrative.outputs.generated == 'true'
         continue-on-error: true

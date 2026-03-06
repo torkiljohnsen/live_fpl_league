@@ -102,6 +102,8 @@ def main() -> None:
     )
     print(f"Narrative saved: {narrative_path}")
     _set_github_output("generated", "true")
+    _set_github_output("season", season)
+    _set_github_output("event_id", str(event_id))
 
 
 def _set_github_output(name: str, value: str) -> None:

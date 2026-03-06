@@ -327,7 +327,7 @@ The column should be easy to scan. Think newspaper layout — a reader should be
   - Dúbravka og Mané: delte 4 mellom seg, som om det var en trøst.
   ```
 
-  Don't force lists. Prose is always the default. Lists are a punctuation mark, not a paragraph structure.
+  Prose is the default, but most rounds have at least one moment that benefits from a short list — a bench disaster inventory, captain results across managers, transfer outcomes, or a quick scoring breakdown. When in doubt, include one; it's easier to cut than to add. Lists are a punctuation mark, not a paragraph structure — but a column without any punctuation marks feels flat.
 - **Fact boxes**: One per article maximum. A fact box is a visually separated sidebar with a short, structured nugget — a mini-leaderboard, a season record snapshot, a stat comparison. The template renders fact boxes as a distinct block, clearly separated from the surrounding prose.
 
   Use the HTML wrapper `<div class="fact-box" markdown="1">` so the renderer applies the styling. The first bold line becomes the box header. Content can be a short list (3–5 items) or a few bold key-value lines. Each item should have Reidar's voice — not raw data, but data with a comment or edge:
@@ -354,7 +354,7 @@ The column should be easy to scan. Think newspaper layout — a reader should be
   - **Title race tightening**: Points gaps at the top over the last 5 rounds
   - **Team value divergence**: Richest and poorest squads
 
-  Don't force a fact box. If the round doesn't have an interesting data angle, skip it. A fact box that restates what the prose already says is filler. The box should add a dimension the text doesn't cover — a historical lens, a cross-round comparison, a stat that's too structured for flowing prose but too interesting to leave out.
+  Aim to include a fact box more often than not — most rounds have a stat angle worth highlighting. If you're unsure whether the data is interesting enough, it probably is. A fact box that restates what the prose already says is filler, but one that adds a historical lens, a cross-round comparison, or a structured stat the text can't elegantly contain is exactly right. When in doubt, include one; it's easier to cut than to add.
 - **Paragraph rhythm**: Vary paragraph length. A long analytical paragraph followed by a two-sentence paragraph followed by a standalone line creates visual rhythm. Three long paragraphs in a row is a wall. Three short ones in a row feels choppy. Mix them.
 
 ### Tone Calibration
