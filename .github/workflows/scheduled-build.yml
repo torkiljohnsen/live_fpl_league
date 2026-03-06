@@ -1,9 +1,9 @@
-name: Nightly Dashboard & Weekly Report
+name: Hourly Dashboard & Weekly Report
 
 on:
   schedule:
-    - cron: "0 5 * * *"   # Runs at 05:00 UTC every day
-  workflow_dispatch:       # Allow manual runs too
+    - cron: "0 * * * *"  # Hourly check
+  workflow_dispatch:      # Manual runs skip the check and run everything
 
 permissions:
   contents: write   # Needed to push changes
@@ -28,34 +28,73 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Generate standings and gw history for the Sinkaberg leagues
+      - name: Check gameweek status
+        id: gw_check
+        if: github.event_name != 'workflow_dispatch'
+        run: python check_gw_status.py --cache-dir .fpl_cache
+
+      # Dashboards: refresh when new fixtures finish OR when the whole gameweek finishes
+      - name: Generate standings and gw history
+        if: >-
+          github.event_name == 'workflow_dispatch'
+          || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
+          || steps.gw_check.outputs.gameweek_finished == 'true'
         run: python generate_html.py -l 1639886,1638989 --cache-dir .fpl_cache
 
       - name: Generate Index
+        if: >-
+          github.event_name == 'workflow_dispatch'
+          || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
+          || steps.gw_check.outputs.gameweek_finished == 'true'
         run: python generate_index.py
 
+      # Tier 2: Whole gameweek finished → report + narrative + notification
       - name: Generate weekly report (JSON)
+        if: >-
+          github.event_name == 'workflow_dispatch'
+          || steps.gw_check.outputs.gameweek_finished == 'true'
         run: python generate_weekly_report.py -l 1638989 --skip-existing --cache-dir .fpl_cache
 
       - name: Generate narrative
         id: narrative
+        if: >-
+          github.event_name == 'workflow_dispatch'
+          || steps.gw_check.outputs.gameweek_finished == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python generate_narrative.py -l 1638989 --skip-existing --cache-dir .fpl_cache
 
       - name: Copy hero images to docs/assets
+        if: >-
+          github.event_name == 'workflow_dispatch'
+          || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
+          || steps.gw_check.outputs.gameweek_finished == 'true'
         run: |
           mkdir -p docs/assets
           for img in weekly_report/reidars_rapport_*.png; do
             cp -n "$img" docs/assets/ 2>/dev/null || true
           done
 
+      # Save state after successful generation so the next run can diff against it.
+      # Runs before commit so the updated state file is included in the commit.
+      # Only runs when the check step detected changes (or on manual dispatch).
+      - name: Save gameweek state
+        if: >-
+          github.event_name == 'workflow_dispatch'
+          || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
+          || steps.gw_check.outputs.gameweek_finished == 'true'
+        run: python check_gw_status.py --save --cache-dir .fpl_cache
+
       - name: Commit and push changes
+        if: >-
+          github.event_name == 'workflow_dispatch'
+          || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
+          || steps.gw_check.outputs.gameweek_finished == 'true'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add docs/
+          git add docs/ .gw_state.json
           for dir in weekly_report/reports weekly_report/reidar_memory; do
             [ -d "$dir" ] && git add "$dir"
           done

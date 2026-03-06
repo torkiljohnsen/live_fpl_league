@@ -41,6 +41,9 @@ class DummyAPI:
             return json.loads(path.read_text(encoding="utf-8"))
         return []
 
+    def get_fixtures(self, event_id=None):
+        return []
+
     def get_event_live(self, event_id):
         path = self.data_dir / f"event_{event_id}_live_sample.json"
         if path.exists():

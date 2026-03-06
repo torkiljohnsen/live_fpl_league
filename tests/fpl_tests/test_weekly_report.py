@@ -349,6 +349,9 @@ class WeeklyReportDummyAPI:
     def get_transfers(self, team_id: str) -> list[dict[str, Any]]:
         return self._transfers.get(team_id, [])
 
+    def get_fixtures(self, event_id: int | None = None) -> list[dict[str, Any]]:
+        return []
+
     def get_event_live(self, event_id: str) -> dict[str, Any]:
         return EVENT_LIVE_DATA
 

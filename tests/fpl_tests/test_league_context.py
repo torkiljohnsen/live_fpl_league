@@ -28,6 +28,15 @@ class DummyAPI:
     def get_team_picks(self, team_id, event_id):
         return {}
 
+    def get_fixtures(self, event_id=None):
+        return []
+
+    def get_transfers(self, team_id):
+        return []
+
+    def get_event_live(self, event_id):
+        return {}
+
 
 data_dir = Path(__file__).parent / "data_samples"
 LEAGUE_ID = "1639886"
