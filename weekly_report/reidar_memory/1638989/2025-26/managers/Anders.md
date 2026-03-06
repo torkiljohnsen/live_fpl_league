@@ -1,9 +1,9 @@
 **Lag:** Thisistheyear
-**Sesongstatistikk:** 9 seiere, 0 sisteplasser. Sesong-high 83 (GW16), low 32 (GW5, GW13). Snitt ~58.
-**Nåværende form:** Serieleder med 1623 poeng — men gapet ned til Torkil er krympet til 5 poeng. 56 i GW28 — tredje lavest i runden.
-**Sesongutvikling:** 28 runder uten sisteplass. 9 rundeseiere. Men GW28 var et dobbelt varselskudd: null fra Haaland-kapteinen, og ligaens dårligste bytter (Rice inn for Garner: -1 netto, Dalot inn for Timber: -7 netto — samlet -8). Wilson som visekaptein satt på 12 ubrukt. Gapet til Torkil var 35 for tre uker siden. Nå er det 5.
-**Min vurdering:** Konsistensmannen gjør de samme feilene som alle andre — han er bare mer sjelden avslørt. GW28 var en sjelden avsløring. Null fra kapteinen, negative bytter, 56 poeng. Tre uker til: gap på 35. Én uke etter: gap på 5. Det er fort gjort å miste en tittel man aldri tapte en eneste runde på veien mot.
-**Nevneverdige øyeblikk:** GW28: Null fra Haaland-kapteinen. Ligaens verste bytter (-8 nettotap). Gap til Torkil: fra 35 til 5 på tre uker.
-**Løpende vitser:** Haaland-lojalitet har en pris. GW28 viste den. Wilson på andreknappen med 12 ubrukt er sesongens mest ironiske scenario.
-**Byttemønster:** To bytter i GW28 — begge gale. Rice inn for Garner, Dalot inn for Timber.
-**Kapteinvalg:** Haaland (GW28) — null. Haaland på benken med null, Wilson (12) som ubrukt visekaptein.
+**Sesongstatistikk:** 10 seiere, 0 sisteplasser. Sesong-high 83 (GW16), low 32 (GW5, GW13). Snitt ~59.
+**Nåværende form:** Serieleder med 1705 poeng — gapet ned til Torkil er nå 40 poeng etter at Anders vant GW29 med 82.
+**Sesongutvikling:** Free hit i GW29. Saka som kaptein ga 18 — ligaens beste kapteinsprestasjon denne runden. Tarkowski (15), Gabriel (11), Garner (10) og João Pedro (19) bidro solidt. Men benken hadde 24 poeng — João Pedro lå ubrukt med 19. Det er free hit i et nøtteskall: bytter alt, treffer på det meste, mister 24 til benken uansett.
+**Min vurdering:** Konsistensmannen holder. 10 rundeseiere, null sisteplasser. Etter GW28-fiasko (null fra Haaland, -8 på bytter) og et krympet gap til Torkil (5 poeng), responderte Anders med free hit og rundeseier. Det er karaktertest. Men 24 benchpoeng er ikke imponerende — det er en påminnelse om at perfekte free hits ikke eksisterer. Med 40 poengs ledelse og ni runder igjen ser dette ut som Anders' tittel å miste.
+**Nevneverdige øyeblikk:** GW28: Katastrofal runde — null fra Haaland, -8 bytter, gap krympet fra 35 til 5. GW29: Free hit, rundevinner 82. João Pedro (19) på benken. Gap til Torkil: 40.
+**Løpende vitser:** Free hit med 24 benchpoeng. Haaland ute, Saka inn — og 10 runder uten sisteplass. João Pedro's 19 sitter ubrukt på benken og ler.
+**Byttemønster:** GW29: 13 free hit-bytter. Saka inn for Palmer, Tarkowski inn for Muñoz, Bruno inn for Cunha — de fleste treff.
+**Kapteinvalg:** Saka (GW29) — 9 poeng, dobbelt til 18. Ligaens beste kapteinsprestasjon i runden.

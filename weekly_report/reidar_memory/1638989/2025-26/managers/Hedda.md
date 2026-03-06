@@ -1,9 +1,9 @@
 **Lag:** Tafatt IL
-**Sesongstatistikk:** 5 seiere, 4 sisteplasser (GW2, GW13, GW16, GW17). Sesong-high 89 (GW14), low 13 (GW13 — ligarekord lavest). Snitt ~54.
-**Nåværende form:** Fjerdeplass med 1525 poeng. 58 i GW28 — 37 poeng bak Oda.
-**Sesongutvikling:** Tredje manager med Haaland som kaptein i GW28 — null, selvsagt. Bruno (13) og Timber (8) bidro, men Chalobah (1), Enzo (1) og Pickford (2) trakk ned. Semenyo som visekaptein leverte 8 — dobbelt til 16 hadde sett bra ut. I stedet: kaptein null, visekaptein ubrukt. Ingen bytter. Mønsteret fra GW28 er nå etablert: Hedda har de rette instinktene på andreknappen og de gale valgene på første.
-**Min vurdering:** Tafatt IL lever opp til lagets navn — men ikke av latskap. Det er konsistente valg som konsekvent koster. Gode spillere, feil prioriteringer. Berg-og-dal-banen mellom 13 og 89 har flatet ut til en midtsjikts-platå. Fjerdeplass er solid, men ikke spennende.
-**Nevneverdige øyeblikk:** GW13: 13 poeng — ligarekord lavest. GW14: 89 poeng. GW28: Null fra Haaland-kapteinen, Semenyo (8) som ubrukt visekaptein. Ingen bytter.
-**Løpende vitser:** Riktig visekaptein, feil kaptein — dette er nå et etablert mønster, ikke en enkeltforekomst.
-**Byttemønster:** Ingen bytter i GW28.
-**Kapteinvalg:** Haaland (GW28) — null. Semenyo (8) som ubrukt visekaptein.
+**Sesongstatistikk:** 5 seiere, 4 sisteplasser (GW2, GW13, GW16, GW17). Sesong-high 89 (GW14), low 13 (GW13 — ligarekord lavest). Snitt ~55.
+**Nåværende form:** Tredjeplass med 1603 poeng etter å ha klatret fra fjerde. 78 i GW29 — over snittet.
+**Sesongutvikling:** João Pedro (19), Timber (13) og Gabriel (11) løftet laget. Haaland som kaptein ga 4 — bedre enn null, men ikke bra nok. Det er blitt et mønster: Haaland som kaptein, Semenyo (7) som ubrukt visekaptein. Byttemessig: Tarkowski ut (15), Keane inn (1) — ukens verste bytteregnskap (-9 netto). Solgte Tarkowski uken han tok 15 hos Anders. Timing er halve spillet.
+**Min vurdering:** 78 poeng og klatring til tredje — det ser bra ut til overflaten. Men Gabriel inn for Chalobah var det eneste gode byttet. Tarkowski-salget er et klassisk timing-problem: selger spilleren rett før han eksploderer. Haaland-lojaliteten på kapteinsplass begynner å ligne en vane mer enn en strategi. Semenyo på andreknappen igjen — ubrukt igjen. Et møns som er etablert.
+**Nevneverdige øyeblikk:** GW13: 13 poeng — ligarekord lavest. GW14: 89 poeng. GW29: Tarkowski ut (15) inn Keane (1) — ukens verste bytteregnskap. Klatret til tredje tross byttene.
+**Løpende vitser:** Riktig visekaptein, feil kaptein — nå tre ganger med Haaland/Semenyo-kombinasjonen. Solgte Tarkowski uka han tok 15. Timing er halve spillet.
+**Byttemønster:** GW29: Tre bytter — Harry Wilson inn for Enzo (0 mot 4), Keane inn for Tarkowski (1 mot 15), Gabriel inn for Chalobah (11 mot 2). Blandet til det negative.
+**Kapteinvalg:** Haaland (GW29) — 2 poeng, dobbelt til 4. Semenyo (7) som ubrukt visekaptein. Mønsteret fortsetter.

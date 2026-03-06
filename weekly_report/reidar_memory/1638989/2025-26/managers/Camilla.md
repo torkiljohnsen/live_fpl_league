@@ -1,9 +1,9 @@
 **Lag:** YVIL
-**Sesongstatistikk:** 1 seier, 5 sisteplasser (GW3, GW15, GW18, GW23, GW25). Sesong-high 76 (GW24), low 25 (GW5). Snitt ~52.
-**Nåværende form:** Sjetteplass med 1468 poeng. 63 i GW28 med bench boost — under ligasnittet på 66,1.
-**Sesongutvikling:** Begge chips brukt på to uker: wildcard GW27, bench boost GW28. Bench boost ga 63 poeng — under snittet. Semenyo som kaptein leverte 8, dobbelt til 16 — nest beste kapteinsprestasjon i runden. Bruno (13) og Wilson (12) bidro. Men Haaland (0), Hincapié (0), Acheampong (0) og James Hill (2) sørget for at gulvet var lavt. Ingen chips igjen. Alle fremtidige runder uten sikkerhetsnett.
-**Min vurdering:** Bench boost under ligasnittet er ikke en feil — det er to feil: chipsen er brukt, og utbyttet var dårlig. Kapteinvalget var faktisk det nest beste i runden, noe som tyder på at instinktene er der. Men laget bærer for mye risiko i form av skadeutsatte og lavpresterende spillere. Ingen chips igjen fra runde 29 til slutten av sesongen. Det er den tøffe virkeligheten.
-**Nevneverdige øyeblikk:** GW27: Wildcard. GW28: Bench boost — 63 poeng, under snittet. Begge chips brukt på to uker. Semenyo nest beste kaptein i runden.
-**Løpende vitser:** Bench boost for 63 poeng under snittet. Sesong-high på 76 er fortsatt lavest i ligaen. Ingen chips igjen.
-**Byttemønster:** Én bytte i GW28 (Van Hecke inn for Mukiele).
-**Kapteinvalg:** Semenyo (GW28) — 8 poeng, dobbelt til 16. Nest beste kapteinvalg i runden.
+**Sesongstatistikk:** 1 seier, 5 sisteplasser (GW3, GW15, GW18, GW23, GW25). Sesong-high 80 (GW29), low 25 (GW5). Snitt ~53.
+**Nåværende form:** Sjetteplass med 1548 poeng. 80 i GW29 — nest beste i ligaen denne runden.
+**Sesongutvikling:** Begge chips brukt (wildcard GW27, bench boost GW28). GW29 uten chips: 80 poeng. Bruno Fernandes som kaptein leverte 16. João Pedro (19) og Hincapié (9) supplerte. Ingen bytter. Noen ganger er det beste trekket å ikke gjøre noe — noe Camilla ikke alltid har vært kjent for, men som fungerte her. Ny sesong-high: 80 (det forrige rekordhøyeste var 76 i GW24).
+**Min vurdering:** Bench boost for 63 under snittet — etterfølgt av 80 uten chips. Ironien er tydelig. Kapteinvalget var godt, João Pedro ble riktig valgt inn, og ingen chips ble kastet bort. Men ingen chips igjen betyr at dette nivået må holdes organisk frem til slutten. Det er et krevende krav for et lag med Haaland i startoppstillingen.
+**Nevneverdige øyeblikk:** GW27: Wildcard. GW28: Bench boost — 63, under snittet. GW29: 80, ny sesong-high, ingen chips. Bruno-kaptein 16.
+**Løpende vitser:** Ny sesong-high kom uten chips, mens bench boost ga under snittet. Ingen chips igjen — fremtiden er chipsfri.
+**Byttemønster:** GW29: Ingen bytter. Satt stille og scoret 80.
+**Kapteinvalg:** Bruno Fernandes (GW29) — 8 poeng, dobbelt til 16. Godt valg.
