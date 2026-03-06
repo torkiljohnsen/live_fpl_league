@@ -31,6 +31,9 @@ class DummyAPI:
     def get_transfers(self, team_id):
         return []
 
+    def get_fixtures(self, event_id=None):
+        return []
+
     def get_event_live(self, event_id):
         return {}
 
