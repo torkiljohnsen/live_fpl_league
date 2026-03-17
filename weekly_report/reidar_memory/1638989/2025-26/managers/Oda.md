@@ -1,9 +1,9 @@
 **Lag:** Odas Disipler
 **Sesongstatistikk:** 6 seiere, 2 sisteplasser (GW11, GW24). Sesong-high 104 (GW17), low 29 (GW13). Snitt ~55.
-**Nåværende form:** Fjerdeplass med 1595 poeng, ned fra tredje. 33 poeng i GW29 — lavest i ligaen.
-**Sesongutvikling:** Endelig solgte hun Summerville — men byttet ham ut med Ekitiké og valgte ham som kaptein umiddelbart. 4 poeng. Fra asken og rett i ilden. Bruno Fernandes (8) og Ballard (9) satt på benken med til sammen 17 ubrukte poeng. Van de Ven leverte -3. To runder på rad med under 35 poeng. Fem uker med Summerville som kaptein, nå Ekitiké — Oda leter etter noe hun ikke finner på kapteinsplass.
-**Min vurdering:** Selger Summerville etter to svake kapteinsuker med ham — og velger umiddelbart neste mann som kaptein uten å la ham bevise seg først. Det er ikke en strategi, det er en refleks. 17 benchpoeng aktivert hadde gitt 50 poeng — ikke imponerende, men ikke 33 heller. 110 bak Anders nå. Realitetene er tunge.
-**Nevneverdige øyeblikk:** GW17: 104 poeng. GW28-29: Under 35 to runder på rad. GW29: Ekitiké-kaptein for 4, Bruno + Ballard (17) på benken, Van de Ven -3.
-**Løpende vitser:** Summerville-lojaliteten er borte — erstattet av Ekitiké-lojalitet. Benken produserer mer enn startoppstillingen. 110 bak toppen med ni runder igjen.
-**Byttemønster:** GW29: Tre bytter — Ekitiké inn for Watkins, Iwobi inn for Rice, Mac Allister inn for Summerville.
-**Kapteinvalg:** Ekitiké (GW29) — 2 poeng, dobbelt til 4. Fra én skuffende kaptein til neste.
+**Nåværende form:** Tredjeplass med 1649 poeng — klatret fra fjerde. GW30: 54 poeng.
+**Sesongutvikling:** Igor Thiago som kaptein ga 6 poeng dobbelt til 12 — et greit valg i en grå runde. Gabriel (9) og Bruno (10) bidro. Men benken hadde 17 poeng: Mac Allister (8), Ballard (4), Stach (5) — aldri aktivert. To runder på rad med 17 benchpoeng. Bytter denne runden: Van Dijk inn for Guéhi (2/2), O'Reilly inn for Van de Ven (2/0), João Pedro inn for Ekitiké (2/1) — netto +3, men best transfer-prisen er litt ironisk med den marginale gevinsten.
+**Min vurdering:** Klatringen til tredje er ekte, men den kommer på baksiden av Anders' svake runde mer enn Odas styrke. 100 poeng bak Anders med åtte runder igjen er realiteten. Benken produserer konsekvent fra feil sted — det er et strukturproblem, ikke et flaksproblem. Solgte Ekitiké etter to kapteinsskuffelser med ham, noe som var riktig — men ersatningene leverte heller ikke.
+**Nevneverdige øyeblikk:** GW17: 104 poeng. GW29-30: Klatret til tredje, men med 17 benchpoeng begge rundene. GW30: Best transfer-pris for +3 netto.
+**Løpende vitser:** Benken produserer mer enn startoppstillingen, to runder på rad. 100 poeng bak toppen med åtte runder igjen.
+**Byttemønster:** GW30: Tre bytter — Van Dijk inn for Guéhi, O'Reilly inn for Van de Ven, João Pedro inn for Ekitiké. Marginalt positivt.
+**Kapteinvalg:** Igor Thiago (GW30) — 6 poeng, dobbelt til 12. Greit valg i en flat runde.
