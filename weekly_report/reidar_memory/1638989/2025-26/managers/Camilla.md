@@ -1,9 +1,9 @@
 **Lag:** YVIL
-**Sesongstatistikk:** 1 seier, 5 sisteplasser (GW3, GW15, GW18, GW23, GW25). Sesong-high 80 (GW29), low 25 (GW5). Snitt ~54.
-**Nåværende form:** Sjetteplass med 1608 poeng. 60 i GW30 — rundevinner, over åtte poeng over andreplassen.
-**Sesongutvikling:** Bruno Fernandes som kaptein leverte 10 poeng, dobbelt til 20 — ligaens beste kapteinsprestasjon i GW30, med god margin. James Hill (8), Van Hecke (9) og Bowen (6) bidro. Benken hadde 14 poeng — Thiaw (9) og Wilson (3) ubrukt. Ingen bytter. To sterke runder på rad uten chips: 80 og 60. Chips tilgjengelig — men når brukes de?
-**Min vurdering:** Bruno-kapteinen var genuint godt valg denne uken — han var ikke alles førstevalg. Camilla treffer kapteinsvalgene for andre runde på rad, og det er ikke tilfeldig lenger. Men laget har strukturelle svakheter: Haaland i startoppstillingen leverer ikke, og 14 benchpoeng ubrukt er ikke ideelt. Ingen chips igjen betyr organisk fremgang — og så langt holder den. Sjetteplass, men med stigende form.
-**Nevneverdige øyeblikk:** GW28: Bench boost — 63, under snittet. GW29: 80, ingen chips, Bruno-kaptein 16. GW30: 60, ingen chips, Bruno-kaptein 20 — rundevinner.
-**Løpende vitser:** Bench boost ga under snittet. De to påfølgende rundene uten chips: 80 og 60. Ironien er komplett. Bruno Fernandes er nå Camillas kaptein to runder på rad — begge ganger ligaens beste kapteinsprestasjon.
-**Byttemønster:** GW30: Ingen bytter.
-**Kapteinvalg:** Bruno Fernandes (GW30) — 10 poeng, dobbelt til 20. Ligaens beste kapteinsprestasjon i runden.
+**Sesongstatistikk:** 1 seier, 5 sisteplasser. Sesong-high 80 (GW29), low 25 (GW5). Snitt ~54.
+**Nåværende form:** Delt femteplass med 1662 poeng. 54 i GW31 — klatret én plass.
+**Sesongutvikling:** Bruno-kapteinen ga 26 for tredje runde i nærheten av rad — ligaens beste tre kapteinsprestasjonar baklengs: 20, 20, 26. Men rundt Bruno er det hull. Sesko scoret null som Haaland-erstatning, James Hill leverte -1, Bowen 2. Benken: Emiliano Martínez (6) urørt. Tre bytter: Szoboszlai inn, Sesko inn for Haaland, Gabriel inn for Acheampong — netto -3, «verste transfer» i runden. Mild dom: Haaland ut var riktig, Sesko er et håp.
+**Min vurdering:** Camilla treffer konsekvent på kapteinsvalget nå, og det er ikke tilfeldig. Men kaptein bærer laget — resten er for svakt. Ingen chips igjen, og strukturen rundt Bruno er ikke god nok til å klatre på tabellen med denne formen.
+**Nevneverdige øyeblikk:** GW29: 80, Bruno-kaptein 16. GW30: 60, Bruno-kaptein 20 — rundevinner. GW31: 54, Bruno-kaptein 26, men rundt ham: null og minus.
+**Løpende vitser:** Bench boost ga under snittet (GW28). De tre påfølgende rundene uten chips: 80, 60, 54. Bruno er blitt lagets eneste pålitelige ledd. James Hill med -1 er en ny lav.
+**Byttemønster:** GW31: Tre bytter — Szoboszlai inn, Sesko inn for Haaland, Gabriel inn for Acheampong.
+**Kapteinvalg:** Bruno Fernandes (GW31) — 13 poeng, dobbelt til 26. Tredje sterke kapteinsprestasjon på rad.
