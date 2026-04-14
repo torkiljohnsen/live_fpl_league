@@ -1,9 +1,9 @@
 **Lag:** Thisistheyear
 **Sesongstatistikk:** 10 seiere, 0 sisteplasser. Sesong-high 83 (GW16), low 32 (GW5, GW13). Snitt ~58.
-**Nåværende form:** Serieleder med 1802 poeng — gap til Torkil er 25 poeng etter GW31. Tok -4 hit, fikk 53 netto.
-**Sesongutvikling:** Endelig kvittet seg med Haaland og Rice. Hentet Bruno Fernandes, som umiddelbart leverte 13 poeng og 26 som kaptein. Nettoutbytte på byttesettet: +18, best i ligaen. Jiménez inn for Mané ga 5 mot 0. Tre store avgjørelser — alle riktige. Kostnad: 4 poeng.
-**Min vurdering:** Det tok ham noen runder for lenge, men Anders ryddet til slutt opp. Haaland-lojaliteten som var et mønster er nå et minne. Bruno inne og som kaptein — samme våpen Torkil, Camilla og Eirin brukte. Timingen kostet 4, men fortjenesten var 26. Ingen chips igjen. 25 poengs ledelse med syv runder igjen er fortsatt komfortabelt — men det er jevnere enn det ser ut.
-**Nevneverdige øyeblikk:** GW28: Null fra Haaland, -8 bytter. GW29: Free hit, rundevinner 82. GW30: Haaland-kaptein for 4, gap faller. GW31: -4 hit, Bruno inn og 26 kapteinspoeng — beste transfer-pris i runden.
-**Løpende vitser:** Forrige uke så han Bruno gi Camilla 20. Denne uken hentet han Bruno og fikk det samme. Timing er alt. Haaland ute — det er fremdeles en nyhet.
-**Byttemønster:** GW31: Tre bytter (-4 hit) — Bruno inn for Rice, Igor Thiago inn for Haaland, Jiménez inn for Mané.
-**Kapteinvalg:** Bruno Fernandes (GW31) — 13 poeng, dobbelt til 26. Ligaens beste kapteinsprestasjon denne runden.
+**Nåværende form:** Serieleder med 1866 poeng. 64 i GW32 — gap til Torkil stabilt på 25 poeng.
+**Sesongutvikling:** Bruno-kapteinen leverte bare 8 denne uken (4 poeng × 2). Semenyo inn for Enzo Fernández — netto +2, «verste transfer» i runden, men det er en mild dom. Mukiele (14) og O'Reilly (14) var lagets toppscorere. Ingen chips igjen.
+**Min vurdering:** Gap til Torkil er nøyaktig det samme som det var for en uke siden. Anders og Torkil delte kaptein, delte poengsum, delte plass i tabellen. 25 poeng med seks runder igjen er fortsatt komfortabelt — men det krever at Anders ikke gjør noe dumt. Semenyo-bytte var ufarlig. Resten av laget er greit nok. Haaland er borte for alltid.
+**Nevneverdige øyeblikk:** GW31: Bruno-kaptein 26. GW32: Bruno-kaptein 8, Mukiele og O'Reilly bærer laget med 14 hver.
+**Løpende vitser:** Gapet til Torkil: stabilt som en norsk fjord. Anders og Torkil ender likt i GW32 — til og med kapteinspoengene er identiske.
+**Byttemønster:** GW32: Én bytte — Semenyo inn for Enzo Fernández (+2 netto).
+**Kapteinvalg:** Bruno Fernandes (GW32) — 4 poeng, dobbelt til 8.

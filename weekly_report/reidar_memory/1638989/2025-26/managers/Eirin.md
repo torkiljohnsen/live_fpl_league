@@ -1,9 +1,9 @@
 **Lag:** Dragen BK
 **Sesongstatistikk:** 1 seier, 3 sisteplasser. Sesong-high 97 (GW25), low 24 (GW5). Snitt ~52.
-**Nåværende form:** Sjuendeplass med 1639 poeng. 55 i GW31 — ingen tabellbevegelse.
-**Sesongutvikling:** Spilte free hit i GW31. Valgte Bruno som kaptein — 26 poeng. Wilson (9) bidro. Men 55 poeng av en free hit er skuffende i en runde der man har full frihet. Benken hadde 9 poeng — Kroupi (5) og Verbruggen (3) aldri aktivert. Lammens i mål leverte 2. Free hit-kortet er brukt. Ingen chips igjen.
-**Min vurdering:** Free hit og Bruno-kaptein — riktig valg, middelmådig utbytte. Det er FPL. Kapteinsuortodoksien fra GW27 (Gabriel) er erstattet av pragmatisme, og Bruno-valget var riktig. Men 55 av en free hit, med full squadefriheten i verden, er ikke hva man ønsker. Nå er alle kortene brukt, og 97-poengeren i GW25 er nå fire runder gammel.
-**Nevneverdige øyeblikk:** GW25: 97 — tredje beste i ligahistorien. GW27: Kaptein på Gabriel (forsvarsspiller). GW31: Free hit, Bruno-kaptein 26 — 55 poeng.
-**Løpende vitser:** Uortodoks strateg: kaptein på forsvarsspiller én runde, free hit neste. Noen ganger genialt (GW25), noen ganger middelmådig med full frihet (GW31).
-**Byttemønster:** GW31: Free hit — Szoboszlai, Van Dijk, Lammens, Cucurella, Worrall, Mbeumo, Igor Thiago inn.
-**Kapteinvalg:** Bruno Fernandes (GW31) — 13 poeng, dobbelt til 26. Riktig valg.
+**Nåværende form:** Sjuendeplass med 1686 poeng. 47 i GW32 — nest lavest i runden.
+**Sesongutvikling:** Spilte trippelkaptein på Bruno Fernandes. Bruno leverte 4 poeng, tredoblet til 12. I forrige uke leverte Bruno 13 til vanlige kapteinseiere og 26 til doble. Eirin ventet én uke ekstra og fikk 12. Benken hadde 23 poeng: Verbruggen (9), Alderete (8), Kroupi (6) satt urørt. Alle chips er nå brukt.
+**Min vurdering:** Trippelkaptein er brukt. 12 poeng er resultatet. 23 benchpoeng er straffen. Det er den type runde som definerer en sesong — ikke fordi det er katastrofalt, men fordi det er irreversibelt. 97-poengeren i GW25 er nå syv runder gammel, og alle kortene er spilt.
+**Nevneverdige øyeblikk:** GW25: 97 poeng. GW31: Free hit, 55 poeng. GW32: Trippelkaptein, Bruno 12, benk 23.
+**Løpende vitser:** Chips-historikk: Bench boost (under snitt), free hit (55 av full frihet), trippelkaptein (12 av Bruno × 3). Uortodoks til det siste. Benken leverte mer enn kapteinen multiplisert.
+**Byttemønster:** GW32: Ingen bytter (trippelkaptein-chip).
+**Kapteinvalg:** Bruno Fernandes (GW32, trippelkaptein) — 4 poeng × 3 = 12. Timing var alt — og timingen var feil.

@@ -1,9 +1,9 @@
 **Lag:** Sisteplass læll
 **Sesongstatistikk:** 2 seiere, 4 sisteplasser. Sesong-high 89 (GW28). Low 26 (GW9). Snitt ~53.
-**Nåværende form:** Femteplass med 1662 poeng (delt med Camilla). 46 i GW31.
-**Sesongutvikling:** Ekitiké som kaptein for **fjerde** runde på rad. Poengrekken: 30, 4, 4, 2. Nedadgående kurve som nå er statistisk. Bruno satt i laget med 13 poeng som ikke-kaptein. Wilson (9) og Rogers (6) leverte greit, men kapteinsvalget trakk alt ned. Benken: Petrović (2), Nunes, Timber og Haaland med null.
-**Min vurdering:** Det er ikke lenger lojalitet. Det er noe annet. Ekitiké-kaptein fire ganger: 30, 4, 4, 2. Bruno er i laget. Bruno har 13. Og likevel. Lagnavnet «Sisteplass læll» er fremdeles ikke helt presist — femteplass — men det er ingenting her som antyder oppadgående bevegelse.
-**Nevneverdige øyeblikk:** GW28: 89, Ekitiké 30. GW29-31: Ekitiké-kaptein tre ganger til — 4, 4, 2. Totalt fire runder: 30, 4, 4, 2.
-**Løpende vitser:** Ekitiké-kaptein: 30, 4, 4, 2. Bruno i samme lag: 13 poeng. Ubrukt som kaptein alle fire rundene. Timber (0) som visekaptein — aldri aktivert, aldri savnet.
-**Byttemønster:** GW31: Ingen bytter.
-**Kapteinvalg:** Ekitiké (GW31) — 1 poeng, dobbelt til 2. Verste kapteinspick i runden (delt med Peder).
+**Nåværende form:** Femteplass med 1728 poeng. 66 i GW32.
+**Sesongutvikling:** Ekitiké byttet ut — men kapteinsbåndet ble gitt til ham fra benken der han satt med null poeng. Det er en ny og kreativ tolkning av kapteinsstrategien. Ekitiké leverte 0, visekaptein Timber leverte 0. O'Reilly (14), Igor Thiago (13) og Dewsbury-Hall (9) reddet laget til 66 poeng. Bruno satt i laget med 4 udoblet.
+**Min vurdering:** Ekitiké er nå på benken. Kapteinsbåndet fulgte ham dit. Hauk har nå kapteinskort på en benkevarmer som ikke spiller. Timber som visekaptein har aldri levert et eneste poeng i den rollen. Lagnavnet er fortsatt femteplass, men kapteinsfilosofien antyder noe annet.
+**Nevneverdige øyeblikk:** GW28: 89, Ekitiké 30. GW29-31: Ekitiké-kaptein — 4, 4, 2. GW32: Ekitiké på benken med kapteinsbånd — 0. Total kapteinsrekke: 30, 4, 4, 2, 0.
+**Løpende vitser:** Ekitiké-kapteinsrekken: 30, 4, 4, 2, 0. Nå fra benken. Timber: null poeng som visekaptein i hvert eneste forsøk. Hauk er kreativ — bare ikke på den måten det hjelper.
+**Byttemønster:** GW32: Ingen bytter.
+**Kapteinvalg:** Hugo Ekitiké (GW32, fra benken) — 0 poeng. Verste kaptein i runden.
