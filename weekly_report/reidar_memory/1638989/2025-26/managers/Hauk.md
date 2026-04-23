@@ -1,9 +1,9 @@
 **Lag:** Sisteplass læll
 **Sesongstatistikk:** 2 seiere, 4 sisteplasser. Sesong-high 89 (GW28). Low 26 (GW9). Snitt ~53.
-**Nåværende form:** Femteplass med 1728 poeng. 66 i GW32.
-**Sesongutvikling:** Ekitiké byttet ut — men kapteinsbåndet ble gitt til ham fra benken der han satt med null poeng. Det er en ny og kreativ tolkning av kapteinsstrategien. Ekitiké leverte 0, visekaptein Timber leverte 0. O'Reilly (14), Igor Thiago (13) og Dewsbury-Hall (9) reddet laget til 66 poeng. Bruno satt i laget med 4 udoblet.
-**Min vurdering:** Ekitiké er nå på benken. Kapteinsbåndet fulgte ham dit. Hauk har nå kapteinskort på en benkevarmer som ikke spiller. Timber som visekaptein har aldri levert et eneste poeng i den rollen. Lagnavnet er fortsatt femteplass, men kapteinsfilosofien antyder noe annet.
-**Nevneverdige øyeblikk:** GW28: 89, Ekitiké 30. GW29-31: Ekitiké-kaptein — 4, 4, 2. GW32: Ekitiké på benken med kapteinsbånd — 0. Total kapteinsrekke: 30, 4, 4, 2, 0.
-**Løpende vitser:** Ekitiké-kapteinsrekken: 30, 4, 4, 2, 0. Nå fra benken. Timber: null poeng som visekaptein i hvert eneste forsøk. Hauk er kreativ — bare ikke på den måten det hjelper.
-**Byttemønster:** GW32: Ingen bytter.
-**Kapteinvalg:** Hugo Ekitiké (GW32, fra benken) — 0 poeng. Verste kaptein i runden.
+**Nåværende form:** Fjerdeplass med 1812 poeng — klatret én plass. 84 i GW33, bench boost spilt. Alle chips brukt.
+**Sesongutvikling:** Bench boost aktivert. Kaptein João Pedro leverte **null**. Marc Cucurella som visekaptein trådde inn med 6 doble poeng (3 × 2). Fire bytter inn til boost-runden: João Pedro inn (0), Semenyo inn (5), Williams inn (2), Cucurella inn (3). Morgan Rogers ut (9), Matheus Nunes ut (11) — begge leverte mer enn sine erstattere. Bench boost med null fra kapteinen og minus på to transfers er en spesiell kombinasjon. 84 poeng reddet av Van Hecke (12), O'Reilly (13) og benken som faktisk spilte.
+**Min vurdering:** João Pedro som kaptein under bench boost er dette sesongens mest kreative feiltagelse. Etter Ekitiké-fra-benken i GW32, er dette andre runde på rad med null fra kapteinen. Lagnavnet er fjerdeplass nå — men kapteinsfilosofien er konsekvent overraskende.
+**Nevneverdige øyeblikk:** GW28: 89, Ekitiké 30. GW32: Ekitiké-kaptein fra benken, 0 poeng. GW33: Bench boost, João Pedro-kaptein 0, Cucurella visekaptein redder.
+**Løpende vitser:** To runder på rad med null fra kapteinen. Bench boost med kaptein som ikke scorer. Cucurella som redningsmann. Lagnavnet nærmer seg ironisk sannhet fra feil retning.
+**Byttemønster:** GW33: Fire bytter til bench boost — João Pedro, Semenyo, Williams, Cucurella inn.
+**Kapteinvalg:** João Pedro (GW33) — 0 poeng. To nullrunder på rad som kaptein nå.
