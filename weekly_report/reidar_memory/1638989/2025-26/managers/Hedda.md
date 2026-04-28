@@ -1,9 +1,9 @@
 **Lag:** Tafatt IL
 **Sesongstatistikk:** 5 seiere, 4 sisteplasser. Sesong-high 89 (GW14), low 13 (GW13). Snitt ~55.
-**Nåværende form:** Tredjeplass med 1844 poeng. 82 i GW33 — trippelkaptein-chip spilt og brukt riktig. Alle chips nå brukt.
-**Sesongutvikling:** Trippelkaptein på Haaland: 13 poeng × 3 = 39. 82 poeng totalt. To bytter: Alex Scott inn for Wilson (+2), Senesi inn for Keane (+5). Benken leverte bare 1 poeng (Pickford 1, Stach 0, João Pedro 0, Timber 0). Men det spilte ingen rolle — Haaland-multiplikatoren gjorde jobben. Dette er hva trippelkaptein skal se ut som.
-**Min vurdering:** Etter GW32s forsiktige 55 poeng er dette en klar forbedring. Timing på trippelkaptein var riktig — Eirin ventet én uke for lenge i GW32 og fikk 12. Hedda ventet én runde til og fikk 39. Timber på benken: fortsatt null poeng, fortsatt aldri levert. Alle kort er nå spilt.
-**Nevneverdige øyeblikk:** GW13: 13 poeng — ligarekord lavest. GW31: Free hit 61. GW33: Trippelkaptein Haaland 39, 82 poeng totalt.
-**Løpende vitser:** Forsvarerne scorer mer enn angriperne. Timber på benken: null poeng i hele sesongen, konsekvent uaktivert. Trippelkaptein-timing: én runde bedre enn Eirin.
-**Byttemønster:** GW33: Alex Scott inn for Wilson, Senesi inn for Keane.
-**Kapteinvalg:** Erling Haaland (GW33, trippelkaptein) — 13 poeng × 3 = 39. Beste kaptein i runden.
+**Nåværende form:** Tredjeplass med 1913 poeng. 69 i GW34 — wildcard spilt. Alle chips nå brukt.
+**Sesongutvikling:** Wildcard aktivert i GW34. Syv bytter, nytt lag. Casimiro (12), Gibbs-White (13) og Bowen (10) var lysglimtene. Bruno som kaptein: 5 poeng, dobbelt til 10 — mens visekaptein Casimiro satt med 12 urørt. Timber på benken igjen med null. Haaland på benken med null. 69 poeng med wildcard er over ligasnittet, men syv poeng over snittet er ikke hva et wildcard i april skal levere. Laget er bygget om, og det er bedre — men effekten er ikke målbar i GW34 alene.
+**Min vurdering:** Casimiro (12) som visekaptein mens Bruno-kaptein ga 10 er wildcardets irriterende poeng: du bygger et nytt lag og klarer fortsatt å ha riktig mann på feil plass. Wildcardresultat: 69. Hedda er nå uten alle chips. Bowen og Gibbs-White er gode tilskudd. Men vil laget holde?
+**Nevneverdige øyeblikk:** GW13: 13 poeng — ligarekord lavest. GW33: Trippelkaptein Haaland 39, 82 poeng. GW34: Wildcard, 69 poeng, Casimiro 12 som visekaptein.
+**Løpende vitser:** Timber på benken: null poeng, konsekvent i alle oppstillinger. Casimiro som visekaptein mens Bruno-kaptein ga 10 vs 12. Wildcard i april — laget er nytt, poengsummen er midt på treet.
+**Byttemønster:** GW34: Syv wildcardsbytter — Bowen, Casimiro, Gibbs-White, Zubimendi, Garner, Tarkowski, Van Dijk inn.
+**Kapteinvalg:** Bruno Fernandes (GW34) — 5 poeng, dobbelt til 10. Visekaptein Casimiro ga 12.

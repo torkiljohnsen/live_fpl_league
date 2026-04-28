@@ -1,9 +1,9 @@
 **Lag:** YVIL
 **Sesongstatistikk:** 1 seier, 5 sisteplasser. Sesong-high 80 (GW29), low 25 (GW5). Snitt ~54.
-**Nåværende form:** Sjetteplass med 1777 poeng — ingen tabellbevegelse. 69 i GW33 — under ligasnittet med chip aktiv.
-**Sesongutvikling:** Trippelkaptein på Senesi: 6 poeng × 3 = 18. 69 poeng totalt. Ampadu (12) og Van Hecke (12) bidro. Men Pickford (1), Gabriel (0), Bowen (2) trakk ned. Benken: Martínez (2), João Pedro (0), Thiaw (1), Sesko (2) — 5 benchpoeng. Senesi-triple er et valg. En Bournemouth-forsvarer tredoblet i en runde der Haaland scoret. Under ligasnittet med en chip. Freehit fortsatt tilgjengelig — eneste gjenværende chip i ligaen.
-**Min vurdering:** 69 poeng med trippelkaptein er ikke hva man tegner seg for. Hedda gjorde det samme chipen bedre med Haaland og fikk 82. Senesi vs Haaland — 18 vs 39. Camilla er eneste manager med chip igjen. Det er et kort, men det er ett kort.
-**Nevneverdige øyeblikk:** GW29-31: Bruno-kapteinsrekke. GW32: Lavest i runden. GW33: Trippelkaptein Senesi 18, under ligasnitt.
-**Løpende vitser:** Martínez på benken er permanent inventar. Trippelkaptein på forsvarer — det er noe med Camilla og differensialer som aldri leverer nok. Eneste med chip igjen i ligaen.
-**Byttemønster:** GW33: Ampadu inn for Enzo Fernández (+8 netto).
-**Kapteinvalg:** Marcos Senesi (GW33, trippelkaptein) — 6 poeng × 3 = 18.
+**Nåværende form:** Sjetteplass med 1814 poeng. 37 i GW34. Eneste manager med chip igjen — free hit tilgjengelig.
+**Sesongutvikling:** Senesi som kaptein — satt på benken (multiplier 0), ga null poeng. Semenyo som visekaptein: også null. Det er ikke bare at kapteinen ikke leverte — kapteinen ble ikke engang aktivert. Bowen (10) og Sesko (8) bar laget. Ampadu, Szoboszlai, Thiaw — lite utbytte. 37 poeng totalt, nest lavest i runden. Ingen bytter.
+**Min vurdering:** Senesi som kaptein på benken er et nytt kapittel i Camillas differensial-sagaen. Ikke bare feil valg — kapteinen ble inaktiv. Det er et spesielt FPL-fenomen. Martínez er nå permanent inventar på benken. Men: Camilla er eneste manager med free hit igjen. I fem avsluttende runder er det ett kort ingen andre har. Det kan bety noe. Det kan også bety ingenting. Men det er noe.
+**Nevneverdige øyeblikk:** GW29-31: Bruno-kapteinsrekke. GW33: Trippelkaptein Senesi 18, under ligasnitt. GW34: Senesi-kaptein ikke aktivert (benken), 0 poeng.
+**Løpende vitser:** Senesi som kaptein to runder på rad — trippel i GW33 (18), inaktiv på benken i GW34 (0). Martínez er fast på benken. Eneste chip igjen: free hit. Bruker hun det?
+**Byttemønster:** GW34: Ingen bytter.
+**Kapteinvalg:** Marcos Senesi (GW34) — satt på benken, ikke aktivert, 0 poeng.
