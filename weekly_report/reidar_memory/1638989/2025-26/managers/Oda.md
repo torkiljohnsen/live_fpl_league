@@ -1,9 +1,9 @@
 **Lag:** Odas Disipler
 **Sesongstatistikk:** 6 seiere, 2 sisteplasser. Sesong-high 104 (GW17), low 29 (GW13). Snitt ~55.
-**Nåværende form:** Fjerdeplass med 1852 poeng — klatret én plass. 44 i GW34. Ingen chips.
-**Sesongutvikling:** Igor Thiago som kaptein for femte runde: 1 poeng, dobbelt til 2. Kapteinsrekken er nå: 12, 8, 26, 4, 2. En rekke som startet med en storsprekk og har erodert systematisk siden. Mac Allister (13) og Raya (10) bærer laget. Visekaptein Stach leverte null — ingen redning. Haaland, Nunes og O'Reilly satt alle på benken med null. Ingen bytter.
-**Min vurdering:** Igor Thiago-eksperimentet er nå statistisk avsluttet. 2 poeng denne uken, null fra benken. Det eneste positive er at Oda klatret til fjerde uten å gjøre noe særlig — naboen falt. Stach som visekaptein er en interessant sekundær vurdering: null der også. Haaland med 0 fra benken tre uker på rad er sin egen lille katastrofe.
-**Nevneverdige øyeblikk:** GW17: 104 poeng. GW32-34: Igor Thiago-kapteinsrekke endt på 2. GW34: Klatret til fjerde uten å imponere.
-**Løpende vitser:** Igor Thiago-rekken som kaptein: 12, 8, 26, 4, 2 — starter med en rakett, slutter med en suser. Haaland på benken med null: ligaens mest konsekvent inaktive superstar. Oda er fjerde — fordi andre falt, ikke fordi hun steg.
-**Byttemønster:** GW34: Ingen bytter.
-**Kapteinvalg:** Igor Thiago (GW34) — 1 poeng, dobbelt til 2. Femte runde som kaptein. Rekken er over.
+**Nåværende form:** Fjerdeplass med 1903 poeng. 51 i GW35 — over ligasnittet.
+**Sesongutvikling:** Igor Thiago som kaptein for sjette runde: 6 poeng, dobbelt til 12. Rekken er nå: 12, 8, 26, 4, 2, 12 — en rekke som falt og snudde litt opp igjen. Stach (10) og João Pedro (8) bidro godt. Haaland på benken med 7 — fjerde uke på rad med Haaland inaktiv fra benken. Ingen bytter.
+**Min vurdering:** 51 poeng er godkjent. Igor Thiago leverte faktisk noe denne uken — 12 fra kapteinsmultiplikatoren er ikke ille, selv om rekken har vært skuffende. Stach med 10 er et interessant element. Men Haaland med 7 poeng på benken igjen er sin egen lille katastrofe — han scoret i GW35 og Oda fikk ikke noe ut av det. Oda klatrer ingen steder, men holder fjerde.
+**Nevneverdige øyeblikk:** GW17: 104 poeng. GW32-35: Igor Thiago-kapteinsrekke — 12, 8, 26, 4, 2, 12. Haaland på benken med poeng: fire uker på rad.
+**Løpende vitser:** Igor Thiago-rekken: 12, 8, 26, 4, 2, 12 — en rakett, en krasj, en svak oppreisning. Haaland på benken er ligaens mest konsekvent bortkastede superstar. Oda er fjerde fordi hun er fjerde — ikke fordi hun er best.
+**Byttemønster:** GW35: Ingen bytter.
+**Kapteinvalg:** Igor Thiago (GW35) — 6 poeng, dobbelt til 12. Sjette runde som kaptein.

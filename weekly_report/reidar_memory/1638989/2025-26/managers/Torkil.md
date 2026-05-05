@@ -1,9 +1,9 @@
 **Lag:** FK Haralds/By
-**Sesongstatistikk:** 7 seiere, 2 sisteplasser. Sesong-high 103 (GW33), low 35 (GW2). Snitt ~57.
-**Nåværende form:** Ligaleder med 1983 poeng. 39 nettpoeng i GW34 (43 brutto, -4 hit). Gap til Anders: 28 poeng.
-**Sesongutvikling:** Tok -4 hit for to bytter — Gibbs-White inn for Mac Allister (13 mot 13, break even), Rogers inn for Gordon (2 mot 0, marginalt bedre). Bruno som kaptein leverte 10 poeng. Haaland på benken med null. Timber på benken med null. Total benk: 0 poeng. Etter GW33s 103-poenger og free hit-triumf, er GW34 en runde der ligalederen sakket 7 poeng til andreplassen etter eget valg om å ta en hit som ikke lønte seg.
-**Min vurdering:** -4 for bytter som i beste fall brøt akkurat — det er en kalkulasjon som ikke gikk opp. Gibbs-White vs Mac Allister: null netto. Rogers vs Gordon: +2, men det dekker ikke hiten. Ledelsen er nede i 28 fra 35. Fem runder igjen, ingen chips. Haaland og Timber på benken er et gjentakende tema — GW33 hadde 29 benchpoeng. GW34 ga 0, men bare fordi ingenting leverte. Konsekvent, bare fra feil kant.
-**Nevneverdige øyeblikk:** GW33: Free hit, 103 poeng, snudde tabellen 60 poeng. GW34: -4 hit, 39 nettpoeng, leder krymper.
-**Løpende vitser:** Tar -4 hit for bytter som bryter akkurat. Haaland og Timber er faste på benken uansett chip-status. Gikk 60 poeng frem på én uke, mistet 7 uken etter.
-**Byttemønster:** GW34: Gibbs-White inn for Mac Allister, Rogers inn for Gordon. -4.
-**Kapteinvalg:** Bruno Fernandes (GW34) — 5 poeng, dobbelt til 10.
+**Sesongstatistikk:** 8 seiere, 2 sisteplasser. Sesong-high 103 (GW33), low 35 (GW2). Snitt ~57.
+**Nåværende form:** Ligaleder med 2038 poeng. 55 i GW35. Gap til Anders: 40 poeng — vokste fra 28.
+**Sesongutvikling:** Haaland som kaptein: 7 poeng, dobbelt til 14. Solidere enn forrige runde, men ikke imponerende. Igor Thiago (6) og Ouattara (6) bidro. Gabriel med 6. Ingen bytter, ingen chips. Benken: Timber (0) igjen, Dúbravka (2), Thiaw (2), Wilson (2) — 6 benchpoeng. Relativt rent.
+**Min vurdering:** 55 poeng og gapet vokser — Torkil tar ikke store grep, og det fungerer. Timber på benken med null er blitt en ukentlig sak. Gapet på 40 med fire runder igjen ser komfortabelt ut, men ingenting er avgjort. Etter GW34s -4 hit som ikke lønte seg, er GW35 en ren, ukomplisert uke som sier: gapen vokser uten drama.
+**Nevneverdige øyeblikk:** GW33: Free hit, 103 poeng, snudde tabellen 60 poeng. GW34: -4 hit for bytter som brøt akkurat. GW35: 55 poeng, gap vokser til 40.
+**Løpende vitser:** Timber på benken med null — tredje uke på rad, uansett chip-status. Tar -4 hit i GW34 for ingenting, får det igjen i GW35 uten å gjøre noe. Ledelse uten drama er fortsatt ledelse.
+**Byttemønster:** GW35: Ingen bytter.
+**Kapteinvalg:** Haaland (GW35) — 7 poeng, dobbelt til 14.
