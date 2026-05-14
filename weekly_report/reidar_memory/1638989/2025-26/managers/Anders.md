@@ -1,9 +1,9 @@
 **Lag:** Thisistheyear
 **Sesongstatistikk:** 10 seiere, 1 sisteplass. Sesong-high 83 (GW16), low 32 (GW5/GW13). Snitt ~58.
-**Nåværende form:** Andreplass med 1998 poeng. 43 i GW35 — delt lavest i runden. Gap til Torkil: 40 poeng — vokste fra 28.
-**Sesongutvikling:** Watkins som kaptein: 1 poeng, dobbelt til 2. Ligaens verste kapteinvalg i runden. Mukiele (11) som visekaptein — aldri aktivert. 13 benchpoeng, inkludert Matheus Cunha med 7 fra benken. Ingen bytter, ingen chips.
-**Min vurdering:** GW34s stille Gabriel-triumf er glemt. Watkins som kaptein er ikke det stille, riktige valget — det er bare feil. Mukiele med 11 fra visekapteinposisjon er en ekstra irritasjon. Cunha med 7 på benken: Thisistheyear mister poeng fra begge ender. Fire runder igjen, 40 bak. Ikke umulig, men Torkil trenger å kollapse.
-**Nevneverdige øyeblikk:** GW16: 83 poeng. GW34: Gabriel-kaptein 16, stille comeback. GW35: 43 poeng, Watkins-kaptein 2, Mukiele 11 fra benken uaktiviert.
-**Løpende vitser:** "Thisistheyear" — fire runder gjenstår, 40 bak. Gabriel over Bruno i GW34 var riktig. Watkins over alle andre i GW35 var galt. Cunha (7) og Mukiele (11) sitter på benken og ser på.
-**Byttemønster:** GW35: Ingen bytter.
-**Kapteinvalg:** Watkins (GW35) — 1 poeng, dobbelt til 2. Ligaens svakeste kapteinvalg i runden.
+**Nåværende form:** Andreplass med 2064 poeng. 66 i GW36. Gap til Torkil: 36 poeng — uendret fra forrige uke.
+**Sesongutvikling:** To frie bytter: Lacroix inn for Dalot (4 mot 0), Saka inn for Cunha (2 mot 2). O'Reilly som kaptein: 5 poeng, dobbelt til 10. Semenyo var på laget og leverte 12 — kapteinsbåndet gikk til feil spiller. 14 poengs gap fra ett enkelt valg. Mukiele (6) og Wilson (2) på benken igjen.
+**Min vurdering:** Anders vant runden mellom de to — 66 mot 62 — men gapet er uendret på 36. Tre runder gjenstår. Thisistheyear kan fortsatt vinne, men det krever at Torkil snubler mens Anders treffer. O'Reilly fremfor Semenyo som kaptein er GW36s stille feil: riktig spiller på laget, feil bând. Gabriel (11), Raya (9), Watkins (9), Semenyo (12) var bærende — laget er ikke problemet. Beslutningene er.
+**Nevneverdige øyeblikk:** GW16: 83 poeng. GW34: Gabriel-kaptein 16. GW35: Watkins-kaptein 2. GW36: Semenyo på laget, O'Reilly som kaptein — 14 poengs tap fra ett valg.
+**Løpende vitser:** "Thisistheyear" — tre runder igjen, 36 bak. Semenyo sitter på laget og leverer 12. O'Reilly får kapteinsbåndet og leverer 5. Mukiele på benken er blitt et fast innslag.
+**Byttemønster:** GW36: Lacroix inn for Dalot, Saka inn for Cunha. Gratis.
+**Kapteinvalg:** O'Reilly (GW36) — 5 poeng, dobbelt til 10. Semenyo (12) var tilgjengelig.

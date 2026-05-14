@@ -1,9 +1,9 @@
 **Lag:** FK Haralds/By
 **Sesongstatistikk:** 8 seiere, 2 sisteplasser. Sesong-high 103 (GW33), low 35 (GW2). Snitt ~57.
-**Nåværende form:** Ligaleder med 2038 poeng. 55 i GW35. Gap til Anders: 40 poeng — vokste fra 28.
-**Sesongutvikling:** Haaland som kaptein: 7 poeng, dobbelt til 14. Solidere enn forrige runde, men ikke imponerende. Igor Thiago (6) og Ouattara (6) bidro. Gabriel med 6. Ingen bytter, ingen chips. Benken: Timber (0) igjen, Dúbravka (2), Thiaw (2), Wilson (2) — 6 benchpoeng. Relativt rent.
-**Min vurdering:** 55 poeng og gapet vokser — Torkil tar ikke store grep, og det fungerer. Timber på benken med null er blitt en ukentlig sak. Gapet på 40 med fire runder igjen ser komfortabelt ut, men ingenting er avgjort. Etter GW34s -4 hit som ikke lønte seg, er GW35 en ren, ukomplisert uke som sier: gapen vokser uten drama.
-**Nevneverdige øyeblikk:** GW33: Free hit, 103 poeng, snudde tabellen 60 poeng. GW34: -4 hit for bytter som brøt akkurat. GW35: 55 poeng, gap vokser til 40.
-**Løpende vitser:** Timber på benken med null — tredje uke på rad, uansett chip-status. Tar -4 hit i GW34 for ingenting, får det igjen i GW35 uten å gjøre noe. Ledelse uten drama er fortsatt ledelse.
-**Byttemønster:** GW35: Ingen bytter.
-**Kapteinvalg:** Haaland (GW35) — 7 poeng, dobbelt til 14.
+**Nåværende form:** Ligaleder med 2100 poeng. 62 i GW36. Gap til Anders: 36 poeng — uendret fra GW35.
+**Sesongutvikling:** To frie bytter: O'Reilly inn for Timber (5 mot 0), Cherki inn for Gibbs-White (5 mot 0). Timber er endelig ute. Haaland som kaptein: 11 poeng, dobbelt til 22 — ryggraden som alltid. Gabriel (11) og Alderete (8) fra benken var solide. Benken ga 11 poeng totalt — ryddig.
+**Min vurdering:** 62 poeng, gap uendret, ingen chips, ingen drama. Torkil vinner ikke runden, men han mister heller ikke terreng. Anders scoret 66 og hentet inn 4 poeng — tre runder igjen, 36 bak. Timber er endelig borte etter uker på benken med null. Det burde ha skjedd tidligere. Resten er kontroll.
+**Nevneverdige øyeblikk:** GW33: Free hit, 103 poeng. GW34: -4 hit. GW35: Gap vokste til 40. GW36: Gap faller til 36 mens Anders scoret 66 — Torkil vant ikke runden mellom de to, men leder fortsatt med behagelig margin.
+**Løpende vitser:** Timber er omsider ute. Tok -4 hit i GW34 for ingenting, men leder uansett. Ledelse uten drama er fortsatt ledelse.
+**Byttemønster:** GW36: O'Reilly inn for Timber, Cherki inn for Gibbs-White. Gratis.
+**Kapteinvalg:** Haaland (GW36) — 11 poeng, dobbelt til 22.

@@ -1,9 +1,9 @@
 **Lag:** Odas Disipler
 **Sesongstatistikk:** 6 seiere, 2 sisteplasser. Sesong-high 104 (GW17), low 29 (GW13). Snitt ~55.
-**Nåværende form:** Fjerdeplass med 1903 poeng. 51 i GW35 — over ligasnittet.
-**Sesongutvikling:** Igor Thiago som kaptein for sjette runde: 6 poeng, dobbelt til 12. Rekken er nå: 12, 8, 26, 4, 2, 12 — en rekke som falt og snudde litt opp igjen. Stach (10) og João Pedro (8) bidro godt. Haaland på benken med 7 — fjerde uke på rad med Haaland inaktiv fra benken. Ingen bytter.
-**Min vurdering:** 51 poeng er godkjent. Igor Thiago leverte faktisk noe denne uken — 12 fra kapteinsmultiplikatoren er ikke ille, selv om rekken har vært skuffende. Stach med 10 er et interessant element. Men Haaland med 7 poeng på benken igjen er sin egen lille katastrofe — han scoret i GW35 og Oda fikk ikke noe ut av det. Oda klatrer ingen steder, men holder fjerde.
-**Nevneverdige øyeblikk:** GW17: 104 poeng. GW32-35: Igor Thiago-kapteinsrekke — 12, 8, 26, 4, 2, 12. Haaland på benken med poeng: fire uker på rad.
-**Løpende vitser:** Igor Thiago-rekken: 12, 8, 26, 4, 2, 12 — en rakett, en krasj, en svak oppreisning. Haaland på benken er ligaens mest konsekvent bortkastede superstar. Oda er fjerde fordi hun er fjerde — ikke fordi hun er best.
-**Byttemønster:** GW35: Ingen bytter.
-**Kapteinvalg:** Igor Thiago (GW35) — 6 poeng, dobbelt til 12. Sjette runde som kaptein.
+**Nåværende form:** Fjerdeplass med 1977 poeng. 74 i GW36 — over ligasnittet.
+**Sesongutvikling:** To frie bytter: Dewsbury-Hall inn for Iwobi (5 mot 0), Senesi inn for Ballard (8 mot 0). Begge byttene traff. Ligaens beste transferrunde i GW36. Haaland byttet til kaptein — 11 poeng, dobbelt til 22. Igor Thiago som visekaptein (2) — ikke aktivert, og ingen sorg over det. Igor Thiago-kapteinsrekken (GW32-35) er over: 12, 8, 26, 4, 2, 12 — Haaland tar over.
+**Min vurdering:** Oda leverer stille og solid. 74 poeng, begge bytter treffende, Haaland som kaptein til rett tid. Det er ikke dramatisk — det er bare riktig. Fjerdeplass er trygg, men Camilla (femte) og Eirin (sjette) er ikke langt unna. Odas evne til å klatre er begrenset av gapet opp, men hun faller heller ikke.
+**Nevneverdige øyeblikk:** GW17: 104 poeng. GW32-35: Igor Thiago-kapteinsrekken. GW36: Ligaens beste bytter, Haaland-kaptein, 74 poeng.
+**Løpende vitser:** Igor Thiago-kapteinsrekken er over — avsluttet med et dempet 12. Haaland tar over som om det alltid var planen. Oda er fjerde fordi hun gjør de riktige tingene stille.
+**Byttemønster:** GW36: Dewsbury-Hall inn for Iwobi, Senesi inn for Ballard. Gratis.
+**Kapteinvalg:** Haaland (GW36) — 11 poeng, dobbelt til 22.

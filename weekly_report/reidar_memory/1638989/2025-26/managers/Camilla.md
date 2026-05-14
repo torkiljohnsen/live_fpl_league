@@ -1,9 +1,9 @@
 **Lag:** YVIL
-**Sesongstatustikk:** 1 seier, 5 sisteplasser. Sesong-high 80 (GW29), low 25 (GW5). Snitt ~54.
-**Nåværende form:** Sjetteplass med 1868 poeng. 54 i GW35. Eneste manager med chip igjen — free hit tilgjengelig.
-**Sesongutvikling:** To bytter: James Hill ut for Van Dijk (10 mot 1), João Pedro ut for Watkins (8 mot 1). Begge byttene gikk feil vei — Hill leverte 10 denne uken, João Pedro leverte 8. Net tap fra bytteaktivitet: -16 poeng. Watkins som kaptein: 1 poeng, dobbelt til 2. Senesi i startoppstillingen leverte 14 — riktig plass denne uken. Szoboszlai (13) reddet mye.
-**Min vurdering:** Forrige uke satt Senesi på benken som inaktiv kaptein. Denne uken er han i startoppstillingen og leverer 14. Timingen er Camillas kjennemerke, og den er konsekvent feil. Byttevinduet i GW35 var det verste i runden: begge spillerne som gikk ut scoret bedre enn de som kom inn. Watkins-kaptein + feil bytter = 54 poeng som burde vært 70. Free hit gjenstår. Fire runder. Det er noe.
-**Nevneverdige øyeblikk:** GW33: Trippelkaptein Senesi 18. GW34: Senesi kaptein på benken, 0. GW35: Senesi (14) i startoppstillingen, Hill (10) og João Pedro (8) solgt uken de scoret.
-**Løpende vitser:** Senesi-syklusen: kaptein (18), benk-kaptein (0), startoppstilling (14) — alltid feil timing. Hill og João Pedro solgt uken de scoret mest på lenge. Watkins som kaptein: 2 poeng. Free hit gjenstår — Camillas siste kort.
-**Byttemønster:** GW35: Van Dijk inn for Hill, Watkins inn for João Pedro. Gratis. Netto -16 fra bytteaktivitet.
-**Kapteinvalg:** Watkins (GW35) — 1 poeng, dobbelt til 2.
+**Sesongstatistikk:** 1 seier, 5 sisteplasser. Sesong-high 80 (GW29), low 25 (GW5). Snitt ~54.
+**Nåværende form:** Femteplass med 1942 poeng. 74 i GW36. Klatret én plass. Eneste manager med chip igjen — free hit tilgjengelig.
+**Sesongutvikling:** Ett bytte: O'Reilly inn for Thiaw (5 mot 2). Semenyo som kaptein: 12 poeng, dobbelt til 24 — riktig valg denne uken. Men benken: Ampadu (10) og van Hecke (6) — 19 benchpoeng totalt uten chip. Gabriel (11), Senesi (8), Martinez (6) fra startoppstillingen bidro solid.
+**Min vurdering:** Semenyo-kapteinen var riktig. Det er fremgang. 74 poeng og klatring til femteplass er den beste uken på en stund. Men 19 benchpoeng uten noen chip er Camillas kjennemerke — Ampadu (10) ser ut gjennom vinduet. Free hit gjenstår. Tre runder. Det er noe — spørsmålet er om timingen blir riktig denne gangen.
+**Nevneverdige øyeblikk:** GW33: Trippelkaptein Senesi 18. GW34: Senesi kaptein på benken. GW36: Semenyo-kaptein 24, 19 benchpoeng, Ampadu (10) aldri aktivert.
+**Løpende vitser:** Ampadu (10) på benken erstatter Mukiele (11) fra GW35 som ukens ubrukte benkeressurs. Free hit er Camillas siste kort — og Camilla og timing er et komplisert forhold.
+**Byttemønster:** GW36: O'Reilly inn for Thiaw. Gratis.
+**Kapteinvalg:** Semenyo (GW36) — 12 poeng, dobbelt til 24. Riktig valg.

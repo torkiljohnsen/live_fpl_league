@@ -1,9 +1,9 @@
 **Lag:** Tafatt IL
 **Sesongstatistikk:** 5 seiere, 4 sisteplasser. Sesong-high 89 (GW14), low 13 (GW13). Snitt ~55.
-**Nåværende form:** Tredjeplass med 1962 poeng. 49 i GW35. Alle chips brukt.
-**Sesongutvikling:** To frie bytter: Tarkowski ut for O'Reilly (0 mot 0), Timber ut for Guéhi (0 mot 4). Guéhi er en marginal oppgradering. Haaland som kaptein: 7 poeng, dobbelt til 14 — greit, ikke mer. Benken: Mukiele (11), Garner (5), Zubimendi (1), Pickford (1) — 18 benchpoeng. Mukiele med 11 er Heddas Senesi-øyeblikk denne uken.
-**Min vurdering:** Wildcardlaget fra GW34 begynte å levere benchpoeng før startoppstillingene. Mukiele (11) på benken er et spesielt kapittel — riktig spiller, feil plass. 18 benchpoeng uten noen chip igjen er frustrerende. Guéhi inn for Timber er riktig på sikt, men effekten i GW35 var minimal. 76 bak Torkil, 36 bak Anders — fire runder, matematisk mulig.
-**Nevneverdige øyeblikk:** GW13: 13 poeng — ligarekord lavest. GW33: Trippelkaptein Haaland 39, 82 poeng. GW34: Wildcard. GW35: 18 benchpoeng, Mukiele (11) aldri aktivert.
-**Løpende vitser:** Wildcardlaget presterer best på benken. Mukiele (11) i GW35 som Camillas Senesi-variant. Guéhi inn for Timber — en mann som leverer null erstattes av en mann som leverer 4.
-**Byttemønster:** GW35: O'Reilly inn for Tarkowski, Guéhi inn for Timber. Gratis.
-**Kapteinvalg:** Haaland (GW35) — 7 poeng, dobbelt til 14.
+**Nåværende form:** Tredjeplass med 2041 poeng. 79 netto (83 brutto) i GW36. Alle chips brukt.
+**Sesongutvikling:** Bench boost aktivert. -4 hit for to bytter: Semenyo inn for Gibbs-White (12 mot 0), Senesi inn for Guéhi (8 mot 15). Guéhi leverte 15 denne uken — etter å ha forlatt laget. Nøkkelbyttet gikk feil vei. Haaland kaptein: 11 poeng, dobbelt til 22. Benken bidro bare 2 poeng — Dúbravka (0), Casimiro (0), Zubimendi (1), Garner (1). Bench boost med tomme lommer.
+**Min vurdering:** 79 netto er over ligasnittet, men potensialet var klart høyere. Bench boost med 2 benchpoeng er enten ironisk eller tragisk. Guéhi (15) som reiste ut denne uken er det virkelige stikket. -4 hit pluss feil side av Guéhi/Senesi-byttet definerer GW36 for Tafatt IL. 59 bak Torkil, tre runder igjen, ingen chips. Det krever mye.
+**Nevneverdige øyeblikk:** GW13: 13 poeng — ligarekord lavest. GW33: Trippelkaptein Haaland, 82 poeng. GW34: Wildcard. GW36: Bench boost med 2 benchpoeng, Guéhi (15) solgt uken han leverte mest.
+**Løpende vitser:** Wildcardlaget og bench boost-laget presterer best for spillerne som forlater det. Guéhi inn, Guéhi ut, Guéhi 15. Bench boost hentet ut tomme lommer.
+**Byttemønster:** GW36: Semenyo inn for Gibbs-White, Senesi inn for Guéhi. -4 hit.
+**Kapteinvalg:** Haaland (GW36) — 11 poeng, dobbelt til 22.
