@@ -1,9 +1,9 @@
 **Lag:** Thisistheyear
 **Sesongstatistikk:** 10 seiere, 1 sisteplass. Sesong-high 83 (GW16), low 32 (GW5/GW13). Snitt ~58.
-**Nåværende form:** Andreplass med 2064 poeng. 66 i GW36. Gap til Torkil: 36 poeng — uendret fra forrige uke.
-**Sesongutvikling:** To frie bytter: Lacroix inn for Dalot (4 mot 0), Saka inn for Cunha (2 mot 2). O'Reilly som kaptein: 5 poeng, dobbelt til 10. Semenyo var på laget og leverte 12 — kapteinsbåndet gikk til feil spiller. 14 poengs gap fra ett enkelt valg. Mukiele (6) og Wilson (2) på benken igjen.
-**Min vurdering:** Anders vant runden mellom de to — 66 mot 62 — men gapet er uendret på 36. Tre runder gjenstår. Thisistheyear kan fortsatt vinne, men det krever at Torkil snubler mens Anders treffer. O'Reilly fremfor Semenyo som kaptein er GW36s stille feil: riktig spiller på laget, feil bând. Gabriel (11), Raya (9), Watkins (9), Semenyo (12) var bærende — laget er ikke problemet. Beslutningene er.
-**Nevneverdige øyeblikk:** GW16: 83 poeng. GW34: Gabriel-kaptein 16. GW35: Watkins-kaptein 2. GW36: Semenyo på laget, O'Reilly som kaptein — 14 poengs tap fra ett valg.
-**Løpende vitser:** "Thisistheyear" — tre runder igjen, 36 bak. Semenyo sitter på laget og leverer 12. O'Reilly får kapteinsbåndet og leverer 5. Mukiele på benken er blitt et fast innslag.
-**Byttemønster:** GW36: Lacroix inn for Dalot, Saka inn for Cunha. Gratis.
-**Kapteinvalg:** O'Reilly (GW36) — 5 poeng, dobbelt til 10. Semenyo (12) var tilgjengelig.
+**Nåværende form:** Andreplass med 2118 poeng. 54 i GW37. Gap til Torkil: 42 poeng — opp fra 36. To runder igjen.
+**Sesongutvikling:** Ett gratis bytte: Bruno Guimarães inn for Morgan Rogers (4 mot 12). Rogers leverte 12 der han var — på Torkils benk. Bruno G ga 4. Saka som kaptein var ukens beste valg i ligaen: 10 poeng, dobbelt til 20. Men Watkins (15) satt på benken igjen. Mukiele (2) og Lacroix (2) fulgte. 19 benchpoeng totalt.
+**Min vurdering:** Sakas kapteinvalg var riktig og ukens beste i ligaen. Det er fremgang fra O'Reilly-fiaskoen i GW36. Men Watkins (15) på benken og Bruno G (4) inn for Rogers (12) kostet. Gapet vokste med 6 denne uken — Anders taper terreng. "Thisistheyear" har to runder på seg og trenger at Torkil kollapser mens han selv treffer. Det ene er mulig. Det andre er usannsynlig.
+**Nevneverdige øyeblikk:** GW34: Gabriel-kaptein 16. GW36: Semenyo på laget, O'Reilly som kaptein. GW37: Saka-kaptein 20 — beste i ligaen. Watkins (15) på benken.
+**Løpende vitser:** Watkins på benken er blitt like fast som Mukiele. Rogers (12) forlot laget og leverte 12. Thisistheyear teller ned: to runder, 42 poeng bak.
+**Byttemønster:** GW37: Bruno Guimarães inn for Morgan Rogers. Gratis.
+**Kapteinvalg:** Saka (GW37) — 10 poeng, dobbelt til 20. Ukens beste kapteinvalg i ligaen.

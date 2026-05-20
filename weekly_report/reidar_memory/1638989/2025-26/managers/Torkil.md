@@ -1,9 +1,9 @@
 **Lag:** FK Haralds/By
 **Sesongstatistikk:** 8 seiere, 2 sisteplasser. Sesong-high 103 (GW33), low 35 (GW2). Snitt ~57.
-**Nåværende form:** Ligaleder med 2100 poeng. 62 i GW36. Gap til Anders: 36 poeng — uendret fra GW35.
-**Sesongutvikling:** To frie bytter: O'Reilly inn for Timber (5 mot 0), Cherki inn for Gibbs-White (5 mot 0). Timber er endelig ute. Haaland som kaptein: 11 poeng, dobbelt til 22 — ryggraden som alltid. Gabriel (11) og Alderete (8) fra benken var solide. Benken ga 11 poeng totalt — ryddig.
-**Min vurdering:** 62 poeng, gap uendret, ingen chips, ingen drama. Torkil vinner ikke runden, men han mister heller ikke terreng. Anders scoret 66 og hentet inn 4 poeng — tre runder igjen, 36 bak. Timber er endelig borte etter uker på benken med null. Det burde ha skjedd tidligere. Resten er kontroll.
-**Nevneverdige øyeblikk:** GW33: Free hit, 103 poeng. GW34: -4 hit. GW35: Gap vokste til 40. GW36: Gap faller til 36 mens Anders scoret 66 — Torkil vant ikke runden mellom de to, men leder fortsatt med behagelig margin.
-**Løpende vitser:** Timber er omsider ute. Tok -4 hit i GW34 for ingenting, men leder uansett. Ledelse uten drama er fortsatt ledelse.
-**Byttemønster:** GW36: O'Reilly inn for Timber, Cherki inn for Gibbs-White. Gratis.
-**Kapteinvalg:** Haaland (GW36) — 11 poeng, dobbelt til 22.
+**Nåværende form:** Ligaleder med 2160 poeng. 60 i GW37. Gap til Anders: 42 poeng — opp fra 36.
+**Sesongutvikling:** Ett gratis bytte: Gyökeres inn for Welbeck (1 mot 2). Haaland som kaptein: 9 poeng, dobbelt til 18. Ouattara leverte 15, Bruno Fernandes 9. Men 27 benchpoeng råtnet: Morgan Rogers (12) og van Dijk (14) satt på benken. Det er mer enn noen av lagene scoret totalt i de svakeste rundene.
+**Min vurdering:** 60 poeng er akseptabelt når man leder med 42. Torkil vinner ikke runden, men han trenger heller ikke det. Gapet vokste med 6 denne uken — Anders er den som jakter, ikke Torkil. Rogers (12) og van Dijk (14) på benken er GW37s ironiske fortelling: laget er for godt til benken sin. Gyökeres inn for Welbeck ga 1 mot 2 — kåret til beste transfer i ligaen. Det sier noe om resten av feltet.
+**Nevneverdige øyeblikk:** GW33: Free hit, 103 poeng. GW36: Gap falt til 36. GW37: Gap vokser til 42. 27 benchpoeng — Rogers og van Dijk ubrukt.
+**Løpende vitser:** Beste transfer: Gyökeres inn for Welbeck, nettoutbytte -1. Den prisen sier mer om konkurransen enn om Torkil. Van Dijk (14) og Rogers (12) ser ut gjennom vinduet mens ligaledelsen er trygg.
+**Byttemønster:** GW37: Gyökeres inn for Welbeck. Gratis.
+**Kapteinvalg:** Haaland (GW37) — 9 poeng, dobbelt til 18.

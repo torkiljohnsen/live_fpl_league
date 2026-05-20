@@ -1,9 +1,9 @@
 **Lag:** Odas Disipler
 **Sesongstatistikk:** 6 seiere, 2 sisteplasser. Sesong-high 104 (GW17), low 29 (GW13). Snitt ~55.
-**Nåværende form:** Fjerdeplass med 1977 poeng. 74 i GW36 — over ligasnittet.
-**Sesongutvikling:** To frie bytter: Dewsbury-Hall inn for Iwobi (5 mot 0), Senesi inn for Ballard (8 mot 0). Begge byttene traff. Ligaens beste transferrunde i GW36. Haaland byttet til kaptein — 11 poeng, dobbelt til 22. Igor Thiago som visekaptein (2) — ikke aktivert, og ingen sorg over det. Igor Thiago-kapteinsrekken (GW32-35) er over: 12, 8, 26, 4, 2, 12 — Haaland tar over.
-**Min vurdering:** Oda leverer stille og solid. 74 poeng, begge bytter treffende, Haaland som kaptein til rett tid. Det er ikke dramatisk — det er bare riktig. Fjerdeplass er trygg, men Camilla (femte) og Eirin (sjette) er ikke langt unna. Odas evne til å klatre er begrenset av gapet opp, men hun faller heller ikke.
-**Nevneverdige øyeblikk:** GW17: 104 poeng. GW32-35: Igor Thiago-kapteinsrekken. GW36: Ligaens beste bytter, Haaland-kaptein, 74 poeng.
-**Løpende vitser:** Igor Thiago-kapteinsrekken er over — avsluttet med et dempet 12. Haaland tar over som om det alltid var planen. Oda er fjerde fordi hun gjør de riktige tingene stille.
-**Byttemønster:** GW36: Dewsbury-Hall inn for Iwobi, Senesi inn for Ballard. Gratis.
-**Kapteinvalg:** Haaland (GW36) — 11 poeng, dobbelt til 22.
+**Nåværende form:** Fjerdeplass med 2041 poeng. 64 i GW37 — bench boost aktivert. Alle chips nå brukt.
+**Sesongutvikling:** Bench boost aktivert. Fire bytter: De Cuyper inn for Nunes (2 mot 2), Porro inn for O'Reilly (0 mot 2), Saliba inn for van Dijk (8 mot 14), Hinshelwood inn for Mac Allister (3 mot 4). Alle fire byttene gikk feil vei. Særlig Saliba inn for van Dijk — van Dijk leverte 14 der han var. Porro (0), João Pedro (0), Simon Moore (0) fra startoppstillingen bidro ingenting. Haaland-kapteinen ga 18. 64 poeng totalt — ligasnittet var 57,6.
+**Min vurdering:** Bench boost er FPLs sterkeste chip, og Oda brukte den på en runde der resultatene landet under det dramatisk. 64 poeng er over snittet, men fire bytter som alle tapte verdi, tre nullstillere i startoppstillingen, og ingen plassforbedring. Igor Thiago som visekaptein (2) er en vakker siste reference til kapitelsrekken som definerte midtsesongen. Worst transfer i ligaen denne uken. Alle chips brukt.
+**Nevneverdige øyeblikk:** GW17: 104 poeng. GW36: Ligaens beste bytter. GW37: Bench boost, 64 poeng, alle fire bytter ga negativ avkastning, van Dijk solgt uken han leverte 14.
+**Løpende vitser:** Igor Thiago-kapteinsrekken endte, og han dukker opp igjen som visekaptein i bench boost-runden. Oda er fjerde fordi hun gjør de riktige tingene stille — bortsett fra i chip-rundene.
+**Byttemønster:** GW37: De Cuyper, Porro, Saliba, Hinshelwood inn. Fire bytter, alle med negativ nettoutbytte.
+**Kapteinvalg:** Haaland (GW37) — 9 poeng, dobbelt til 18. Worst transfer: Saliba inn for van Dijk (8 mot 14).
