@@ -1,9 +1,9 @@
 **Lag:** FK Haralds/By
 **Sesongstatistikk:** 8 seiere, 2 sisteplasser. Sesong-high 103 (GW33), low 35 (GW2). Snitt ~57.
-**Nåværende form:** Ligaleder med 2160 poeng. 60 i GW37. Gap til Anders: 42 poeng — opp fra 36.
-**Sesongutvikling:** Ett gratis bytte: Gyökeres inn for Welbeck (1 mot 2). Haaland som kaptein: 9 poeng, dobbelt til 18. Ouattara leverte 15, Bruno Fernandes 9. Men 27 benchpoeng råtnet: Morgan Rogers (12) og van Dijk (14) satt på benken. Det er mer enn noen av lagene scoret totalt i de svakeste rundene.
-**Min vurdering:** 60 poeng er akseptabelt når man leder med 42. Torkil vinner ikke runden, men han trenger heller ikke det. Gapet vokste med 6 denne uken — Anders er den som jakter, ikke Torkil. Rogers (12) og van Dijk (14) på benken er GW37s ironiske fortelling: laget er for godt til benken sin. Gyökeres inn for Welbeck ga 1 mot 2 — kåret til beste transfer i ligaen. Det sier noe om resten av feltet.
-**Nevneverdige øyeblikk:** GW33: Free hit, 103 poeng. GW36: Gap falt til 36. GW37: Gap vokser til 42. 27 benchpoeng — Rogers og van Dijk ubrukt.
-**Løpende vitser:** Beste transfer: Gyökeres inn for Welbeck, nettoutbytte -1. Den prisen sier mer om konkurransen enn om Torkil. Van Dijk (14) og Rogers (12) ser ut gjennom vinduet mens ligaledelsen er trygg.
-**Byttemønster:** GW37: Gyökeres inn for Welbeck. Gratis.
-**Kapteinvalg:** Haaland (GW37) — 9 poeng, dobbelt til 18.
+**Sluttresultat:** LIGAVINNER 2025-26. 2213 poeng. 37 poeng foran Anders.
+**GW38:** 53 poeng. Haaland spilte ikke — null fra kapteinen. Jarrod Bowen som visekaptein ga 24 (12, dobbelt) og reddet runden. Bruno Fernandes bidro med 14. Gyökeres solgt for Bowen — nettoutbytte +11, beste transfer i ligaen.
+**Min vurdering:** Torkil vant ikke runden. Han trengte ikke det. Åtte seierunder og konsistent ledelse gjennom hele sesongen bygget en buffer som holdt selv når Haaland ble hjemme. FK Haralds/By var aldri det mest spektakulære laget — det var det mest pålitelige. Det er den riktige måten å vinne FPL på.
+**Nevneverdige øyeblikk:** GW33: Free hit, 103 poeng. GW37: Gap vokste til 42. GW38: Ligaseier, Haaland spilte ikke, Bowen-visekaptein reddet det.
+**Løpende vitser:** Beste transfer GW38: Bowen inn for Gyökeres, nettoutbytte +11. Forrige sesong var beste transfer Gyökeres inn for Welbeck med nettoutbytte -1. To helt forskjellige historier. Haaland på benken (ikke spilt) i siste runde — Torkil var den eneste som ikke ble straffet.
+**Byttemønster:** GW38: Bowen inn for Gyökeres. Gratis.
+**Kapteinvalg:** Haaland (GW38) — spilte ikke, 0 poeng. Bowen som visekaptein tok over: 24 effektive poeng.

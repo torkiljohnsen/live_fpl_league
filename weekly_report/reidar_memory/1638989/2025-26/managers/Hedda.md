@@ -1,9 +1,9 @@
 **Lag:** Tafatt IL
 **Sesongstatistikk:** 5 seiere, 4 sisteplasser. Sesong-high 89 (GW14), low 13 (GW13). Snitt ~55.
-**Nåværende form:** Tredjeplass med 2106 poeng. 65 i GW37. Ingen chips igjen.
-**Sesongutvikling:** Ingen bytter. Van Dijk (14) og Haaland-kapteinen (18) var bærende. Bruno Fernandes (9) bidro. Benken ga bare 4 poeng — Dúbravka (0), Mukiele (2), Zubimendi (1), Garner (1). Stille og anstendig. 54 bak Torkil, to runder igjen.
-**Min vurdering:** 65 poeng uten bytter og uten drama. Hedda holder tredjen, og det er egentlig alt hun kan gjøre nå. Van Dijk i startoppstillingen — i motsetning til Torkil som benket ham — var et poeng i riktig retning. Matematikken for å nå Torkil finnes på papiret. Sannsynligheten er en annen sak. To runder, ingen chips. Det blir som det blir.
-**Nevneverdige øyeblikk:** GW13: 13 poeng — ligarekord lavest. GW36: Bench boost med 2 benchpoeng, Guéhi (15) solgt. GW37: Van Dijk (14) i startoppstillingen, 65 poeng, ingen bytte.
-**Løpende vitser:** Wildcardlaget og bench boost-laget presterer best for de som forlater det. Nå er alle chips brukt — og Tafatt IL er stille og tredje.
-**Byttemønster:** GW37: Ingen bytter.
-**Kapteinvalg:** Haaland (GW37) — 9 poeng, dobbelt til 18.
+**Sluttresultat:** Tredjeplass med 2169 poeng.
+**GW38:** 63 poeng — rundevinner. Haaland spilte ikke, men visekaptein Bruno Fernandes rykket inn som effektiv kaptein og ga 28 poeng (14, dobbelt). Bowen 12, Semenyo 6. Elliot Anderson inn for Casimiro (2 mot 0) — uproblematisk.
+**Min vurdering:** Siste runde ble Heddas beste. Mekanismen fungerte perfekt: Haaland spilte ikke, Bruno Fernandes tok over, 28 effektive poeng. Det er ikke strategi — det er hell med godt utgangspunkt. Tredjeplassen var aldri truet og ble aldri spennende. Tafatt IL lever opp til navnet: solid, anstendig, alltid litt bak de to fremst.
+**Nevneverdige øyeblikk:** GW13: 13 poeng — ligarekord lavest. GW38: Rundevinner (63), Haaland spilte ikke, Bruno Fernandes ga 28 som effektiv kaptein.
+**Løpende vitser:** Haaland-kaptein som ikke spiller, reddet av visekaptein — og det ga rundeseier. Tafatt IL avslutter sesongen med et tilfeldig mesterstykke.
+**Byttemønster:** GW38: Elliot Anderson inn for Casimiro. Gratis.
+**Kapteinvalg:** Haaland (GW38) — spilte ikke. Bruno Fernandes som effektiv kaptein: 28 poeng. Beste kapteinresultat i runden.

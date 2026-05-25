@@ -1,9 +1,9 @@
 **Lag:** Thisistheyear
 **Sesongstatistikk:** 10 seiere, 1 sisteplass. Sesong-high 83 (GW16), low 32 (GW5/GW13). Snitt ~58.
-**Nåværende form:** Andreplass med 2118 poeng. 54 i GW37. Gap til Torkil: 42 poeng — opp fra 36. To runder igjen.
-**Sesongutvikling:** Ett gratis bytte: Bruno Guimarães inn for Morgan Rogers (4 mot 12). Rogers leverte 12 der han var — på Torkils benk. Bruno G ga 4. Saka som kaptein var ukens beste valg i ligaen: 10 poeng, dobbelt til 20. Men Watkins (15) satt på benken igjen. Mukiele (2) og Lacroix (2) fulgte. 19 benchpoeng totalt.
-**Min vurdering:** Sakas kapteinvalg var riktig og ukens beste i ligaen. Det er fremgang fra O'Reilly-fiaskoen i GW36. Men Watkins (15) på benken og Bruno G (4) inn for Rogers (12) kostet. Gapet vokste med 6 denne uken — Anders taper terreng. "Thisistheyear" har to runder på seg og trenger at Torkil kollapser mens han selv treffer. Det ene er mulig. Det andre er usannsynlig.
-**Nevneverdige øyeblikk:** GW34: Gabriel-kaptein 16. GW36: Semenyo på laget, O'Reilly som kaptein. GW37: Saka-kaptein 20 — beste i ligaen. Watkins (15) på benken.
-**Løpende vitser:** Watkins på benken er blitt like fast som Mukiele. Rogers (12) forlot laget og leverte 12. Thisistheyear teller ned: to runder, 42 poeng bak.
-**Byttemønster:** GW37: Bruno Guimarães inn for Morgan Rogers. Gratis.
-**Kapteinvalg:** Saka (GW37) — 10 poeng, dobbelt til 20. Ukens beste kapteinvalg i ligaen.
+**Sluttresultat:** Andreplass med 2176 poeng. 37 poeng bak Torkil.
+**GW38:** 58 poeng. Bowen som kaptein: 24 poeng (12, dobbelt) — riktig valg. Bruno Fernandes 14. Men Watkins (13) ble solgt for Bowen (12) — worst transfer i ligaen med -1 i nettoutbytte. Saka (0) på benken igjen.
+**Min vurdering:** 10 rundeseiere — den beste statistikken blant alle managere. Og likevel andreplass. Torkil var bedre. Watkins solgt for Bowen, Bowen leverte 12, Watkins leverte 13 der han var. Ett poeng i feil retning. Det betyr ingenting for sluttresultatet, men det er den typen ting man grubbler på. Thisistheyear var egentlig aldri dette året.
+**Nevneverdige øyeblikk:** GW37: Saka-kaptein 20. GW38: Watkins (13) solgt for Bowen (12) — worst transfer. Saka på benken i siste runde.
+**Løpende vitser:** Watkins på benken er byttet ut med Watkins solgt. Begge alternativene gir samme resultat. "Thisistheyear" ble "Nestesesongen kanskje."
+**Byttemønster:** GW38: Bowen inn for Watkins. Gratis.
+**Kapteinvalg:** Bowen (GW38) — 12 poeng, dobbelt til 24.

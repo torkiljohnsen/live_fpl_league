@@ -1,9 +1,9 @@
 **Lag:** Odas Disipler
 **Sesongstatistikk:** 6 seiere, 2 sisteplasser. Sesong-high 104 (GW17), low 29 (GW13). Snitt ~55.
-**Nåværende form:** Fjerdeplass med 2041 poeng. 64 i GW37 — bench boost aktivert. Alle chips nå brukt.
-**Sesongutvikling:** Bench boost aktivert. Fire bytter: De Cuyper inn for Nunes (2 mot 2), Porro inn for O'Reilly (0 mot 2), Saliba inn for van Dijk (8 mot 14), Hinshelwood inn for Mac Allister (3 mot 4). Alle fire byttene gikk feil vei. Særlig Saliba inn for van Dijk — van Dijk leverte 14 der han var. Porro (0), João Pedro (0), Simon Moore (0) fra startoppstillingen bidro ingenting. Haaland-kapteinen ga 18. 64 poeng totalt — ligasnittet var 57,6.
-**Min vurdering:** Bench boost er FPLs sterkeste chip, og Oda brukte den på en runde der resultatene landet under det dramatisk. 64 poeng er over snittet, men fire bytter som alle tapte verdi, tre nullstillere i startoppstillingen, og ingen plassforbedring. Igor Thiago som visekaptein (2) er en vakker siste reference til kapitelsrekken som definerte midtsesongen. Worst transfer i ligaen denne uken. Alle chips brukt.
-**Nevneverdige øyeblikk:** GW17: 104 poeng. GW36: Ligaens beste bytter. GW37: Bench boost, 64 poeng, alle fire bytter ga negativ avkastning, van Dijk solgt uken han leverte 14.
-**Løpende vitser:** Igor Thiago-kapteinsrekken endte, og han dukker opp igjen som visekaptein i bench boost-runden. Oda er fjerde fordi hun gjør de riktige tingene stille — bortsett fra i chip-rundene.
-**Byttemønster:** GW37: De Cuyper, Porro, Saliba, Hinshelwood inn. Fire bytter, alle med negativ nettoutbytte.
-**Kapteinvalg:** Haaland (GW37) — 9 poeng, dobbelt til 18. Worst transfer: Saliba inn for van Dijk (8 mot 14).
+**Sluttresultat:** Fjerdeplass med 2083 poeng.
+**GW38:** 42 poeng. Trippelkaptein aktivert. Haaland spilte ikke. Igor Thiago som visekaptein rykket inn som effektiv kaptein: 6 poeng (2, tredobbelt). Ingen bytter.
+**Min vurdering:** To chips på to siste runder. GW37: bench boost, 64 poeng, under det den burde gi. GW38: trippelkaptein, Haaland spiller ikke, Igor Thiago ga 6. Det er en avslutning så konsekvent i sin ironi at det nesten er imponerende. Igor Thiago som visekaptein i trippelkaptein-runden er den perfekte siste referansen til en rekke som har definert Odas midtsesong.
+**Nevneverdige øyeblikk:** GW17: 104 poeng. GW37: Bench boost, 64 poeng. GW38: Trippelkaptein, Haaland spiller ikke, Igor Thiago 6 effektive poeng.
+**Løpende vitser:** Igor Thiago-sagaen slutter som den begynte — med 6 poeng og et kapteinsbånd han ikke fortjente. Oda brukte begge gjenværende chips på siste to runder og endte under snittet begge gangene.
+**Byttemønster:** GW38: Ingen bytter.
+**Kapteinvalg:** Haaland (GW38) — spilte ikke. Igor Thiago som effektiv kaptein: 6 poeng (2, tredobbelt).
