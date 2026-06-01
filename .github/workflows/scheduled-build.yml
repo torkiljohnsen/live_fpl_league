@@ -1,8 +1,10 @@
 name: Hourly Dashboard & Weekly Report
 
 on:
-  schedule:
-    - cron: "0 * * * *"  # Hourly check
+  # Hourly schedule disabled for the off-season (FPL season over).
+  # To re-activate: uncomment the two lines below.
+  # schedule:
+  #   - cron: "0 * * * *"  # Hourly check
   workflow_dispatch:      # Manual runs skip the check and run everything
 
 permissions:
