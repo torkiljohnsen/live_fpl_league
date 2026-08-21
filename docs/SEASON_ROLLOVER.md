@@ -205,9 +205,21 @@ into BPS and Defensive Contribution points. Consequences:
   `finished_provisional` flips at full time. `count_finished_fixtures()`
   counts both, or dashboards would refresh once per gameweek instead of after
   each match.
-- The report and narrative wait for `event.finished`, which flips at the lock.
-  So Reidar's report now lands the *morning after* the last match, not late the
-  same night. Teams notification timing shifts with it.
+- The report and narrative wait for `finished` **and** `data_checked`;
+  `data_checked` is what tracks the lock, and `finished` has historically
+  flipped earlier. `detect_current_gameweek()` requires both for the same
+  reason. Reidar's report therefore lands the *morning after* the gameweek's
+  last match, not late the same night.
+- The report is then held until **11:00 Oslo time** (the "Check report window"
+  step), so the Teams notification arrives at lunch rather than at 10:00. The
+  window is computed with `zoneinfo` rather than a fixed UTC cron hour, so it
+  stays at 11:00 local through the winter time change. It is open-ended, so a
+  failed 11:00 run is retried by the next hourly one, and a manual dispatch
+  ignores it.
+- Because the report can fire hours after the fixture/event deltas were
+  consumed, the commit, save-state and hero-image steps also trigger on
+  `steps.narrative.outputs.generated` — otherwise a narrative generated at
+  11:00 would never be committed and Teams would link to a 404.
 
 **Reports for past seasons cannot be rebuilt.** The FPL API only serves the
 season currently running — historical picks, transfers and live data are gone.

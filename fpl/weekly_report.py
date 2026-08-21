@@ -35,19 +35,24 @@ def get_season_from_bootstrap(bootstrap: dict[str, Any]) -> str:
 
 
 def detect_current_gameweek(api: FPLAPIProtocol) -> int:
-    """Find the latest finished gameweek from bootstrap-static data.
+    """Find the latest locked gameweek from bootstrap-static data.
 
-    Scans events in reverse to find the most recent event with
-    finished=True. Raises SystemExit if no finished gameweek is found.
+    Scans events in reverse for the most recent one that is both
+    finished and data_checked. FPL locks gameweek points at 09:00 UK on
+    the day after the gameweek's final match, and data_checked is what
+    marks that lock — before it, BPS and Defensive Contribution points
+    can still be amended by Opta's post-match review.
+
+    Raises SystemExit if no locked gameweek is found.
     """
     bootstrap = api.get_bootstrap_static()
     events = bootstrap.get("events", [])
 
     for event in reversed(events):
-        if event.get("finished", False):
+        if event.get("finished", False) and event.get("data_checked", False):
             return int(event["id"])
 
-    print("Error: No finished gameweek found.", file=sys.stderr)
+    print("Error: No locked gameweek found.", file=sys.stderr)
     sys.exit(1)
 
 

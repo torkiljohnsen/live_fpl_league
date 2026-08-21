@@ -34,6 +34,28 @@ jobs:
         id: gw_check
         run: python check_gw_status.py --cache-dir .fpl_cache
 
+      # Reidar's report is held back to lunchtime rather than posted the
+      # moment FPL locks the gameweek (09:00 UK / 10:00 Oslo). Uses the Oslo
+      # zone rather than a fixed UTC cron hour so it stays at 11:00 local
+      # across the winter time change. Open-ended, so a failed 11:00 run is
+      # retried by the next hourly one.
+      - name: Check report window
+        id: window
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+
+          now = datetime.now(ZoneInfo("Europe/Oslo"))
+          print(f"open={'true' if now.hour >= 11 else 'false'}")
+          print(f"local_time={now:%Y-%m-%d %H:%M %Z}")
+          PY
+
+      - name: Report window status
+        run: |
+          echo "Oslo time: ${{ steps.window.outputs.local_time }}"
+          echo "Report window open: ${{ steps.window.outputs.open }}"
+
       # Dashboards: refresh when new fixtures finish OR when the whole gameweek finishes
       - name: Generate standings and gw history
         if: >-
@@ -52,17 +74,17 @@ jobs:
       # Tier 2: Whole gameweek finished → report + narrative + notification
       - name: Generate weekly report (JSON)
         if: >-
-          steps.gw_check.outputs.gameweek_finished == 'true'
-          || (github.event_name == 'workflow_dispatch'
-              && steps.gw_check.outputs.has_finished_gameweek == 'true')
+          steps.gw_check.outputs.has_finished_gameweek == 'true'
+          && (github.event_name == 'workflow_dispatch'
+              || steps.window.outputs.open == 'true')
         run: python generate_weekly_report.py -l 848662 --skip-existing --cache-dir .fpl_cache
 
       - name: Generate narrative
         id: narrative
         if: >-
-          steps.gw_check.outputs.gameweek_finished == 'true'
-          || (github.event_name == 'workflow_dispatch'
-              && steps.gw_check.outputs.has_finished_gameweek == 'true')
+          steps.gw_check.outputs.has_finished_gameweek == 'true'
+          && (github.event_name == 'workflow_dispatch'
+              || steps.window.outputs.open == 'true')
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python generate_narrative.py -l 848662 --skip-existing --cache-dir .fpl_cache
@@ -72,6 +94,7 @@ jobs:
           github.event_name == 'workflow_dispatch'
           || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
           || steps.gw_check.outputs.gameweek_finished == 'true'
+          || steps.narrative.outputs.generated == 'true'
         run: |
           mkdir -p docs/assets
           for img in weekly_report/reidars_rapport_*.png; do
@@ -86,6 +109,7 @@ jobs:
           github.event_name == 'workflow_dispatch'
           || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
           || steps.gw_check.outputs.gameweek_finished == 'true'
+          || steps.narrative.outputs.generated == 'true'
         run: python check_gw_status.py --save --cache-dir .fpl_cache
 
       - name: Commit and push changes
@@ -94,6 +118,7 @@ jobs:
           github.event_name == 'workflow_dispatch'
           || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
           || steps.gw_check.outputs.gameweek_finished == 'true'
+          || steps.narrative.outputs.generated == 'true'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"

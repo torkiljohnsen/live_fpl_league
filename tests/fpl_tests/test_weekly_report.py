@@ -32,6 +32,7 @@ BOOTSTRAP_DATA: dict[str, Any] = {
             "name": "Gameweek 1",
             "deadline_time": "2025-08-15T17:30:00Z",
             "finished": True,
+            "data_checked": True,
             "is_next": False,
             "is_previous": False,
             "is_current": False,
@@ -41,6 +42,7 @@ BOOTSTRAP_DATA: dict[str, Any] = {
             "name": "Gameweek 2",
             "deadline_time": "2025-08-22T17:30:00Z",
             "finished": True,
+            "data_checked": True,
             "is_next": False,
             "is_previous": True,
             "is_current": False,
@@ -816,6 +818,20 @@ class TestDetectCurrentGameweek:
 
         with pytest.raises(SystemExit):
             detect_current_gameweek(NoFinishedAPI())
+
+    def test_skips_a_finished_but_unlocked_gameweek(self) -> None:
+        """Points are not final until the gameweek locks at 09:00 UK the
+        day after its last match. Reporting on GW3 before then would use
+        pre-review BPS and Defensive Contribution numbers."""
+
+        class UnlockedAPI(WeeklyReportDummyAPI):
+            def get_bootstrap_static(self) -> dict[str, Any]:
+                return {"events": [
+                    {"id": 2, "finished": True, "data_checked": True},
+                    {"id": 3, "finished": True, "data_checked": False},
+                ]}
+
+        assert detect_current_gameweek(UnlockedAPI()) == 2
 
 
 class TestPathHelpers:
