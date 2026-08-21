@@ -20,7 +20,7 @@ def _mock_client(
     client = MagicMock()
     response = MagicMock(content=content, stop_reason=stop_reason)
     response.stop_details = MagicMock(category=category) if category else None
-    client.beta.messages.create.return_value = response
+    client.messages.create.return_value = response
     return client
 
 
@@ -40,16 +40,14 @@ class TestComplete:
 
         assert result == "Rapporten."
 
-    def test_sends_model_and_fallbacks(self):
+    def test_sends_model_and_token_ceiling(self):
         client = _mock_client([_block("text", "x")])
 
         claude_api.complete(client, system="S", user="U")
 
-        kwargs = client.beta.messages.create.call_args.kwargs
+        kwargs = client.messages.create.call_args.kwargs
         assert kwargs["model"] == claude_api.MODEL
         assert kwargs["max_tokens"] == claude_api.MAX_TOKENS
-        assert kwargs["fallbacks"] == "default"
-        assert claude_api.FALLBACK_BETA in kwargs["betas"]
 
     def test_refusal_raises(self):
         client = _mock_client(
@@ -66,34 +64,3 @@ class TestComplete:
         with pytest.raises(RuntimeError, match="truncated"):
             claude_api.complete(client, system="S", user="U")
 
-
-class TestFallbackDegradation:
-    """The weekly run must survive an account without the fallbacks beta."""
-
-    def _bad_request(self, message: str) -> Exception:
-        exc = Exception(message)
-        exc.status_code = 400  # type: ignore[attr-defined]
-        return exc
-
-    def test_retries_without_fallbacks_on_beta_rejection(self, capsys):
-        client = MagicMock()
-        client.beta.messages.create.side_effect = self._bad_request(
-            "fallbacks: unsupported beta"
-        )
-        client.messages.create.return_value = MagicMock(
-            content=[_block("text", "Rapporten.")], stop_reason="end_turn"
-        )
-
-        result = claude_api.complete(client, system="S", user="U")
-
-        assert result == "Rapporten."
-        assert "WARNING" in capsys.readouterr().err
-
-    def test_other_errors_propagate(self):
-        client = MagicMock()
-        client.beta.messages.create.side_effect = RuntimeError("connection reset")
-
-        with pytest.raises(RuntimeError, match="connection reset"):
-            claude_api.complete(client, system="S", user="U")
-
-        client.messages.create.assert_not_called()
