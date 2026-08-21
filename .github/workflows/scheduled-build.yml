@@ -1,14 +1,15 @@
 name: Hourly Dashboard & Weekly Report
 
 on:
-  # Hourly schedule disabled for the off-season (FPL season over).
-  # To re-activate: uncomment the two lines below.
-  # schedule:
-  #   - cron: "0 * * * *"  # Hourly check
+  # Runs hourly during the season; each run exits early unless FPL data changed.
+  # To pause for the off-season, comment out the two schedule lines below.
+  schedule:
+    - cron: "0 * * * *"  # Hourly check
   workflow_dispatch:      # Manual runs skip the check and run everything
 
 permissions:
   contents: write   # Needed to push changes
+  pages: write      # Needed to request a Pages rebuild after pushing
 
 jobs:
   update-dashboard:
@@ -20,7 +21,6 @@ jobs:
         with:
           ref: dev
           fetch-depth: 0   # Needed so git can detect changes properly
-          token: ${{ secrets.GH_PAT }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -32,7 +32,6 @@ jobs:
 
       - name: Check gameweek status
         id: gw_check
-        if: github.event_name != 'workflow_dispatch'
         run: python check_gw_status.py --cache-dir .fpl_cache
 
       # Dashboards: refresh when new fixtures finish OR when the whole gameweek finishes
@@ -41,7 +40,7 @@ jobs:
           github.event_name == 'workflow_dispatch'
           || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
           || steps.gw_check.outputs.gameweek_finished == 'true'
-        run: python generate_html.py -l 1639886,1638989 --cache-dir .fpl_cache
+        run: python generate_html.py -l 538233,848662 --cache-dir .fpl_cache
 
       - name: Generate Index
         if: >-
@@ -53,18 +52,20 @@ jobs:
       # Tier 2: Whole gameweek finished → report + narrative + notification
       - name: Generate weekly report (JSON)
         if: >-
-          github.event_name == 'workflow_dispatch'
-          || steps.gw_check.outputs.gameweek_finished == 'true'
-        run: python generate_weekly_report.py -l 1638989 --skip-existing --cache-dir .fpl_cache
+          steps.gw_check.outputs.gameweek_finished == 'true'
+          || (github.event_name == 'workflow_dispatch'
+              && steps.gw_check.outputs.has_finished_gameweek == 'true')
+        run: python generate_weekly_report.py -l 848662 --skip-existing --cache-dir .fpl_cache
 
       - name: Generate narrative
         id: narrative
         if: >-
-          github.event_name == 'workflow_dispatch'
-          || steps.gw_check.outputs.gameweek_finished == 'true'
+          steps.gw_check.outputs.gameweek_finished == 'true'
+          || (github.event_name == 'workflow_dispatch'
+              && steps.gw_check.outputs.has_finished_gameweek == 'true')
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python generate_narrative.py -l 1638989 --skip-existing --cache-dir .fpl_cache
+        run: python generate_narrative.py -l 848662 --skip-existing --cache-dir .fpl_cache
 
       - name: Copy hero images to docs/assets
         if: >-
@@ -88,6 +89,7 @@ jobs:
         run: python check_gw_status.py --save --cache-dir .fpl_cache
 
       - name: Commit and push changes
+        id: commit
         if: >-
           github.event_name == 'workflow_dispatch'
           || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
@@ -100,10 +102,21 @@ jobs:
           for dir in weekly_report/reports weekly_report/reidar_memory; do
             [ -d "$dir" ] && git add "$dir"
           done
-          git diff --cached --quiet || (
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+          else
             git commit -m "chore: nightly dashboard and report update [skip ci]"
             git push
-          )
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Pushes made with the built-in GITHUB_TOKEN do not trigger the
+      # pages-build-deployment workflow, so ask for the build explicitly.
+      - name: Request GitHub Pages build
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
 
       - name: Wait for GitHub Pages deployment
         if: steps.narrative.outputs.generated == 'true'
@@ -124,11 +137,11 @@ jobs:
         env:
           SEASON: ${{ steps.narrative.outputs.season }}
           GW: ${{ steps.narrative.outputs.event_id }}
-          LEAGUE_ID: "1638989"
+          LEAGUE_ID: "848662"
 
       - name: Send Teams notification
         if: steps.narrative.outputs.generated == 'true'
         continue-on-error: true
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-        run: python notify_teams.py -l 1638989 --cache-dir .fpl_cache
+        run: python notify_teams.py -l 848662 --cache-dir .fpl_cache

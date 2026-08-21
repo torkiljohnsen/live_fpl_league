@@ -20,15 +20,15 @@ from fpl.weekly_report import (
     get_season_from_bootstrap,
 )
 
-FPL_LEAGUE_ID = "1639886"
+FPL_LEAGUE_ID = "848662"
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Send Teams notification for an existing narrative.",
         epilog="Examples:\n"
-               "  python notify_teams.py -l 1638989           # Auto-detect GW\n"
-               "  python notify_teams.py -l 1638989 -e 25     # Specific GW\n",
+               "  python notify_teams.py -l 848662           # Auto-detect GW\n"
+               "  python notify_teams.py -l 848662 -e 25     # Specific GW\n",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(

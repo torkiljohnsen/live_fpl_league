@@ -18,7 +18,7 @@
 
         <div class="narrative-header">
             <div class="narrative-header-rule"></div>
-            <p class="narrative-kicker">Sinkaberg administrasjon &bull; 2025-26</p>
+            <p class="narrative-kicker" id="narrative-kicker"></p>
             <h1 class="narrative-title" id="narrative-title"></h1>
             <div class="narrative-gw-nav" id="header-gw-nav">
                 <a id="header-prev" href="" class="gw-nav-arrow" aria-label="Forrige runde">&laquo;</a>
@@ -37,24 +37,34 @@
                 <a id="footer-next" href="" class="gw-nav-link"></a>
             </div>
             <nav class="narrative-nav">
-                <a href="league_standings_1638989.html">Tabell</a>
+                <a id="nav-standings" href="">Tabell</a>
                 <span class="narrative-nav-dot">&middot;</span>
-                <a href="league_gameweek_history_1638989.html">Rundehistorikk</a>
+                <a id="nav-history" href="">Rundehistorikk</a>
                 <span class="narrative-nav-dot">&middot;</span>
-                <a href="ranking_progression_1638989.html">Poengutvikling</a>
+                <a id="nav-progression" href="">Poengutvikling</a>
             </nav>
-            <p>Sinkaberg administrasjon &mdash; 2025-26</p>
+            <p id="narrative-footer-league"></p>
         </footer>
     </div>
 
     <script>
         (function () {
-            var LEAGUE_ID = '1638989';
-            var SEASON = '2025-26';
+            // Keep in sync with leagues.json. Newest season first.
+            var SEASONS = {
+                '2026-27': { league: '848662', name: 'Sinkaberg The Office' },
+                '2025-26': { league: '1638989', name: 'Sinkaberg administrasjon' }
+            };
+            var CURRENT_SEASON = '2026-27';
             var MIN_GW = 1;
             var MAX_GW = 38;
 
             var params = new URLSearchParams(window.location.search);
+            var seasonParam = params.get('season');
+            var SEASON = SEASONS[seasonParam] ? seasonParam : CURRENT_SEASON;
+            var LEAGUE_ID = SEASONS[SEASON].league;
+
+            setLeagueChrome();
+
             var gwParam = params.get('gw');
             var gw = gwParam ? parseInt(gwParam, 10) : null;
 
@@ -86,6 +96,24 @@
                     showNotFound(gw);
                 });
 
+            function gwLink(gwNum) {
+                var suffix = SEASON === CURRENT_SEASON ? '' : '&season=' + SEASON;
+                return '?gw=' + gwNum + suffix;
+            }
+
+            function setLeagueChrome() {
+                var label = SEASONS[SEASON].name + ' \u2014 ' + SEASON;
+                document.getElementById('narrative-kicker').innerHTML =
+                    SEASONS[SEASON].name + ' &bull; ' + SEASON;
+                document.getElementById('narrative-footer-league').textContent = label;
+                document.getElementById('nav-standings').href =
+                    'league_standings_' + LEAGUE_ID + '.html';
+                document.getElementById('nav-history').href =
+                    'league_gameweek_history_' + LEAGUE_ID + '.html';
+                document.getElementById('nav-progression').href =
+                    'ranking_progression_' + LEAGUE_ID + '.html';
+            }
+
             function setupNavigation(gwNum) {
                 var headerPrev = document.getElementById('header-prev');
                 var headerNext = document.getElementById('header-next');
@@ -96,8 +124,8 @@
                     headerPrev.hidden = true;
                     footerPrev.hidden = true;
                 } else {
-                    headerPrev.href = '?gw=' + (gwNum - 1);
-                    footerPrev.href = '?gw=' + (gwNum - 1);
+                    headerPrev.href = gwLink(gwNum - 1);
+                    footerPrev.href = gwLink(gwNum - 1);
                     footerPrev.textContent = '\u00AB Runde ' + (gwNum - 1);
                 }
 
@@ -105,8 +133,8 @@
                     headerNext.hidden = true;
                     footerNext.hidden = true;
                 } else {
-                    headerNext.href = '?gw=' + (gwNum + 1);
-                    footerNext.href = '?gw=' + (gwNum + 1);
+                    headerNext.href = gwLink(gwNum + 1);
+                    footerNext.href = gwLink(gwNum + 1);
                     footerNext.textContent = 'Runde ' + (gwNum + 1) + ' \u00BB';
                 }
             }
@@ -145,7 +173,7 @@
                 document.getElementById('header-gw-nav').querySelector('#header-next').hidden = true;
                 document.getElementById('footer-gw-nav').hidden = true;
                 document.getElementById('narrative-article').innerHTML =
-                    '<p>Bruk lenker med <code>?gw=N</code> for å lese en rapport, for eksempel <a href="?gw=27">Runde 27</a>.</p>';
+                    '<p>Bruk lenker med <code>?gw=N</code> for å lese en rapport, for eksempel <a href="' + gwLink(1) + '">Runde 1</a>.</p>';
             }
 
             function showNotFound(gwNum) {

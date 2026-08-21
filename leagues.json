@@ -1,0 +1,22 @@
+{
+  "_comment": "Leagues followed per season, newest first. Used by generate_index.py to group the dashboards on the index page. When a new season starts: add a season entry on top, update the workflow's league IDs, and update SEASONS in docs/reidars_rapport.html.",
+  "seasons": [
+    {
+      "season": "2026-27",
+      "current": true,
+      "report_league": "848662",
+      "leagues": [
+        { "id": "848662", "name": "Sinkaberg The Office" },
+        { "id": "538233", "name": "Sinkaberg Superliga" }
+      ]
+    },
+    {
+      "season": "2025-26",
+      "report_league": "1638989",
+      "leagues": [
+        { "id": "1638989", "name": "Sinkaberg administrasjon" },
+        { "id": "1639886", "name": "Sinkaberg Superliga" }
+      ]
+    }
+  ]
+}

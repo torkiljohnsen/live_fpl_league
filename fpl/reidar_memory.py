@@ -49,6 +49,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from . import claude_api
+
 
 class ReidarMemory:
     """Manages Reidar's persistent knowledge across gameweeks.
@@ -190,14 +192,11 @@ class ReidarMemory:
             report_json, narrative, current_profiles, current_arc
         )
 
-        response = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=4096,
+        response_text = claude_api.complete(
+            client,
             system=system_prompt,
-            messages=[{"role": "user", "content": user_content}],
+            user=user_content,
         )
-
-        response_text: str = response.content[0].text  # type: ignore[union-attr]
 
         self._save_debug_response(response_text, event_id)
         self._parse_and_write_memory(response_text, event_id)

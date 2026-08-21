@@ -174,12 +174,12 @@ def generate_rank_progression_chart(
         league_rank = participant.league_rank
 
         # Get the latest overall_rank from history and format appropriately
+        from .formatters import NO_RANK, format_rank_compact
         if history:
-            latest_overall_rank = history[-1].get('overall_rank', 0)
-            from .formatters import format_rank_compact
-            overall_rank_str = format_rank_compact(latest_overall_rank)
+            # May still be None early in a gameweek — format_rank_compact handles it
+            overall_rank_str = format_rank_compact(history[-1].get('overall_rank'))
         else:
-            overall_rank_str = "0"
+            overall_rank_str = NO_RANK
 
         # Format legend label
         if league_rank is not None:

@@ -19,7 +19,7 @@ from fpl.weekly_report import (
     get_season_from_bootstrap,
 )
 
-FPL_LEAGUE_ID = "1639886"
+FPL_LEAGUE_ID = "848662"
 
 
 def main() -> None:
@@ -27,7 +27,7 @@ def main() -> None:
         description="Generate weekly FPL league report (JSON).",
         epilog="Examples:\n"
                "  python generate_weekly_report.py                        # Auto-detect GW, default league\n"
-               "  python generate_weekly_report.py -l 1639886 -e 25      # Specific league and GW\n"
+               "  python generate_weekly_report.py -l 848662 -e 25      # Specific league and GW\n"
                "  python generate_weekly_report.py --dev                  # Use sample data (dev mode)\n"
                "  python generate_weekly_report.py --output-dir ./out     # Custom output directory\n",
         formatter_class=argparse.RawDescriptionHelpFormatter,

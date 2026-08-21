@@ -1,9 +1,15 @@
 """Utility functions for formatting data for display."""
 
 
-def format_rank_compact(rank: int) -> str:
+NO_RANK = "\u2013"  # en dash, shown before FPL has calculated ranks
+
+
+def format_rank_compact(rank: int | None) -> str:
     """Format rank with 3 significant digits and k/M suffix.
-    
+
+    Returns an en dash when the rank is unknown (None). FPL leaves ranks
+    null until a gameweek has been scored, e.g. during GW1.
+
     Examples:
         1234 -> 1.23k
         23456 -> 23.4k
@@ -12,6 +18,8 @@ def format_rank_compact(rank: int) -> str:
         56789012 -> 56.7M
         678901234 -> 678M
     """
+    if rank is None:
+        return NO_RANK
     if rank >= 100_000_000:
         # 100M+: show as whole millions (e.g., 123M)
         return f"{rank // 1_000_000}M"

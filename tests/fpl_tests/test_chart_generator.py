@@ -1180,3 +1180,26 @@ def test_legend_positioned_outside_plot_area():
     # Assert - Right margin should be 200px to accommodate legend
     assert fig.layout.margin.r == 200, \
         f"Right margin should be 200px to provide space for legend, got: {fig.layout.margin.r}"
+
+
+def test_chart_handles_unscored_gameweek_ranks():
+    """During GW1 the FPL API returns null ranks — the chart must still render.
+
+    Regression test: format_rank_compact used to be called with None and
+    crashed the whole HTML generation at the start of a new season.
+    """
+    # Arrange
+    participants = [
+        make_test_participant(
+            "Torkil",
+            [{'event': 1, 'points': 0, 'total_points': 0, 'overall_rank': None}],
+        )
+    ]
+
+    # Act
+    fig = generate_rank_progression_chart(participants)
+
+    # Assert
+    assert len(fig.data) == 1, "Should still draw a trace for the participant"
+    assert "Torkil" in fig.data[0].name, "Legend should name the participant"
+    assert "None" not in fig.data[0].name, "Missing rank should not leak 'None'"

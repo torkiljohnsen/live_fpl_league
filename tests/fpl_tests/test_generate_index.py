@@ -1,5 +1,7 @@
 """Tests for generate_index.py"""
 
+import json
+from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -52,6 +54,30 @@ def mock_docs_files(tmp_path):
     return docs_dir
 
 
+@pytest.fixture
+def mock_leagues_file(tmp_path):
+    """Season config covering the fixture leagues."""
+    leagues_file = tmp_path / "leagues.json"
+    leagues_file.write_text(json.dumps({
+        "seasons": [
+            {
+                "season": "2026-27",
+                "report_league": "848662",
+                "leagues": [{"id": "848662", "name": "Sinkaberg The Office"}],
+            },
+            {
+                "season": "2025-26",
+                "report_league": "1638989",
+                "leagues": [
+                    {"id": "1638989", "name": "Sinkaberg administrasjon"},
+                    {"id": "1639886", "name": "Sinkaberg Superliga"},
+                ],
+            },
+        ]
+    }), encoding="utf-8")
+    return leagues_file
+
+
 def test_get_league_html_files_includes_ranking_progression(mock_docs_files):
     """Test that get_league_html_files includes ranking_progression files."""
     with patch.object(generate_index, "DOCS_DIR", mock_docs_files):
@@ -74,7 +100,9 @@ def test_get_league_html_files_includes_ranking_progression(mock_docs_files):
         assert "test_ranking_progression.html" not in file_names
 
 
-def test_main_includes_ranking_progression_in_index(mock_docs_files, tmp_path):
+def test_main_includes_ranking_progression_in_index(
+    mock_docs_files, mock_leagues_file, tmp_path
+):
     """Test that main() generates index with ranking_progression links."""
     templates_dir = tmp_path / "templates"
     templates_dir.mkdir()
@@ -86,8 +114,11 @@ def test_main_includes_ranking_progression_in_index(mock_docs_files, tmp_path):
 <body>
     <h1>Index</h1>
     <ul>
-    {% for file, title in league_files %}
-        <li><a href="{{ file }}">{{ title }}</a></li>
+    {% for season in seasons %}
+        <h2>{{ season.season }}</h2>
+        {% for file, title in season.league_files %}
+            <li><a href="{{ file }}">{{ title }}</a></li>
+        {% endfor %}
     {% endfor %}
     </ul>
 </body>
@@ -98,6 +129,7 @@ def test_main_includes_ranking_progression_in_index(mock_docs_files, tmp_path):
 
     with patch.object(generate_index, "DOCS_DIR", mock_docs_files), \
          patch.object(generate_index, "TEMPLATES_DIR", templates_dir), \
+         patch.object(generate_index, "LEAGUES_FILE", mock_leagues_file), \
          patch.object(generate_index, "OUTPUT_FILE", output_file):
 
         generate_index.main()
@@ -123,15 +155,19 @@ def test_main_includes_ranking_progression_in_index(mock_docs_files, tmp_path):
         assert "test_ranking_progression.html" not in index_html
 
 
-def test_ranking_progression_links_are_correctly_formatted(mock_docs_files, tmp_path):
+def test_ranking_progression_links_are_correctly_formatted(
+    mock_docs_files, mock_leagues_file, tmp_path
+):
     """Test that ranking_progression links in index are properly formatted as clickable links."""
     templates_dir = tmp_path / "templates"
     templates_dir.mkdir()
 
     # Create index template
     (templates_dir / "index.html").write_text("""
-{% for file, title in league_files %}
+{% for season in seasons %}
+{% for file, title in season.league_files %}
 <a href="{{ file }}">{{ title }}</a>
+{% endfor %}
 {% endfor %}
 """, encoding="utf-8")
 
@@ -139,6 +175,7 @@ def test_ranking_progression_links_are_correctly_formatted(mock_docs_files, tmp_
 
     with patch.object(generate_index, "DOCS_DIR", mock_docs_files), \
          patch.object(generate_index, "TEMPLATES_DIR", templates_dir), \
+         patch.object(generate_index, "LEAGUES_FILE", mock_leagues_file), \
          patch.object(generate_index, "OUTPUT_FILE", output_file):
 
         generate_index.main()
@@ -147,3 +184,57 @@ def test_ranking_progression_links_are_correctly_formatted(mock_docs_files, tmp_
         # Check for properly formatted links
         assert '<a href="ranking_progression_1638989.html">' in index_html
         assert '<a href="ranking_progression_1639886.html">' in index_html
+
+
+# ---------------------------------------------------------------------------
+# Season grouping
+# ---------------------------------------------------------------------------
+
+
+def test_index_groups_files_under_their_season(
+    mock_docs_files, mock_leagues_file, tmp_path
+):
+    """Each dashboard is listed under the season its league belongs to."""
+    templates_dir = tmp_path / "templates"
+    templates_dir.mkdir()
+    (templates_dir / "index.html").write_text("""
+{% for season in seasons %}
+<h2>{{ season.season }}</h2>
+{% for file, title in season.league_files %}<a href="{{ file }}">{{ title }}</a>
+{% endfor %}
+{% if season.report_url %}<a href="{{ season.report_url }}">Reidars Rapport</a>{% endif %}
+{% endfor %}
+""", encoding="utf-8")
+    output_file = mock_docs_files / "index.html"
+
+    with patch.object(generate_index, "DOCS_DIR", mock_docs_files), \
+         patch.object(generate_index, "TEMPLATES_DIR", templates_dir), \
+         patch.object(generate_index, "LEAGUES_FILE", mock_leagues_file), \
+         patch.object(generate_index, "OUTPUT_FILE", output_file):
+
+        generate_index.main()
+        index_html = output_file.read_text(encoding="utf-8")
+
+    assert "<h2>2025-26</h2>" in index_html
+    # No 2026-27 dashboards exist in the fixture, so that season is omitted
+    assert "<h2>2026-27</h2>" not in index_html
+    assert "reidars_rapport.html?season=2025-26" in index_html
+
+
+def test_unknown_league_gets_its_own_section():
+    """A league missing from leagues.json is still listed, not dropped."""
+    seasons = [{"season": "2026-27", "leagues": [{"id": "848662", "name": "X"}]}]
+    files = [Path("docs/league_standings_999999.html")]
+
+    sections = generate_index.group_by_season(files, seasons)
+
+    assert len(sections) == 1
+    assert sections[0]["season"] == generate_index.UNKNOWN_SEASON
+    assert sections[0]["league_files"][0][0] == "league_standings_999999.html"
+
+
+def test_extract_league_id():
+    assert generate_index.extract_league_id(
+        Path("docs/ranking_progression_848662.html")
+    ) == "848662"
+    assert generate_index.extract_league_id(Path("docs/index.html")) is None

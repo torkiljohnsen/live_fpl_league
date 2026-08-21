@@ -43,7 +43,7 @@ Three independent pipeline stages, each with its own CLI script:
 3. **Participant Building** - [`fpl/weekly_report.py`](fpl/weekly_report.py) assembles per-participant gameweek data (points, captain, bench, transfers, rank changes)
 4. **Awards Calculation** - [`fpl/weekly_report_stats.py`](fpl/weekly_report_stats.py) computes awards (top scorer, bench disasters, captain picks, etc.)
 5. **Report Assembly** - `WeeklyReport.build()` produces a self-contained JSON report with meta, standings, awards, league_summary
-6. **Narrative Generation** - [`fpl/narrative_generator.py`](fpl/narrative_generator.py) sends report + Reidar persona + memory context to Claude API, returns Norwegian-language narrative. `run_narrative_pipeline()` orchestrates the full flow.
+6. **Narrative Generation** - [`fpl/narrative_generator.py`](fpl/narrative_generator.py) sends report + Reidar persona + memory context to Claude API, returns Norwegian-language narrative. The request itself goes through [`fpl/claude_api.py`](fpl/claude_api.py), which holds the model choice and `max_tokens` for both the narrative and the memory update, and raises on a refusal or a truncated response. `run_narrative_pipeline()` orchestrates the full flow.
 7. **Memory Update** - [`fpl/reidar_memory.py`](fpl/reidar_memory.py) updates per-manager profiles, season arc, and GW summaries after each narrative
 8. **Teams Notification** - [`fpl/teams_notification.py`](fpl/teams_notification.py) posts an Adaptive Card with teaser and link
 
@@ -104,8 +104,17 @@ State is only saved after successful generation. If a step fails, the next hourl
   - [`generate_weekly_report.py`](generate_weekly_report.py) - Weekly report JSON generation
   - [`generate_narrative.py`](generate_narrative.py) - Narrative generation via Claude API
   - [`notify_teams.py`](notify_teams.py) - Teams webhook notification
-  - [`.gw_state.json`](.gw_state.json) - Persisted gameweek state (committed by CI, tracks finished fixtures)
+  - [`.gw_state.json`](.gw_state.json) - Persisted gameweek state (committed by CI, tracks finished fixtures). **Reset to zero counts at the start of a new season** — the FPL API counters restart, so a stale count means the hourly check never fires
+  - [`leagues.json`](leagues.json) - Leagues per season, newest first. Drives the season grouping on `docs/index.html`
   - [`requirements.txt`](requirements.txt) - Python dependencies
+
+## Season Rollover
+
+At the start of a new FPL season: add the season to [`leagues.json`](leagues.json), swap the league IDs in [`scheduled-build.yml`](.github/workflows/scheduled-build.yml), update `SEASONS`/`CURRENT_SEASON` in [`docs/reidars_rapport.html`](docs/reidars_rapport.html), reset [`.gw_state.json`](.gw_state.json) to zero counts, and re-enable the workflow `schedule:` block. Season strings are derived from the FPL API, not configured — see `get_season_from_bootstrap()`.
+
+Before the first gameweek is scored, the FPL API returns `null` for `overall_rank`, `rank` and friends. Anything reading those fields must tolerate `None` — see `format_rank_compact()`.
+
+Previous seasons stay published: `docs/index.html` lists them as archive sections, and `reidars_rapport.html?season={season}` serves their narratives.
 
 ## Key Conventions
 - **Dev mode suffix**: Files end with `-dev.html` when using sample data

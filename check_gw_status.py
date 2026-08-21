@@ -8,6 +8,10 @@ If the counts change, GitHub Actions outputs are set:
   - has_new_finished_fixtures → refresh dashboards (generate_html, generate_index)
   - gameweek_finished         → generate weekly report, narrative, Teams notification
 
+A third output, has_finished_gameweek, is absolute rather than a delta: it
+says whether any gameweek has finished at all this season. Manual dispatch
+uses it to skip the report steps before the first gameweek is played.
+
 The state file (.gw_state.json) is committed to the repo so it persists
 across workflow runs.
 """
@@ -116,13 +120,16 @@ def main() -> None:
               f"{events_count} finished events.")
         return
 
-    has_new, gw_finished, _ = check_status(api, state_path)
+    has_new, gw_finished, new_state = check_status(api, state_path)
+    has_finished_gw = new_state["finished_events"] > 0
 
     print(f"has_new_finished_fixtures={str(has_new).lower()}")
     print(f"gameweek_finished={str(gw_finished).lower()}")
+    print(f"has_finished_gameweek={str(has_finished_gw).lower()}")
 
     _set_github_output("has_new_finished_fixtures", str(has_new).lower())
     _set_github_output("gameweek_finished", str(gw_finished).lower())
+    _set_github_output("has_finished_gameweek", str(has_finished_gw).lower())
 
     if not has_new and not gw_finished:
         print("Nothing changed since last check.")

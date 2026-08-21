@@ -15,8 +15,11 @@ def _mock_client(response_text: str = "Generated narrative") -> MagicMock:
     """Create a mocked anthropic client."""
     mock = MagicMock()
     mock_content_block = MagicMock()
+    mock_content_block.type = "text"
     mock_content_block.text = response_text
-    mock.messages.create.return_value = MagicMock(content=[mock_content_block])
+    mock.beta.messages.create.return_value = MagicMock(
+        content=[mock_content_block], stop_reason="end_turn"
+    )
     return mock
 
 
@@ -74,7 +77,7 @@ class TestGenerate:
             memory_context="MEMORY TEXT",
         )
 
-        call_kwargs = client.messages.create.call_args
+        call_kwargs = client.beta.messages.create.call_args
         system = call_kwargs.kwargs["system"]
         assert "PERSONA TEXT" in system
         assert "GUIDE TEXT" in system
@@ -93,7 +96,7 @@ class TestGenerate:
             memory_context="M",
         )
 
-        call_kwargs = client.messages.create.call_args
+        call_kwargs = client.beta.messages.create.call_args
         system = call_kwargs.kwargs["system"]
         assert "---" in system
 
@@ -109,7 +112,7 @@ class TestGenerate:
             memory_context="",
         )
 
-        call_kwargs = client.messages.create.call_args
+        call_kwargs = client.beta.messages.create.call_args
         system = call_kwargs.kwargs["system"]
         # With empty memory_context, only 3 sections joined by ---
         assert system.count("---") == 2
@@ -126,7 +129,7 @@ class TestGenerate:
             memory_context="",
         )
 
-        call_kwargs = client.messages.create.call_args
+        call_kwargs = client.beta.messages.create.call_args
         user_msg = call_kwargs.kwargs["messages"][0]["content"]
         assert "Ola" in user_msg
         assert "json" in user_msg
@@ -144,7 +147,7 @@ class TestGenerate:
             previous_narrative="Previous week text here",
         )
 
-        call_kwargs = client.messages.create.call_args
+        call_kwargs = client.beta.messages.create.call_args
         user_msg = call_kwargs.kwargs["messages"][0]["content"]
         assert "Previous week text here" in user_msg
 
@@ -161,7 +164,7 @@ class TestGenerate:
             previous_narrative=None,
         )
 
-        call_kwargs = client.messages.create.call_args
+        call_kwargs = client.beta.messages.create.call_args
         user_msg = call_kwargs.kwargs["messages"][0]["content"]
         assert "forrige ukes" not in user_msg
 
@@ -177,8 +180,8 @@ class TestGenerate:
             memory_context="",
         )
 
-        call_kwargs = client.messages.create.call_args
-        assert call_kwargs.kwargs["model"] == "claude-sonnet-4-6"
+        call_kwargs = client.beta.messages.create.call_args
+        assert call_kwargs.kwargs["model"] == "claude-opus-5"
 
     def test_returns_generated_text(self):
         client = _mock_client("Reidars Rapport for runde 5")

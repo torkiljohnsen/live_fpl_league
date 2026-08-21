@@ -4,7 +4,7 @@ from pathlib import Path
 
 from fpl import FPL_API, LeagueContext, LeagueTemplateRenderer
 
-FPL_LEAGUE_ID = "1639886"
+FPL_LEAGUE_ID = "848662"
 ALL_OUTPUT = "ALL"
 TEMPLATE_MAP = {
     "standings": "league_standings",
@@ -43,9 +43,9 @@ def main() -> None:
         description="Generate static HTML dashboards for FPL mini-leagues.",
         epilog="Examples:\n"
                "  python generate_html.py                          # Generate all views for default league\n"
-               "  python generate_html.py -l 1638989               # Generate all views for specific league\n"
-               "  python generate_html.py -l 1638989,1639886       # Multiple leagues (comma-separated)\n"
-               "  python generate_html.py -l 1638989 -l 1639886    # Multiple leagues (repeated flag)\n"
+               "  python generate_html.py -l 848662               # Generate all views for specific league\n"
+               "  python generate_html.py -l 848662,538233       # Multiple leagues (comma-separated)\n"
+               "  python generate_html.py -l 848662 -l 538233    # Multiple leagues (repeated flag)\n"
                "  python generate_html.py -o ranking_progression   # Generate only ranking progression view\n"
                "  python generate_html.py --dev                    # Use sample data (dev mode)\n",
         formatter_class=argparse.RawDescriptionHelpFormatter

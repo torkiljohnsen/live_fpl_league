@@ -33,7 +33,7 @@ python generate_html.py
 
 Generate for a specific league:
 ```bash
-python generate_html.py -l 1638989
+python generate_html.py -l 848662
 ```
 
 ### Command-Line Options
@@ -44,7 +44,7 @@ python generate_html.py --help
 ```
 
 **Basic options:**
-- `-l, --league_id` - FPL league ID(s). Can be comma-separated or repeated. Default: 1639886
+- `-l, --league_id` - FPL league ID(s). Can be comma-separated or repeated. Default: 848662
 - `-o, --output` - Which view to generate: `standings`, `gw_history`, `ranking_progression`, or `ALL` (default)
 - `-j, --join_code` - Optional league join code to display
 - `--dev` - Use sample data instead of live FPL API (outputs have `-dev.html` suffix)
@@ -55,16 +55,16 @@ python generate_html.py --help
 python generate_html.py
 
 # Generate all views for specific league
-python generate_html.py -l 1638989
+python generate_html.py -l 848662
 
 # Generate only ranking progression chart
 python generate_html.py -o ranking_progression
 
 # Multiple leagues (comma-separated)
-python generate_html.py -l 1638989,1639886
+python generate_html.py -l 848662,538233
 
 # Multiple leagues (repeated flag)
-python generate_html.py -l 1638989 -l 1639886
+python generate_html.py -l 848662 -l 538233
 
 # Use sample data (dev mode)
 python generate_html.py --dev
@@ -77,7 +77,7 @@ Generated HTML files are saved to the `docs/` directory:
 - `league_gameweek_history_{league_id}.html` - Historical performance grid
 - `ranking_progression_{league_id}.html` - Rank progression chart over time
 
-When using `--dev` mode, files are suffixed with `-dev.html` (e.g., `league_standings_1638989-dev.html`)
+When using `--dev` mode, files are suffixed with `-dev.html` (e.g., `league_standings_848662-dev.html`)
 
 ## Weekly Report (Reidar's Rapport)
 
@@ -100,16 +100,16 @@ $env:ANTHROPIC_API_KEY = "sk-ant-..."
 
 ```bash
 # Generate report + narrative for a specific gameweek
-python generate_weekly_report.py -l 1639886 -e 10 --narrative
+python generate_weekly_report.py -l 848662 -e 10 --narrative
 
 # Generate report only (no narrative, no API key needed)
-python generate_weekly_report.py -l 1639886 -e 10
+python generate_weekly_report.py -l 848662 -e 10
 
 # Skip if report already exists (used in CI to avoid duplicates)
-python generate_weekly_report.py -l 1639886 --narrative --skip-existing
+python generate_weekly_report.py -l 848662 --narrative --skip-existing
 
 # Generate narrative with Teams notification
-python generate_weekly_report.py -l 1639886 -e 10 --narrative --notify-teams
+python generate_weekly_report.py -l 848662 -e 10 --narrative --notify-teams
 
 # Dev mode with sample data
 python generate_weekly_report.py --dev
@@ -129,6 +129,22 @@ All weekly report artifacts are stored under `weekly_report/`:
 
 Narrative Markdown files are written to `docs/narratives/{season}/{league_id}/gw{N}.md`, rendered client-side at `reidars_rapport.html?gw={N}`.
 
+## Seasons and Leagues
+
+The leagues followed each season are listed in [`leagues.json`](leagues.json), newest season first. `generate_index.py` uses it to group the dashboards on `docs/index.html` under a heading per season, so previous seasons stay published as an archive below the current one.
+
+Current season (2026-27): `848662` (Sinkaberg The Office — the league Reidar writes about) and `538233` (Sinkaberg Superliga).
+
+**Starting a new season:**
+1. Add a season entry at the top of `leagues.json` with the new league IDs.
+2. Update the league IDs in `.github/workflows/scheduled-build.yml` (dashboards take both leagues, report/narrative/notification take the report league).
+3. Update `SEASONS` and `CURRENT_SEASON` in [`docs/reidars_rapport.html`](docs/reidars_rapport.html).
+4. Reset `.gw_state.json` to `{"finished_fixtures": 0, "finished_events": 0}` — the FPL API counters restart each season, so a stale count from last season means the hourly check never fires.
+5. Re-enable the `schedule:` block in the workflow if it was commented out for the off-season.
+6. Optionally seed `weekly_report/reidar_memory/{league_id}/{season}/` with carried-over manager profiles and a season arc, so Reidar keeps his history of returning managers.
+
+Archived seasons stay readable: `reidars_rapport.html?season=2025-26&gw=30` serves last season's narratives from `docs/narratives/`.
+
 ## GitHub Actions (Hourly Workflow)
 
 An hourly GitHub Actions workflow (`.github/workflows/scheduled-build.yml`) checks for FPL changes and runs the appropriate steps. It can also be triggered manually via `workflow_dispatch`.
@@ -138,7 +154,7 @@ An hourly GitHub Actions workflow (`.github/workflows/scheduled-build.yml`) chec
 Each hour, `check_gw_status.py` queries the FPL API and compares against a persisted state file (`.gw_state.json`) to detect what has changed since the last successful run. It produces two signals:
 
 **Tier 1 — New fixtures finished** (e.g. a match ended): Refreshes dashboards.
-1. **HTML dashboards** — Regenerates standings, gameweek history, and ranking progression for all configured leagues (`1639886`, `1638989`).
+1. **HTML dashboards** — Regenerates standings, gameweek history, and ranking progression for all configured leagues (`848662`, `538233`).
 2. **Index page** — Regenerates `docs/index.html`.
 
 **Tier 2 — Whole gameweek finished** (FPL marks the event as finished): Generates reports.
@@ -154,9 +170,10 @@ Manual dispatch (`workflow_dispatch`) skips the check and runs everything uncond
 
 ### Required secrets
 
-- `GH_PAT` — GitHub personal access token (for pushing to the repo)
 - `ANTHROPIC_API_KEY` — Claude API key (for narrative generation)
 - `TEAMS_WEBHOOK_URL` — Power Automate Workflows webhook URL (for Teams notifications)
+
+No personal access token is needed. The workflow pushes with the built-in `GITHUB_TOKEN` (`contents: write`). Because pushes made with that token don't trigger the `pages-build-deployment` workflow, the run asks for the Pages rebuild explicitly via `POST /pages/builds` (`pages: write`).
 
 ### Failure recovery
 
@@ -227,13 +244,13 @@ Sample files follow the naming pattern: `{endpoint}_sample.json`
 #### Generating Sample Data
 
 ```bash
-# First run generates sample data for league 1638989
-python generate_html.py -l 1638989 --dev
-# Output: [dev_mode] API called and sample generated: fpl/sample_data/leagues-classic_1638989_standings_sample.json
+# First run generates sample data for league 848662
+python generate_html.py -l 848662 --dev
+# Output: [dev_mode] API called and sample generated: fpl/sample_data/leagues-classic_848662_standings_sample.json
 
 # Subsequent runs use cached data
-python generate_html.py -l 1638989 --dev
-# Output: [dev_mode] Sample read: fpl/sample_data/leagues-classic_1638989_standings_sample.json
+python generate_html.py -l 848662 --dev
+# Output: [dev_mode] Sample read: fpl/sample_data/leagues-classic_848662_standings_sample.json
 ```
 
 #### Refreshing Sample Data
@@ -242,5 +259,5 @@ To update sample data with fresh API data, delete the sample files and rerun wit
 
 ```bash
 rm fpl/sample_data/*_sample.json
-python generate_html.py -l 1638989 --dev
+python generate_html.py -l 848662 --dev
 ```

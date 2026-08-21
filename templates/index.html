@@ -2,18 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FPL League Dashboard Index</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 2em; }
+        body { font-family: Arial, sans-serif; margin: 2em; max-width: 40em; }
+        h2 { margin-top: 1.8em; border-bottom: 1px solid #ccc; padding-bottom: 0.2em; }
         ul { line-height: 2; }
+        .archive h2 { color: #666; }
     </style>
 </head>
 <body>
     <h1>FPL League Dashboard Index</h1>
-    <ul>
-        {% for file, title in league_files %}
-            <li><a href="{{ file }}">{{ title }}</a></li>
-        {% endfor %}
-    </ul>
+    {% for season in seasons %}
+        <section {% if not loop.first %}class="archive"{% endif %}>
+            <h2>{{ season.season }}</h2>
+            <ul>
+                {% for file, title in season.league_files %}
+                    <li><a href="{{ file }}">{{ title }}</a></li>
+                {% endfor %}
+                {% if season.report_url %}
+                    <li><a href="{{ season.report_url }}">Reidars Rapport</a></li>
+                {% endif %}
+            </ul>
+        </section>
+    {% endfor %}
 </body>
 </html>

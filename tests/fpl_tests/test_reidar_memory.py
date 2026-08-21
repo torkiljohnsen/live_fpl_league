@@ -223,9 +223,10 @@ class TestUpdateMemory:
         """Create a mocked anthropic client returning the given text."""
         mock = MagicMock()
         mock_content_block = MagicMock()
+        mock_content_block.type = "text"
         mock_content_block.text = response_text
-        mock.messages.create.return_value = MagicMock(
-            content=[mock_content_block]
+        mock.beta.messages.create.return_value = MagicMock(
+            content=[mock_content_block], stop_reason="end_turn"
         )
         return mock
 
@@ -295,8 +296,8 @@ class TestUpdateMemory:
 
         mem.update_memory(_sample_report(), "Narrative", client)
 
-        call_kwargs = client.messages.create.call_args
-        assert call_kwargs.kwargs["model"] == "claude-sonnet-4-6"
+        call_kwargs = client.beta.messages.create.call_args
+        assert call_kwargs.kwargs["model"] == "claude-opus-5"
 
     def test_first_run_bootstrap(self, tmp_path: Path):
         """On first run (no profiles), prompt should include bootstrap note."""
@@ -313,7 +314,7 @@ class TestUpdateMemory:
 
         mem.update_memory(_sample_report(), "Narrative", client)
 
-        call_kwargs = client.messages.create.call_args
+        call_kwargs = client.beta.messages.create.call_args
         system_prompt = call_kwargs.kwargs["system"]
         assert "FØRSTE runde" in system_prompt
 
@@ -334,7 +335,7 @@ class TestUpdateMemory:
 
         mem.update_memory(_sample_report(), "Narrative", client)
 
-        call_kwargs = client.messages.create.call_args
+        call_kwargs = client.beta.messages.create.call_args
         system_prompt = call_kwargs.kwargs["system"]
         assert "FØRSTE runde" not in system_prompt
 
@@ -351,7 +352,7 @@ class TestUpdateMemory:
 
         mem.update_memory(_sample_report(), "My narrative text", client)
 
-        call_kwargs = client.messages.create.call_args
+        call_kwargs = client.beta.messages.create.call_args
         user_msg = call_kwargs.kwargs["messages"][0]["content"]
         assert "My narrative text" in user_msg
         assert "Ola" in user_msg  # from standings

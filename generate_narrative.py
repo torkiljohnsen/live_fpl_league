@@ -23,16 +23,16 @@ from fpl.weekly_report import (
     get_season_from_bootstrap,
 )
 
-FPL_LEAGUE_ID = "1639886"
+FPL_LEAGUE_ID = "848662"
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Generate weekly narrative from an existing report JSON.",
         epilog="Examples:\n"
-               "  python generate_narrative.py -l 1638989           # Auto-detect GW\n"
-               "  python generate_narrative.py -l 1638989 -e 25     # Specific GW\n"
-               "  python generate_narrative.py -l 1638989 --skip-existing\n",
+               "  python generate_narrative.py -l 848662           # Auto-detect GW\n"
+               "  python generate_narrative.py -l 848662 -e 25     # Specific GW\n"
+               "  python generate_narrative.py -l 848662 --skip-existing\n",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(

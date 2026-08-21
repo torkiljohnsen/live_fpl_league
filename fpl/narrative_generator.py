@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 from typing import Any
 
+from . import claude_api
 from .reidar_memory import ReidarMemory
 
 # Reidar reference docs live in weekly_report/ relative to the repo root
@@ -105,7 +106,7 @@ class NarrativeGenerator:
     the report JSON, then calls the Claude API.
     """
 
-    MODEL = "claude-sonnet-4-6"
+    MODEL = claude_api.MODEL
 
     def __init__(self, client: Any | None = None) -> None:
         """Initialize with an anthropic client.
@@ -166,14 +167,11 @@ class NarrativeGenerator:
             report_json, previous_narrative
         )
 
-        response = self._client.messages.create(
-            model=self.MODEL,
-            max_tokens=4096,
+        return claude_api.complete(
+            self._client,
             system=system_prompt,
-            messages=[{"role": "user", "content": user_content}],
+            user=user_content,
         )
-
-        return response.content[0].text  # type: ignore[union-attr]
 
     def save_narrative(
         self,

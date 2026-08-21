@@ -167,3 +167,24 @@ class TestCheckStatus:
         has_new, gw_fin, _ = check_status(api, state_path)
         assert has_new is False
         assert gw_fin is False
+
+
+class TestHasFinishedGameweek:
+    """The absolute signal manual dispatch uses to skip pre-season reports."""
+
+    def test_false_before_the_first_gameweek_is_scored(self, tmp_path: Path) -> None:
+        api = StubAPI(finished_fixture_count=3, total_fixture_count=380,
+                      finished_event_count=0, total_event_count=38)
+        _, _, new_state = check_status(api, tmp_path / "state.json")
+        assert new_state["finished_events"] == 0
+
+    def test_true_once_a_gameweek_has_finished(self, tmp_path: Path) -> None:
+        state_path = tmp_path / "state.json"
+        save_state(state_path, {"finished_fixtures": 10, "finished_events": 1})
+        api = StubAPI(finished_fixture_count=10, total_fixture_count=380,
+                      finished_event_count=1, total_event_count=38)
+        has_new, gw_fin, new_state = check_status(api, state_path)
+        # Nothing new since last run, but a gameweek exists to report on
+        assert has_new is False
+        assert gw_fin is False
+        assert new_state["finished_events"] == 1
