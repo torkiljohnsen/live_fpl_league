@@ -110,9 +110,11 @@ State is only saved after successful generation. If a step fails, the next hourl
 
 ## Season Rollover
 
-At the start of a new FPL season: add the season to [`leagues.json`](leagues.json), swap the league IDs in [`scheduled-build.yml`](.github/workflows/scheduled-build.yml), update `SEASONS`/`CURRENT_SEASON` in [`docs/reidars_rapport.html`](docs/reidars_rapport.html), reset [`.gw_state.json`](.gw_state.json) to zero counts, and re-enable the workflow `schedule:` block. Season strings are derived from the FPL API, not configured — see `get_season_from_bootstrap()`.
+Full step-by-step recipe: [`docs/SEASON_ROLLOVER.md`](docs/SEASON_ROLLOVER.md). In short, at the start of a new FPL season: add the season to [`leagues.json`](leagues.json), swap the league IDs in [`scheduled-build.yml`](.github/workflows/scheduled-build.yml), update `SEASONS`/`CURRENT_SEASON` in [`docs/reidars_rapport.html`](docs/reidars_rapport.html), reset [`.gw_state.json`](.gw_state.json) to zero counts, and re-enable the workflow `schedule:` block. Season strings are derived from the FPL API, not configured — see `get_season_from_bootstrap()`.
 
 Before the first gameweek is scored, the FPL API returns `null` for `overall_rank`, `rank` and friends. Anything reading those fields must tolerate `None` — see `format_rank_compact()`.
+
+**Gameweek lock (2026/27 onward)**: FPL locks gameweek points at 09:00 UK on the day after the gameweek's final match, so Opta's six-hour post-match review can feed into BPS and Defensive Contribution points. A played fixture therefore keeps `finished: false` for days — only `finished_provisional` flips at full time. `count_finished_fixtures()` counts provisional so dashboards refresh on match day; `count_finished_events()` requires `finished` **and** `data_checked` so the report is never built on pre-review numbers.
 
 Previous seasons stay published: `docs/index.html` lists them as archive sections, and `reidars_rapport.html?season={season}` serves their narratives.
 

@@ -133,6 +133,8 @@ Narrative Markdown files are written to `docs/narratives/{season}/{league_id}/gw
 
 ## Seasons and Leagues
 
+Rolling the project over to a new season: [`docs/SEASON_ROLLOVER.md`](docs/SEASON_ROLLOVER.md).
+
 The leagues followed each season are listed in [`leagues.json`](leagues.json), newest season first. `generate_index.py` uses it to group the dashboards on `docs/index.html` under a heading per season, so previous seasons stay published as an archive below the current one.
 
 Current season (2026-27): `848662` (Sinkaberg The Office — the league Reidar writes about) and `538233` (Sinkaberg Superliga).

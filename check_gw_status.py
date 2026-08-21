@@ -1,8 +1,8 @@
 """Check gameweek status for the hourly CI workflow.
 
 Compares two simple counts against a persisted state file:
-  - finished_fixtures: total finished fixtures across all gameweeks
-  - finished_events: total events marked finished by FPL
+  - finished_fixtures: total fixtures played (finished or provisionally so)
+  - finished_events: total events marked finished by FPL, i.e. locked
 
 If the counts change, GitHub Actions outputs are set:
   - has_new_finished_fixtures → refresh dashboards (generate_html, generate_index)
@@ -40,16 +40,39 @@ def save_state(state_path: Path, state: dict) -> None:
 
 
 def count_finished_fixtures(api: FPLAPIProtocol) -> int:
-    """Count total finished fixtures across all gameweeks."""
+    """Count fixtures that have been played, across all gameweeks.
+
+    Counts `finished_provisional` as well as `finished`. From 2026/27 FPL
+    locks gameweek scores at 09:00 UK on the day after the gameweek's final
+    match, rather than an hour after each match, so a played fixture keeps
+    `finished: false` for days while `finished_provisional` flips at full
+    time. Dashboards follow the provisional signal so standings refresh on
+    match day; the weekly report waits for the locked event instead — see
+    count_finished_events().
+    """
     fixtures = api.get_fixtures()
-    return sum(1 for f in fixtures if f.get("finished", False))
+    return sum(
+        1 for f in fixtures
+        if f.get("finished", False) or f.get("finished_provisional", False)
+    )
 
 
 def count_finished_events(api: FPLAPIProtocol) -> int:
-    """Count total events marked finished in bootstrap-static."""
+    """Count total events marked finished in bootstrap-static.
+
+    Requires both `finished` and `data_checked`. The lockdown at 09:00 UK
+    on the day after the gameweek's final match is what makes scores final,
+    and `data_checked` is the flag that tracks it; `finished` alone has
+    historically flipped earlier. Generating the report before the lock
+    would bake pre-review BPS and Defensive Contribution numbers into
+    Reidar's memory permanently, so wait for both.
+    """
     bootstrap = api.get_bootstrap_static()
     events = bootstrap.get("events", [])
-    return sum(1 for e in events if e.get("finished", False))
+    return sum(
+        1 for e in events
+        if e.get("finished", False) and e.get("data_checked", False)
+    )
 
 
 def check_status(

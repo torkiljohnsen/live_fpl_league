@@ -1,8 +1,7 @@
 """Tests for check_gw_status module."""
 
-import json
-from typing import Any
 from pathlib import Path
+from typing import Any
 
 from check_gw_status import (
     check_status,
@@ -36,6 +35,7 @@ class StubAPI:
             events.append({
                 "id": i + 1,
                 "finished": i < finished_event_count,
+                "data_checked": i < finished_event_count,
                 "is_current": i == finished_event_count,
                 "deadline_time": "2025-08-16T10:00:00Z",
             })
@@ -86,6 +86,40 @@ class TestCounters:
     def test_count_finished_fixtures_none(self) -> None:
         api = StubAPI(finished_fixture_count=0, total_fixture_count=10)
         assert count_finished_fixtures(api) == 0
+
+    def test_count_finished_fixtures_counts_provisional(self) -> None:
+        """From 2026/27 a played fixture stays `finished: false` until the
+        gameweek locks at 09:00 UK the day after its final match. Dashboards
+        must refresh on match day, so provisional fixtures count too."""
+
+        class ProvisionalAPI(StubAPI):
+            def get_fixtures(self, event_id: int | None = None) -> list[dict[str, Any]]:
+                return [
+                    {"id": 1, "finished": False, "finished_provisional": True},
+                    {"id": 2, "finished": False, "finished_provisional": False},
+                    {"id": 3, "finished": True, "finished_provisional": True},
+                ]
+
+        assert count_finished_fixtures(ProvisionalAPI()) == 2
+
+    def test_count_finished_events_requires_the_lock(self) -> None:
+        """A gameweek only counts once FPL has locked it.
+
+        Scores lock at 09:00 UK the day after the gameweek's final match,
+        tracked by data_checked. An event marked finished but not yet
+        checked can still have its BPS and Defensive Contribution points
+        amended, so the report must not be built from it.
+        """
+
+        class UnlockedAPI(StubAPI):
+            def get_bootstrap_static(self) -> dict[str, Any]:
+                return {"events": [
+                    {"id": 1, "finished": True, "data_checked": True},
+                    {"id": 2, "finished": True, "data_checked": False},
+                    {"id": 3, "finished": False, "data_checked": False},
+                ]}
+
+        assert count_finished_events(UnlockedAPI()) == 1
 
     def test_count_finished_events(self) -> None:
         api = StubAPI(finished_event_count=28, total_event_count=38)
