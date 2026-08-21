@@ -15,6 +15,10 @@ on:
       event:
         description: "Gameweek number"
         required: true
+      season:
+        description: "Season, e.g. 2025-26. Leave blank for the current season."
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -50,9 +54,14 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
+          SEASON_ARG=""
+          if [ -n "${{ inputs.season }}" ]; then
+            SEASON_ARG="--season ${{ inputs.season }}"
+          fi
           python generate_narrative.py \
             -l ${{ inputs.league_id }} \
             -e ${{ inputs.event }} \
+            $SEASON_ARG \
             --output-dir preview \
             --cache-dir .fpl_cache
 

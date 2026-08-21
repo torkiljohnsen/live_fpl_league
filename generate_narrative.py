@@ -32,7 +32,8 @@ def main() -> None:
         epilog="Examples:\n"
                "  python generate_narrative.py -l 848662           # Auto-detect GW\n"
                "  python generate_narrative.py -l 848662 -e 25     # Specific GW\n"
-               "  python generate_narrative.py -l 848662 --skip-existing\n",
+               "  python generate_narrative.py -l 848662 --skip-existing\n"
+               "  python generate_narrative.py -l 1638989 -e 38 --season 2025-26   # Archived GW\n",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
@@ -42,6 +43,12 @@ def main() -> None:
     parser.add_argument(
         "-e", "--event", type=int, default=None,
         help="Gameweek number. If omitted, auto-detects the latest finished GW.",
+    )
+    parser.add_argument(
+        "--season", type=str, default=None,
+        help="Season string, e.g. 2025-26. Defaults to the current season "
+             "from the FPL API. Needed to regenerate an archived gameweek, "
+             "since the API only reports the season that is running now.",
     )
     parser.add_argument(
         "--output-dir", type=str, default=".",
@@ -66,8 +73,9 @@ def main() -> None:
     else:
         event_id = detect_current_gameweek(api)
 
-    bootstrap = api.get_bootstrap_static()
-    season = get_season_from_bootstrap(bootstrap)
+    season = args.season or get_season_from_bootstrap(
+        api.get_bootstrap_static()
+    )
 
     # Check if narrative already exists
     if args.skip_existing:
