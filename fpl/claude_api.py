@@ -9,7 +9,7 @@ from __future__ import annotations
 import sys
 from typing import Any
 
-MODEL = "claude-opus-5"
+MODEL = "claude-sonnet-5"
 
 # Non-streaming ceiling. The memory update in particular writes eight
 # manager profiles plus a GW summary and a season arc in one response —

@@ -181,7 +181,7 @@ class TestGenerate:
         )
 
         call_kwargs = client.beta.messages.create.call_args
-        assert call_kwargs.kwargs["model"] == "claude-opus-5"
+        assert call_kwargs.kwargs["model"] == "claude-sonnet-5"
 
     def test_returns_generated_text(self):
         client = _mock_client("Reidars Rapport for runde 5")

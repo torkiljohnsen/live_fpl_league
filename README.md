@@ -96,6 +96,8 @@ On Windows (PowerShell):
 $env:ANTHROPIC_API_KEY = "sk-ant-..."
 ```
 
+The model and token limits live in [`fpl/claude_api.py`](fpl/claude_api.py) (currently `claude-sonnet-5`). Each gameweek costs two calls — the narrative (~33k input, ~2k output) and the memory update (~25k input, ~6k output) — which works out to roughly $0.30 per gameweek, or $10-12 for a full 38-gameweek season.
+
 ### Usage
 
 ```bash

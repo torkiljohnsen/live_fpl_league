@@ -297,7 +297,7 @@ class TestUpdateMemory:
         mem.update_memory(_sample_report(), "Narrative", client)
 
         call_kwargs = client.beta.messages.create.call_args
-        assert call_kwargs.kwargs["model"] == "claude-opus-5"
+        assert call_kwargs.kwargs["model"] == "claude-sonnet-5"
 
     def test_first_run_bootstrap(self, tmp_path: Path):
         """On first run (no profiles), prompt should include bootstrap note."""
