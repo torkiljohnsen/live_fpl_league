@@ -41,10 +41,13 @@ jobs:
       # moving the numbers long after the last fixture flips to finished --
       # bonus points land later, and the classic-league standings endpoint
       # refreshes on FPL's own batch schedule -- so a fixture-count delta
-      # alone leaves the published standings a day behind. 05:00-08:00 rather
-      # than a single hour because scheduled runs drift by up to half an hour
-      # and GitHub may drop one entirely; rendering is deterministic, so the
-      # later runs simply find no diff and commit nothing.
+      # alone leaves the published standings a day behind. The league reads
+      # the dashboard when the working day starts at 07:00, so it has to be
+      # current by 06:00. GitHub's scheduler is best-effort -- hourly runs
+      # land 10-30 min late and one can be dropped outright -- so the window
+      # opens at 04:00 to get two attempts in before 06:00 and stays open to
+      # 08:00 to pick up anything FPL revises after that. Rendering is
+      # deterministic, so the later runs find no diff and commit nothing.
       #
       # `open` holds Reidar's report back to lunchtime rather than posting it
       # the moment FPL locks the gameweek (09:00 UK / 10:00 Oslo). Open-ended,
@@ -58,7 +61,7 @@ jobs:
 
           now = datetime.now(ZoneInfo("Europe/Oslo"))
           print(f"open={'true' if now.hour >= 11 else 'false'}")
-          print(f"daily_refresh={'true' if 5 <= now.hour < 8 else 'false'}")
+          print(f"daily_refresh={'true' if 4 <= now.hour < 8 else 'false'}")
           print(f"local_time={now:%Y-%m-%d %H:%M %Z}")
           PY
 
