@@ -50,6 +50,15 @@ h1 {
 	font-size: 2.2rem;
 	margin-bottom: 1.5rem;
 }
+
+/* Emoji in headings renders inconsistently across platforms — some render
+   nothing at all — so headings use the same PNG icons as the table headers.
+   Sized in em so the icon tracks the heading's font-size. */
+h1 .title_icon {
+	height: 0.9em;
+	width: auto;
+	vertical-align: -0.1em;
+}
 .logo-container {
 	display: flex;
 	justify-content: center;
