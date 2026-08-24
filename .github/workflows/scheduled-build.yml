@@ -34,12 +34,22 @@ jobs:
         id: gw_check
         run: python check_gw_status.py --cache-dir .fpl_cache
 
-      # Reidar's report is held back to lunchtime rather than posted the
-      # moment FPL locks the gameweek (09:00 UK / 10:00 Oslo). Uses the Oslo
-      # zone rather than a fixed UTC cron hour so it stays at 11:00 local
-      # across the winter time change. Open-ended, so a failed 11:00 run is
-      # retried by the next hourly one.
-      - name: Check report window
+      # Two time windows, both in the Oslo zone rather than a fixed UTC cron
+      # hour so they stay put across the winter time change.
+      #
+      # `daily_refresh` forces a dashboard rebuild every morning. FPL keeps
+      # moving the numbers long after the last fixture flips to finished --
+      # bonus points land later, and the classic-league standings endpoint
+      # refreshes on FPL's own batch schedule -- so a fixture-count delta
+      # alone leaves the published standings a day behind. 05:00-08:00 rather
+      # than a single hour because scheduled runs drift by up to half an hour
+      # and GitHub may drop one entirely; rendering is deterministic, so the
+      # later runs simply find no diff and commit nothing.
+      #
+      # `open` holds Reidar's report back to lunchtime rather than posting it
+      # the moment FPL locks the gameweek (09:00 UK / 10:00 Oslo). Open-ended,
+      # so a failed 11:00 run is retried by the next hourly one.
+      - name: Check time windows
         id: window
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
@@ -48,18 +58,22 @@ jobs:
 
           now = datetime.now(ZoneInfo("Europe/Oslo"))
           print(f"open={'true' if now.hour >= 11 else 'false'}")
+          print(f"daily_refresh={'true' if 5 <= now.hour < 8 else 'false'}")
           print(f"local_time={now:%Y-%m-%d %H:%M %Z}")
           PY
 
-      - name: Report window status
+      - name: Time window status
         run: |
           echo "Oslo time: ${{ steps.window.outputs.local_time }}"
+          echo "Daily dashboard refresh: ${{ steps.window.outputs.daily_refresh }}"
           echo "Report window open: ${{ steps.window.outputs.open }}"
 
-      # Dashboards: refresh when new fixtures finish OR when the whole gameweek finishes
+      # Dashboards: refresh every morning, when new fixtures finish,
+      # and when the whole gameweek finishes
       - name: Generate standings and gw history
         if: >-
           github.event_name == 'workflow_dispatch'
+          || steps.window.outputs.daily_refresh == 'true'
           || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
           || steps.gw_check.outputs.gameweek_finished == 'true'
         run: python generate_html.py -l 538233,848662 --cache-dir .fpl_cache
@@ -67,6 +81,7 @@ jobs:
       - name: Generate Index
         if: >-
           github.event_name == 'workflow_dispatch'
+          || steps.window.outputs.daily_refresh == 'true'
           || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
           || steps.gw_check.outputs.gameweek_finished == 'true'
         run: python generate_index.py
@@ -92,6 +107,7 @@ jobs:
       - name: Copy hero images to docs/assets
         if: >-
           github.event_name == 'workflow_dispatch'
+          || steps.window.outputs.daily_refresh == 'true'
           || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
           || steps.gw_check.outputs.gameweek_finished == 'true'
           || steps.narrative.outputs.generated == 'true'
@@ -107,6 +123,7 @@ jobs:
       - name: Save gameweek state
         if: >-
           github.event_name == 'workflow_dispatch'
+          || steps.window.outputs.daily_refresh == 'true'
           || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
           || steps.gw_check.outputs.gameweek_finished == 'true'
           || steps.narrative.outputs.generated == 'true'
@@ -116,6 +133,7 @@ jobs:
         id: commit
         if: >-
           github.event_name == 'workflow_dispatch'
+          || steps.window.outputs.daily_refresh == 'true'
           || steps.gw_check.outputs.has_new_finished_fixtures == 'true'
           || steps.gw_check.outputs.gameweek_finished == 'true'
           || steps.narrative.outputs.generated == 'true'
