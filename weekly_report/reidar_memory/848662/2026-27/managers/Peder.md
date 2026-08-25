@@ -1,9 +1,9 @@
 **Lag:** Find the Salahution
-**Nåværende form:** Ny sesong — ingen runder spilt ennå.
-**Sesongutvikling:** Sisteplass i fjor.
-**Forrige sesong (2025-26):** Sisteplass med 1892 poeng, 321 bak vinneren. 3 rundeseiere, 11 sisteplasser. Sesong-high 115 (GW16 — LIGAREKORD, 2495. plass globalt, top 0,019 %), low 25. Snitt ~48.
-**Min vurdering:** Han holder ligarekorden og sisteplassen samtidig. Dualiteten er fullstendig. 115 poeng i GW16 henger fremdeles der, uberørt av alle andre. Elleve sisteplasser henger også der. Det er rart hva FPL gir deg.
-**Nevneverdige øyeblikk:** 2025-26: GW16 — 115 poeng, ligarekord og 2495. plass globalt. 11 sisteplasser på én sesong.
-**Løpende vitser:** Ligarekorden og bunnplasseringen i samme lag. Nytt lagnavn: "Find the Salahution" — et ordspill som lover mer enn tabellen har levert. "Team Eiden med venna" ble borte; vennene hjalp én gang, veldig mye, og én gang var ikke nok.
-**Byttemønster:** Ingen data denne sesongen ennå.
-**Kapteinvalg:** Ingen data denne sesongen ennå.
+**Nåværende form:** GW1: 58 poeng, 5. plass. Midt på treet, ingen Salah i sikte fortsatt.
+**Sesongutvikling:** Sisteplass i fjor. Åpner ny sesong midt i feltet — en klar forbedring fra fjorårets bunnplassering, i alle fall for én runde.
+**Forrige sesong (2025-26):** Sisteplass med 1892 poeng, 321 bak vinneren. 3 rundeseiere, 11 sisteplasser. Sesong-high 115 (GW16 — LIGAREKORD), low 25. Snitt ~48.
+**Min vurdering:** Han holder fortsatt ligarekorden og fjorårets sisteplass samtidig. Denne sesongen åpner han anstendig, med Isak som kaptein for 4 poeng — ikke en katastrofe, men ikke det navnet lover heller. "Find the Salahution" har fremdeles ikke funnet Salah.
+**Nevneverdige øyeblikk:** 2025-26: GW16 — 115 poeng, ligarekord. 11 sisteplasser på én sesong. 2026-27 GW1: Isak-kaptein, 4 poeng, 5. plass.
+**Løpende vitser:** Ligarekorden og bunnplasseringen i samme lag, fra i fjor. Nytt lagnavn lover en løsning som fortsatt er usett — ingen Salah i laget.
+**Byttemønster:** Ingen bytter i GW1.
+**Kapteinvalg:** Isak i GW1 — 4 poeng.

@@ -1,7 +1,15 @@
-# Sesongbue 2026-27
-**Ny liga, nytt navn:** Ligaen heter nå "Sinkaberg The Office" (tidligere "Sinkaberg administrasjon"). Ti managere mot åtte i fjor. Hauk er ute — "Sisteplass læll" ble til slutt bare et navn han slapp unna. Inn kommer tre nye: Daniel (Salmageddon FC), Vidar (FK Straumen) og Amund (Aquabyters). Ingen av dem har historikk i denne ligaen. Det får de.
-**Tittelkamp:** Sesongen er ikke i gang. Torkil forsvarer tittelen fra 2025-26 (2213 poeng). Anders var 37 poeng bak med ti rundeseiere og har døpt laget "Back2back" — en påstand som mangler et første ledd. Hedda var ytterligere syv poeng bak på tredje. De tre startet fjoråret som de avsluttet det: tett.
-**Fjorårets sluttabell:** 1. Torkil 2213 — 2. Anders 2176 — 3. Hedda 2169 — 4. Oda 2083 — 5. Camilla 2069 — 6. Eirin 2033 — 7. Hauk 2020 (ikke med i år) — 8. Peder 1892.
-**Sesongens rekorder (fra 2025-26, står til de slås):** Høyeste rundescore: Peder 115 (GW16) — 2495. plass globalt, top 0,019 %. Nest høyeste: Oda 104 (GW17). Laveste: Hedda 13 (GW13).
-**Reidars løpehistorier å følge:** Anders' lagnavn versus Anders' meritter. Om Torkil takler å bli jaktet i stedet for å jakte. Camillas forhold til chips — free hit overlevde hele forrige sesong ubrukt. Odas timing på chips, som i fjor var nøyaktig feil to ganger på rad. Peders dualitet: ligarekord og sisteplass i samme lag. Og de tre nye — hvem av dem er en trussel, og hvem er neste sisteplass.
-**Tonenotater:** Reidars stemme er tørr, direkte og litt oppgitt. Korte setninger. Lar tallene gjøre jobben og legger til kommentarer som gjør vondt fordi de er presise. Ikke ondsinnet, ikke snill. De tre nye skal behandles nøytralt til de gir ham noe å jobbe med — han dømmer ingen på forhånd, men han venter ikke lenge.
+**Ny sesong, ti managere:** "Sinkaberg The Office" (tidligere "Sinkaberg administrasjon") åpner med Torkil på topp etter GW1 med 89 poeng, drevet av en dristig bench boost i runde 1 — en strategi som fungerte til tross for at kapteinen hans (Bruno Fernandes, 4 poeng) var ligaens svakeste pick. Det paradokset — forsvarende mester, dårligste kapteinsvalg, likevel serieleder — er årets første store historie å følge.
+
+**Tittelkamp:** Torkil (89) leder, Daniel (72) følger tett, Oda (70) på tredje. Gapet ned til Camilla i bunn (20) er stort, men det er én runde av trettiåtte — betyr foreløpig ingenting.
+
+**Debutantene:** Daniel (Salmageddon FC) kom inn med et smell — trippelkaptein Saka ga 27 poeng, sesongens beste kapteinspick. Vidar (FK Straumen) og Amund (Aquabyters) leverte solide, anonyme åpninger uten å avsløre identitet som managere ennå. Alle tre venter fortsatt på sin første dom fra Reidar.
+
+**Haaland-fellen:** Fire managere — Oda, Anders, Eirin, Hedda — kapteinet Haaland i GW1 og fikk identiske 2 grunnpoeng. En kollektiv feilberegning som Reidar kaller "ikke flaks som svikter, men templaten som slår tilbake." Verdt å følge om noen av de fire lærer, eller om Haaland-avhengigheten fortsetter.
+
+**Chips brukt tidlig:** Torkil (bench boost) og Daniel (trippelkaptein) har begge brukt en chip i GW1 — to managere går inn i resten av sesongen med ett verktøy mindre. Om det var smart eller forhastet er en historie for senere runder.
+
+**Rekorder som står (fra 2025-26):** Høyeste rundescore: Peder 115 (GW16). Nest høyeste: Oda 104 (GW17). Laveste: Hedda 13 (GW13). Ingen av disse er i fare etter én runde.
+
+**Reidars løpehistorier å følge:** Torkils paradoks (dårlig kaptein, god plassering). Anders' lagnavn versus meritter — fortsatt uinnløst. Camillas forhold til chips og hennes umiddelbare bunnplassering i år. De tre nyes sanne nivå, som ennå ikke er avslørt. Og om Haaland-firkløveret gjentar feilen i GW2.
+
+**Tonenotater:** Reidar er fortsatt tørr og nøytral med de nye — dømmer ingen før de gir ham noe å jobbe med. Fokus på kapteinsvalg som narrativ motor denne runden.

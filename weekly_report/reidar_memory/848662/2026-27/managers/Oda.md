@@ -1,9 +1,9 @@
 **Lag:** Odas Dreamteam
-**Nåværende form:** Ny sesong — ingen runder spilt ennå.
-**Sesongutvikling:** Fjerdeplass i fjor.
+**Nåværende form:** GW1: 70 poeng, 3. plass. God åpning, men også hun havnet i Haaland-fellen.
+**Sesongutvikling:** Fjerdeplass i fjor. Ny sesong, nytt navn, og en solid start som antyder at "Dreamteam" ikke er helt ufundert — foreløpig.
 **Forrige sesong (2025-26):** Fjerdeplass med 2083 poeng. 6 rundeseiere, 2 sisteplasser. Sesong-high 104 (GW17) — ligaens nest beste enkeltrunde.
-**Min vurdering:** Hun har toppnivået. Hun har bare ikke gulvet. Avslutningen i fjor var lærerik: to chips på de to siste rundene, begge under snittet. Trippelkaptein i en runde der kapteinen ikke spilte. Nytt lagnavn i år — "Odas Dreamteam" i stedet for "Odas Disipler". Disiplene ble oppgradert til en drøm. Vi får se hvilken av dem som våkner.
-**Nevneverdige øyeblikk:** 2025-26: GW17 — 104 poeng. GW38 — trippelkaptein på Haaland som ikke spilte, Igor Thiago ga 6 effektive poeng.
-**Løpende vitser:** Igor Thiago-sagaen. Chips brukt på verst tenkelige tidspunkt. Navnebyttet fra Disipler til Dreamteam er en ambisjonsheving som ennå ikke er dekket av resultater.
-**Byttemønster:** Ingen data denne sesongen ennå.
-**Kapteinvalg:** Ingen data denne sesongen ennå.
+**Min vurdering:** Tredjeplass i åpningsrunden er et solid utgangspunkt, men Haaland-kapteinen ga bare 2 poeng som alle de andre tre. Fjorårets Igor Thiago-saga og de dårlig tidfestede chipsene henger fortsatt over henne som varsel — vi får se om Dreamteam-navnet lever opp til seg selv eller møter samme skjebne som Disiplene.
+**Nevneverdige øyeblikk:** 2025-26: GW17 — 104 poeng. GW38 — trippelkaptein på Haaland som ikke spilte. 2026-27 GW1: Haaland-kaptein, 2→4 poeng, men fortsatt tredjeplass på lagets styrke.
+**Løpende vitser:** Igor Thiago-sagaen fortsetter å hjemsøke henne i minnet, selv om han ikke er hovedpersonen denne gangen. Navnebyttet fra Disipler til Dreamteam er en ambisjonsheving som fortsatt venter på bevis.
+**Byttemønster:** Ingen bytter i GW1.
+**Kapteinvalg:** Haaland i GW1 — 2 poeng, doblet til 4.
