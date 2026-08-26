@@ -8,7 +8,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from fpl.narrative_generator import NarrativeGenerator
+from fpl.narrative_generator import NarrativeGenerator, run_narrative_pipeline
 
 
 def _mock_client(response_text: str = "Generated narrative") -> MagicMock:
@@ -168,6 +168,40 @@ class TestGenerate:
         user_msg = call_kwargs.kwargs["messages"][0]["content"]
         assert "forrige ukes" not in user_msg
 
+    def test_extra_instructions_appended_to_user_message(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            extra_instructions="Rett disse feilene:\n- for lang",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert "Rett disse feilene" in user_msg
+        assert "for lang" in user_msg
+
+    def test_no_extra_instructions_omits_section(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert "Rett disse feilene" not in user_msg
+
     def test_uses_correct_model(self):
         client = _mock_client()
         gen = NarrativeGenerator(client=client)
@@ -257,3 +291,126 @@ class TestSaveNarrative:
         path = gen.save_narrative("second", str(tmp_path), "123", "2025-26", 1)
 
         assert path.read_text(encoding="utf-8") == "second"
+
+
+# ---------------------------------------------------------------------------
+# run_narrative_pipeline() — style lint gate (issue #40, workstream E)
+# ---------------------------------------------------------------------------
+
+
+def _pipeline_report(event_id: int = 6) -> dict:
+    return {
+        "meta": {"event_id": event_id, "league_id": "123", "season": "2025-26"},
+        "standings": [{"player_first_name": "Ola", "event_total": 70}],
+        "awards": {},
+        "league_summary": {},
+    }
+
+
+# A narrative that trips several hard failures: three-fragment staccato
+# headline, and the "Vi sees" sign-off.
+_BAD_NARRATIVE = (
+    "# Chip-karneval. Ny leder. Anders krasjlander.\n\n"
+    "![Reidars Rapport](../../reidars_rapport_1.png)\n\n"
+    "En helt vanlig runde uten noe spesielt å melde her i det hele tatt.\n\n"
+    "Vi sees."
+)
+
+_GOOD_NARRATIVE = (
+    "# En helt vanlig overskrift for runden\n\n"
+    "![Reidars Rapport](../../reidars_rapport_1.png)\n\n"
+    "En helt vanlig runde uten noe spesielt å melde her i det hele tatt.\n\n"
+    "Ha det bra til neste gang."
+)
+
+
+def _make_save_narrative(tmp_path: Path):
+    def _save(content, output_dir, league_id, season, event_id):  # type: ignore[no-untyped-def]
+        p = (
+            Path(output_dir)
+            / "docs"
+            / "narratives"
+            / season
+            / league_id
+            / f"gw{event_id}.md"
+        )
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(content, encoding="utf-8")
+        return p
+
+    return _save
+
+
+class TestRunNarrativePipelineStyleLintGate:
+    def test_regenerates_exactly_once_on_failing_first_draft(self, tmp_path: Path):
+        mock_generator = MagicMock()
+        mock_generator.generate.side_effect = [_BAD_NARRATIVE, _GOOD_NARRATIVE]
+        mock_generator.save_narrative.side_effect = _make_save_narrative(tmp_path)
+        mock_generator._client = MagicMock()
+
+        mock_memory = MagicMock()
+        mock_memory.get_prompt_context.return_value = ""
+
+        with (
+            patch("fpl.narrative_generator.read_reidar_doc", return_value="doc"),
+            patch(
+                "fpl.narrative_generator.NarrativeGenerator",
+                return_value=mock_generator,
+            ),
+            patch("fpl.narrative_generator.ReidarMemory", return_value=mock_memory),
+        ):
+            path = run_narrative_pipeline(
+                _pipeline_report(), "123", 6, str(tmp_path)
+            )
+
+        assert mock_generator.generate.call_count == 2
+        second_call_kwargs = mock_generator.generate.call_args_list[1].kwargs
+        assert second_call_kwargs.get("extra_instructions")
+        assert Path(path).read_text(encoding="utf-8") == _GOOD_NARRATIVE
+
+    def test_does_not_regenerate_on_clean_first_draft(self, tmp_path: Path):
+        mock_generator = MagicMock()
+        mock_generator.generate.side_effect = [_GOOD_NARRATIVE]
+        mock_generator.save_narrative.side_effect = _make_save_narrative(tmp_path)
+        mock_generator._client = MagicMock()
+
+        mock_memory = MagicMock()
+        mock_memory.get_prompt_context.return_value = ""
+
+        with (
+            patch("fpl.narrative_generator.read_reidar_doc", return_value="doc"),
+            patch(
+                "fpl.narrative_generator.NarrativeGenerator",
+                return_value=mock_generator,
+            ),
+            patch("fpl.narrative_generator.ReidarMemory", return_value=mock_memory),
+        ):
+            path = run_narrative_pipeline(
+                _pipeline_report(), "123", 6, str(tmp_path)
+            )
+
+        assert mock_generator.generate.call_count == 1
+        assert Path(path).read_text(encoding="utf-8") == _GOOD_NARRATIVE
+
+    def test_memory_update_uses_final_narrative(self, tmp_path: Path):
+        mock_generator = MagicMock()
+        mock_generator.generate.side_effect = [_BAD_NARRATIVE, _GOOD_NARRATIVE]
+        mock_generator.save_narrative.side_effect = _make_save_narrative(tmp_path)
+        mock_generator._client = MagicMock()
+
+        mock_memory = MagicMock()
+        mock_memory.get_prompt_context.return_value = ""
+
+        with (
+            patch("fpl.narrative_generator.read_reidar_doc", return_value="doc"),
+            patch(
+                "fpl.narrative_generator.NarrativeGenerator",
+                return_value=mock_generator,
+            ),
+            patch("fpl.narrative_generator.ReidarMemory", return_value=mock_memory),
+        ):
+            run_narrative_pipeline(_pipeline_report(), "123", 6, str(tmp_path))
+
+        mock_memory.update_memory.assert_called_once()
+        call_kwargs = mock_memory.update_memory.call_args.kwargs
+        assert call_kwargs["narrative"] == _GOOD_NARRATIVE

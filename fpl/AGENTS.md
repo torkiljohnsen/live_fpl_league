@@ -116,9 +116,9 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 
 **[`narrative_generator.py`](narrative_generator.py)** - Claude API narrative generation
 - `NarrativeGenerator(client=None)` — accepts optional anthropic client; creates from `ANTHROPIC_API_KEY` env var if not provided
-- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None)` — builds system prompt from reference docs + memory, sends report as user message, returns Norwegian narrative markdown
+- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None, *, extra_instructions=None)` — builds system prompt from reference docs + memory, sends report as user message, returns Norwegian narrative markdown. `extra_instructions` is appended to the user message (used by the style lint gate below).
 - `save_narrative(content, output_dir, league_id, season, event_id)` writes to `docs/narratives/{season}/{league_id}/gw{N}.md`
-- `run_narrative_pipeline(result, league_id, event_id, output_dir)` — orchestrates full flow: read Reidar docs, load memory, generate narrative, save, update memory
+- `run_narrative_pipeline(result, league_id, event_id, output_dir)` — orchestrates full flow: read Reidar docs, load memory, generate narrative, run it through `style_lint.lint_narrative()` against the last 5 saved narratives and regenerate once (with the hard failures appended as `extra_instructions`) if it fails, save, update memory
 - `read_reidar_doc(filename)` — reads reference docs from `weekly_report/` directory
 - Uses `claude-sonnet-4-6` model
 
@@ -135,6 +135,10 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 - `load_recent_gameweeks(current_event, window=5)` returns last N GW summaries
 - `get_prompt_context(current_event)` assembles all memory into formatted prompt string (~4k words)
 - `update_memory(report_json, narrative, client)` makes a Claude API call to update all memory files after each narrative
+
+**[`style_lint.py`](style_lint.py)** - Deterministic (stdlib-only) style lint for narratives (issue #40)
+- `lint_narrative(text, previous=None, limits=None) -> LintResult` — word count vs. shape budget, em dash rate, headline staccato shape, sign-off similarity to previous narratives, heading/device counts, repeated n-grams, banned phrases/tics, scorecard-style player-points lists
+- CLI: `python -m fpl.style_lint <file-or-dir> [--previous N] [--json]` — run over a whole season to produce the "tells" summary that feeds the prompt rewrite
 
 ### Sample Data
 **[`sample_data/`](sample_data/)** - Sample API JSON responses for dev mode
