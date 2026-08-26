@@ -348,7 +348,8 @@ class TestRunNarrativePipelineReferenceDocs:
 
         call_kwargs = mock_generator.generate.call_args.kwargs
         assert call_kwargs["reference_docs"]
-        assert "FPL rules 2026/27" in call_kwargs["reference_docs"]
+        # GW1 selects more than the word budget allows; what's-new survives.
+        assert "2026/27" in call_kwargs["reference_docs"]
 
         captured = capsys.readouterr()
         assert "Reference docs:" in captured.out

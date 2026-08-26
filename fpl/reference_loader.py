@@ -23,6 +23,7 @@ WORD_BUDGET = 1500
 # Priority order applied when the word budget forces us to drop docs — the
 # lowest-priority names at the tail of a triggered set are dropped first.
 _PRIORITY_ORDER = [
+    "league_rules.md",
     "fpl_chips_2026-27.md",
     "fpl_strategy_notes.md",
     "fpl_whats_new_2026-27.md",
@@ -30,6 +31,7 @@ _PRIORITY_ORDER = [
     "fpl_faq_edge_cases.md",
     "fpl_deadlines_2026-27.md",
     "fpl_bps_2026-27.md",
+    "league_history.md",
 ]
 
 _ADVICE_FORMATS = {"raadgiveren", "advice"}
@@ -86,6 +88,16 @@ def select_reference_docs(
     if _bonus_decided_this_round(report):
         triggered.add("fpl_bps_2026-27.md")
 
+    # League-specific material (golden gameweeks, prizes, all-time records)
+    # lives in two hand-maintained files: rules on GW1 and every golden
+    # gameweek, history on GW1, GW38 and when a season record is set.
+    if event_id == 1 or meta.get("is_golden") or (
+        meta.get("is_golden") is None and event_id % 4 == 0
+    ):
+        triggered.add("league_rules.md")
+    if event_id in (1, 38) or _record_set_this_round(report):
+        triggered.add("league_history.md")
+
     return [name for name in _PRIORITY_ORDER if name in triggered]
 
 
@@ -105,7 +117,10 @@ def load_reference_docs(
     running_words = 0
 
     for filename in filenames:
-        text = (reference_dir / filename).read_text(encoding="utf-8")
+        path = reference_dir / filename
+        if not path.is_file():
+            continue  # a hand-maintained file may not exist yet
+        text = path.read_text(encoding="utf-8")
         word_count = len(text.split())
 
         if sections and running_words + word_count > word_budget:
@@ -169,6 +184,18 @@ def _midweek_next_deadline(next_event: dict[str, Any]) -> bool:
     except ValueError:
         return False
     return dt.weekday() not in _USUAL_DEADLINE_WEEKDAYS
+
+
+def _record_set_this_round(report: dict[str, Any]) -> bool:
+    """A season best or worst score was set this gameweek (angles.records)."""
+    event_id = (report.get("meta") or {}).get("event_id")
+    records = (report.get("angles") or {}).get("records") or {}
+    if event_id is None or event_id <= 3:
+        return False
+    return any(
+        (records.get(key) or {}).get("event_id") == event_id
+        for key in ("best", "worst")
+    )
 
 
 def _bonus_decided_this_round(report: dict[str, Any]) -> bool:

@@ -272,7 +272,10 @@ class TestPriorityOrder:
 
         docs = select_reference_docs(report, event_id=1, format="raadgiveren")
 
-        assert docs == [CHIPS, STRATEGY, WHATS_NEW, RULES, FAQ, DEADLINES]
+        assert docs == [
+            "league_rules.md", CHIPS, STRATEGY, WHATS_NEW, RULES, FAQ, DEADLINES,
+            "league_history.md",
+        ]
 
 
 # ---------------------------------------------------------------------------
@@ -329,3 +332,38 @@ class TestLoadReferenceDocs:
 
         assert "### A" in content
         assert "### B" in content
+
+
+class TestLeagueDocs:
+    def test_gw1_selects_league_rules_and_history(self):
+        report = {"meta": {"event_id": 1, "is_golden": False}, "standings": [], "awards": {}}
+        selected = select_reference_docs(report, 1)
+        assert "league_rules.md" in selected
+        assert "league_history.md" in selected
+
+    def test_golden_gameweek_selects_league_rules(self):
+        report = {"meta": {"event_id": 8, "is_golden": True}, "standings": [], "awards": {}}
+        assert "league_rules.md" in select_reference_docs(report, 8)
+
+    def test_quiet_week_selects_neither(self):
+        report = {
+            "meta": {"event_id": 7, "is_golden": False, "next_event": {"is_golden": False}},
+            "standings": [], "awards": {},
+        }
+        selected = select_reference_docs(report, 7)
+        assert "league_rules.md" not in selected
+        assert "league_history.md" not in selected
+
+    def test_record_set_selects_history(self):
+        report = {
+            "meta": {"event_id": 12, "is_golden": True},
+            "standings": [], "awards": {},
+            "angles": {"records": {"best": {"event_id": 12}, "worst": {"event_id": 5}}},
+        }
+        assert "league_history.md" in select_reference_docs(report, 12)
+
+    def test_missing_file_is_skipped(self, tmp_path):
+        (tmp_path / "a.md").write_text("# A\n\nsome words", encoding="utf-8")
+        text = load_reference_docs(["missing.md", "a.md"], reference_dir=tmp_path)
+        assert "### A" in text
+        assert "missing" not in text
