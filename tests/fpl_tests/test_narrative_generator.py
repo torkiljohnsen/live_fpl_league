@@ -168,6 +168,76 @@ class TestGenerate:
         user_msg = call_kwargs.kwargs["messages"][0]["content"]
         assert "forrige ukes" not in user_msg
 
+    def test_do_not_repeat_included_in_user_message(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            do_not_repeat="## Ikke gjenta (brukt de siste fem rundene)\nNoe unikt her",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert "Ikke gjenta" in user_msg
+        assert "Noe unikt her" in user_msg
+
+    def test_do_not_repeat_absent_when_empty(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            do_not_repeat="",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert "Ikke gjenta" not in user_msg
+
+    def test_do_not_repeat_defaults_to_none(self):
+        """Omitting do_not_repeat entirely must not raise or add the section."""
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert "Ikke gjenta" not in user_msg
+
+    def test_do_not_repeat_appears_after_previous_narrative(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            previous_narrative="FORRIGE_MARKØR",
+            do_not_repeat="IKKE_GJENTA_MARKØR",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert user_msg.index("FORRIGE_MARKØR") < user_msg.index("IKKE_GJENTA_MARKØR")
+
     def test_uses_correct_model(self):
         client = _mock_client()
         gen = NarrativeGenerator(client=client)
@@ -257,3 +327,60 @@ class TestSaveNarrative:
         path = gen.save_narrative("second", str(tmp_path), "123", "2025-26", 1)
 
         assert path.read_text(encoding="utf-8") == "second"
+
+
+# ---------------------------------------------------------------------------
+# run_narrative_pipeline() — do_not_repeat wiring
+# ---------------------------------------------------------------------------
+
+
+class TestRunNarrativePipelineDoNotRepeat:
+    def _run(self, tmp_path: Path, mock_generator: MagicMock) -> None:
+        from fpl import narrative_generator as ng
+
+        with patch.object(ng, "read_reidar_doc", return_value="DOC"), patch.object(
+            ng, "NarrativeGenerator", return_value=mock_generator
+        ), patch.object(ng.ReidarMemory, "update_memory"):
+            result = {"meta": {"season": "2025-26", "event_id": 5}}
+            ng.run_narrative_pipeline(
+                result=result,
+                league_id="123456",
+                event_id=5,
+                output_dir=str(tmp_path),
+            )
+
+    def _mock_generator(self, tmp_path: Path) -> MagicMock:
+        mock_generator = MagicMock()
+        mock_generator.generate.return_value = "# Tittel\n\nÅpning."
+        mock_generator.save_narrative.return_value = tmp_path / "gw5.md"
+        mock_generator._client = MagicMock()
+        return mock_generator
+
+    def test_passes_do_not_repeat_kwarg(self, tmp_path: Path):
+        mock_generator = self._mock_generator(tmp_path)
+        self._run(tmp_path, mock_generator)
+
+        _, kwargs = mock_generator.generate.call_args
+        assert "do_not_repeat" in kwargs
+
+    def test_empty_do_not_repeat_when_no_memory(self, tmp_path: Path):
+        """With no recent.json yet, the block passed through should be empty."""
+        mock_generator = self._mock_generator(tmp_path)
+        self._run(tmp_path, mock_generator)
+
+        _, kwargs = mock_generator.generate.call_args
+        assert kwargs["do_not_repeat"] == ""
+
+    def test_uses_recorded_recent_entries(self, tmp_path: Path):
+        """A prior recent.json entry inside the window shows up in do_not_repeat."""
+        from fpl.reidar_memory import ReidarMemory
+
+        memory = ReidarMemory(str(tmp_path), "123456", "2025-26")
+        memory.scaffold_directories()
+        memory.record_recent(4, "# Forrige overskrift\n\nForrige åpning.\n\nForrige slutt.")
+
+        mock_generator = self._mock_generator(tmp_path)
+        self._run(tmp_path, mock_generator)
+
+        _, kwargs = mock_generator.generate.call_args
+        assert "Forrige overskrift" in kwargs["do_not_repeat"]

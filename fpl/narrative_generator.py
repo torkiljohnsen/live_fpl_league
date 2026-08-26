@@ -66,6 +66,7 @@ def run_narrative_pipeline(
         examples=examples,
         memory_context=memory_context,
         previous_narrative=previous_narrative,
+        do_not_repeat=memory.get_do_not_repeat_block(event_id),
     )
 
     # Save narrative
@@ -142,6 +143,8 @@ class NarrativeGenerator:
         examples: str,
         memory_context: str,
         previous_narrative: str | None = None,
+        *,
+        do_not_repeat: str | None = None,
     ) -> str:
         """Generate a narrative from report data and context.
 
@@ -155,6 +158,9 @@ class NarrativeGenerator:
             examples: Example narratives for few-shot prompting.
             memory_context: Assembled memory from ReidarMemory.
             previous_narrative: Previous gameweek narrative for continuity.
+            do_not_repeat: Norwegian do-not-repeat block (recently used
+                headlines/openers/closers/jokes) from ReidarMemory, or
+                None/empty to omit it.
 
         Returns:
             Generated markdown narrative string.
@@ -164,7 +170,7 @@ class NarrativeGenerator:
         )
 
         user_content = self._build_user_message(
-            report_json, previous_narrative
+            report_json, previous_narrative, do_not_repeat=do_not_repeat
         )
 
         return claude_api.complete(
@@ -232,6 +238,8 @@ class NarrativeGenerator:
         self,
         report_json: dict[str, Any],
         previous_narrative: str | None,
+        *,
+        do_not_repeat: str | None = None,
     ) -> str:
         """Build the user message with report data and optional previous narrative."""
         parts: list[str] = []
@@ -247,5 +255,8 @@ class NarrativeGenerator:
                 "\n\nHer er forrige ukes narrativ for kontinuitet:\n\n"
                 f"{previous_narrative}"
             )
+
+        if do_not_repeat:
+            parts.append(f"\n\n{do_not_repeat}")
 
         return "\n".join(parts)

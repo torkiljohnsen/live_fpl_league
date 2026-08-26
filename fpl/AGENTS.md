@@ -116,7 +116,7 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 
 **[`narrative_generator.py`](narrative_generator.py)** - Claude API narrative generation
 - `NarrativeGenerator(client=None)` — accepts optional anthropic client; creates from `ANTHROPIC_API_KEY` env var if not provided
-- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None)` — builds system prompt from reference docs + memory, sends report as user message, returns Norwegian narrative markdown
+- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None, *, do_not_repeat=None)` — builds system prompt from reference docs + memory, sends report as user message (+ do-not-repeat block from `ReidarMemory.get_do_not_repeat_block()` when given), returns Norwegian narrative markdown
 - `save_narrative(content, output_dir, league_id, season, event_id)` writes to `docs/narratives/{season}/{league_id}/gw{N}.md`
 - `run_narrative_pipeline(result, league_id, event_id, output_dir)` — orchestrates full flow: read Reidar docs, load memory, generate narrative, save, update memory
 - `read_reidar_doc(filename)` — reads reference docs from `weekly_report/` directory
@@ -133,8 +133,11 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 - `load_manager_profiles()` returns `dict[str, str]` keyed by manager name
 - `load_season_arc()` returns season arc markdown (empty string if missing)
 - `load_recent_gameweeks(current_event, window=5)` returns last N GW summaries
-- `get_prompt_context(current_event)` assembles all memory into formatted prompt string (~4k words)
-- `update_memory(report_json, narrative, client)` makes a Claude API call to update all memory files after each narrative
+- `get_prompt_context(current_event)` assembles all memory into formatted prompt string (~4k words), including the prediction ledger and open threads (capped ~350 words combined)
+- `update_memory(report_json, narrative, client)` makes a Claude API call to update all memory files after each narrative, including `ledger.md` (prediction ledger) and `threads.md` (running bits) via new `===LEDGER===`/`===THREADS===`/`===JOKES===` markers
+- `load_ledger()` / `load_threads()` read those two LLM-maintained files (empty string if missing)
+- `record_recent(event_id, narrative, jokes=None)` / `load_recent()` — code-only (no LLM), maintains `recent.json`: last 8 entries of headline/opener/closer/jokes, extracted from the narrative text
+- `get_do_not_repeat_block(current_event, window=5)` builds the Norwegian "Ikke gjenta" block from `recent.json` for the user message (≤200 words); empty string if nothing recorded in the window
 
 ### Sample Data
 **[`sample_data/`](sample_data/)** - Sample API JSON responses for dev mode
