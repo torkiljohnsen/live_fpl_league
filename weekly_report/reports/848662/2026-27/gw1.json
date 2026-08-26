@@ -4,9 +4,15 @@
     "league_name": "Sinkaberg The Office",
     "season": "2026-27",
     "event_id": 1,
-    "generated_at": "2026-08-25T13:21:33.809939+00:00",
+    "generated_at": "2026-08-26T08:44:19.376638+00:00",
     "previous_report": null,
-    "previous_narrative": null
+    "previous_narrative": null,
+    "next_event": {
+      "id": 2,
+      "deadline_time": "2026-08-28T17:30:00Z",
+      "is_golden": false
+    },
+    "is_golden": false
   },
   "standings": [
     {
@@ -21,6 +27,25 @@
       "league_rank_previous": 0,
       "league_rank_change": -1,
       "overall_rank": 16725,
+      "event_rank": 16725,
+      "event_percentile": 0.2,
+      "overall_percentile": 0.2,
+      "points_per_starter": 5.9,
+      "vs_global_average": 39,
+      "form_last_5": null,
+      "bench_points_season": 0,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "3xc"
+      ],
+      "chips_played_season": [
+        {
+          "name": "bboost",
+          "event": 1
+        }
+      ],
       "team_value": 100.0,
       "bank": 0.0,
       "bench_points": 0,
@@ -192,6 +217,25 @@
       "league_rank_previous": 0,
       "league_rank_change": -2,
       "overall_rank": 398656,
+      "event_rank": 398657,
+      "event_percentile": 4.1,
+      "overall_percentile": 4.1,
+      "points_per_starter": 6.5,
+      "vs_global_average": 22,
+      "form_last_5": null,
+      "bench_points_season": 7,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost"
+      ],
+      "chips_played_season": [
+        {
+          "name": "3xc",
+          "event": 1
+        }
+      ],
       "team_value": 100.0,
       "bank": 0.0,
       "bench_points": 7,
@@ -388,6 +432,21 @@
       "league_rank_previous": 0,
       "league_rank_change": -3,
       "overall_rank": 529735,
+      "event_rank": 529737,
+      "event_percentile": 5.5,
+      "overall_percentile": 5.5,
+      "points_per_starter": 6.4,
+      "vs_global_average": 20,
+      "form_last_5": null,
+      "bench_points_season": 2,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [],
       "team_value": 100.0,
       "bank": 1.5,
       "bench_points": 2,
@@ -584,6 +643,21 @@
       "league_rank_previous": 0,
       "league_rank_change": -4,
       "overall_rank": 1605173,
+      "event_rank": 1605175,
+      "event_percentile": 16.5,
+      "overall_percentile": 16.5,
+      "points_per_starter": 5.5,
+      "vs_global_average": 11,
+      "form_last_5": null,
+      "bench_points_season": 9,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [],
       "team_value": 100.0,
       "bank": 0.0,
       "bench_points": 9,
@@ -780,6 +854,21 @@
       "league_rank_previous": 0,
       "league_rank_change": -5,
       "overall_rank": 2201654,
+      "event_rank": 2201657,
+      "event_percentile": 22.7,
+      "overall_percentile": 22.7,
+      "points_per_starter": 5.3,
+      "vs_global_average": 8,
+      "form_last_5": null,
+      "bench_points_season": 10,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [],
       "team_value": 100.0,
       "bank": 3.5,
       "bench_points": 10,
@@ -976,6 +1065,21 @@
       "league_rank_previous": 0,
       "league_rank_change": -6,
       "overall_rank": 3482299,
+      "event_rank": 3482304,
+      "event_percentile": 35.9,
+      "overall_percentile": 35.9,
+      "points_per_starter": 4.8,
+      "vs_global_average": 3,
+      "form_last_5": null,
+      "bench_points_season": 2,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [],
       "team_value": 100.0,
       "bank": 1.0,
       "bench_points": 2,
@@ -1172,6 +1276,21 @@
       "league_rank_previous": 0,
       "league_rank_change": -7,
       "overall_rank": 4383525,
+      "event_rank": 4383530,
+      "event_percentile": 45.2,
+      "overall_percentile": 45.2,
+      "points_per_starter": 4.5,
+      "vs_global_average": 0,
+      "form_last_5": null,
+      "bench_points_season": 6,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [],
       "team_value": 100.0,
       "bank": 0.0,
       "bench_points": 6,
@@ -1368,6 +1487,21 @@
       "league_rank_previous": 0,
       "league_rank_change": -8,
       "overall_rank": 6382778,
+      "event_rank": 6382788,
+      "event_percentile": 65.8,
+      "overall_percentile": 65.8,
+      "points_per_starter": 3.9,
+      "vs_global_average": -7,
+      "form_last_5": null,
+      "bench_points_season": 2,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [],
       "team_value": 100.0,
       "bank": 0.0,
       "bench_points": 2,
@@ -1564,6 +1698,21 @@
       "league_rank_previous": 0,
       "league_rank_change": -9,
       "overall_rank": 7094513,
+      "event_rank": 7094525,
+      "event_percentile": 73.1,
+      "overall_percentile": 73.1,
+      "points_per_starter": 3.6,
+      "vs_global_average": -10,
+      "form_last_5": null,
+      "bench_points_season": 4,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [],
       "team_value": 100.0,
       "bank": 0.0,
       "bench_points": 4,
@@ -1760,6 +1909,21 @@
       "league_rank_previous": 0,
       "league_rank_change": -10,
       "overall_rank": 8871478,
+      "event_rank": 8871493,
+      "event_percentile": 91.4,
+      "overall_percentile": 91.4,
+      "points_per_starter": 1.8,
+      "vs_global_average": -30,
+      "form_last_5": null,
+      "bench_points_season": 0,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [],
       "team_value": 100.0,
       "bank": 0.0,
       "bench_points": 0,
@@ -1957,12 +2121,7 @@
       "team_name": "YVIL"
     },
     "biggest_rise": null,
-    "biggest_fall": {
-      "player_name": "Camilla",
-      "old_rank": 0,
-      "new_rank": 10,
-      "change": -10
-    },
+    "biggest_fall": null,
     "bench_disasters": [],
     "best_transfer": null,
     "worst_transfer": null,
@@ -2003,6 +2162,355 @@
       "player_name": "Torkil",
       "total_points": 89
     },
-    "total_participants": 10
-  }
+    "total_participants": 10,
+    "global_average": 50,
+    "managers_above_global_average": 6
+  },
+  "global": {
+    "average_score": 50,
+    "highest_score": 131,
+    "total_players": 9702231,
+    "league_vs_world": 5.6
+  },
+  "angles": {
+    "head_to_head": [
+      {
+        "player_name": "Torkil",
+        "beat": 9,
+        "lost_to": 0,
+        "season_record": {
+          "wins": 9,
+          "losses": 0
+        }
+      },
+      {
+        "player_name": "Daniel",
+        "beat": 8,
+        "lost_to": 1,
+        "season_record": {
+          "wins": 8,
+          "losses": 1
+        }
+      },
+      {
+        "player_name": "Oda",
+        "beat": 7,
+        "lost_to": 2,
+        "season_record": {
+          "wins": 7,
+          "losses": 2
+        }
+      },
+      {
+        "player_name": "Vidar",
+        "beat": 6,
+        "lost_to": 3,
+        "season_record": {
+          "wins": 6,
+          "losses": 3
+        }
+      },
+      {
+        "player_name": "Peder",
+        "beat": 5,
+        "lost_to": 4,
+        "season_record": {
+          "wins": 5,
+          "losses": 4
+        }
+      },
+      {
+        "player_name": "amund",
+        "beat": 4,
+        "lost_to": 5,
+        "season_record": {
+          "wins": 4,
+          "losses": 5
+        }
+      },
+      {
+        "player_name": "Anders",
+        "beat": 3,
+        "lost_to": 6,
+        "season_record": {
+          "wins": 3,
+          "losses": 6
+        }
+      },
+      {
+        "player_name": "Eirin",
+        "beat": 2,
+        "lost_to": 7,
+        "season_record": {
+          "wins": 2,
+          "losses": 7
+        }
+      },
+      {
+        "player_name": "Hedda",
+        "beat": 1,
+        "lost_to": 8,
+        "season_record": {
+          "wins": 1,
+          "losses": 8
+        }
+      },
+      {
+        "player_name": "Camilla",
+        "beat": 0,
+        "lost_to": 9,
+        "season_record": {
+          "wins": 0,
+          "losses": 9
+        }
+      }
+    ],
+    "differentials": {
+      "top": [
+        {
+          "player_name": "Maxim De Cuyper",
+          "owner": "Torkil",
+          "points": 17
+        },
+        {
+          "player_name": "Anton Stach",
+          "owner": "Oda",
+          "points": 13
+        },
+        {
+          "player_name": "Benjamin White",
+          "owner": "Torkil",
+          "points": 11
+        },
+        {
+          "player_name": "Kiernan Dewsbury-Hall",
+          "owner": "amund",
+          "points": 11
+        },
+        {
+          "player_name": "Bukayo Saka",
+          "owner": "Daniel",
+          "points": 9
+        }
+      ],
+      "bottom": [
+        {
+          "player_name": "Alex Palmer",
+          "owner": "Vidar",
+          "points": 0
+        },
+        {
+          "player_name": "Moisés Caicedo Corozo",
+          "owner": "amund",
+          "points": 0
+        },
+        {
+          "player_name": "Ben Davies",
+          "owner": "Camilla",
+          "points": 0
+        }
+      ]
+    },
+    "captain_that_would_have_won": {
+      "player_name": "Maxim De Cuyper",
+      "points": 17,
+      "captained_by": 0
+    },
+    "streaks": [],
+    "records": {
+      "best": {
+        "player_name": "Torkil",
+        "event_id": 1,
+        "points": 89
+      },
+      "worst": {
+        "player_name": "Camilla",
+        "event_id": 1,
+        "points": 20
+      }
+    },
+    "chip_tracker": [
+      {
+        "player_name": "Torkil",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "3xc"
+        ],
+        "chips_played": [
+          {
+            "name": "bboost",
+            "event": 1
+          }
+        ]
+      },
+      {
+        "player_name": "Daniel",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost"
+        ],
+        "chips_played": [
+          {
+            "name": "3xc",
+            "event": 1
+          }
+        ]
+      },
+      {
+        "player_name": "Oda",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": []
+      },
+      {
+        "player_name": "Vidar",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": []
+      },
+      {
+        "player_name": "Peder",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": []
+      },
+      {
+        "player_name": "amund",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": []
+      },
+      {
+        "player_name": "Anders",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": []
+      },
+      {
+        "player_name": "Eirin",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": []
+      },
+      {
+        "player_name": "Hedda",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": []
+      },
+      {
+        "player_name": "Camilla",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": []
+      }
+    ]
+  },
+  "storylines": [
+    {
+      "kind": "gw_rank_extreme",
+      "score": 95,
+      "managers": [
+        "Torkil"
+      ],
+      "facts": {
+        "event_total": 89,
+        "event_percentile": 0.2
+      },
+      "summary": "Torkil 89 pts, GW rank in the top 1% of the field."
+    },
+    {
+      "kind": "score_far_below_average",
+      "score": 90,
+      "managers": [
+        "Camilla"
+      ],
+      "facts": {
+        "event_total": 20,
+        "global_average": 50
+      },
+      "summary": "Camilla 20 pts, 1.8 per starter, less than half the global average of 50."
+    },
+    {
+      "kind": "overall_top_tier",
+      "score": 85,
+      "managers": [
+        "Torkil"
+      ],
+      "facts": {
+        "overall_percentile": 0.2
+      },
+      "summary": "Torkil sits in the top 0.5% of all managers overall (0.2%)."
+    },
+    {
+      "kind": "chip_played",
+      "score": 70,
+      "managers": [
+        "Torkil"
+      ],
+      "facts": {
+        "chip": "bboost",
+        "event_total": 89
+      },
+      "summary": "Torkil played bboost for 89 pts — the round's extreme score."
+    },
+    {
+      "kind": "gw_rank_notable",
+      "score": 70,
+      "managers": [
+        "Daniel"
+      ],
+      "facts": {
+        "event_total": 72,
+        "event_percentile": 4.1
+      },
+      "summary": "Daniel 72 pts, GW rank in the top 5% of the field."
+    },
+    {
+      "kind": "chip_played",
+      "score": 50,
+      "managers": [
+        "Daniel"
+      ],
+      "facts": {
+        "chip": "3xc",
+        "event_total": 72
+      },
+      "summary": "Daniel played 3xc for 72 pts."
+    }
+  ]
 }
