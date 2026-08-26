@@ -15,15 +15,34 @@ from typing import Any
 from . import claude_api
 from .reference_loader import load_reference_docs, select_reference_docs
 from .reidar_memory import ReidarMemory
+from .style_lint import lint_narrative
+from .weekly_report import get_narrative_path
 
 # Reidar reference docs live in weekly_report/ relative to the repo root
 _REIDAR_DOCS_DIR = Path(__file__).resolve().parent.parent / "weekly_report"
+
+# How many preceding gameweeks' narratives feed the style lint gate
+# (sign-off similarity, repeated n-grams).
+_LINT_PREVIOUS_WINDOW = 5
 
 
 def read_reidar_doc(filename: str) -> str:
     """Read a Reidar reference document from the weekly_report/ directory."""
     path = _REIDAR_DOCS_DIR / filename
     return path.read_text(encoding="utf-8")
+
+
+def _load_previous_narratives_for_lint(
+    output_dir: str, league_id: str, season: str, event_id: int
+) -> list[str]:
+    """Load up to the last five narratives before event_id, most recent
+    first, for the style lint's sign-off/repeated-n-gram checks."""
+    texts: list[str] = []
+    for gw in range(event_id - 1, max(0, event_id - 1 - _LINT_PREVIOUS_WINDOW), -1):
+        path = get_narrative_path(output_dir, league_id, season, gw)
+        if path.is_file():
+            texts.append(path.read_text(encoding="utf-8"))
+    return texts
 
 
 def run_narrative_pipeline(
@@ -81,6 +100,41 @@ def run_narrative_pipeline(
         previous_narrative=previous_narrative,
         reference_docs=reference_docs,
     )
+
+    # Style lint gate: cheap, deterministic checks (issue #40, workstream E).
+    # A hard failure triggers exactly one regeneration with the findings
+    # appended to the prompt; whatever comes back is accepted.
+    lint_previous = _load_previous_narratives_for_lint(
+        output_dir, league_id, season, event_id
+    )
+    lint_result = lint_narrative(narrative, previous=lint_previous)
+    if lint_result.hard_failures:
+        print(
+            f"Style lint: {len(lint_result.hard_failures)} hard failures → regenerating once"
+        )
+        extra_instructions = (
+            "Forrige utkast brøt disse reglene — skriv på nytt og rett dem:\n"
+            + "\n".join(f"- {failure}" for failure in lint_result.hard_failures)
+        )
+        narrative = generator.generate(
+            report_json=result,
+            persona=persona,
+            narrative_guide=narrative_guide,
+            examples=examples,
+            memory_context=memory_context,
+            previous_narrative=previous_narrative,
+            reference_docs=reference_docs,
+            extra_instructions=extra_instructions,
+        )
+        lint_result = lint_narrative(narrative, previous=lint_previous)
+        remaining = len(lint_result.hard_failures)
+        print(
+            "Style lint: OK after regeneration"
+            if remaining == 0
+            else f"Style lint: {remaining} hard failures remain after regeneration"
+        )
+    else:
+        print("Style lint: OK")
 
     # Save narrative
     narrative_path = generator.save_narrative(
@@ -158,6 +212,7 @@ class NarrativeGenerator:
         previous_narrative: str | None = None,
         *,
         reference_docs: str | None = None,
+        extra_instructions: str | None = None,
     ) -> str:
         """Generate a narrative from report data and context.
 
@@ -175,6 +230,9 @@ class NarrativeGenerator:
                 fpl/reference_loader.py), included in the user message only
                 when non-empty. Kept out of the system prompt on purpose —
                 it must not grow the standing context weight.
+            extra_instructions: Appended at the end of the user message —
+                used by the style lint gate to ask for a corrected
+                regeneration (see run_narrative_pipeline).
 
         Returns:
             Generated markdown narrative string.
@@ -184,7 +242,10 @@ class NarrativeGenerator:
         )
 
         user_content = self._build_user_message(
-            report_json, previous_narrative, reference_docs=reference_docs
+            report_json,
+            previous_narrative,
+            reference_docs=reference_docs,
+            extra_instructions=extra_instructions,
         )
 
         return claude_api.complete(
@@ -254,8 +315,10 @@ class NarrativeGenerator:
         previous_narrative: str | None,
         *,
         reference_docs: str | None = None,
+        extra_instructions: str | None = None,
     ) -> str:
-        """Build the user message with report data and optional previous narrative."""
+        """Build the user message with report data and optional previous
+        narrative, plus any extra instructions appended at the end."""
         parts: list[str] = []
 
         parts.append(
@@ -275,5 +338,8 @@ class NarrativeGenerator:
                 "\n\nHer er forrige ukes narrativ for kontinuitet:\n\n"
                 f"{previous_narrative}"
             )
+
+        if extra_instructions:
+            parts.append(f"\n\n{extra_instructions}")
 
         return "\n".join(parts)
