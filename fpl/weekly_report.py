@@ -34,6 +34,11 @@ def get_season_from_bootstrap(bootstrap: dict[str, Any]) -> str:
     return f"{year}-{next_year_short}"
 
 
+def _is_golden(event_id: int) -> bool:
+    """Golden gameweeks carry a cash prize and fall every 4th GW."""
+    return event_id % 4 == 0
+
+
 def detect_current_gameweek(api: FPLAPIProtocol) -> int:
     """Find the latest locked gameweek from bootstrap-static data.
 
@@ -99,6 +104,7 @@ class WeeklyReport:
         self._league_id = league_id
         self._event_id = event_id
         self._participants_data: list[dict[str, Any]] = []
+        self._histories: dict[int, list[dict[str, Any]]] = {}
         self._bootstrap: dict[str, Any] = {}
         self._league_name: str = ""
         self._report: dict[str, Any] = {}
@@ -122,6 +128,9 @@ class WeeklyReport:
 
         teams = standings.get("standings", {}).get("results", [])
         self._participants_data = []
+        self._histories = {}
+        bootstrap_chips = self._bootstrap.get("chips", [])
+        global_block = self._build_global()
 
         for team in teams:
             entry_id = team["entry"]
@@ -132,22 +141,43 @@ class WeeklyReport:
             gw_transfers = [
                 t for t in all_transfers if t.get("event") == self._event_id
             ]
+            team_history = self._api.get_team_history(str(entry_id))
+            history_current = team_history.get("current", [])
+            history_chips = team_history.get("chips", [])
+            self._histories[entry_id] = history_current
 
             participant = self._build_participant_data(
-                team, picks_data, gw_transfers, live_points, registry
+                team,
+                picks_data,
+                gw_transfers,
+                live_points,
+                registry,
+                history_current,
+                history_chips,
+                bootstrap_chips,
+                global_block,
             )
             self._participants_data.append(participant)
 
         # Sort standings by league rank
         self._participants_data.sort(key=lambda p: p.get("league_rank", 0))
 
+        # league_vs_world needs the fully built participant list, which
+        # didn't exist yet when global_block was first assembled above.
+        global_block["league_vs_world"] = self._compute_league_vs_world(
+            global_block.get("average_score")
+        )
+
         # Assemble the full report
         self._report = {
             "meta": self._build_meta(),
             "standings": self._participants_data,
             "awards": self._build_awards(),
-            "league_summary": self._build_league_summary(),
+            "league_summary": self._build_league_summary(global_block),
+            "global": global_block,
+            "angles": self._build_angles(),
         }
+        self._report["storylines"] = stats.rank_storylines(self._report)
 
         return self._report
 
@@ -194,6 +224,17 @@ class WeeklyReport:
                 f"docs/narratives/{season}/{self._league_id}/gw{prev_event}.md"
             )
 
+        events = self._bootstrap.get("events", [])
+        next_event = None
+        for event in events:
+            if event.get("id") == self._event_id + 1:
+                next_event = {
+                    "id": event["id"],
+                    "deadline_time": event.get("deadline_time"),
+                    "is_golden": _is_golden(event["id"]),
+                }
+                break
+
         return {
             "league_id": self._league_id,
             "league_name": self._league_name,
@@ -202,6 +243,8 @@ class WeeklyReport:
             "generated_at": datetime.now(UTC).isoformat(),
             "previous_report": previous_report,
             "previous_narrative": previous_narrative,
+            "next_event": next_event,
+            "is_golden": _is_golden(self._event_id),
         }
 
     def _build_awards(self) -> dict[str, Any]:
@@ -214,8 +257,8 @@ class WeeklyReport:
         return {
             "highest_scorer": stats.get_highest_gameweek_scorer(p),
             "lowest_scorer": stats.get_lowest_gameweek_scorer(p),
-            "biggest_rise": stats.get_biggest_rank_rise(p),
-            "biggest_fall": stats.get_biggest_rank_fall(p),
+            "biggest_rise": stats.get_biggest_rank_rise(p, event_id=self._event_id),
+            "biggest_fall": stats.get_biggest_rank_fall(p, event_id=self._event_id),
             "bench_disasters": stats.get_bench_disasters(p),
             "best_transfer": best_transfer,
             "worst_transfer": worst_transfer,
@@ -224,20 +267,68 @@ class WeeklyReport:
             "hit_takers": stats.get_hit_takers(p),
         }
 
-    def _build_league_summary(self) -> dict[str, Any]:
+    def _build_global(self) -> dict[str, Any]:
+        """Build the global (world-context) section.
+
+        Pulls this gameweek's average/highest score and the total
+        player count from bootstrap-static, per issue #40 workstream K.
+        `league_vs_world` is filled in later, once participants exist —
+        see `_compute_league_vs_world()`.
+        """
+        events = self._bootstrap.get("events", [])
+        event: dict[str, Any] = next(
+            (e for e in events if e.get("id") == self._event_id), {}
+        )
+        return {
+            "average_score": event.get("average_entry_score"),
+            "highest_score": event.get("highest_score"),
+            "total_players": self._bootstrap.get("total_players"),
+            "league_vs_world": None,
+        }
+
+    def _compute_league_vs_world(self, average_score: float | None) -> float | None:
+        """League's average net score minus the global average score."""
+        net_scores = [p.get("net_points", 0) for p in self._participants_data]
+        if average_score is None or not net_scores:
+            return None
+        league_avg = sum(net_scores) / len(net_scores)
+        return round(league_avg - average_score, 1)
+
+    def _build_angles(self) -> dict[str, Any]:
+        """Build the new data-angle hooks (issue #40 workstream F)."""
+        p = self._participants_data
+        return {
+            "head_to_head": stats.get_head_to_head(p, self._histories),
+            "differentials": stats.get_differentials(p),
+            "captain_that_would_have_won": stats.get_captain_that_would_have_won(p),
+            "streaks": stats.get_streaks(p, self._histories),
+            "records": stats.get_records(p, self._histories),
+            "chip_tracker": stats.get_chip_tracker(p),
+        }
+
+    def _build_league_summary(self, global_block: dict[str, Any]) -> dict[str, Any]:
         """Build the league summary section."""
         total = len(self._participants_data)
+        global_average = global_block.get("average_score")
         if total == 0:
             return {
                 "average_score": 0,
                 "leader": None,
                 "total_participants": 0,
+                "global_average": global_average,
+                "managers_above_global_average": 0,
             }
 
         net_scores = [p.get("net_points", 0) for p in self._participants_data]
         avg = sum(net_scores) / total
 
         leader = self._participants_data[0]
+
+        managers_above_global_average = sum(
+            1
+            for p in self._participants_data
+            if global_average is not None and p.get("event_total", 0) > global_average
+        )
 
         return {
             "average_score": round(avg, 1),
@@ -246,6 +337,8 @@ class WeeklyReport:
                 "total_points": leader["total_points"],
             },
             "total_participants": total,
+            "global_average": global_average,
+            "managers_above_global_average": managers_above_global_average,
         }
 
     def _build_live_points_map(
@@ -264,6 +357,10 @@ class WeeklyReport:
         gw_transfers: list[dict[str, Any]],
         live_points: dict[int, int],
         registry: PlayerRegistry,
+        history_current: list[dict[str, Any]],
+        history_chips: list[dict[str, Any]],
+        bootstrap_chips: list[dict[str, Any]],
+        global_block: dict[str, Any],
     ) -> dict[str, Any]:
         """Build a GameweekParticipantData dict for a single participant."""
         entry_history = picks_data.get("entry_history", {})
@@ -293,6 +390,62 @@ class WeeklyReport:
             manager_name.split()[0] if manager_name else "Unknown"
         )
 
+        overall_rank = entry_history.get("overall_rank", 0)
+        total_players = global_block.get("total_players")
+
+        event_rank = entry_history.get("rank")
+        event_percentile = (
+            round(event_rank / total_players * 100, 1)
+            if event_rank and total_players
+            else None
+        )
+        overall_percentile = (
+            round(overall_rank / total_players * 100, 1)
+            if overall_rank and total_players
+            else None
+        )
+
+        starters = sum(1 for p in squad if p.get("multiplier", 0) > 0)
+        points_per_starter = (
+            round(event_total / starters, 1) if starters else None
+        )
+
+        global_average = global_block.get("average_score")
+        vs_global_average = (
+            round(event_total - global_average)
+            if global_average is not None
+            else None
+        )
+
+        form_last_5 = None
+        if self._event_id > 1:
+            past_points = [
+                h["points"]
+                for h in history_current
+                if h.get("event", 0) <= self._event_id and h.get("points") is not None
+            ]
+            recent = past_points[-5:]
+            if recent:
+                form_last_5 = round(sum(recent) / len(recent), 1)
+
+        bench_points_season = sum(
+            h.get("points_on_bench", 0) or 0
+            for h in history_current
+            if h.get("event", 0) <= self._event_id
+        )
+        hit_cost_season = sum(
+            h.get("event_transfers_cost", 0) or 0
+            for h in history_current
+            if h.get("event", 0) <= self._event_id
+        )
+
+        chips_remaining = stats.get_chips_remaining(
+            bootstrap_chips, history_chips, self._event_id
+        )
+        chips_played_season = stats.get_chips_played_to_date(
+            history_chips, self._event_id
+        )
+
         return {
             "entry_id": team["entry"],
             "team_name": team.get("entry_name", "Unknown"),
@@ -306,7 +459,18 @@ class WeeklyReport:
             "league_rank": league_rank,
             "league_rank_previous": league_rank_previous,
             "league_rank_change": league_rank_change,
-            "overall_rank": entry_history.get("overall_rank", 0),
+            "overall_rank": overall_rank,
+            # Global context (issue #40 workstream K)
+            "event_rank": event_rank,
+            "event_percentile": event_percentile,
+            "overall_percentile": overall_percentile,
+            "points_per_starter": points_per_starter,
+            "vs_global_average": vs_global_average,
+            "form_last_5": form_last_5,
+            "bench_points_season": bench_points_season,
+            "hit_cost_season": hit_cost_season,
+            "chips_remaining": chips_remaining,
+            "chips_played_season": chips_played_season,
             # Value
             "team_value": entry_history.get("value", 0) / 10,
             "bank": entry_history.get("bank", 0) / 10,

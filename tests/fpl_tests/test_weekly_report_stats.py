@@ -6,11 +6,20 @@ from fpl.weekly_report_stats import (
     get_biggest_rank_fall,
     get_biggest_rank_rise,
     get_captain_summary,
+    get_captain_that_would_have_won,
+    get_chip_tracker,
     get_chip_usage,
+    get_chips_played_to_date,
+    get_chips_remaining,
+    get_differentials,
+    get_head_to_head,
     get_highest_gameweek_scorer,
     get_hit_takers,
     get_lowest_gameweek_scorer,
+    get_records,
+    get_streaks,
     get_transfer_impact,
+    rank_storylines,
 )
 
 
@@ -190,6 +199,77 @@ class TestBiggestRankFall:
             _make_participant(name="Alice", league_rank_change=3),
         ]
         assert get_biggest_rank_fall(participants) is None
+
+
+# --- #35: rank rise/fall are suppressed in early gameweeks ---
+
+
+class TestRankAwardsEarlyGameweekDamping:
+    def test_gw1_suppresses_rise_even_with_large_change(self):
+        participants = [
+            _make_participant(
+                name="Alice", league_rank=1, league_rank_previous=10, league_rank_change=9
+            ),
+        ]
+        assert get_biggest_rank_rise(participants, event_id=1) is None
+
+    def test_gw1_suppresses_fall_even_with_large_change(self):
+        participants = [
+            _make_participant(
+                name="Alice", league_rank=10, league_rank_previous=1, league_rank_change=-9
+            ),
+        ]
+        assert get_biggest_rank_fall(participants, event_id=1) is None
+
+    def test_no_previous_rank_skips_candidate_regardless_of_event_id(self):
+        """A previous rank of 0 (the GW1 artifact) is never a real fall,
+        even outside GW1 — e.g. a manager who joined the league mid-season."""
+        participants = [
+            _make_participant(
+                name="Alice", league_rank=10, league_rank_previous=0, league_rank_change=-10
+            ),
+        ]
+        assert get_biggest_rank_fall(participants, event_id=7) is None
+        assert get_biggest_rank_rise(participants, event_id=7) is None
+
+    def test_gw2_to_5_requires_change_of_at_least_3(self):
+        participants = [
+            _make_participant(
+                name="Alice", league_rank=3, league_rank_previous=5, league_rank_change=2
+            ),
+        ]
+        assert get_biggest_rank_rise(participants, event_id=3) is None
+        assert get_biggest_rank_fall(participants, event_id=3) is None
+
+    def test_gw2_to_5_change_of_3_is_reported(self):
+        participants = [
+            _make_participant(
+                name="Alice", league_rank=2, league_rank_previous=5, league_rank_change=3
+            ),
+        ]
+        result = get_biggest_rank_rise(participants, event_id=4)
+        assert result is not None
+        assert result["player_name"] == "Alice"
+
+    def test_gw6_reverts_to_change_of_2(self):
+        participants = [
+            _make_participant(
+                name="Alice", league_rank=3, league_rank_previous=5, league_rank_change=2
+            ),
+        ]
+        result = get_biggest_rank_rise(participants, event_id=6)
+        assert result is not None
+        assert result["player_name"] == "Alice"
+
+    def test_no_event_id_preserves_default_threshold_of_2(self):
+        """Existing callers that don't pass event_id keep today's behaviour."""
+        participants = [
+            _make_participant(
+                name="Alice", league_rank=3, league_rank_previous=5, league_rank_change=2
+            ),
+        ]
+        result = get_biggest_rank_rise(participants)
+        assert result is not None
 
 
 # --- get_bench_disasters ---
@@ -508,3 +588,434 @@ class TestHitTakers:
         costs = {r["player_name"]: r["cost"] for r in result}
         assert costs["Alice"] == 4
         assert costs["Bob"] == 8
+
+
+# ---------------------------------------------------------------------------
+# New data angles (issue #40 workstream F)
+# ---------------------------------------------------------------------------
+
+
+def _make_full_participant(
+    name: str,
+    entry_id: int,
+    event_total: int = 50,
+    squad: list[dict] | None = None,
+    captain_element_id: int = 1,
+    captain_did_not_play: bool = False,
+    effective_captain: str | None = None,
+    bench_points: int = 0,
+    transfer_cost: int = 0,
+    chip_played: str | None = None,
+    chips_remaining: list[str] | None = None,
+    chips_played_season: list[dict] | None = None,
+    event_percentile: float | None = None,
+    overall_percentile: float | None = None,
+    points_per_starter: float | None = None,
+) -> dict:
+    captain: dict = {"name": "Salah", "element_id": captain_element_id}
+    if captain_did_not_play:
+        captain["did_not_play"] = True
+        captain["effective_captain"] = effective_captain
+    return {
+        "entry_id": entry_id,
+        "player_first_name": name,
+        "event_total": event_total,
+        "squad": squad or [],
+        "captain": captain,
+        "bench_points": bench_points,
+        "transfer_cost": transfer_cost,
+        "chip_played": chip_played,
+        "chips_remaining": chips_remaining or [],
+        "chips_played_season": chips_played_season or [],
+        "event_percentile": event_percentile,
+        "overall_percentile": overall_percentile,
+        "points_per_starter": points_per_starter,
+    }
+
+
+class TestChipsRemaining:
+    BOOTSTRAP_CHIPS = [
+        {"name": "wildcard", "start_event": 1, "stop_event": 19},
+        {"name": "freehit", "start_event": 1, "stop_event": 19},
+        {"name": "bboost", "start_event": 1, "stop_event": 19},
+        {"name": "3xc", "start_event": 1, "stop_event": 19},
+        {"name": "wildcard", "start_event": 20, "stop_event": 38},
+        {"name": "freehit", "start_event": 20, "stop_event": 38},
+        {"name": "bboost", "start_event": 20, "stop_event": 38},
+        {"name": "3xc", "start_event": 20, "stop_event": 38},
+    ]
+
+    def test_all_available_when_none_played(self):
+        result = get_chips_remaining(self.BOOTSTRAP_CHIPS, [], 5)
+        assert set(result) == {"wildcard", "freehit", "bboost", "3xc"}
+
+    def test_excludes_chip_played_this_window(self):
+        played = [{"name": "wildcard", "event": 3}]
+        result = get_chips_remaining(self.BOOTSTRAP_CHIPS, played, 5)
+        assert "wildcard" not in result
+        assert set(result) == {"freehit", "bboost", "3xc"}
+
+    def test_second_half_window_is_independent(self):
+        """A chip played in the first half doesn't count against the
+        second half's allowance."""
+        played = [{"name": "wildcard", "event": 3}]
+        result = get_chips_remaining(self.BOOTSTRAP_CHIPS, played, 25)
+        assert "wildcard" in result
+
+    def test_chip_played_in_other_window_still_available(self):
+        played = [{"name": "wildcard", "event": 25}]
+        result = get_chips_remaining(self.BOOTSTRAP_CHIPS, played, 5)
+        assert "wildcard" in result
+
+    def test_empty_bootstrap_chips(self):
+        assert get_chips_remaining([], [], 5) == []
+
+
+class TestChipsPlayedToDate:
+    def test_filters_by_event(self):
+        played = [
+            {"name": "wildcard", "event": 2},
+            {"name": "bboost", "event": 10},
+        ]
+        result = get_chips_played_to_date(played, 5)
+        assert result == [{"name": "wildcard", "event": 2}]
+
+    def test_includes_current_event(self):
+        played = [{"name": "wildcard", "event": 5}]
+        result = get_chips_played_to_date(played, 5)
+        assert result == [{"name": "wildcard", "event": 5}]
+
+    def test_empty_when_none_played(self):
+        assert get_chips_played_to_date([], 5) == []
+
+
+class TestHeadToHead:
+    def test_beat_and_lost_to_this_gw(self):
+        participants = [
+            _make_full_participant("Alice", 1, event_total=80),
+            _make_full_participant("Bob", 2, event_total=50),
+            _make_full_participant("Charlie", 3, event_total=65),
+        ]
+        result = get_head_to_head(participants)
+        by_name = {r["player_name"]: r for r in result}
+        assert by_name["Alice"]["beat"] == 2
+        assert by_name["Alice"]["lost_to"] == 0
+        assert by_name["Bob"]["beat"] == 0
+        assert by_name["Bob"]["lost_to"] == 2
+        assert by_name["Charlie"]["beat"] == 1
+        assert by_name["Charlie"]["lost_to"] == 1
+
+    def test_no_histories_gives_zero_season_record(self):
+        participants = [_make_full_participant("Alice", 1, event_total=50)]
+        result = get_head_to_head(participants)
+        assert result[0]["season_record"] == {"wins": 0, "losses": 0}
+
+    def test_season_record_from_histories(self):
+        participants = [
+            _make_full_participant("Alice", 1, event_total=50),
+            _make_full_participant("Bob", 2, event_total=40),
+        ]
+        histories = {
+            1: [{"event": 1, "points": 60}, {"event": 2, "points": 50}],
+            2: [{"event": 1, "points": 40}, {"event": 2, "points": 40}],
+        }
+        result = get_head_to_head(participants, histories)
+        by_name = {r["player_name"]: r for r in result}
+        # Alice beat Bob both GWs (60>40, 50>40)
+        assert by_name["Alice"]["season_record"] == {"wins": 2, "losses": 0}
+        assert by_name["Bob"]["season_record"] == {"wins": 0, "losses": 2}
+
+    def test_empty_participants(self):
+        assert get_head_to_head([]) == []
+
+
+class TestDifferentials:
+    def test_owned_by_exactly_one_manager(self):
+        participants = [
+            _make_full_participant(
+                "Alice", 1,
+                squad=[
+                    {"element_id": 1, "name": "Salah", "points": 12},
+                    {"element_id": 2, "name": "Haaland", "points": 8},
+                ],
+            ),
+            _make_full_participant(
+                "Bob", 2,
+                squad=[
+                    {"element_id": 1, "name": "Salah", "points": 12},
+                    {"element_id": 3, "name": "Palmer", "points": 20},
+                ],
+            ),
+        ]
+        result = get_differentials(participants)
+        # Salah owned by both -> not a differential; Haaland/Palmer are
+        names = {d["player_name"] for d in result["top"]}
+        assert "Salah" not in names
+        assert "Haaland" in names
+        assert "Palmer" in names
+
+    def test_sorted_by_points_desc(self):
+        participants = [
+            _make_full_participant(
+                "Alice", 1,
+                squad=[
+                    {"element_id": 1, "name": "Low", "points": 2},
+                    {"element_id": 2, "name": "High", "points": 20},
+                ],
+            ),
+        ]
+        result = get_differentials(participants)
+        assert [d["player_name"] for d in result["top"]] == ["High", "Low"]
+
+    def test_top_capped_at_5_bottom_at_3(self):
+        squad = [
+            {"element_id": i, "name": f"P{i}", "points": i} for i in range(10)
+        ]
+        participants = [_make_full_participant("Alice", 1, squad=squad)]
+        result = get_differentials(participants)
+        assert len(result["top"]) == 5
+        assert len(result["bottom"]) == 3
+
+    def test_no_differentials(self):
+        participants = [
+            _make_full_participant(
+                "Alice", 1, squad=[{"element_id": 1, "name": "Salah", "points": 12}]
+            ),
+            _make_full_participant(
+                "Bob", 2, squad=[{"element_id": 1, "name": "Salah", "points": 12}]
+            ),
+        ]
+        result = get_differentials(participants)
+        assert result == {"top": [], "bottom": []}
+
+
+class TestCaptainThatWouldHaveWon:
+    def test_finds_highest_scoring_player(self):
+        participants = [
+            _make_full_participant(
+                "Alice", 1, captain_element_id=1,
+                squad=[
+                    {"element_id": 1, "name": "Salah", "points": 12},
+                    {"element_id": 2, "name": "Palmer", "points": 20},
+                ],
+            ),
+        ]
+        result = get_captain_that_would_have_won(participants)
+        assert result is not None
+        assert result["player_name"] == "Palmer"
+        assert result["points"] == 20
+        assert result["captained_by"] == 0
+
+    def test_counts_managers_who_captained_him(self):
+        participants = [
+            _make_full_participant(
+                "Alice", 1, captain_element_id=2,
+                squad=[{"element_id": 2, "name": "Palmer", "points": 20}],
+            ),
+            _make_full_participant(
+                "Bob", 2, captain_element_id=2,
+                squad=[{"element_id": 2, "name": "Palmer", "points": 20}],
+            ),
+            _make_full_participant(
+                "Charlie", 3, captain_element_id=1,
+                squad=[{"element_id": 2, "name": "Palmer", "points": 20}],
+            ),
+        ]
+        result = get_captain_that_would_have_won(participants)
+        assert result is not None
+        assert result["captained_by"] == 2
+
+    def test_empty_participants(self):
+        assert get_captain_that_would_have_won([]) is None
+
+
+class TestStreaks:
+    def test_above_average_streak_reported_at_3(self):
+        histories = {
+            1: [
+                {"event": 1, "points": 80, "overall_rank": 100},
+                {"event": 2, "points": 80, "overall_rank": 90},
+                {"event": 3, "points": 80, "overall_rank": 80},
+            ],
+            2: [
+                {"event": 1, "points": 20, "overall_rank": 900},
+                {"event": 2, "points": 20, "overall_rank": 900},
+                {"event": 3, "points": 20, "overall_rank": 900},
+            ],
+        }
+        participants = [
+            _make_full_participant("Alice", 1),
+            _make_full_participant("Bob", 2),
+        ]
+        result = get_streaks(participants, histories)
+        above_avg = [s for s in result if s["kind"] == "above_average"]
+        assert len(above_avg) == 1
+        assert above_avg[0]["player_name"] == "Alice"
+        assert above_avg[0]["length"] == 3
+
+    def test_streak_below_3_not_reported(self):
+        histories = {
+            1: [
+                {"event": 1, "points": 80, "overall_rank": 100},
+                {"event": 2, "points": 20, "overall_rank": 900},
+            ],
+            2: [
+                {"event": 1, "points": 20, "overall_rank": 900},
+                {"event": 2, "points": 80, "overall_rank": 100},
+            ],
+        }
+        participants = [
+            _make_full_participant("Alice", 1),
+            _make_full_participant("Bob", 2),
+        ]
+        result = get_streaks(participants, histories)
+        assert result == []
+
+    def test_round_wins_streak(self):
+        histories = {
+            1: [
+                {"event": 1, "points": 90, "overall_rank": 100},
+                {"event": 2, "points": 90, "overall_rank": 100},
+                {"event": 3, "points": 90, "overall_rank": 100},
+            ],
+            2: [
+                {"event": 1, "points": 10, "overall_rank": 900},
+                {"event": 2, "points": 10, "overall_rank": 900},
+                {"event": 3, "points": 10, "overall_rank": 900},
+            ],
+        }
+        participants = [
+            _make_full_participant("Alice", 1),
+            _make_full_participant("Bob", 2),
+        ]
+        result = get_streaks(participants, histories)
+        wins = [s for s in result if s["kind"] == "round_wins"]
+        assert len(wins) == 1
+        assert wins[0]["player_name"] == "Alice"
+        assert wins[0]["length"] == 3
+
+    def test_green_arrows_streak(self):
+        histories = {
+            1: [
+                {"event": 1, "points": 50, "overall_rank": 1000},
+                {"event": 2, "points": 50, "overall_rank": 500},
+                {"event": 3, "points": 50, "overall_rank": 100},
+                {"event": 4, "points": 50, "overall_rank": 50},
+            ],
+        }
+        participants = [_make_full_participant("Alice", 1)]
+        result = get_streaks(participants, histories)
+        arrows = [s for s in result if s["kind"] == "green_arrows"]
+        assert len(arrows) == 1
+        assert arrows[0]["length"] == 3
+
+    def test_no_histories_returns_empty(self):
+        participants = [_make_full_participant("Alice", 1)]
+        assert get_streaks(participants, {}) == []
+
+
+class TestRecords:
+    def test_best_and_worst(self):
+        histories = {
+            1: [{"event": 1, "points": 90}, {"event": 2, "points": 40}],
+            2: [{"event": 1, "points": 30}, {"event": 2, "points": 60}],
+        }
+        participants = [
+            _make_full_participant("Alice", 1),
+            _make_full_participant("Bob", 2),
+        ]
+        result = get_records(participants, histories)
+        assert result["best"] == {"player_name": "Alice", "event_id": 1, "points": 90}
+        assert result["worst"] == {"player_name": "Bob", "event_id": 1, "points": 30}
+
+    def test_empty_histories(self):
+        participants = [_make_full_participant("Alice", 1)]
+        result = get_records(participants, {})
+        assert result == {"best": None, "worst": None}
+
+
+class TestChipTracker:
+    def test_reads_participant_chip_fields(self):
+        participants = [
+            _make_full_participant(
+                "Alice", 1,
+                chips_remaining=["wildcard", "freehit"],
+                chips_played_season=[{"name": "bboost", "event": 1}],
+            ),
+        ]
+        result = get_chip_tracker(participants)
+        assert result == [{
+            "player_name": "Alice",
+            "chips_remaining": ["wildcard", "freehit"],
+            "chips_played": [{"name": "bboost", "event": 1}],
+        }]
+
+    def test_empty_participants(self):
+        assert get_chip_tracker([]) == []
+
+
+class TestRankStorylines:
+    def _base_report(self, **overrides) -> dict:
+        report = {
+            "meta": {"event_id": 5, "is_golden": False},
+            "global": {"average_score": 50},
+            "standings": [
+                _make_full_participant(
+                    "Alice", 1, event_total=90, event_percentile=0.5,
+                    overall_percentile=0.3, points_per_starter=8.0,
+                ),
+                _make_full_participant(
+                    "Bob", 2, event_total=20, event_percentile=99.5,
+                ),
+            ],
+            "awards": {},
+            "angles": {"streaks": [], "records": {}},
+        }
+        report.update(overrides)
+        return report
+
+    def test_returns_at_most_6(self):
+        report = self._base_report()
+        result = rank_storylines(report)
+        assert len(result) <= 6
+
+    def test_sorted_descending_by_score(self):
+        report = self._base_report()
+        result = rank_storylines(report)
+        scores = [s["score"] for s in result]
+        assert scores == sorted(scores, reverse=True)
+
+    def test_gw_rank_extreme_triggers(self):
+        report = self._base_report()
+        result = rank_storylines(report)
+        kinds = {s["kind"] for s in result}
+        assert "gw_rank_extreme" in kinds
+
+    def test_below_half_average_triggers(self):
+        report = self._base_report()
+        result = rank_storylines(report)
+        below = [s for s in result if s["kind"] == "score_far_below_average"]
+        assert len(below) == 1
+        assert below[0]["managers"] == ["Bob"]
+
+    def test_summary_contains_numbers(self):
+        report = self._base_report()
+        result = rank_storylines(report)
+        for s in result:
+            assert any(ch.isdigit() for ch in s["summary"])
+
+    def test_golden_winner_when_golden(self):
+        report = self._base_report(meta={"event_id": 4, "is_golden": True})
+        result = rank_storylines(report)
+        kinds = {s["kind"] for s in result}
+        assert "golden_winner" in kinds
+
+    def test_empty_report(self):
+        report = {
+            "meta": {"event_id": 1, "is_golden": False},
+            "global": {},
+            "standings": [],
+            "awards": {},
+            "angles": {},
+        }
+        assert rank_storylines(report) == []

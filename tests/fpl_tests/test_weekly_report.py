@@ -26,6 +26,13 @@ from fpl.weekly_report import (
 # ---------------------------------------------------------------------------
 
 BOOTSTRAP_DATA: dict[str, Any] = {
+    "total_players": 10_000_000,
+    "chips": [
+        {"name": "wildcard", "start_event": 1, "stop_event": 19},
+        {"name": "freehit", "start_event": 1, "stop_event": 19},
+        {"name": "bboost", "start_event": 1, "stop_event": 19},
+        {"name": "3xc", "start_event": 1, "stop_event": 19},
+    ],
     "events": [
         {
             "id": 1,
@@ -36,6 +43,8 @@ BOOTSTRAP_DATA: dict[str, Any] = {
             "is_next": False,
             "is_previous": False,
             "is_current": False,
+            "average_entry_score": 50,
+            "highest_score": 100,
         },
         {
             "id": 2,
@@ -46,6 +55,8 @@ BOOTSTRAP_DATA: dict[str, Any] = {
             "is_next": False,
             "is_previous": True,
             "is_current": False,
+            "average_entry_score": 55,
+            "highest_score": 90,
         },
         {
             "id": 3,
@@ -55,6 +66,8 @@ BOOTSTRAP_DATA: dict[str, Any] = {
             "is_next": True,
             "is_previous": False,
             "is_current": True,
+            "average_entry_score": None,
+            "highest_score": None,
         },
     ],
     "elements": [
@@ -314,6 +327,103 @@ CHARLIE_TRANSFERS: list[dict[str, Any]] = []
 
 
 # ---------------------------------------------------------------------------
+# Team history per participant — GW1 and GW2 "current" entries, plus
+# chips already played this season. GW2 points/points_on_bench/
+# event_transfers_cost are internally consistent with the picks above.
+# ---------------------------------------------------------------------------
+
+ALICE_HISTORY: dict[str, Any] = {
+    "current": [
+        {
+            "event": 1,
+            "points": 60,
+            "total_points": 60,
+            "rank": 400000,
+            "overall_rank": 150000,
+            "bank": 10,
+            "value": 1000,
+            "event_transfers": 0,
+            "event_transfers_cost": 0,
+            "points_on_bench": 5,
+        },
+        {
+            "event": 2,
+            "points": 70,
+            "total_points": 200,
+            "rank": 500000,
+            "overall_rank": 100000,
+            "bank": 15,
+            "value": 1005,
+            "event_transfers": 1,
+            "event_transfers_cost": 0,
+            "points_on_bench": 6,
+        },
+    ],
+    "chips": [],
+}
+
+BOB_HISTORY: dict[str, Any] = {
+    "current": [
+        {
+            "event": 1,
+            "points": 50,
+            "total_points": 50,
+            "rank": 1500000,
+            "overall_rank": 700000,
+            "bank": 20,
+            "value": 1000,
+            "event_transfers": 1,
+            "event_transfers_cost": 0,
+            "points_on_bench": 3,
+        },
+        {
+            "event": 2,
+            "points": 45,
+            "total_points": 180,
+            "rank": 2000000,
+            "overall_rank": 500000,
+            "bank": 30,
+            "value": 990,
+            "event_transfers": 3,
+            "event_transfers_cost": 4,
+            "points_on_bench": 2,
+        },
+    ],
+    "chips": [{"name": "wildcard", "event": 2}],
+}
+
+CHARLIE_HISTORY: dict[str, Any] = {
+    "current": [
+        {
+            "event": 1,
+            "points": 40,
+            "total_points": 40,
+            "rank": 3500000,
+            "overall_rank": 900000,
+            "bank": 0,
+            "value": 1000,
+            "event_transfers": 0,
+            "event_transfers_cost": 0,
+            "points_on_bench": 4,
+        },
+        {
+            "event": 2,
+            "points": 55,
+            "total_points": 150,
+            "rank": 3000000,
+            "overall_rank": 800000,
+            "bank": 0,
+            "value": 1000,
+            "event_transfers": 0,
+            "event_transfers_cost": 0,
+            "points_on_bench": 5,
+        },
+    ],
+    "chips": [{"name": "3xc", "event": 2}],
+}
+
+
+# ---------------------------------------------------------------------------
 # DummyAPI for WeeklyReport integration tests
 # ---------------------------------------------------------------------------
 
@@ -332,6 +442,11 @@ class WeeklyReportDummyAPI:
             "1002": BOB_TRANSFERS,
             "1003": CHARLIE_TRANSFERS,
         }
+        self._histories: dict[str, dict[str, Any]] = {
+            "1001": ALICE_HISTORY,
+            "1002": BOB_HISTORY,
+            "1003": CHARLIE_HISTORY,
+        }
 
     def get_bootstrap_static(self) -> dict[str, Any]:
         return BOOTSTRAP_DATA
@@ -343,7 +458,7 @@ class WeeklyReportDummyAPI:
         return {}
 
     def get_team_history(self, team_id: str) -> dict[str, Any]:
-        return {}
+        return self._histories.get(team_id, {"current": [], "chips": []})
 
     def get_team_picks(self, team_id: str, event_id: str) -> dict[str, Any]:
         return self._picks.get(team_id, {"picks": [], "entry_history": {}})
@@ -546,6 +661,276 @@ class TestWeeklyReportBuild:
         bench = [p for p in alice["squad"] if p["multiplier"] == 0]
         assert len(bench) == 1
         assert bench[0]["element_id"] == 300
+
+
+class TestWeeklyReportMetaGlobalContext:
+    """Test meta.next_event / meta.is_golden (issue #40 workstream K)."""
+
+    @pytest.fixture
+    def report(self) -> dict[str, Any]:
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
+        return wr.build()
+
+    def test_next_event(self, report: dict[str, Any]) -> None:
+        next_event = report["meta"]["next_event"]
+        assert next_event == {
+            "id": 3,
+            "deadline_time": "2025-08-29T17:30:00Z",
+            "is_golden": False,
+        }
+
+    def test_is_golden_false_for_gw2(self, report: dict[str, Any]) -> None:
+        assert report["meta"]["is_golden"] is False
+
+    def test_next_event_none_when_next_gw_absent(self) -> None:
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, 3)
+        result = wr.build()
+        assert result["meta"]["next_event"] is None
+
+    def test_is_golden_true_on_4th_gameweek(self) -> None:
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, 4)
+        result = wr.build()
+        assert result["meta"]["is_golden"] is True
+
+
+class TestWeeklyReportGlobalBlock:
+    """Test the `global` section (issue #40 workstream K)."""
+
+    @pytest.fixture
+    def report(self) -> dict[str, Any]:
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
+        return wr.build()
+
+    def test_global_fields(self, report: dict[str, Any]) -> None:
+        g = report["global"]
+        assert g["average_score"] == 55
+        assert g["highest_score"] == 90
+        assert g["total_players"] == 10_000_000
+
+    def test_league_vs_world(self, report: dict[str, Any]) -> None:
+        # League net-points average is 55.3 (see TestWeeklyReportLeagueSummary),
+        # global average is 55 -> 0.3
+        assert report["global"]["league_vs_world"] == 0.3
+
+
+class TestParticipantGlobalContextFields:
+    """Test per-manager fields added by issue #40 workstream K."""
+
+    @pytest.fixture
+    def report(self) -> dict[str, Any]:
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
+        return wr.build()
+
+    def test_alice_fields(self, report: dict[str, Any]) -> None:
+        alice = report["standings"][0]
+        assert alice["event_rank"] == 500000
+        assert alice["event_percentile"] == 5.0
+        assert alice["overall_percentile"] == 1.0
+        assert alice["points_per_starter"] == 23.3  # 70 / 3 starters
+        assert alice["vs_global_average"] == 15  # 70 - 55
+        assert alice["form_last_5"] == 65.0  # mean(60, 70)
+        assert alice["bench_points_season"] == 11  # 5 + 6
+        assert alice["hit_cost_season"] == 0
+        assert set(alice["chips_remaining"]) == {"wildcard", "freehit", "bboost", "3xc"}
+        assert alice["chips_played_season"] == []
+
+    def test_bob_fields(self, report: dict[str, Any]) -> None:
+        bob = report["standings"][1]
+        assert bob["event_percentile"] == 20.0
+        assert bob["overall_percentile"] == 5.0
+        assert bob["points_per_starter"] == 15.0  # 45 / 3 starters
+        assert bob["vs_global_average"] == -10  # 45 - 55
+        assert bob["form_last_5"] == 47.5  # mean(50, 45)
+        assert bob["bench_points_season"] == 5  # 3 + 2
+        assert bob["hit_cost_season"] == 4
+        assert set(bob["chips_remaining"]) == {"freehit", "bboost", "3xc"}
+        assert bob["chips_played_season"] == [{"name": "wildcard", "event": 2}]
+
+    def test_charlie_fields(self, report: dict[str, Any]) -> None:
+        charlie = report["standings"][2]
+        assert charlie["event_percentile"] == 30.0
+        assert charlie["overall_percentile"] == 8.0
+        assert charlie["points_per_starter"] == 18.3  # 55 / 3 starters
+        assert charlie["vs_global_average"] == 0
+        assert charlie["form_last_5"] == 47.5  # mean(40, 55)
+        assert set(charlie["chips_remaining"]) == {"wildcard", "freehit", "bboost"}
+
+    def test_form_last_5_none_in_gw1(self) -> None:
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, 1)
+        result = wr.build()
+        for p in result["standings"]:
+            assert p["form_last_5"] is None
+
+
+class TestLeagueSummaryGlobalContext:
+    """Test league_summary.global_average / managers_above_global_average."""
+
+    @pytest.fixture
+    def report(self) -> dict[str, Any]:
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
+        return wr.build()
+
+    def test_global_average(self, report: dict[str, Any]) -> None:
+        assert report["league_summary"]["global_average"] == 55
+
+    def test_managers_above_global_average(self, report: dict[str, Any]) -> None:
+        # Only Alice (70) is above the global average of 55
+        assert report["league_summary"]["managers_above_global_average"] == 1
+
+
+class TestAnglesBlock:
+    """Test the `angles` section (issue #40 workstream F)."""
+
+    @pytest.fixture
+    def report(self) -> dict[str, Any]:
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
+        return wr.build()
+
+    def test_angles_has_all_keys(self, report: dict[str, Any]) -> None:
+        angles = report["angles"]
+        for key in (
+            "head_to_head",
+            "differentials",
+            "captain_that_would_have_won",
+            "streaks",
+            "records",
+            "chip_tracker",
+        ):
+            assert key in angles, f"Missing angle key: {key}"
+
+    def test_head_to_head_this_gw(self, report: dict[str, Any]) -> None:
+        h2h = {r["player_name"]: r for r in report["angles"]["head_to_head"]}
+        assert h2h["Alice"]["beat"] == 2
+        assert h2h["Alice"]["lost_to"] == 0
+        assert h2h["Bob"]["beat"] == 0
+        assert h2h["Bob"]["lost_to"] == 2
+        assert h2h["Charlie"]["beat"] == 1
+        assert h2h["Charlie"]["lost_to"] == 1
+
+    def test_head_to_head_season_record(self, report: dict[str, Any]) -> None:
+        h2h = {r["player_name"]: r for r in report["angles"]["head_to_head"]}
+        assert h2h["Alice"]["season_record"] == {"wins": 4, "losses": 0}
+        assert h2h["Bob"]["season_record"] == {"wins": 1, "losses": 3}
+        assert h2h["Charlie"]["season_record"] == {"wins": 1, "losses": 3}
+
+    def test_differentials(self, report: dict[str, Any]) -> None:
+        diffs = report["angles"]["differentials"]
+        top_names = {d["player_name"] for d in diffs["top"]}
+        assert top_names == {"Virgil van Dijk", "Bukayo Saka", "Bruno Fernandes"}
+        # Salah/Haaland/Alisson are owned by all 3 managers -> not differentials
+        assert all(d["player_name"] not in {"Mohamed Salah", "Erling Haaland"} for d in diffs["top"])
+
+    def test_captain_that_would_have_won(self, report: dict[str, Any]) -> None:
+        result = report["angles"]["captain_that_would_have_won"]
+        assert result is not None
+        assert result["player_name"] == "Mohamed Salah"
+        assert result["points"] == 12
+        assert result["captained_by"] == 2  # Alice and Charlie both captained Salah
+
+    def test_streaks_empty_with_only_two_gws(self, report: dict[str, Any]) -> None:
+        # Streaks require >= 3 gameweeks of history; only 2 are available.
+        assert report["angles"]["streaks"] == []
+
+    def test_records(self, report: dict[str, Any]) -> None:
+        records = report["angles"]["records"]
+        assert records["best"] == {"player_name": "Alice", "event_id": 2, "points": 70}
+        assert records["worst"] == {"player_name": "Charlie", "event_id": 1, "points": 40}
+
+    def test_chip_tracker(self, report: dict[str, Any]) -> None:
+        tracker = {r["player_name"]: r for r in report["angles"]["chip_tracker"]}
+        assert set(tracker["Alice"]["chips_remaining"]) == {
+            "wildcard", "freehit", "bboost", "3xc"
+        }
+        assert tracker["Bob"]["chips_played"] == [{"name": "wildcard", "event": 2}]
+        assert tracker["Charlie"]["chips_played"] == [{"name": "3xc", "event": 2}]
+
+
+class TestStorylines:
+    """Test the top-level `storylines` key (issue #40 workstream F)."""
+
+    @pytest.fixture
+    def report(self) -> dict[str, Any]:
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
+        return wr.build()
+
+    def test_storylines_present_and_capped(self, report: dict[str, Any]) -> None:
+        storylines = report["storylines"]
+        assert isinstance(storylines, list)
+        assert len(storylines) <= 6
+
+    def test_storylines_sorted_descending(self, report: dict[str, Any]) -> None:
+        scores = [s["score"] for s in report["storylines"]]
+        assert scores == sorted(scores, reverse=True)
+
+    def test_chip_played_outranks_plain_round_win(self, report: dict[str, Any]) -> None:
+        """Bob's wildcard, played for the round's lowest net score, should
+        score higher than the plain round win."""
+        storylines = report["storylines"]
+        bobs_chip = next(
+            s for s in storylines
+            if s["kind"] == "chip_played" and s["managers"] == ["Bob"]
+        )
+        round_win = next(s for s in storylines if s["kind"] == "round_win")
+        assert bobs_chip["score"] > round_win["score"]
+
+    def test_storyline_shape(self, report: dict[str, Any]) -> None:
+        for s in report["storylines"]:
+            assert set(s.keys()) == {"kind", "score", "managers", "facts", "summary"}
+            assert isinstance(s["managers"], list)
+            assert isinstance(s["summary"], str)
+            assert s["summary"]
+
+
+class TestReportGoldenShape:
+    """One full-shape test: every top-level and per-manager key introduced
+    by issue #40 (workstreams F and K) and #35 is present in a real
+    build() output."""
+
+    def test_full_report_shape(self) -> None:
+        api = WeeklyReportDummyAPI()
+        wr = WeeklyReport(api, LEAGUE_ID, EVENT_ID)
+        report = wr.build()
+
+        assert set(report.keys()) == {
+            "meta", "standings", "awards", "league_summary", "global",
+            "angles", "storylines",
+        }
+
+        assert "next_event" in report["meta"]
+        assert "is_golden" in report["meta"]
+
+        assert set(report["global"].keys()) == {
+            "average_score", "highest_score", "total_players", "league_vs_world",
+        }
+
+        assert set(report["angles"].keys()) == {
+            "head_to_head", "differentials", "captain_that_would_have_won",
+            "streaks", "records", "chip_tracker",
+        }
+
+        assert "global_average" in report["league_summary"]
+        assert "managers_above_global_average" in report["league_summary"]
+
+        new_participant_fields = [
+            "event_rank", "event_percentile", "overall_percentile",
+            "points_per_starter", "vs_global_average", "form_last_5",
+            "bench_points_season", "hit_cost_season", "chips_remaining",
+            "chips_played_season",
+        ]
+        for p in report["standings"]:
+            for field in new_participant_fields:
+                assert field in p, f"Missing field '{field}' in participant"
+
+        assert isinstance(report["storylines"], list)
 
 
 class TestWeeklyReportAwards:
@@ -906,6 +1291,13 @@ class TestSkipExisting:
                     "1002": BOB_TRANSFERS,
                     "1003": CHARLIE_TRANSFERS,
                 }.get(tid, [])
+            )
+            mock_api.get_team_history.side_effect = (
+                lambda tid: {
+                    "1001": ALICE_HISTORY,
+                    "1002": BOB_HISTORY,
+                    "1003": CHARLIE_HISTORY,
+                }.get(tid, {"current": [], "chips": []})
             )
 
             from generate_weekly_report import main

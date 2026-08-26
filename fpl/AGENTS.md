@@ -104,14 +104,17 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 
 **[`weekly_report.py`](weekly_report.py)** - Assembles gameweek data into a structured report
 - `WeeklyReport(api, league_id, event_id)` — constructor takes API client, league ID, and gameweek number
-- `build()` fetches all data, assembles participant dicts, calculates awards, returns complete report dict with `meta`, `standings`, `awards`, `league_summary`
+- `build()` fetches all data, assembles participant dicts, calculates awards, returns complete report dict with `meta`, `standings`, `awards`, `league_summary`, `global`, `angles`, `storylines`
 - `save_report(output_dir)` writes JSON to `weekly_report/reports/{league_id}/{season}/gw{N}.json`
-- Uses PlayerRegistry for name resolution, weekly_report_stats for awards
+- Uses PlayerRegistry for name resolution, weekly_report_stats for awards/angles/storylines
 - Shared helpers: `detect_current_gameweek(api)`, `get_report_path()`, `get_narrative_path()`, `get_season_from_bootstrap()`
+- **Global context (issue #40 workstream K)**: `meta.next_event`/`meta.is_golden`; a `global` block (`average_score`, `highest_score`, `total_players`, `league_vs_world`) from `bootstrap-static.events[event_id]`/`total_players`; per-manager `event_rank`, `event_percentile`, `overall_percentile`, `points_per_starter`, `vs_global_average`, `form_last_5`, `bench_points_season`, `hit_cost_season`, `chips_remaining`, `chips_played_season` — the last two from `get_team_history(entry).chips` vs `bootstrap-static.chips` windows. `league_summary.global_average`/`managers_above_global_average` follow the same block.
 
-**[`weekly_report_stats.py`](weekly_report_stats.py)** - Pure award calculation functions
+**[`weekly_report_stats.py`](weekly_report_stats.py)** - Pure award/angle/storyline calculation functions
 - All functions: `list[dict]` in, `dict`/`list`/`None` out — no side effects
-- Functions: `get_highest_gameweek_scorer`, `get_lowest_gameweek_scorer`, `get_biggest_rank_rise`, `get_biggest_rank_fall`, `get_bench_disasters`, `get_transfer_impact`, `get_captain_summary`, `get_chip_usage`, `get_hit_takers`
+- Awards: `get_highest_gameweek_scorer`, `get_lowest_gameweek_scorer`, `get_biggest_rank_rise`, `get_biggest_rank_fall`, `get_bench_disasters`, `get_transfer_impact`, `get_captain_summary`, `get_chip_usage`, `get_hit_takers`. `get_biggest_rank_rise`/`_fall` take `event_id` and return `None` in GW1 or for a candidate with no previous rank; GW2–5 require a ≥3-position swing (#35)
+- **Angles (issue #40 workstream F)**, wired into the top-level `angles` key: `get_head_to_head`, `get_differentials`, `get_captain_that_would_have_won`, `get_streaks`, `get_records`, `get_chip_tracker`, plus helpers `get_chips_remaining`/`get_chips_played_to_date`
+- `rank_storylines(report)` scores notability hooks off the assembled report dict and returns the top 6 as the `storylines` key — see the table in issue #40 workstream F for triggers/scores
 - Follows same pure-function pattern as [`statistics.py`](statistics.py)
 
 **[`narrative_generator.py`](narrative_generator.py)** - Claude API narrative generation
