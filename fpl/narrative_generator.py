@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from . import claude_api
+from .reference_loader import load_reference_docs, select_reference_docs
 from .reidar_memory import ReidarMemory
 
 # Reidar reference docs live in weekly_report/ relative to the repo root
@@ -57,6 +58,18 @@ def run_narrative_pipeline(
         if full_prev_path.is_file():
             previous_narrative = full_prev_path.read_text(encoding="utf-8")
 
+    # Select and load on-demand reference docs (weekly_report/reference/),
+    # only when this gameweek's data actually calls for one — see
+    # fpl/reference_loader.py and weekly_report/reference/README.md.
+    reference_filenames = select_reference_docs(result, event_id)
+    reference_docs = load_reference_docs(reference_filenames)
+    doc_word_count = len(reference_docs.split()) if reference_docs else 0
+    print(
+        "Reference docs: "
+        f"{', '.join(reference_filenames) if reference_filenames else 'none'} "
+        f"({doc_word_count} words)"
+    )
+
     # Generate narrative
     generator = NarrativeGenerator()
     narrative = generator.generate(
@@ -66,6 +79,7 @@ def run_narrative_pipeline(
         examples=examples,
         memory_context=memory_context,
         previous_narrative=previous_narrative,
+        reference_docs=reference_docs,
     )
 
     # Save narrative
@@ -142,6 +156,8 @@ class NarrativeGenerator:
         examples: str,
         memory_context: str,
         previous_narrative: str | None = None,
+        *,
+        reference_docs: str | None = None,
     ) -> str:
         """Generate a narrative from report data and context.
 
@@ -155,6 +171,10 @@ class NarrativeGenerator:
             examples: Example narratives for few-shot prompting.
             memory_context: Assembled memory from ReidarMemory.
             previous_narrative: Previous gameweek narrative for continuity.
+            reference_docs: On-demand reference material (from
+                fpl/reference_loader.py), included in the user message only
+                when non-empty. Kept out of the system prompt on purpose —
+                it must not grow the standing context weight.
 
         Returns:
             Generated markdown narrative string.
@@ -164,7 +184,7 @@ class NarrativeGenerator:
         )
 
         user_content = self._build_user_message(
-            report_json, previous_narrative
+            report_json, previous_narrative, reference_docs=reference_docs
         )
 
         return claude_api.complete(
@@ -232,6 +252,8 @@ class NarrativeGenerator:
         self,
         report_json: dict[str, Any],
         previous_narrative: str | None,
+        *,
+        reference_docs: str | None = None,
     ) -> str:
         """Build the user message with report data and optional previous narrative."""
         parts: list[str] = []
@@ -241,6 +263,12 @@ class NarrativeGenerator:
             "Skriv Reidars Rapport basert på dette:\n\n"
             f"```json\n{json.dumps(report_json, indent=2, ensure_ascii=False)}\n```"
         )
+
+        if reference_docs:
+            parts.append(
+                "\n\n## Oppslagsverk (bare for denne runden)\n\n"
+                f"{reference_docs}"
+            )
 
         if previous_narrative:
             parts.append(

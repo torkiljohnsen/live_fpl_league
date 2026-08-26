@@ -116,11 +116,16 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 
 **[`narrative_generator.py`](narrative_generator.py)** - Claude API narrative generation
 - `NarrativeGenerator(client=None)` — accepts optional anthropic client; creates from `ANTHROPIC_API_KEY` env var if not provided
-- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None)` — builds system prompt from reference docs + memory, sends report as user message, returns Norwegian narrative markdown
+- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None, *, reference_docs=None)` — builds system prompt from persona/guide/examples + memory, sends report (+ reference docs, if any) as user message, returns Norwegian narrative markdown
 - `save_narrative(content, output_dir, league_id, season, event_id)` writes to `docs/narratives/{season}/{league_id}/gw{N}.md`
 - `run_narrative_pipeline(result, league_id, event_id, output_dir)` — orchestrates full flow: read Reidar docs, load memory, generate narrative, save, update memory
 - `read_reidar_doc(filename)` — reads reference docs from `weekly_report/` directory
 - Uses `claude-sonnet-4-6` model
+
+**[`reference_loader.py`](reference_loader.py)** — On-demand reference docs from `weekly_report/reference/` (rules/chips/deadlines/etc.), separate from the always-on persona/guide/examples above and never added to the system prompt
+- `select_reference_docs(report, event_id, format=None)` — pure, no I/O; returns triggered filenames in priority order (see `weekly_report/reference/README.md` for the load-when table)
+- `load_reference_docs(filenames)` — reads and concatenates them under `### <title>` headings, capped at `WORD_BUDGET` (1500 words), dropping the lowest-priority tail first
+- `run_narrative_pipeline()` loads both and passes the result to `generate()` as `reference_docs`
 
 **[`teams_notification.py`](teams_notification.py)** - Microsoft Teams Adaptive Card notifications
 - `extract_teaser(narrative, max_length=300)` — extracts first real paragraph, strips markdown formatting, truncates on word boundary
