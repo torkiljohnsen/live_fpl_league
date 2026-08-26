@@ -367,3 +367,10 @@ class TestLeagueDocs:
         text = load_reference_docs(["missing.md", "a.md"], reference_dir=tmp_path)
         assert "### A" in text
         assert "missing" not in text
+
+
+def test_loaded_doc_does_not_repeat_its_own_heading(tmp_path):
+    (tmp_path / "a.md").write_text("# A title\n\nBody here", encoding="utf-8")
+    text = load_reference_docs(["a.md"], reference_dir=tmp_path)
+    assert text.count("A title") == 1
+    assert "Body here" in text

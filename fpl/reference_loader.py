@@ -126,10 +126,21 @@ def load_reference_docs(
         if sections and running_words + word_count > word_budget:
             break
 
-        sections.append(f"### {_extract_title(text)}\n\n{text}")
+        sections.append(f"### {_extract_title(text)}\n\n{_drop_title_line(text)}")
         running_words += word_count
 
     return "\n\n".join(sections)
+
+
+def _drop_title_line(text: str) -> str:
+    """The file's own '# Heading' would duplicate the '###' we add above it."""
+    lines = text.splitlines()
+    for i, line in enumerate(lines):
+        if line.strip():
+            if line.lstrip().startswith("#"):
+                return "\n".join(lines[i + 1 :]).lstrip("\n")
+            break
+    return text
 
 
 def _extract_title(text: str) -> str:
