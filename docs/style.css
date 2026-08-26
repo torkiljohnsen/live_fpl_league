@@ -589,6 +589,189 @@ body:has(.narrative-page) {
 	font-size: 0.9rem;
 }
 
+/* Tables — power rankings, report card, H2H, chip tracker (small, ≤6 rows).
+   No wrapper markup required from Reidar unless the table needs to scroll on
+   narrow screens; when it might, wrap it: <div class="table-wrap" markdown="1"> */
+.narrative-article .table-wrap {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	margin: 2rem 0;
+}
+.narrative-article .table-wrap table {
+	margin: 0;
+}
+/* Reset against the dashboard's global table/th rules (dark theme,
+   fixed-width, rounded corners) before applying the newspaper look. */
+.narrative-article table {
+	width: 100%;
+	max-width: 100%;
+	border-collapse: collapse;
+	margin: 2rem 0;
+	background: none;
+	border-radius: 0;
+	overflow: visible;
+	font-family: 'Source Serif 4', Georgia, serif;
+	font-size: 0.92rem;
+	color: var(--nr-ink);
+}
+.narrative-article th,
+.narrative-article td {
+	padding: 0.5rem 0.9rem;
+	text-align: left;
+	line-height: 1.4;
+	border-bottom: 1px solid var(--nr-rule);
+	white-space: nowrap;
+}
+.narrative-article th {
+	background: none;
+	font-family: 'Sora', sans-serif;
+	font-size: 0.68rem;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	font-weight: 700;
+	color: var(--nr-muted);
+	border-bottom: 2px solid var(--nr-ink);
+}
+/* Numeric columns right-align by default (last column) or via .num */
+.narrative-article td:last-child,
+.narrative-article th:last-child,
+.narrative-article td.num,
+.narrative-article th.num {
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+.narrative-article tbody tr:nth-child(even) {
+	background: var(--nr-highlight);
+}
+
+/* Big number — "Ukens tall": one huge figure, one caption line under it */
+.narrative-article .big-number {
+	text-align: center;
+	margin: 2.5rem 0;
+}
+.narrative-article .big-number > p:first-child {
+	font-family: 'DM Serif Display', Georgia, serif;
+	font-size: 4.5rem;
+	line-height: 1;
+	color: var(--nr-accent);
+	margin: 0 0 0.5rem;
+}
+.narrative-article .big-number > p:first-child::first-letter {
+	float: none;
+	font-size: inherit;
+	padding: 0;
+	color: inherit;
+}
+.narrative-article .big-number > p:last-child {
+	font-family: 'Sora', sans-serif;
+	font-size: 0.78rem;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	color: var(--nr-muted);
+	margin: 0;
+}
+
+/* Receipt — Reidar quoting his own earlier column. Distinct from the pull
+   quote: no giant quote marks, a small-caps dateline, a cheap clipping tilt. */
+.narrative-article .receipt {
+	max-width: 480px;
+	margin: 2.2rem auto;
+	padding: 1.2rem 1.4rem 1.4rem;
+	background: #FDFBF6;
+	border: 1px solid var(--nr-rule);
+	box-shadow: 0 1px 3px rgba(28, 25, 23, 0.14);
+	transform: rotate(-0.6deg);
+}
+.narrative-article .receipt > p:first-child {
+	font-family: 'Sora', sans-serif;
+	font-size: 0.68rem;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	font-weight: 700;
+	color: var(--nr-accent);
+	margin: 0 0 0.6rem;
+}
+.narrative-article .receipt > p:last-child {
+	font-style: italic;
+	font-size: 0.98rem;
+	line-height: 1.6;
+	margin: 0;
+}
+
+/* Timeline — match-day diary. A styled <ol>: lør 16:00 / søn 17:30 … */
+.narrative-article .timeline ol {
+	list-style: none;
+	margin: 2rem 0;
+	padding-left: 0;
+	border-left: 2px solid var(--nr-rule);
+}
+.narrative-article .timeline li {
+	position: relative;
+	padding: 0 0 1.1rem 1.4rem;
+	margin: 0;
+}
+.narrative-article .timeline li::before {
+	content: '';
+	position: absolute;
+	left: -5px;
+	top: 0.4rem;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--nr-accent);
+}
+.narrative-article .timeline li:last-child {
+	padding-bottom: 0;
+}
+.narrative-article .timeline li > strong:first-child {
+	display: inline-block;
+	font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: var(--nr-accent);
+	margin-right: 0.5rem;
+}
+
+/* For/against — two short columns for the trial shape ("Retten er satt").
+   Markup: <div class="for-against"><div class="fa-col" markdown="1">…</div>
+   <div class="fa-col" markdown="1">…</div></div> */
+.narrative-article .for-against {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.5rem;
+	margin: 2.2rem 0;
+}
+.narrative-article .fa-col {
+	background: var(--nr-highlight);
+	border: 1px solid var(--nr-rule);
+	padding: 1.1rem 1.3rem;
+}
+.narrative-article .fa-col > p:first-child {
+	font-family: 'Sora', sans-serif;
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	font-weight: 700;
+	color: var(--nr-accent);
+	margin: 0 0 0.7rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--nr-rule);
+}
+.narrative-article .fa-col > p:first-child::first-letter {
+	float: none;
+	font-size: inherit;
+	padding: 0;
+	color: inherit;
+}
+.narrative-article .fa-col ul {
+	margin: 0;
+}
+.narrative-article .fa-col li {
+	margin-bottom: 0.2rem;
+	font-size: 0.92rem;
+}
+
 /* Footer — compact colophon with nav */
 .narrative-footer {
 	max-width: 660px;
@@ -688,6 +871,25 @@ body:has(.narrative-page) {
 	.narrative-article .fact-box {
 		padding: 1rem 1.1rem;
 		font-size: 0.88rem;
+	}
+	.narrative-article th,
+	.narrative-article td {
+		padding: 0.4rem 0.6rem;
+		font-size: 0.85rem;
+	}
+	.narrative-article .big-number > p:first-child {
+		font-size: 3.1rem;
+	}
+	.narrative-article .receipt {
+		max-width: 100%;
+		padding: 1rem 1.1rem 1.2rem;
+	}
+	.narrative-article .timeline li {
+		padding-left: 1.1rem;
+	}
+	.narrative-article .for-against {
+		grid-template-columns: 1fr;
+		gap: 1rem;
 	}
 	.gw-nav-arrow {
 		font-size: 1.4rem;
