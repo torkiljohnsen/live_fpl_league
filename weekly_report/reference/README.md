@@ -11,8 +11,10 @@ Condensed reference material Reidar can be handed **on demand**. None of this is
 | `fpl_bps_2026-27.md` | ~300 | bonus points decided a round or a captaincy; otherwise never |
 | `fpl_faq_edge_cases.md` | ~450 | a DGW/BGW; TC on a non-starter; a Free Hit week; a player subbed on 59 min; four from one club; a player who left the PL; a DC/bonus revision |
 | `fpl_strategy_notes.md` | ~450 | a chip window opens or closes; a DGW/BGW or golden gameweek is next; the format is advice-shaped; a manager's chip pattern suggests a plan |
+| `league_rules.md` | ~230 | GW1; every golden gameweek (`meta.is_golden` or `meta.next_event.is_golden`) |
+| `league_history.md` | ~310 | GW1; GW38; a league record is threatened or broken |
 
-Everything is derived from the official FPL help pages (`/help/rules`, `/help/new`), retrieved 2026-08-26. The FAQ page (`/help/faqs`) is represented only by `fpl_faq_edge_cases.md` — account, league-admin, assist-definition and ICT questions were deliberately dropped.
+`league_rules.md` and `league_history.md` are hand-maintained by the league, not clipped from anywhere — `league_history.md` gets a new section appended at season end. Everything else is derived from the official FPL help pages (`/help/rules`, `/help/new`), retrieved 2026-08-26. The FAQ page (`/help/faqs`) is represented only by `fpl_faq_edge_cases.md` — account, league-admin, assist-definition and ICT questions were deliberately dropped.
 
 ## How it is loaded
 

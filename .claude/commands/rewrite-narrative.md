@@ -44,7 +44,7 @@ Read ALL of these files — they form the system prompt for narrative generation
 Read memory context files if they exist:
 6. **Manager profiles**: all `.md` files in `weekly_report/reidar_memory/{league_id}/{season}/managers/`
 7. **Season arc**: `weekly_report/reidar_memory/{league_id}/{season}/season_arc.md`
-8. **Recent GW summaries**: the last 5 `gw{N}.md` files in `weekly_report/reidar_memory/{league_id}/{season}/gw_summaries/` before the current gameweek
+8. **Recent GW summaries**: the last 5 `gw{N}.md` files in `weekly_report/reidar_memory/{league_id}/{season}/gameweeks/` before the current gameweek
 
 Also read the previous gameweek's narrative for continuity:
 9. **Previous narrative**: `weekly_report/narratives/{league_id}/{season}/gw{N-1}.md` (if it exists)
@@ -54,12 +54,12 @@ Also read the previous gameweek's narrative for continuity:
 Using all the context above, rewrite the narrative following the persona and narrative guide exactly. Key requirements:
 
 - **The first line MUST be a `# ` heading** with a punchy, clickbait-style headline (NEVER "Reidars Rapport — Runde N")
-- **The second line MUST be the image line**: `![Reidars Rapport](../../reidars_rapport_5.png)`
+- **The second line MUST be the image line**: `![Reidars Rapport](../../reidars_rapport_N.png)` — pick N from 1–5, and don't always pick the same one
 - Write in Norwegian bokmål, in Reidar's voice
-- Follow all formatting rules from NARRATIVE_GUIDE.md: subheadings, bold, short standalone lines, pull quotes (`>`), section dividers (`---`), short lists where natural
+- Pick a shape from NARRATIVE_GUIDE.md's shape menu (Spalten unless the round calls for another) and stay inside that shape's word budget and device suggestions; markup for each device is in `weekly_report/DEVICE_PALETTE.md`
 - Use the report JSON as the source of truth for all stats and facts
 - Maintain continuity with the previous narrative and memory context
-- Target 400-700 words
+- Obey NARRATIVE_GUIDE.md's hard constraints exactly, then verify with `source .venv/bin/activate && python -m fpl.style_lint <file>` before showing the result
 
 ### Step 4: Save
 

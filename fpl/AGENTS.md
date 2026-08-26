@@ -121,7 +121,7 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 - `NarrativeGenerator(client=None)` — accepts optional anthropic client; creates from `ANTHROPIC_API_KEY` env var if not provided
 - `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None, *, reference_docs=None, extra_instructions=None)` — builds system prompt from persona/guide/examples + memory, sends report (+ on-demand reference docs, if any) as user message, returns Norwegian narrative markdown. `extra_instructions` is appended to the user message (used by the style lint gate below).
 - `save_narrative(content, output_dir, league_id, season, event_id)` writes to `docs/narratives/{season}/{league_id}/gw{N}.md`
-- `run_narrative_pipeline(result, league_id, event_id, output_dir)` — orchestrates full flow: read Reidar docs, load memory, generate narrative, run it through `style_lint.lint_narrative()` against the last 5 saved narratives and regenerate once (with the hard failures appended as `extra_instructions`) if it fails, save, update memory
+- `run_narrative_pipeline(result, league_id, event_id, output_dir)` — orchestrates full flow: read Reidar docs (`DEVICE_PALETTE.md` is appended to `NARRATIVE_GUIDE.md` so the device markup rides along in the system prompt), load memory, generate narrative, run it through `style_lint.lint_narrative()` against the last 5 saved narratives and regenerate once (with the hard failures appended as `extra_instructions`) if it fails, save, update memory
 - `read_reidar_doc(filename)` — reads reference docs from `weekly_report/` directory
 - Uses `claude-sonnet-4-6` model
 

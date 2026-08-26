@@ -59,7 +59,13 @@ def run_narrative_pipeline(
 
     # Read Reidar reference docs
     persona = read_reidar_doc("REIDAR_PERSONA.md")
-    narrative_guide = read_reidar_doc("NARRATIVE_GUIDE.md")
+    # The device palette is the exact markup for every visual device the
+    # guide refers to, so it rides along with the guide in the system prompt.
+    narrative_guide = (
+        read_reidar_doc("NARRATIVE_GUIDE.md")
+        + "\n\n---\n\n"
+        + read_reidar_doc("DEVICE_PALETTE.md")
+    )
     examples = read_reidar_doc("REIDAR_EXAMPLES.md")
 
     # Load memory context

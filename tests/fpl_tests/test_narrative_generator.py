@@ -416,6 +416,33 @@ class TestRunNarrativePipelineReferenceDocs:
         assert "Reference docs: none (0 words)" in captured.out
 
 
+class TestRunNarrativePipelineDevicePalette:
+    """DEVICE_PALETTE.md rides along with the guide in the system prompt."""
+
+    def test_palette_appended_to_narrative_guide(self, tmp_path: Path):
+        mock_generator = MagicMock()
+        mock_generator.generate.return_value = _GOOD_NARRATIVE
+        mock_generator.save_narrative.side_effect = _make_save_narrative(tmp_path)
+        mock_generator._client = MagicMock()
+
+        mock_memory = MagicMock()
+        mock_memory.get_prompt_context.return_value = ""
+
+        with (
+            patch(
+                "fpl.narrative_generator.NarrativeGenerator",
+                return_value=mock_generator,
+            ),
+            patch("fpl.narrative_generator.ReidarMemory", return_value=mock_memory),
+        ):
+            run_narrative_pipeline(_pipeline_report(), "123", 6, str(tmp_path))
+
+        guide = mock_generator.generate.call_args.kwargs["narrative_guide"]
+        assert "# Narrative Guide" in guide
+        assert "# Device Palette" in guide
+        assert 'class="fact-box"' in guide
+
+
 class TestSaveNarrative:
     def test_creates_correct_path(self, tmp_path: Path):
         client = _mock_client()
