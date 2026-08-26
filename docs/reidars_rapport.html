@@ -104,7 +104,7 @@
                 // Set up gameweek navigation arrows
                 setupNavigation(gw, rounds);
 
-                document.getElementById('hero-img').src = 'assets/reidars_rapport_5.png';
+                document.getElementById('hero-img').src = 'assets/' + heroImageFilename(gw);
 
                 // Subtitle
                 document.getElementById('narrative-subtitle').textContent = 'Runde ' + gw;
@@ -123,6 +123,11 @@
                     .catch(function () {
                         showNotFound(gw);
                     });
+            }
+
+            function heroImageFilename(gwNum) {
+                // Keep in sync with fpl.teams_notification.hero_image_filename
+                return 'reidars_rapport_' + ((gwNum % 5) + 1) + '.png';
             }
 
             function gwLink(gwNum) {
@@ -201,7 +206,31 @@
                 }
             }
 
+            function stripFrontMatter(md) {
+                // Mirrors fpl.teams_notification.parse_front_matter: only a
+                // block starting at line 1 with '---' and closed by a line
+                // containing only '---' counts. No YAML parsing — this only
+                // needs to remove the block, not read its fields.
+                var normalized = md.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+                var lines = normalized.split('\n');
+                if (!lines.length || lines[0].trim() !== '---') {
+                    return normalized;
+                }
+                var closeIdx = -1;
+                for (var i = 1; i < lines.length; i++) {
+                    if (lines[i].trim() === '---') {
+                        closeIdx = i;
+                        break;
+                    }
+                }
+                if (closeIdx === -1) {
+                    return normalized;
+                }
+                return lines.slice(closeIdx + 1).join('\n').replace(/^\n+/, '');
+            }
+
             function renderArticle(md) {
+                md = stripFrontMatter(md);
                 var lines = md.split('\n');
                 var title = '';
                 var bodyLines = [];

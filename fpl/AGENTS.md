@@ -137,8 +137,11 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 - `run_narrative_pipeline()` loads both and passes the result to `generate()` as `reference_docs`
 
 **[`teams_notification.py`](teams_notification.py)** - Microsoft Teams Adaptive Card notifications
-- `extract_teaser(narrative, max_length=300)` — extracts first real paragraph, strips markdown formatting, truncates on word boundary
-- `build_adaptive_card(gameweek, teaser, narrative_url, image_url)` — builds Adaptive Card v1.4 payload dict
+- `parse_front_matter(narrative)` — parses an optional `---`-delimited front-matter block (Reidar's `teaser`/`mentions`) at line 1 of a narrative; no YAML lib, degrades to `({}, narrative)` when missing/malformed. `docs/reidars_rapport.html`'s `stripFrontMatter()` mirrors the stripping rules in JS.
+- `extract_teaser(narrative, max_length=300)` — prefers front-matter `teaser` (hard-capped 200 chars), else falls back to the first real paragraph of the body, strips markdown formatting, truncates on word boundary
+- `extract_mentions(narrative)` — comma-separated first names from front-matter `mentions`, else `[]`
+- `hero_image_filename(gameweek)` — rotates `reidars_rapport_1.png`..`_5.png` by `gameweek % 5`; used by `notify_teams.py` and mirrored in `reidars_rapport.html`'s `heroImageFilename()`
+- `build_adaptive_card(gameweek, teaser, narrative_url, image_url, *, mentions=None)` — builds Adaptive Card v1.4 payload dict; rotates the link label by `gameweek % 5`, adds a "Nevnt denne uka:" line when `mentions` is non-empty
 - `post_to_teams(webhook_url, gameweek, narrative, narrative_url, image_url)` — posts card to Power Automate Workflows webhook; returns `True`/`False`, never raises
 
 **[`reidar_memory.py`](reidar_memory.py)** - Persistent memory system for Reidar persona
