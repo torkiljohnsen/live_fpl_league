@@ -1,7 +1,9 @@
 """Tests for weekly report award calculation functions."""
 
+from collections import Counter
 
 from fpl.weekly_report_stats import (
+    _SCORE_FAMILY_KINDS,
     get_bench_disasters,
     get_biggest_rank_fall,
     get_biggest_rank_rise,
@@ -1019,3 +1021,54 @@ class TestRankStorylines:
             "angles": {},
         }
         assert rank_storylines(report) == []
+
+
+class TestChipsRemainingWindowNotYetOpen:
+    def test_wildcard_opening_at_gw2_counts_as_available_at_gw1(self):
+        chips = [
+            {"name": "wildcard", "start_event": 2, "stop_event": 19},
+            {"name": "wildcard", "start_event": 20, "stop_event": 38},
+            {"name": "bboost", "start_event": 1, "stop_event": 19},
+        ]
+        assert get_chips_remaining(chips, [], 1) == ["wildcard", "bboost"]
+
+    def test_second_half_window_not_counted_in_first_half(self):
+        chips = [
+            {"name": "3xc", "start_event": 1, "stop_event": 19},
+            {"name": "3xc", "start_event": 20, "stop_event": 38},
+        ]
+        assert get_chips_remaining(chips, [{"name": "3xc", "event": 5}], 7) == []
+
+
+class TestStorylinesPerManagerCap:
+    def test_at_most_two_score_family_storylines_per_manager(self):
+        report = {
+            "meta": {"event_id": 1},
+            "global": {"average_score": 50, "total_players": 1000},
+            "standings": [
+                {
+                    "player_first_name": "A", "event_total": 120, "net_points": 120,
+                    "event_percentile": 0.1, "overall_percentile": 0.1,
+                    "chip_played": "bboost", "bench_points": 0, "transfer_cost": 0,
+                    "captain": {}, "points_per_starter": 10.0,
+                },
+                {
+                    "player_first_name": "B", "event_total": 51, "net_points": 51,
+                    "event_percentile": 50.0, "overall_percentile": 50.0,
+                    "chip_played": None, "bench_points": 25, "transfer_cost": 0,
+                    "captain": {}, "points_per_starter": 4.6,
+                },
+            ],
+            "awards": {"highest_scorer": {"player_name": "A", "points": 120},
+                       "lowest_scorer": {"player_name": "B", "points": 51},
+                       "biggest_rise": None, "biggest_fall": None,
+                       "captain_summary": {}, "chip_usage": [], "hit_takers": [],
+                       "bench_disasters": []},
+            "angles": {"streaks": [], "records": {}},
+        }
+        result = rank_storylines(report)
+        counts = Counter(
+            n for s in result if s["kind"] in _SCORE_FAMILY_KINDS for n in s["managers"]
+        )
+        assert counts["A"] <= 2
+        assert any("B" in s["managers"] for s in result)

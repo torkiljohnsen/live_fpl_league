@@ -322,7 +322,12 @@ def get_chips_remaining(
     start_event, stop_event — two windows per name across a season).
     chips_played is a team's history.chips (each entry has name, event).
     A chip counts as played if it was used within the *same* window.
+    Windows that open later in the same half-season still count as
+    available (the first-half wildcard opens at GW2, but a manager at
+    GW1 has not lost it), so a window matches when it has not yet
+    closed and it belongs to the half that contains event_id.
     """
+    half_end = 19 if event_id <= 19 else 38
     available = []
     for chip in bootstrap_chips:
         name = chip.get("name")
@@ -330,7 +335,7 @@ def get_chips_remaining(
         stop = chip.get("stop_event")
         if name is None or start is None or stop is None:
             continue
-        if not (start <= event_id <= stop):
+        if stop < event_id or start > half_end:
             continue
         already_played = any(
             cp.get("name") == name and start <= cp.get("event", -1) <= stop
@@ -620,6 +625,15 @@ def _storyline(
     }
 
 
+_SCORE_FAMILY_KINDS = frozenset({
+    "gw_rank_extreme",
+    "gw_rank_notable",
+    "overall_top_tier",
+    "score_far_above_average",
+    "score_far_below_average",
+})
+
+
 def rank_storylines(report: dict) -> list[dict]:
     """Rank notability hooks from an assembled (or report-like) dict —
     same shape as WeeklyReport.build() produces (meta, standings,
@@ -790,4 +804,18 @@ def rank_storylines(report: dict) -> list[dict]:
             ))
 
     storylines.sort(key=lambda s: s["score"], reverse=True)
-    return storylines[:6]
+    # The score-family kinds are different views of the same round, so a
+    # manager gets at most two of them; distinct facts (chip, golden win,
+    # bench, streak) are always kept. Stops one big round crowding
+    # everyone else out of the six slots the prompt sees.
+    per_manager: Counter[str] = Counter()
+    kept: list[dict] = []
+    for story in storylines:
+        names = story.get("managers") or []
+        if story["kind"] in _SCORE_FAMILY_KINDS:
+            if any(per_manager[n] >= 2 for n in names):
+                continue
+            for n in names:
+                per_manager[n] += 1
+        kept.append(story)
+    return kept[:6]
