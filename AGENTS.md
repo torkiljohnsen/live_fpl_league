@@ -78,6 +78,7 @@ State is only saved after successful generation. If a step fails, the next hourl
   - Generated HTML files for each league/view
   - `assets/` — Images (hero images, trophy, rank badges, 404 image)
   - `narratives/{season}/{league_id}/` — Narrative markdown files (e.g. `gw25.md`), rendered client-side by `reidars_rapport.html`
+  - `narratives/index.json` — Manifest of published narratives per season (`generate_index.py`'s `build_narrative_manifest()`), so the front page and `reidars_rapport.html` know which rounds exist without probing via fetch
   - [`reidars_rapport.html`](docs/reidars_rapport.html) — Dynamic article page (client-side Markdown rendering via marked.js)
   - [`style.css`](docs/style.css) — Shared stylesheet
   - **Do not place non-publishing files here** — this folder is deployed to GitHub Pages
