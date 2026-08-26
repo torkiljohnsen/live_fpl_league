@@ -16,13 +16,10 @@ Public API:
     load_recent_shapes()/record_shape() -- shapes.json round-trip, so the
         picker knows what it did the last few weeks
 
-Not wired here: the "kvitteringene" (prediction ledger) shape needs
-weekly_report/reidar_memory/{league}/{season}/ledger.md to exist and be
-non-empty (workstream C, not yet built). choose_assignment() has no
-filesystem access by design (it is a pure function of report + recent
-shapes), so kvitteringene's random weight stays at 0 here until a future
-change threads ledger availability into the call -- see the "decisions"
-note in the issue #40 workstream A/B report.
+The "kvitteringene" (prediction ledger) shape is only eligible when the
+caller says a ledger exists (``has_ledger=True``, from
+weekly_report/reidar_memory/{league}/{season}/ledger.md being non-empty);
+choose_assignment() has no filesystem access by design.
 """
 
 from __future__ import annotations
@@ -140,7 +137,7 @@ _BASE_WEIGHTS: dict[str, int] = {
     "portrettet": 8,
     "maktrangeringen": 5,
     "retten_er_satt": 6,
-    "kvitteringene": 0,  # needs the prediction ledger -- see module docstring
+    "kvitteringene": 0,  # weighted in only when has_ledger, see _weighted_menu
     "brevet": 6,
     "regnearket": 6,
     "dagboka": 3,  # no DGW detection yet -- TODO, see issue #40 workstream A
@@ -181,6 +178,7 @@ def choose_assignment(
     recent_shapes: list[str],
     *,
     rng_seed: str | None = None,
+    has_ledger: bool = False,
 ) -> Assignment:
     """Pick this gameweek's Assignment.
 
@@ -216,7 +214,7 @@ def choose_assignment(
     excluded |= {s for s in last_three if s != _DEFAULT_SHAPE}
     excluded.discard(None)
 
-    weights, triggered = _weighted_menu(report, event_id)
+    weights, triggered = _weighted_menu(report, event_id, has_ledger)
     for shape in excluded:
         weights[shape] = 0
 
@@ -263,11 +261,18 @@ def _fixed_set_piece(event_id: int) -> tuple[str | None, str]:
 
 
 def _weighted_menu(
-    report: dict[str, Any], event_id: int
+    report: dict[str, Any], event_id: int, has_ledger: bool = False
 ) -> tuple[dict[str, int], list[str]]:
     """Base weights plus data-trigger boosts. Returns (weights, triggered names)."""
     weights = dict(_BASE_WEIGHTS)
     triggered: list[str] = []
+
+    if has_ledger:
+        # Receipts roughly every 6-8 weeks once there is something to grade.
+        weights["kvitteringene"] = 6
+        if event_id in (9, 15, 21, 27, 33):
+            weights["kvitteringene"] += 20
+            triggered.append("ledger checkpoint")
 
     standings = report.get("standings") or []
     angles = report.get("angles") or {}

@@ -59,6 +59,10 @@ These are not catchphrases to deploy on schedule. They turn up when they fit and
 
 He has no sign-off. He has 38 different last lines a season, and rule 5 in the guide is not negotiable.
 
+## The adviser in him
+
+He gives advice the way he played: chips as timing, hits as debt, and the golden gameweek every fourth week as the one place this league's money and its rank pull in different directions. One tip per column, to a named manager, and he keeps score of his own — being wrong in public is the price of being allowed to say it.
+
 ## Running material
 
 Callbacks carry a date: "i runde 9 skrev jeg at ...". Streaks get counted out loud. Records get tracked. Oddities get noticed. A joke builds over weeks, but a joke used two weeks running is dead — the `## Ikke gjenta` block says which ones need resting. When he was wrong about a prediction he says so once, briefly, and moves on. When he was right, he makes sure you noticed.

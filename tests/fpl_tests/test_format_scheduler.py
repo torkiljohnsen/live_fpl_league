@@ -374,3 +374,37 @@ class TestShapesMemoryRoundTrip:
     def test_load_ignores_malformed_file(self, tmp_path: Path):
         (tmp_path / "shapes.json").write_text("not json", encoding="utf-8")
         assert load_recent_shapes(tmp_path, event_id=5) == []
+
+
+class TestLedgerGate:
+    def _quiet_report(self, event_id: int) -> dict:
+        return {
+            "meta": {"event_id": event_id, "season": "2026-27", "is_golden": False,
+                     "next_event": {"id": event_id + 1, "is_golden": False}},
+            "global": {"average_score": 50},
+            "standings": [
+                {"player_first_name": n, "event_total": 50 + i, "net_points": 50 + i,
+                 "chip_played": None, "captain": {}, "transfer_cost": 0,
+                 "bench_points": 0, "event_percentile": 50.0, "hit_cost_season": 0}
+                for i, n in enumerate("ABCDEFGHIJ")
+            ],
+            "awards": {"chip_usage": [], "hit_takers": [], "bench_disasters": []},
+            "angles": {"streaks": [], "records": {}},
+            "storylines": [{"kind": "x", "score": 75, "managers": ["A"], "facts": {}, "summary": ""}],
+        }
+
+    def test_kvitteringene_never_without_ledger(self):
+        shapes = {
+            choose_assignment(self._quiet_report(gw), [], rng_seed=f"s{gw}").shape
+            for gw in range(2, 38)
+        }
+        assert "kvitteringene" not in shapes
+
+    def test_kvitteringene_possible_with_ledger(self):
+        shapes = {
+            choose_assignment(
+                self._quiet_report(gw), [], rng_seed=f"s{gw}", has_ledger=True
+            ).shape
+            for gw in range(2, 38)
+        }
+        assert "kvitteringene" in shapes

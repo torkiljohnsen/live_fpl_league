@@ -27,6 +27,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from .front_matter import parse_front_matter
+
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
@@ -101,7 +103,6 @@ _CODE_FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
 _IMAGE_LINE_RE = re.compile(r"^!\[.*?\]\(.*?\)\s*$")
 _HEADLINE_LINE_RE = re.compile(r"^#\s+.*$")
 _HTML_TAG_RE = re.compile(r"<[^>]+>")
-_FRONT_MATTER_RE = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
 _HEADLINE_RE = re.compile(r"^#[ \t]+(.*)$", re.MULTILINE)
 _SUBHEADING_RE = re.compile(r"^(##|###)[ \t]+(.*)$", re.MULTILINE)
 _NAME_PAREN_RE = re.compile(r"\b[A-ZÆØÅ][\wÀ-ÖØ-öø-ÿ'\-]*\s*\(\d{1,2}\)")
@@ -114,16 +115,10 @@ _NAME_COMMA_RE = re.compile(r"\b[A-ZÆØÅ][\wÀ-ÖØ-öø-ÿ'\-]*\s+\d{1,2},")
 
 
 def _strip_front_matter(text: str) -> tuple[str, dict[str, str]]:
-    """Strip a leading ``---\\n…\\n---\\n`` front-matter block, if present."""
-    m = _FRONT_MATTER_RE.match(text)
-    if not m:
-        return text, {}
-    meta: dict[str, str] = {}
-    for line in m.group(1).split("\n"):
-        if ":" in line:
-            key, _, value = line.partition(":")
-            meta[key.strip().lower()] = value.strip().strip("\"'")
-    return text[m.end():], meta
+    """Strip a leading front-matter block; keys lower-cased, quotes dropped."""
+    fields, body = parse_front_matter(text)
+    meta = {k.lower(): v.strip("\"'") for k, v in fields.items()}
+    return body, meta
 
 
 def _extract_headline(body: str) -> str:

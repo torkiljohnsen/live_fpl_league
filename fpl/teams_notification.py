@@ -5,6 +5,8 @@ from typing import Any
 
 import requests
 
+from .front_matter import parse_front_matter
+
 # Rotates by gameweek % 5 so the Teams card doesn't look identical every week.
 _LINK_LABELS = [
     "Les hele rapporten",
@@ -15,48 +17,6 @@ _LINK_LABELS = [
 ]
 
 _TEASER_FRONT_MATTER_MAX = 200
-
-
-def parse_front_matter(narrative: str) -> tuple[dict[str, str], str]:
-    """Parse an optional YAML-ish front-matter block at the top of a narrative.
-
-    Only a block that starts at line 1 with `---` and is closed by a line
-    containing only `---` counts. Lines in between are parsed as
-    `key: value` pairs, one per line; unknown keys are kept as-is. No YAML
-    library is used. When the block is missing or malformed (no closing
-    `---`), returns an empty fields dict and the narrative unchanged.
-
-    Returns:
-        A (fields, body) tuple. `body` has the front-matter block (if any)
-        removed, with line endings normalized to `\\n`.
-    """
-    normalized = narrative.replace("\r\n", "\n").replace("\r", "\n")
-    lines = normalized.split("\n")
-
-    if not lines or lines[0].strip() != "---":
-        return {}, normalized
-
-    close_idx = None
-    for i in range(1, len(lines)):
-        if lines[i].strip() == "---":
-            close_idx = i
-            break
-
-    if close_idx is None:
-        return {}, normalized
-
-    fields: dict[str, str] = {}
-    for line in lines[1:close_idx]:
-        if ":" not in line:
-            continue
-        key, _, value = line.partition(":")
-        key = key.strip()
-        if not key:
-            continue
-        fields[key] = value.strip()
-
-    body = "\n".join(lines[close_idx + 1 :]).lstrip("\n")
-    return fields, body
 
 
 def _truncate_on_word_boundary(text: str, max_length: int) -> str:

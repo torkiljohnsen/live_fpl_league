@@ -54,6 +54,7 @@ from pathlib import Path
 from typing import Any
 
 from . import claude_api
+from .front_matter import parse_front_matter
 
 _RECENT_MAX_ENTRIES = 8
 _LEDGER_MAX_LINES = 20
@@ -80,13 +81,8 @@ def _tail_lines(text: str, max_lines: int) -> str:
 
 
 def _strip_front_matter(narrative: str) -> str:
-    """Strip a leading ---...--- front-matter block, if present."""
-    stripped = narrative.lstrip("\n")
-    if stripped.startswith("---"):
-        end = stripped.find("---", 3)
-        if end != -1:
-            return stripped[end + 3 :].lstrip("\n")
-    return narrative
+    """Strip a leading front-matter block, if present."""
+    return parse_front_matter(narrative)[1]
 
 
 def _first_sentence(text: str) -> str:
@@ -555,7 +551,7 @@ class ReidarMemory:
         # Report JSON
         parts.append(
             "## Ny rundedata\n"
-            f"```json\n{json.dumps(report_json, indent=2, ensure_ascii=False)}\n```\n"
+            f"```json\n{json.dumps(report_json, indent=1, ensure_ascii=False)}\n```\n"
         )
 
         # Narrative

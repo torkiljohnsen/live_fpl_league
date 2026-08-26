@@ -51,6 +51,33 @@ def _load_previous_narratives_for_lint(
     return texts
 
 
+def compact_report_for_prompt(report: dict[str, Any]) -> dict[str, Any]:
+    """A lighter copy of the report for the prompt (the file on disk is untouched).
+
+    The squad lists are more than half the JSON's weight: seven keys per
+    player, fifteen players, ten managers. Reidar needs the name, the club,
+    the points and who was captain or benched — one string per player does
+    that at a fifth of the size. Element ids and the duplicate bench list go.
+    """
+    compact = json.loads(json.dumps(report))
+    for p in compact.get("standings", []):
+        squad = []
+        for pl in p.get("squad", []):
+            tag = ""
+            if pl.get("is_captain"):
+                tag = " (C)" if pl.get("multiplier", 1) else " (C, spilte ikke)"
+            elif pl.get("multiplier", 1) == 0:
+                tag = " (benk)"
+            squad.append(f"{pl.get('name')} ({pl.get('club')}) {pl.get('points', 0)}{tag}")
+        p["squad"] = squad
+        p.pop("bench_players", None)
+        for key in ("captain", "vice_captain"):
+            if isinstance(p.get(key), dict):
+                p[key].pop("element_id", None)
+        p.pop("entry_id", None)
+    return compact
+
+
 def run_narrative_pipeline(
     result: dict[str, Any],
     league_id: str,
@@ -100,7 +127,9 @@ def run_narrative_pipeline(
     # the pipeline schedules the week's shape rather than letting the model
     # default to the same six-section column every time.
     recent_shapes = load_recent_shapes(memory_dir, event_id)
-    assignment = choose_assignment(result, recent_shapes)
+    assignment = choose_assignment(
+        result, recent_shapes, has_ledger=bool(memory.load_ledger().strip())
+    )
     print(
         f"Assignment: {assignment.shape} "
         f"({assignment.constraint or 'none'}) — {assignment.reason}"
@@ -195,7 +224,7 @@ def run_narrative_pipeline(
     # Update Reidar's memory (best-effort — don't lose the narrative over a parse failure)
     try:
         memory.update_memory(
-            report_json=result,
+            report_json=compact_report_for_prompt(result),
             narrative=narrative,
             client=generator._client,
         )
@@ -383,7 +412,9 @@ class NarrativeGenerator:
         parts.append(
             "Her er rundedata i JSON-format. "
             "Skriv Reidars Rapport basert på dette:\n\n"
-            f"```json\n{json.dumps(report_json, indent=2, ensure_ascii=False)}\n```"
+            "```json\n"
+            f"{json.dumps(compact_report_for_prompt(report_json), indent=1, ensure_ascii=False)}"
+            "\n```"
         )
 
         if assignment:

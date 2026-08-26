@@ -879,3 +879,49 @@ class TestRunNarrativePipelineDoNotRepeat:
 
         _, kwargs = mock_generator.generate.call_args
         assert "Forrige overskrift" in kwargs["do_not_repeat"]
+
+
+class TestCompactReportForPrompt:
+    def test_squad_becomes_strings_and_ids_are_dropped(self):
+        from fpl.narrative_generator import compact_report_for_prompt
+
+        report = {
+            "standings": [
+                {
+                    "entry_id": 1,
+                    "player_first_name": "Ola",
+                    "captain": {"name": "Haaland", "element_id": 5, "points": 4},
+                    "vice_captain": {"name": "Saka", "element_id": 6, "points": 9},
+                    "bench_players": [{"name": "X"}],
+                    "squad": [
+                        {"element_id": 5, "name": "Haaland", "club": "Man City",
+                         "position": 1, "points": 2, "is_captain": True, "multiplier": 2},
+                        {"element_id": 7, "name": "Raya", "club": "Arsenal",
+                         "position": 12, "points": 6, "is_captain": False, "multiplier": 0},
+                    ],
+                }
+            ]
+        }
+        compact = compact_report_for_prompt(report)
+        p = compact["standings"][0]
+        assert p["squad"] == ["Haaland (Man City) 2 (C)", "Raya (Arsenal) 6 (benk)"]
+        assert "bench_players" not in p
+        assert "entry_id" not in p
+        assert "element_id" not in p["captain"]
+        # the original is untouched
+        assert report["standings"][0]["squad"][0]["element_id"] == 5
+
+    def test_user_message_uses_compact_view(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+        report = _sample_report()
+        report["standings"] = [{
+            "player_first_name": "Ola",
+            "squad": [{"element_id": 99, "name": "Raya", "club": "Arsenal",
+                       "points": 6, "is_captain": False, "multiplier": 1}],
+        }]
+        gen.generate(report_json=report, persona="P", narrative_guide="G",
+                     examples="E", memory_context="")
+        user_msg = client.messages.create.call_args.kwargs["messages"][0]["content"]
+        assert "Raya (Arsenal) 6" in user_msg
+        assert "99" not in user_msg

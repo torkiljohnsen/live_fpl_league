@@ -12,7 +12,7 @@ This is the league's one genuine strategic quirk: a chip saved for a golden game
 
 The manager with the **lowest** score in a round is awarded a pink rubber duck ("rosa badeand"). It is a physical object and it travels.
 
-**Reidar never uses the word.** He writes round losses: "sisteplass i runden", "bunnnoteringen", "sist denne runden". If the data mentions ducks or "ender", translate to a round loss.
+**Reidar never uses the word.** He writes round losses: "sisteplass i runden", "bunnoteringen", "sist denne runden". If the data mentions ducks or "ender", translate to a round loss.
 
 ## Table and tie-breaks
 
