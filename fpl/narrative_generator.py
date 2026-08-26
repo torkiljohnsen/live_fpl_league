@@ -121,6 +121,9 @@ def run_narrative_pipeline(
         f"({doc_word_count} words)"
     )
 
+    # Recently used headlines/openers/closers/jokes — off-limits this week
+    do_not_repeat = memory.get_do_not_repeat_block(event_id)
+
     # Generate narrative
     generator = NarrativeGenerator()
     narrative = generator.generate(
@@ -132,6 +135,7 @@ def run_narrative_pipeline(
         previous_narrative=previous_narrative,
         reference_docs=reference_docs,
         assignment=assignment_text,
+        do_not_repeat=do_not_repeat,
     )
 
     # Style lint gate: cheap, deterministic checks (issue #40, workstream E).
@@ -161,6 +165,7 @@ def run_narrative_pipeline(
             previous_narrative=previous_narrative,
             reference_docs=reference_docs,
             assignment=assignment_text,
+            do_not_repeat=do_not_repeat,
             extra_instructions=extra_instructions,
         )
         lint_result = lint_narrative(
@@ -256,6 +261,7 @@ class NarrativeGenerator:
         reference_docs: str | None = None,
         extra_instructions: str | None = None,
         assignment: str | None = None,
+        do_not_repeat: str | None = None,
     ) -> str:
         """Generate a narrative from report data and context.
 
@@ -276,6 +282,8 @@ class NarrativeGenerator:
             extra_instructions: Appended at the end of the user message —
                 used by the style lint gate to ask for a corrected
                 regeneration (see run_narrative_pipeline).
+            do_not_repeat: Norwegian "Ikke gjenta" block from
+                ReidarMemory.get_do_not_repeat_block(); omitted when empty.
             assignment: This gameweek's scheduled format, rendered by
                 fpl.format_scheduler.render_assignment() (issue #40,
                 workstreams A + B) — the shape/constraint/calendar block,
@@ -294,6 +302,7 @@ class NarrativeGenerator:
             reference_docs=reference_docs,
             extra_instructions=extra_instructions,
             assignment=assignment,
+            do_not_repeat=do_not_repeat,
         )
 
         return claude_api.complete(
@@ -365,6 +374,7 @@ class NarrativeGenerator:
         reference_docs: str | None = None,
         extra_instructions: str | None = None,
         assignment: str | None = None,
+        do_not_repeat: str | None = None,
     ) -> str:
         """Build the user message with report data and optional previous
         narrative, plus any extra instructions appended at the end."""
@@ -390,6 +400,9 @@ class NarrativeGenerator:
                 "\n\nHer er forrige ukes narrativ for kontinuitet:\n\n"
                 f"{previous_narrative}"
             )
+
+        if do_not_repeat:
+            parts.append(f"\n\n{do_not_repeat}")
 
         if extra_instructions:
             parts.append(f"\n\n{extra_instructions}")

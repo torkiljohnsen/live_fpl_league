@@ -125,7 +125,7 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 
 **[`narrative_generator.py`](narrative_generator.py)** - Claude API narrative generation
 - `NarrativeGenerator(client=None)` — accepts optional anthropic client; creates from `ANTHROPIC_API_KEY` env var if not provided
-- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None, *, reference_docs=None, extra_instructions=None, assignment=None)` — builds system prompt from persona/guide/examples + memory, sends report (+ `assignment` block, + on-demand reference docs, if any) as user message, returns Norwegian narrative markdown. `extra_instructions` is appended to the user message (used by the style lint gate below).
+- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None, *, reference_docs=None, extra_instructions=None, assignment=None, do_not_repeat=None)` — builds system prompt from persona/guide/examples + memory, sends report (+ `assignment` block, + on-demand reference docs, + `do_not_repeat` block from `ReidarMemory.get_do_not_repeat_block()`, if any) as user message, returns Norwegian narrative markdown. `extra_instructions` is appended to the user message (used by the style lint gate below).
 - `save_narrative(content, output_dir, league_id, season, event_id)` writes to `docs/narratives/{season}/{league_id}/gw{N}.md`
 - `run_narrative_pipeline(result, league_id, event_id, output_dir)` — orchestrates full flow: read Reidar docs (`DEVICE_PALETTE.md` is appended to `NARRATIVE_GUIDE.md` so the device markup rides along in the system prompt), load memory, pick this week's `format_scheduler.Assignment` and render it into the user message, generate narrative, run it through `style_lint.lint_narrative(shape=assignment.shape)` against the last 5 saved narratives and regenerate once (with the hard failures appended as `extra_instructions`) if it fails, save, `format_scheduler.record_shape()`, update memory
 - `read_reidar_doc(filename)` — reads reference docs from `weekly_report/` directory
@@ -147,8 +147,11 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 - `load_manager_profiles()` returns `dict[str, str]` keyed by manager name
 - `load_season_arc()` returns season arc markdown (empty string if missing)
 - `load_recent_gameweeks(current_event, window=5)` returns last N GW summaries
-- `get_prompt_context(current_event)` assembles all memory into formatted prompt string (~4k words)
-- `update_memory(report_json, narrative, client)` makes a Claude API call to update all memory files after each narrative
+- `get_prompt_context(current_event)` assembles all memory into formatted prompt string (~2–4k words), including the prediction ledger and open threads (capped ~350 words combined)
+- `update_memory(report_json, narrative, client)` makes a Claude API call to update all memory files after each narrative, including `ledger.md` (prediction ledger) and `threads.md` (running bits) via `===LEDGER===`/`===THREADS===`/`===JOKES===` markers
+- `load_ledger()` / `load_threads()` read those two LLM-maintained files (empty string if missing)
+- `record_recent(event_id, narrative, jokes=None)` / `load_recent()` — code-only, maintains `recent.json`: last 8 entries of headline/opener/closer/jokes extracted from the narrative text
+- `get_do_not_repeat_block(current_event, window=5)` builds the Norwegian "Ikke gjenta" block from `recent.json` for the user message (≤200 words); empty when nothing is recorded
 
 **[`style_lint.py`](style_lint.py)** - Deterministic (stdlib-only) style lint for narratives (issue #40)
 - `lint_narrative(text, previous=None, limits=None, *, shape=None) -> LintResult` — word count vs. shape budget, em dash rate, headline staccato shape, sign-off similarity to previous narratives, heading/device counts, repeated n-grams, banned phrases/tics, scorecard-style player-points lists. `shape` overrides the front-matter `shape:` value — used by `run_narrative_pipeline` to pass the scheduled shape from `format_scheduler`.

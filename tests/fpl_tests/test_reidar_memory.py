@@ -356,3 +356,319 @@ class TestUpdateMemory:
         user_msg = call_kwargs.kwargs["messages"][0]["content"]
         assert "My narrative text" in user_msg
         assert "Ola" in user_msg  # from standings
+
+    def test_writes_ledger_and_threads(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+
+        response = (
+            "===MANAGER: Ola===\nP\n===END===\n"
+            "===GW_SUMMARY===\nS\n===END===\n"
+            "===SEASON_ARC===\nA\n===END===\n"
+            "===LEDGER===\n"
+            "- GW5 | Ola vinner ligaen | avgjøres: GW38 | status: åpen\n"
+            "===END===\n"
+            "===THREADS===\n"
+            "- Kari-feiden | Kari og Ola krangler om chips | sist brukt: GW5\n"
+            "===END===\n"
+            "===JOKES===\n"
+            "- Ola som en gammel traktor\n"
+            "- \"Templaten slår tilbake\"\n"
+            "===END===\n"
+        )
+        client = self._mock_client(response)
+
+        mem.update_memory(_sample_report(), "Narrative", client)
+
+        base = _base_path(tmp_path)
+        ledger = (base / "ledger.md").read_text(encoding="utf-8")
+        assert "Ola vinner ligaen" in ledger
+        threads = (base / "threads.md").read_text(encoding="utf-8")
+        assert "Kari-feiden" in threads
+
+    def test_missing_ledger_section_does_not_break_others(self, tmp_path: Path):
+        """A malformed/missing LEDGER section must not stop THREADS/other writes."""
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+
+        response = (
+            "===MANAGER: Ola===\nP\n===END===\n"
+            "===GW_SUMMARY===\nS\n===END===\n"
+            "===SEASON_ARC===\nA\n===END===\n"
+            "===THREADS===\n- En tråd | tekst | sist brukt: GW5\n===END===\n"
+        )
+        client = self._mock_client(response)
+
+        mem.update_memory(_sample_report(), "Narrative", client)
+
+        base = _base_path(tmp_path)
+        assert not (base / "ledger.md").is_file()
+        assert (base / "threads.md").is_file()
+        assert (base / "managers" / "Ola.md").is_file()
+
+    def test_jokes_returned_and_fed_to_record_recent(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+
+        response = (
+            "===MANAGER: Ola===\nP\n===END===\n"
+            "===GW_SUMMARY===\nS\n===END===\n"
+            "===SEASON_ARC===\nA\n===END===\n"
+            "===JOKES===\n- vits en\n- vits to\n===END===\n"
+        )
+        client = self._mock_client(response)
+
+        mem.update_memory(_sample_report(), "# Tittel\n\nÅpning her.", client)
+
+        recent = mem.load_recent()
+        assert len(recent) == 1
+        assert recent[0]["jokes"] == ["vits en", "vits to"]
+
+    def test_update_memory_calls_record_recent(self, tmp_path: Path):
+        """update_memory must append a recent.json entry (code-side, no LLM)."""
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+
+        response = (
+            "===MANAGER: Ola===\nP\n===END===\n"
+            "===GW_SUMMARY===\nS\n===END===\n"
+            "===SEASON_ARC===\nA\n===END===\n"
+        )
+        client = self._mock_client(response)
+
+        mem.update_memory(
+            _sample_report(), "# En overskrift\n\nÅpningssetning her. Mer tekst.", client
+        )
+
+        recent = mem.load_recent()
+        assert len(recent) == 1
+        assert recent[0]["event_id"] == 5
+        assert recent[0]["headline"] == "En overskrift"
+        assert recent[0]["opener"] == "Åpningssetning her."
+
+
+# ---------------------------------------------------------------------------
+# load_ledger / load_threads
+# ---------------------------------------------------------------------------
+
+
+class TestLoadLedgerAndThreads:
+    def test_missing_ledger_returns_empty(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        assert mem.load_ledger() == ""
+
+    def test_reads_existing_ledger(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        base = _base_path(tmp_path)
+        (base / "ledger.md").write_text("- GW1 | spådom | avgjøres: GW2 | status: åpen", encoding="utf-8")
+        assert "spådom" in mem.load_ledger()
+
+    def test_missing_threads_returns_empty(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        assert mem.load_threads() == ""
+
+    def test_reads_existing_threads(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        base = _base_path(tmp_path)
+        (base / "threads.md").write_text("- Tråd | tekst | sist brukt: GW1", encoding="utf-8")
+        assert "Tråd" in mem.load_threads()
+
+
+# ---------------------------------------------------------------------------
+# record_recent / load_recent
+# ---------------------------------------------------------------------------
+
+
+class TestRecordAndLoadRecent:
+    def test_missing_file_returns_empty_list(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        assert mem.load_recent() == []
+
+    def test_malformed_json_returns_empty_list(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        base = _base_path(tmp_path)
+        (base / "recent.json").write_text("not json{{", encoding="utf-8")
+        assert mem.load_recent() == []
+
+    def test_record_recent_round_trip(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+
+        narrative = (
+            "# Store greier i denne runden\n\n"
+            "![Reidars Rapport](../img.png)\n\n"
+            "Dette er åpningssetningen. Og en til.\n\n"
+            "Midtparagraf med detaljer.\n\n"
+            "Dette er den siste setningen i kolonnen."
+        )
+        mem.record_recent(7, narrative, jokes=["vits a", "vits b"])
+
+        recent = mem.load_recent()
+        assert len(recent) == 1
+        entry = recent[0]
+        assert entry["event_id"] == 7
+        assert entry["headline"] == "Store greier i denne runden"
+        assert entry["opener"] == "Dette er åpningssetningen."
+        assert entry["closer"] == "Dette er den siste setningen i kolonnen."
+        assert entry["jokes"] == ["vits a", "vits b"]
+
+    def test_strips_front_matter_and_image_line(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+
+        narrative = (
+            "---\n"
+            "teaser: Noe skjer\n"
+            "mentions: Ola\n"
+            "---\n"
+            "# Overskrift\n\n"
+            "![bilde](x.png)\n\n"
+            "Den ekte åpningen kommer her. Resten følger.\n\n"
+            "Sluttlinje."
+        )
+        mem.record_recent(1, narrative)
+
+        entry = mem.load_recent()[0]
+        assert entry["headline"] == "Overskrift"
+        assert entry["opener"] == "Den ekte åpningen kommer her."
+        assert entry["closer"] == "Sluttlinje."
+
+    def test_closer_capped_at_40_words(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        long_closer = " ".join(f"ord{i}" for i in range(60))
+        narrative = f"# Tittel\n\nÅpning.\n\n{long_closer}"
+        mem.record_recent(1, narrative)
+
+        entry = mem.load_recent()[0]
+        assert len(entry["closer"].rstrip("…").split()) == 40
+
+    def test_keeps_only_last_8_entries(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+
+        for gw in range(1, 11):
+            mem.record_recent(gw, f"# GW{gw}\n\nÅpning {gw}.\n\nSlutt {gw}.")
+
+        recent = mem.load_recent()
+        assert len(recent) == 8
+        assert [e["event_id"] for e in recent] == list(range(3, 11))
+
+    def test_no_jokes_defaults_to_empty_list(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        mem.record_recent(1, "# T\n\nÅpning.\n\nSlutt.")
+        assert mem.load_recent()[0]["jokes"] == []
+
+
+# ---------------------------------------------------------------------------
+# get_prompt_context — ledger/threads sections
+# ---------------------------------------------------------------------------
+
+
+class TestGetPromptContextLedgerThreads:
+    def test_includes_ledger_and_threads_when_present(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        base = _base_path(tmp_path)
+        (base / "ledger.md").write_text(
+            "- GW1 | Ola vinner alt | avgjøres: GW38 | status: åpen", encoding="utf-8"
+        )
+        (base / "threads.md").write_text(
+            "- Kari-feiden | krangler om chips | sist brukt: GW1", encoding="utf-8"
+        )
+
+        context = mem.get_prompt_context(2)
+
+        assert "Spådomsprotokoll" in context
+        assert "Ola vinner alt" in context
+        assert "Åpne tråder" in context
+        assert "Kari-feiden" in context
+
+    def test_absent_when_no_ledger_or_threads(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        context = mem.get_prompt_context(2)
+        assert context == ""
+
+    def test_ledger_truncated_to_20_lines(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        base = _base_path(tmp_path)
+        lines = "\n".join(f"- GW{i} | pred {i} | avgjøres: GW38 | status: åpen" for i in range(1, 31))
+        (base / "ledger.md").write_text(lines, encoding="utf-8")
+
+        context = mem.get_prompt_context(31)
+
+        assert "pred 1 |" not in context
+        assert "pred 30" in context
+
+    def test_threads_truncated_to_10_lines(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        base = _base_path(tmp_path)
+        lines = "\n".join(f"- Thread{i} | tekst | sist brukt: GW1" for i in range(1, 16))
+        (base / "threads.md").write_text(lines, encoding="utf-8")
+
+        context = mem.get_prompt_context(2)
+
+        assert "Thread1 |" not in context
+        assert "Thread15" in context
+
+
+# ---------------------------------------------------------------------------
+# get_do_not_repeat_block
+# ---------------------------------------------------------------------------
+
+
+class TestGetDoNotRepeatBlock:
+    def test_empty_when_no_recent(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        assert mem.get_do_not_repeat_block(5) == ""
+
+    def test_builds_block_from_recent(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        mem.record_recent(
+            3,
+            "# En overskrift\n\nEn åpningssetning. Mer tekst.\n\nEn sluttsetning.",
+            jokes=["en vits"],
+        )
+
+        block = mem.get_do_not_repeat_block(5)
+
+        assert "Ikke gjenta" in block
+        assert "En overskrift" in block
+        assert "En åpningssetning." in block
+        assert "En sluttsetning." in block
+        assert "en vits" in block
+        assert "Disse er brukt opp" in block
+
+    def test_excludes_entries_outside_window(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        mem.record_recent(1, "# Gammel sak\n\nGammel åpning.\n\nGammel slutt.")
+
+        # current_event=10, window=5 -> gw1 is outside [5, 9]
+        block = mem.get_do_not_repeat_block(10, window=5)
+        assert block == ""
+
+    def test_excludes_current_event(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        mem.record_recent(5, "# Denne uken\n\nÅpning.\n\nSlutt.")
+
+        block = mem.get_do_not_repeat_block(5)
+        assert block == ""
+
+    def test_word_cap_respected(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        long_jokes = [f"vits nummer {i} med noen flere ord her for lengde" for i in range(30)]
+        mem.record_recent(4, "# Tittel\n\nÅpning.\n\nSlutt.", jokes=long_jokes)
+
+        block = mem.get_do_not_repeat_block(5)
+        assert len(block.split()) <= 200
