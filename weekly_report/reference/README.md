@@ -14,6 +14,10 @@ Condensed reference material Reidar can be handed **on demand**. None of this is
 
 Everything is derived from the official FPL help pages (`/help/rules`, `/help/new`), retrieved 2026-08-26. The FAQ page (`/help/faqs`) is represented only by `fpl_faq_edge_cases.md` — account, league-admin, assist-definition and ICT questions were deliberately dropped.
 
+## How it is loaded
+
+`fpl/reference_loader.py` implements the table above. `select_reference_docs(report, event_id, format=...)` is a pure function — no I/O — that reads the report JSON and returns the filenames this gameweek's triggers fired, in priority order (chips, strategy notes, what's new, rules, FAQ, deadlines, BPS). `load_reference_docs(filenames)` then reads them and concatenates them under a `### <title>` heading each, stopping once the ~1500-word budget would be exceeded (dropping the lowest-priority tail, never the first doc). `run_narrative_pipeline()` in `fpl/narrative_generator.py` calls both and appends the result to the user message as `## Oppslagsverk (bare for denne runden)` — only when something triggered, never in the system prompt, so the standing context stays small on a quiet week.
+
 ## Maintenance
 
 - Refresh at season rollover: re-clip the two pages, regenerate the seven files, bump the season in the filenames, and rewrite the "what's new" file from scratch. Add to `docs/SEASON_ROLLOVER.md`.

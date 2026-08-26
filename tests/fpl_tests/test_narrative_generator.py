@@ -8,7 +8,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from fpl.narrative_generator import NarrativeGenerator
+from fpl.narrative_generator import NarrativeGenerator, run_narrative_pipeline
 
 
 def _mock_client(response_text: str = "Generated narrative") -> MagicMock:
@@ -168,6 +168,79 @@ class TestGenerate:
         user_msg = call_kwargs.kwargs["messages"][0]["content"]
         assert "forrige ukes" not in user_msg
 
+    def test_reference_docs_included_in_user_message(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            reference_docs="### Some doc\n\nContent here",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert "## Oppslagsverk (bare for denne runden)" in user_msg
+        assert "### Some doc" in user_msg
+        assert "Content here" in user_msg
+
+    def test_no_reference_docs_omits_section(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            reference_docs=None,
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert "Oppslagsverk" not in user_msg
+
+    def test_empty_reference_docs_omits_section(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            reference_docs="",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert "Oppslagsverk" not in user_msg
+
+    def test_reference_docs_appear_before_previous_narrative(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            previous_narrative="Previous week text here",
+            reference_docs="### Some doc\n\nContent here",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert user_msg.index("Oppslagsverk") < user_msg.index(
+            "Previous week text here"
+        )
+
     def test_uses_correct_model(self):
         client = _mock_client()
         gen = NarrativeGenerator(client=client)
@@ -201,6 +274,111 @@ class TestGenerate:
 # ---------------------------------------------------------------------------
 # save_narrative()
 # ---------------------------------------------------------------------------
+
+
+class TestRunNarrativePipelineReferenceDocs:
+    def test_reference_docs_loaded_and_passed_to_generate(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ):
+        # GW1 -> select_reference_docs triggers real reference files.
+        report = {
+            "meta": {
+                "event_id": 1,
+                "league_id": "123456",
+                "season": "2025-26",
+                "previous_narrative": None,
+            },
+            "standings": [],
+            "awards": {},
+            "league_summary": {},
+        }
+
+        mock_generator = MagicMock()
+        mock_generator.generate.return_value = "Narrative text"
+        mock_generator.save_narrative.return_value = tmp_path / "gw1.md"
+        mock_generator._client = MagicMock()
+
+        mock_memory = MagicMock()
+        mock_memory.get_prompt_context.return_value = ""
+
+        with (
+            patch(
+                "fpl.narrative_generator.NarrativeGenerator",
+                return_value=mock_generator,
+            ),
+            patch(
+                "fpl.narrative_generator.ReidarMemory", return_value=mock_memory
+            ),
+        ):
+            run_narrative_pipeline(report, "123456", 1, str(tmp_path))
+
+        call_kwargs = mock_generator.generate.call_args.kwargs
+        assert call_kwargs["reference_docs"]
+        assert "FPL rules 2026/27" in call_kwargs["reference_docs"]
+
+        captured = capsys.readouterr()
+        assert "Reference docs:" in captured.out
+        assert "fpl_rules_2026-27.md" in captured.out
+
+    def test_quiet_gameweek_passes_empty_reference_docs(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ):
+        report = {
+            "meta": {
+                "event_id": 7,
+                "league_id": "123456",
+                "season": "2025-26",
+                "previous_narrative": None,
+                "next_event": {
+                    "id": 8,
+                    "deadline_time": "2026-10-30T17:30:00Z",  # a Friday
+                    "is_golden": False,
+                },
+            },
+            "standings": [
+                {
+                    "player_first_name": "Ola",
+                    "league_rank": 1,
+                    "total_points": 50,
+                    "chip_played": None,
+                    "captain": {"name": "Haaland", "did_not_play": False},
+                },
+                {
+                    "player_first_name": "Kari",
+                    "league_rank": 2,
+                    "total_points": 45,
+                    "chip_played": None,
+                    "captain": {"name": "Salah", "did_not_play": False},
+                },
+            ],
+            "awards": {},
+            "league_summary": {},
+        }
+
+        mock_generator = MagicMock()
+        mock_generator.generate.return_value = "Narrative text"
+        mock_generator.save_narrative.return_value = tmp_path / "gw7.md"
+        mock_generator._client = MagicMock()
+
+        mock_memory = MagicMock()
+        mock_memory.get_prompt_context.return_value = ""
+
+        with (
+            patch(
+                "fpl.narrative_generator.NarrativeGenerator",
+                return_value=mock_generator,
+            ),
+            patch(
+                "fpl.narrative_generator.ReidarMemory", return_value=mock_memory
+            ),
+        ):
+            run_narrative_pipeline(report, "123456", 7, str(tmp_path))
+
+        call_kwargs = mock_generator.generate.call_args.kwargs
+        assert call_kwargs["reference_docs"] == ""
+
+        captured = capsys.readouterr()
+        assert "Reference docs: none (0 words)" in captured.out
 
 
 class TestSaveNarrative:
