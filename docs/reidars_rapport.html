@@ -68,33 +68,62 @@
             var gwParam = params.get('gw');
             var gw = gwParam ? parseInt(gwParam, 10) : null;
 
-            if (!gw || isNaN(gw) || gw < MIN_GW || gw > MAX_GW) {
-                showLanding();
-                return;
-            }
-
-            // Set up gameweek navigation arrows
-            setupNavigation(gw);
-
-            document.getElementById('hero-img').src = 'assets/reidars_rapport_5.png';
-
-            // Subtitle
-            document.getElementById('narrative-subtitle').textContent = 'Runde ' + gw;
-            document.title = 'Reidars Rapport — Runde ' + gw;
-
-            // Fetch narrative markdown
-            var mdPath = 'narratives/' + SEASON + '/' + LEAGUE_ID + '/gw' + gw + '.md';
-            fetch(mdPath)
+            // Fetch the manifest of published reports once, then continue —
+            // it tells us which rounds actually exist for this season, so
+            // navigation and the landing page never point at unplayed rounds.
+            // If it fails to load, fall back to today's behaviour (blind
+            // MIN_GW..MAX_GW range, "type a URL" landing message).
+            fetch('narratives/index.json')
                 .then(function (response) {
-                    if (!response.ok) throw new Error('Not found');
-                    return response.text();
+                    if (!response.ok) throw new Error('manifest not found');
+                    return response.json();
                 })
-                .then(function (md) {
-                    renderArticle(md);
+                .then(function (manifest) {
+                    init(roundsForSeason(manifest, SEASON));
                 })
                 .catch(function () {
-                    showNotFound(gw);
+                    init(null);
                 });
+
+            function roundsForSeason(manifest, season) {
+                if (!manifest || !manifest.seasons) return null;
+                for (var i = 0; i < manifest.seasons.length; i++) {
+                    if (manifest.seasons[i].season === season) {
+                        return manifest.seasons[i].gameweeks || [];
+                    }
+                }
+                return null;
+            }
+
+            function init(rounds) {
+                if (!gw || isNaN(gw) || gw < MIN_GW || gw > MAX_GW) {
+                    showLanding(rounds);
+                    return;
+                }
+
+                // Set up gameweek navigation arrows
+                setupNavigation(gw, rounds);
+
+                document.getElementById('hero-img').src = 'assets/reidars_rapport_5.png';
+
+                // Subtitle
+                document.getElementById('narrative-subtitle').textContent = 'Runde ' + gw;
+                document.title = 'Reidars Rapport — Runde ' + gw;
+
+                // Fetch narrative markdown
+                var mdPath = 'narratives/' + SEASON + '/' + LEAGUE_ID + '/gw' + gw + '.md';
+                fetch(mdPath)
+                    .then(function (response) {
+                        if (!response.ok) throw new Error('Not found');
+                        return response.text();
+                    })
+                    .then(function (md) {
+                        renderArticle(md);
+                    })
+                    .catch(function () {
+                        showNotFound(gw);
+                    });
+            }
 
             function gwLink(gwNum) {
                 var suffix = SEASON === CURRENT_SEASON ? '' : '&season=' + SEASON;
@@ -114,12 +143,45 @@
                     'ranking_progression_' + LEAGUE_ID + '.html';
             }
 
-            function setupNavigation(gwNum) {
+            function setupNavigation(gwNum, rounds) {
                 var headerPrev = document.getElementById('header-prev');
                 var headerNext = document.getElementById('header-next');
                 var footerPrev = document.getElementById('footer-prev');
                 var footerNext = document.getElementById('footer-next');
 
+                if (rounds && rounds.length) {
+                    // Step to the previous/next round that actually has a
+                    // published report, so the arrows never dead-end in the
+                    // "not played yet" page.
+                    var prev = null;
+                    var next = null;
+                    for (var i = 0; i < rounds.length; i++) {
+                        var r = rounds[i];
+                        if (r < gwNum && (prev === null || r > prev)) prev = r;
+                        if (r > gwNum && (next === null || r < next)) next = r;
+                    }
+
+                    if (prev === null) {
+                        headerPrev.hidden = true;
+                        footerPrev.hidden = true;
+                    } else {
+                        headerPrev.href = gwLink(prev);
+                        footerPrev.href = gwLink(prev);
+                        footerPrev.textContent = '\u00AB Runde ' + prev;
+                    }
+
+                    if (next === null) {
+                        headerNext.hidden = true;
+                        footerNext.hidden = true;
+                    } else {
+                        headerNext.href = gwLink(next);
+                        footerNext.href = gwLink(next);
+                        footerNext.textContent = 'Runde ' + next + ' \u00BB';
+                    }
+                    return;
+                }
+
+                // Manifest unavailable \u2014 fall back to the blind MIN_GW..MAX_GW range.
                 if (gwNum <= MIN_GW) {
                     headerPrev.hidden = true;
                     footerPrev.hidden = true;
@@ -165,15 +227,27 @@
                 document.getElementById('narrative-article').innerHTML = marked.parse(bodyMd);
             }
 
-            function showLanding() {
+            function showLanding(rounds) {
                 document.getElementById('hero-img').src = 'assets/reidars_rapport_1.png';
                 document.getElementById('narrative-title').textContent = 'Reidars Rapport';
                 document.getElementById('narrative-subtitle').textContent = 'Velg en runde';
                 document.getElementById('header-gw-nav').querySelector('#header-prev').hidden = true;
                 document.getElementById('header-gw-nav').querySelector('#header-next').hidden = true;
                 document.getElementById('footer-gw-nav').hidden = true;
-                document.getElementById('narrative-article').innerHTML =
-                    '<p>Bruk lenker med <code>?gw=N</code> for å lese en rapport, for eksempel <a href="' + gwLink(1) + '">Runde 1</a>.</p>';
+
+                var article = document.getElementById('narrative-article');
+
+                if (rounds && rounds.length) {
+                    var sorted = rounds.slice().sort(function (a, b) { return b - a; });
+                    var items = '';
+                    for (var i = 0; i < sorted.length; i++) {
+                        items += '<li><a href="' + gwLink(sorted[i]) + '">Runde ' + sorted[i] + '</a></li>';
+                    }
+                    article.innerHTML = '<ul>' + items + '</ul>';
+                } else {
+                    article.innerHTML =
+                        '<p>Bruk lenker med <code>?gw=N</code> for å lese en rapport, for eksempel <a href="' + gwLink(1) + '">Runde 1</a>.</p>';
+                }
             }
 
             function showNotFound(gwNum) {

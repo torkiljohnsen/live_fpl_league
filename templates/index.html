@@ -9,6 +9,8 @@
         h2 { margin-top: 1.8em; border-bottom: 1px solid #ccc; padding-bottom: 0.2em; }
         ul { line-height: 2; }
         .archive h2 { color: #666; }
+        summary { cursor: pointer; }
+        details ul { margin: 0.3em 0 0; }
     </style>
 </head>
 <body>
@@ -20,7 +22,23 @@
                 {% for file, title in season.league_files %}
                     <li><a href="{{ file }}">{{ title }}</a></li>
                 {% endfor %}
-                {% if season.report_url %}
+                {% if season.report_rounds_visible or season.report_rounds_hidden %}
+                    {% for gw, url in season.report_rounds_visible %}
+                        <li><a href="{{ url }}">Runde {{ gw }}</a></li>
+                    {% endfor %}
+                    {% if season.report_rounds_hidden %}
+                        <li>
+                            <details>
+                                <summary>Alle runder</summary>
+                                <ul>
+                                    {% for gw, url in season.report_rounds_hidden %}
+                                        <li><a href="{{ url }}">Runde {{ gw }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </details>
+                        </li>
+                    {% endif %}
+                {% elif season.report_url %}
                     <li><a href="{{ season.report_url }}">Reidars Rapport</a></li>
                 {% endif %}
             </ul>

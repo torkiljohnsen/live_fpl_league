@@ -39,7 +39,7 @@ League templates receive:
 
 **narrative.html** - Reidar's Rapport article page. Receives: `title` (str), `subtitle` (str, e.g. "Runde 27"), `body_html` (str, rendered HTML), `hero_image` (str, image path), `base_path` (str, relative path to docs root, e.g. `../../../`), `league_id` (str), `league_name` (str), `season` (str). Structure: hero image, title/subtitle, navigation bar (Tabell, Rundehistorikk, Poengutvikling — all prefixed with `base_path`), article body, footer. Output to `docs/narratives/{season}/{league_id}/`.
 
-**index.html** - Standalone (doesn't extend base). Uses `seasons`: a list of `{season, report_url, league_files}` dicts, newest season first, where `league_files` is a list of `(filename, title)` tuples. Built by `generate_index.py` from `leagues.json`.
+**index.html** - Standalone (doesn't extend base). Uses `seasons`: a list of `{season, report_url, league_files, report_rounds_visible, report_rounds_hidden}` dicts, newest season first, where `league_files` is a list of `(filename, title)` tuples and `report_rounds_visible`/`report_rounds_hidden` are lists of `(gw, url)` tuples (newest first) — the current season shows up to 8 inline with the rest behind a `<details>`, archive seasons collapse everything. Built by `generate_index.py` from `leagues.json` and `docs/narratives/index.json` (the narrative manifest, see `generate_index.build_narrative_manifest`).
 
 ## Key Rules
 
