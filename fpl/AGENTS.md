@@ -117,11 +117,17 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 - `rank_storylines(report)` scores notability hooks off the assembled report dict and returns the top 6 as the `storylines` key — see the table in issue #40 workstream F for triggers/scores
 - Follows same pure-function pattern as [`statistics.py`](statistics.py)
 
+**[`format_scheduler.py`](format_scheduler.py)** - Format rotation + season calendar (issue #40, workstreams A + B): "shape is scheduled, not chosen by the model"
+- `SHAPES: dict[str, Shape]` — the 14 Norwegian-titled shapes (spalten, kortversjonen, portrettet, maktrangeringen, retten_er_satt, kvitteringene, brevet, regnearket, dagboka, nekrologen, karakterboka, raadgiveren, sesongforhaandsomtalen, sesongoppsummeringen), each with a `word_max` and a device hint from `weekly_report/DEVICE_PALETTE.md`
+- `choose_assignment(report, recent_shapes, *, rng_seed=None) -> Assignment` — pure, deterministic (seed = `f"{season}-{event_id}"` unless overridden). GW1/GW38/GW10/19/29 are fixed set-pieces; otherwise a weighted RNG pick from data triggers (flat round, wasted chip, hit ≥ 8, captain DNP, a record set, a streak ≥ 4, the GW9–11/19–21/29–31 power-rankings window), excluding last week's shape and any non-default shape used in the last 3 weeks. `kvitteringene`'s weight is pinned at 0 here — it needs `ledger.md` (workstream C, not yet built) and this function has no filesystem access by design
+- `render_assignment(assignment) -> str` — the ≤90-word Norwegian block (`## Ukens oppdrag` / form / constraint / calendar / set-piece) placed in the user message
+- `load_recent_shapes(memory_dir, event_id, window=5)` / `record_shape(memory_dir, event_id, assignment)` — round-trip `{memory_dir}/shapes.json`
+
 **[`narrative_generator.py`](narrative_generator.py)** - Claude API narrative generation
 - `NarrativeGenerator(client=None)` — accepts optional anthropic client; creates from `ANTHROPIC_API_KEY` env var if not provided
-- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None, *, reference_docs=None, extra_instructions=None)` — builds system prompt from persona/guide/examples + memory, sends report (+ on-demand reference docs, if any) as user message, returns Norwegian narrative markdown. `extra_instructions` is appended to the user message (used by the style lint gate below).
+- `generate(report_json, persona, narrative_guide, examples, memory_context, previous_narrative=None, *, reference_docs=None, extra_instructions=None, assignment=None)` — builds system prompt from persona/guide/examples + memory, sends report (+ `assignment` block, + on-demand reference docs, if any) as user message, returns Norwegian narrative markdown. `extra_instructions` is appended to the user message (used by the style lint gate below).
 - `save_narrative(content, output_dir, league_id, season, event_id)` writes to `docs/narratives/{season}/{league_id}/gw{N}.md`
-- `run_narrative_pipeline(result, league_id, event_id, output_dir)` — orchestrates full flow: read Reidar docs (`DEVICE_PALETTE.md` is appended to `NARRATIVE_GUIDE.md` so the device markup rides along in the system prompt), load memory, generate narrative, run it through `style_lint.lint_narrative()` against the last 5 saved narratives and regenerate once (with the hard failures appended as `extra_instructions`) if it fails, save, update memory
+- `run_narrative_pipeline(result, league_id, event_id, output_dir)` — orchestrates full flow: read Reidar docs (`DEVICE_PALETTE.md` is appended to `NARRATIVE_GUIDE.md` so the device markup rides along in the system prompt), load memory, pick this week's `format_scheduler.Assignment` and render it into the user message, generate narrative, run it through `style_lint.lint_narrative(shape=assignment.shape)` against the last 5 saved narratives and regenerate once (with the hard failures appended as `extra_instructions`) if it fails, save, `format_scheduler.record_shape()`, update memory
 - `read_reidar_doc(filename)` — reads reference docs from `weekly_report/` directory
 - Uses `claude-sonnet-4-6` model
 
@@ -145,7 +151,7 @@ summary_dict = league.get_summary_as_dicts()  # Converts to plain dicts
 - `update_memory(report_json, narrative, client)` makes a Claude API call to update all memory files after each narrative
 
 **[`style_lint.py`](style_lint.py)** - Deterministic (stdlib-only) style lint for narratives (issue #40)
-- `lint_narrative(text, previous=None, limits=None) -> LintResult` — word count vs. shape budget, em dash rate, headline staccato shape, sign-off similarity to previous narratives, heading/device counts, repeated n-grams, banned phrases/tics, scorecard-style player-points lists
+- `lint_narrative(text, previous=None, limits=None, *, shape=None) -> LintResult` — word count vs. shape budget, em dash rate, headline staccato shape, sign-off similarity to previous narratives, heading/device counts, repeated n-grams, banned phrases/tics, scorecard-style player-points lists. `shape` overrides the front-matter `shape:` value — used by `run_narrative_pipeline` to pass the scheduled shape from `format_scheduler`.
 - CLI: `python -m fpl.style_lint <file-or-dir> [--previous N] [--json]` — run over a whole season to produce the "tells" summary that feeds the prompt rewrite
 
 ### Sample Data

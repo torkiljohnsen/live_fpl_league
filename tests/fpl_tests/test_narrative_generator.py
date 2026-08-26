@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
 from unittest.mock import MagicMock, patch
@@ -274,6 +275,59 @@ class TestGenerate:
         assert user_msg.index("Oppslagsverk") < user_msg.index(
             "Previous week text here"
         )
+
+    def test_assignment_included_in_user_message(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            assignment="## Ukens oppdrag\nUkens form: Spalten — testbeskrivelse.",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert "## Ukens oppdrag" in user_msg
+        assert "Spalten" in user_msg
+
+    def test_no_assignment_omits_section(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            assignment=None,
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert "Ukens oppdrag" not in user_msg
+
+    def test_assignment_appears_before_reference_docs(self):
+        client = _mock_client()
+        gen = NarrativeGenerator(client=client)
+
+        gen.generate(
+            report_json=_sample_report(),
+            persona="P",
+            narrative_guide="G",
+            examples="E",
+            memory_context="",
+            assignment="## Ukens oppdrag\nUkens form: Spalten.",
+            reference_docs="### Some doc\n\nContent here",
+        )
+
+        call_kwargs = client.messages.create.call_args
+        user_msg = call_kwargs.kwargs["messages"][0]["content"]
+        assert user_msg.index("Ukens oppdrag") < user_msg.index("Oppslagsverk")
 
     def test_uses_correct_model(self):
         client = _mock_client()
@@ -620,3 +674,81 @@ class TestRunNarrativePipelineStyleLintGate:
         mock_memory.update_memory.assert_called_once()
         call_kwargs = mock_memory.update_memory.call_args.kwargs
         assert call_kwargs["narrative"] == _GOOD_NARRATIVE
+
+
+# ---------------------------------------------------------------------------
+# run_narrative_pipeline() — format scheduler wiring (issue #40, workstream A/B)
+# ---------------------------------------------------------------------------
+
+
+class TestRunNarrativePipelineFormatScheduler:
+    def test_assignment_text_passed_to_generate(self, tmp_path: Path):
+        mock_generator = MagicMock()
+        mock_generator.generate.return_value = _GOOD_NARRATIVE
+        mock_generator.save_narrative.side_effect = _make_save_narrative(tmp_path)
+        mock_generator._client = MagicMock()
+
+        mock_memory = MagicMock()
+        mock_memory.get_prompt_context.return_value = ""
+
+        with (
+            patch("fpl.narrative_generator.read_reidar_doc", return_value="doc"),
+            patch(
+                "fpl.narrative_generator.NarrativeGenerator",
+                return_value=mock_generator,
+            ),
+            patch("fpl.narrative_generator.ReidarMemory", return_value=mock_memory),
+        ):
+            run_narrative_pipeline(_pipeline_report(), "123", 6, str(tmp_path))
+
+        call_kwargs = mock_generator.generate.call_args.kwargs
+        assert "## Ukens oppdrag" in call_kwargs["assignment"]
+        assert "Kalender:" in call_kwargs["assignment"]
+
+    def test_shapes_json_written_after_successful_run(self, tmp_path: Path):
+        mock_generator = MagicMock()
+        mock_generator.generate.return_value = _GOOD_NARRATIVE
+        mock_generator.save_narrative.side_effect = _make_save_narrative(tmp_path)
+        mock_generator._client = MagicMock()
+
+        mock_memory = MagicMock()
+        mock_memory.get_prompt_context.return_value = ""
+
+        with (
+            patch("fpl.narrative_generator.read_reidar_doc", return_value="doc"),
+            patch(
+                "fpl.narrative_generator.NarrativeGenerator",
+                return_value=mock_generator,
+            ),
+            patch("fpl.narrative_generator.ReidarMemory", return_value=mock_memory),
+        ):
+            run_narrative_pipeline(_pipeline_report(), "123", 6, str(tmp_path))
+
+        shapes_path = (
+            tmp_path / "weekly_report" / "reidar_memory" / "123" / "2025-26" / "shapes.json"
+        )
+        assert shapes_path.is_file()
+        data = json.loads(shapes_path.read_text(encoding="utf-8"))
+        assert data == [{"event_id": 6, "shape": data[0]["shape"], "constraint": data[0]["constraint"]}]
+
+    def test_set_piece_gw1_forces_season_preview_shape(self, tmp_path: Path):
+        mock_generator = MagicMock()
+        mock_generator.generate.return_value = _GOOD_NARRATIVE
+        mock_generator.save_narrative.side_effect = _make_save_narrative(tmp_path)
+        mock_generator._client = MagicMock()
+
+        mock_memory = MagicMock()
+        mock_memory.get_prompt_context.return_value = ""
+
+        with (
+            patch("fpl.narrative_generator.read_reidar_doc", return_value="doc"),
+            patch(
+                "fpl.narrative_generator.NarrativeGenerator",
+                return_value=mock_generator,
+            ),
+            patch("fpl.narrative_generator.ReidarMemory", return_value=mock_memory),
+        ):
+            run_narrative_pipeline(_pipeline_report(event_id=1), "123", 1, str(tmp_path))
+
+        call_kwargs = mock_generator.generate.call_args.kwargs
+        assert "Sesongforhåndsomtalen" in call_kwargs["assignment"]

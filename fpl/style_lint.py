@@ -362,6 +362,8 @@ def lint_narrative(
     text: str,
     previous: list[str] | None = None,
     limits: Limits | None = None,
+    *,
+    shape: str | None = None,
 ) -> LintResult:
     """Lint a single narrative markdown string.
 
@@ -371,6 +373,9 @@ def lint_narrative(
             recent first, used for sign-off similarity and repeated
             n-grams. May be empty/None for the first narrative of a season.
         limits: Override the default hard-limit thresholds.
+        shape: The pipeline-scheduled shape (issue #40, workstream A/B),
+            overriding whatever the front-matter `shape:` says. Falls back
+            to the front matter when omitted.
 
     Returns:
         A LintResult with metrics, hard_failures (for the regeneration
@@ -439,7 +444,7 @@ def lint_narrative(
     for hit in _detect_number_restated(re.findall(_WORD_RE, cleaned)):
         banned_phrases.append(f"Tall gjentatt som ord ({hit})")
 
-    shape = front_matter.get("shape")
+    shape = shape if shape is not None else front_matter.get("shape")
     word_limit = limits.word_limit_for_shape(shape)
 
     metrics: dict[str, Any] = {

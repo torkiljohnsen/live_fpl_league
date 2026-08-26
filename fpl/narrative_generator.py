@@ -13,6 +13,12 @@ from pathlib import Path
 from typing import Any
 
 from . import claude_api
+from .format_scheduler import (
+    choose_assignment,
+    load_recent_shapes,
+    record_shape,
+    render_assignment,
+)
 from .reference_loader import load_reference_docs, select_reference_docs
 from .reidar_memory import ReidarMemory
 from .style_lint import lint_narrative
@@ -75,6 +81,13 @@ def run_narrative_pipeline(
     memory.scaffold_directories()
     memory_context = memory.get_prompt_context(event_id)
 
+    # Memory dir computed directly (not via a ReidarMemory property) so this
+    # doesn't collide with the reidar_memory.py changes another agent is
+    # making — see issue #40 workstream A/B.
+    memory_dir = (
+        Path(output_dir) / "weekly_report" / "reidar_memory" / league_id / season
+    )
+
     # Check for previous narrative
     previous_narrative: str | None = None
     prev_narrative_path = result["meta"].get("previous_narrative")
@@ -83,10 +96,23 @@ def run_narrative_pipeline(
         if full_prev_path.is_file():
             previous_narrative = full_prev_path.read_text(encoding="utf-8")
 
+    # Format rotation + season calendar (issue #40, workstreams A + B):
+    # the pipeline schedules the week's shape rather than letting the model
+    # default to the same six-section column every time.
+    recent_shapes = load_recent_shapes(memory_dir, event_id)
+    assignment = choose_assignment(result, recent_shapes)
+    print(
+        f"Assignment: {assignment.shape} "
+        f"({assignment.constraint or 'none'}) — {assignment.reason}"
+    )
+    assignment_text = render_assignment(assignment)
+
     # Select and load on-demand reference docs (weekly_report/reference/),
     # only when this gameweek's data actually calls for one — see
     # fpl/reference_loader.py and weekly_report/reference/README.md.
-    reference_filenames = select_reference_docs(result, event_id)
+    reference_filenames = select_reference_docs(
+        result, event_id, format=assignment.shape
+    )
     reference_docs = load_reference_docs(reference_filenames)
     doc_word_count = len(reference_docs.split()) if reference_docs else 0
     print(
@@ -105,15 +131,19 @@ def run_narrative_pipeline(
         memory_context=memory_context,
         previous_narrative=previous_narrative,
         reference_docs=reference_docs,
+        assignment=assignment_text,
     )
 
     # Style lint gate: cheap, deterministic checks (issue #40, workstream E).
     # A hard failure triggers exactly one regeneration with the findings
-    # appended to the prompt; whatever comes back is accepted.
+    # appended to the prompt; whatever comes back is accepted. The scheduled
+    # shape overrides the front-matter one for the word budget (workstream A/B).
     lint_previous = _load_previous_narratives_for_lint(
         output_dir, league_id, season, event_id
     )
-    lint_result = lint_narrative(narrative, previous=lint_previous)
+    lint_result = lint_narrative(
+        narrative, previous=lint_previous, shape=assignment.shape
+    )
     if lint_result.hard_failures:
         print(
             f"Style lint: {len(lint_result.hard_failures)} hard failures → regenerating once"
@@ -130,9 +160,12 @@ def run_narrative_pipeline(
             memory_context=memory_context,
             previous_narrative=previous_narrative,
             reference_docs=reference_docs,
+            assignment=assignment_text,
             extra_instructions=extra_instructions,
         )
-        lint_result = lint_narrative(narrative, previous=lint_previous)
+        lint_result = lint_narrative(
+            narrative, previous=lint_previous, shape=assignment.shape
+        )
         remaining = len(lint_result.hard_failures)
         print(
             "Style lint: OK after regeneration"
@@ -150,6 +183,9 @@ def run_narrative_pipeline(
         season=season,
         event_id=event_id,
     )
+
+    # Record this gameweek's shape so future weeks know not to repeat it.
+    record_shape(memory_dir, event_id, assignment)
 
     # Update Reidar's memory (best-effort — don't lose the narrative over a parse failure)
     try:
@@ -219,6 +255,7 @@ class NarrativeGenerator:
         *,
         reference_docs: str | None = None,
         extra_instructions: str | None = None,
+        assignment: str | None = None,
     ) -> str:
         """Generate a narrative from report data and context.
 
@@ -239,6 +276,10 @@ class NarrativeGenerator:
             extra_instructions: Appended at the end of the user message —
                 used by the style lint gate to ask for a corrected
                 regeneration (see run_narrative_pipeline).
+            assignment: This gameweek's scheduled format, rendered by
+                fpl.format_scheduler.render_assignment() (issue #40,
+                workstreams A + B) — the shape/constraint/calendar block,
+                placed right after the report JSON.
 
         Returns:
             Generated markdown narrative string.
@@ -252,6 +293,7 @@ class NarrativeGenerator:
             previous_narrative,
             reference_docs=reference_docs,
             extra_instructions=extra_instructions,
+            assignment=assignment,
         )
 
         return claude_api.complete(
@@ -322,6 +364,7 @@ class NarrativeGenerator:
         *,
         reference_docs: str | None = None,
         extra_instructions: str | None = None,
+        assignment: str | None = None,
     ) -> str:
         """Build the user message with report data and optional previous
         narrative, plus any extra instructions appended at the end."""
@@ -332,6 +375,9 @@ class NarrativeGenerator:
             "Skriv Reidars Rapport basert på dette:\n\n"
             f"```json\n{json.dumps(report_json, indent=2, ensure_ascii=False)}\n```"
         )
+
+        if assignment:
+            parts.append(f"\n\n{assignment}")
 
         if reference_docs:
             parts.append(

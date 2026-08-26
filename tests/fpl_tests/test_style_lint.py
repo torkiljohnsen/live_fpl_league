@@ -96,6 +96,20 @@ class TestWordCountLimit:
         result = lint_narrative(_narrative(body=" ".join(["ord"] * 20)), limits=Limits(max_word_count=10))
         assert any("For langt" in f for f in result.hard_failures)
 
+    def test_shape_kwarg_overrides_front_matter(self):
+        # Front matter says spalten (650), but the pipeline scheduled
+        # kortversjonen (250) for this gameweek (issue #40, workstream A/B).
+        text = "---\nshape: spalten\n---\n" + _narrative(body=" ".join(["ord"] * 300))
+        result = lint_narrative(text, shape="kortversjonen")
+        assert result.metrics["shape"] == "kortversjonen"
+        assert result.metrics["word_limit"] == 250
+        assert any("For langt" in f for f in result.hard_failures)
+
+    def test_shape_kwarg_falls_back_to_front_matter_when_omitted(self):
+        text = "---\nshape: kortversjonen\n---\n" + _narrative(body=" ".join(["ord"] * 100))
+        result = lint_narrative(text)
+        assert result.metrics["shape"] == "kortversjonen"
+
 
 class TestEmDash:
     def test_no_em_dash_is_clean(self):
