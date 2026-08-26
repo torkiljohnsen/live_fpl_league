@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 from fpl import FPL_API
-from fpl.teams_notification import post_to_teams
+from fpl.teams_notification import hero_image_filename, post_to_teams
 from fpl.weekly_report import (
     detect_current_gameweek,
     get_narrative_path,
@@ -89,7 +89,7 @@ def main() -> None:
     )
     image_url = (
         "https://torkiljohnsen.github.io/live_fpl_league/"
-        "assets/reidars_rapport_5.png"
+        f"assets/{hero_image_filename(event_id)}"
     )
 
     success = post_to_teams(

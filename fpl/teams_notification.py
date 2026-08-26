@@ -5,18 +5,109 @@ from typing import Any
 
 import requests
 
+# Rotates by gameweek % 5 so the Teams card doesn't look identical every week.
+_LINK_LABELS = [
+    "Les hele rapporten",
+    "Reidar har ordet",
+    "Hele spalten her",
+    "Les Reidars dom",
+    "Til rapporten →",
+]
+
+_TEASER_FRONT_MATTER_MAX = 200
+
+
+def parse_front_matter(narrative: str) -> tuple[dict[str, str], str]:
+    """Parse an optional YAML-ish front-matter block at the top of a narrative.
+
+    Only a block that starts at line 1 with `---` and is closed by a line
+    containing only `---` counts. Lines in between are parsed as
+    `key: value` pairs, one per line; unknown keys are kept as-is. No YAML
+    library is used. When the block is missing or malformed (no closing
+    `---`), returns an empty fields dict and the narrative unchanged.
+
+    Returns:
+        A (fields, body) tuple. `body` has the front-matter block (if any)
+        removed, with line endings normalized to `\\n`.
+    """
+    normalized = narrative.replace("\r\n", "\n").replace("\r", "\n")
+    lines = normalized.split("\n")
+
+    if not lines or lines[0].strip() != "---":
+        return {}, normalized
+
+    close_idx = None
+    for i in range(1, len(lines)):
+        if lines[i].strip() == "---":
+            close_idx = i
+            break
+
+    if close_idx is None:
+        return {}, normalized
+
+    fields: dict[str, str] = {}
+    for line in lines[1:close_idx]:
+        if ":" not in line:
+            continue
+        key, _, value = line.partition(":")
+        key = key.strip()
+        if not key:
+            continue
+        fields[key] = value.strip()
+
+    body = "\n".join(lines[close_idx + 1 :]).lstrip("\n")
+    return fields, body
+
+
+def _truncate_on_word_boundary(text: str, max_length: int) -> str:
+    """Truncate text to max_length on a word boundary, appending '...'."""
+    if len(text) <= max_length:
+        return text
+    truncated = text[:max_length]
+    last_space = truncated.rfind(" ")
+    if last_space > 0:
+        truncated = truncated[:last_space]
+    return truncated + "..."
+
+
+def hero_image_filename(gameweek: int) -> str:
+    """Return the rotated hero image filename for a gameweek.
+
+    Rotates through assets/reidars_rapport_1.png .. _5.png keyed by
+    `gameweek % 5`, so the card and the report page don't always show
+    the same image.
+    """
+    return f"reidars_rapport_{(gameweek % 5) + 1}.png"
+
 
 def extract_title(narrative: str) -> str:
-    """Extract the headline from the first # heading in the narrative."""
-    for line in narrative.split("\n"):
+    """Extract the headline from the first # heading in the narrative body.
+
+    Skips any front-matter block before looking for the heading.
+    """
+    _, body = parse_front_matter(narrative)
+    for line in body.split("\n"):
         if line.startswith("# "):
             return line[2:].strip()
     return "Reidars Rapport"
 
 
 def extract_teaser(narrative: str, max_length: int = 300) -> str:
-    """Extract a teaser paragraph from a narrative markdown string."""
-    paragraphs = narrative.split("\n\n")
+    """Extract a teaser for a narrative markdown string.
+
+    Prefers the `teaser` field from a front-matter block, if present
+    (stripped, hard-capped at 200 chars on a word boundary). Otherwise
+    falls back to the first real paragraph of the body.
+    """
+    fields, body = parse_front_matter(narrative)
+
+    front_matter_teaser = fields.get("teaser", "").strip()
+    if front_matter_teaser:
+        return _truncate_on_word_boundary(
+            front_matter_teaser, _TEASER_FRONT_MATTER_MAX
+        )
+
+    paragraphs = body.split("\n\n")
 
     for paragraph in paragraphs:
         stripped = paragraph.strip()
@@ -27,16 +118,18 @@ def extract_teaser(narrative: str, max_length: int = 300) -> str:
         if stripped.startswith("!["):
             continue
         teaser = stripped.replace("**", "")
-        if len(teaser) <= max_length:
-            return teaser
-        # Truncate on word boundary
-        truncated = teaser[:max_length]
-        last_space = truncated.rfind(" ")
-        if last_space > 0:
-            truncated = truncated[:last_space]
-        return truncated + "..."
+        return _truncate_on_word_boundary(teaser, max_length)
 
     return ""
+
+
+def extract_mentions(narrative: str) -> list[str]:
+    """Extract the comma-separated `mentions` field from front-matter, if any."""
+    fields, _ = parse_front_matter(narrative)
+    mentions_field = fields.get("mentions", "")
+    if not mentions_field:
+        return []
+    return [name.strip() for name in mentions_field.split(",") if name.strip()]
 
 
 def build_adaptive_card(
@@ -45,10 +138,48 @@ def build_adaptive_card(
     narrative_url: str,
     image_url: str,
     title: str = "",
+    *,
+    mentions: list[str] | None = None,
 ) -> dict[str, Any]:
     """Build an Adaptive Card payload for Power Automate webhook."""
     card_title = title if title else f"Reidars Rapport — Runde {gameweek}"
-    link_label = f"Les Reidars rapport uke {gameweek}"
+    link_label = _LINK_LABELS[gameweek % 5]
+
+    left_items: list[dict[str, Any]] = [
+        {
+            "type": "TextBlock",
+            "text": card_title,
+            "weight": "bolder",
+            "size": "large",
+            "wrap": True,
+        },
+        {
+            "type": "TextBlock",
+            "text": teaser,
+            "wrap": True,
+            "size": "medium",
+            "spacing": "small",
+        },
+        {
+            "type": "TextBlock",
+            "text": f"[{link_label}]({narrative_url})",
+            "wrap": True,
+            "spacing": "medium",
+        },
+    ]
+
+    if mentions:
+        left_items.append(
+            {
+                "type": "TextBlock",
+                "text": f"Nevnt denne uka: {', '.join(mentions)}",
+                "wrap": True,
+                "isSubtle": True,
+                "size": "small",
+                "spacing": "small",
+            }
+        )
+
     return {
         "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
         "type": "AdaptiveCard",
@@ -60,28 +191,7 @@ def build_adaptive_card(
                     {
                         "type": "Column",
                         "width": "stretch",
-                        "items": [
-                            {
-                                "type": "TextBlock",
-                                "text": card_title,
-                                "weight": "bolder",
-                                "size": "large",
-                                "wrap": True,
-                            },
-                            {
-                                "type": "TextBlock",
-                                "text": teaser,
-                                "wrap": True,
-                                "size": "medium",
-                                "spacing": "small",
-                            },
-                            {
-                                "type": "TextBlock",
-                                "text": f"[{link_label}]({narrative_url})",
-                                "wrap": True,
-                                "spacing": "medium",
-                            },
-                        ],
+                        "items": left_items,
                     },
                     {
                         "type": "Column",
@@ -114,8 +224,14 @@ def post_to_teams(
     try:
         title = extract_title(narrative)
         teaser = extract_teaser(narrative)
+        mentions = extract_mentions(narrative)
         card = build_adaptive_card(
-            gameweek, teaser, narrative_url, image_url, title=title,
+            gameweek,
+            teaser,
+            narrative_url,
+            image_url,
+            title=title,
+            mentions=mentions,
         )
         payload = {
             "type": "message",
