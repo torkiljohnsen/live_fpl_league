@@ -107,6 +107,13 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python generate_narrative.py -l 848662 --skip-existing --cache-dir .fpl_cache
 
+      # The manifest (docs/narratives/index.json) feeds the front page and the
+      # article page's prev/next arrows, so rebuild it once the new narrative
+      # is on disk — the earlier index step ran before it existed.
+      - name: Regenerate index with the new narrative
+        if: steps.narrative.outputs.generated == 'true'
+        run: python generate_index.py
+
       - name: Copy hero images to docs/assets
         if: >-
           github.event_name == 'workflow_dispatch'
