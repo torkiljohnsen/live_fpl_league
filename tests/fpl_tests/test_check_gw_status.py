@@ -7,7 +7,11 @@ from check_gw_status import (
     check_status,
     count_finished_events,
     count_finished_fixtures,
+    latest_finished_event,
     load_state,
+    mark_notified,
+    pending_notification,
+    save_counts,
     save_state,
 )
 
@@ -222,3 +226,131 @@ class TestHasFinishedGameweek:
         assert has_new is False
         assert gw_fin is False
         assert new_state["finished_events"] == 1
+
+
+class TestLatestFinishedEvent:
+    """latest_finished_event() reports which gameweek is locked, not how many."""
+
+    def test_returns_highest_locked_event(self):
+        api = StubAPI(finished_event_count=3, total_event_count=38)
+        assert latest_finished_event(api) == 3
+
+    def test_returns_none_before_any_gameweek_locks(self):
+        api = StubAPI(finished_event_count=0, total_event_count=38)
+        assert latest_finished_event(api) is None
+
+
+def _write_narrative(root: Path, season: str, league_id: str, gw: int) -> None:
+    path = root / "docs" / "narratives" / season / league_id / f"gw{gw}.md"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("# Reidar\n", encoding="utf-8")
+
+
+class TestPendingNotification:
+    """The Teams card is gated on a narrative existing but not yet announced."""
+
+    SEASON = "2025-26"
+    LEAGUE = "848662"
+
+    def test_pending_when_narrative_exists_and_is_unannounced(self, tmp_path):
+        api = StubAPI(finished_event_count=2, total_event_count=38)
+        _write_narrative(tmp_path, self.SEASON, self.LEAGUE, 2)
+
+        event_id, season = pending_notification(
+            api, tmp_path / "state.json", self.LEAGUE, str(tmp_path)
+        )
+
+        assert event_id == 2
+        assert season == self.SEASON
+
+    def test_not_pending_once_marked_notified(self, tmp_path):
+        api = StubAPI(finished_event_count=2, total_event_count=38)
+        _write_narrative(tmp_path, self.SEASON, self.LEAGUE, 2)
+        state_path = tmp_path / "state.json"
+        save_state(state_path, {"notified_events": [1, 2]})
+
+        assert pending_notification(
+            api, state_path, self.LEAGUE, str(tmp_path)
+        ) == (None, "")
+
+    def test_not_pending_while_the_narrative_is_still_being_written(self, tmp_path):
+        """The gameweek is locked but generate_narrative.py has not run yet."""
+        api = StubAPI(finished_event_count=2, total_event_count=38)
+
+        assert pending_notification(
+            api, tmp_path / "state.json", self.LEAGUE, str(tmp_path)
+        ) == (None, "")
+
+    def test_not_pending_before_any_gameweek_locks(self, tmp_path):
+        api = StubAPI(finished_event_count=0, total_event_count=38)
+
+        assert pending_notification(
+            api, tmp_path / "state.json", self.LEAGUE, str(tmp_path)
+        ) == (None, "")
+
+    def test_a_new_gameweek_is_pending_even_though_earlier_ones_were_sent(self, tmp_path):
+        api = StubAPI(finished_event_count=3, total_event_count=38)
+        _write_narrative(tmp_path, self.SEASON, self.LEAGUE, 3)
+        state_path = tmp_path / "state.json"
+        save_state(state_path, {"notified_events": [1, 2]})
+
+        event_id, _ = pending_notification(
+            api, state_path, self.LEAGUE, str(tmp_path)
+        )
+
+        assert event_id == 3
+
+
+class TestMarkNotified:
+    """Marking is what stops the next hourly run from sending a duplicate."""
+
+    def test_records_the_gameweek(self, tmp_path):
+        state_path = tmp_path / "state.json"
+        save_state(state_path, {"finished_fixtures": 20, "finished_events": 2})
+
+        mark_notified(state_path, 2)
+
+        assert load_state(state_path)["notified_events"] == [2]
+
+    def test_keeps_the_counts_it_shares_the_file_with(self, tmp_path):
+        state_path = tmp_path / "state.json"
+        save_state(state_path, {"finished_fixtures": 20, "finished_events": 2})
+
+        mark_notified(state_path, 2)
+
+        state = load_state(state_path)
+        assert state["finished_fixtures"] == 20
+        assert state["finished_events"] == 2
+
+    def test_is_idempotent(self, tmp_path):
+        state_path = tmp_path / "state.json"
+        mark_notified(state_path, 2)
+        mark_notified(state_path, 2)
+
+        assert load_state(state_path)["notified_events"] == [2]
+
+    def test_accumulates_across_gameweeks_in_order(self, tmp_path):
+        state_path = tmp_path / "state.json"
+        for gw in (2, 1, 3):
+            mark_notified(state_path, gw)
+
+        assert load_state(state_path)["notified_events"] == [1, 2, 3]
+
+
+class TestSaveCounts:
+    """--save runs before the card is sent, so it must not clear the marker."""
+
+    def test_preserves_notified_events(self, tmp_path):
+        state_path = tmp_path / "state.json"
+        save_state(state_path, {"notified_events": [1, 2]})
+        api = StubAPI(
+            finished_fixture_count=30, total_fixture_count=380,
+            finished_event_count=3, total_event_count=38,
+        )
+
+        save_counts(api, state_path)
+
+        state = load_state(state_path)
+        assert state["notified_events"] == [1, 2]
+        assert state["finished_fixtures"] == 30
+        assert state["finished_events"] == 3

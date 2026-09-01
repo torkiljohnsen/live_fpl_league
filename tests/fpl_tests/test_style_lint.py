@@ -7,7 +7,12 @@ import subprocess
 import sys
 from pathlib import Path
 
-from fpl.style_lint import Limits, lint_narrative, lint_path
+from fpl.style_lint import (
+    DEFAULT_WORD_LIMIT,
+    Limits,
+    lint_narrative,
+    lint_path,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -76,10 +81,10 @@ class TestWordCountLimit:
         assert not any("For langt" in f for f in result.hard_failures)
 
     def test_over_default_limit_is_hard_failure(self):
-        body = " ".join(["ord"] * 700)
+        body = " ".join(["ord"] * (DEFAULT_WORD_LIMIT + 50))
         result = lint_narrative(_narrative(body=body))
         assert any("For langt" in f for f in result.hard_failures)
-        assert result.metrics["word_count"] > 650
+        assert result.metrics["word_count"] > DEFAULT_WORD_LIMIT
 
     def test_shape_specific_limit_applies(self):
         text = "---\nshape: kortversjonen\n---\n" + _narrative(body=" ".join(["ord"] * 300))
@@ -97,7 +102,7 @@ class TestWordCountLimit:
         assert any("For langt" in f for f in result.hard_failures)
 
     def test_shape_kwarg_overrides_front_matter(self):
-        # Front matter says spalten (650), but the pipeline scheduled
+        # Front matter says spalten (1200), but the pipeline scheduled
         # kortversjonen (250) for this gameweek (issue #40, workstream A/B).
         text = "---\nshape: spalten\n---\n" + _narrative(body=" ".join(["ord"] * 300))
         result = lint_narrative(text, shape="kortversjonen")

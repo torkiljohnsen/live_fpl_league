@@ -27,22 +27,22 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from .format_scheduler import SHAPES
 from .front_matter import parse_front_matter
 
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
 
-# Word budget per shape, from the front-matter `shape:` a later workstream
-# (D) adds. Unknown/missing shape falls back to DEFAULT_WORD_LIMIT.
+# Word budget per shape. The keys are the format_scheduler shape keys,
+# which is what run_narrative_pipeline passes as `shape=`; a missing or
+# unknown shape falls back to DEFAULT_WORD_LIMIT. Only the hard ceiling
+# is enforced here -- the softer per-shape target that Reidar is asked to
+# aim for lives in Shape.word_soft and is guidance, not arithmetic.
 SHAPE_WORD_LIMITS: dict[str, int] = {
-    "kortversjonen": 250,
-    "spalten": 650,
-    "portrettet": 650,
-    "brevet": 550,
-    "karakterboka": 500,
+    key: shape.word_max for key, shape in SHAPES.items()
 }
-DEFAULT_WORD_LIMIT = 650
+DEFAULT_WORD_LIMIT = 1200
 
 MAX_EM_DASH = 3
 MAX_HEADING_COUNT = 3
