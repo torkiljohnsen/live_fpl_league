@@ -1,15 +1,13 @@
-**Ny sesong, ti managere:** "Sinkaberg The Office" (tidligere "Sinkaberg administrasjon") åpner med Torkil på topp etter GW1 med 89 poeng, drevet av en dristig bench boost i runde 1 — en strategi som fungerte til tross for at kapteinen hans (Bruno Fernandes, 4 poeng) var ligaens svakeste pick. Det paradokset — forsvarende mester, dårligste kapteinsvalg, likevel serieleder — er årets første store historie å følge.
+**Tittelkamp:** Torkil (204) leder klart etter to runder, nå med både beste kapteinspick og beste rundescore i GW2 — paradokset fra GW1 er borte. Vidar (160) og Markus (159) følger tett bak, begge løftet av samme Bruno Fernandes-kaptein. Oda (153) holder fjerdeplass med beste bytte i ligaen denne uken.
 
-**Tittelkamp:** Torkil (89) leder, Daniel (72) følger tett, Oda (70) på tredje. Gapet ned til Camilla i bunn (20) er stort, men det er én runde av trettiåtte — betyr foreløpig ingenting.
+**Bruno Fernandes-saken:** Sesongens første store gjennomgangsfigur. Samme spiller var ligaens verste kapteinsvalg i GW1 (4 poeng) og beste i GW2 (46 poeng) — kapteinet av tre forskjellige managere begge ganger, med identisk utfall. Reidar følger dette som en studie i templat-avhengighet, ikke individuell genialitet.
 
-**Debutantene:** Daniel (Salmageddon FC) kom inn med et smell — trippelkaptein Saka ga 27 poeng, sesongens beste kapteinspick. Vidar (FK Straumen) og Amund (Aquabyters) leverte solide, anonyme åpninger uten å avsløre identitet som managere ennå. Alle tre venter fortsatt på sin første dom fra Reidar.
+**Haaland-fellen, versjon 2:** Firkløveret fra GW1 (Oda, Anders, Eirin, Hedda) endret form denne uken. Oda rømte til João Pedro og ble belønnet. Anders, Eirin og Hedda ble værende og fikk 26 poeng hver — sammen med amund og nykommer Camilla, som nå er femte medlem. Spørsmålet står fortsatt: lærer noen, eller er dette bare hvem som eier Haaland denne uken?
 
-**Haaland-fellen:** Fire managere — Oda, Anders, Eirin, Hedda — kapteinet Haaland i GW1 og fikk identiske 2 grunnpoeng. En kollektiv feilberegning som Reidar kaller "ikke flaks som svikter, men templaten som slår tilbake." Verdt å følge om noen av de fire lærer, eller om Haaland-avhengigheten fortsetter.
+**Peders fall:** Fra 5. til 9. plass i én runde, drevet av ligaens dårligste kapteinspick (Isak, 16 poeng). Kombinert med fjorårets ligarekord (115, GW16) og sisteplass, bygger dette et bilde av en manager med enorme svingninger — akkurat som i fjor.
 
-**Chips brukt tidlig:** Torkil (bench boost) og Daniel (trippelkaptein) har begge brukt en chip i GW1 — to managere går inn i resten av sesongen med ett verktøy mindre. Om det var smart eller forhastet er en historie for senere runder.
+**Chips brukt tidlig:** Torkil (bench boost) og Daniel (trippelkaptein) sitter fortsatt med ett verktøy mindre enn resten av feltet. Daniels fall til 5. plass i GW2, etter en Saka-drevet GW1-sensasjon, antyder at kostnaden begynner å vise seg.
 
-**Rekorder som står (fra 2025-26):** Høyeste rundescore: Peder 115 (GW16). Nest høyeste: Oda 104 (GW17). Laveste: Hedda 13 (GW13). Ingen av disse er i fare etter én runde.
+**Rekorder som står (fra 2025-26):** Høyeste rundescore: Peder 115 (GW16). Denne sesongens beste så langt: Torkil 115 (GW2) — like høyt som Peders ligarekord, men ikke over den. Laveste: Hedda 13 (GW13), fortsatt uinnfridd av Camillas GW1-bunn på 20.
 
-**Reidars løpehistorier å følge:** Torkils paradoks (dårlig kaptein, god plassering). Anders' lagnavn versus meritter — fortsatt uinnløst. Camillas forhold til chips og hennes umiddelbare bunnplassering i år. De tre nyes sanne nivå, som ennå ikke er avslørt. Og om Haaland-firkløveret gjentar feilen i GW2.
-
-**Tonenotater:** Reidar er fortsatt tørr og nøytral med de nye — dømmer ingen før de gir ham noe å jobbe med. Fokus på kapteinsvalg som narrativ motor denne runden.
+**Tonenotater:** Reidar begynner å feste blikket på gjentakende mønstre — Bruno Fernandes-svingningen, Haaland-flokken, benkepoeng-problemet hos Anders. Fortsatt tørr og nøytral med de tre nye (Vidar, amund, Markus), men konturer av identitet begynner å vise seg hos alle tre.

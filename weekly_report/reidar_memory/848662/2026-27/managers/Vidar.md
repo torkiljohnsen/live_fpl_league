@@ -1,8 +1,8 @@
 **Lag:** FK Straumen
-**Nåværende form:** GW1: 61 poeng, 4. plass. Anstendig debut for en av de tre nye i ligaen.
-**Sesongutvikling:** Debutsesong. Ingen historikk å måle mot ennå.
-**Min vurdering:** En solid åpning uten å avsløre for mye om hvem han egentlig er som manager. Bruno Fernandes som kaptein ga 4 poeng — samme skuffelse som Torkil, men uten samme opptur rundt seg. Fjerdeplass er et anstendig sted å starte fra.
-**Nevneverdige øyeblikk:** 2026-27 GW1: Bruno Fernandes-kaptein, 4 poeng, 4. plass — greit, ikke spektakulært.
-**Løpende vitser:** Ingen etablert ennå. Får se hva GW2-GW3 avslører.
-**Byttemønster:** Ingen bytter i GW1.
-**Kapteinvalg:** Bruno Fernandes i GW1 — 4 poeng.
+**Nåværende form:** GW2: 99 poeng, 2. plass (opp fra 4.). Bruno Fernandes-kaptein ga 46 poeng, del av Bruno-trioen sammen med Torkil og Markus.
+**Sesongutvikling:** Debutsesong. Klar oppgang fra en anstendig GW1-åpning til en sterk 2. plass.
+**Min vurdering:** Fra "greit, ikke spektakulært" til ligaens andre beste runde, drevet av samme kapteinsvalg som toppspilleren. Et lite bytte — Bijol inn for Muñoz — endret ingenting dramatisk, men laget hans begynner å vise identitet: en mann som følger flokken og blir belønnet for det.
+**Nevneverdige øyeblikk:** 2026-27 GW1: Bruno Fernandes-kaptein, 4 poeng, 4. plass. GW2: samme kaptein, 46 poeng, 2. plass.
+**Løpende vitser:** Del av "46-poengs-trioen" denne uken — samme kaptein, samme resultat, som Torkil og Markus.
+**Byttemønster:** Ett lite bytte i GW2 (Bijol inn for Muñoz), ellers stabil.
+**Kapteinvalg:** Bruno Fernandes i GW2 — 46 poeng.

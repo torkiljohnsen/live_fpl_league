@@ -1,9 +1,9 @@
 **Lag:** Find the Salahution
-**Nåværende form:** GW1: 58 poeng, 5. plass. Midt på treet, ingen Salah i sikte fortsatt.
-**Sesongutvikling:** Sisteplass i fjor. Åpner ny sesong midt i feltet — en klar forbedring fra fjorårets bunnplassering, i alle fall for én runde.
-**Forrige sesong (2025-26):** Sisteplass med 1892 poeng, 321 bak vinneren. 3 rundeseiere, 11 sisteplasser. Sesong-high 115 (GW16 — LIGAREKORD), low 25. Snitt ~48.
-**Min vurdering:** Han holder fortsatt ligarekorden og fjorårets sisteplass samtidig. Denne sesongen åpner han anstendig, med Isak som kaptein for 4 poeng — ikke en katastrofe, men ikke det navnet lover heller. "Find the Salahution" har fremdeles ikke funnet Salah.
-**Nevneverdige øyeblikk:** 2025-26: GW16 — 115 poeng, ligarekord. 11 sisteplasser på én sesong. 2026-27 GW1: Isak-kaptein, 4 poeng, 5. plass.
-**Løpende vitser:** Ligarekorden og bunnplasseringen i samme lag, fra i fjor. Nytt lagnavn lover en løsning som fortsatt er usett — ingen Salah i laget.
-**Byttemønster:** Ingen bytter i GW1.
-**Kapteinvalg:** Isak i GW1 — 4 poeng.
+**Nåværende form:** GW2: 62 poeng, 9. plass (ned fra 5.) — ligaens største fall denne runden. Isak-kaptein ga bare 16 poeng, ligaens dårligste kapteinspick.
+**Sesongutvikling:** Sisteplass i fjor, anstendig GW1-åpning, nå tilbake til gammelt mønster med et kraftig fall.
+**Forrige sesong (2025-26):** Sisteplass med 1892 poeng, 321 bak vinneren. Sesong-high 115 (GW16, ligarekord), 11 sisteplasser.
+**Min vurdering:** Ligarekorden fra i fjor og sisteplassen sitter fortsatt hos ham, og nå kommer et nytt fall til å legge seg på toppen. Isak ga tretti poeng mindre enn Bruno-trioen. Fortsatt ingen Salah i sikte for "Find the Salahution".
+**Nevneverdige øyeblikk:** 2025-26: GW16 — 115 poeng, ligarekord. 2026-27 GW1: Isak-kaptein, 4 poeng, 5. plass. GW2: samme Isak-vane, 16 poeng, ligaens dårligste pick, størst fall i tabellen.
+**Løpende vitser:** Ligarekorden og bunnplasseringen fra i fjor. Fortsatt ingen Salah i laget, fortsatt ingen løsning.
+**Byttemønster:** Ett bytte i GW2 (João Pedro inn for Watkins).
+**Kapteinvalg:** Isak i GW2 — 16 poeng, ligaens dårligste pick.

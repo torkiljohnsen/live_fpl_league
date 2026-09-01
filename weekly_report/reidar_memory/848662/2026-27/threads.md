@@ -1,0 +1,6 @@
+- Bruno Fernandes-saga | Samme spiller var verste kapteinsvalg i GW1 og beste i GW2 | sist brukt: GW2
+- Haaland-fellen | Fem managere kapteinet Haaland i GW2 og fikk 26 poeng hver | sist brukt: GW2
+- Peders svingninger | Ligarekord i fjor, størst fall i GW2 — ekstremene fortsetter | sist brukt: GW2
+- Camillas bunnrekord | Eier fortsatt sesongens laveste rundescore (20, GW1) | sist brukt: GW2
+- Chips brukt tidlig | Torkil (bboost) og Daniel (3xc) har ett verktøy mindre resten av sesongen | sist brukt: GW2
+- Anders' benkeproblem | 17 benkpoeng i GW2, andre uke på rad med høye tap på benken | sist brukt: GW2

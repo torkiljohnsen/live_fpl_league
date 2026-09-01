@@ -1,0 +1,1 @@
+(ingen aktive spådommer denne runden)

@@ -1,9 +1,9 @@
 **Lag:** Dragen BK
-**Nåværende form:** GW1: 43 poeng, 8. plass. Del av Haaland-firkløveret som alle fikk 4 poeng.
-**Sesongutvikling:** Sjetteplass i fjor. Åpner ny sesong uten dramatikk, midt i feltet nedad.
-**Forrige sesong (2025-26):** Sjetteplass med 2033 poeng. 2 rundeseiere, 3 sisteplasser. Sesong-high 97 (GW25), bench boost i GW36 ga 93.
-**Min vurdering:** Hun tok det beste kapteinvalget i ligaen i siste runde i fjor. Denne uken var hun tilbake på standardmenyen — Haaland, sammen med tre andre, og fikk de samme 2 poengene alle fire fikk. Det uortodokse strateget viser seg ikke alltid; noen ganger følger hun bare flokken, og flokken tok feil.
-**Nevneverdige øyeblikk:** 2025-26: GW25 — 97 poeng fra ingenting. GW36 — bench boost, 93 poeng. GW38 — ligaens beste kapteinvalg. 2026-27 GW1: Haaland-kaptein, 2→4 poeng.
-**Løpende vitser:** Kaptein på forsvarsspiller, uortodoks strateg — men denne gangen valgte hun det åpenbare, og det åpenbare svek henne som alle de andre.
-**Byttemønster:** Ingen bytter i GW1.
-**Kapteinvalg:** Haaland i GW1 — 2 poeng, doblet til 4.
+**Nåværende form:** GW2: 79 poeng, 8. plass (uendret). Haaland-kaptein ga 26 poeng, del av firkløveret som denne uken faktisk fikk noe ut av valget.
+**Sesongutvikling:** Sjetteplass i fjor, midt i feltet nedad i år uten dramatikk i noen retning.
+**Forrige sesong (2025-26):** Sjetteplass med 2033 poeng. Sesong-high 97 (GW25).
+**Min vurdering:** Ingen bevegelse i tabellen, ingen bevegelse i historien. Haaland leverte denne gangen, i motsetning til GW1, men det holdt bare til en uendret 8. plass. Det uortodokse strateget fra fjorårets siste runde er fortsatt fraværende.
+**Nevneverdige øyeblikk:** 2025-26: GW25 — 97 poeng. GW38 — ligaens beste kapteinvalg. 2026-27 GW1: Haaland-flopp. GW2: Haaland leverer 26, men plasseringen står stille.
+**Løpende vitser:** Kaptein på forsvarsspiller, uortodoks strateg — men flokk-kapteinen ga henne endelig noe denne uken.
+**Byttemønster:** Ett bytte i GW2 (De Cuyper inn for Cash, netto tap).
+**Kapteinvalg:** Haaland i GW2 — 26 poeng.

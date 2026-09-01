@@ -3,5 +3,10 @@
     "event_id": 1,
     "shape": "spalten",
     "constraint": null
+  },
+  {
+    "event_id": 2,
+    "shape": "regnearket",
+    "constraint": null
   }
 ]

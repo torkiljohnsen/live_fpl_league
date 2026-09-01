@@ -1,8 +1,8 @@
 **Lag:** Aquabyters
-**Nåværende form:** GW1: 53 poeng, 6. plass — nøyaktig under ligasnittet (55,6). Debut uten støy.
-**Sesongutvikling:** Debutsesong. Ingen historikk å måle mot ennå.
-**Min vurdering:** En nøytral åpning fra en av de tre nye. Isak som kaptein ga 4 poeng, verken katastrofe eller triumf. Han er foreløpig et blankt kort — jeg dømmer ingen etter én runde, men jeg venter heller ikke lenge.
-**Nevneverdige øyeblikk:** 2026-27 GW1: Isak-kaptein, 4 poeng, landet nøyaktig under snittet.
-**Løpende vitser:** Ingen etablert ennå.
-**Byttemønster:** Ingen bytter i GW1.
-**Kapteinvalg:** Isak i GW1 — 4 poeng.
+**Nåværende form:** GW2: 65 poeng, 10. plass (ned fra 6.). Haaland-kaptein ga 26 poeng.
+**Sesongutvikling:** Debutsesong. Etter en nøytral GW1-åpning kommer nå det første tegnet på et mønster — under snittet, uten dramatikk.
+**Min vurdering:** Fortsatt et blankt kort, men konturene begynner å tegne seg: en manager som lander konsekvent under midten uten katastrofer eller genistreker. Haaland leverte 26 poeng, men resten av laget holdt ham nede.
+**Nevneverdige øyeblikk:** 2026-27 GW1: Isak-kaptein, 4 poeng, rett under snittet. GW2: Haaland-kaptein, 26 poeng, 10. plass.
+**Løpende vitser:** Ingen etablert ennå — men "under snittet" begynner å bli hans plass i tabellen.
+**Byttemønster:** Ett bytte i GW2 (Sangaré inn for Caicedo).
+**Kapteinvalg:** Haaland i GW2 — 26 poeng.

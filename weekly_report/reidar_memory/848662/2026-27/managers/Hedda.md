@@ -1,9 +1,9 @@
 **Lag:** Tafatt il
-**Nåværende form:** GW1: 40 poeng, 9. plass. Fjerde medlem av Haaland-firkløveret.
-**Sesongutvikling:** Tredjeplass i fjor. Åpner sesongen svakt, nær bunnen.
-**Forrige sesong (2025-26):** Tredjeplass med 2169 poeng, 7 bak Anders. 5 rundeseiere, 4 sisteplasser. Sesong-high 89 (GW14), low 13 (GW13) — ligaens laveste rundescore noensinne.
-**Min vurdering:** 40 poeng er, relativt sett, nesten en opptur når man fortsatt innehar bunnrekorden på 13. Men hun følger samme mønster som Oda, Anders og Eirin — Haaland-kapteinen som ikke leverte. Fjorårets spenn mellom katastrofe og mesterstykke er ikke synlig ennå i denne åpningen; det var bare en middels start uten uflaks eller genialitet.
-**Nevneverdige øyeblikk:** 2025-26: GW13 — 13 poeng, ligarekord lavest. GW38 — rundevinner med 63 da visekapteinen reddet dagen. 2026-27 GW1: Haaland-kaptein, 4 poeng.
-**Løpende vitser:** Tafatt IL avsluttet fjoråret med et tilfeldig mesterstykke. Sesongstarten var langt mer forutsigbar — og langt mindre spennende.
-**Byttemønster:** Ingen bytter i GW1.
-**Kapteinvalg:** Haaland i GW1 — 2 poeng, doblet til 4.
+**Nåværende form:** GW2: 90 poeng, 7. plass (opp fra 9.). Haaland-kaptein ga 26 poeng.
+**Sesongutvikling:** Tredjeplass i fjor, svak GW1-åpning, nå tilbake mot midtfeltet med en solid runde.
+**Forrige sesong (2025-26):** Tredjeplass med 2169 poeng. Sesong-high 89, low 13 — ligarekord lavest.
+**Min vurdering:** Fra Haaland-fellens fjerde medlem i GW1 til en av dem som faktisk fikk betalt for det samme valget i GW2. Fortsatt langt fra fjorårets spenn mellom katastrofe og mesterstykke, men en klar oppgang fra bunnen.
+**Nevneverdige øyeblikk:** 2025-26: GW13 — 13 poeng, ligarekord lavest. GW38 — rundevinner. 2026-27 GW1: Haaland-flopp. GW2: Haaland leverer 26, 7. plass.
+**Løpende vitser:** Tafatt IL fortsetter sitt mønster: bunn ene uken, opp neste — fortsatt uten fjorårets ekstreme utslag.
+**Byttemønster:** Ett bytte i GW2 (Lewis-Potter inn for Zubimendi).
+**Kapteinvalg:** Haaland i GW2 — 26 poeng.
