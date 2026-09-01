@@ -63,6 +63,8 @@ Three independent pipeline stages, each with its own CLI script:
 
 State is only saved after successful generation. If a step fails, the next hourly run retries automatically. Manual dispatch runs everything unconditionally.
 
+**The Teams card is gated on the page being live.** After the push, `check_gw_status.py --pending-notification` asks whether a narrative on disk has not been announced yet (`notified_events` in `.gw_state.json`); if so the workflow polls the published `.md` until GitHub Pages serves it, and only then sends the card and records the send with `--mark-notified`. A timeout fails the run rather than posting a link that 404s, and because the gameweek stays unmarked the next hourly run retries the wait. The question is asked after the push, not derived from the narrative step, so a card held back by an earlier run is picked up later.
+
 ## Directory Structure
 
 - **[`fpl/`](fpl/)** - Core Python package for data fetching and processing. See [`fpl/AGENTS.md`](fpl/AGENTS.md) for detailed module documentation.
@@ -81,6 +83,9 @@ State is only saved after successful generation. If a step fails, the next hourl
   - `narratives/index.json` — Manifest of published narratives per season (`generate_index.py`'s `build_narrative_manifest()`), so the front page and `reidars_rapport.html` know which rounds exist without probing via fetch
   - [`reidars_rapport.html`](docs/reidars_rapport.html) — Dynamic article page (client-side Markdown rendering via marked.js)
   - [`style.css`](docs/style.css) — Shared stylesheet
+  - `.nojekyll` — keeps GitHub Pages from running Jekyll. Jekyll renders any `.md` file that opens with a
+    YAML front-matter block into `.html` and stops serving the source, which 404s the narratives
+    `reidars_rapport.html` fetches. Do not remove it (guarded by `tests/fpl_tests/test_docs_publishing.py`)
   - **Do not place non-publishing files here** — this folder is deployed to GitHub Pages
 
 - **[`weekly_report/`](weekly_report/)** - Everything related to weekly narrative generation (Reidar's Rapport)

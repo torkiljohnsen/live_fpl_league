@@ -256,10 +256,24 @@ tr:nth-child(odd) {
 	--nr-highlight: #EDE8DD;
 	background: var(--nr-paper);
 	animation: narrativeFadeIn 0.6s ease-out;
+	/* The hero is a square-ish portrait cropped to a banner, so the wider the
+	   page gets the more of Reidar's face `object-fit: cover` shaves off --
+	   past ~1280px you are left with his forehead. Cap the whole column. */
+	max-width: 1280px;
+	margin: 0 auto;
+	/* Keeps the sheet full-height on short reports, so the darker ground
+	   never appears as a band under the footer. */
+	min-height: 100vh;
+	/* Lifts the paper off the darker ground once the viewport is wider than
+	   the column; below 1280px the shadow falls outside the viewport. */
+	box-shadow: 0 0 2.5rem rgba(28, 25, 23, 0.14);
 }
 
+/* A shade darker than --nr-paper, so the column reads as a sheet of paper on a
+   desk rather than running edge to edge. Hard-coded because the palette custom
+   properties are scoped to .narrative-page. */
 body:has(.narrative-page) {
-	background: #F5F0E8;
+	background: #E6DFD2;
 }
 
 @keyframes narrativeFadeIn {

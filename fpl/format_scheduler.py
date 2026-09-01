@@ -37,8 +37,18 @@ from typing import Any
 
 @dataclass(frozen=True)
 class Shape:
+    """One column format.
+
+    Two budgets, not one. ``word_soft`` is the length the shape normally
+    wants; ``word_max`` is roughly double it, and is there so a round with
+    genuinely more to say is not cut off mid-story. The gap has to be
+    earned with new material -- see NARRATIVE_GUIDE.md -- and only
+    ``word_max`` is enforced, by fpl.style_lint.
+    """
+
     key: str
     title_no: str
+    word_soft: int
     word_max: int
     description_no: str
     devices_hint: str
@@ -46,72 +56,72 @@ class Shape:
 
 SHAPES: dict[str, Shape] = {
     "spalten": Shape(
-        "spalten", "Spalten", 600,
+        "spalten", "Spalten", 600, 1200,
         "den vante rette kolonnen",
         "pull quote, fact box, standalone-linje",
     ),
     "kortversjonen": Shape(
-        "kortversjonen", "Kortversjonen", 250,
+        "kortversjonen", "Kortversjonen", 250, 500,
         "kort og konsentrert, ingen overskrifter",
         "ingen",
     ),
     "portrettet": Shape(
-        "portrettet", "Portrettet", 650,
+        "portrettet", "Portrettet", 650, 1300,
         "hele saken om én manager",
         "pull quote, standalone-linje",
     ),
     "maktrangeringen": Shape(
-        "maktrangeringen", "Maktrangeringen", 500,
+        "maktrangeringen", "Maktrangeringen", 500, 1000,
         "styrkeforhold etter form, ikke tabellplassering",
         "tabell",
     ),
     "retten_er_satt": Shape(
-        "retten_er_satt", "Retten er satt", 500,
+        "retten_er_satt", "Retten er satt", 500, 1000,
         "én avgjørelse for retten: aktorat, forsvar, dom",
         "for/against-blokk",
     ),
     "kvitteringene": Shape(
-        "kvitteringene", "Kvitteringene", 450,
+        "kvitteringene", "Kvitteringene", 450, 900,
         "Reidar sjekker sine egne spådommer",
         "kvittering (receipt)",
     ),
     "brevet": Shape(
-        "brevet", "Brevet", 550,
+        "brevet", "Brevet", 550, 1100,
         "et åpent brev til én manager",
         "standalone-linje",
     ),
     "regnearket": Shape(
-        "regnearket", "Regnearket", 400,
+        "regnearket", "Regnearket", 400, 800,
         "ett tall snudd og vendt fra alle kanter",
         "stort tall (big-number)",
     ),
     "dagboka": Shape(
-        "dagboka", "Dagboka", 500,
+        "dagboka", "Dagboka", 500, 1000,
         "kampdagen, time for time",
         "tidslinje (timeline)",
     ),
     "nekrologen": Shape(
-        "nekrologen", "Nekrologen", 400,
+        "nekrologen", "Nekrologen", 400, 800,
         "en nekrolog over et kapteinbind, en chip eller en tittelsjanse",
         "pull quote",
     ),
     "karakterboka": Shape(
-        "karakterboka", "Karakterboka", 500,
+        "karakterboka", "Karakterboka", 500, 1000,
         "karakterbok, én linje per manager",
         "tabell",
     ),
     "raadgiveren": Shape(
-        "raadgiveren", "Rådgiveren", 450,
+        "raadgiveren", "Rådgiveren", 450, 900,
         "råd om chips, timing og hvem som spiller for hva",
         "fact box, kvittering",
     ),
     "sesongforhaandsomtalen": Shape(
-        "sesongforhaandsomtalen", "Sesongforhåndsomtalen", 650,
+        "sesongforhaandsomtalen", "Sesongforhåndsomtalen", 650, 1300,
         "sesongåpning: laget presenteres, ingen rangeringsprat",
         "fact box",
     ),
     "sesongoppsummeringen": Shape(
-        "sesongoppsummeringen", "Sesongoppsummeringen", 650,
+        "sesongoppsummeringen", "Sesongoppsummeringen", 650, 1300,
         "sesongen oppsummert, Reidars årsavslutning",
         "tabell, stort tall",
     ),
@@ -128,12 +138,17 @@ _ORDINARY_SHAPES = (
 
 _DEFAULT_SHAPE = "spalten"
 
+# A round counts as flat when the league's best and worst net scores are
+# within this many points of each other. Loose enough that a genuinely dull
+# week still qualifies when one manager drifts a little clear.
+_FLAT_ROUND_MAX_SPREAD = 25
+
 # Base weights on a quiet ordinary week (no data triggers). Tuned, together
 # with the exclusion rules below, so spalten lands roughly 40% of ordinary
 # weeks -- see the simulation test in tests/fpl_tests/test_format_scheduler.py.
 _BASE_WEIGHTS: dict[str, int] = {
     "spalten": 90,
-    "kortversjonen": 10,
+    "kortversjonen": 0,  # only weighted in on a flat round, see _weighted_menu
     "portrettet": 8,
     "maktrangeringen": 5,
     "retten_er_satt": 6,
@@ -323,11 +338,18 @@ def _weighted_menu(
     any_chip_played = any(p.get("chip_played") for p in standings)
     if net_points:
         spread = max(net_points) - min(net_points)
-        flat_round = spread <= 20 and max_storyline_score < 70 and not any_chip_played
+        flat_round = (
+            spread <= _FLAT_ROUND_MAX_SPREAD
+            and max_storyline_score < 70
+            and not any_chip_played
+        )
         if flat_round:
             # "Strongly" per the issue: a flat round has nothing for the
             # default column to chew on, so spalten is actively suppressed
-            # rather than just outweighed.
+            # rather than just outweighed. This is also the only way
+            # kortversjonen is ever drawn -- its base weight is 0, because a
+            # 250-word column on an eventful round reads as truncated rather
+            # than terse.
             weights["kortversjonen"] += 60
             weights["spalten"] = min(weights["spalten"], 5)
             triggered.append("flat_round")
@@ -409,7 +431,9 @@ def render_assignment(a: Assignment) -> str:
     lines = [
         "## Ukens oppdrag",
         f"Ukens form: {shape.title_no} — {shape.description_no}. "
-        f"Ordgrense: {shape.word_max}.",
+        f"Ordramme: {shape.word_soft}–{shape.word_max}. "
+        f"Sikt mot {shape.word_soft}; gå lenger bare hvis runden gir deg "
+        f"nytt stoff, aldri for å fylle plass.",
     ]
     if a.constraint:
         lines.append(f"Ukens begrensning: {a.constraint}")

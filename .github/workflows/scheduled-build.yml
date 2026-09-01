@@ -171,30 +171,63 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
 
-      - name: Wait for GitHub Pages deployment
-        if: steps.narrative.outputs.generated == 'true'
+      # Asked after the push rather than derived from the narrative step, so
+      # a card held back by an earlier run is picked up again here. Answers
+      # "is there a narrative on disk the league has not been told about?"
+      - name: Check for a report waiting to be announced
+        id: pending
+        run: python check_gw_status.py --pending-notification -l 848662 --cache-dir .fpl_cache
+
+      # A card whose link 404s is worse than a card that arrives late, so the
+      # notification waits until the file the article page fetches is actually
+      # being served. On a timeout this step fails the run: the gameweek is
+      # never marked as notified, so the next hourly run retries the wait and
+      # the card follows once Pages catches up.
+      - name: Wait for the narrative to be live on GitHub Pages
+        if: steps.pending.outputs.pending_notification == 'true'
         run: |
           URL="https://torkiljohnsen.github.io/live_fpl_league/narratives/${SEASON}/${LEAGUE_ID}/gw${GW}.md"
-          echo "Waiting for GitHub Pages to deploy: $URL"
+          echo "Waiting for GitHub Pages to serve: $URL"
           for i in $(seq 1 30); do
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
             if [ "$STATUS" = "200" ]; then
               echo "Live after ~$((i * 10))s"
-              break
-            fi
-            if [ "$i" = "30" ]; then
-              echo "Warning: timed out after 5min, sending notification anyway"
+              exit 0
             fi
             sleep 10
           done
+          echo "::error::$URL still returns $STATUS after 5 min. Holding the Teams notification back; the next hourly run retries."
+          exit 1
         env:
-          SEASON: ${{ steps.narrative.outputs.season }}
-          GW: ${{ steps.narrative.outputs.event_id }}
+          SEASON: ${{ steps.pending.outputs.pending_season }}
+          GW: ${{ steps.pending.outputs.pending_event }}
           LEAGUE_ID: "848662"
 
+      # No continue-on-error: a failed send leaves the gameweek unmarked, so
+      # the next hourly run tries again rather than dropping the card silently.
       - name: Send Teams notification
-        if: steps.narrative.outputs.generated == 'true'
-        continue-on-error: true
+        if: steps.pending.outputs.pending_notification == 'true'
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-        run: python notify_teams.py -l 848662 --cache-dir .fpl_cache
+          GW: ${{ steps.pending.outputs.pending_event }}
+        run: |
+          python notify_teams.py -l 848662 -e "$GW" --cache-dir .fpl_cache
+          python check_gw_status.py --mark-notified "$GW"
+
+      # The marker is written after the push above, so it needs its own commit.
+      - name: Commit notification state
+        if: steps.pending.outputs.pending_notification == 'true'
+        env:
+          GW: ${{ steps.pending.outputs.pending_event }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .gw_state.json
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+          else
+            git commit -m "chore: mark GW${GW} report as announced [skip ci]"
+            git pull --rebase
+            git push
+          fi

@@ -34,6 +34,25 @@ def get_season_from_bootstrap(bootstrap: dict[str, Any]) -> str:
     return f"{year}-{next_year_short}"
 
 
+def _percentile(rank: int | None, total_players: int | None) -> float | None:
+    """Where a rank sits in the global field, as a top-N percentage.
+
+    One decimal place is too coarse at the sharp end. Overall rank 3 605
+    of 10.25 m is the top 0.035 %, which rounds to 0.0 and reads as
+    nonsense -- and an 0.0 in the report is an invitation to invent a
+    friendlier number. Below 1 % the value keeps two significant digits
+    instead, which is exactly where the precision earns its place.
+    """
+    if not rank or not total_players:
+        return None
+    pct = rank / total_players * 100
+    if pct >= 1:
+        return round(pct, 1)
+    # Floored so a freak rank never renders as 9.8e-06 in the report JSON,
+    # which is not a number anyone can put in a sentence.
+    return max(float(f"{pct:.2g}"), 0.0001)
+
+
 def _is_golden(event_id: int) -> bool:
     """Golden gameweeks carry a cash prize and fall every 4th GW."""
     return event_id % 4 == 0
@@ -317,6 +336,7 @@ class WeeklyReport:
                 "total_participants": 0,
                 "global_average": global_average,
                 "managers_above_global_average": 0,
+                "new_entrants": [],
             }
 
         net_scores = [p.get("net_points", 0) for p in self._participants_data]
@@ -330,6 +350,20 @@ class WeeklyReport:
             if global_average is not None and p.get("event_total", 0) > global_average
         )
 
+        # Surfaced here as well as per-manager so a new name cannot be
+        # missed: a manager joining mid-season is news the column should
+        # open on, not a row that quietly appears in the table.
+        new_entrants = [
+            {
+                "player_name": p["player_first_name"],
+                "team_name": p.get("team_name"),
+                "total_points": p.get("total_points", 0),
+                "league_rank": p.get("league_rank", 0),
+            }
+            for p in self._participants_data
+            if p.get("is_new_entrant")
+        ]
+
         return {
             "average_score": round(avg, 1),
             "leader": {
@@ -339,6 +373,7 @@ class WeeklyReport:
             "total_participants": total,
             "global_average": global_average,
             "managers_above_global_average": managers_above_global_average,
+            "new_entrants": new_entrants,
         }
 
     def _build_live_points_map(
@@ -382,8 +417,15 @@ class WeeklyReport:
 
         league_rank = team.get("rank", 0)
         league_rank_previous = team.get("last_rank", 0)
+        # FPL reports last_rank 0 for a manager the league has not ranked
+        # before: everyone in GW1, and anyone who joins mid-season after
+        # that. They have not moved, so the change is 0 rather than
+        # 0 - rank, which would read as a fall from nowhere.
+        is_new_entrant = not league_rank_previous and self._event_id > 1
         # Positive change means climbed (e.g., 5->3 = +2)
-        league_rank_change = league_rank_previous - league_rank
+        league_rank_change = (
+            0 if not league_rank_previous else league_rank_previous - league_rank
+        )
 
         manager_name = team.get("player_name", "Unknown")
         player_first_name = (
@@ -394,16 +436,8 @@ class WeeklyReport:
         total_players = global_block.get("total_players")
 
         event_rank = entry_history.get("rank")
-        event_percentile = (
-            round(event_rank / total_players * 100, 1)
-            if event_rank and total_players
-            else None
-        )
-        overall_percentile = (
-            round(overall_rank / total_players * 100, 1)
-            if overall_rank and total_players
-            else None
-        )
+        event_percentile = _percentile(event_rank, total_players)
+        overall_percentile = _percentile(overall_rank, total_players)
 
         starters = sum(1 for p in squad if p.get("multiplier", 0) > 0)
         points_per_starter = (
@@ -459,6 +493,7 @@ class WeeklyReport:
             "league_rank": league_rank,
             "league_rank_previous": league_rank_previous,
             "league_rank_change": league_rank_change,
+            "is_new_entrant": is_new_entrant,
             "overall_rank": overall_rank,
             # Global context (issue #40 workstream K)
             "event_rank": event_rank,

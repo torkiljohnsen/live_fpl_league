@@ -6,6 +6,7 @@ sample data to test the full build() and save_report() flow.
 
 from __future__ import annotations
 
+import copy
 import json
 import os
 from typing import Any
@@ -15,6 +16,7 @@ import pytest
 
 from fpl.weekly_report import (
     WeeklyReport,
+    _percentile,
     detect_current_gameweek,
     get_narrative_path,
     get_report_path,
@@ -1316,3 +1318,81 @@ class TestSkipExisting:
 
             # Report should have been built
             mock_api.get_league_standings.assert_called_once()
+
+
+class TestPercentileResolution:
+    """A rank at the sharp end must survive being turned into a percentage."""
+
+    def test_elite_rank_keeps_two_significant_digits(self):
+        # Rank 3 605 of 10.25 m is the top 0.035 %. Rounding to one decimal
+        # gave 0.0, which read as "top 0 %" and invited an invented number.
+        assert _percentile(3605, 10250275) == 0.035
+
+    def test_ordinary_rank_keeps_one_decimal(self):
+        assert _percentile(286971, 10250275) == 2.8
+
+    def test_mid_table_rank_keeps_one_decimal(self):
+        assert _percentile(5000000, 10250275) == 48.8
+
+    def test_floored_so_it_never_renders_in_scientific_notation(self):
+        assert _percentile(1, 10250275) == 0.0001
+
+    def test_missing_inputs_give_none(self):
+        assert _percentile(None, 10250275) is None
+        assert _percentile(3605, None) is None
+        assert _percentile(0, 10250275) is None
+
+
+class TestNewEntrants:
+    """A manager joining mid-season is news, not a fall from nowhere."""
+
+    @pytest.fixture
+    def standings_with_newcomer(self) -> dict[str, Any]:
+        """Charlie joins in GW2: FPL reports last_rank 0 for him."""
+        data = copy.deepcopy(LEAGUE_STANDINGS)
+        for team in data["standings"]["results"]:
+            if team["entry"] == 1003:
+                team["last_rank"] = 0
+        return data
+
+    def _report(self, standings: dict[str, Any], event_id: int = 2) -> dict[str, Any]:
+        api = WeeklyReportDummyAPI()
+        api.get_league_standings = lambda league_id: standings  # type: ignore[method-assign]
+        return WeeklyReport(api, LEAGUE_ID, event_id).build()
+
+    def test_newcomer_is_flagged(self, standings_with_newcomer):
+        report = self._report(standings_with_newcomer)
+        charlie = next(p for p in report["standings"] if p["entry_id"] == 1003)
+        assert charlie["is_new_entrant"] is True
+
+    def test_newcomer_has_not_fallen(self, standings_with_newcomer):
+        """0 - rank would read as a drop of three places he never made."""
+        report = self._report(standings_with_newcomer)
+        charlie = next(p for p in report["standings"] if p["entry_id"] == 1003)
+        assert charlie["league_rank_change"] == 0
+
+    def test_established_managers_are_not_flagged(self, standings_with_newcomer):
+        report = self._report(standings_with_newcomer)
+        others = [p for p in report["standings"] if p["entry_id"] != 1003]
+        assert all(p["is_new_entrant"] is False for p in others)
+
+    def test_league_summary_lists_the_newcomer(self, standings_with_newcomer):
+        report = self._report(standings_with_newcomer)
+        entrants = report["league_summary"]["new_entrants"]
+        assert [e["player_name"] for e in entrants] == ["Charlie"]
+        assert entrants[0]["league_rank"] == 3
+
+    def test_no_newcomers_is_an_empty_list(self):
+        report = self._report(LEAGUE_STANDINGS)
+        assert report["league_summary"]["new_entrants"] == []
+
+    def test_gameweek_one_has_no_new_entrants(self):
+        """Everyone has last_rank 0 in GW1; nobody is news for joining."""
+        data = copy.deepcopy(LEAGUE_STANDINGS)
+        for team in data["standings"]["results"]:
+            team["last_rank"] = 0
+
+        report = self._report(data, event_id=1)
+
+        assert report["league_summary"]["new_entrants"] == []
+        assert all(not p["is_new_entrant"] for p in report["standings"])
