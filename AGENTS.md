@@ -81,6 +81,9 @@ State is only saved after successful generation. If a step fails, the next hourl
   - `narratives/index.json` — Manifest of published narratives per season (`generate_index.py`'s `build_narrative_manifest()`), so the front page and `reidars_rapport.html` know which rounds exist without probing via fetch
   - [`reidars_rapport.html`](docs/reidars_rapport.html) — Dynamic article page (client-side Markdown rendering via marked.js)
   - [`style.css`](docs/style.css) — Shared stylesheet
+  - `.nojekyll` — keeps GitHub Pages from running Jekyll. Jekyll renders any `.md` file that opens with a
+    YAML front-matter block into `.html` and stops serving the source, which 404s the narratives
+    `reidars_rapport.html` fetches. Do not remove it (guarded by `tests/fpl_tests/test_docs_publishing.py`)
   - **Do not place non-publishing files here** — this folder is deployed to GitHub Pages
 
 - **[`weekly_report/`](weekly_report/)** - Everything related to weekly narrative generation (Reidar's Rapport)
