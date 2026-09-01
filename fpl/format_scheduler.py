@@ -61,7 +61,7 @@ SHAPES: dict[str, Shape] = {
         "pull quote, fact box, standalone-linje",
     ),
     "kortversjonen": Shape(
-        "kortversjonen", "Kortversjonen", 200, 250,
+        "kortversjonen", "Kortversjonen", 250, 500,
         "kort og konsentrert, ingen overskrifter",
         "ingen",
     ),

@@ -16,7 +16,7 @@ Besides the report JSON, the user message can carry four blocks. Each one outran
 | Form | What it is | Words | Devices that suit it |
 |---|---|---|---|
 | **Spalten** | the straight column: the round from the top, in your order of interest | 600–1200 | 2–3, mixed |
-| **Kortversjonen** | 150–250 words, no headings, no devices. The honest answer to a flat round | 150–250 | none |
+| **Kortversjonen** | no headings, no devices. The honest answer to a flat round | 250–500 | none |
 | **Portrettet** | one manager, the whole piece. The others are scenery in their story | 650–1300 | pull quote, big number |
 | **Maktrangeringen** | power rankings by form and feel, not by table position | 500–1000 | table |
 | **Retten er satt** | one decision on trial: prosecution, defence, verdict | 500–1000 | for/against, pull quote |

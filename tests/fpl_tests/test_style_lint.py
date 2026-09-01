@@ -9,6 +9,7 @@ from pathlib import Path
 
 from fpl.style_lint import (
     DEFAULT_WORD_LIMIT,
+    SHAPE_WORD_LIMITS,
     Limits,
     lint_narrative,
     lint_path,
@@ -87,10 +88,18 @@ class TestWordCountLimit:
         assert result.metrics["word_count"] > DEFAULT_WORD_LIMIT
 
     def test_shape_specific_limit_applies(self):
-        text = "---\nshape: kortversjonen\n---\n" + _narrative(body=" ".join(["ord"] * 300))
+        limit = SHAPE_WORD_LIMITS["kortversjonen"]
+        text = "---\nshape: kortversjonen\n---\n" + _narrative(
+            body=" ".join(["ord"] * (limit + 50))
+        )
         result = lint_narrative(text)
-        assert result.metrics["word_limit"] == 250
+        assert result.metrics["word_limit"] == limit
         assert any("For langt" in f for f in result.hard_failures)
+
+    def test_shape_specific_limit_is_tighter_than_the_default(self):
+        """Kortversjonen is the short shape; that is the whole point of it."""
+        assert SHAPE_WORD_LIMITS["kortversjonen"] < DEFAULT_WORD_LIMIT
+        assert SHAPE_WORD_LIMITS["kortversjonen"] == min(SHAPE_WORD_LIMITS.values())
 
     def test_shape_specific_limit_not_exceeded(self):
         text = "---\nshape: kortversjonen\n---\n" + _narrative(body=" ".join(["ord"] * 100))
@@ -102,12 +111,16 @@ class TestWordCountLimit:
         assert any("For langt" in f for f in result.hard_failures)
 
     def test_shape_kwarg_overrides_front_matter(self):
-        # Front matter says spalten (1200), but the pipeline scheduled
-        # kortversjonen (250) for this gameweek (issue #40, workstream A/B).
-        text = "---\nshape: spalten\n---\n" + _narrative(body=" ".join(["ord"] * 300))
+        # Front matter says spalten, but the pipeline scheduled kortversjonen
+        # for this gameweek (issue #40, workstream A/B), and its tighter
+        # budget is the one that must bite.
+        limit = SHAPE_WORD_LIMITS["kortversjonen"]
+        text = "---\nshape: spalten\n---\n" + _narrative(
+            body=" ".join(["ord"] * (limit + 50))
+        )
         result = lint_narrative(text, shape="kortversjonen")
         assert result.metrics["shape"] == "kortversjonen"
-        assert result.metrics["word_limit"] == 250
+        assert result.metrics["word_limit"] == limit
         assert any("For langt" in f for f in result.hard_failures)
 
     def test_shape_kwarg_falls_back_to_front_matter_when_omitted(self):
