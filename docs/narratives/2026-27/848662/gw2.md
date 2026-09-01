@@ -24,7 +24,7 @@ Tallet er ikke bare Torkils. Vidar og Markus kapteinet ham også og fikk nøyakt
 | Markus | 102 | Bruno Fernandes | 46 |
 | Vidar | 99 | Bruno Fernandes | 46 |
 
-Torkil sitter dermed på 115 poeng i runden, topp 2,8 prosent av verden, og en samlet plassering i topp 0,5 prosent av alle managere globalt. Paradokset jeg noterte forrige uke, dårligste kaptein men serieleder, er borte. Nå har han begge deler: beste kapteinspick og beste rundescore.
+Torkil sitter dermed på 115 poeng i runden, topp 2,8 prosent av verden, og en samlet plassering i topp 0,035 prosent av alle managere globalt. Paradokset jeg noterte forrige uke, dårligste kaptein men serieleder, er borte. Nå har han begge deler: beste kapteinspick og beste rundescore.
 
 Nederst i det samme tallet ligger Peder. Isak som kaptein ga 16, tretti poeng svakere enn Bruno-trioen, og Peder faller fra femte til niende plass, ligaens største fall denne runden. Runde 2 av 38 er for tidlig til å bry seg om rangeringssvingninger, så den detaljen får ligge.
 
