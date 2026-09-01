@@ -138,12 +138,17 @@ _ORDINARY_SHAPES = (
 
 _DEFAULT_SHAPE = "spalten"
 
+# A round counts as flat when the league's best and worst net scores are
+# within this many points of each other. Loose enough that a genuinely dull
+# week still qualifies when one manager drifts a little clear.
+_FLAT_ROUND_MAX_SPREAD = 25
+
 # Base weights on a quiet ordinary week (no data triggers). Tuned, together
 # with the exclusion rules below, so spalten lands roughly 40% of ordinary
 # weeks -- see the simulation test in tests/fpl_tests/test_format_scheduler.py.
 _BASE_WEIGHTS: dict[str, int] = {
     "spalten": 90,
-    "kortversjonen": 10,
+    "kortversjonen": 0,  # only weighted in on a flat round, see _weighted_menu
     "portrettet": 8,
     "maktrangeringen": 5,
     "retten_er_satt": 6,
@@ -333,11 +338,18 @@ def _weighted_menu(
     any_chip_played = any(p.get("chip_played") for p in standings)
     if net_points:
         spread = max(net_points) - min(net_points)
-        flat_round = spread <= 20 and max_storyline_score < 70 and not any_chip_played
+        flat_round = (
+            spread <= _FLAT_ROUND_MAX_SPREAD
+            and max_storyline_score < 70
+            and not any_chip_played
+        )
         if flat_round:
             # "Strongly" per the issue: a flat round has nothing for the
             # default column to chew on, so spalten is actively suppressed
-            # rather than just outweighed.
+            # rather than just outweighed. This is also the only way
+            # kortversjonen is ever drawn -- its base weight is 0, because a
+            # 250-word column on an eventful round reads as truncated rather
+            # than terse.
             weights["kortversjonen"] += 60
             weights["spalten"] = min(weights["spalten"], 5)
             triggered.append("flat_round")

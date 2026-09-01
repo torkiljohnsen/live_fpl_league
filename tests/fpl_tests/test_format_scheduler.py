@@ -7,6 +7,7 @@ from collections import Counter
 from pathlib import Path
 
 from fpl.format_scheduler import (
+    _FLAT_ROUND_MAX_SPREAD,
     Assignment,
     choose_assignment,
     load_recent_shapes,
@@ -60,8 +61,9 @@ def _report(
 
 
 def _quiet_standings() -> list[dict]:
-    # Spread > 20 so the flat-round trigger doesn't fire; no chips.
-    return [_standing(f"M{i}", event_total=40 + i * 3) for i in range(10)]
+    # Quiet, but not flat: the spread clears _FLAT_ROUND_MAX_SPREAD with room
+    # to spare so the flat-round trigger stays out of the other simulations.
+    return [_standing(f"M{i}", event_total=40 + i * 5) for i in range(10)]
 
 
 # ---------------------------------------------------------------------------
@@ -190,6 +192,67 @@ class TestFlatRoundTrigger:
 
         assert counts.most_common(1)[0][0] == "kortversjonen"
         assert counts["kortversjonen"] / sum(counts.values()) > 0.5
+
+    def test_quiet_standings_are_not_flat(self):
+        """Guards the other simulations, which assume no flat trigger."""
+        totals = [s["event_total"] for s in _quiet_standings()]
+        assert max(totals) - min(totals) > _FLAT_ROUND_MAX_SPREAD
+
+    def test_spread_at_the_threshold_is_still_flat(self):
+        standings = [_standing("A", event_total=50), _standing("B", event_total=75)]
+        report = _report(7, standings=standings, storylines=[{"score": 20}])
+
+        counts = Counter(
+            choose_assignment(report, [], rng_seed=f"edge-{i}").shape for i in range(40)
+        )
+
+        assert counts["kortversjonen"] / sum(counts.values()) > 0.5
+
+    def test_spread_one_over_the_threshold_is_not_flat(self):
+        standings = [_standing("A", event_total=50), _standing("B", event_total=76)]
+        report = _report(7, standings=standings, storylines=[{"score": 20}])
+
+        counts = Counter(
+            choose_assignment(report, [], rng_seed=f"edge-{i}").shape for i in range(40)
+        )
+
+        assert counts["kortversjonen"] == 0
+
+
+class TestKortversjonenOnlyOnFlatRounds:
+    """A 250-word column on an eventful round reads truncated, not terse."""
+
+    def test_never_drawn_on_an_eventful_round(self):
+        """The spread alone is enough to disqualify it, chips or not."""
+        drawn = set()
+        for gw in range(2, 38):
+            report = _report(gw, season="2025-26", standings=_quiet_standings())
+            for i in range(20):
+                drawn.add(choose_assignment(report, [], rng_seed=f"{gw}-{i}").shape)
+
+        assert "kortversjonen" not in drawn
+
+    def test_a_big_storyline_disqualifies_it_even_when_scores_are_level(self):
+        """Everyone within a point, but someone had a top-1% round."""
+        standings = [_standing(f"M{i}", event_total=50 + (i % 2)) for i in range(10)]
+        report = _report(7, standings=standings, storylines=[{"score": 95}])
+
+        counts = Counter(
+            choose_assignment(report, [], rng_seed=f"story-{i}").shape for i in range(40)
+        )
+
+        assert counts["kortversjonen"] == 0
+
+    def test_a_chip_disqualifies_it_even_when_scores_are_level(self):
+        standings = [_standing(f"M{i}", event_total=50 + (i % 2)) for i in range(10)]
+        standings[0]["chip_played"] = "bboost"
+        report = _report(7, standings=standings, storylines=[{"score": 20}])
+
+        counts = Counter(
+            choose_assignment(report, [], rng_seed=f"chip-{i}").shape for i in range(40)
+        )
+
+        assert counts["kortversjonen"] == 0
 
 
 class TestQuarterMarkWindowTrigger:
