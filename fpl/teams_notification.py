@@ -33,11 +33,11 @@ def _truncate_on_word_boundary(text: str, max_length: int) -> str:
 def hero_image_filename(gameweek: int) -> str:
     """Return the rotated hero image filename for a gameweek.
 
-    Rotates through assets/reidars_rapport_1.png .. _5.png keyed by
-    `gameweek % 5`, so the card and the report page don't always show
+    Rotates through assets/reidars_rapport_1.png .. _6.png keyed by
+    `gameweek % 6`, so the card and the report page don't always show
     the same image.
     """
-    return f"reidars_rapport_{(gameweek % 5) + 1}.png"
+    return f"reidars_rapport_{(gameweek % 6) + 1}.png"
 
 
 def extract_title(narrative: str) -> str:

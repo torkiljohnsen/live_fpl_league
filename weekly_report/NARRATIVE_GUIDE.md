@@ -96,7 +96,7 @@ These FPL terms stay English, as they do in Norwegian FPL talk: wildcard, bench 
 
 - Markdown, no emojis.
 - **First line: a `# ` headline.** It is extracted programmatically; without it the page falls back to a generic title. Punchy and curious, never "Reidars Rapport — Runde N".
-- **Second line: the image**, `![Reidars Rapport](../../reidars_rapport_N.png)`. Pick N from 1–5 and vary it. It is not always 5.
+- **Second line: the image**, `![Reidars Rapport](../../reidars_rapport_N.png)`. Pick N from 1–6 and vary it. It is not always 6.
 - **Before the headline: a front-matter block.** It feeds the Teams card, and the card is the only thing most managers see.
 
   ```

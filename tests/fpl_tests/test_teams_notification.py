@@ -213,12 +213,13 @@ class TestHeroImageFilename:
             (2, "reidars_rapport_3.png"),
             (3, "reidars_rapport_4.png"),
             (4, "reidars_rapport_5.png"),
-            (5, "reidars_rapport_1.png"),
-            (10, "reidars_rapport_1.png"),
-            (27, "reidars_rapport_3.png"),
+            (5, "reidars_rapport_6.png"),
+            (6, "reidars_rapport_1.png"),
+            (10, "reidars_rapport_5.png"),
+            (27, "reidars_rapport_4.png"),
         ],
     )
-    def test_rotates_through_five_images(self, gameweek: int, expected: str) -> None:
+    def test_rotates_through_six_images(self, gameweek: int, expected: str) -> None:
         assert hero_image_filename(gameweek) == expected
 
 
