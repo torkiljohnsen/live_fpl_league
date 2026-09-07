@@ -8,5 +8,10 @@
     "event_id": 2,
     "shape": "regnearket",
     "constraint": null
+  },
+  {
+    "event_id": 3,
+    "shape": "raadgiveren",
+    "constraint": null
   }
 ]

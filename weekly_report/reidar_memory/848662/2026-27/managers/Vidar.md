@@ -1,8 +1,8 @@
 **Lag:** FK Straumen
-**Nåværende form:** GW2: 99 poeng, 2. plass (opp fra 4.). Bruno Fernandes-kaptein ga 46 poeng, del av Bruno-trioen sammen med Torkil og Markus.
-**Sesongutvikling:** Debutsesong. Klar oppgang fra en anstendig GW1-åpning til en sterk 2. plass.
-**Min vurdering:** Fra "greit, ikke spektakulært" til ligaens andre beste runde, drevet av samme kapteinsvalg som toppspilleren. Et lite bytte — Bijol inn for Muñoz — endret ingenting dramatisk, men laget hans begynner å vise identitet: en mann som følger flokken og blir belønnet for det.
-**Nevneverdige øyeblikk:** 2026-27 GW1: Bruno Fernandes-kaptein, 4 poeng, 4. plass. GW2: samme kaptein, 46 poeng, 2. plass.
-**Løpende vitser:** Del av "46-poengs-trioen" denne uken — samme kaptein, samme resultat, som Torkil og Markus.
-**Byttemønster:** Ett lite bytte i GW2 (Bijol inn for Muñoz), ellers stabil.
-**Kapteinvalg:** Bruno Fernandes i GW2 — 46 poeng.
+**Nåværende form:** GW3: 73 poeng, 2. plass (uendret), topp 2,5 prosent av verden denne runden. Spilte free hit med ligaens beste transfer-gevinst (+24 netto) og Haaland som kaptein, 18 poeng.
+**Sesongutvikling:** Debutsesong, og en av sesongens sterkeste historier så langt — tre runder på rad over ligasnittet (streak registrert).
+**Min vurdering:** Samme chip som Torkil, dramatisk forskjellig resultat. Der Torkil fikk 52, fant Vidar 73 og ligaens beste transferbytte samtidig. Han sitter fortsatt med wildcard, benkeboost og trippelkaptein i behold — mens ligalederen allerede har brukt to av fire kort. Om dette fortsetter, er avstanden til Torkil ikke uoverkommelig.
+**Nevneverdige øyeblikk:** GW1: grei åpning. GW2: del av "46-poengs-trioen". GW3: free hit, 73 poeng, beste transfer i ligaen, tre runder på rad over snittet.
+**Løpende vitser:** Mannen som følger flokken og blir belønnet for det, nå også mannen som bruker samme chip som lederen og gjør det bedre.
+**Byttemønster:** Free hit i GW3 — hele laget snudd, med ligaens beste nettoresultat.
+**Kapteinvalg:** Haaland i GW3 — 18 poeng.

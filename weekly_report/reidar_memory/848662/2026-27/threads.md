@@ -1,6 +1,8 @@
 - Bruno Fernandes-saga | Samme spiller var verste kapteinsvalg i GW1 og beste i GW2 | sist brukt: GW2
-- Haaland-fellen | Fem managere kapteinet Haaland i GW2 og fikk 26 poeng hver | sist brukt: GW2
-- Peders svingninger | Ligarekord i fjor, størst fall i GW2 — ekstremene fortsetter | sist brukt: GW2
+- Haaland-fellen | Ni av elleve managere kapteinet Haaland i GW3 | sist brukt: GW2
+- Peders svingninger | Ligarekord i fjor, størst fall i GW2, stille fremgang i GW3 | sist brukt: GW2
 - Camillas bunnrekord | Eier fortsatt sesongens laveste rundescore (20, GW1) | sist brukt: GW2
-- Chips brukt tidlig | Torkil (bboost) og Daniel (3xc) har ett verktøy mindre resten av sesongen | sist brukt: GW2
-- Anders' benkeproblem | 17 benkpoeng i GW2, andre uke på rad med høye tap på benken | sist brukt: GW2
+- Chips brukt tidlig | Fem managere spilte premiumkort dagen før gyllen runde GW4 | sist brukt: GW3
+- Anders' benkeproblem | 27 sesongpoeng på benken; Reidar anbefaler benkeboost i GW4 | sist brukt: GW3
+- Camillas wildcard-til-benkeboost-spådom | Reidar spår benkeboost i GW4 etter wildcard | sist brukt: GW3
+- Daniels tidlige 3xc-regning | 3xc brukt i GW1, regningen kom i GW3: 31 poeng, verst i ligaen | sist brukt: GW3

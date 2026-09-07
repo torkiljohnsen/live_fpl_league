@@ -1,8 +1,8 @@
 **Lag:** Aquabyters
-**Nåværende form:** GW2: 65 poeng, 10. plass (ned fra 6.). Haaland-kaptein ga 26 poeng.
-**Sesongutvikling:** Debutsesong. Etter en nøytral GW1-åpning kommer nå det første tegnet på et mønster — under snittet, uten dramatikk.
-**Min vurdering:** Fortsatt et blankt kort, men konturene begynner å tegne seg: en manager som lander konsekvent under midten uten katastrofer eller genistreker. Haaland leverte 26 poeng, men resten av laget holdt ham nede.
-**Nevneverdige øyeblikk:** 2026-27 GW1: Isak-kaptein, 4 poeng, rett under snittet. GW2: Haaland-kaptein, 26 poeng, 10. plass.
-**Løpende vitser:** Ingen etablert ennå — men "under snittet" begynner å bli hans plass i tabellen.
-**Byttemønster:** Ett bytte i GW2 (Sangaré inn for Caicedo).
-**Kapteinvalg:** Haaland i GW2 — 26 poeng.
+**Nåværende form:** GW3: 75 poeng, rundens høyeste score i ligaen, hoppet fra 10. til 6. plass — sesongens største fremgang. Haaland-kaptein ga 18 poeng, uten chip.
+**Sesongutvikling:** Debutsesong. Etter to nøytrale runder under snittet kommer en overraskende topprestasjon, uten noe verktøy brukt i det hele tatt.
+**Min vurdering:** Konturene jeg antydet forrige uke — "konsekvent under midten" — ble knust denne gangen. Ligaens beste rundescore, uten chip, mens fem andre tømte lommene for kort. Det er for tidlig å kalle dette et mønster, men det er langt fra det jeg skrev for én uke siden.
+**Nevneverdige øyeblikk:** GW1: rett under snittet. GW2: 10. plass. GW3: 75 poeng, ligaens beste, størst fremgang i tabellen.
+**Løpende vitser:** "Under snittet" holdt ikke en runde til. Nå: mannen som vant runden uten å bruke noe som helst.
+**Byttemønster:** Ett bytte i GW3 (Cherki inn for Semenyo).
+**Kapteinvalg:** Haaland i GW3 — 18 poeng.

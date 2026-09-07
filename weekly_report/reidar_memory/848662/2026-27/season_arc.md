@@ -1,13 +1,11 @@
-**Tittelkamp:** Torkil (204) leder klart etter to runder, nå med både beste kapteinspick og beste rundescore i GW2 — paradokset fra GW1 er borte. Vidar (160) og Markus (159) følger tett bak, begge løftet av samme Bruno Fernandes-kaptein. Oda (153) holder fjerdeplass med beste bytte i ligaen denne uken.
+**Tittelkamp:** Torkil (256) leder klart foran Vidar (233), Markus (214) og Oda (212). Men Torkil brukte free hit denne uken for en beskjeden 52 poeng, mens Vidar fant 73 på samme chip og ligaens beste transfer-gevinst. Torkil har nå bare wildcard og 3xc igjen, mens Vidar sitter på tre kort inn mot gyllen runde — avstanden kan smelte fortere enn ledelsen antyder.
 
-**Bruno Fernandes-saken:** Sesongens første store gjennomgangsfigur. Samme spiller var ligaens verste kapteinsvalg i GW1 (4 poeng) og beste i GW2 (46 poeng) — kapteinet av tre forskjellige managere begge ganger, med identisk utfall. Reidar følger dette som en studie i templat-avhengighet, ikke individuell genialitet.
+**Den store chip-historien:** Fem managere (Torkil, Vidar, Markus, Oda, Camilla) tømte sitt mest verdifulle kort i GW3, dagen før gyllen runde 4 der chips gir dobbel uttelling. Markus og Oda spilte trippelkaptein på Haaland for beskjedne 55/59 poeng — rett rundt ligasnittet, i en uke uten ekstra betaling. Daniel, som brukte 3xc allerede i GW1, viste denne uken hva regningen koster: 31 poeng, verst i ligaen, størst fall i tabellen (5.→10.), og dårligste kapteinspick. Fem managere (Anders, amund, Hedda, Peder, Eirin) sitter fortsatt med alle fire kort urørt — akkurat de rette til å utnytte gyllen runde fullt ut.
 
-**Haaland-fellen, versjon 2:** Firkløveret fra GW1 (Oda, Anders, Eirin, Hedda) endret form denne uken. Oda rømte til João Pedro og ble belønnet. Anders, Eirin og Hedda ble værende og fikk 26 poeng hver — sammen med amund og nykommer Camilla, som nå er femte medlem. Spørsmålet står fortsatt: lærer noen, eller er dette bare hvem som eier Haaland denne uken?
+**amunds gjennombrudd:** Fra "konsekvent under snittet" til ligaens beste rundescore uten chip i det hele tatt — størst fremgang i tabellen (10.→6.). For tidlig å kalle mønster, men verdt å følge.
 
-**Peders fall:** Fra 5. til 9. plass i én runde, drevet av ligaens dårligste kapteinspick (Isak, 16 poeng). Kombinert med fjorårets ligarekord (115, GW16) og sisteplass, bygger dette et bilde av en manager med enorme svingninger — akkurat som i fjor.
+**Camillas wildcard-gåte:** Hun spilte wildcard i GW3, og Reidar spår benkeboost i GW4, basert på et vanlig mønster i FPL. Om det ikke skjer, har han lovet leserne en innrømmelse.
 
-**Chips brukt tidlig:** Torkil (bench boost) og Daniel (trippelkaptein) sitter fortsatt med ett verktøy mindre enn resten av feltet. Daniels fall til 5. plass i GW2, etter en Saka-drevet GW1-sensasjon, antyder at kostnaden begynner å vise seg.
+**Rekorder som står:** Høyeste rundescore: Torkil 115 (GW2). Laveste: Camilla 20 (GW1). Begge uinnfridd denne uken.
 
-**Rekorder som står (fra 2025-26):** Høyeste rundescore: Peder 115 (GW16). Denne sesongens beste så langt: Torkil 115 (GW2) — like høyt som Peders ligarekord, men ikke over den. Laveste: Hedda 13 (GW13), fortsatt uinnfridd av Camillas GW1-bunn på 20.
-
-**Tonenotater:** Reidar begynner å feste blikket på gjentakende mønstre — Bruno Fernandes-svingningen, Haaland-flokken, benkepoeng-problemet hos Anders. Fortsatt tørr og nøytral med de tre nye (Vidar, amund, Markus), men konturer av identitet begynner å vise seg hos alle tre.
+**Tonenotater:** Reidar fokuserer nå tungt på chip-timing som tema — hvem som brukte for tidlig, hvem som sparer riktig. Ros til amund og Vidar, mild bekymring for Markus og Oda, direkte kritikk av Daniels tidlige 3xc.

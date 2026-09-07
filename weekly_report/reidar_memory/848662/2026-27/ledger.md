@@ -1,1 +1,2 @@
-(ingen aktive spådommer denne runden)
+- GW3 | Camilla spiller benkeboost i GW4 etter wildcard i GW3 | avgjøres: GW4 | status: åpen
+- GW3 | Reidars råd: Anders bør spille benkeboost i gyllen runde GW4 | avgjøres: GW4 | status: åpen

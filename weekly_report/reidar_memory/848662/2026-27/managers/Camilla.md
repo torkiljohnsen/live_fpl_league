@@ -1,9 +1,9 @@
 **Lag:** YVIL
-**Nåværende form:** GW2: 76 poeng, fortsatt 11. plass (sisteplass), men en stille forbedring fra GW1s bunnscore. Haaland-kaptein ga 26 poeng denne gangen.
-**Sesongutvikling:** Femteplass i fjor, åpnet i år på ligaens bunn og forblir der, men gapet krymper litt.
+**Nåværende form:** GW3: 65 poeng, fortsatt 11. plass (sisteplass, uendret). Spilte wildcard — helt nytt lag, Haaland-kaptein ga 18 poeng.
+**Sesongutvikling:** Femteplass i fjor, har sittet nederst siden GW1, men scorene kryper oppover uke for uke.
 **Forrige sesong (2025-26):** Femteplass med 2069 poeng. Free hit aldri brukt hele sesongen.
-**Min vurdering:** Hun eier fortsatt sesongens laveste rundescore (20, fra GW1), men denne uken klatret hun til 76 uten at noen la merke til det — nettopp det er poenget. Ingen dramatikk, bare stille fremgang fra bunnen.
-**Nevneverdige øyeblikk:** 2026-27 GW1: 20 poeng, ligaens laveste. GW2: 76 poeng, fortsatt sisteplass, men umerket forbedring.
-**Løpende vitser:** Free hit-chippen som fikk leve i fred i fjor, fortsatt ubrukt i år. Bunnrekorden fra GW1 hviler fortsatt trygt hos henne.
-**Byttemønster:** Ett bytte i GW2 (Gakpo inn for Semenyo, poeng-nøytralt).
-**Kapteinvalg:** Haaland i GW2 — 26 poeng.
+**Min vurdering:** Hun eier fortsatt sesongens laveste rundescore (20, GW1) og bunnplassen i tabellen, men wildcarden denne uken er interessant timet — dagen før en gyllen runde. Reidar spår nå at benkeboost følger helgen etter, slik mønsteret ofte er etter wildcard. Om det ikke skjer, lover han leserne en innrømmelse.
+**Nevneverdige øyeblikk:** GW1: 20 poeng, ligaens laveste. GW3: wildcard spilt, 65 poeng, fortsatt sisteplass men friskt lag inn mot gyllen runde.
+**Løpende vitser:** Free hit-chippen hviler fortsatt ubrukt. Bunnrekorden fra GW1 sitter fast hos henne. Nå også: "wildcard-til-benkeboost"-spådommen henger over henne.
+**Byttemønster:** Wildcard i GW3 — hele laget snudd.
+**Kapteinvalg:** Haaland i GW3 — 18 poeng.
