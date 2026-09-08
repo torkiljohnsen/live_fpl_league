@@ -40,7 +40,7 @@ class Shape:
     """One column format.
 
     Two budgets, not one. ``word_soft`` is the length the shape normally
-    wants; ``word_max`` is roughly double it, and is there so a round with
+    wants; ``word_max`` sits a few hundred words above it, and is there so a round with
     genuinely more to say is not cut off mid-story. The gap has to be
     earned with new material -- see NARRATIVE_GUIDE.md -- and only
     ``word_max`` is enforced, by fpl.style_lint.
@@ -56,72 +56,72 @@ class Shape:
 
 SHAPES: dict[str, Shape] = {
     "spalten": Shape(
-        "spalten", "Spalten", 600, 1200,
+        "spalten", "Spalten", 750, 1300,
         "den vante rette kolonnen",
         "pull quote, fact box, standalone-linje",
     ),
     "kortversjonen": Shape(
-        "kortversjonen", "Kortversjonen", 250, 500,
+        "kortversjonen", "Kortversjonen", 350, 600,
         "kort og konsentrert, ingen overskrifter",
         "ingen",
     ),
     "portrettet": Shape(
-        "portrettet", "Portrettet", 650, 1300,
+        "portrettet", "Portrettet", 800, 1400,
         "hele saken om én manager",
         "pull quote, standalone-linje",
     ),
     "maktrangeringen": Shape(
-        "maktrangeringen", "Maktrangeringen", 500, 1000,
+        "maktrangeringen", "Maktrangeringen", 650, 1100,
         "styrkeforhold etter form, ikke tabellplassering",
         "tabell",
     ),
     "retten_er_satt": Shape(
-        "retten_er_satt", "Retten er satt", 500, 1000,
+        "retten_er_satt", "Retten er satt", 650, 1100,
         "én avgjørelse for retten: aktorat, forsvar, dom",
         "for/against-blokk",
     ),
     "kvitteringene": Shape(
-        "kvitteringene", "Kvitteringene", 450, 900,
+        "kvitteringene", "Kvitteringene", 600, 1000,
         "Reidar sjekker sine egne spådommer",
         "kvittering (receipt)",
     ),
     "brevet": Shape(
-        "brevet", "Brevet", 550, 1100,
+        "brevet", "Brevet", 700, 1200,
         "et åpent brev til én manager",
         "standalone-linje",
     ),
     "regnearket": Shape(
-        "regnearket", "Regnearket", 400, 800,
+        "regnearket", "Regnearket", 550, 900,
         "ett tall snudd og vendt fra alle kanter",
         "stort tall (big-number)",
     ),
     "dagboka": Shape(
-        "dagboka", "Dagboka", 500, 1000,
+        "dagboka", "Dagboka", 650, 1100,
         "kampdagen, time for time",
         "tidslinje (timeline)",
     ),
     "nekrologen": Shape(
-        "nekrologen", "Nekrologen", 400, 800,
+        "nekrologen", "Nekrologen", 550, 900,
         "en nekrolog over et kapteinbind, en chip eller en tittelsjanse",
         "pull quote",
     ),
     "karakterboka": Shape(
-        "karakterboka", "Karakterboka", 500, 1000,
+        "karakterboka", "Karakterboka", 650, 1100,
         "karakterbok, én linje per manager",
         "tabell",
     ),
     "raadgiveren": Shape(
-        "raadgiveren", "Rådgiveren", 450, 900,
+        "raadgiveren", "Rådgiveren", 600, 1000,
         "råd om chips, timing og hvem som spiller for hva",
         "fact box, kvittering",
     ),
     "sesongforhaandsomtalen": Shape(
-        "sesongforhaandsomtalen", "Sesongforhåndsomtalen", 650, 1300,
+        "sesongforhaandsomtalen", "Sesongforhåndsomtalen", 800, 1400,
         "sesongåpning: laget presenteres, ingen rangeringsprat",
         "fact box",
     ),
     "sesongoppsummeringen": Shape(
-        "sesongoppsummeringen", "Sesongoppsummeringen", 650, 1300,
+        "sesongoppsummeringen", "Sesongoppsummeringen", 800, 1400,
         "sesongen oppsummert, Reidars årsavslutning",
         "tabell, stort tall",
     ),
