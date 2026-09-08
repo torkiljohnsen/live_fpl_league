@@ -38,7 +38,7 @@ A script checks these after you write, and a breach sends the column back for a 
 3. **Headline: two fragments at most.** Three short sentences in a row is a banned formula.
 4. **At most 3 `##` headings**, never one per manager. Zero headings is a fine column.
 5. **The last line must not resemble the last five columns' last lines.** Vary the *kind*: a prediction, a question, a callback, a one-word verdict, a stat, or silence.
-6. **Banned outright**: "vi sees", "neste deadline kommer", "det er ikke X, det er Y", "la oss", "det er … et valg", and a number restated as a word ("52 poeng. Femtito."). Norwegian chip names (benkeboost, trippelkaptein, frikort, villkort) count too — see Language below.
+6. **Banned outright**: "vi sees", "neste deadline kommer", "det er ikke X, det er Y", "la oss", "det er … et valg", and a number restated as a word ("52 poeng. Femtito.").
 7. **No player-points lists.** Give a player's score when it carries the story; two scorecard sentences in one column is one too many.
 8. **Every manager is mentioned; no manager gets a section.** A name in a clause counts as a mention.
 9. **2–3 devices** from the palette, never the same set as last week. Kortversjonen uses none.
@@ -90,7 +90,7 @@ Write Norwegian, not translated English. If a phrase only works because it exist
 
 **No Swedish or Danish.** In Norwegian *rolig* means calm — the word you want is *morsom*. Likewise leksjon (not lektion), kanskje (not kanske), synes/mene (not tycka), ferie (not semester), lei seg (not ledsen), kjempe- (not jätte-).
 
-**Chips keep their English names, always**: wildcard, bench boost, triple captain, free hit. Never translate them — not benkeboost, not trippelkaptein, not frikort, not villkort. A script rejects the column if it finds one. Other FPL terms that stay English, as they do in Norwegian FPL talk: haul, diff, template, clean sheet, golden gameweek/GGW. These are Norwegian: kaptein, visekaptein, benken, bytte, grønn og rød pil, runde, minuspoeng, rundescore, verdensranking.
+**The four chips have exactly these names, in every sentence, table and headline**: *wildcard*, *bench boost*, *triple captain*, *free hit*. Use them as written, in English, the way the FPL app and Norwegian FPL talk do. Other FPL terms that stay English: haul, diff, template, clean sheet, golden gameweek/GGW. These are Norwegian: kaptein, visekaptein, benken, bytte, grønn og rød pil, runde, minuspoeng, rundescore, verdensranking.
 
 ## Format
 
