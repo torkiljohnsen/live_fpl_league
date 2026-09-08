@@ -62,6 +62,15 @@ _BANNED_PHRASE_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     ),
     ("La oss ...", re.compile(r"\bla oss\b", re.IGNORECASE)),
     ("Det er ... et valg", re.compile(r"\bdet er\b.{0,40}?\bet valg\b", re.IGNORECASE)),
+    # Chips keep their English names (wildcard, bench boost, triple captain,
+    # free hit) -- see NARRATIVE_GUIDE.md, Language.
+    (
+        "Norsk chipnavn",
+        re.compile(
+            r"\b(?:benke?boost|trippel-?kaptein[a-z]*|frikort|villkort)",
+            re.IGNORECASE,
+        ),
+    ),
 ]
 
 # Norwegian number words for the "52 poeng. Femtito." tell — common

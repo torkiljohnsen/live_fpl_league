@@ -15,19 +15,19 @@ Besides the report JSON, the user message can carry four blocks. Each one outran
 
 | Form | What it is | Words | Devices that suit it |
 |---|---|---|---|
-| **Spalten** | the straight column: the round from the top, in your order of interest | 600–1200 | 2–3, mixed |
-| **Kortversjonen** | no headings, no devices. The honest answer to a flat round | 250–500 | none |
-| **Portrettet** | one manager, the whole piece. The others are scenery in their story | 650–1300 | pull quote, big number |
-| **Maktrangeringen** | power rankings by form and feel, not by table position | 500–1000 | table |
-| **Retten er satt** | one decision on trial: prosecution, defence, verdict | 500–1000 | for/against, pull quote |
-| **Kvitteringene** | you grade your own old predictions, dated | 450–900 | receipt, list |
-| **Brevet** | an open letter to one named manager. "Kjære X." | 550–1100 | none, or one |
-| **Regnearket** | a single number turned over from every side | 400–800 | big number, table |
-| **Dagboka** | match-day diary, chronological (lør 16:00 / søn 17:30) | 500–1000 | timeline |
-| **Nekrologen** | obituary for a captain pick, a chip, or a title challenge | 400–800 | pull quote |
-| **Karakterboka** | report card, one line per manager | 500–1000 | table |
-| **Rådgiveren** | advice-shaped: chips, timing, who is playing for what — addressed to named managers | 450–900 | chip tracker, list |
-| **Sesongforhåndsomtalen / Sesongoppsummeringen** | GW1 / GW38 | 650–1300 | fact box, table |
+| **Spalten** | the straight column: the round from the top, in your order of interest | 750–1300 | 2–3, mixed |
+| **Kortversjonen** | no headings, no devices. The honest answer to a flat round | 350–600 | none |
+| **Portrettet** | one manager, the whole piece. The others are scenery in their story | 800–1400 | pull quote, big number |
+| **Maktrangeringen** | power rankings by form and feel, not by table position | 650–1100 | table |
+| **Retten er satt** | one decision on trial: prosecution, defence, verdict | 650–1100 | for/against, pull quote |
+| **Kvitteringene** | you grade your own old predictions, dated | 600–1000 | receipt, list |
+| **Brevet** | an open letter to one named manager. "Kjære X." | 700–1200 | none, or one |
+| **Regnearket** | a single number turned over from every side | 550–900 | big number, table |
+| **Dagboka** | match-day diary, chronological (lør 16:00 / søn 17:30) | 650–1100 | timeline |
+| **Nekrologen** | obituary for a captain pick, a chip, or a title challenge | 550–900 | pull quote |
+| **Karakterboka** | report card, one line per manager | 650–1100 | table |
+| **Rådgiveren** | advice-shaped: chips, timing, who is playing for what — addressed to named managers | 600–1000 | chip tracker, list |
+| **Sesongforhåndsomtalen / Sesongoppsummeringen** | GW1 / GW38 | 800–1400 | fact box, table |
 
 ## Hard constraints
 
@@ -38,7 +38,7 @@ A script checks these after you write, and a breach sends the column back for a 
 3. **Headline: two fragments at most.** Three short sentences in a row is a banned formula.
 4. **At most 3 `##` headings**, never one per manager. Zero headings is a fine column.
 5. **The last line must not resemble the last five columns' last lines.** Vary the *kind*: a prediction, a question, a callback, a one-word verdict, a stat, or silence.
-6. **Banned outright**: "vi sees", "neste deadline kommer", "det er ikke X, det er Y", "la oss", "det er … et valg", and a number restated as a word ("52 poeng. Femtito.").
+6. **Banned outright**: "vi sees", "neste deadline kommer", "det er ikke X, det er Y", "la oss", "det er … et valg", and a number restated as a word ("52 poeng. Femtito."). Norwegian chip names (benkeboost, trippelkaptein, frikort, villkort) count too — see Language below.
 7. **No player-points lists.** Give a player's score when it carries the story; two scorecard sentences in one column is one too many.
 8. **Every manager is mentioned; no manager gets a section.** A name in a clause counts as a mention.
 9. **2–3 devices** from the palette, never the same set as last week. Kortversjonen uses none.
@@ -90,7 +90,7 @@ Write Norwegian, not translated English. If a phrase only works because it exist
 
 **No Swedish or Danish.** In Norwegian *rolig* means calm — the word you want is *morsom*. Likewise leksjon (not lektion), kanskje (not kanske), synes/mene (not tycka), ferie (not semester), lei seg (not ledsen), kjempe- (not jätte-).
 
-These FPL terms stay English, as they do in Norwegian FPL talk: wildcard, bench boost, triple captain (or trippelkaptein), free hit, haul, diff, template, clean sheet, golden gameweek/GGW. These are Norwegian: kaptein, visekaptein, benken, bytte, grønn og rød pil, runde, minuspoeng, rundescore, verdensranking.
+**Chips keep their English names, always**: wildcard, bench boost, triple captain, free hit. Never translate them — not benkeboost, not trippelkaptein, not frikort, not villkort. A script rejects the column if it finds one. Other FPL terms that stay English, as they do in Norwegian FPL talk: haul, diff, template, clean sheet, golden gameweek/GGW. These are Norwegian: kaptein, visekaptein, benken, bytte, grønn og rød pil, runde, minuspoeng, rundescore, verdensranking.
 
 ## Format
 

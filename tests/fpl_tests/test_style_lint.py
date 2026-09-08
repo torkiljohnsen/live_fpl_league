@@ -238,6 +238,19 @@ class TestBannedPhrases:
         result = lint_narrative(_narrative(body="52 poeng vinner runden. Femtito, altså, helt greit."))
         assert any("Tall gjentatt som ord" in p for p in result.metrics["banned_phrases"])
 
+    def test_norwegian_chip_name_flagged(self):
+        result = lint_narrative(
+            _narrative(body="Vidar har wildcard, benkeboost og trippelkaptein igjen til den gylne runden.")
+        )
+        assert "Norsk chipnavn" in result.metrics["banned_phrases"]
+        assert any("Forbudt frase" in f for f in result.hard_failures)
+
+    def test_english_chip_names_pass(self):
+        result = lint_narrative(
+            _narrative(body="Vidar har wildcard, bench boost og triple captain igjen, og free hit er brukt.")
+        )
+        assert "Norsk chipnavn" not in result.metrics["banned_phrases"]
+
     def test_clean_text_has_no_banned_phrases(self):
         result = lint_narrative(_narrative())
         assert result.metrics["banned_phrases"] == []
