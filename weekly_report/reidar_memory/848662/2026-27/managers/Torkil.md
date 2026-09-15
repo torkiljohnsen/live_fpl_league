@@ -1,9 +1,9 @@
 **Lag:** FK Haralds/By
-**Nåværende form:** GW3: 52 poeng, 1. plass (uendret), fortsatt ligaleder med 256 poeng totalt. Spilte free hit, men fikk bare marginalt over verdenssnittet — en chip brukt for omtrent ingenting.
-**Sesongutvikling:** Forsvarende ligamester. Etter to sterke runder med paradokset løst i GW2, kom GW3 med et svakere resultat på tross av det dyreste kortet i spillet.
+**Nåværende form:** GW4: 86 poeng, 1. plass (uendret), 342 poeng totalt. Spilte wildcard i selve den gylne runden og vant hele potten. Beste transfer i ligaen (+26 netto, spesielt Groß inn for Szoboszlai).
+**Sesongutvikling:** Forsvarende ligamester, og etter en svak free hit-runde i GW3 fant han det riktige kortet til rett tid denne gangen — akkurat der Reidar tidligere kritiserte ham for å bruke verktøy for tidlig.
 **Forrige sesong (2025-26):** LIGAVINNER med 2213 poeng, 37 foran Anders. 8 rundeseiere, 2 sisteplasser. Sesong-high 103 (GW33, free hit), low 35.
-**Min vurdering:** Free hit ga ham 52 poeng mot Vidars 73 på samme chip — forskjellen mellom å bruke kortet riktig og bare bruke det. Han beholder ledelsen komfortabelt, men effektiviteten sviktet denne gangen. Bench boost og nå free hit er brukt; bare wildcard og 3xc gjenstår, og gyllen runde kommer uten hans mest fleksible verktøy.
-**Nevneverdige øyeblikk:** GW1: bench boost, dårligste kapteinspick. GW2: samme kaptein, beste pick i ligaen. GW3: free hit spilt, 52 poeng, midt på treet.
-**Løpende vitser:** Bruno Fernandes-saken hviler i bakgrunnen denne uken. Torkil ser fortsatt ut til å ri flokken, uansett hvor den fører ham.
-**Byttemønster:** Free hit i GW3 — hele laget midlertidig snudd.
-**Kapteinvalg:** Haaland i GW3 — 18 poeng.
+**Min vurdering:** Isak-kapteinen ga bare 4 poeng, ligaens dårligste kapteinspick denne uken — men wildcarden og transferne bar ham til seier likevel. Han sitter nå i topp 0,12 prosent av alle managere i verden. Bare 3xc gjenstår av chipene, men det holdt til å vinne når det gjaldt.
+**Nevneverdige øyeblikk:** GW1: bench boost. GW3: free hit, svakt utbytte. GW4: wildcard, 86 poeng, gyllen rundes vinner, beste transfer i ligaen.
+**Løpende vitser:** Bruno Fernandes-saken hviler fortsatt. Torkil ser fortsatt ut til å ri flokken — og nå også vinne gyllen runde med den.
+**Byttemønster:** Wildcard i GW4 — hele laget snudd, beste nettoresultat i ligaen.
+**Kapteinvalg:** Isak i GW4 — 4 poeng, ligaens dårligste pick, men chip og bytter bar ham likevel.

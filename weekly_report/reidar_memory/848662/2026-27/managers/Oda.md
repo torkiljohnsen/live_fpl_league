@@ -1,9 +1,8 @@
 **Lag:** Odas Dreamteam
-**Nåværende form:** GW3: 59 poeng, 4. plass (uendret). Spilte trippelkaptein på Haaland, 27 poeng — men verste bytte i ligaen denne uken (Sangaré inn for Le Fée, netto -8).
-**Sesongutvikling:** Fjerdeplass i fjor, sterk GW1-åpning, liten glidning i GW2, og nå et blandet GW3: chip-timing som bekymrer, samtidig som plasseringen holder seg stabil.
-**Forrige sesong (2025-26):** Fjerdeplass med 2083 poeng. 6 rundeseiere, 2 sisteplasser. Sesong-high 104 (GW17).
-**Min vurdering:** Hun rømte Haaland-fellen i GW2 med beste bytte i ligaen — denne uken var hun tilbake på Haaland som trippelkaptein og fikk samtidig ligaens verste bytte. Kortet ment for gyllen runde er brukt opp én uke for tidlig, akkurat som hos Markus.
-**Nevneverdige øyeblikk:** GW2: beste bytte i ligaen. GW3: 3xc spilt, Haaland 27 poeng tredoblet, men verste bytte samme uke.
-**Løpende vitser:** Igor Thiago-sagaen hviler fortsatt i minnet. Dreamteam-navnet lever, men chip-timingen hennes ligner nå Markus'.
-**Byttemønster:** Ett bytte i GW3 (Sangaré inn for Le Fée) — ligaens verste denne uken.
-**Kapteinvalg:** Haaland (3xc) i GW3 — 27 poeng.
+**Nåværende form:** GW4: 61 poeng, 4. plass (uendret). Ingen chip. Kaptein Anton Stach ga kun 6 poeng — et påfallende svakt valg med Haaland i laget uten bind. Verste bytte i ligaen denne uken (Ødegaard inn for Bruno, netto -1).
+**Sesongutvikling:** Fjerdeplass i fjor, sterk start i år, men GW3-GW4 har vist chip-anger og nå to uker på rad med svake bytter/kapteinsvalg.
+**Min vurdering:** Trippelkaptein-kortet er brukt opp fra GW3, og denne uken viste hva som skjer uten det: et påfallende dårlig kapteinsvalg og ligaens svakeste transferbytte samme runde. Plasseringen holder seg, men marginene krymper.
+**Nevneverdige øyeblikk:** GW2: beste bytte i ligaen. GW3: 3xc spilt, samtidig verste bytte. GW4: nytt svakt kapteinsvalg, nytt svakt bytte.
+**Løpende vitser:** Igor Thiago-sagaen hviler fortsatt i minnet. Dreamteam-navnet lever, men to runder med bomskudd på rad krever forklaring.
+**Byttemønster:** Ett bytte i GW4 (Ødegaard inn for Bruno) — ligaens verste denne uken.
+**Kapteinvalg:** Anton Stach i GW4 — 6 poeng.

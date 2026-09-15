@@ -1,9 +1,9 @@
 **Lag:** Tafatt il
-**Nåværende form:** GW3: 51 poeng, 7. plass (uendret). Haaland-kaptein ga 18 poeng, akkurat på ligasnittet.
-**Sesongutvikling:** Tredjeplass i fjor, svak GW1-åpning, GW2-oppgang, nå en flat, anonym runde.
+**Nåværende form:** GW4: 71 poeng, 8. plass (ned fra 7.). Haaland-kaptein ga 18 poeng, hennes beste kapteinpoeng denne sesongen.
+**Sesongutvikling:** Tredjeplass i fjor, en flat GW3 fulgt av en anonym men solid GW4. Hun er nå — sammen med amund — den eneste i ligaen med alle fire chips urørt, fire runder inn.
 **Forrige sesong (2025-26):** Tredjeplass med 2169 poeng. Sesong-high 89, low 13 — ligarekord lavest.
-**Min vurdering:** Tafatt IL har for én gangs skyld ikke noe mønster å vise til denne uken — verken bunn eller topp, bare rett i midten. Fortsatt langt fra fjorårets ekstreme spenn.
-**Nevneverdige øyeblikk:** 2025-26: GW13 — 13 poeng, ligarekord lavest. GW38 — rundevinner. 2026-27 GW1-2: bunn til oppgang. GW3: helt flat, 7. plass uendret.
-**Løpende vitser:** Tafatt IL-mønsteret (bunn ene uken, opp neste) tok pause denne uken — kanskje bare et pusterom.
-**Byttemønster:** Ingen bytter i GW3.
-**Kapteinvalg:** Haaland i GW3 — 18 poeng.
+**Min vurdering:** Fire chips urørt begynner ikke lenger å ligne forsiktighet — det ligner en plan. Reidar vil gjerne vite hva planen er, og har nå spådd at minst to av de urørte-kort-managerne bryter ut kortstokken før neste gyldne runde (GW8).
+**Nevneverdige øyeblikk:** 2025-26: GW13 — 13 poeng, ligarekord lavest. 2026-27 GW4: fortsatt intet chip brukt, hennes beste Haaland-runde hittil.
+**Løpende vitser:** Tafatt IL-mønsteret tar en pause i tredje sesong på rad — nå erstattet av spørsmålet om chip-strategien hennes.
+**Byttemønster:** To bytter i GW4 (Ødegaard inn, Ajayi inn).
+**Kapteinvalg:** Haaland i GW4 — 18 poeng.

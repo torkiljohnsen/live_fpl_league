@@ -1,9 +1,9 @@
 **Lag:** YVIL
-**Nåværende form:** GW3: 65 poeng, fortsatt 11. plass (sisteplass, uendret). Spilte wildcard — helt nytt lag, Haaland-kaptein ga 18 poeng.
-**Sesongutvikling:** Femteplass i fjor, har sittet nederst siden GW1, men scorene kryper oppover uke for uke.
+**Nåværende form:** GW4: 64 poeng, fortsatt 11. plass (sisteplass, uendret). Ingen chip spilt — Reidars spådom om bench boost etter wildcard slo ikke til. Haaland-kaptein ga 18 poeng.
+**Sesongutvikling:** Femteplass i fjor, har sittet nederst siden GW1. Datagrunnlaget viser nå en grønn-pil-rekke på tre runder, selv om plasseringen ikke har rørt seg.
 **Forrige sesong (2025-26):** Femteplass med 2069 poeng. Free hit aldri brukt hele sesongen.
-**Min vurdering:** Hun eier fortsatt sesongens laveste rundescore (20, GW1) og bunnplassen i tabellen, men wildcarden denne uken er interessant timet — dagen før en gyllen runde. Reidar spår nå at benkeboost følger helgen etter, slik mønsteret ofte er etter wildcard. Om det ikke skjer, lover han leserne en innrømmelse.
-**Nevneverdige øyeblikk:** GW1: 20 poeng, ligaens laveste. GW3: wildcard spilt, 65 poeng, fortsatt sisteplass men friskt lag inn mot gyllen runde.
-**Løpende vitser:** Free hit-chippen hviler fortsatt ubrukt. Bunnrekorden fra GW1 sitter fast hos henne. Nå også: "wildcard-til-benkeboost"-spådommen henger over henne.
-**Byttemønster:** Wildcard i GW3 — hele laget snudd.
-**Kapteinvalg:** Haaland i GW3 — 18 poeng.
+**Min vurdering:** Reidar lovet leserne en innrømmelse dersom spådommen sviktet, og den kom: Camilla spilte ingen chip i det hele tatt, verken bench boost eller noe annet. Wildcard-mønsteret han trodde på fantes ikke her. Hun blir stående med bunnrekorden og sisteplassen, men scorene kryper sakte oppover.
+**Nevneverdige øyeblikk:** GW1: 20 poeng, ligaens laveste. GW3: wildcard spilt. GW4: ingen chip, spådommen bommet, Reidar innrømmer feil offentlig.
+**Løpende vitser:** Free hit-chippen hviler fortsatt ubrukt. Bunnrekorden fra GW1 sitter fast. Wildcard-til-benkeboost-spådommen er nå historie — og feil historie.
+**Byttemønster:** Ingen bytter i GW4.
+**Kapteinvalg:** Haaland i GW4 — 18 poeng.

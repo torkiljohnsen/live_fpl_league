@@ -1,8 +1,9 @@
 - Bruno Fernandes-saga | Samme spiller var verste kapteinsvalg i GW1 og beste i GW2 | sist brukt: GW2
 - Haaland-fellen | Ni av elleve managere kapteinet Haaland i GW3 | sist brukt: GW2
-- Peders svingninger | Ligarekord i fjor, størst fall i GW2, stille fremgang i GW3 | sist brukt: GW2
-- Camillas bunnrekord | Eier fortsatt sesongens laveste rundescore (20, GW1) | sist brukt: GW2
-- Chips brukt tidlig | Fem managere spilte premiumkort dagen før gyllen runde GW4 | sist brukt: GW3
-- Anders' benkeproblem | 27 sesongpoeng på benken; Reidar anbefaler benkeboost i GW4 | sist brukt: GW3
-- Camillas wildcard-til-benkeboost-spådom | Reidar spår benkeboost i GW4 etter wildcard | sist brukt: GW3
-- Daniels tidlige 3xc-regning | 3xc brukt i GW1, regningen kom i GW3: 31 poeng, verst i ligaen | sist brukt: GW3
+- Peders svingninger | Ligarekord i fjor, nå størst fremgang i ligaen med bench boost i gyllen runde | sist brukt: GW4
+- Camillas bunnrekord | Eier fortsatt sesongens laveste rundescore (20, GW1) og sisteplassen | sist brukt: GW4
+- Gyllen runde-chip-timingen | Torkil og Peder traff riktig i selve gyllen runde, Anders og Camilla bommet | sist brukt: GW4
+- Anders' benkeproblem | 54 sesongpoeng på benken; wildcard løste det ikke, 27 poeng igjen i GW4 | sist brukt: GW4
+- Daniels tidlige 3xc-regning | 3xc brukt i GW1; GW4 viste bedring med Saka-kaptein (16 poeng) | sist brukt: GW4
+- Hedda og amunds chip-hamstring | Eneste to med alle fire chips urørt fire runder inn | sist brukt: GW4
+- amunds berg-og-dalbane | Ligaens beste rundescore i GW3, verste i GW4 — størst fall i ligaen | sist brukt: GW4

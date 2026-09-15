@@ -1,9 +1,9 @@
 **Lag:** Dragen BK
-**Nåværende form:** GW3: 57 poeng, 9. plass (ned fra 8.). Haaland-kaptein ga 18 poeng.
-**Sesongutvikling:** Sjetteplass i fjor, midt i feltet i år uten dramatikk i noen retning — en stille glidning nedover denne uken.
+**Nåværende form:** GW4: 76 poeng, 7. plass (opp fra 9.). Spilte free hit i selve den gylne runden. Cole Palmer-kaptein ga 10 poeng.
+**Sesongutvikling:** Sjetteplass i fjor, midt i feltet i år. Datagrunnlaget bekrefter nå en grønn-pil-rekke på tre runder — en av kun to i ligaen med den strengen.
 **Forrige sesong (2025-26):** Sjetteplass med 2033 poeng. Sesong-high 97 (GW25).
-**Min vurdering:** Ingenting spesielt skjedde her denne uken, og det er akkurat greit tre runder inn i sesongen. Ingen chip brukt, ingen dramatikk, bare et lite fall i tabellen mens andre rørte på seg.
-**Nevneverdige øyeblikk:** 2025-26: GW25 — 97 poeng. GW38 — ligaens beste kapteinvalg. 2026-27 GW1-2: Haaland-svingninger. GW3: fortsatt Haaland, 57 poeng, mildt fall.
-**Løpende vitser:** Kaptein på forsvarsspiller, uortodoks strateg — men denne uken bare en av mange anonyme Haaland-eiere.
-**Byttemønster:** Ingen bytter i GW3.
-**Kapteinvalg:** Haaland i GW3 — 18 poeng.
+**Min vurdering:** Fra stille glidning nedover i GW3 til en av ligaens tydeligste oppadgående streker denne uken. Free hit i gyllen runde var et smart trekk, og den treårs-lange grønne pil-strengen fortjener å bli fulgt videre.
+**Nevneverdige øyeblikk:** 2025-26: GW25 — 97 poeng. 2026-27 GW3: mildt fall. GW4: free hit spilt, 76 poeng, tre grønne piler på rad.
+**Løpende vitser:** Kaptein på forsvarsspiller, uortodoks strateg — nå også en av bare to managere med en reell oppgangsstrek gående.
+**Byttemønster:** Free hit i GW4 — hele laget midlertidig snudd.
+**Kapteinvalg:** Cole Palmer i GW4 — 10 poeng.
