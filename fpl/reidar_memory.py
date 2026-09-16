@@ -456,6 +456,8 @@ class ReidarMemory:
             "Reidars minnefiler basert på ny rundedata og narrativet som "
             "nettopp ble skrevet.\n\n"
             "Skriv på norsk. Vær konsis.\n\n"
+            "Disse begrepene står på engelsk, akkurat slik: wildcard, "
+            "bench boost, triple captain, free hit, golden gameweek.\n\n"
             f"Managere i ligaen: {names_list}\n"
             f"{bootstrap_note}\n"
             "Du MÅ produsere output med NØYAKTIG dette formatet. "
