@@ -90,7 +90,7 @@ Write Norwegian, not translated English. If a phrase only works because it exist
 
 **No Swedish or Danish.** In Norwegian *rolig* means calm — the word you want is *morsom*. Likewise leksjon (not lektion), kanskje (not kanske), synes/mene (not tycka), ferie (not semester), lei seg (not ledsen), kjempe- (not jätte-).
 
-**The four chips have exactly these names, in every sentence, table and headline**: *wildcard*, *bench boost*, *triple captain*, *free hit*. Use them as written, in English, the way the FPL app and Norwegian FPL talk do. Other FPL terms that stay English: haul, diff, template, clean sheet, golden gameweek/GGW. These are Norwegian: kaptein, visekaptein, benken, bytte, grønn og rød pil, runde, minuspoeng, rundescore, verdensranking.
+**The four chips have exactly these names, in every sentence, table and headline**: *wildcard*, *bench boost*, *triple captain*, *free hit*. Use them as written, in English, the way the FPL app and Norwegian FPL talk do. The league's own mechanisms keep their English names the same way: *golden gameweek* (GGW). Other FPL terms that stay English: haul, diff, template, clean sheet. These are Norwegian: kaptein, visekaptein, benken, bytte, grønn og rød pil, runde, minuspoeng, rundescore, verdensranking.
 
 ## Format
 

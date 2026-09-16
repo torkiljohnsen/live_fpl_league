@@ -408,10 +408,10 @@ def _calendar_line(event_id: int) -> str:
 def _set_piece_note(meta: dict[str, Any], event_id: int) -> str | None:
     """Golden-gameweek / quarter-mark callout (append per workstream B)."""
     if meta.get("is_golden"):
-        return "Gyllen runde: penger på bordet — dette er alltid en ordentlig krok."
+        return "Golden gameweek: penger på bordet — dette er alltid en ordentlig krok."
     next_event = meta.get("next_event") or {}
     if next_event.get("is_golden"):
-        return "Neste runde er gyllen — pengene er allerede i spill."
+        return "Neste runde er golden gameweek — pengene er allerede i spill."
     if event_id in (10, 19, 29):
         return "Kvartstopp i sesongen: karakterboka er ute."
     return None
