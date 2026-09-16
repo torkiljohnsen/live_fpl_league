@@ -506,6 +506,8 @@ class ReidarMemory:
             "Åpne tråder: oppdater «sist brukt» KUN når narrativet faktisk "
             "brukte tråden denne uken. Legg til nye tråder sparsomt. "
             "Fjern tråder ubrukt i 8+ runder. Maks 10 linjer.\n\n"
+            "Linjer som starter med «**Kontekst fra ligaen:**» er skrevet "
+            "for hånd av ligaen. Ta dem med ordrett i profilen.\n\n"
             "VIKTIG: Oppdater eksisterende profiler med NY informasjon — "
             "ikke gjenta alt fra forrige gang. Behold det som fortsatt er "
             "relevant og legg til nytt."

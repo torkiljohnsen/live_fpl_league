@@ -318,6 +318,18 @@ class TestUpdateMemory:
         system_prompt = call_kwargs.kwargs["system"]
         assert "FØRSTE runde" in system_prompt
 
+    def test_prompt_keeps_hand_written_league_context(self, tmp_path: Path):
+        # Profiles are rewritten every round; facts the league adds by hand
+        # would vanish after one update unless the prompt protects them.
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        client = self._mock_client("===GW_SUMMARY===\nx\n===END===\n")
+
+        mem.update_memory(_sample_report(), "Narrative", client)
+
+        system_prompt = client.messages.create.call_args.kwargs["system"]
+        assert "**Kontekst fra ligaen:**" in system_prompt
+
     def test_existing_profiles_no_bootstrap_note(self, tmp_path: Path):
         """With existing profiles, prompt should NOT include bootstrap note."""
         mem = _make_memory(tmp_path)
