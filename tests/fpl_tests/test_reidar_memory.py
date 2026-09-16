@@ -212,6 +212,26 @@ class TestGetPromptContext:
         assert "Sesongbue" not in context
         assert "Tidligere runder" not in context
 
+    def test_includes_hand_written_league_context_first(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+
+        base = _base_path(tmp_path)
+        (base / "league_context.md").write_text("Ola og Kari jobber sammen", encoding="utf-8")
+        (base / "managers" / "Ola.md").write_text("Ola profile", encoding="utf-8")
+
+        context = mem.get_prompt_context(4)
+
+        assert "## Om ligaen" in context
+        assert context.index("Ola og Kari jobber sammen") < context.index("Managerprofiler")
+
+    def test_league_context_alone_is_enough_for_a_context(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        (_base_path(tmp_path) / "league_context.md").write_text("Kontekst", encoding="utf-8")
+
+        assert "Kontekst" in mem.get_prompt_context(1)
+
 
 # ---------------------------------------------------------------------------
 # update_memory (mocked LLM)
@@ -317,6 +337,21 @@ class TestUpdateMemory:
         call_kwargs = client.messages.create.call_args
         system_prompt = call_kwargs.kwargs["system"]
         assert "FØRSTE runde" in system_prompt
+
+    def test_leaves_hand_written_league_context_untouched(self, tmp_path: Path):
+        mem = _make_memory(tmp_path)
+        mem.scaffold_directories()
+        context_path = _base_path(tmp_path) / "league_context.md"
+        context_path.write_text("Skrevet for hånd", encoding="utf-8")
+        client = self._mock_client(
+            "===MANAGER: Ola===\nP\n===END===\n"
+            "===GW_SUMMARY===\nS\n===END===\n"
+            "===SEASON_ARC===\nA\n===END===\n"
+        )
+
+        mem.update_memory(_sample_report(), "Narrative", client)
+
+        assert context_path.read_text(encoding="utf-8") == "Skrevet for hånd"
 
     def test_prompt_keeps_hand_written_league_context(self, tmp_path: Path):
         # Profiles are rewritten every round; facts the league adds by hand
