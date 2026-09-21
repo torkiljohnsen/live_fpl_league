@@ -1,9 +1,9 @@
 **Lag:** FK Haralds/By
-**Nåværende form:** GW4: 86 poeng, 1. plass (uendret), 342 poeng totalt. Spilte wildcard i selve den gylne runden og vant hele potten. Beste transfer i ligaen (+26 netto, spesielt Groß inn for Szoboszlai).
-**Sesongutvikling:** Forsvarende ligamester, og etter en svak free hit-runde i GW3 fant han det riktige kortet til rett tid denne gangen — akkurat der Reidar tidligere kritiserte ham for å bruke verktøy for tidlig.
+**Nåværende form:** GW5: 36 poeng, 1. plass (uendret), 378 poeng totalt — men ligaens laveste rundescore denne uken, tolv under verdenssnittet. Verste transfer i hele ligaen (-20 netto: Wissa inn for Isak, Gibbs-White inn for Groß — begge spillerne han solgte leverte solid).
+**Sesongutvikling:** Forsvarende ligamester, satt i topp 0,12 % av verden for bare en uke siden. Ledelsen over Markus har krympet fra 44 til 10 poeng på to runder.
 **Forrige sesong (2025-26):** LIGAVINNER med 2213 poeng, 37 foran Anders. 8 rundeseiere, 2 sisteplasser. Sesong-high 103 (GW33, free hit), low 35.
-**Min vurdering:** Isak-kapteinen ga bare 4 poeng, ligaens dårligste kapteinspick denne uken — men wildcarden og transferne bar ham til seier likevel. Han sitter nå i topp 0,12 prosent av alle managere i verden. Bare 3xc gjenstår av chipene, men det holdt til å vinne når det gjaldt.
-**Nevneverdige øyeblikk:** GW1: bench boost. GW3: free hit, svakt utbytte. GW4: wildcard, 86 poeng, gyllen rundes vinner, beste transfer i ligaen.
-**Løpende vitser:** Bruno Fernandes-saken hviler fortsatt. Torkil ser fortsatt ut til å ri flokken — og nå også vinne gyllen runde med den.
-**Byttemønster:** Wildcard i GW4 — hele laget snudd, beste nettoresultat i ligaen.
-**Kapteinvalg:** Isak i GW4 — 4 poeng, ligaens dårligste pick, men chip og bytter bar ham likevel.
+**Min vurdering:** Fra ligaens dominerende gyllen-runde-vinner til ligaens svakeste rundescore på én uke, med en verstingtransfer på toppen. Groß, spilleren han solgte, ga 14 poeng — til Markus. Ti poeng er fortsatt en ledelse, men marginen er langt tynnere enn for to uker siden.
+**Nevneverdige øyeblikk:** GW4: wildcard, gyllen rundes vinner. GW5: ligaens laveste score, ligaens verste transfer.
+**Løpende vitser:** Bruno Fernandes-saken hviler fortsatt. Torkil rir flokken fortsatt — men denne uken falt han av hesten.
+**Byttemønster:** To bytter i GW5, minus 20 netto — ligaens verste.
+**Kapteinvalg:** Haaland i GW5 — 12 poeng.

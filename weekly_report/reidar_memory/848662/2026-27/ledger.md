@@ -1,3 +1,4 @@
 - GW3 | Camilla spiller benkeboost i GW4 etter wildcard i GW3 | avgjøres: GW4 | status: feil (GW4)
 - GW3 | Reidars råd: Anders bør spille benkeboost i gyllen runde GW4 | avgjøres: GW4 | status: feil (GW4)
 - GW4 | Minst to av managerne med urørte chips bruker kort før gyllen runde GW8 | avgjøres: GW8 | status: åpen
+- GW5 | Peders 3-strake-streak (snitt/grønne piler) nevnes igjen i GW8 hvis den lever videre | avgjøres: GW8 | status: åpen

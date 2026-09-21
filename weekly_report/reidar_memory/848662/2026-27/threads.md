@@ -1,9 +1,10 @@
 - Bruno Fernandes-saga | Samme spiller var verste kapteinsvalg i GW1 og beste i GW2 | sist brukt: GW2
-- Haaland-fellen | Ni av elleve managere kapteinet Haaland i GW3 | sist brukt: GW2
-- Peders svingninger | Ligarekord i fjor, nå størst fremgang i ligaen med bench boost i gyllen runde | sist brukt: GW4
-- Camillas bunnrekord | Eier fortsatt sesongens laveste rundescore (20, GW1) og sisteplassen | sist brukt: GW4
-- Gyllen runde-chip-timingen | Torkil og Peder traff riktig i selve gyllen runde, Anders og Camilla bommet | sist brukt: GW4
-- Anders' benkeproblem | 54 sesongpoeng på benken; wildcard løste det ikke, 27 poeng igjen i GW4 | sist brukt: GW4
-- Daniels tidlige 3xc-regning | 3xc brukt i GW1; GW4 viste bedring med Saka-kaptein (16 poeng) | sist brukt: GW4
-- Hedda og amunds chip-hamstring | Eneste to med alle fire chips urørt fire runder inn | sist brukt: GW4
-- amunds berg-og-dalbane | Ligaens beste rundescore i GW3, verste i GW4 — størst fall i ligaen | sist brukt: GW4
+- Haaland-fellen | Sju av elleve kapteinet Haaland for 12 poeng, mens Semenyo (17) igjen slapp ubundet | sist brukt: GW5
+- Peders svingninger | Tre strake runder over snitt og tre grønne piler, ligaens mest oversette streak | sist brukt: GW5
+- Camillas bunnrekord | Eier fortsatt sesongens laveste rundescore (20, GW1) og sisteplassen | sist brukt: GW5
+- Gyllen runde-chip-timingen | Torkil og Peder traff riktig i GW4, effekten visket ut to uker senere | sist brukt: GW4
+- Anders' benkeproblem | 74 sesongpoeng på benken, fjerde bench-disaster tross beste kapteinspick i GW5 | sist brukt: GW5
+- Daniels tidlige 3xc-regning | 3xc brukt i GW1; klatret i GW5 via differensial, ikke kaptein | sist brukt: GW5
+- Hedda og amunds chip-hamstring | Eneste to med alle fire chips urørt fem runder inn, GW8-frist nærmer seg | sist brukt: GW5
+- amunds berg-og-dalbane | Fra beste (GW3) til verste (GW4) til stille glidning nedover (GW5) | sist brukt: GW5
+- Torkil-Markus tittelkamp | Luken krympet fra 44 til 10 poeng etter Torkils svakeste og Markus' sterkeste runde | sist brukt: GW5

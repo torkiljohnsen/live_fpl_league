@@ -1,8 +1,8 @@
 **Lag:** Aquabyters
-**Nåværende form:** GW4: 51 poeng, ligaens laveste denne uken, stupte fra 6. til 9. plass — størst fall i ligaen. Isak-kaptein ga bare 4 poeng. Ingen chip spilt.
-**Sesongutvikling:** Etter forrige ukes gjennombrudd (ligaens beste rundescore uten chip) kom en brå korreksjon: fra topp til bunn på én uke.
-**Min vurdering:** Reidar lot spørsmålet stå åpent forrige uke om GW3 var starten på et mønster. Svaret kom fort og tydelig: én god runde var bare én god runde. Han sitter fortsatt — sammen med Hedda — på alle fire chips urørt, fire runder inn.
-**Nevneverdige øyeblikk:** GW3: 75 poeng, ligaens beste, størst fremgang. GW4: 51 poeng, ligaens laveste, størst fall — rett motsatt retning på én uke.
-**Løpende vitser:** "Under snittet" holdt ikke, men nå heller ikke "over snittet". Berg-og-dalbane-mannen, nå også en av bare to med fullt chip-lager.
-**Byttemønster:** Ingen bytter i GW4.
-**Kapteinvalg:** Isak i GW4 — 4 poeng.
+**Nåværende form:** GW5: 47 poeng, 10. plass (ned fra 9., -1). Haaland-kaptein ga 12 poeng. Ingen chip spilt. Fortsetter berg-og-dalbanen: fra ligaens beste (GW3) til ligaens verste (GW4) og nå videre nedover, under snittet igjen.
+**Sesongutvikling:** Etter det brå fallet i GW4 fortsetter formen i samme retning heller enn å snu tilbake — tre runder med tre helt forskjellige historier.
+**Min vurdering:** Rollercoasteren fortsetter, nå i en tredje variant: ikke lenger et voldsomt fall, men en stille glidning videre nedover. Han sitter fortsatt — sammen med Hedda — på alle fire chips urørt, fem runder inn, og Reidars spådom om at minst to av de urørte bryter ut kortstokken før GW8 lever videre.
+**Nevneverdige øyeblikk:** GW3: 75 poeng, ligaens beste. GW4: 51 poeng, ligaens laveste. GW5: fortsatt under snittet, tredje ulik retning på rad.
+**Løpende vitser:** Berg-og-dalbane-mannen, nå på sin tredje distinkte fase denne sesongen.
+**Byttemønster:** Ingen bytter i GW5.
+**Kapteinvalg:** Haaland i GW5 — 12 poeng.

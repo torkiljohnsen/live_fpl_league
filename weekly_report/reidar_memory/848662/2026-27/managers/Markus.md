@@ -1,8 +1,8 @@
 **Lag:** Gluggen maskinlag
-**Nåværende form:** GW4: 75 poeng, 3. plass (uendret). Ingen chip denne uken — 3xc er brukt opp. Bruno Fernandes-kaptein ga kun 4 poeng, et svakt valg med Haaland (9 poeng) urørt på bindet.
-**Sesongutvikling:** Solid 3. plass gjennom hele sesongen, men fortsatt med bekymringen fra Reidar om at trippelkaptein ble brukt én uke for tidlig, dagen før gyllen runde.
-**Min vurdering:** Uten trippelkaptein å ta i bruk denne uken måtte han klare seg med et vanlig kapteinsvalg — og det ble et svakt et. Groß-byttet reddet mye (17 poeng inn for Cherkis 1), men chip-angeren fra GW3 henger fortsatt over ham.
-**Nevneverdige øyeblikk:** GW2: verste bytte, beste kaptein. GW3: 3xc spilt for tidlig. GW4: solid poengsum tross svakt kapteinsvalg.
-**Løpende vitser:** Mannen som taper på transfermarkedet men vinner på kapteinsbenken — foreløpig satt på pause denne uken.
-**Byttemønster:** Ett bytte i GW4 (Groß inn for Cherki).
-**Kapteinvalg:** Bruno Fernandes i GW4 — 4 poeng.
+**Nåværende form:** GW5: 79 poeng, 2. plass (opp fra 3., +1), topp 0,8 % i verden denne uken. Beste bytte i ligaen — Semenyo inn for Tzolis, 15 poeng netto. Haaland-kaptein ga 12 poeng, ikke spesielt, men laget rundt bar likevel.
+**Sesongutvikling:** Solid tredjeplass hele sesongen, nå forbi Vidar og bare 10 poeng bak Torkil — et gap som var 44 poeng for to runder siden.
+**Min vurdering:** Der Torkil hadde sesongens svakeste runde, leverte Markus sesongens sterkeste. Dette er ikke lenger bare "mannen som taper på transfermarkedet men vinner på kapteinsbenken" — denne uken vant han begge deler. Chip-angeren fra GW3 (3xc for tidlig) føles fjern når resten av laget presterer slik.
+**Nevneverdige øyeblikk:** GW2: verste bytte, beste kaptein. GW5: beste score i ligaen, beste bytte, klatring til andreplass.
+**Løpende vitser:** Mannen som taper på transfermarkedet men vinner på kapteinsbenken — denne uken vant han på begge fronter samtidig.
+**Byttemønster:** Ett bytte i GW5 (Semenyo inn for Tzolis) — ligaens beste.
+**Kapteinvalg:** Haaland i GW5 — 12 poeng.

@@ -1,9 +1,9 @@
 **Lag:** Odas Dreamteam
 **Kontekst fra ligaen:** Oda er i mammapermisjon og er tilbake på jobb 28. oktober. Rom for lett humor når det passer: fysisk fravær = mentalt fravær, at folk i permisjon tilsynelatende har bedre tid enn andre til å planlegge laget, eller, bare etter en dårlig runde, at ammetåka kan ha ført til noen tvilsomme valg.
-**Nåværende form:** GW4: 61 poeng, 4. plass (uendret). Ingen chip. Kaptein Anton Stach ga kun 6 poeng — et påfallende svakt valg med Haaland i laget uten bind. Verste bytte i ligaen denne uken (Ødegaard inn for Bruno, netto -1).
-**Sesongutvikling:** Fjerdeplass i fjor, sterk start i år, men GW3-GW4 har vist chip-anger og nå to uker på rad med svake bytter/kapteinsvalg.
-**Min vurdering:** Trippelkaptein-kortet er brukt opp fra GW3, og denne uken viste hva som skjer uten det: et påfallende dårlig kapteinsvalg og ligaens svakeste transferbytte samme runde. Plasseringen holder seg, men marginene krymper.
-**Nevneverdige øyeblikk:** GW2: beste bytte i ligaen. GW3: 3xc spilt, samtidig verste bytte. GW4: nytt svakt kapteinsvalg, nytt svakt bytte.
-**Løpende vitser:** Igor Thiago-sagaen hviler fortsatt i minnet. Dreamteam-navnet lever, men to runder med bomskudd på rad krever forklaring.
-**Byttemønster:** Ett bytte i GW4 (Ødegaard inn for Bruno) — ligaens verste denne uken.
-**Kapteinvalg:** Anton Stach i GW4 — 6 poeng.
+**Nåværende form:** GW5: 49 poeng, 4. plass (uendret). Ingen bytter, ingen chip. Anton Stach-kaptein ga 10 poeng (doblet fra 5), en anonym runde uten dramatikk i noen retning.
+**Sesongutvikling:** Fjerdeplass i fjor, sterk start i år, men etter to runder med chip-anger og svake valg (GW3-GW4) kom en helt rolig runde uten hverken bomskudd eller gevinst.
+**Min vurdering:** Etter to uker med ligaens verste bytte og svakeste kapteinsvalg var en stille, nøytral runde nesten en lettelse. Ingen nye historier å skrive om, men også ingen nye skader.
+**Nevneverdige øyeblikk:** GW3: 3xc spilt, verste bytte. GW4: svakt kapteinsvalg, svakt bytte. GW5: total stillstand.
+**Løpende vitser:** Igor Thiago-sagaen hviler fortsatt i minnet. Dreamteam-navnet lever videre i limbo.
+**Byttemønster:** Ingen bytter i GW5.
+**Kapteinvalg:** Anton Stach i GW5 — 10 poeng.

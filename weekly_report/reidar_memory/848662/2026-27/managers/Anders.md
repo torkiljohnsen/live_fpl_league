@@ -1,8 +1,8 @@
 **Lag:** Back2back
-**Nåværende form:** GW4: 65 poeng, 6. plass (ned fra 5.). Spilte endelig wildcard — men ikke i tråd med Reidars råd om bench boost. Nytt lag, samme gamle problem: 27 poeng på benken, ligaens "bench disaster" denne uken. Cole Palmer-kaptein ga 10 poeng.
-**Sesongutvikling:** Andreplass i fjor, jakter fortsatt sin første seier. Sesongens benkepoeng har nå nådd 54, klart mest i ligaen, til tross for et helt nytt lag.
-**Min vurdering:** Reidar anbefalte bench boost i den gylne runden. Anders valgte wildcard i stedet, og resultatet ble et bevis på at problemet ikke lå i laget, men i mannen: 27 nye benkepoeng dukket opp på et brett han nettopp hadde bygget fra bunnen.
-**Nevneverdige øyeblikk:** GW1-2: høye benkepoeng. GW3: roligere. GW4: wildcard spilt, benkeproblemet tilbake for fullt, ligaens verste bench-disaster denne uken.
-**Løpende vitser:** "Back2back" fra en mann som aldri har vunnet — og nå mannen som ignorerte Reidars råd og betalte for det umiddelbart.
-**Byttemønster:** Wildcard i GW4 — hele laget snudd, uten effekt på benkeproblemet.
-**Kapteinvalg:** Cole Palmer i GW4 — 10 poeng.
+**Nåværende form:** GW5: 58 poeng, 6. plass (uendret). Beste kapteinsvalg i hele ligaen — Lewis Hall, 26 poeng, en spiller nesten ingen andre eier. Men 20 poeng ble liggende på benken samme runde, ligaens fjerde bench-disaster med hans navn på i år.
+**Sesongutvikling:** Andreplass i fjor, jakter fortsatt sin første seier. Sesongens benkepoeng har nå nådd 74, klart mest i ligaen — et tall som bare vokser uansett hva han gjør med laget.
+**Min vurdering:** Wildcarden i GW4 løste ingenting, og GW5 beviste det videre: et strålende kapteinsvalg klarte ikke å redde en runde der 20 poeng nok en gang satt fast på bånken. Reidar tror ikke lenger problemet er laget Anders velger — det er mannen som lar dem sitte.
+**Nevneverdige øyeblikk:** GW1-2: høye benkepoeng. GW4: wildcard, benkeproblem tilbake. GW5: beste kapteinspick i ligaen, likevel ny bench-disaster.
+**Løpende vitser:** "Back2back" fra en mann som aldri har vunnet — og nå mannen med sesongens mest pålitelige benke-katastrofe.
+**Byttemønster:** Ingen bytter i GW5.
+**Kapteinvalg:** Lewis Hall i GW5 — 26 poeng, ligaens beste pick, bortkastet av benken.
