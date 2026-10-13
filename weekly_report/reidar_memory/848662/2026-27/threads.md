@@ -1,10 +1,10 @@
-- Bruno Fernandes-saga | Samme spiller var verste kapteinsvalg i GW1 og beste i GW2 | sist brukt: GW2
-- Haaland-fellen | Sju av elleve kapteinet Haaland for 12 poeng, mens Semenyo (17) igjen slapp ubundet | sist brukt: GW5
-- Peders svingninger | Tre strake runder over snitt og tre grønne piler, ligaens mest oversette streak | sist brukt: GW5
-- Camillas bunnrekord | Eier fortsatt sesongens laveste rundescore (20, GW1) og sisteplassen | sist brukt: GW5
-- Gyllen runde-chip-timingen | Torkil og Peder traff riktig i GW4, effekten visket ut to uker senere | sist brukt: GW4
-- Anders' benkeproblem | 74 sesongpoeng på benken, fjerde bench-disaster tross beste kapteinspick i GW5 | sist brukt: GW5
-- Daniels tidlige 3xc-regning | 3xc brukt i GW1; klatret i GW5 via differensial, ikke kaptein | sist brukt: GW5
-- Hedda og amunds chip-hamstring | Eneste to med alle fire chips urørt fem runder inn, GW8-frist nærmer seg | sist brukt: GW5
-- amunds berg-og-dalbane | Fra beste (GW3) til verste (GW4) til stille glidning nedover (GW5) | sist brukt: GW5
-- Torkil-Markus tittelkamp | Luken krympet fra 44 til 10 poeng etter Torkils svakeste og Markus' sterkeste runde | sist brukt: GW5
+- Haaland-fellen | amund kapteinet Haaland for standard 12 poeng samme uke som han toppet ligaen via differensial-bytter | sist brukt: GW6
+- Peders svingninger | Treukers grønn pil-streng brøt i GW6, ett poeng under snittet, til tross for ligaens beste kapteinspick | sist brukt: GW6
+- Camillas bunnrekord | Eier fortsatt sesongens laveste rundescore (20, GW1) og sisteplassen, nå seks runder på rad | sist brukt: GW6
+- Gyllen runde-chip-timingen | Torkil og Peder traff riktig i GW4, effekten visket ut to runder senere | sist brukt: GW4
+- Anders' benkeproblem | 88 sesongpoeng på benken, men ingen ny disaster i GW6 til tross for solid klatring | sist brukt: GW5
+- Daniels tidlige 3xc-regning | 3xc brukt i GW1; faller nå tilbake mot bunnen etter kort oppgang i GW5 | sist brukt: GW5
+- Hedda og amunds chip-hamstring | Samme kortstokk, motsatt uke: amund toppet ligaen (82), Hedda bunnet (39), begge urørt | sist brukt: GW6
+- amunds berg-og-dalbane | Fjerde ulike fase på fire runder: best (GW3), verst (GW4), nedgang (GW5), ny topp (GW6) | sist brukt: GW6
+- Torkil-Markus tittelkamp | Luken utvidet seg igjen fra 10 til 16 poeng etter Torkils svarrunde og Markus' svakeste kapteinspick | sist brukt: GW6
+- Edvind - ny deltaker | Entret direkte på femteplass med 382 poeng, ingen profil ennå, verste transfer i ligaen i debuten | sist brukt: GW6

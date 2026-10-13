@@ -1,9 +1,9 @@
 **Lag:** Find the Salahution
-**Nåværende form:** GW5: 57 poeng, 5. plass (uendret). Tre strake runder over verdenssnittet, tre grønne piler på rad — offisielt registrert som sesongens mest undervurderte streak. Isak-kaptein ga 16 poeng, ikke eksepsjonelt, men laget bar likevel.
-**Sesongutvikling:** Sisteplass i fjor, svingende åpning i år, nå en av kun to managere med en reell, dokumentert oppgangsstreng gående (den andre er Eirin, hvis streng nettopp brøt).
+**Nåværende form:** GW6: 57 poeng, 6. plass (ned fra 5., -1). João Pedro-kaptein ga **24 poeng** — beste kapteinspick i hele ligaen denne uken. Likevel endte runden ett poeng under verdenssnittet, og den treukers grønne pil-strengen brøt endelig.
+**Sesongutvikling:** Sisteplass i fjor, svingende åpning i år, deretter en dokumentert tre-runders oppgangsstreng som nå er historie — brutt før den rakk frem til gyllen runde GW8.
 **Forrige sesong (2025-26):** Sisteplass med 1892 poeng, 321 bak vinneren. Sesong-high 115 (GW16, ligarekord), 11 sisteplasser.
-**Min vurdering:** Reidar lovet å nevne denne streken igjen om den lever videre til gyllen runde GW8 — og etter GW5 lever den fortsatt i beste velgående, uten å lene seg på ett stort kapteinsvalg.
-**Nevneverdige øyeblikk:** GW4: bench boost i gyllen runde, størst fremgang. GW5: tredje strake grønne pil, tredje strake over snittet.
-**Løpende vitser:** Ligarekorden og bunnplasseringen fra i fjor. "Find the Salahution" har funnet en jevn, undervurdert form i stedet.
-**Byttemønster:** Ingen bytter i GW5.
-**Kapteinvalg:** Isak i GW5 — 16 poeng.
+**Min vurdering:** Reidar lovet å nevne streken igjen om den levde videre til GW8 — nå er det moot, siden den røk allerede i GW6, til tross for ligaens beste kapteinspick denne uken. Ironisk at det beste individuelle valget ikke var nok til å holde strengen i live.
+**Nevneverdige øyeblikk:** GW5: tredje strake grønne pil. GW6: beste kapteinspick i ligaen, men streken brutt.
+**Løpende vitser:** Ligarekorden og bunnplasseringen fra i fjor. "Find the Salahution" fant en jevn form i fem runder — nå avbrutt.
+**Byttemønster:** To bytter i GW6 (Barcola inn for Semenyo, Wissa inn for Isak).
+**Kapteinvalg:** João Pedro i GW6 — 24 poeng, ligaens beste pick.

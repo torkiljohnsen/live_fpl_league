@@ -1,8 +1,8 @@
 **Lag:** Salmageddon FC
-**Nåværende form:** GW5: 58 poeng, 8. plass (opp fra 10., +2). Saka-kaptein var ligaens dårligste pick denne uken (4 poeng), men James Tarkowski — en differensial nesten ingen andre hadde — reddet runden med 14 poeng.
-**Sesongutvikling:** Etter GW3-kollapsen og en anonym GW4 klatrer han nå to plasser, ikke på grunn av kapteinsvalget, men på grunn av et lag som fant poeng andre steder.
-**Min vurdering:** En interessant kontrast: verste kapteinspick i ligaen, men fortsatt en klatring, fordi resten av laget bar ham. 3xc-regningen fra GW1 nevnes stadig sjeldnere når slikt skjer.
-**Nevneverdige øyeblikk:** GW1: 3xc spilt tidlig. GW3: 31 poeng, verst i ligaen. GW5: verste kapteinspick, likevel +2 i tabellen via Tarkowski.
-**Løpende vitser:** Mannen som brukte trippelkaptein før noen andre — nå mer kjent for differensialer enn for kapteinsbindet.
-**Byttemønster:** Ingen bytter i GW5.
-**Kapteinvalg:** Saka i GW5 — 4 poeng, ligaens svakeste pick.
+**Nåværende form:** GW6: 45 poeng, 11. plass (ned fra 8., -3). Saka-kaptein ga 4 poeng, mens João Pedro — 12 poeng — igjen satt på benken i stedet for å spille. Ingen bytter.
+**Sesongutvikling:** Etter oppgangen i GW5 (via Tarkowski-differensial) faller han nå tre plasser, tilbake mot bunnen av tabellen.
+**Min vurdering:** Mønsteret med å la gode spillere sitte på benken mens svake kapteinsvalg koster poeng, fortsetter. GW1s 3xc-regning føles stadig fjernere, men problemet har bare skiftet form.
+**Nevneverdige øyeblikk:** GW1: 3xc spilt tidlig. GW3: 31 poeng, verst i ligaen. GW5: +2 via differensial. GW6: tilbake ned, João Pedro på benk igjen.
+**Løpende vitser:** Mannen som brukte trippelkaptein før noen andre — nå mer kjent for å la de gode spillerne sitte.
+**Byttemønster:** Ingen bytter i GW6.
+**Kapteinvalg:** Saka i GW6 — 4 poeng.

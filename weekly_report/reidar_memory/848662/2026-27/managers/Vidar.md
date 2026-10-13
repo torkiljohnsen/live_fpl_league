@@ -1,8 +1,8 @@
 **Lag:** FK Straumen
-**Nåværende form:** GW5: 55 poeng, 3. plass (ned fra 2., -1), 353 poeng totalt. Ingen chip spilt. Haaland-kaptein ga 12 poeng, en ordinær runde uten dramatikk.
-**Sesongutvikling:** Debutsesong, fortsatt en solid historie, men etter forrige ukes tap i terreng mot Torkil ble han denne gangen forbigått også av Markus — første gang han faller helt til tredjeplass.
-**Min vurdering:** Beste kapteinspick i ligaen forrige uke ble denne gangen erstattet av en helt vanlig Haaland-runde, og uten chip-boost mister han fart mot både Torkil og Markus. Fortsatt tre kort i behold (wildcard, bench boost, 3xc) — mer enn nesten alle andre i toppen.
-**Nevneverdige øyeblikk:** GW4: beste kapteinspick i ligaen. GW5: ingen chip, forbigått av Markus til tredjeplass.
-**Løpende vitser:** Mannen som følger flokken og blir belønnet for det — denne uken var flokken raskere enn ham.
-**Byttemønster:** Ingen bytter i GW5.
-**Kapteinvalg:** Haaland i GW5 — 12 poeng.
+**Nåværende form:** GW6: 45 poeng, 3. plass (uendret), 398 poeng totalt. Spilte wildcard — ligaens dyreste kort — på en av sesongens jevneste uker, og fikk kun 45 poeng tilbake, med hele 15 poeng liggende på benken (Mbeumo 8p blant dem).
+**Sesongutvikling:** Debutsesong, fortsatt en solid historie, men wildcarden denne uken var ikke tidspunktet jeg ville anbefalt — ingen store gevinster, bare et nytt lag som leverte omtrent det samme som det gamle.
+**Min vurdering:** Etter forrige ukes ordinære Haaland-runde kom et wildcard som ikke løste noe — en kostbar chip brukt på en runde som verken var en krise eller en mulighet. Fortsatt to kort igjen (bench boost, 3xc).
+**Nevneverdige øyeblikk:** GW4: beste kapteinspick i ligaen. GW5: forbigått av Markus. GW6: wildcard spilt, moderat avkastning.
+**Løpende vitser:** Mannen som følger flokken og blir belønnet for det — denne uken brukte han jokeren sin på en helt vanlig dag.
+**Byttemønster:** Wildcard spilt i GW6 — nytt lag, 45 poeng, 15 på benken.
+**Kapteinvalg:** Wissa i GW6 — 4 poeng.

@@ -1,8 +1,8 @@
 **Lag:** Gluggen maskinlag
-**Nåværende form:** GW5: 79 poeng, 2. plass (opp fra 3., +1), topp 0,8 % i verden denne uken. Beste bytte i ligaen — Semenyo inn for Tzolis, 15 poeng netto. Haaland-kaptein ga 12 poeng, ikke spesielt, men laget rundt bar likevel.
-**Sesongutvikling:** Solid tredjeplass hele sesongen, nå forbi Vidar og bare 10 poeng bak Torkil — et gap som var 44 poeng for to runder siden.
-**Min vurdering:** Der Torkil hadde sesongens svakeste runde, leverte Markus sesongens sterkeste. Dette er ikke lenger bare "mannen som taper på transfermarkedet men vinner på kapteinsbenken" — denne uken vant han begge deler. Chip-angeren fra GW3 (3xc for tidlig) føles fjern når resten av laget presterer slik.
-**Nevneverdige øyeblikk:** GW2: verste bytte, beste kaptein. GW5: beste score i ligaen, beste bytte, klatring til andreplass.
-**Løpende vitser:** Mannen som taper på transfermarkedet men vinner på kapteinsbenken — denne uken vant han på begge fronter samtidig.
-**Byttemønster:** Ett bytte i GW5 (Semenyo inn for Tzolis) — ligaens beste.
-**Kapteinvalg:** Haaland i GW5 — 12 poeng.
+**Nåværende form:** GW6: 66 poeng, 2. plass (uendret). Bruno Fernandes-kaptein ga kun 2 poeng — ligaens dårligste kapteinspick denne uken — men laget rundt bar ham likevel til en solid runde. Ingen bytter.
+**Sesongutvikling:** Solid andreplass hele sesongen, men gapet opp til Torkil utvidet seg denne uken fra 10 til 16 poeng, stikk i strid med den innsnevringen Reidar antydet forrige uke.
+**Min vurdering:** Tredje strake runde over verdenssnittet, men denne gangen uten hjelp fra kapteinsbindet — faktisk til tross for det verste kapteinsvalget i ligaen. En form jeg fortsatt ikke helt stoler på, nå med enda mer bevis på at den ikke trenger et godt kapteinsvalg for å holde.
+**Nevneverdige øyeblikk:** GW5: beste score, beste bytte i ligaen. GW6: verste kapteinspick i ligaen, likevel tredje strake over snittet.
+**Løpende vitser:** Mannen som taper på transfermarkedet men vinner på kapteinsbenken — denne uken snudde det: tapte på kapteinsbindet, vant likevel totalt.
+**Byttemønster:** Ingen bytter i GW6.
+**Kapteinvalg:** Bruno Fernandes i GW6 — 2 poeng, ligaens svakeste pick.
