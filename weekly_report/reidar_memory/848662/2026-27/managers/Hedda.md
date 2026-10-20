@@ -1,9 +1,9 @@
 **Lag:** Tafatt il
-**Nåværende form:** GW6: 39 poeng, 10. plass (ned fra 7., -3) — ligaens laveste rundescore denne uken, 19 poeng under verdenssnittet. Bruno Fernandes-kaptein ga bare 2 poeng. Ingen bytter, ingen chip.
-**Sesongutvikling:** Tredjeplass i fjor, jevn midt-i-feltet-sesong før denne uken. Sammen med amund fortsatt den eneste med alle fire chips urørt, nå seks runder inn — men denne uken skilte de to seg fullstendig: amund scoret ligaens beste (82), Hedda ligaens dårligste (39), fra identisk utgangspunkt.
+**Nåværende form:** GW7: **74 poeng**, ligaens beste denne uken, topp 12,4 % i verden. Spilte wildcard — ni bytter på én gang — dagen før pengene står på spill i gyllen runde GW8. Likevel: forble på 10. plass, uendret. Haaland-kaptein ga 13 poeng (26 med C).
+**Sesongutvikling:** Vant runden uten å røre tabellplasseringen med en finger — et bevis på hvor langt bak hun faktisk ligger. 418 poeng totalt. Benken ga bare 8 poeng, tynt utbytte for et nybygd lag.
 **Forrige sesong (2025-26):** Tredjeplass med 2169 poeng. Sesong-high 89, low 13 — ligarekord lavest.
-**Min vurdering:** Reidars spådom om at minst to av de urørte-kort-managerne skulle bryte ut kortstokken før gyllen runde GW8 lever videre, og Hedda demonstrerte denne uken hvorfor tålmodigheten hennes har en kostnad: samme kortstokk som amund, men motsatt resultat.
-**Nevneverdige øyeblikk:** 2025-26: GW13 — 13 poeng, ligarekord lavest. GW6: ligaens laveste score, fortsatt intet chip brukt.
-**Løpende vitser:** Chip-gåten fortsetter — nå med en konkret kontrast til amund, samme uke, motsatt skjebne.
-**Byttemønster:** Ingen bytter i GW6.
-**Kapteinvalg:** Bruno Fernandes i GW6 — 2 poeng.
+**Min vurdering:** Reidars råd: vent én runde til med benkeboost — la benken bevise at den fortjener gyllen runde før kortet brukes. Chip-hamstring-spådommen fra GW4 er nå delvis innfridd: Hedda brøt ut først, amund er alene igjen urørt.
+**Nevneverdige øyeblikk:** 2025-26: GW13 — 13 poeng, ligarekord lavest. GW6: ligaens laveste. GW7: ligaens beste, wildcard spilt, tabellplass uendret.
+**Løpende vitser:** Chip-gåten løst for hennes del — nå venter spørsmålet om benkeboost-timingen.
+**Byttemønster:** Wildcard i GW7, ni bytter, 74 poeng.
+**Kapteinvalg:** Haaland i GW7 — 13 poeng.

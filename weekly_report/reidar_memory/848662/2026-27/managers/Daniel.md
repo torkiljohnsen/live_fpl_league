@@ -1,8 +1,8 @@
 **Lag:** Salmageddon FC
-**Nåværende form:** GW6: 45 poeng, 11. plass (ned fra 8., -3). Saka-kaptein ga 4 poeng, mens João Pedro — 12 poeng — igjen satt på benken i stedet for å spille. Ingen bytter.
-**Sesongutvikling:** Etter oppgangen i GW5 (via Tarkowski-differensial) faller han nå tre plasser, tilbake mot bunnen av tabellen.
-**Min vurdering:** Mønsteret med å la gode spillere sitte på benken mens svake kapteinsvalg koster poeng, fortsetter. GW1s 3xc-regning føles stadig fjernere, men problemet har bare skiftet form.
-**Nevneverdige øyeblikk:** GW1: 3xc spilt tidlig. GW3: 31 poeng, verst i ligaen. GW5: +2 via differensial. GW6: tilbake ned, João Pedro på benk igjen.
-**Løpende vitser:** Mannen som brukte trippelkaptein før noen andre — nå mer kjent for å la de gode spillerne sitte.
-**Byttemønster:** Ingen bytter i GW6.
-**Kapteinvalg:** Saka i GW6 — 4 poeng.
+**Nåværende form:** GW7: 35 poeng, ligaens laveste denne uken, 24 under verdenssnittet, kun 3,2 poeng per startende spiller. Falt til 12. plass (ned fra 11., -1) — nå sist i ligaen. Saka-kaptein ga 6 poeng, mens João Pedro igjen satt på benken.
+**Sesongutvikling:** Overtok sisteplassen fra Camilla etter seks runder der hun eide den. 377 poeng totalt.
+**Min vurdering:** Mønsteret med å la gode spillere sitte på benken mens svake kapteinsvalg koster poeng, har nå sendt ham forbi Camilla og ned til bunnen. Han har ikke tatt et eneste minuspoeng hele sesongen — det eneste han har unngått.
+**Nevneverdige øyeblikk:** GW1: 3xc spilt tidlig. GW3: 31 poeng, verst i ligaen den gang. GW5: +2 via differensial. GW7: ny bunnplassering, ligaens laveste rundescore.
+**Løpende vitser:** Mannen som brukte trippelkaptein før noen andre — nå kjent for å la de gode spillerne sitte, og nå sist i ligaen for første gang.
+**Byttemønster:** Ingen bytter i GW7.
+**Kapteinvalg:** Saka i GW7 — 6 poeng.

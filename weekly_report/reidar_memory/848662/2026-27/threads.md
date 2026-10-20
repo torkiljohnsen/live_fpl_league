@@ -1,10 +1,10 @@
-- Haaland-fellen | amund kapteinet Haaland for standard 12 poeng samme uke som han toppet ligaen via differensial-bytter | sist brukt: GW6
-- Peders svingninger | Treukers grønn pil-streng brøt i GW6, ett poeng under snittet, til tross for ligaens beste kapteinspick | sist brukt: GW6
-- Camillas bunnrekord | Eier fortsatt sesongens laveste rundescore (20, GW1) og sisteplassen, nå seks runder på rad | sist brukt: GW6
-- Gyllen runde-chip-timingen | Torkil og Peder traff riktig i GW4, effekten visket ut to runder senere | sist brukt: GW4
-- Anders' benkeproblem | 88 sesongpoeng på benken, men ingen ny disaster i GW6 til tross for solid klatring | sist brukt: GW5
-- Daniels tidlige 3xc-regning | 3xc brukt i GW1; faller nå tilbake mot bunnen etter kort oppgang i GW5 | sist brukt: GW5
-- Hedda og amunds chip-hamstring | Samme kortstokk, motsatt uke: amund toppet ligaen (82), Hedda bunnet (39), begge urørt | sist brukt: GW6
-- amunds berg-og-dalbane | Fjerde ulike fase på fire runder: best (GW3), verst (GW4), nedgang (GW5), ny topp (GW6) | sist brukt: GW6
-- Torkil-Markus tittelkamp | Luken utvidet seg igjen fra 10 til 16 poeng etter Torkils svarrunde og Markus' svakeste kapteinspick | sist brukt: GW6
-- Edvind - ny deltaker | Entret direkte på femteplass med 382 poeng, ingen profil ennå, verste transfer i ligaen i debuten | sist brukt: GW6
+- Haaland-fellen | 8 av 12 kapteinet Haaland for 26 hver denne uken, men Edvind matchet lederen med Groß i stedet | sist brukt: GW7
+- Bunnplass-stafetten | Camillas seks runder lange sisteplass er over — Daniel overtok med ligaens laveste score (35) | sist brukt: GW7
+- Gyllen runde-chip-timingen | Hedda spilte wildcard rett før GW8; Reidar råder henne til å vente med benkeboost | sist brukt: GW7
+- Hedda og amunds chip-hamstring | Hedda brøt ut med wildcard (74p), amund er nå alene igjen med alle fire chips urørt | sist brukt: GW7
+- amunds berg-og-dalbane | Etter sesongtopp (82, GW6) kom en roligere, solid runde uten bytter | sist brukt: GW7
+- Torkil-Markus tittelkamp | Gapet har vokst to runder på rad, nå 25 poeng, Torkils Haaland ga ligaens beste pick | sist brukt: GW7
+- Edvind - ny deltaker | Matchet lederens score i GW7 uten å kapteine Haaland i det hele tatt | sist brukt: GW7
+- Peders svingninger | Fra ligaens beste kapteinspick (GW6) til ligaens verste (GW7), falt to plasser | sist brukt: GW7
+- Daniels tidlige 3xc-regning | 3xc brukt i GW1; nå på bunnplass for første gang med ligaens laveste score i GW7 | sist brukt: GW7
+- Anders' benkeproblem | 98 sesongpoeng på benken, men to runder uten ny disaster, fjerdeplass urokkelig | sist brukt: GW7
