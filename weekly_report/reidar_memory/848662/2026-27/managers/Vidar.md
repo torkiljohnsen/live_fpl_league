@@ -1,8 +1,8 @@
 **Lag:** FK Straumen
-**Nåværende form:** GW7: 54 poeng, 3. plass uendret, 452 totalt. Første runde etter wildcarden i GW6, uten bytter. Ødegaard-kaptein ga 6 poeng — en sjeldenhet, siden Vidar ikke har Haaland i hele stallen, en unik posisjon i ligaen.
-**Sesongutvikling:** Debutsesong, fortsatt solid tredjeplass, men etter en kostbar wildcard i GW6 som ikke løste noe, fortsetter han nå uten den store flokk-fordelen (Haaland) resten av ligaen lener seg på.
-**Min vurdering:** Å stå uten Haaland midt i en liga der åtte av tolv kapteinerte ham for 26 poeng hver, er en dristig posisjon — denne uken kostet det ham relativt, men identiteten er tydelig.
-**Nevneverdige øyeblikk:** GW4: beste kapteinspick. GW6: wildcard spilt, moderat avkastning. GW7: eneste uten Haaland i stallen.
-**Løpende vitser:** Mannen som følger flokken — bortsett fra når det gjelder Haaland, der han går sin egen vei.
-**Byttemønster:** Ingen bytter i GW7.
-**Kapteinvalg:** Ødegaard i GW7 — 6 poeng.
+**Nåværende form:** GW8: 53 poeng, falt fra 3. til 5. plass (-2), sesongens største fall denne uken. To bytter, inkludert Haaland inn for João Pedro — nå har han endelig hentet inn flokk-standarden han har stått uten hele sesongen.
+**Sesongutvikling:** 505 poeng totalt. Debutsesongen fortsetter, men wildcarden fra GW6 ser nå enda tynnere ut etter et fall to plasser ned.
+**Min vurdering:** Mannen som sto alene uten Haaland har nå snudd — han hentet ham inn, kapteinet ham, og fikk likevel ligaens største fall. En påminnelse om at standardvalget ikke er noen garanti, selv når man endelig følger flokken.
+**Nevneverdige øyeblikk:** GW4: beste kapteinspick. GW7: eneste uten Haaland i stallen. GW8: hentet inn Haaland, falt likevel to plasser.
+**Løpende vitser:** Mannen som fulgte flokken — bortsett fra når det gjaldt Haaland, helt til nå.
+**Byttemønster:** To bytter i GW8.
+**Kapteinvalg:** Haaland i GW8 — 16 poeng.

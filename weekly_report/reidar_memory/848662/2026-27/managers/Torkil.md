@@ -1,9 +1,9 @@
 **Lag:** FK Haralds/By
-**Nåværende form:** GW7: 68 poeng, 1. plass uendret, 518 poeng totalt. Haaland-kaptein ga ligaens beste kapteinspick denne uken (26 poeng med C). To bytter (Gonzalo García inn for Wissa, Pascal Groß inn for Gibbs-White).
-**Sesongutvikling:** Forsvarende ligamester. Gapet til Markus har nå vokst to runder på rad — fra 10 til 16 til **25** poeng. Reidars antydning om krymping er begravd for godt.
+**Nåværende form:** GW8: 46 poeng, 1. plass uendret, 564 poeng totalt. Ingen bytter. Haaland-kaptein ga 16 poeng, standard avkastning.
+**Sesongutvikling:** Forsvarende ligamester. Gapet til Markus har nå vokst en tredje runde på rad — fra 16 til 25 til **29** poeng. Reidar spår nå at det passerer 40 før jul.
 **Forrige sesong (2025-26):** LIGAVINNER med 2213 poeng, 37 foran Anders. 8 rundeseiere, 2 sisteplasser. Sesong-high 103 (GW33, free hit), low 35.
-**Min vurdering:** Et standardvalg (Haaland) ga ham den beste avkastningen i ligaen denne uken, og gapet vokser nå i stedet for å krympe slik jeg antydet to uker på rad. Flokken rir trygt videre.
-**Nevneverdige øyeblikk:** GW5: ligaens laveste score. GW6: solid svar. GW7: beste kapteinspick, gapet opp til 25.
+**Min vurdering:** Ingen dramatikk, ingen bytter, bare en jevn runde som holder ham foran mens gapet sakte vokser seg umulig å ta igjen. Flokken rir trygt videre.
+**Nevneverdige øyeblikk:** GW5: ligaens laveste score. GW7: beste kapteinspick, gapet opp til 25. GW8: ingen drama, gapet opp til 29.
 **Løpende vitser:** Bruno Fernandes-saken hviler fortsatt. Torkil rir flokken, og flokken vinner stadig større.
-**Byttemønster:** To bytter i GW7, begge nøytrale/positive.
-**Kapteinvalg:** Haaland i GW7 — 13 poeng (26 med C), ligaens beste pick.
+**Byttemønster:** Ingen bytter i GW8.
+**Kapteinvalg:** Haaland i GW8 — 16 poeng.

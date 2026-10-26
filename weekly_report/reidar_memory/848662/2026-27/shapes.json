@@ -33,5 +33,10 @@
     "event_id": 7,
     "shape": "spalten",
     "constraint": null
+  },
+  {
+    "event_id": 8,
+    "shape": "kvitteringene",
+    "constraint": null
   }
 ]

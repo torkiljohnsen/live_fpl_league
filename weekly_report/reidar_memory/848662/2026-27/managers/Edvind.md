@@ -1,8 +1,8 @@
 **Lag:** Ctrl Alt De Ligt
-**Nåværende form:** GW7: 68 poeng, matcher serielederens score uten å kapteine Haaland. Pascal Groß-kaptein ga 10 poeng, mens Haaland satt som visekaptein på benken og scoret 13. 5. plass uendret, 450 poeng totalt. Ett bytte (Calafiori inn for Porro), solid positivt.
-**Sesongutvikling:** Andre runde i denne ligaen etter debuten i GW6, allerede et konkret bevis på at han tør avvike fra standardvalget uten å tape poeng for det.
-**Min vurdering:** Et uvanlig kapteinsvalg som fungerte perfekt — åtte av tolv andre kapteinet Haaland for 26 poeng hver, Edvind fikk 10 fra Groß og endte like høyt som Torkil likevel. En historie som begynner å ta form.
-**Nevneverdige øyeblikk:** GW6: ligadebut, verste transfer i ligaen. GW7: matchet lederens score uten Haaland-kaptein.
-**Løpende vitser:** Ingen ennå — men "mannen som ikke trenger Haaland" er en kandidat.
-**Byttemønster:** Ett bytte i GW7, positivt netto.
-**Kapteinvalg:** Pascal Groß i GW7 — 10 poeng, mot ligaens Haaland-standard.
+**Nåværende form:** GW8: **73 poeng**, ligaens beste, golden gameweek-vinneren og 50-kronersputten. Spilte free hit mens kapteinen João Pedro ikke spilte i det hele tatt — visekaptein Alexander Isak rykket inn og ble doblet til 18 poeng. Rank opp to plasser til 3., 523 totalt.
+**Sesongutvikling:** Tredje runde i ligaen etter debuten i GW6 — og allerede den managereren som vant selve golden gameweek, på en chip de fleste bruker i desperasjon, ikke når pengene står på spill.
+**Min vurdering:** 28 poeng over verdenssnittet, 6,6 poeng per startende spiller, topp 1,2 prosent av hele verden i rundescore. "Mannen som ikke trenger Haaland" er ikke lenger en kandidat til kallenavn — det er bekreftet fakta, to ganger på rad.
+**Nevneverdige øyeblikk:** GW6: ligadebut, verste transfer. GW7: matchet lederens score uten Haaland. GW8: vant golden gameweek med free hit og en benket kaptein som likevel ga 18.
+**Løpende vitser:** "Mannen som ikke trenger Haaland" — nå med en potteseier som bevis.
+**Byttemønster:** Free hit i GW8, 73 poeng, ligaens beste.
+**Kapteinvalg:** João Pedro (spilte ikke) → Isak effektivt, 18 poeng — ligaens beste pick.

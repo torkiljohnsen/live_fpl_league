@@ -1,10 +1,10 @@
-- Haaland-fellen | 8 av 12 kapteinet Haaland for 26 hver denne uken, men Edvind matchet lederen med Groß i stedet | sist brukt: GW7
-- Bunnplass-stafetten | Camillas seks runder lange sisteplass er over — Daniel overtok med ligaens laveste score (35) | sist brukt: GW7
-- Golden gameweek-chip-timingen | Hedda spilte wildcard rett før GW8; Reidar råder henne til å vente med bench boost | sist brukt: GW7
-- Hedda og amunds chip-hamstring | Hedda brøt ut med wildcard (74p), amund er nå alene igjen med alle fire chips urørt | sist brukt: GW7
-- amunds berg-og-dalbane | Etter sesongtopp (82, GW6) kom en roligere, solid runde uten bytter | sist brukt: GW7
-- Torkil-Markus tittelkamp | Gapet har vokst to runder på rad, nå 25 poeng, Torkils Haaland ga ligaens beste pick | sist brukt: GW7
-- Edvind - ny deltaker | Matchet lederens score i GW7 uten å kapteine Haaland i det hele tatt | sist brukt: GW7
-- Peders svingninger | Fra ligaens beste kapteinspick (GW6) til ligaens verste (GW7), falt to plasser | sist brukt: GW7
-- Daniels tidlige 3xc-regning | 3xc brukt i GW1; nå på bunnplass for første gang med ligaens laveste score i GW7 | sist brukt: GW7
-- Anders' benkeproblem | 98 sesongpoeng på benken, men to runder uten ny disaster, fjerdeplass urokkelig | sist brukt: GW7
+- Haaland-fellen | 8 av 12 kapteinet Haaland for 16 hver i GW8, men Edvind vant likevel med benket kaptein | sist brukt: GW8
+- Bunnplass-stafetten | Daniel fortsatt sist i ligaen; Peder hadde lavest rundescore i GW8 | sist brukt: GW8
+- Golden gameweek-chip-timingen | Hedda fulgte Reidars råd, spilte ingen chip, og rådet ble bekreftet riktig | sist brukt: GW8
+- Hedda og amunds chip-hamstring | amund alene igjen med alle fire chips urørt, også verste transfer i GW8 | sist brukt: GW8
+- amunds berg-og-dalbane | Etter sesongtopp (82, GW6) fortsetter en roligere, ujevn fase, verste bytte i GW8 | sist brukt: GW8
+- Torkil-Markus tittelkamp | Gapet har vokst tredje runde på rad til 29; Reidar spår 40 før jul | sist brukt: GW8
+- Edvind - golden gameweek-vinner | Vant potten med free hit og benket kaptein, 73 poeng, opp til 3. plass | sist brukt: GW8
+- Peders svingninger | João Pedro-forbannelsen rammet to runder på rad, lavest score i GW8 | sist brukt: GW8
+- Daniels tidlige 3xc-regning | Wildcard i GW8 endret ingenting, fortsatt sist i ligaen | sist brukt: GW8
+- Anders' dobbelheit | Beste transfer og verste kapteinspick i samme runde, GW8 | sist brukt: GW8

@@ -1,8 +1,8 @@
 **Lag:** Back2back
-**Nåværende form:** GW7: 62 poeng, 4. plass (uendret), 451 poeng totalt. Haaland-kaptein ga 13 poeng (26 med C), solid men ikke eksepsjonelt. Ett bytte (Rúben Dias inn for Lewis Hall) ble ligaens verste transfer denne uken, -3 poeng netto.
-**Sesongutvikling:** Tredje strake runde over verdenssnittet, helt uten drama denne gangen — fjerdeplassen ligger urokkelig fast.
-**Min vurdering:** Etter fire bench-katastrofer tidligere i sesongen er dette nå to runder på rad uten kaos. En stille, stabil fase fra en mann hvis lagnavn fortsatt venter på sin første seier.
-**Nevneverdige øyeblikk:** GW5: beste kapteinspick, likevel bench-disaster. GW6: ingen drama, klatring til fjerdeplass. GW7: verste transfer i ligaen, men ingen skade på plasseringen.
-**Løpende vitser:** "Back2back" fra en mann som aldri har vunnet — benkepoengene vokser uansett, nå 98 for sesongen.
-**Byttemønster:** Ett bytte i GW7, netto -3, ligaens svakeste denne uken.
-**Kapteinvalg:** Haaland i GW7 — 13 poeng.
+**Nåværende form:** GW8: 61 poeng, 4. plass uendret, 512 totalt. Spilte free hit. Hentet Gabriel Magalhães for Tyrick Mitchell — ligaens beste bytte denne uken, +37 netto — men kapteinet Cole Palmer til minus to, ligaens dårligste pick. To ytterpunkter i samme regnskap.
+**Sesongutvikling:** Fjerde runde på rad over verdenssnittet. Fjerdeplassen ligger fortsatt urokkelig, nå med et enda mer fargerikt bevis på hvor ujevn formen er under overflaten.
+**Min vurdering:** Samme manager, samme runde: ett geni og én tabbe, og totalen på 61 later som ingenting av dette skjedde. Benkeproblemet hans ligger i dvale, men dobbeltheten i GW8 er en ny variant av samme historie — ekstremt god på transfermarkedet, ekstremt dårlig på kapteinsbindet.
+**Nevneverdige øyeblikk:** GW5: beste kapteinspick, bench-disaster. GW7: verste transfer. GW8: beste transfer OG verste kapteinspick, samtidig.
+**Løpende vitser:** "Back2back" uten en eneste seier — nå også mannen som er både ligaens smarteste og dummeste manager i samme runde.
+**Byttemønster:** Free hit i GW8, inkludert ligaens beste enkeltbytte.
+**Kapteinvalg:** Cole Palmer i GW8 — minus 2 poeng, ligaens verste pick.

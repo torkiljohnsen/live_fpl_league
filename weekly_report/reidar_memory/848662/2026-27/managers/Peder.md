@@ -1,9 +1,9 @@
 **Lag:** Find the Salahution
-**Nåværende form:** GW7: 52 poeng, 8. plass (ned fra 6., -2), sesongens nest største fall denne uken. João Pedro-kaptein ga kun **4 poeng** — ligaens dårligste kapteinspick — mens 17 poeng lå på benken.
-**Sesongutvikling:** Etter at den treukers grønne pil-strengen brøt i GW6, fortsetter nedturen med et av sesongens svakeste kapteinsvalg. 430 poeng totalt.
+**Nåværende form:** GW8: 34 poeng, ligaens laveste denne uken, falt til 9. plass (-1). For andre uke på rad spilte João Pedro ikke en meter som kaptein — denne gangen rykket Cole Palmer inn og ble doblet til minus to.
+**Sesongutvikling:** 464 poeng totalt. En skjør formkurve blir nå et mønster: João Pedro-forbannelsen har nå rammet to runder på rad.
 **Forrige sesong (2025-26):** Sisteplass med 1892 poeng, 321 bak vinneren. Sesong-high 115 (GW16, ligarekord), 11 sisteplasser.
-**Min vurdering:** Fra ligaens beste kapteinspick i GW6 til ligaens verste i GW7 — en svingning som sier alt om hvor skjør formen hans er akkurat nå.
-**Nevneverdige øyeblikk:** GW5: tredje strake grønne pil. GW6: beste kapteinspick, streken likevel brutt. GW7: verste kapteinspick, to plasser ned.
-**Løpende vitser:** Ligarekorden og bunnplasseringen fra i fjor. "Find the Salahution" leter fortsatt etter stabilitet.
-**Byttemønster:** Ingen bytter i GW7.
-**Kapteinvalg:** João Pedro i GW7 — 4 poeng, ligaens verste pick.
+**Min vurdering:** Fra ligaens beste kapteinspick i GW6 til ligaens verste i GW7, og nå ligaens laveste rundescore i GW8 — samme kapteinsvalg, samme feilkilde, to uker på rad.
+**Nevneverdige øyeblikk:** GW6: beste kapteinspick. GW7: verste kapteinspick. GW8: ligaens laveste score, João Pedro-forbannelsen fortsetter.
+**Løpende vitser:** Ligarekorden og bunnplasseringen fra i fjor. João Pedro-forbannelsen er nå offisielt en toukers-affære.
+**Byttemønster:** Ingen bytter i GW8.
+**Kapteinvalg:** João Pedro (spilte ikke) → Cole Palmer effektivt, minus 2 poeng.

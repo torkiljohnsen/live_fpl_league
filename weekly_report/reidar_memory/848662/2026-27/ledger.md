@@ -1,2 +1,3 @@
 - GW4 | Minst to av managerne med urørte chips bruker kort før golden gameweek GW8 | avgjøres: GW8 | status: feil (GW7)
-- GW7 | Reidars råd: Hedda bør vente én runde til med bench boost, ikke bruke i golden gameweek GW8 | avgjøres: GW8 | status: åpen
+- GW7 | Reidars råd: Hedda bør vente én runde til med bench boost, ikke bruke i golden gameweek GW8 | avgjøres: GW8 | status: riktig (GW8)
+- GW8 | Reidar spår: gapet mellom Torkil og Markus passerer 40 poeng før jul | avgjøres: ca GW17 (før jul) | status: åpen
