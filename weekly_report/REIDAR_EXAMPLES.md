@@ -44,7 +44,7 @@ Rundeplassering i verden: topp 0,4 prosent. Beste enkeltrunde i ligaen denne ses
 
 </div>
 
-6,1 poeng per startende spiller. Det tallet er verdt mer enn totalen, for det betyr at hun ikke hadde ett heldig kapteinsvalg og ti passasjerer. Hun hadde et lag. Trippelkapteinen var Kvernhuset FCs eneste virkelige gamble på hele sesongen, og hun sparte den til en dobbeltrunde hun må ha planlagt i november.
+6,1 poeng per startende spiller. Det tallet er verdt mer enn totalen, for det betyr at hun ikke hadde ett heldig kapteinsvalg og ti passasjerer. Hun hadde et lag. Triple captain var Kvernhuset FCs eneste virkelige gamble på hele sesongen, og hun sparte den til en dobbeltrunde hun må ha planlagt i november.
 
 Jeg skal være ærlig: jeg trodde ikke hun hadde den i seg. I runde 14 skrev jeg at Åse spilte for å unngå å tape, og det var ikke ment vennlig. Hun har ikke svart med et ord. Hun har svart med tre grønne piler og nå dette.
 
@@ -98,7 +98,7 @@ Vennlig hilsen, en mann med et regneark.
 
 Fire ganger i sesongen ligger det penger på bordet, og hver gang har denne ligaen levert en runde der alle scorer likt og premien går til en tilfeldighet. Ikke denne gangen. Kjetil vant golden gameweek 20 med 95 poeng mot et verdenssnitt på 62, og han vant med tolv poengs margin.
 
-Han sparte trippelkapteinen til nøyaktig denne runden. Han sa det høyt i november, jeg noterte det, og så gjorde han det. Det skjer omtrent aldri i denne ligaen.
+Han sparte triple captain til nøyaktig denne runden. Han sa det høyt i november, jeg noterte det, og så gjorde han det. Det skjer omtrent aldri i denne ligaen.
 
 <div class="big-number" markdown="1">
 
@@ -148,7 +148,7 @@ I runde 9 skrev jeg at Kjetil manglet et gir. Han fant det i den ene uka på hel
 
 ![Reidars Rapport](../../reidars_rapport_5.png)
 
-Ingrid brukte trippelkaptein i en golden gameweek på en spiller som ikke spilte ett minutt. Visekapteinen hennes leverte fire poeng, tredoblet til tolv, og IL Snarveien endte på 52, sju poeng under det verden snittet. Retten er satt.
+Ingrid brukte triple captain i en golden gameweek på en spiller som ikke spilte ett minutt. Visekapteinen hennes leverte fire poeng, tredoblet til tolv, og IL Snarveien endte på 52, sju poeng under det verden snittet. Retten er satt.
 
 <div class="for-against">
 
@@ -157,7 +157,7 @@ Ingrid brukte trippelkaptein i en golden gameweek på en spiller som ikke spilte
 **Aktoratet**
 
 - Spilleren sto oppført med tvilsom status i to dager før fristen.
-- Trippelkaptein i en pengerunde er det dyreste kortet i stokken, brukt på den mest usikre spilleren i troppen.
+- Triple captain i en pengerunde er det dyreste kortet i stokken, brukt på den mest usikre spilleren i troppen.
 - Ingrid gjorde sitt siste bytte i oktober. Hun visste ikke at spilleren var tvilsom, fordi hun ikke så etter.
 
 </div>
