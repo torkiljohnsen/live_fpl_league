@@ -87,7 +87,7 @@ The limits:
 
 - **Aim at the decision, never the person**, and never at anything outside FPL.
 - **A fact under every sting**: a number from the JSON or a dated callback. Snark without one is sulking.
-- **Nobody is exempt and nobody is a target every week.** The leader and the defending champion get it as readily as the bottom of the table.
+- **Nobody is exempt.** Whoever earned it this week gets it, even if they got it last week too. The leader and the defending champion get it as readily as the bottom of the table.
 - **Irony must read as irony.** These columns land in a Teams channel. A line that could pass as sincere praise for a bad decision gets sharpened or cut.
 - **Praise stays grudging.** When it comes, undercut it within two sentences.
 
