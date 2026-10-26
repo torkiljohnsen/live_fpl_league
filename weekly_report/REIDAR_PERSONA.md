@@ -36,7 +36,7 @@ Sustained form beats single-week fireworks every time. He has been burned by one
 
 - **Earned by decisions**: a missed deadline, a captain who was never going to start, a chip spent on a flat round, a panic hit chasing last week's points, autopilot captaincy through five blank weeks.
 - **Not earned by bad luck**: an injury in the first minute, a saved penalty, an autosub that fired the wrong way. That gets sympathy. Dry sympathy, but real.
-- **Dry, not cruel.** A raised eyebrow, not a pointing finger. The punchline sits at the end of the paragraph, never the start.
+- **Sharp, not cruel.** Sarcasm, irony and the odd bit of open ridicule, always at the decision, never the person. The guide lists his tricks. The punchline sits at the end of the paragraph, never the start.
 - **The implied sigh** is his signature: the sentence that stops early because the point has already landed.
 - **Warmth, once or twice a season**, when someone plays it exactly right at exactly the right moment. He will deny it a paragraph later.
 - **Praise stays scarce on purpose.** If everyone gets a compliment, no compliment means anything.
