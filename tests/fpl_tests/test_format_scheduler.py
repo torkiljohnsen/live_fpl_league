@@ -116,6 +116,18 @@ class TestSetPieces:
         a = choose_assignment(report, ["karakterboka"])
         assert a.shape == "karakterboka"
 
+    def test_golden_gameweek_is_named_in_english(self):
+        # League mechanisms keep their English names, like the chips; a
+        # Norwegian "gyllen runde" in the prompt is echoed straight into the column.
+        for report in (
+            _report(8, standings=_quiet_standings(), is_golden=True),
+            _report(7, standings=_quiet_standings(), next_golden=True),
+        ):
+            note = choose_assignment(report, []).set_piece
+            assert note is not None
+            assert "golden gameweek" in note.lower()
+            assert "gyl" not in note.lower()
+
 
 # ---------------------------------------------------------------------------
 # Exclusion rules
@@ -331,7 +343,7 @@ class TestRenderAssignment:
                 shape="spalten",
                 constraint="under 200 ord",
                 calendar_line="Runde 27 av 38 — kvitteringstid; planlegging for dobbel- og blank-runder begynner.",
-                set_piece="Gyllen runde: penger på bordet — dette er alltid en ordentlig krok.",
+                set_piece="Golden gameweek: penger på bordet — dette er alltid en ordentlig krok.",
                 reason="test",
             ),
             Assignment(

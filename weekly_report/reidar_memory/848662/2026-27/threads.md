@@ -1,6 +1,6 @@
 - Haaland-fellen | 8 av 12 kapteinet Haaland for 26 hver denne uken, men Edvind matchet lederen med Groß i stedet | sist brukt: GW7
 - Bunnplass-stafetten | Camillas seks runder lange sisteplass er over — Daniel overtok med ligaens laveste score (35) | sist brukt: GW7
-- Gyllen runde-chip-timingen | Hedda spilte wildcard rett før GW8; Reidar råder henne til å vente med benkeboost | sist brukt: GW7
+- Golden gameweek-chip-timingen | Hedda spilte wildcard rett før GW8; Reidar råder henne til å vente med bench boost | sist brukt: GW7
 - Hedda og amunds chip-hamstring | Hedda brøt ut med wildcard (74p), amund er nå alene igjen med alle fire chips urørt | sist brukt: GW7
 - amunds berg-og-dalbane | Etter sesongtopp (82, GW6) kom en roligere, solid runde uten bytter | sist brukt: GW7
 - Torkil-Markus tittelkamp | Gapet har vokst to runder på rad, nå 25 poeng, Torkils Haaland ga ligaens beste pick | sist brukt: GW7

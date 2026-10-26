@@ -1,2 +1,2 @@
-- GW4 | Minst to av managerne med urørte chips bruker kort før gyllen runde GW8 | avgjøres: GW8 | status: feil (GW7)
-- GW7 | Reidars råd: Hedda bør vente én runde til med benkeboost, ikke bruke i gyllen runde GW8 | avgjøres: GW8 | status: åpen
+- GW4 | Minst to av managerne med urørte chips bruker kort før golden gameweek GW8 | avgjøres: GW8 | status: feil (GW7)
+- GW7 | Reidars råd: Hedda bør vente én runde til med bench boost, ikke bruke i golden gameweek GW8 | avgjøres: GW8 | status: åpen

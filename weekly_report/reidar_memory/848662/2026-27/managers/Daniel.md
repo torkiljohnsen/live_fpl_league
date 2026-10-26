@@ -3,6 +3,6 @@
 **Sesongutvikling:** Overtok sisteplassen fra Camilla etter seks runder der hun eide den. 377 poeng totalt.
 **Min vurdering:** Mønsteret med å la gode spillere sitte på benken mens svake kapteinsvalg koster poeng, har nå sendt ham forbi Camilla og ned til bunnen. Han har ikke tatt et eneste minuspoeng hele sesongen — det eneste han har unngått.
 **Nevneverdige øyeblikk:** GW1: 3xc spilt tidlig. GW3: 31 poeng, verst i ligaen den gang. GW5: +2 via differensial. GW7: ny bunnplassering, ligaens laveste rundescore.
-**Løpende vitser:** Mannen som brukte trippelkaptein før noen andre — nå kjent for å la de gode spillerne sitte, og nå sist i ligaen for første gang.
+**Løpende vitser:** Mannen som brukte triple captain før noen andre — nå kjent for å la de gode spillerne sitte, og nå sist i ligaen for første gang.
 **Byttemønster:** Ingen bytter i GW7.
 **Kapteinvalg:** Saka i GW7 — 6 poeng.

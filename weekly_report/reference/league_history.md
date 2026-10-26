@@ -28,4 +28,4 @@ Torkil vant på jevnhet, ikke på topper: åtte rundeseiere, aldri mer enn to si
 
 Ligaen er utvidet til ti og har byttet navn. Tre debutanter: **Daniel**, **Vidar** og **Amund**. Hauk er ikke med. De sju andre — Torkil, Anders, Oda, Hedda, Camilla, Eirin, Peder — har alle en historie i tabellene over, og Torkil er forsvarende mester.
 
-Åpningen: Torkil brukte bench boost i GW1 og vant runden med 89 (topp 0,2 % i verden). Daniel åpnet med trippelkaptein og 72. Camilla endte på 20.
+Åpningen: Torkil brukte bench boost i GW1 og vant runden med 89 (topp 0,2 % i verden). Daniel åpnet med triple captain og 72. Camilla endte på 20.
