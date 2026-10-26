@@ -1,0 +1,2970 @@
+{
+  "meta": {
+    "league_id": "848662",
+    "league_name": "Sinkaberg The Office",
+    "season": "2026-27",
+    "event_id": 5,
+    "generated_at": "2026-09-21T14:12:52.865293+00:00",
+    "previous_report": "weekly_report/reports/848662/2026-27/gw4.json",
+    "previous_narrative": "docs/narratives/2026-27/848662/gw4.md",
+    "next_event": {
+      "id": 6,
+      "deadline_time": "2026-10-10T10:00:00Z",
+      "is_golden": false
+    },
+    "is_golden": false
+  },
+  "standings": [
+    {
+      "entry_id": 1667126,
+      "team_name": "FK Haralds/By",
+      "manager_name": "Torkil Johnsen",
+      "player_first_name": "Torkil",
+      "event_total": 36,
+      "net_points": 36,
+      "total_points": 378,
+      "league_rank": 1,
+      "league_rank_previous": 1,
+      "league_rank_change": 0,
+      "is_new_entrant": false,
+      "overall_rank": 92417,
+      "event_rank": 9371362,
+      "event_percentile": 85.7,
+      "overall_percentile": 0.85,
+      "points_per_starter": 3.3,
+      "vs_global_average": -12,
+      "form_last_5": 75.6,
+      "bench_points_season": 51,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "3xc"
+      ],
+      "chips_played_season": [
+        {
+          "name": "bboost",
+          "event": 1
+        },
+        {
+          "name": "freehit",
+          "event": 3
+        },
+        {
+          "name": "wildcard",
+          "event": 4
+        }
+      ],
+      "team_value": 100.8,
+      "bank": 0.4,
+      "bench_points": 3,
+      "bench_players": [
+        {
+          "name": "Alex Palmer",
+          "club": "Ipswich Town",
+          "points": 0,
+          "element_id": 301
+        },
+        {
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "points": 0,
+          "element_id": 165
+        },
+        {
+          "name": "John Egan",
+          "club": "Hull City",
+          "points": 1,
+          "element_id": 277
+        },
+        {
+          "name": "Regan Slater",
+          "club": "Hull City",
+          "points": 2,
+          "element_id": 290
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Erling Haaland",
+        "club": "Man City",
+        "points": 12,
+        "element_id": 411,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "Morgan Gibbs-White",
+        "club": "Nott'm Forest",
+        "points": 2,
+        "element_id": 480
+      },
+      "squad": [
+        {
+          "element_id": 109,
+          "name": "Bart Verbruggen",
+          "club": "Brighton",
+          "position": 1,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 31,
+          "name": "Ezri Konsa Ngoyo",
+          "club": "Arsenal",
+          "position": 2,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 115,
+          "name": "Maxim De Cuyper",
+          "club": "Brighton",
+          "position": 3,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 8,
+          "name": "Riccardo Calafiori",
+          "club": "Arsenal",
+          "position": 4,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 305,
+          "name": "Leif Davis",
+          "club": "Ipswich Town",
+          "position": 5,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 40,
+          "name": "Morgan Rogers",
+          "club": "Chelsea",
+          "position": 6,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 426,
+          "name": "Bruno Borges Fernandes",
+          "club": "Man Utd",
+          "position": 7,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 15,
+          "name": "Martin Ødegaard",
+          "club": "Arsenal",
+          "position": 8,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 480,
+          "name": "Morgan Gibbs-White",
+          "club": "Nott'm Forest",
+          "position": 9,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 411,
+          "name": "Erling Haaland",
+          "club": "Man City",
+          "position": 10,
+          "points": 6,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 464,
+          "name": "Yoane Wissa",
+          "club": "Newcastle",
+          "position": 11,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 301,
+          "name": "Alex Palmer",
+          "club": "Ipswich Town",
+          "position": 12,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 165,
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "position": 13,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 277,
+          "name": "John Egan",
+          "club": "Hull City",
+          "position": 14,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 290,
+          "name": "Regan Slater",
+          "club": "Hull City",
+          "position": 15,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [
+        {
+          "player_in": "Yoane Wissa",
+          "player_in_club": "Newcastle",
+          "player_out": "Alexander Isak",
+          "player_out_club": "Liverpool",
+          "player_in_points": 0,
+          "player_out_points": 8
+        },
+        {
+          "player_in": "Morgan Gibbs-White",
+          "player_in_club": "Nott'm Forest",
+          "player_out": "Pascal Groß",
+          "player_out_club": "Brighton",
+          "player_in_points": 2,
+          "player_out_points": 14
+        }
+      ],
+      "transfer_cost": 0,
+      "transfers_made": 2
+    },
+    {
+      "entry_id": 7826983,
+      "team_name": "Gluggen maskinlag",
+      "manager_name": "Markus Pettersen",
+      "player_first_name": "Markus",
+      "event_total": 79,
+      "net_points": 79,
+      "total_points": 368,
+      "league_rank": 2,
+      "league_rank_previous": 3,
+      "league_rank_change": 1,
+      "is_new_entrant": false,
+      "overall_rank": 227312,
+      "event_rank": 87631,
+      "event_percentile": 0.8,
+      "overall_percentile": 2.1,
+      "points_per_starter": 7.2,
+      "vs_global_average": 31,
+      "form_last_5": 73.6,
+      "bench_points_season": 40,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost"
+      ],
+      "chips_played_season": [
+        {
+          "name": "3xc",
+          "event": 3
+        }
+      ],
+      "team_value": 100.7,
+      "bank": 0.9,
+      "bench_points": 6,
+      "bench_players": [
+        {
+          "name": "Bart Verbruggen",
+          "club": "Brighton",
+          "points": 6,
+          "element_id": 109
+        },
+        {
+          "name": "Cristhian Mosquera",
+          "club": "Arsenal",
+          "points": 0,
+          "element_id": 11
+        },
+        {
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "points": 0,
+          "element_id": 165
+        },
+        {
+          "name": "Luke O'Nien",
+          "club": "Sunderland",
+          "points": 0,
+          "element_id": 539
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Erling Haaland",
+        "club": "Man City",
+        "points": 12,
+        "element_id": 411,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "Bruno Borges Fernandes",
+        "club": "Man Utd",
+        "points": 2,
+        "element_id": 426
+      },
+      "squad": [
+        {
+          "element_id": 496,
+          "name": "Antonín Kinský",
+          "club": "Spurs",
+          "position": 1,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 259,
+          "name": "Issa Diop",
+          "club": "Ipswich Town",
+          "position": 2,
+          "points": 4,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 8,
+          "name": "Riccardo Calafiori",
+          "club": "Arsenal",
+          "position": 3,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 115,
+          "name": "Maxim De Cuyper",
+          "club": "Brighton",
+          "position": 4,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 426,
+          "name": "Bruno Borges Fernandes",
+          "club": "Man Utd",
+          "position": 5,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 124,
+          "name": "Pascal Groß",
+          "club": "Brighton",
+          "position": 6,
+          "points": 14,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 368,
+          "name": "Dominik Szoboszlai",
+          "club": "Liverpool",
+          "position": 7,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 397,
+          "name": "Antoine Semenyo",
+          "club": "Man City",
+          "position": 8,
+          "points": 17,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 290,
+          "name": "Regan Slater",
+          "club": "Hull City",
+          "position": 9,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 411,
+          "name": "Erling Haaland",
+          "club": "Man City",
+          "position": 10,
+          "points": 6,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 552,
+          "name": "Brian Brobbey",
+          "club": "Sunderland",
+          "position": 11,
+          "points": 17,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 109,
+          "name": "Bart Verbruggen",
+          "club": "Brighton",
+          "position": 12,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 11,
+          "name": "Cristhian Mosquera",
+          "club": "Arsenal",
+          "position": 13,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 165,
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "position": 14,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 539,
+          "name": "Luke O'Nien",
+          "club": "Sunderland",
+          "position": 15,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [
+        {
+          "player_in": "Antoine Semenyo",
+          "player_in_club": "Man City",
+          "player_out": "Christos Tzolis",
+          "player_out_club": "Arsenal",
+          "player_in_points": 17,
+          "player_out_points": 2
+        }
+      ],
+      "transfer_cost": 0,
+      "transfers_made": 1
+    },
+    {
+      "entry_id": 6133991,
+      "team_name": "FK Straumen",
+      "manager_name": "Vidar Fjær",
+      "player_first_name": "Vidar",
+      "event_total": 55,
+      "net_points": 55,
+      "total_points": 353,
+      "league_rank": 3,
+      "league_rank_previous": 2,
+      "league_rank_change": -1,
+      "is_new_entrant": false,
+      "overall_rank": 617842,
+      "event_rank": 2990354,
+      "event_percentile": 27.4,
+      "overall_percentile": 5.7,
+      "points_per_starter": 5.0,
+      "vs_global_average": 7,
+      "form_last_5": 70.6,
+      "bench_points_season": 24,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [
+        {
+          "name": "freehit",
+          "event": 3
+        }
+      ],
+      "team_value": 100.8,
+      "bank": 0.0,
+      "bench_points": 0,
+      "bench_players": [
+        {
+          "name": "Alex Palmer",
+          "club": "Ipswich Town",
+          "points": 0,
+          "element_id": 301
+        },
+        {
+          "name": "Jaka Bijol",
+          "club": "Leeds",
+          "points": 0,
+          "element_id": 327
+        },
+        {
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "points": 0,
+          "element_id": 165
+        },
+        {
+          "name": "Kasey McAteer",
+          "club": "Ipswich Town",
+          "points": 0,
+          "element_id": 323
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Erling Haaland",
+        "club": "Man City",
+        "points": 12,
+        "element_id": 411,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "Alexander Isak",
+        "club": "Liverpool",
+        "points": 8,
+        "element_id": 379
+      },
+      "squad": [
+        {
+          "element_id": 226,
+          "name": "Jordan Pickford",
+          "club": "Everton",
+          "position": 1,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 4,
+          "name": "Gabriel dos Santos Magalhães",
+          "club": "Arsenal",
+          "position": 2,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 8,
+          "name": "Riccardo Calafiori",
+          "club": "Arsenal",
+          "position": 3,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 356,
+          "name": "Virgil van Dijk",
+          "club": "Liverpool",
+          "position": 4,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 87,
+          "name": "Kristoffer Ajer",
+          "club": "Brentford",
+          "position": 5,
+          "points": 7,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 345,
+          "name": "Tanaka Ao",
+          "club": "Leeds",
+          "position": 6,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 43,
+          "name": "Youri Tielemans",
+          "club": "Man Utd",
+          "position": 7,
+          "points": 4,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 15,
+          "name": "Martin Ødegaard",
+          "club": "Arsenal",
+          "position": 8,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 368,
+          "name": "Dominik Szoboszlai",
+          "club": "Liverpool",
+          "position": 9,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 379,
+          "name": "Alexander Isak",
+          "club": "Liverpool",
+          "position": 10,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 411,
+          "name": "Erling Haaland",
+          "club": "Man City",
+          "position": 11,
+          "points": 6,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 301,
+          "name": "Alex Palmer",
+          "club": "Ipswich Town",
+          "position": 12,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 327,
+          "name": "Jaka Bijol",
+          "club": "Leeds",
+          "position": 13,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 165,
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "position": 14,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 323,
+          "name": "Kasey McAteer",
+          "club": "Ipswich Town",
+          "position": 15,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [
+        {
+          "player_in": "Tanaka Ao",
+          "player_in_club": "Leeds",
+          "player_out": "Bruno Borges Fernandes",
+          "player_out_club": "Man Utd",
+          "player_in_points": 2,
+          "player_out_points": 2
+        },
+        {
+          "player_in": "Erling Haaland",
+          "player_in_club": "Man City",
+          "player_out": "Igor Thiago Nascimento Rodrigues",
+          "player_out_club": "Brentford",
+          "player_in_points": 6,
+          "player_out_points": 5
+        }
+      ],
+      "transfer_cost": 0,
+      "transfers_made": 2
+    },
+    {
+      "entry_id": 6376854,
+      "team_name": "Odas Dreamteam",
+      "manager_name": "Oda Myhre",
+      "player_first_name": "Oda",
+      "event_total": 49,
+      "net_points": 49,
+      "total_points": 322,
+      "league_rank": 4,
+      "league_rank_previous": 4,
+      "league_rank_change": 0,
+      "is_new_entrant": false,
+      "overall_rank": 2495305,
+      "event_rank": 4730761,
+      "event_percentile": 43.3,
+      "overall_percentile": 22.8,
+      "points_per_starter": 4.5,
+      "vs_global_average": 1,
+      "form_last_5": 64.4,
+      "bench_points_season": 26,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost"
+      ],
+      "chips_played_season": [
+        {
+          "name": "3xc",
+          "event": 3
+        }
+      ],
+      "team_value": 100.4,
+      "bank": 6.9,
+      "bench_points": 0,
+      "bench_players": [
+        {
+          "name": "Jason Steele",
+          "club": "Brighton",
+          "points": 0,
+          "element_id": 111
+        },
+        {
+          "name": "Ola Aina",
+          "club": "Nott'm Forest",
+          "points": 0,
+          "element_id": 473
+        },
+        {
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "points": 0,
+          "element_id": 165
+        },
+        {
+          "name": "Jonah Kusi-Asare",
+          "club": "Fulham",
+          "points": 0,
+          "element_id": 272
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Anton Stach",
+        "club": "Leeds",
+        "points": 10,
+        "element_id": 335,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "Martin Ødegaard",
+        "club": "Arsenal",
+        "points": 2,
+        "element_id": 15
+      },
+      "squad": [
+        {
+          "element_id": 109,
+          "name": "Bart Verbruggen",
+          "club": "Brighton",
+          "position": 1,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 112,
+          "name": "Jan Paul van Hecke",
+          "club": "Spurs",
+          "position": 2,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 204,
+          "name": "Tyrick Mitchell",
+          "club": "Crystal Palace",
+          "position": 3,
+          "points": 7,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 8,
+          "name": "Riccardo Calafiori",
+          "club": "Arsenal",
+          "position": 4,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 388,
+          "name": "Marc Guéhi",
+          "club": "Man City",
+          "position": 5,
+          "points": 4,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 15,
+          "name": "Martin Ødegaard",
+          "club": "Arsenal",
+          "position": 6,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 335,
+          "name": "Anton Stach",
+          "club": "Leeds",
+          "position": 7,
+          "points": 5,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 368,
+          "name": "Dominik Szoboszlai",
+          "club": "Liverpool",
+          "position": 8,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 565,
+          "name": "Mamadou Sangaré",
+          "club": "Brentford",
+          "position": 9,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 237,
+          "name": "Iliman Ndiaye",
+          "club": "Man City",
+          "position": 10,
+          "points": 5,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 411,
+          "name": "Erling Haaland",
+          "club": "Man City",
+          "position": 11,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 111,
+          "name": "Jason Steele",
+          "club": "Brighton",
+          "position": 12,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 473,
+          "name": "Ola Aina",
+          "club": "Nott'm Forest",
+          "position": 13,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 165,
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "position": 14,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 272,
+          "name": "Jonah Kusi-Asare",
+          "club": "Fulham",
+          "position": 15,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [],
+      "transfer_cost": 0,
+      "transfers_made": 0
+    },
+    {
+      "entry_id": 6378267,
+      "team_name": "Find the Salahution",
+      "manager_name": "Peder Eiden",
+      "player_first_name": "Peder",
+      "event_total": 57,
+      "net_points": 57,
+      "total_points": 321,
+      "league_rank": 5,
+      "league_rank_previous": 5,
+      "league_rank_change": 0,
+      "is_new_entrant": false,
+      "overall_rank": 2577395,
+      "event_rank": 2235532,
+      "event_percentile": 20.4,
+      "overall_percentile": 23.6,
+      "points_per_starter": 5.2,
+      "vs_global_average": 9,
+      "form_last_5": 64.2,
+      "bench_points_season": 24,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "3xc"
+      ],
+      "chips_played_season": [
+        {
+          "name": "bboost",
+          "event": 4
+        }
+      ],
+      "team_value": 99.5,
+      "bank": 0.3,
+      "bench_points": 10,
+      "bench_players": [
+        {
+          "name": "Bart Verbruggen",
+          "club": "Brighton",
+          "points": 6,
+          "element_id": 109
+        },
+        {
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "points": 0,
+          "element_id": 165
+        },
+        {
+          "name": "Lewis Dunk",
+          "club": "Brighton",
+          "points": 0,
+          "element_id": 116
+        },
+        {
+          "name": "Andrew Robertson",
+          "club": "Spurs",
+          "points": 4,
+          "element_id": 502
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Alexander Isak",
+        "club": "Liverpool",
+        "points": 16,
+        "element_id": 379,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "Antoine Semenyo",
+        "club": "Man City",
+        "points": 17,
+        "element_id": 397
+      },
+      "squad": [
+        {
+          "element_id": 1,
+          "name": "David Raya Martín",
+          "club": "Arsenal",
+          "position": 1,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 200,
+          "name": "Maxence Lacroix",
+          "club": "Chelsea",
+          "position": 2,
+          "points": 3,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 388,
+          "name": "Marc Guéhi",
+          "club": "Man City",
+          "position": 3,
+          "points": 4,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 8,
+          "name": "Riccardo Calafiori",
+          "club": "Arsenal",
+          "position": 4,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 368,
+          "name": "Dominik Szoboszlai",
+          "club": "Liverpool",
+          "position": 5,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 154,
+          "name": "Cole Palmer",
+          "club": "Chelsea",
+          "position": 6,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 237,
+          "name": "Iliman Ndiaye",
+          "club": "Man City",
+          "position": 7,
+          "points": 5,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 397,
+          "name": "Antoine Semenyo",
+          "club": "Man City",
+          "position": 8,
+          "points": 17,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 515,
+          "name": "James Maddison",
+          "club": "Spurs",
+          "position": 9,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 106,
+          "name": "Igor Thiago Nascimento Rodrigues",
+          "club": "Brentford",
+          "position": 10,
+          "points": 5,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 379,
+          "name": "Alexander Isak",
+          "club": "Liverpool",
+          "position": 11,
+          "points": 8,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 109,
+          "name": "Bart Verbruggen",
+          "club": "Brighton",
+          "position": 12,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 165,
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "position": 13,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 116,
+          "name": "Lewis Dunk",
+          "club": "Brighton",
+          "position": 14,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 502,
+          "name": "Andrew Robertson",
+          "club": "Spurs",
+          "position": 15,
+          "points": 4,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [],
+      "transfer_cost": 0,
+      "transfers_made": 0
+    },
+    {
+      "entry_id": 2024193,
+      "team_name": "Back2back",
+      "manager_name": "Anders Morken",
+      "player_first_name": "Anders",
+      "event_total": 58,
+      "net_points": 58,
+      "total_points": 317,
+      "league_rank": 6,
+      "league_rank_previous": 6,
+      "league_rank_change": 0,
+      "is_new_entrant": false,
+      "overall_rank": 2905113,
+      "event_rank": 1996818,
+      "event_percentile": 18.3,
+      "overall_percentile": 26.6,
+      "points_per_starter": 5.3,
+      "vs_global_average": 10,
+      "form_last_5": 63.4,
+      "bench_points_season": 74,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [
+        {
+          "name": "wildcard",
+          "event": 4
+        }
+      ],
+      "team_value": 101.0,
+      "bank": 0.1,
+      "bench_points": 20,
+      "bench_players": [
+        {
+          "name": "Bart Verbruggen",
+          "club": "Brighton",
+          "points": 6,
+          "element_id": 109
+        },
+        {
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "points": 0,
+          "element_id": 165
+        },
+        {
+          "name": "Maxim De Cuyper",
+          "club": "Brighton",
+          "points": 6,
+          "element_id": 115
+        },
+        {
+          "name": "Diego Gómez Amarilla",
+          "club": "Brighton",
+          "points": 8,
+          "element_id": 127
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Lewis Hall",
+        "club": "Newcastle",
+        "points": 26,
+        "element_id": 449,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "Erling Haaland",
+        "club": "Man City",
+        "points": 6,
+        "element_id": 411
+      },
+      "squad": [
+        {
+          "element_id": 28,
+          "name": "Emiliano Martínez Romero",
+          "club": "Chelsea",
+          "position": 1,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 204,
+          "name": "Tyrick Mitchell",
+          "club": "Crystal Palace",
+          "position": 2,
+          "points": 7,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 449,
+          "name": "Lewis Hall",
+          "club": "Newcastle",
+          "position": 3,
+          "points": 13,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 8,
+          "name": "Riccardo Calafiori",
+          "club": "Arsenal",
+          "position": 4,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 305,
+          "name": "Leif Davis",
+          "club": "Ipswich Town",
+          "position": 5,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 15,
+          "name": "Martin Ødegaard",
+          "club": "Arsenal",
+          "position": 6,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 154,
+          "name": "Cole Palmer",
+          "club": "Chelsea",
+          "position": 7,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 12,
+          "name": "Bukayo Saka",
+          "club": "Arsenal",
+          "position": 8,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 368,
+          "name": "Dominik Szoboszlai",
+          "club": "Liverpool",
+          "position": 9,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 411,
+          "name": "Erling Haaland",
+          "club": "Man City",
+          "position": 10,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 249,
+          "name": "Thierno Barry",
+          "club": "Everton",
+          "position": 11,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 109,
+          "name": "Bart Verbruggen",
+          "club": "Brighton",
+          "position": 12,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 165,
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "position": 13,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 115,
+          "name": "Maxim De Cuyper",
+          "club": "Brighton",
+          "position": 14,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 127,
+          "name": "Diego Gómez Amarilla",
+          "club": "Brighton",
+          "position": 15,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [],
+      "transfer_cost": 0,
+      "transfers_made": 0
+    },
+    {
+      "entry_id": 8722163,
+      "team_name": "Tafatt il",
+      "manager_name": "Hedda Wahl-Ovesen",
+      "player_first_name": "Hedda",
+      "event_total": 53,
+      "net_points": 53,
+      "total_points": 305,
+      "league_rank": 7,
+      "league_rank_previous": 8,
+      "league_rank_change": 1,
+      "is_new_entrant": false,
+      "overall_rank": 4028622,
+      "event_rank": 3535139,
+      "event_percentile": 32.3,
+      "overall_percentile": 36.9,
+      "points_per_starter": 4.8,
+      "vs_global_average": 5,
+      "form_last_5": 61.0,
+      "bench_points_season": 31,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [],
+      "team_value": 100.2,
+      "bank": 0.0,
+      "bench_points": 8,
+      "bench_players": [
+        {
+          "name": "Martin Dubravka",
+          "club": "Spurs",
+          "points": 0,
+          "element_id": 497
+        },
+        {
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "points": 0,
+          "element_id": 165
+        },
+        {
+          "name": "Ferdi Kadıoğlu",
+          "club": "Brighton",
+          "points": 5,
+          "element_id": 113
+        },
+        {
+          "name": "Sander Berge",
+          "club": "Fulham",
+          "points": 3,
+          "element_id": 265
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Erling Haaland",
+        "club": "Man City",
+        "points": 12,
+        "element_id": 411,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "Bruno Borges Fernandes",
+        "club": "Man Utd",
+        "points": 2,
+        "element_id": 426
+      },
+      "squad": [
+        {
+          "element_id": 1,
+          "name": "David Raya Martín",
+          "club": "Arsenal",
+          "position": 1,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 388,
+          "name": "Marc Guéhi",
+          "club": "Man City",
+          "position": 2,
+          "points": 4,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 330,
+          "name": "Jayden Bogle",
+          "club": "Leeds",
+          "position": 3,
+          "points": 5,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 279,
+          "name": "Semi Ajayi",
+          "club": "Hull City",
+          "position": 4,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 259,
+          "name": "Issa Diop",
+          "club": "Ipswich Town",
+          "position": 5,
+          "points": 4,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 426,
+          "name": "Bruno Borges Fernandes",
+          "club": "Man Utd",
+          "position": 6,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 397,
+          "name": "Antoine Semenyo",
+          "club": "Man City",
+          "position": 7,
+          "points": 17,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 15,
+          "name": "Martin Ødegaard",
+          "club": "Arsenal",
+          "position": 8,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 86,
+          "name": "Keane Lewis-Potter",
+          "club": "Brentford",
+          "position": 9,
+          "points": 3,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 411,
+          "name": "Erling Haaland",
+          "club": "Man City",
+          "position": 10,
+          "points": 6,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 346,
+          "name": "Dominic Calvert-Lewin",
+          "club": "Leeds",
+          "position": 11,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 497,
+          "name": "Martin Dubravka",
+          "club": "Spurs",
+          "position": 12,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 165,
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "position": 13,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 113,
+          "name": "Ferdi Kadıoğlu",
+          "club": "Brighton",
+          "position": 14,
+          "points": 5,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 265,
+          "name": "Sander Berge",
+          "club": "Fulham",
+          "position": 15,
+          "points": 3,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [
+        {
+          "player_in": "Jayden Bogle",
+          "player_in_club": "Leeds",
+          "player_out": "Luke Shaw",
+          "player_out_club": "Man Utd",
+          "player_in_points": 5,
+          "player_out_points": 2
+        }
+      ],
+      "transfer_cost": 0,
+      "transfers_made": 1
+    },
+    {
+      "entry_id": 6212672,
+      "team_name": "Salmageddon FC",
+      "manager_name": "Daniel Lauritzen",
+      "player_first_name": "Daniel",
+      "event_total": 58,
+      "net_points": 58,
+      "total_points": 297,
+      "league_rank": 8,
+      "league_rank_previous": 10,
+      "league_rank_change": 2,
+      "is_new_entrant": false,
+      "overall_rank": 4739755,
+      "event_rank": 1996818,
+      "event_percentile": 18.3,
+      "overall_percentile": 43.4,
+      "points_per_starter": 5.3,
+      "vs_global_average": 10,
+      "form_last_5": 59.4,
+      "bench_points_season": 53,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost"
+      ],
+      "chips_played_season": [
+        {
+          "name": "3xc",
+          "event": 1
+        }
+      ],
+      "team_value": 100.0,
+      "bank": 0.1,
+      "bench_points": 9,
+      "bench_players": [
+        {
+          "name": "Alisson Becker",
+          "club": "Liverpool",
+          "points": 8,
+          "element_id": 350
+        },
+        {
+          "name": "Marcos Senesi Barón",
+          "club": "Spurs",
+          "points": 0,
+          "element_id": 498
+        },
+        {
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "points": 0,
+          "element_id": 165
+        },
+        {
+          "name": "Oli McBurnie",
+          "club": "Hull City",
+          "points": 1,
+          "element_id": 295
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Bukayo Saka",
+        "club": "Arsenal",
+        "points": 4,
+        "element_id": 12,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "João Pedro Junqueira de Jesus",
+        "club": "Chelsea",
+        "points": 0,
+        "element_id": 165
+      },
+      "squad": [
+        {
+          "element_id": 1,
+          "name": "David Raya Martín",
+          "club": "Arsenal",
+          "position": 1,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 229,
+          "name": "James Tarkowski",
+          "club": "Everton",
+          "position": 2,
+          "points": 14,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 200,
+          "name": "Maxence Lacroix",
+          "club": "Chelsea",
+          "position": 3,
+          "points": 3,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 202,
+          "name": "Chris Richards",
+          "club": "Crystal Palace",
+          "position": 4,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 472,
+          "name": "Murillo Costa dos Santos",
+          "club": "Nott'm Forest",
+          "position": 5,
+          "points": 4,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 12,
+          "name": "Bukayo Saka",
+          "club": "Arsenal",
+          "position": 6,
+          "points": 2,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 399,
+          "name": "Rayan Cherki",
+          "club": "Man City",
+          "position": 7,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 40,
+          "name": "Morgan Rogers",
+          "club": "Chelsea",
+          "position": 8,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 368,
+          "name": "Dominik Szoboszlai",
+          "club": "Liverpool",
+          "position": 9,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 155,
+          "name": "Enzo Fernández",
+          "club": "Man City",
+          "position": 10,
+          "points": 7,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 106,
+          "name": "Igor Thiago Nascimento Rodrigues",
+          "club": "Brentford",
+          "position": 11,
+          "points": 5,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 350,
+          "name": "Alisson Becker",
+          "club": "Liverpool",
+          "position": 12,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 498,
+          "name": "Marcos Senesi Barón",
+          "club": "Spurs",
+          "position": 13,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 165,
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "position": 14,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 295,
+          "name": "Oli McBurnie",
+          "club": "Hull City",
+          "position": 15,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [],
+      "transfer_cost": 0,
+      "transfers_made": 0
+    },
+    {
+      "entry_id": 5253479,
+      "team_name": "Dragen BK",
+      "manager_name": "Eirin Ottesen",
+      "player_first_name": "Eirin",
+      "event_total": 39,
+      "net_points": 39,
+      "total_points": 294,
+      "league_rank": 9,
+      "league_rank_previous": 7,
+      "league_rank_change": -2,
+      "is_new_entrant": false,
+      "overall_rank": 5017507,
+      "event_rank": 8498445,
+      "event_percentile": 77.7,
+      "overall_percentile": 45.9,
+      "points_per_starter": 3.5,
+      "vs_global_average": -9,
+      "form_last_5": 58.8,
+      "bench_points_season": 10,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [
+        {
+          "name": "freehit",
+          "event": 4
+        }
+      ],
+      "team_value": 100.5,
+      "bank": 0.2,
+      "bench_points": 0,
+      "bench_players": [
+        {
+          "name": "Martin Dubravka",
+          "club": "Spurs",
+          "points": 0,
+          "element_id": 497
+        },
+        {
+          "name": "Ola Aina",
+          "club": "Nott'm Forest",
+          "points": 0,
+          "element_id": 473
+        },
+        {
+          "name": "Will Hughes",
+          "club": "Crystal Palace",
+          "points": 0,
+          "element_id": 212
+        },
+        {
+          "name": "Jonah Kusi-Asare",
+          "club": "Fulham",
+          "points": 0,
+          "element_id": 272
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Erling Haaland",
+        "club": "Man City",
+        "points": 12,
+        "element_id": 411,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "Bruno Borges Fernandes",
+        "club": "Man Utd",
+        "points": 2,
+        "element_id": 426
+      },
+      "squad": [
+        {
+          "element_id": 109,
+          "name": "Bart Verbruggen",
+          "club": "Brighton",
+          "position": 1,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 4,
+          "name": "Gabriel dos Santos Magalhães",
+          "club": "Arsenal",
+          "position": 2,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 115,
+          "name": "Maxim De Cuyper",
+          "club": "Brighton",
+          "position": 3,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 259,
+          "name": "Issa Diop",
+          "club": "Ipswich Town",
+          "position": 4,
+          "points": 4,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 423,
+          "name": "Luke Shaw",
+          "club": "Man Utd",
+          "position": 5,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 426,
+          "name": "Bruno Borges Fernandes",
+          "club": "Man Utd",
+          "position": 6,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 427,
+          "name": "Bryan Mbeumo",
+          "club": "Man Utd",
+          "position": 7,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 15,
+          "name": "Martin Ødegaard",
+          "club": "Arsenal",
+          "position": 8,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 368,
+          "name": "Dominik Szoboszlai",
+          "club": "Liverpool",
+          "position": 9,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 165,
+          "name": "João Pedro Junqueira de Jesus",
+          "club": "Chelsea",
+          "position": 10,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 411,
+          "name": "Erling Haaland",
+          "club": "Man City",
+          "position": 11,
+          "points": 6,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 497,
+          "name": "Martin Dubravka",
+          "club": "Spurs",
+          "position": 12,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 473,
+          "name": "Ola Aina",
+          "club": "Nott'm Forest",
+          "position": 13,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 212,
+          "name": "Will Hughes",
+          "club": "Crystal Palace",
+          "position": 14,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 272,
+          "name": "Jonah Kusi-Asare",
+          "club": "Fulham",
+          "position": 15,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [
+        {
+          "player_in": "João Pedro Junqueira de Jesus",
+          "player_in_club": "Chelsea",
+          "player_out": "Igor Thiago Nascimento Rodrigues",
+          "player_out_club": "Brentford",
+          "player_in_points": 0,
+          "player_out_points": 5
+        }
+      ],
+      "transfer_cost": 0,
+      "transfers_made": 1
+    },
+    {
+      "entry_id": 5234374,
+      "team_name": "Aquabyters",
+      "manager_name": "amund strand",
+      "player_first_name": "amund",
+      "event_total": 47,
+      "net_points": 47,
+      "total_points": 291,
+      "league_rank": 10,
+      "league_rank_previous": 9,
+      "league_rank_change": -1,
+      "is_new_entrant": false,
+      "overall_rank": 5291300,
+      "event_rank": 5472213,
+      "event_percentile": 50.1,
+      "overall_percentile": 48.4,
+      "points_per_starter": 4.3,
+      "vs_global_average": -1,
+      "form_last_5": 58.2,
+      "bench_points_season": 59,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "wildcard",
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [],
+      "team_value": 101.2,
+      "bank": 1.7,
+      "bench_points": 16,
+      "bench_players": [
+        {
+          "name": "Martin Dubravka",
+          "club": "Spurs",
+          "points": 0,
+          "element_id": 497
+        },
+        {
+          "name": "Pascal Groß",
+          "club": "Brighton",
+          "points": 14,
+          "element_id": 124
+        },
+        {
+          "name": "Milan van Ewijk",
+          "club": "Coventry City",
+          "points": 0,
+          "element_id": 175
+        },
+        {
+          "name": "Luke Shaw",
+          "club": "Man Utd",
+          "points": 2,
+          "element_id": 423
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Erling Haaland",
+        "club": "Man City",
+        "points": 12,
+        "element_id": 411,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "Alexander Isak",
+        "club": "Liverpool",
+        "points": 8,
+        "element_id": 379
+      },
+      "squad": [
+        {
+          "element_id": 496,
+          "name": "Antonín Kinský",
+          "club": "Spurs",
+          "position": 1,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 356,
+          "name": "Virgil van Dijk",
+          "club": "Liverpool",
+          "position": 2,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 8,
+          "name": "Riccardo Calafiori",
+          "club": "Arsenal",
+          "position": 3,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 390,
+          "name": "Rúben dos Santos Gato Alves Dias",
+          "club": "Man City",
+          "position": 4,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 15,
+          "name": "Martin Ødegaard",
+          "club": "Arsenal",
+          "position": 5,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 399,
+          "name": "Rayan Cherki",
+          "club": "Man City",
+          "position": 6,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 236,
+          "name": "Kiernan Dewsbury-Hall",
+          "club": "Everton",
+          "position": 7,
+          "points": 3,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 565,
+          "name": "Mamadou Sangaré",
+          "club": "Brentford",
+          "position": 8,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 26,
+          "name": "Kai Havertz",
+          "club": "Arsenal",
+          "position": 9,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 379,
+          "name": "Alexander Isak",
+          "club": "Liverpool",
+          "position": 10,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 411,
+          "name": "Erling Haaland",
+          "club": "Man City",
+          "position": 11,
+          "points": 6,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 497,
+          "name": "Martin Dubravka",
+          "club": "Spurs",
+          "position": 12,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 124,
+          "name": "Pascal Groß",
+          "club": "Brighton",
+          "position": 13,
+          "points": 14,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 175,
+          "name": "Milan van Ewijk",
+          "club": "Coventry City",
+          "position": 14,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 423,
+          "name": "Luke Shaw",
+          "club": "Man Utd",
+          "position": 15,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [],
+      "transfer_cost": 0,
+      "transfers_made": 0
+    },
+    {
+      "entry_id": 3017925,
+      "team_name": "YVIL",
+      "manager_name": "Camilla Moen",
+      "player_first_name": "Camilla",
+      "event_total": 39,
+      "net_points": 39,
+      "total_points": 264,
+      "league_rank": 11,
+      "league_rank_previous": 11,
+      "league_rank_change": 0,
+      "is_new_entrant": false,
+      "overall_rank": 7409786,
+      "event_rank": 8567043,
+      "event_percentile": 78.4,
+      "overall_percentile": 67.8,
+      "points_per_starter": 3.5,
+      "vs_global_average": -9,
+      "form_last_5": 52.8,
+      "bench_points_season": 38,
+      "hit_cost_season": 0,
+      "chips_remaining": [
+        "freehit",
+        "bboost",
+        "3xc"
+      ],
+      "chips_played_season": [
+        {
+          "name": "wildcard",
+          "event": 3
+        }
+      ],
+      "team_value": 100.5,
+      "bank": 1.0,
+      "bench_points": 16,
+      "bench_players": [
+        {
+          "name": "Jason Steele",
+          "club": "Brighton",
+          "points": 0,
+          "element_id": 111
+        },
+        {
+          "name": "Maxim De Cuyper",
+          "club": "Brighton",
+          "points": 6,
+          "element_id": 115
+        },
+        {
+          "name": "Malick Yalcouyé",
+          "club": "Brighton",
+          "points": 1,
+          "element_id": 605
+        },
+        {
+          "name": "Bobby Thomas",
+          "club": "Coventry City",
+          "points": 9,
+          "element_id": 173
+        }
+      ],
+      "chip_played": null,
+      "captain": {
+        "name": "Erling Haaland",
+        "club": "Man City",
+        "points": 12,
+        "element_id": 411,
+        "did_not_play": false
+      },
+      "vice_captain": {
+        "name": "Bruno Borges Fernandes",
+        "club": "Man Utd",
+        "points": 2,
+        "element_id": 426
+      },
+      "squad": [
+        {
+          "element_id": 384,
+          "name": "Gianluigi Donnarumma",
+          "club": "Man City",
+          "position": 1,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 391,
+          "name": "Joško Gvardiol",
+          "club": "Man City",
+          "position": 2,
+          "points": 4,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 356,
+          "name": "Virgil van Dijk",
+          "club": "Liverpool",
+          "position": 3,
+          "points": 8,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 277,
+          "name": "John Egan",
+          "club": "Hull City",
+          "position": 4,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 426,
+          "name": "Bruno Borges Fernandes",
+          "club": "Man Utd",
+          "position": 5,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 236,
+          "name": "Kiernan Dewsbury-Hall",
+          "club": "Everton",
+          "position": 6,
+          "points": 3,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 15,
+          "name": "Martin Ødegaard",
+          "club": "Arsenal",
+          "position": 7,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 367,
+          "name": "Cody Gakpo",
+          "club": "Liverpool",
+          "position": 8,
+          "points": 3,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 346,
+          "name": "Dominic Calvert-Lewin",
+          "club": "Leeds",
+          "position": 9,
+          "points": 2,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 411,
+          "name": "Erling Haaland",
+          "club": "Man City",
+          "position": 10,
+          "points": 6,
+          "is_captain": true,
+          "multiplier": 2
+        },
+        {
+          "element_id": 464,
+          "name": "Yoane Wissa",
+          "club": "Newcastle",
+          "position": 11,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 1
+        },
+        {
+          "element_id": 111,
+          "name": "Jason Steele",
+          "club": "Brighton",
+          "position": 12,
+          "points": 0,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 115,
+          "name": "Maxim De Cuyper",
+          "club": "Brighton",
+          "position": 13,
+          "points": 6,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 605,
+          "name": "Malick Yalcouyé",
+          "club": "Brighton",
+          "position": 14,
+          "points": 1,
+          "is_captain": false,
+          "multiplier": 0
+        },
+        {
+          "element_id": 173,
+          "name": "Bobby Thomas",
+          "club": "Coventry City",
+          "position": 15,
+          "points": 9,
+          "is_captain": false,
+          "multiplier": 0
+        }
+      ],
+      "transfers": [
+        {
+          "player_in": "Kiernan Dewsbury-Hall",
+          "player_in_club": "Everton",
+          "player_out": "Rayan Cherki",
+          "player_out_club": "Man City",
+          "player_in_points": 3,
+          "player_out_points": 8
+        },
+        {
+          "player_in": "Joško Gvardiol",
+          "player_in_club": "Man City",
+          "player_out": "Benjamin White",
+          "player_out_club": "Arsenal",
+          "player_in_points": 4,
+          "player_out_points": 0
+        }
+      ],
+      "transfer_cost": 0,
+      "transfers_made": 2
+    }
+  ],
+  "awards": {
+    "highest_scorer": {
+      "player_name": "Markus",
+      "points": 79,
+      "team_name": "Gluggen maskinlag"
+    },
+    "lowest_scorer": {
+      "player_name": "Torkil",
+      "points": 36,
+      "team_name": "FK Haralds/By"
+    },
+    "biggest_rise": null,
+    "biggest_fall": null,
+    "bench_disasters": [
+      {
+        "player_name": "Anders",
+        "bench_points": 20,
+        "event_total": 58
+      }
+    ],
+    "best_transfer": {
+      "player_name": "Markus",
+      "net_gain": 15,
+      "transfers": [
+        {
+          "player_in": "Antoine Semenyo",
+          "player_in_club": "Man City",
+          "player_out": "Christos Tzolis",
+          "player_out_club": "Arsenal",
+          "player_in_points": 17,
+          "player_out_points": 2
+        }
+      ]
+    },
+    "worst_transfer": {
+      "player_name": "Torkil",
+      "net_loss": -20,
+      "transfers": [
+        {
+          "player_in": "Yoane Wissa",
+          "player_in_club": "Newcastle",
+          "player_out": "Alexander Isak",
+          "player_out_club": "Liverpool",
+          "player_in_points": 0,
+          "player_out_points": 8
+        },
+        {
+          "player_in": "Morgan Gibbs-White",
+          "player_in_club": "Nott'm Forest",
+          "player_out": "Pascal Groß",
+          "player_out_club": "Brighton",
+          "player_in_points": 2,
+          "player_out_points": 14
+        }
+      ]
+    },
+    "captain_summary": {
+      "most_popular": {
+        "player": "Erling Haaland",
+        "count": 7
+      },
+      "best_pick": {
+        "manager": "Anders",
+        "captain": "Lewis Hall",
+        "points": 26
+      },
+      "worst_pick": {
+        "manager": "Daniel",
+        "captain": "Bukayo Saka",
+        "points": 4
+      },
+      "vice_captain_substitutions": []
+    },
+    "chip_usage": [],
+    "hit_takers": []
+  },
+  "league_summary": {
+    "average_score": 51.8,
+    "leader": {
+      "player_name": "Torkil",
+      "total_points": 378
+    },
+    "total_participants": 11,
+    "global_average": 48,
+    "managers_above_global_average": 7,
+    "new_entrants": []
+  },
+  "global": {
+    "average_score": 48,
+    "highest_score": 126,
+    "total_players": 10931750,
+    "league_vs_world": 3.8
+  },
+  "angles": {
+    "head_to_head": [
+      {
+        "player_name": "Torkil",
+        "beat": 0,
+        "lost_to": 10,
+        "season_record": {
+          "wins": 32,
+          "losses": 18
+        }
+      },
+      {
+        "player_name": "Markus",
+        "beat": 10,
+        "lost_to": 0,
+        "season_record": {
+          "wins": 34,
+          "losses": 16
+        }
+      },
+      {
+        "player_name": "Vidar",
+        "beat": 6,
+        "lost_to": 4,
+        "season_record": {
+          "wins": 33,
+          "losses": 16
+        }
+      },
+      {
+        "player_name": "Oda",
+        "beat": 4,
+        "lost_to": 6,
+        "season_record": {
+          "wins": 24,
+          "losses": 26
+        }
+      },
+      {
+        "player_name": "Peder",
+        "beat": 7,
+        "lost_to": 3,
+        "season_record": {
+          "wins": 29,
+          "losses": 21
+        }
+      },
+      {
+        "player_name": "Anders",
+        "beat": 8,
+        "lost_to": 1,
+        "season_record": {
+          "wins": 24,
+          "losses": 24
+        }
+      },
+      {
+        "player_name": "Hedda",
+        "beat": 5,
+        "lost_to": 5,
+        "season_record": {
+          "wins": 20,
+          "losses": 30
+        }
+      },
+      {
+        "player_name": "Daniel",
+        "beat": 8,
+        "lost_to": 1,
+        "season_record": {
+          "wins": 24,
+          "losses": 25
+        }
+      },
+      {
+        "player_name": "Eirin",
+        "beat": 1,
+        "lost_to": 8,
+        "season_record": {
+          "wins": 20,
+          "losses": 29
+        }
+      },
+      {
+        "player_name": "amund",
+        "beat": 3,
+        "lost_to": 7,
+        "season_record": {
+          "wins": 18,
+          "losses": 32
+        }
+      },
+      {
+        "player_name": "Camilla",
+        "beat": 1,
+        "lost_to": 8,
+        "season_record": {
+          "wins": 14,
+          "losses": 35
+        }
+      }
+    ],
+    "differentials": {
+      "top": [
+        {
+          "player_name": "Brian Brobbey",
+          "owner": "Markus",
+          "points": 17
+        },
+        {
+          "player_name": "James Tarkowski",
+          "owner": "Daniel",
+          "points": 14
+        },
+        {
+          "player_name": "Lewis Hall",
+          "owner": "Anders",
+          "points": 13
+        },
+        {
+          "player_name": "Bobby Thomas",
+          "owner": "Camilla",
+          "points": 9
+        },
+        {
+          "player_name": "Jordan Pickford",
+          "owner": "Vidar",
+          "points": 8
+        }
+      ],
+      "bottom": [
+        {
+          "player_name": "Marcos Senesi Barón",
+          "owner": "Daniel",
+          "points": 0
+        },
+        {
+          "player_name": "Will Hughes",
+          "owner": "Eirin",
+          "points": 0
+        },
+        {
+          "player_name": "Milan van Ewijk",
+          "owner": "amund",
+          "points": 0
+        }
+      ]
+    },
+    "captain_that_would_have_won": {
+      "player_name": "Antoine Semenyo",
+      "points": 17,
+      "captained_by": 0
+    },
+    "streaks": [
+      {
+        "player_name": "Peder",
+        "kind": "above_average",
+        "length": 3
+      },
+      {
+        "player_name": "Peder",
+        "kind": "green_arrows",
+        "length": 3
+      }
+    ],
+    "records": {
+      "best": {
+        "player_name": "Torkil",
+        "event_id": 2,
+        "points": 115
+      },
+      "worst": {
+        "player_name": "Camilla",
+        "event_id": 1,
+        "points": 20
+      }
+    },
+    "chip_tracker": [
+      {
+        "player_name": "Torkil",
+        "chips_remaining": [
+          "3xc"
+        ],
+        "chips_played": [
+          {
+            "name": "bboost",
+            "event": 1
+          },
+          {
+            "name": "freehit",
+            "event": 3
+          },
+          {
+            "name": "wildcard",
+            "event": 4
+          }
+        ]
+      },
+      {
+        "player_name": "Markus",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost"
+        ],
+        "chips_played": [
+          {
+            "name": "3xc",
+            "event": 3
+          }
+        ]
+      },
+      {
+        "player_name": "Vidar",
+        "chips_remaining": [
+          "wildcard",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": [
+          {
+            "name": "freehit",
+            "event": 3
+          }
+        ]
+      },
+      {
+        "player_name": "Oda",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost"
+        ],
+        "chips_played": [
+          {
+            "name": "3xc",
+            "event": 3
+          }
+        ]
+      },
+      {
+        "player_name": "Peder",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "3xc"
+        ],
+        "chips_played": [
+          {
+            "name": "bboost",
+            "event": 4
+          }
+        ]
+      },
+      {
+        "player_name": "Anders",
+        "chips_remaining": [
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": [
+          {
+            "name": "wildcard",
+            "event": 4
+          }
+        ]
+      },
+      {
+        "player_name": "Hedda",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": []
+      },
+      {
+        "player_name": "Daniel",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost"
+        ],
+        "chips_played": [
+          {
+            "name": "3xc",
+            "event": 1
+          }
+        ]
+      },
+      {
+        "player_name": "Eirin",
+        "chips_remaining": [
+          "wildcard",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": [
+          {
+            "name": "freehit",
+            "event": 4
+          }
+        ]
+      },
+      {
+        "player_name": "amund",
+        "chips_remaining": [
+          "wildcard",
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": []
+      },
+      {
+        "player_name": "Camilla",
+        "chips_remaining": [
+          "freehit",
+          "bboost",
+          "3xc"
+        ],
+        "chips_played": [
+          {
+            "name": "wildcard",
+            "event": 3
+          }
+        ]
+      }
+    ]
+  },
+  "storylines": [
+    {
+      "kind": "gw_rank_extreme",
+      "score": 95,
+      "managers": [
+        "Markus"
+      ],
+      "facts": {
+        "event_total": 79,
+        "event_percentile": 0.8
+      },
+      "summary": "Markus 79 pts, GW rank in the top 1% of the field."
+    },
+    {
+      "kind": "score_far_above_average",
+      "score": 80,
+      "managers": [
+        "Markus"
+      ],
+      "facts": {
+        "event_total": 79,
+        "global_average": 48
+      },
+      "summary": "Markus 79 pts, at least 1.5x the global average of 48."
+    },
+    {
+      "kind": "streak",
+      "score": 50,
+      "managers": [
+        "Peder"
+      ],
+      "facts": {
+        "player_name": "Peder",
+        "kind": "above_average",
+        "length": 3
+      },
+      "summary": "Peder: 3 straight above average."
+    },
+    {
+      "kind": "streak",
+      "score": 50,
+      "managers": [
+        "Peder"
+      ],
+      "facts": {
+        "player_name": "Peder",
+        "kind": "green_arrows",
+        "length": 3
+      },
+      "summary": "Peder: 3 straight green arrows."
+    },
+    {
+      "kind": "bench_points_high",
+      "score": 40,
+      "managers": [
+        "Anders"
+      ],
+      "facts": {
+        "bench_points": 20
+      },
+      "summary": "Anders left 20 points on the bench."
+    },
+    {
+      "kind": "round_win",
+      "score": 30,
+      "managers": [
+        "Markus"
+      ],
+      "facts": {
+        "event_total": 79
+      },
+      "summary": "Markus won the round with 79 pts."
+    }
+  ]
+}

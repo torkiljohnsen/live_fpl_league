@@ -1,3 +1,2 @@
-- GW3 | Camilla spiller bench boost i GW4 etter wildcard i GW3 | avgjøres: GW4 | status: feil (GW4)
-- GW3 | Reidars råd: Anders bør spille bench boost i golden gameweek GW4 | avgjøres: GW4 | status: feil (GW4)
-- GW4 | Minst to av managerne med urørte chips bruker kort før golden gameweek GW8 | avgjøres: GW8 | status: åpen
+- GW4 | Minst to av managerne med urørte chips bruker kort før golden gameweek GW8 | avgjøres: GW8 | status: feil (GW7)
+- GW7 | Reidars råd: Hedda bør vente én runde til med bench boost, ikke bruke i golden gameweek GW8 | avgjøres: GW8 | status: åpen

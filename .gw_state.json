@@ -1,10 +1,13 @@
 {
-  "finished_fixtures": 40,
-  "finished_events": 4,
+  "finished_fixtures": 80,
+  "finished_events": 7,
   "notified_events": [
     1,
     2,
     3,
-    4
+    4,
+    5,
+    6,
+    7
   ]
 }

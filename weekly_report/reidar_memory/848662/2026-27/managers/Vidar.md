@@ -1,8 +1,8 @@
 **Lag:** FK Straumen
-**Nåværende form:** GW4: 65 poeng, 2. plass (uendret), 298 poeng totalt. Ingen chip spilt. João Pedro-kaptein ga 24 poeng — beste kapteinspick i ligaen denne uken.
-**Sesongutvikling:** Debutsesong, fortsatt en av sesongens sterkeste historier, men avstanden til Torkil har nå økt til 44 poeng etter at ligalederen vant golden gameweek med wildcard.
-**Min vurdering:** Beste kapteinsvalg i ligaen holder ham i toppen, men uten chip-boost i selve golden gameweek tapte han terreng mot Torkil for første gang siden sesongstart. Han sitter fortsatt på wildcard, bench boost og triple captain — tre kort i behold mot Torkils ett.
-**Nevneverdige øyeblikk:** GW3: free hit, 73 poeng, beste transfer i ligaen. GW4: ingen chip, men beste kapteinspick i ligaen (João Pedro, 24 poeng).
-**Løpende vitser:** Mannen som følger flokken og blir belønnet for det — men denne uken var det Torkil som fant den store gevinsten.
-**Byttemønster:** Ingen bytter i GW4.
-**Kapteinvalg:** João Pedro i GW4 — 24 poeng, beste pick i ligaen.
+**Nåværende form:** GW7: 54 poeng, 3. plass uendret, 452 totalt. Første runde etter wildcarden i GW6, uten bytter. Ødegaard-kaptein ga 6 poeng — en sjeldenhet, siden Vidar ikke har Haaland i hele stallen, en unik posisjon i ligaen.
+**Sesongutvikling:** Debutsesong, fortsatt solid tredjeplass, men etter en kostbar wildcard i GW6 som ikke løste noe, fortsetter han nå uten den store flokk-fordelen (Haaland) resten av ligaen lener seg på.
+**Min vurdering:** Å stå uten Haaland midt i en liga der åtte av tolv kapteinerte ham for 26 poeng hver, er en dristig posisjon — denne uken kostet det ham relativt, men identiteten er tydelig.
+**Nevneverdige øyeblikk:** GW4: beste kapteinspick. GW6: wildcard spilt, moderat avkastning. GW7: eneste uten Haaland i stallen.
+**Løpende vitser:** Mannen som følger flokken — bortsett fra når det gjelder Haaland, der han går sin egen vei.
+**Byttemønster:** Ingen bytter i GW7.
+**Kapteinvalg:** Ødegaard i GW7 — 6 poeng.

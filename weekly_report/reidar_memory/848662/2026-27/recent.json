@@ -49,5 +49,47 @@
       "Hedda og amund: chip-hamstrerne som Reidar nå krever en forklaring fra.",
       "\"Find the Salahution\" fant en bench boost-løsning i stedet for Salah."
     ]
+  },
+  {
+    "event_id": 5,
+    "headline": "Torkil scoret dårligst i ligaen, og ledelsen krympet til ti poeng",
+    "opener": "For en uke siden sto jeg her og skrev at Torkil lå i topp 0,12 prosent av alle managere i verden, etter en golden gameweek han vant med wildcard og god planlegging.",
+    "closer": "Ti poeng, trettitre runder igjen. Jeg har sett større ledelser forsvinne raskere enn dette.",
+    "jokes": [
+      "\"Poeng per startende spiller: 3,3\" — Torkils nye visittkort som ligaleder.",
+      "Groß ga 14 poeng til Markus samme uke Torkil solgte ham — ligaens dyreste avskjed.",
+      "Semenyo, fisken som igjen slapp unna Haaland-nettet, denne gangen for 17 poeng ubundet.",
+      "Anders' benk: nå en institusjon med 74 poeng i egen rett.",
+      "Hedda og amund, kortstokk-munkene, fortsatt musestille fem runder inn.",
+      "\"Ti poeng, trettitre runder igjen\" — Reidars nye favorittlinje om tittelkampen."
+    ]
+  },
+  {
+    "event_id": 6,
+    "headline": "82 poeng, uten en eneste chip",
+    "opener": "amund endte runde 6 med **82** poeng, best i hele ligaen.",
+    "closer": "Så her er spørsmålet jeg tar med meg til runde sju: var 82 poeng en ny vane for amund, eller bare den fjerde vendingen på en bane som allerede har snudd tre ganger?",
+    "jokes": [
+      "\"Samme kortstokk, motsatt uke\" — amund og Hedda som ligaens ferskeste kontrastpar.",
+      "Torkil rir flokken igjen, etter å ha falt av hesten forrige runde.",
+      "Markus: taper på kapteinsbindet, vinner likevel totalt — rollene byttet denne uken.",
+      "Vidars wildcard brukt på \"sesongens jevneste uke\" — den dyreste chippen på den billigste dagen.",
+      "Anders' benkepoeng vokser uansett hva han gjør — nå 88, en stillegående katastrofe.",
+      "Edvind entrer ligaen med blanke ark og umiddelbart ligaens verste transfer."
+    ]
+  },
+  {
+    "event_id": 7,
+    "headline": "Hedda vant uka. Golden gameweek venter.",
+    "opener": "Hedda spilte wildcard i runde 7, dagen før pengene står på spill i runde 8, og endte med **74** poeng, best i hele ligaen.",
+    "closer": "Vekkerklokka er satt.",
+    "jokes": [
+      "Hedda: vant runden, rørte ikke tabellplasseringen med en finger",
+      "amund alene igjen i chip-hamstring-saken — den ensomme kortsamleren",
+      "Vidar: mannen uten Haaland i en liga full av ham",
+      "\"Back2back\" uten en eneste seier, men med 98 poeng på benken",
+      "Daniel: eneste i ligaen uten et minuspoeng — og nå sist likevel",
+      "Torkil rir flokken, gapet vokser, spådommen begravd for godt"
+    ]
   }
 ]

@@ -1,9 +1,10 @@
-- Bruno Fernandes-saga | Samme spiller var verste kapteinsvalg i GW1 og beste i GW2 | sist brukt: GW2
-- Haaland-fellen | Ni av elleve managere kapteinet Haaland i GW3 | sist brukt: GW2
-- Peders svingninger | Ligarekord i fjor, nå størst fremgang i ligaen med bench boost i golden gameweek | sist brukt: GW4
-- Camillas bunnrekord | Eier fortsatt sesongens laveste rundescore (20, GW1) og sisteplassen | sist brukt: GW4
-- Golden gameweek-chip-timingen | Torkil og Peder traff riktig i selve golden gameweek, Anders og Camilla bommet | sist brukt: GW4
-- Anders' benkeproblem | 54 sesongpoeng på benken; wildcard løste det ikke, 27 poeng igjen i GW4 | sist brukt: GW4
-- Daniels tidlige 3xc-regning | 3xc brukt i GW1; GW4 viste bedring med Saka-kaptein (16 poeng) | sist brukt: GW4
-- Hedda og amunds chip-hamstring | Eneste to med alle fire chips urørt fire runder inn | sist brukt: GW4
-- amunds berg-og-dalbane | Ligaens beste rundescore i GW3, verste i GW4 — størst fall i ligaen | sist brukt: GW4
+- Haaland-fellen | 8 av 12 kapteinet Haaland for 26 hver denne uken, men Edvind matchet lederen med Groß i stedet | sist brukt: GW7
+- Bunnplass-stafetten | Camillas seks runder lange sisteplass er over — Daniel overtok med ligaens laveste score (35) | sist brukt: GW7
+- Golden gameweek-chip-timingen | Hedda spilte wildcard rett før GW8; Reidar råder henne til å vente med bench boost | sist brukt: GW7
+- Hedda og amunds chip-hamstring | Hedda brøt ut med wildcard (74p), amund er nå alene igjen med alle fire chips urørt | sist brukt: GW7
+- amunds berg-og-dalbane | Etter sesongtopp (82, GW6) kom en roligere, solid runde uten bytter | sist brukt: GW7
+- Torkil-Markus tittelkamp | Gapet har vokst to runder på rad, nå 25 poeng, Torkils Haaland ga ligaens beste pick | sist brukt: GW7
+- Edvind - ny deltaker | Matchet lederens score i GW7 uten å kapteine Haaland i det hele tatt | sist brukt: GW7
+- Peders svingninger | Fra ligaens beste kapteinspick (GW6) til ligaens verste (GW7), falt to plasser | sist brukt: GW7
+- Daniels tidlige 3xc-regning | 3xc brukt i GW1; nå på bunnplass for første gang med ligaens laveste score i GW7 | sist brukt: GW7
+- Anders' benkeproblem | 98 sesongpoeng på benken, men to runder uten ny disaster, fjerdeplass urokkelig | sist brukt: GW7

@@ -1,8 +1,8 @@
 **Lag:** Back2back
-**Nåværende form:** GW4: 65 poeng, 6. plass (ned fra 5.). Spilte endelig wildcard — men ikke i tråd med Reidars råd om bench boost. Nytt lag, samme gamle problem: 27 poeng på benken, ligaens "bench disaster" denne uken. Cole Palmer-kaptein ga 10 poeng.
-**Sesongutvikling:** Andreplass i fjor, jakter fortsatt sin første seier. Sesongens benkepoeng har nå nådd 54, klart mest i ligaen, til tross for et helt nytt lag.
-**Min vurdering:** Reidar anbefalte bench boost i golden gameweek. Anders valgte wildcard i stedet, og resultatet ble et bevis på at problemet ikke lå i laget, men i mannen: 27 nye benkepoeng dukket opp på et brett han nettopp hadde bygget fra bunnen.
-**Nevneverdige øyeblikk:** GW1-2: høye benkepoeng. GW3: roligere. GW4: wildcard spilt, benkeproblemet tilbake for fullt, ligaens verste bench-disaster denne uken.
-**Løpende vitser:** "Back2back" fra en mann som aldri har vunnet — og nå mannen som ignorerte Reidars råd og betalte for det umiddelbart.
-**Byttemønster:** Wildcard i GW4 — hele laget snudd, uten effekt på benkeproblemet.
-**Kapteinvalg:** Cole Palmer i GW4 — 10 poeng.
+**Nåværende form:** GW7: 62 poeng, 4. plass (uendret), 451 poeng totalt. Haaland-kaptein ga 13 poeng (26 med C), solid men ikke eksepsjonelt. Ett bytte (Rúben Dias inn for Lewis Hall) ble ligaens verste transfer denne uken, -3 poeng netto.
+**Sesongutvikling:** Tredje strake runde over verdenssnittet, helt uten drama denne gangen — fjerdeplassen ligger urokkelig fast.
+**Min vurdering:** Etter fire bench-katastrofer tidligere i sesongen er dette nå to runder på rad uten kaos. En stille, stabil fase fra en mann hvis lagnavn fortsatt venter på sin første seier.
+**Nevneverdige øyeblikk:** GW5: beste kapteinspick, likevel bench-disaster. GW6: ingen drama, klatring til fjerdeplass. GW7: verste transfer i ligaen, men ingen skade på plasseringen.
+**Løpende vitser:** "Back2back" fra en mann som aldri har vunnet — benkepoengene vokser uansett, nå 98 for sesongen.
+**Byttemønster:** Ett bytte i GW7, netto -3, ligaens svakeste denne uken.
+**Kapteinvalg:** Haaland i GW7 — 13 poeng.

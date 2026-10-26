@@ -18,5 +18,20 @@
     "event_id": 4,
     "shape": "kvitteringene",
     "constraint": null
+  },
+  {
+    "event_id": 5,
+    "shape": "spalten",
+    "constraint": null
+  },
+  {
+    "event_id": 6,
+    "shape": "regnearket",
+    "constraint": null
+  },
+  {
+    "event_id": 7,
+    "shape": "spalten",
+    "constraint": null
   }
 ]

@@ -152,6 +152,7 @@ class ReidarMemory:
         self._ledger_path = self._base_path / "ledger.md"
         self._threads_path = self._base_path / "threads.md"
         self._recent_path = self._base_path / "recent.json"
+        self._league_context_path = self._base_path / "league_context.md"
 
     def scaffold_directories(self) -> None:
         """Create the memory directory structure.
@@ -176,6 +177,16 @@ class ReidarMemory:
         for md_file in sorted(self._managers_path.glob("*.md")):
             profiles[md_file.stem] = md_file.read_text(encoding="utf-8")
         return profiles
+
+    def load_league_context(self) -> str:
+        """Read league_context.md: who the managers are off the pitch.
+
+        Hand-maintained by the league and never written by update_memory().
+        Returns an empty string if the file doesn't exist.
+        """
+        if not self._league_context_path.is_file():
+            return ""
+        return self._league_context_path.read_text(encoding="utf-8")
 
     def load_season_arc(self) -> str:
         """Read the season_arc.md file.
@@ -331,6 +342,10 @@ class ReidarMemory:
         first run (no files exist).
         """
         sections: list[str] = []
+
+        league_context = self.load_league_context()
+        if league_context:
+            sections.append(f"## Om ligaen\n{league_context}\n")
 
         # Manager profiles
         profiles = self.load_manager_profiles()
@@ -508,6 +523,8 @@ class ReidarMemory:
             "Åpne tråder: oppdater «sist brukt» KUN når narrativet faktisk "
             "brukte tråden denne uken. Legg til nye tråder sparsomt. "
             "Fjern tråder ubrukt i 8+ runder. Maks 10 linjer.\n\n"
+            "Linjer som starter med «**Kontekst fra ligaen:**» er skrevet "
+            "for hånd av ligaen. Ta dem med ordrett i profilen.\n\n"
             "VIKTIG: Oppdater eksisterende profiler med NY informasjon — "
             "ikke gjenta alt fra forrige gang. Behold det som fortsatt er "
             "relevant og legg til nytt."

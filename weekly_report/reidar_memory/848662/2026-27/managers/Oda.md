@@ -1,8 +1,9 @@
 **Lag:** Odas Dreamteam
-**Nåværende form:** GW4: 61 poeng, 4. plass (uendret). Ingen chip. Kaptein Anton Stach ga kun 6 poeng — et påfallende svakt valg med Haaland i laget uten bind. Verste bytte i ligaen denne uken (Ødegaard inn for Bruno, netto -1).
-**Sesongutvikling:** Fjerdeplass i fjor, sterk start i år, men GW3-GW4 har vist chip-anger og nå to uker på rad med svake bytter/kapteinsvalg.
-**Min vurdering:** Triple captain-kortet er brukt opp fra GW3, og denne uken viste hva som skjer uten det: et påfallende dårlig kapteinsvalg og ligaens svakeste transferbytte samme runde. Plasseringen holder seg, men marginene krymper.
-**Nevneverdige øyeblikk:** GW2: beste bytte i ligaen. GW3: 3xc spilt, samtidig verste bytte. GW4: nytt svakt kapteinsvalg, nytt svakt bytte.
-**Løpende vitser:** Igor Thiago-sagaen hviler fortsatt i minnet. Dreamteam-navnet lever, men to runder med bomskudd på rad krever forklaring.
-**Byttemønster:** Ett bytte i GW4 (Ødegaard inn for Bruno) — ligaens verste denne uken.
-**Kapteinvalg:** Anton Stach i GW4 — 6 poeng.
+**Kontekst fra ligaen:** Oda er i mammapermisjon og er tilbake på jobb 28. oktober. Rom for lett humor når det passer: fysisk fravær = mentalt fravær, at folk i permisjon tilsynelatende har bedre tid enn andre til å planlegge laget, eller, bare etter en dårlig runde, at ammetåka kan ha ført til noen tvilsomme valg.
+**Nåværende form:** GW7: 63 poeng, 7. plass uendret. Tre bytter (Groß, Rogers, Ajer inn) ga ligaens beste transfer denne uken, +7 netto. Haaland-kaptein ga 13 poeng.
+**Sesongutvikling:** Etter sesongens største fall i GW6 kom et solid svar — beste bytte i ligaen holdt plasseringen stabil. 439 poeng totalt, dødt likt med amund.
+**Min vurdering:** Fra stille passivitet til ligaens beste bytte på én uke — et tegn på at hun fortsatt har grep om laget til tross for permisjonen.
+**Nevneverdige øyeblikk:** GW3: 3xc spilt, verste bytte. GW6: sesongens største fall. GW7: ligaens beste transfer, stabilisert syvendeplass.
+**Løpende vitser:** Igor Thiago-sagaen hviler fortsatt i minnet. Dreamteam-navnet lever videre i limbo.
+**Byttemønster:** Tre bytter i GW7, +7 netto, ligaens beste.
+**Kapteinvalg:** Haaland i GW7 — 13 poeng.
