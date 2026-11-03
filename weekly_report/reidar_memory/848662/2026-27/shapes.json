@@ -38,5 +38,10 @@
     "event_id": 8,
     "shape": "kvitteringene",
     "constraint": null
+  },
+  {
+    "event_id": 9,
+    "shape": "maktrangeringen",
+    "constraint": null
   }
 ]
