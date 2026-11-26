@@ -1,8 +1,8 @@
 **Lag:** Gluggen maskinlag
-**Nåværende form:** GW8: 42 poeng, 2. plass uendret, 535 totalt. Spilte wildcard — en forsiktig avkastning. Haaland-kaptein ga 16 poeng.
-**Sesongutvikling:** Gapet opp til Torkil har nå vokst en tredje runde på rad — fra 16 til 25 til **29** poeng. Wildcarden endret ingenting i det store bildet.
-**Min vurdering:** Et wildcard som ikke løste det egentlige problemet — tempoet mot Torkil. Reidars spådom om et krympende gap er nå ikke bare begravd, men erstattet med en ny spådom om at gapet passerer 40 før jul.
-**Nevneverdige øyeblikk:** GW5: beste score, beste bytte. GW7: stillstand. GW8: wildcard spilt for en moderat 42, gapet vokser videre.
-**Løpende vitser:** Mannen som taper på transfermarkedet og nå også på wildcard-timingen — gapet er nå nesten tre ganger så stort som for tre uker siden.
-**Byttemønster:** Wildcard i GW8, 42 poeng.
-**Kapteinvalg:** Haaland i GW8 — 16 poeng.
+**Nåværende form:** GW11: 25 poeng, 10 under verdenssnittet, 2. plass uendret, 679 totalt. Ingen bytter. Haaland-kaptein ga 4 poeng.
+**Sesongutvikling:** Gapet til Torkil har nå vokst sjette uke på rad, fra 53 til 72 poeng. Wildcarden i GW8 løste aldri tempoproblemet, og nå er avstanden nesten umulig å ta igjen uten noe drastisk.
+**Min vurdering:** Markus betaler egentlig regningen for naboens klatring — en stille, grei runde for ham er fortsatt en tapt uke i tittelkampen. Chips remaining (freehit, bboost) kan være siste kort å spille med, men tiden renner ut.
+**Nevneverdige øyeblikk:** GW5: beste score. GW8: wildcard spilt for moderat avkastning. GW11: stillstand mens gapet passerer 70.
+**Løpende vitser:** Mannen som taper på transfermarkedet og nå også i kappløpet mot Torkil — gapet er nå over det dobbelte av hva det var for tre uker siden.
+**Byttemønster:** Ingen bytter i GW11.
+**Kapteinvalg:** Haaland i GW11 — 4 poeng.

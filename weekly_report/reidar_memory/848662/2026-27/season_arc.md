@@ -1,11 +1,9 @@
-**Tittelkamp:** Torkil (564) leder urokkelig, og gapet til Markus (535) har nå vokst en tredje runde på rad — fra 16 til 25 til **29** poeng. Torkils jevne, bytteløse runder står i kontrast til Markus' wildcard som ikke løste tempoproblemet. Reidar lanserer en ny spådom: gapet passerer 40 poeng før jul.
+**Tittelkamp:** Torkil (751) har nå et gap til Markus (679) på 72 poeng — sjette uke på rad med vekst, fra 53 til 72. Reidars spådom fra GW8 om at gapet skulle passere 40 før jul er innfridd, tidlig og med klar margin. Torkil sitter nå i verdens beste 0,35 prosent av over elleve millioner managere, bygget over tre strake runder over snittet og tre strake grønne piler — alt dette til tross for at han samtidig leverte ligaens verste kapteinspick i GW11.
 
-**Golden gameweek-dramaet:** Edvind vant selve potten med en uvanlig chip-bruk — free hit midt i en runde der kapteinen hans ikke spilte i det hele tatt, og visekapteinen Isak ble doblet til 18. 73 poeng, topp 1,2 % av verden, og en klatring til 3. plass totalt. "Mannen som ikke trenger Haaland" er nå en manager med fasit å vise til.
+**Golden gameweek 2 nærmer seg:** GW12 er golden gameweek, og tre managere — Oda, amund og Peder — sitter fortsatt på urørt wildcard. Reidar spår at minst to av dem bruker den før fredag kveld. Edvind, som vant forrige golden gameweek-pott, spilte wildcard dagen før denne runden og sitter nå kun på bench boost — Reidar anbefaler ham å spille det nettopp i GW12.
 
-**To kvitteringer avgjort:** GW4-spådommen om at minst to av chip-hamstrerne skulle bryte ut før golden gameweek, er offisielt begravd — bare Hedda gjorde det. Men GW7-rådet til Hedda (vent med bench boost) traff blink: hun fulgte rådet, spilte ingen chip, og unngikk å kaste bort kortet i en runde som ga henne nøyaktig verdenssnittet om hun hadde brukt det. amund står nå helt alene som eneste manager med alle fire chips urørt.
+**Rivaliseringer i bevegelse:** Peders João Pedro-forbannelse er nå inne i sin fjerde uke på rad, et mønster Reidar kaller et abonnement snarere enn uflaks. Daniel har overtatt sisteplassen fra Peder, fortsatt uten et eneste minuspoeng hele sesongen. amund er fortsatt alene med alle fire chips urørt. Anders' geni-og-tabbe-mønster er tilbake etter en kort formtopp i GW9.
 
-**Rivaliseringer i bevegelse:** Vidar, som stod alene uten Haaland i hele sesongen, hentet ham endelig inn i GW8 — og fikk likevel sesongens største fall. Peder sliter med en to-ukers João Pedro-forbannelse som kostet ham både verste og laveste kapteinspick på rad. Anders fortsetter å levere både geni og tabbe i samme runde, et mønster som begynner å bli hans varemerke.
+**Rekorder som står:** Høyeste rundescore: Torkil 115 (GW2). Laveste: Camilla 20 (GW1). Eirins 21 poeng i GW11 var nær, men rekorden lever videre.
 
-**Rekorder som står:** Høyeste rundescore: Torkil 115 (GW2). Laveste: Camilla 20 (GW1). Begge fortsatt uinnfridd.
-
-**Tonenotater:** Reidar fokuserer nå på sitt eget prediksjonsregnskap — én spådom begravd, ett råd bekreftet riktig — og en ny, dristig spådom om gapet i toppen før jul.
+**Tonenotater:** Reidar holder et strengt prediksjonsregnskap — én spådom nettopp innfridd (gap-veksten), to nye lagt til denne uka om wildcard-bruk og bench boost-timing foran golden gameweek 2.

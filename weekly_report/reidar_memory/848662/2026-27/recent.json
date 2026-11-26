@@ -1,15 +1,5 @@
 [
   {
-    "event_id": 1,
-    "headline": "Bench boost i runde 1. Har vi lært noe av i fjor?",
-    "opener": "Ny sesong, nytt ligavnavn — \"Sinkaberg The Office\" har erstattet fjorårets \"Sinkaberg administrasjon\", som om noen syntes byråkratiet trengte en oppgradering til komedie.",
-    "closer": "Neste deadline nærmer seg som alltid. Vi sees da. Sannsynligvis med et nytt Haaland-kapteinsdrama på trappene.",
-    "jokes": [
-      "Haaland-kapteinene som kollektiv feilberegning",
-      "lagnavn som ambisjon uten dekning (Back2back, Find the Salahution)"
-    ]
-  },
-  {
     "event_id": 2,
     "headline": "46 poeng, samme spiller, helt ny dom",
     "opener": "I runde 1 skrev jeg at Bruno Fernandes var ligaens dårligste kapteinsvalg.",
@@ -104,6 +94,20 @@
       "Peders João Pedro-forbannelse, nå offisielt en toukers-affære.",
       "Torkil \"rir flokken, og flokken vinner stadig større.\"",
       "Vidar endelig i flokken med Haaland — og fikk sesongens største fall likevel."
+    ]
+  },
+  {
+    "event_id": 11,
+    "headline": "Topp 0,35 prosent, verst i kapteinsvalg",
+    "opener": "Torkil Johnsen ligger nå i verdens beste 0,35 prosent av alle FPL-managere, nummer 39 307 av over elleve millioner.",
+    "closer": "Golden gameweek 12 er rett rundt hjørnet. Jeg spår at minst to av de tre managerne som fortsatt sitter på wildcard, bruker det før fredag kveld.",
+    "jokes": [
+      "Torkil: \"topp 0,35 prosent globalt, bunn i egen liga på kapteinsvalg samme uke\"",
+      "Peders João Pedro-kapteinskap er nå \"et abonnement han fornyer hver fredag\"",
+      "Daniel: mannen uten et eneste minuspoeng, nå også mannen på bunnen av tabellen",
+      "Hedda: \"rundens beste, men 18 poeng forlatt på tribuneplass\"",
+      "amund: \"berg-og-dalbane-mannen\", fortsatt alene i chip-hamstring-klubben",
+      "Edvind: \"mannen som ikke trenger Haaland\", nå ventet å spille bench boost i GW12"
     ]
   }
 ]

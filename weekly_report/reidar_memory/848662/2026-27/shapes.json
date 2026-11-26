@@ -48,5 +48,10 @@
     "event_id": 10,
     "shape": "karakterboka",
     "constraint": null
+  },
+  {
+    "event_id": 11,
+    "shape": "spalten",
+    "constraint": null
   }
 ]

@@ -1,10 +1,10 @@
-- Haaland-fellen | 8 av 12 kapteinet Haaland for 16 hver i GW8, men Edvind vant likevel med benket kaptein | sist brukt: GW8
-- Bunnplass-stafetten | Daniel fortsatt sist i ligaen; Peder hadde lavest rundescore i GW8 | sist brukt: GW8
-- Golden gameweek-chip-timingen | Hedda fulgte Reidars råd, spilte ingen chip, og rådet ble bekreftet riktig | sist brukt: GW8
-- Hedda og amunds chip-hamstring | amund alene igjen med alle fire chips urørt, også verste transfer i GW8 | sist brukt: GW8
-- amunds berg-og-dalbane | Etter sesongtopp (82, GW6) fortsetter en roligere, ujevn fase, verste bytte i GW8 | sist brukt: GW8
-- Torkil-Markus tittelkamp | Gapet har vokst tredje runde på rad til 29; Reidar spår 40 før jul | sist brukt: GW8
-- Edvind - golden gameweek-vinner | Vant potten med free hit og benket kaptein, 73 poeng, opp til 3. plass | sist brukt: GW8
-- Peders svingninger | João Pedro-forbannelsen rammet to runder på rad, lavest score i GW8 | sist brukt: GW8
-- Daniels tidlige 3xc-regning | Wildcard i GW8 endret ingenting, fortsatt sist i ligaen | sist brukt: GW8
-- Anders' dobbelheit | Beste transfer og verste kapteinspick i samme runde, GW8 | sist brukt: GW8
+- Haaland-fellen | Haaland var mest populære kaptein igjen (7 av 12), men Torkils Jackson-pick var ligaens verste | sist brukt: GW11
+- Bunnplass-stafetten | Daniel overtar sisteplassen fra Peder i GW11, fortsatt uten minuspoeng hele sesongen | sist brukt: GW11
+- Golden gameweek-chip-timingen | Hedda fulgte Reidars råd i GW8; ny golden gameweek-test kommer i GW12 | sist brukt: GW8
+- Chip-hamstringen | amund alene med alle fire kort urørt; Oda og Peder sitter også på urørt wildcard foran GW12 | sist brukt: GW11
+- amunds berg-og-dalbane | Etter verste transfer i GW8 kom en rolig, passiv GW11, fortsatt urørte chips | sist brukt: GW11
+- Torkil-Markus tittelkamp | Gapet har vokst sjette uke på rad til 72; Reidars 40-spådom er innfridd | sist brukt: GW11
+- Edvind - golden gameweek-vinner | Spilte wildcard i GW11 foran golden gameweek 2, Reidar spår bench boost i GW12 | sist brukt: GW11
+- Peders svingninger | João Pedro-forbannelsen er nå inne i sin fjerde uke på rad | sist brukt: GW11
+- Daniels tidlige 3xc-regning | Nå tilbake på sisteplass etter wildcard uten effekt i GW8 | sist brukt: GW11
+- Anders' dobbelheit | Formtoppen fra GW9 er borte, ligaens verste transfer i GW11 | sist brukt: GW11

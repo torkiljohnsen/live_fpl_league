@@ -1,9 +1,8 @@
 **Lag:** FK Haralds/By
-**Nåværende form:** GW8: 46 poeng, 1. plass uendret, 564 poeng totalt. Ingen bytter. Haaland-kaptein ga 16 poeng, standard avkastning.
-**Sesongutvikling:** Forsvarende ligamester. Gapet til Markus har nå vokst en tredje runde på rad — fra 16 til 25 til **29** poeng. Reidar spår nå at det passerer 40 før jul.
-**Forrige sesong (2025-26):** LIGAVINNER med 2213 poeng, 37 foran Anders. 8 rundeseiere, 2 sisteplasser. Sesong-high 103 (GW33, free hit), low 35.
-**Min vurdering:** Ingen dramatikk, ingen bytter, bare en jevn runde som holder ham foran mens gapet sakte vokser seg umulig å ta igjen. Flokken rir trygt videre.
-**Nevneverdige øyeblikk:** GW5: ligaens laveste score. GW7: beste kapteinspick, gapet opp til 25. GW8: ingen drama, gapet opp til 29.
-**Løpende vitser:** Bruno Fernandes-saken hviler fortsatt. Torkil rir flokken, og flokken vinner stadig større.
-**Byttemønster:** Ingen bytter i GW8.
-**Kapteinvalg:** Haaland i GW8 — 16 poeng.
+**Nåværende form:** GW11: 44 poeng, 1. plass uendret, 751 totalt. Ingen bytter (Van Hecke inn for Leif Davis var satt opp i forveien og ble ligaens beste transfer, +5 netto). Men kapteinsvalget var ligaens dårligste denne uka: Nicolas Jackson ga 4 poeng mens Haaland satt på visekapteinsplassen og ga 2.
+**Sesongutvikling:** Tre strake runder over verdenssnittet, tre strake grønne piler — og nå offisielt i verdens beste 0,35 prosent av alle FPL-managere, nummer 39 307 av over elleve millioner. Gapet til Markus har vokst sjette uke på rad, fra 53 til **72** poeng. Reidars spådom om at gapet skulle passere 40 før jul er innfridd — tidlig, og med god margin.
+**Min vurdering:** Et tall bygget over elleve runder, ikke én søndag, og det er det som gjør det skremmende for resten av feltet. At han samtidig leverer ligaens verste kapteinspick viser bare hvor lite det betyr når resten av laget bærer ham.
+**Nevneverdige øyeblikk:** GW8: ingen drama. GW11: topp 0,35 % globalt, verste kapteinspick i ligaen samtidig.
+**Løpende vitser:** Bruno Fernandes-saken hviler fortsatt. Torkil rir flokken, og flokken vinner stadig større — nå med et tall som beviser det.
+**Byttemønster:** Ett bytte i GW11, ligaens beste transfer (+5).
+**Kapteinvalg:** Nicolas Jackson i GW11 — 4 poeng, ligaens verste pick.

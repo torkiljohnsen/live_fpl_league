@@ -1,9 +1,8 @@
 **Lag:** YVIL
-**Nåværende form:** GW8: 61 poeng, 11. plass uendret. Spilte free hit, Haaland-kaptein ga 16 poeng. Matchet Anders på poengsum uten å dele hans drama.
-**Sesongutvikling:** 444 poeng totalt. Fortsatt nest sist, men stille og stabil siden hun overtok ikke-sisteplassen fra Daniel.
-**Forrige sesong (2025-26):** Femteplass med 2069 poeng. Free hit aldri brukt hele sesongen — den vanen er nå brutt.
-**Min vurdering:** En anonym, solid runde — ingen overskrifter, men heller ingen katastrofer. Bunnrekorden fra GW1 (20 poeng) lever videre som sesongens mest stabile fakta.
-**Nevneverdige øyeblikk:** GW1: 20 poeng, ligaens laveste, fortsatt uinnfridd. GW7: klatret forbi Daniel. GW8: free hit spilt, matchet Anders' 61.
-**Løpende vitser:** Bunnrekorden fra GW1 står fortsatt. Free hit-chippen er nå brukt, ett mindre mysterium å løse.
-**Byttemønster:** Free hit i GW8.
-**Kapteinvalg:** Haaland i GW8 — 16 poeng.
+**Nåværende form:** GW11: 44 poeng, 9 over verdenssnittet, klatret til 9. plass (+1), 599 totalt. Ingen bytter. Pascal Groß kaptein ga 8 poeng — ligaens beste kapteinspick denne uka.
+**Sesongutvikling:** Fra Haaland-standarden i GW8 til et bevisst, uortodokst valg som faktisk traff best i hele ligaen denne gangen.
+**Min vurdering:** Det Hedda ikke klarte — la 18 poeng råtne på benken — gjorde Camilla motsatt: kapteinet riktig og høstet gevinsten. En liten, stille seier midt i feltet.
+**Nevneverdige øyeblikk:** GW1: 20 poeng, ligaens laveste noensinne. GW8: free hit spilt. GW11: ligaens beste kapteinspick.
+**Løpende vitser:** Bunnrekorden fra GW1 står fortsatt uinnfridd av noen andre. Free hit-mysteriet er løst, nå er det kapteinsbindet som leverer.
+**Byttemønster:** Ingen bytter i GW11.
+**Kapteinvalg:** Pascal Groß i GW11 — 8 poeng, ligaens beste pick.

@@ -1,8 +1,8 @@
 **Lag:** Salmageddon FC
-**Nåværende form:** GW8: 46 poeng, rundt verdenssnittet, men fortsatt sist i ligaen, uendret. Spilte wildcard. Haaland-kaptein ga 16 poeng.
-**Sesongutvikling:** 423 poeng totalt, nå to runder på bunnplass. Wildcarden endret ingenting i tabellen.
-**Min vurdering:** En wildcard som verken reddet eller skadet ham — han forblir sist, og den eneste trøsten er at han aldri har tatt et eneste minuspoeng hele sesongen.
-**Nevneverdige øyeblikk:** GW1: 3xc spilt tidlig. GW7: ny bunnplassering med ligaens laveste score. GW8: wildcard spilt, fortsatt sist.
-**Løpende vitser:** Mannen som brukte triple captain før noen andre — nå også mannen hvis wildcard ikke rørte en eneste tabellplass.
-**Byttemønster:** Wildcard i GW8, 46 poeng, ingen tabellendring.
-**Kapteinvalg:** Haaland i GW8 — 16 poeng.
+**Nåværende form:** GW11: 29 poeng, 6 under verdenssnittet, falt til sisteplass (-1), 579 totalt. Overtar bunnplassen fra Peder. Ingen bytter. Haaland-kaptein ga 4 poeng.
+**Sesongutvikling:** Wildcarden fra GW8 endret aldri noe reelt, og nå er han tilbake på bunnen uten noen trøst igjen.
+**Min vurdering:** Fortsatt uten et eneste minuspoeng hele sesongen, men det tallet begynner å bety stadig mindre når man likevel topper ligaen fra bunnen av.
+**Nevneverdige øyeblikk:** GW1: 3xc spilt tidlig. GW8: wildcard, ingen effekt. GW11: tilbake på sisteplass.
+**Løpende vitser:** Mannen som brukte triple captain før noen andre — nå også mannen med lengst fartstid på bunnplassen uten et eneste minuspoeng.
+**Byttemønster:** Ingen bytter i GW11.
+**Kapteinvalg:** Haaland i GW11 — 4 poeng.

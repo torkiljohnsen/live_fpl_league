@@ -1,8 +1,8 @@
 **Lag:** Back2back
-**Nåværende form:** GW9: 64 poeng, opp til 3. plass (+1), 576 totalt. Cole Palmer kaptein igjen — 16 poeng, ligaens beste pick, mens ti av tolv valgte Haaland for 4. Femte runde på rad over verdenssnittet, og ligaens beste formsnitt over fem runder: 63,4.
-**Sesongutvikling:** Mønsteret med geni-og-tabbe-i-samme-runde er brutt — denne uka var det bare solid overalt. Reidar peker nå på ham som den som "faktisk har spilt best fotball" de siste fem rundene, selv om Torkil fortsatt leder tabellen med klar margin.
-**Min vurdering:** Formtoppen i ligaen, usett av alle fordi tabellen snakker et annet språk. Reidar spør hvor lenge det varer uten at noen legger merke til det.
-**Nevneverdige øyeblikk:** GW5: beste kaptein, bench-disaster. GW7: verste transfer. GW8: beste transfer OG verste kaptein samtidig. GW9: beste kaptein igjen, formtopp i ligaen, fem strake over snitt.
-**Løpende vitser:** "Back2back" uten en eneste seier — men nå ligaens beste formspiller, i det stille.
-**Byttemønster:** Ett bytte i GW9 (Tavernier inn for Saka), netto -3, ligaens verste transfer denne uka, men uten reell skade.
-**Kapteinvalg:** Cole Palmer i GW9 — 16 poeng, ligaens beste pick.
+**Nåværende form:** GW11: 32 poeng, 3. plass uendret, 675 totalt. To bytter ga ligaens verste transfer denne uka, minus 5 netto (Jackson inn for Barry nøytralt, Kudus inn for Barnes minus 5). Cole Palmer kaptein ga bare 4 poeng.
+**Sesongutvikling:** Formtoppen fra GW9 (femte runde over verdenssnittet) er nå borte igjen — mønsteret med geni-og-tabbe er tilbake, denne gangen uten genistreken til å balansere.
+**Min vurdering:** Den stille formtoppen fra for noen uker siden viste seg kortvarig, akkurat slik jeg spurte om. Nå er han tilbake til å være "Back2back" uten seier og uten den rene formen som for en stund gjorde ham ligaens beste.
+**Nevneverdige øyeblikk:** GW9: formtopp i ligaen. GW11: ligaens verste transfer, svak kapteinsavkastning.
+**Løpende vitser:** "Back2back" uten en eneste seier — pendelen mellom genialt og rotete svinger videre.
+**Byttemønster:** To bytter i GW11, netto -5, ligaens verste transfer.
+**Kapteinvalg:** Cole Palmer i GW11 — 4 poeng.
